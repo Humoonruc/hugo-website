@@ -1,0 +1,80 @@
+---
+title: "Trade Theory with Numbers: Quantifying the Consequences of
+Globalization"
+author: "Arnaud Costinot & Andrés Rodríguez-Clare"
+date: "2014"
+output:
+  bookdown::gitbook:
+    config:
+      download: pdf
+      edit: null
+      fontsettings:
+        family: sans
+        size: 2
+        theme: sepia
+      search: no
+      toc:
+        after: 编写：黄蒙
+        before: Chapter4
+    includes:
+      in_header: _header.html
+  bookdown::word_document2:
+    reference_docx: template.docx
+  bookdown::html_document2:
+    code_folding: show
+    df_print: paged
+    fig_caption: yes
+    highlight: haddock
+    number_sections: yes
+    theme: united
+    toc: yes
+    toc_depth: 3
+    toc_float:
+      collapsed: yes
+      smooth_scroll: no
+  bookdown::pdf_book:
+    citation_package: natbib
+    includes:
+      in_header: preamble.tex
+    keep_tex: yes
+    latex_engine: xelatex
+    toc_depth: 3
+csl: china-journal-of-economic-research.csl
+biblio-style: apalike
+delete_merged_file: yes
+description: ''
+documentclass: article
+language:
+  label:
+    def: 定义
+    exm: 例
+    fig: 图
+    proof: '证明: '
+    solution: '解: '
+    tab: 表
+    thm: 定理
+  ui:
+    chapter_name: ''
+link-citations: yes
+bibliography: mybib.bib
+site: bookdown::bookdown_site
+abstract: |
+  EK 模型是对李嘉图模型的扩展，它是一个包含现实地理特征的一般均衡模型。它为双边贸易提供了简单的结构方程，其中包含了反映绝对优势、比较优势（促进贸易）和地理障碍（抑制贸易）的参数。该文使用1990年19个 OECD 国家的制造业、价格和地理数据估计了这些参数，而后使用该模型讨论了各种问题，包括贸易利得、一国技术进步红利通过贸易扩散后的分布和关税削减的影响等。
+---
+
+```{r setup, include=FALSE}
+## global options
+knitr::opts_chunk$set(
+  fig.width = 6, fig.asp = 0.618,
+  out.width = "80%", fig.align = "center",
+  fig.path = 'Figures/', fig.show = "hold",
+  warn = 1, warning = FALSE, message = FALSE, echo = TRUE, 
+  comment = '', collapse = F, 
+  cache = T, cache.comments = F, autodep = TRUE
+  )
+
+pdf.options(height = 10/2.54, width = 10/2.54) # 注意：此设置要放在最后
+```
+
+
+`r if (knitr::is_html_output()) '# 参考文献 {-}'`

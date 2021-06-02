@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>将阿拉伯数字金额转换为人民币大写形式 - 万水千山</title>
+    <meta property="og:title" content="将阿拉伯数字金额转换为人民币大写形式 - 万水千山">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+      
+    
+
+    
+      
+      <meta property="description" content="本程序理论上可以转换任意位数，但由于 R 语言储存数据的精度问题，当包含角、分时，只能转换百万亿人民币以下数量级的金额数。
+">
+      <meta property="og:description" content="本程序理论上可以转换任意位数，但由于 R 语言储存数据的精度问题，当包含角、分时，只能转换百万亿人民币以下数量级的金额数。
+">
+      
+    
+
+    
+    
+
+    
+
+    
+    
+
+
+<link href='//cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+
+  
+  <body class="blog">
+    <header class="masthead">
+      <h1><a href="/">万水千山</a></h1>
+
+<p class="tagline">From Mountain to Ocean.</p>
+
+      <nav class="menu">
+  <input id="menu-check" type="checkbox" />
+  <label id="menu-label" for="menu-check" class="unselectable">
+    <span class="icon close-icon">✕</span>
+    <span class="icon open-icon">☰</span>
+    <span class="text">Menu</span>
+  </label>
+  <ul>
+  
+  
+  <li><a href="/">Home·主页</a></li>
+  
+  <li><a href="/resume/">Resume·简历</a></li>
+  
+  <li><a href="/slide/">Slide·展示</a></li>
+  
+  <li><a href="/application/">Application·应用</a></li>
+  
+  <li><a href="/ebook/">Fiction·小说</a></li>
+  
+  <li><a href="/blog/">Blog·博客</a></li>
+  
+  <li><a href="/academics/">Academics·学术</a></li>
+  
+  <li><a href="/categories/">Categories·类别</a></li>
+  
+  <li><a href="/tags/">Tags·标签</a></li>
+  
+  <li><a href="/about/">About·关于</a></li>
+  
+  
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>将阿拉伯数字金额转换为人民币大写形式</h1>
+
+<h3>Humoon
+  /  2019-10-11</h3>
+<hr>
+
+
+      </header>
+
+
+
+
+
+
+<p>本程序理论上可以转换任意位数，但由于 R 语言储存数据的精度问题，当包含角、分时，只能转换百万亿人民币以下数量级的金额数。</p>
+<pre class="r"><code>library(tidyverse)</code></pre>
+<pre><code>## -- Attaching packages --------------------- tidyverse 1.2.1 --</code></pre>
+<pre><code>## √ ggplot2 3.2.1     √ purrr   0.3.2
+## √ tibble  2.1.3     √ dplyr   0.8.3
+## √ tidyr   1.0.0     √ stringr 1.4.0
+## √ readr   1.3.1     √ forcats 0.4.0</code></pre>
+<pre><code>## -- Conflicts ------------------------ tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()</code></pre>
+<pre class="r"><code>library(data.table)</code></pre>
+<pre><code>## 
+## 载入程辑包：&#39;data.table&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:dplyr&#39;:
+## 
+##     between, first, last</code></pre>
+<pre><code>## The following object is masked from &#39;package:purrr&#39;:
+## 
+##     transpose</code></pre>
+<pre class="r"><code>han_list = c(&quot;零&quot; , &quot;壹&quot; , &quot;贰&quot; , &quot;叁&quot; , &quot;肆&quot;, &quot;伍&quot; , &quot;陆&quot; , &quot;柒&quot; , &quot;捌&quot; , &quot;玖&quot;)
+
+
+# 划分整数和小数部分的函数
+divide &lt;- function(num){
+  integer &lt;- floor(num)
+  fraction &lt;- round((num - integer)*100)
+  c(integer, fraction) %&gt;% return()
+}
+
+
+# 输出小数部分的函数
+fraction_to_rmb &lt;- function(fraction){
+  a &lt;- fraction %/% 10
+  b &lt;- fraction %% 10
+  if (a^2 + b^2 == 0) {
+    return(&#39;整&#39;)
+  } else if (a == 0 &amp; b != 0) {
+    return(str_c(&#39;零&#39;, han_list[b + 1], &#39;分&#39;))
+  } else if (a != 0 &amp; b == 0) {
+    return(str_c(han_list[a + 1], &#39;角&#39;))
+  } else {
+    return(str_c(han_list[a + 1], &#39;角&#39;, han_list[b + 1], &#39;分&#39;))
+  }
+}
+
+
+# 输出整数部分的函数
+integer_to_rmb &lt;- function(integer){
+  string &lt;- integer %&gt;% as.character()
+  n &lt;- str_length(string)
+  m &lt;- (n + 7)/8 # 8位一组来操作，拆分成 m 组
+  s &lt;- &#39;&#39;
+  for (i in 1:m) {
+    if (i &lt; m) {
+      s[i] &lt;- str_sub(string, -8*i, (7 - 8*i)) %&gt;% 
+        eight_to_rmb()
+    } else {
+      s[i] &lt;- str_sub(string, 1, (7 - 8*m)) %&gt;% 
+        eight_to_rmb()
+    }
+  }
+  # 将每组返回的字符串连接起来
+  rmb &lt;- &#39;&#39;
+  for (i in m:1) {
+    rmb &lt;- str_c(rmb, s[i])
+  }
+  # 用正则表达式处理连续的多个零
+  rmb &lt;- rmb %&gt;% str_replace_all(&#39;零+&#39;,&#39;零&#39;) %&gt;% # 连续多个零变成一个
+    str_replace_all(&#39;零万&#39;, &#39;万&#39;) %&gt;% # 万和亿前的末位零删掉
+    str_replace_all(&#39;零亿&#39;, &#39;亿&#39;) %&gt;% 
+    str_replace(&#39;^壹什&#39;, &#39;什&#39;) %&gt;% # 开头不会读作“壹什”
+    str_sub(1, -2) # 去掉个位的“亿”
+  return(rmb)
+}
+
+
+## 处理8位数字的函数
+eight_to_rmb &lt;- function(string){
+  n &lt;- str_length(string)
+  if (n == 8) { # 8位满时
+    front &lt;- str_sub(string, 1, 4) #前4位
+    behind &lt;- str_sub(string, 5, 8) # 后4位
+    if (str_sub(string, 1, 8) == &#39;00000000&#39;) {
+      return(&#39;零&#39;) # 8位皆0不要“亿”
+    } else if (front == &#39;0000&#39;) {
+      return(str_c(&#39;零&#39;, four_to_rmb(behind), &#39;亿&#39;)) # 4位皆0不要“万”
+    } else {
+      return(str_c(four_to_rmb(front), &#39;万&#39;, four_to_rmb(behind), &#39;亿&#39;))
+    }
+  } else if (n &gt; 4) { # 不足8位（数字最前的若干位）
+    front &lt;- str_sub(string, 1, n - 4)
+    behind &lt;- str_sub(string, n - 3, n)
+    return(str_c(four_to_rmb(front), &#39;万&#39;, four_to_rmb(behind), &#39;亿&#39;))
+  } else {# 不足4位
+    return(str_c(four_to_rmb(string), &#39;亿&#39;))
+  }
+}
+
+
+## 处理4位数字的函数
+four_to_rmb &lt;- function(string){
+  n &lt;- str_length(string)
+  s &lt;- &#39;&#39;
+  for (i in 1:n) {
+    s[i] &lt;-  str_sub(string, i, i)
+  }
+  dt &lt;- tibble(seq = n:1, num = s) %&gt;% setDT()
+  dt[, han_character := han_list[num %&gt;% as.integer() + 1]] # 中文大写
+  dt[, magnitude := &#39;&#39;] # 单位
+  dt[seq == 2, magnitude := &#39;什&#39;]
+  dt[seq == 3, magnitude := &#39;佰&#39;]
+  dt[seq == 4, magnitude := &#39;仟&#39;]
+  dt[num == &#39;0&#39;, magnitude := &#39;&#39;] # 数字为0时，十百千单位要去掉
+  # 组合数字与单位
+  dt[, rmb := str_c(han_character, magnitude)]
+  return(dt$rmb %&gt;% str_c(collapse = &#39;&#39;))
+}
+
+
+## 主体函数
+main &lt;- function(float_money){
+  # 首先将金额分为整数部分和小数部分
+  integer &lt;- divide(float_money)[1]
+  fraction &lt;- divide(float_money)[2]
+  # 用两个函数分别处理整数分布和小数部分
+  rmb &lt;- str_c(integer_to_rmb(integer), 
+               &#39;圆&#39;, 
+               fraction_to_rmb(fraction))
+  cat(rmb)
+}
+
+
+main(202000012345678.09)</code></pre>
+<pre><code>## 贰佰零贰万亿壹仟贰佰叁什肆万伍仟陆佰柒什捌圆零玖分</code></pre>
+<pre class="r"><code>main(202000012345678.00)</code></pre>
+<pre><code>## 贰佰零贰万亿壹仟贰佰叁什肆万伍仟陆佰柒什捌圆整</code></pre>
+<pre class="r"><code>main(202000002305008.09)</code></pre>
+<pre><code>## 贰佰零贰万亿零贰佰叁什万伍仟零捌圆零玖分</code></pre>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/blog/%E6%88%98%E5%9B%BD%E6%97%B6%E4%BB%A3%E6%89%8D%E6%98%AF%E5%A4%A7%E5%95%86%E8%BE%88%E5%87%BA%E7%9A%84%E6%97%B6%E4%BB%A3/">战国时代才是大商辈出的时代</a></span>
+  <span class="nav-next"><a href="/blog/%E8%AF%BB-%E6%B8%90%E8%A1%8C%E6%B8%90%E8%BF%91%E7%9A%84%E9%87%91%E8%9E%8D%E5%91%A8%E6%9C%9F/">读《渐行渐近的金融周期》</a> &rarr;</span>
+</nav>
+
+
+
+
+
+<script src="//yihui.name/js/math-code.js"></script>
+<script async src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+
+  
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/tex.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+  
+  <hr>
+  <div class="copyright">© 2019-2021 黄蒙 <a href="mailto:humoonruc@126.com">humoonruc@126.com</a></div>
+  
+  </footer>
+  </article>
+  
+  </body>
+</html>
+

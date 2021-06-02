@@ -1,0 +1,736 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
+<title>阎学通《国际关系分析（第三版）》概念整理</title><link href='https://fonts.loli.net/css?family=PT+Serif:400,400italic,700,700italic&subset=latin,cyrillic-ext,cyrillic,latin-ext' rel='stylesheet' type='text/css' /><style type='text/css'>html {overflow-x: initial !important;}:root { --bg-color:#ffffff; --text-color:#333333; --select-text-bg-color:#B5D6FC; --select-text-font-color:auto; --monospace:"Lucida Console",Consolas,"Courier",monospace; }
+html { font-size: 14px; background-color: var(--bg-color); color: var(--text-color); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+body { margin: 0px; padding: 0px; height: auto; bottom: 0px; top: 0px; left: 0px; right: 0px; font-size: 1rem; line-height: 1.42857; overflow-x: hidden; background: inherit; tab-size: 4; }
+iframe { margin: auto; }
+a.url { word-break: break-all; }
+a:active, a:hover { outline: 0px; }
+.in-text-selection, ::selection { text-shadow: none; background: var(--select-text-bg-color); color: var(--select-text-font-color); }
+#write { margin: 0px auto; height: auto; width: inherit; word-break: normal; overflow-wrap: break-word; position: relative; white-space: normal; overflow-x: visible; padding-top: 40px; }
+#write.first-line-indent p { text-indent: 2em; }
+#write.first-line-indent li p, #write.first-line-indent p * { text-indent: 0px; }
+#write.first-line-indent li { margin-left: 2em; }
+.for-image #write { padding-left: 8px; padding-right: 8px; }
+body.typora-export { padding-left: 30px; padding-right: 30px; }
+.typora-export .footnote-line, .typora-export li, .typora-export p { white-space: pre-wrap; }
+@media screen and (max-width: 500px) {
+  body.typora-export { padding-left: 0px; padding-right: 0px; }
+  #write { padding-left: 20px; padding-right: 20px; }
+  .CodeMirror-sizer { margin-left: 0px !important; }
+  .CodeMirror-gutters { display: none !important; }
+}
+#write li > figure:last-child { margin-bottom: 0.5rem; }
+#write ol, #write ul { position: relative; }
+img { max-width: 100%; vertical-align: middle; }
+button, input, select, textarea { color: inherit; font: inherit; }
+input[type="checkbox"], input[type="radio"] { line-height: normal; padding: 0px; }
+*, ::after, ::before { box-sizing: border-box; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p, #write pre { width: inherit; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p { position: relative; }
+p { line-height: inherit; }
+h1, h2, h3, h4, h5, h6 { break-after: avoid-page; break-inside: avoid; orphans: 2; }
+p { orphans: 4; }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.8rem; }
+h3 { font-size: 1.6rem; }
+h4 { font-size: 1.4rem; }
+h5 { font-size: 1.2rem; }
+h6 { font-size: 1rem; }
+.md-math-block, .md-rawblock, h1, h2, h3, h4, h5, h6, p { margin-top: 1rem; margin-bottom: 1rem; }
+.hidden { display: none; }
+.md-blockmeta { color: rgb(204, 204, 204); font-weight: 700; font-style: italic; }
+a { cursor: pointer; }
+sup.md-footnote { padding: 2px 4px; background-color: rgba(238, 238, 238, 0.7); color: rgb(85, 85, 85); border-radius: 4px; cursor: pointer; }
+sup.md-footnote a, sup.md-footnote a:hover { color: inherit; text-transform: inherit; text-decoration: inherit; }
+#write input[type="checkbox"] { cursor: pointer; width: inherit; height: inherit; }
+figure { overflow-x: auto; margin: 1.2em 0px; max-width: calc(100% + 16px); padding: 0px; }
+figure > table { margin: 0px !important; }
+tr { break-inside: avoid; break-after: auto; }
+thead { display: table-header-group; }
+table { border-collapse: collapse; border-spacing: 0px; width: 100%; overflow: auto; break-inside: auto; text-align: left; }
+table.md-table td { min-width: 32px; }
+.CodeMirror-gutters { border-right: 0px; background-color: inherit; }
+.CodeMirror-linenumber { user-select: none; }
+.CodeMirror { text-align: left; }
+.CodeMirror-placeholder { opacity: 0.3; }
+.CodeMirror pre { padding: 0px 4px; }
+.CodeMirror-lines { padding: 0px; }
+div.hr:focus { cursor: none; }
+#write pre { white-space: pre-wrap; }
+#write.fences-no-line-wrapping pre { white-space: pre; }
+#write pre.ty-contain-cm { white-space: normal; }
+.CodeMirror-gutters { margin-right: 4px; }
+.md-fences { font-size: 0.9rem; display: block; break-inside: avoid; text-align: left; overflow: visible; white-space: pre; background: inherit; position: relative !important; }
+.md-diagram-panel { width: 100%; margin-top: 10px; text-align: center; padding-top: 0px; padding-bottom: 8px; overflow-x: auto; }
+#write .md-fences.mock-cm { white-space: pre-wrap; }
+.md-fences.md-fences-with-lineno { padding-left: 0px; }
+#write.fences-no-line-wrapping .md-fences.mock-cm { white-space: pre; overflow-x: auto; }
+.md-fences.mock-cm.md-fences-with-lineno { padding-left: 8px; }
+.CodeMirror-line, twitterwidget { break-inside: avoid; }
+.footnotes { opacity: 0.8; font-size: 0.9rem; margin-top: 1em; margin-bottom: 1em; }
+.footnotes + .footnotes { margin-top: 0px; }
+.md-reset { margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: top; background: 0px 0px; text-decoration: none; text-shadow: none; float: none; position: static; width: auto; height: auto; white-space: nowrap; cursor: inherit; -webkit-tap-highlight-color: transparent; line-height: normal; font-weight: 400; text-align: left; box-sizing: content-box; direction: ltr; }
+li div { padding-top: 0px; }
+blockquote { margin: 1rem 0px; }
+li .mathjax-block, li p { margin: 0.5rem 0px; }
+li { margin: 0px; position: relative; }
+blockquote > :last-child { margin-bottom: 0px; }
+blockquote > :first-child, li > :first-child { margin-top: 0px; }
+.footnotes-area { color: rgb(136, 136, 136); margin-top: 0.714rem; padding-bottom: 0.143rem; white-space: normal; }
+#write .footnote-line { white-space: pre-wrap; }
+@media print {
+  body, html { border: 1px solid transparent; height: 99%; break-after: avoid; break-before: avoid; }
+  #write { margin-top: 0px; padding-top: 0px; border-color: transparent !important; }
+  .typora-export * { -webkit-print-color-adjust: exact; }
+  html.blink-to-pdf { font-size: 13px; }
+  .typora-export #write { padding-left: 32px; padding-right: 32px; padding-bottom: 0px; break-after: avoid; }
+  .typora-export #write::after { height: 0px; }
+}
+.footnote-line { margin-top: 0.714em; font-size: 0.7em; }
+a img, img a { cursor: pointer; }
+pre.md-meta-block { font-size: 0.8rem; min-height: 0.8rem; white-space: pre-wrap; background: rgb(204, 204, 204); display: block; overflow-x: hidden; }
+p > .md-image:only-child:not(.md-img-error) img, p > img:only-child { display: block; margin: auto; }
+p > .md-image:only-child { display: inline-block; width: 100%; }
+#write .MathJax_Display { margin: 0.8em 0px 0px; }
+.md-math-block { width: 100%; }
+.md-math-block:not(:empty)::after { display: none; }
+[contenteditable="true"]:active, [contenteditable="true"]:focus, [contenteditable="false"]:active, [contenteditable="false"]:focus { outline: 0px; box-shadow: none; }
+.md-task-list-item { position: relative; list-style-type: none; }
+.task-list-item.md-task-list-item { padding-left: 0px; }
+.md-task-list-item > input { position: absolute; top: 0px; left: 0px; margin-left: -1.2em; margin-top: calc(1em - 10px); border: none; }
+.math { font-size: 1rem; }
+.md-toc { min-height: 3.58rem; position: relative; font-size: 0.9rem; border-radius: 10px; }
+.md-toc-content { position: relative; margin-left: 0px; }
+.md-toc-content::after, .md-toc::after { display: none; }
+.md-toc-item { display: block; color: rgb(65, 131, 196); }
+.md-toc-item a { text-decoration: none; }
+.md-toc-inner:hover { text-decoration: underline; }
+.md-toc-inner { display: inline-block; cursor: pointer; }
+.md-toc-h1 .md-toc-inner { margin-left: 0px; font-weight: 700; }
+.md-toc-h2 .md-toc-inner { margin-left: 2em; }
+.md-toc-h3 .md-toc-inner { margin-left: 4em; }
+.md-toc-h4 .md-toc-inner { margin-left: 6em; }
+.md-toc-h5 .md-toc-inner { margin-left: 8em; }
+.md-toc-h6 .md-toc-inner { margin-left: 10em; }
+@media screen and (max-width: 48em) {
+  .md-toc-h3 .md-toc-inner { margin-left: 3.5em; }
+  .md-toc-h4 .md-toc-inner { margin-left: 5em; }
+  .md-toc-h5 .md-toc-inner { margin-left: 6.5em; }
+  .md-toc-h6 .md-toc-inner { margin-left: 8em; }
+}
+a.md-toc-inner { font-size: inherit; font-style: inherit; font-weight: inherit; line-height: inherit; }
+.footnote-line a:not(.reversefootnote) { color: inherit; }
+.md-attr { display: none; }
+.md-fn-count::after { content: "."; }
+code, pre, samp, tt { font-family: var(--monospace); }
+kbd { margin: 0px 0.1em; padding: 0.1em 0.6em; font-size: 0.8em; color: rgb(36, 39, 41); background: rgb(255, 255, 255); border: 1px solid rgb(173, 179, 185); border-radius: 3px; box-shadow: rgba(12, 13, 14, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; white-space: nowrap; vertical-align: middle; }
+.md-comment { color: rgb(162, 127, 3); opacity: 0.8; font-family: var(--monospace); }
+code { text-align: left; vertical-align: initial; }
+a.md-print-anchor { white-space: pre !important; border-width: initial !important; border-style: none !important; border-color: initial !important; display: inline-block !important; position: absolute !important; width: 1px !important; right: 0px !important; outline: 0px !important; background: 0px 0px !important; text-decoration: initial !important; text-shadow: initial !important; }
+.md-inline-math .MathJax_SVG .noError { display: none !important; }
+.html-for-mac .inline-math-svg .MathJax_SVG { vertical-align: 0.2px; }
+.md-math-block .MathJax_SVG_Display { text-align: center; margin: 0px; position: relative; text-indent: 0px; max-width: none; max-height: none; min-height: 0px; min-width: 100%; width: auto; overflow-y: hidden; display: block !important; }
+.MathJax_SVG_Display, .md-inline-math .MathJax_SVG_Display { width: auto; margin: inherit; display: inline-block !important; }
+.MathJax_SVG .MJX-monospace { font-family: var(--monospace); }
+.MathJax_SVG .MJX-sans-serif { font-family: sans-serif; }
+.MathJax_SVG { display: inline; font-style: normal; font-weight: 400; line-height: normal; zoom: 90%; text-indent: 0px; text-align: left; text-transform: none; letter-spacing: normal; word-spacing: normal; overflow-wrap: normal; white-space: nowrap; float: none; direction: ltr; max-width: none; max-height: none; min-width: 0px; min-height: 0px; border: 0px; padding: 0px; margin: 0px; }
+.MathJax_SVG * { transition: none 0s ease 0s; }
+.MathJax_SVG_Display svg { vertical-align: middle !important; margin-bottom: 0px !important; margin-top: 0px !important; }
+.os-windows.monocolor-emoji .md-emoji { font-family: "Segoe UI Symbol", sans-serif; }
+.md-diagram-panel > svg { max-width: 100%; }
+[lang="flow"] svg, [lang="mermaid"] svg { max-width: 100%; height: auto; }
+[lang="mermaid"] .node text { font-size: 1rem; }
+table tr th { border-bottom: 0px; }
+video { max-width: 100%; display: block; margin: 0px auto; }
+iframe { max-width: 100%; width: 100%; border: none; }
+.highlight td, .highlight tr { border: 0px; }
+svg[id^="mermaidChart"] { line-height: 1em; }
+mark { background: rgb(255, 255, 0); color: rgb(0, 0, 0); }
+.md-html-inline .md-plain, .md-html-inline strong, mark .md-inline-math, mark strong { color: inherit; }
+mark .md-meta { color: rgb(0, 0, 0); opacity: 0.3 !important; }
+
+
+/* meyer reset -- http://meyerweb.com/eric/tools/css/reset/ , v2.0 | 20110126 | License: none (public domain) */
+
+@include-when-export url(https://fonts.loli.net/css?family=PT+Serif:400,400italic,700,700italic&subset=latin,cyrillic-ext,cyrillic,latin-ext);
+
+/* =========== */
+
+:root {
+	--active-file-bg-color: #dadada;
+	--active-file-bg-color: rgba(32, 43, 51, 0.63);
+	--active-file-text-color: white;
+	--bg-color: #f3f2ee;
+	--text-color: #1f0909;
+	--control-text-color: #444;
+	--rawblock-edit-panel-bd: #e5e5e5;
+
+	--select-text-bg-color: rgba(32, 43, 51, 0.63);
+  --select-text-font-color: white;
+}
+
+pre {
+	--select-text-bg-color: #36284e;
+	--select-text-font-color: #fff;
+}
+
+html {
+	font-size: 16px;
+}
+
+html, body {
+	background-color: #f3f2ee;
+	font-family: "PT Serif", 'Times New Roman', Times, serif;
+	color: #1f0909;
+	line-height: 1.5em;
+}
+
+/*#write {
+	overflow-x: auto;
+    max-width: initial;
+	padding-left: calc(50% - 17em);
+    padding-right: calc(50% - 17em);
+}
+
+@media (max-width: 36em) {
+ 	#write {
+ 		padding-left: 1em;
+    	padding-right: 1em;
+ 	}
+}*/
+
+#write {
+	max-width: 40em;
+}
+
+ol li {
+	list-style-type: decimal;
+	list-style-position: outside;
+}
+ul li {
+	list-style-type: disc;
+	list-style-position: outside;
+}
+
+ol,
+ul {
+	list-style: none;
+}
+
+blockquote,
+q {
+	quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+/* styles */
+
+/* ====== */
+
+/* headings */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-weight: bold;
+}
+h1 {
+	font-size: 1.875em;
+	/*30 / 16*/
+	line-height: 1.6em;
+	/* 48 / 30*/
+	margin-top: 2em;
+}
+h2,
+h3 {
+	font-size: 1.3125em;
+	/*21 / 16*/
+	line-height: 1.15;
+	/*24 / 21*/
+	margin-top: 2.285714em;
+	/*48 / 21*/
+	margin-bottom: 1.15em;
+	/*24 / 21*/
+}
+h3 {
+	font-weight: normal;
+}
+h4 {
+	font-size: 1.125em;
+	/*18 / 16*/
+	margin-top: 2.67em;
+	/*48 / 18*/
+}
+h5,
+h6 {
+	font-size: 1em;
+	/*16*/
+}
+h1 {
+	border-bottom: 1px solid;
+	margin-bottom: 1.875em;
+	padding-bottom: 0.8125em;
+}
+/* links */
+
+a {
+	text-decoration: none;
+	color: #065588;
+}
+a:hover,
+a:active {
+	text-decoration: underline;
+}
+/* block spacing */
+
+p,
+blockquote,
+.md-fences {
+	margin-bottom: 1.5em;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	margin-bottom: 1.5em;
+}
+/* blockquote */
+
+blockquote {
+	font-style: italic;
+	border-left: 5px solid;
+	margin-left: 2em;
+	padding-left: 1em;
+}
+/* lists */
+
+ul,
+ol {
+	margin: 0 0 1.5em 1.5em;
+}
+/* tables */
+.md-meta,.md-before, .md-after {
+	color:#999;
+}
+
+table {
+	margin-bottom: 1.5em;
+	/*24 / 16*/
+	font-size: 1em;
+	/* width: 100%; */
+}
+thead th,
+tfoot th {
+	padding: .25em .25em .25em .4em;
+	text-transform: uppercase;
+}
+th {
+	text-align: left;
+}
+td {
+	vertical-align: top;
+	padding: .25em .25em .25em .4em;
+}
+
+code,
+.md-fences {
+	background-color: #dadada;
+}
+
+code {
+	padding-left: 2px;
+	padding-right: 2px;
+}
+
+.md-fences {
+	margin-left: 2em;
+	margin-bottom: 3em;
+	padding-left: 1ch;
+	padding-right: 1ch;
+}
+
+pre,
+code,
+tt {
+	font-size: .875em;
+	line-height: 1.714285em;
+}
+/* some fixes */
+
+h1 {
+	line-height: 1.3em;
+	font-weight: normal;
+	margin-bottom: 0.5em;
+}
+
+p + ul,
+p + ol{
+	margin-top: .5em;
+}
+
+h3 + ul,
+h4 + ul,
+h5 + ul,
+h6 + ul,
+h3 + ol,
+h4 + ol,
+h5 + ol,
+h6 + ol {
+	margin-top: .5em;
+}
+
+li > ul,
+li > ol {
+	margin-top: inherit;
+	margin-bottom: 0;
+}
+
+li ol>li {
+	list-style-type: lower-alpha;
+}
+
+li li ol>li{
+	list-style-type: lower-roman;
+}
+
+h2,
+h3 {
+	margin-bottom: .75em;
+}
+hr {
+	border-top: none;
+	border-right: none;
+	border-bottom: 1px solid;
+	border-left: none;
+}
+h1 {
+	border-color: #c5c5c5;
+}
+blockquote {
+	border-color: #bababa;
+	color: #656565;
+}
+
+blockquote ul,
+blockquote ol {
+	margin-left:0;
+}
+
+.ty-table-edit {
+	background-color: transparent;
+}
+thead {
+	background-color: #dadada;
+}
+tr:nth-child(even) {
+	background: #e8e7e7;
+}
+hr {
+	border-color: #c5c5c5;
+}
+.task-list{
+	padding-left: 1rem;
+}
+
+.md-task-list-item {
+	padding-left: 1.5rem;
+	list-style-type: none;
+}
+
+.md-task-list-item > input:before {
+	content: '\221A';
+	display: inline-block;
+	width: 1.25rem;
+  	height: 1.6rem;
+	vertical-align: middle;
+	text-align: center;
+	color: #ddd;
+	background-color: #F3F2EE;
+}
+
+.md-task-list-item > input:checked:before,
+.md-task-list-item > input[checked]:before{
+	color: inherit;
+}
+
+#write pre.md-meta-block {
+	min-height: 1.875rem;
+	color: #555;
+	border: 0px;
+	background: transparent;
+	margin-top: -4px;
+	margin-left: 1em;
+	margin-top: 1em;
+}
+
+.md-image>.md-meta {
+	color: #9B5146;
+}
+
+.md-image>.md-meta{
+	font-family: Menlo, 'Ubuntu Mono', Consolas, 'Courier New', 'Microsoft Yahei', 'Hiragino Sans GB', 'WenQuanYi Micro Hei', serif;
+}
+
+
+#write>h3.md-focus:before{
+	left: -1.5rem;
+	color:#999;
+	border-color:#999;
+}
+#write>h4.md-focus:before{
+	left: -1.5rem;
+	top: .25rem;
+	color:#999;
+	border-color:#999;
+}
+#write>h5.md-focus:before{
+	left: -1.5rem;
+	top: .0.3125rem;
+	color:#999;
+	border-color:#999;
+}
+#write>h6.md-focus:before{
+	left: -1.5rem;
+	top: 0.3125rem;
+	color:#999;
+	border-color:#999;
+}
+
+.md-toc:focus .md-toc-content{
+	margin-top: 19px;
+}
+
+.md-toc-content:empty:before{
+	color: #065588;
+}
+.md-toc-item {
+	color: #065588;
+}
+#write div.md-toc-tooltip {
+	background-color: #f3f2ee;
+}
+
+#typora-sidebar {
+	background-color: #f3f2ee;
+	-webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.375);
+  	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.375);
+}
+
+.pin-outline #typora-sidebar {
+	background: inherit;
+	box-shadow: none;
+	border-right: 1px dashed;
+}
+
+.pin-outline #typora-sidebar:hover .outline-title-wrapper {
+	border-left:1px dashed;
+}
+
+.outline-item:hover {
+  background-color: #dadada;
+  border-left: 28px solid #dadada;
+  border-right: 18px solid #dadada;
+}
+
+.typora-node .outline-item:hover {
+  	border-right: 28px solid #dadada;
+}
+
+.outline-expander:before {
+  content: "\f0da";
+  font-family: FontAwesome;
+  font-size:14px;
+  top: 1px;
+}
+
+.outline-expander:hover:before,
+.outline-item-open>.outline-item>.outline-expander:before {
+  content: "\f0d7";
+}
+
+.modal-content {
+	background-color: #f3f2ee;
+}
+
+.auto-suggest-container ul li {
+	list-style-type: none;
+}
+
+/** UI for electron */
+
+.megamenu-menu,
+#top-titlebar, #top-titlebar *,
+.megamenu-content {
+	background: #f3f2ee;
+	color: #1f0909;
+}
+
+.megamenu-menu-header {
+	border-bottom: 1px dashed #202B33;
+}
+
+.megamenu-menu {
+	box-shadow: none;
+	border-right: 1px dashed;
+}
+
+header, .context-menu, .megamenu-content, footer {
+	font-family: "PT Serif", 'Times New Roman', Times, serif;
+    color: #1f0909;
+}
+
+#megamenu-back-btn {
+	color: #1f0909;
+	border-color: #1f0909;
+}
+
+.megamenu-menu-header #megamenu-menu-header-title:before {
+	color: #1f0909;
+}
+
+.megamenu-menu-list li a:hover, .megamenu-menu-list li a.active {
+	color: inherit;
+	background-color: #e8e7df;
+}
+
+.long-btn:hover {
+	background-color: #e8e7df;
+}
+
+#recent-file-panel tbody tr:nth-child(2n-1) {
+    background-color: transparent !important;
+}
+
+.megamenu-menu-panel tbody tr:hover td:nth-child(2) {
+    color: inherit;
+}
+
+.megamenu-menu-panel .btn {
+	background-color: #D2D1D1;
+}
+
+.btn-default {
+	background-color: transparent;
+}
+
+.typora-sourceview-on #toggle-sourceview-btn,
+.ty-show-word-count #footer-word-count {
+	background: #c7c5c5;
+}
+
+#typora-quick-open {
+    background-color: inherit;
+}
+
+.md-diagram-panel {
+	margin-top: 8px;
+}
+
+.file-list-item-file-name {
+	font-weight: initial;
+}
+
+.file-list-item-summary {
+	opacity: 1;
+}
+
+.file-list-item {
+	color: #777;
+}
+
+.file-list-item.active {
+	background-color: inherit;
+	color: black;
+}
+
+.ty-side-sort-btn.active {
+	background-color: inherit;
+}
+
+.file-list-item.active .file-list-item-file-name  {
+	font-weight: bold;
+}
+
+.file-list-item{
+    opacity:1 !important;
+}
+
+.file-library-node.active>.file-node-background{
+	background-color: rgba(32, 43, 51, 0.63);
+	background-color: var(--active-file-bg-color);
+}
+
+.file-tree-node.active>.file-node-content{
+	color: white;
+	color: var(--active-file-text-color);
+}
+
+.md-task-list-item>input {
+	margin-left: -1.7em;
+	margin-top: calc(1rem - 12px);
+}
+
+input {
+	border: 1px solid #aaa;
+}
+
+.megamenu-menu-header #megamenu-menu-header-title,
+.megamenu-menu-header:hover, 
+.megamenu-menu-header:focus {
+	color: inherit;
+}
+
+.dropdown-menu .divider {
+	border-color: #e5e5e5;
+}
+
+/* https://github.com/typora/typora-issues/issues/2046 */
+.os-windows-7 strong,
+.os-windows-7 strong  {
+	font-weight: 760;
+}
+
+.ty-preferences .btn-default {
+	background: transparent;
+}
+
+.ty-preferences .window-header {
+	border-bottom: 1px dashed #202B33;
+	box-shadow: none;
+}
+
+#sidebar-loading-template, #sidebar-loading-template.file-list-item {
+	color: #777;
+}
+
+
+</style>
+</head>
+<body class='typora-export os-windows' >
+<div  id='write'  class = 'is-node'><h1><a name="阎学通国际关系分析第三版）2017年9月）概念整理" class="md-header-anchor"></a><span>阎学通《国际关系分析（第三版）》（2017年9月）概念整理</span></h1><div class='md-toc' mdtype='toc'><p class="md-toc-content" role="list"><span role="listitem" class="md-toc-item md-toc-h1" data-ref="n0"><a class="md-toc-inner" href="#阎学通国际关系分析第三版）2017年9月）概念整理">阎学通《国际关系分析（第三版）》（2017年9月）概念整理</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n3"><a class="md-toc-inner" href="#第一章-学科概况和研究方法">第一章 学科概况和研究方法</a></span><span role="listitem" class="md-toc-item md-toc-h4" data-ref="n4"><a class="md-toc-inner" href="#§1-学科范畴">§1 学科范畴</a></span><span role="listitem" class="md-toc-item md-toc-h4" data-ref="n18"><a class="md-toc-inner" href="#§2-研究内容">§2 研究内容</a></span><span role="listitem" class="md-toc-item md-toc-h4" data-ref="n24"><a class="md-toc-inner" href="#§3-国际关系学的主要流派">§3 国际关系学的主要流派</a></span><span role="listitem" class="md-toc-item md-toc-h4" data-ref="n51"><a class="md-toc-inner" href="#§4-学习路径">§4 学习路径</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n59"><a class="md-toc-inner" href="#第二章-国际体系与国际秩序">第二章 国际体系与国际秩序</a></span><span role="listitem" class="md-toc-item md-toc-h4" data-ref="n60"><a class="md-toc-inner" href="#§1-国际体系三要素">§1 国际体系三要素</a></span><span role="listitem" class="md-toc-item md-toc-h4" data-ref="n68"><a class="md-toc-inner" href="#§2-国际秩序三要素">§2 国际秩序三要素</a></span><span role="listitem" class="md-toc-item md-toc-h4" data-ref="n82"><a class="md-toc-inner" href="#§3-国际体系与国际秩序的区别">§3 国际体系与国际秩序的区别</a></span><span role="listitem" class="md-toc-item md-toc-h4" data-ref="n92"><a class="md-toc-inner" href="#§4-国际格局">§4 国际格局</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n112"><a class="md-toc-inner" href="#第三章-国际行为体和国家主权">第三章 国际行为体和国家主权</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n113"><a class="md-toc-inner" href="#第四章-国家利益和民族认同">第四章 国家利益和民族认同</a></span><span role="listitem" class="md-toc-item md-toc-h4" data-ref="n114"><a class="md-toc-inner" href="#§1-民族认同形成的社会条件">§1 民族认同形成的社会条件</a></span><span role="listitem" class="md-toc-item md-toc-h4" data-ref="n120"><a class="md-toc-inner" href="#§2-民族主义的形成原因">§2 民族主义的形成原因</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n126"><a class="md-toc-inner" href="#第五章-综合国力与大国崛起">第五章 综合国力与大国崛起</a></span><span role="listitem" class="md-toc-item md-toc-h4" data-ref="n127"><a class="md-toc-inner" href="#§1-实力与权力">§1 实力与权力</a></span><span role="listitem" class="md-toc-item md-toc-h4" data-ref="n146"><a class="md-toc-inner" href="#§2-综合国力">§2 综合国力</a></span><span role="listitem" class="md-toc-item md-toc-h4" data-ref="n160"><a class="md-toc-inner" href="#§3-大国崛起世界中心转移">§3 大国崛起/世界中心转移</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n175"><a class="md-toc-inner" href="#第六章-国际安全与世界和平">第六章 国际安全与世界和平</a></span><span role="listitem" class="md-toc-item md-toc-h4" data-ref="n176"><a class="md-toc-inner" href="#§1-和平与安全">§1 和平与安全</a></span><span role="listitem" class="md-toc-item md-toc-h4" data-ref="n194"><a class="md-toc-inner" href="#§2-国际安全困境">§2 国际安全困境</a></span><span role="listitem" class="md-toc-item md-toc-h4" data-ref="n204"><a class="md-toc-inner" href="#§3-国际和平">§3 国际和平</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n208"><a class="md-toc-inner" href="#第七章-国际冲突与国际合作">第七章 国际冲突与国际合作</a></span><span role="listitem" class="md-toc-item md-toc-h4" data-ref="n209"><a class="md-toc-inner" href="#§1-国际合作">§1 国际合作</a></span><span role="listitem" class="md-toc-item md-toc-h4" data-ref="n219"><a class="md-toc-inner" href="#§2-绝对收益和相对收益">§2 绝对收益和相对收益</a></span><span role="listitem" class="md-toc-item md-toc-h4" data-ref="n246"><a class="md-toc-inner" href="#§3-积极合作与消极合作">§3 积极合作与消极合作</a></span><span role="listitem" class="md-toc-item md-toc-h4" data-ref="n256"><a class="md-toc-inner" href="#§4-全球治理">§4 全球治理</a></span><span role="listitem" class="md-toc-item md-toc-h4" data-ref="n262"><a class="md-toc-inner" href="#§5-区域合作和区域一体）化">§5 区域合作和区域（一体）化</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n279"><a class="md-toc-inner" href="#第八章-危机管理和对外决策">第八章 危机管理和对外决策</a></span><span role="listitem" class="md-toc-item md-toc-h4" data-ref="n280"><a class="md-toc-inner" href="#§1-国际危机">§1 国际危机</a></span><span role="listitem" class="md-toc-item md-toc-h4" data-ref="n308"><a class="md-toc-inner" href="#§2-决策与政策研究">§2 决策与政策研究</a></span><span role="listitem" class="md-toc-item md-toc-h4" data-ref="n321"><a class="md-toc-inner" href="#§3-政策分析的角度">§3 政策分析的角度</a></span><span role="listitem" class="md-toc-item md-toc-h4" data-ref="n334"><a class="md-toc-inner" href="#§4-国家类型领导类型和对外战略取向">§4 国家类型、领导类型和对外战略取向</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n385"><a class="md-toc-inner" href="#第九章-国际军控和战略威慑">第九章 国际军控和战略威慑</a></span><span role="listitem" class="md-toc-item md-toc-h4" data-ref="n386"><a class="md-toc-inner" href="#§1-国际军控">§1 国际军控</a></span><span role="listitem" class="md-toc-item md-toc-h4" data-ref="n392"><a class="md-toc-inner" href="#§2-战略威慑">§2 战略威慑</a></span><span role="listitem" class="md-toc-item md-toc-h4" data-ref="n405"><a class="md-toc-inner" href="#§3-外空和网络">§3 外空和网络</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n411"><a class="md-toc-inner" href="#第十章-意识形态和宗教">第十章 意识形态和宗教</a></span><span role="listitem" class="md-toc-item md-toc-h4" data-ref="n412"><a class="md-toc-inner" href="#§1-意识形态对国际关系的影响">§1 意识形态对国际关系的影响</a></span><span role="listitem" class="md-toc-item md-toc-h4" data-ref="n430"><a class="md-toc-inner" href="#§2-宗教与国际关系">§2 宗教与国际关系</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n437"><a class="md-toc-inner" href="#第十一章-国际组织与国际规范">第十一章 国际组织与国际规范</a></span><span role="listitem" class="md-toc-item md-toc-h4" data-ref="n438"><a class="md-toc-inner" href="#§1-联合国改革问题">§1 联合国改革问题</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n443"><a class="md-toc-inner" href="#第十二章-国际经济关系和经济制度">第十二章 国际经济关系和经济制度</a></span><span role="listitem" class="md-toc-item md-toc-h4" data-ref="n450"><a class="md-toc-inner" href="#§1-经济相互依存的敏感性和脆弱性">§1 经济相互依存的敏感性和脆弱性</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n463"><a class="md-toc-inner" href="#第十三章-国际关系预测方法和未来五年预测">第十三章 国际关系预测方法和未来五年预测</a></span></p></div><h2><a name="第一章-学科概况和研究方法" class="md-header-anchor"></a><span>第一章 学科概况和研究方法</span></h2><h4><a name="§1-学科范畴" class="md-header-anchor"></a><span>§1 学科范畴</span></h4><figure><table><thead><tr><th><span>内容</span></th><th><span>成果与目的</span></th></tr></thead><tbody><tr><td><span>理论研究</span></td><td><span>学术论文和学术著作，论证规律</span></td></tr><tr><td><span>政策研究</span></td><td><span>政策报告，提出政策建议</span></td></tr><tr><td><span>国际时事评论</span></td><td><span>表达个人或组织的看法和立场</span></td></tr></tbody></table></figure><h4><a name="§2-研究内容" class="md-header-anchor"></a><span>§2 研究内容</span></h4><ol start='' ><li><span>国别和地区研究</span></li><li><span>问题研究</span></li></ol><h4><a name="§3-国际关系学的主要流派" class="md-header-anchor"></a><span>§3 国际关系学的主要流派</span></h4><figure><table><thead><tr><th>&nbsp;</th><th><span>关注问题</span></th><th><span>核心变量</span></th><th><span>解决途径</span></th></tr></thead><tbody><tr><td><span>现实主义</span></td><td><span>安全、冲突</span></td><td><span>权力、国家利益</span></td><td><span>维持均势</span></td></tr><tr><td><span>自由主义</span></td><td><span>发展、合作</span></td><td><span>制度、共同利益</span></td><td><span>改善制度</span></td></tr><tr><td><span>建构主义</span></td><td><span>和谐、进化</span></td><td><span>观念、文化环境</span></td><td><span>改变观念</span></td></tr><tr><td><span>马克思主义</span></td><td><span>剥削、斗争</span></td><td><span>依附、阶级利益</span></td><td><span>改变国际秩序</span></td></tr></tbody></table></figure><h4><a name="§4-学习路径" class="md-header-anchor"></a><span>§4 学习路径</span></h4><ol start='' ><li><span>概念，一个学科的基础知识</span></li><li><span>历史</span></li><li><span>理论，一个学科的顶层知识。应该先打好概念基础，再精研理论。</span></li></ol><h2><a name="第二章-国际体系与国际秩序" class="md-header-anchor"></a><span>第二章 国际体系与国际秩序</span></h2><h4><a name="§1-国际体系三要素" class="md-header-anchor"></a><span>§1 国际体系三要素</span></h4><ol start='' ><li><span>国际行为体（international actors），改变最缓慢</span></li><li><span>国际格局（international configuration），改变最频繁</span></li><li><span>国际规范（international norm）</span></li></ol><h4><a name="§2-国际秩序三要素" class="md-header-anchor"></a><span>§2 国际秩序三要素</span></h4><ol start='' ><li><p><span>国际主导价值观（international dominant values），常常是主导国的价值观</span></p></li><li><p><span>国际制度安排（international institutional arrangements）</span></p><ol start='' ><li><span>国际机构设置</span></li><li><strong><span>权力分配</span></strong><sup class='md-footnote'><a href='#dfref-footnote-1' name='ref-footnote-1'>1</a></sup></li></ol></li><li><p><span>国际规范，一国是否遵守取决于（1）利益（2）价值观</span></p></li></ol><h4><a name="§3-国际体系与国际秩序的区别" class="md-header-anchor"></a><span>§3 国际体系与国际秩序的区别</span></h4><ol start='' ><li><span>前者是客观的，后者由于价值观这个因素是主观的，有了评价成分。</span></li><li><span>“</span><strong><span>建立国际新秩序</span></strong><span>”侧重于三要素中的权力，其</span><strong><span>本质是国际权力再分配</span></strong><span>；相对而言，“</span><strong><span>全球治理</span></strong><span>”则主要指</span><strong><span>国际责任再分配</span></strong><span>。</span></li><li><span>国际格局是国际体系的一部分，但不是国际秩序的一部分。国际格局影响国际秩序，二者是</span><strong><span>实力基础与上层建筑的关系</span></strong><span>；前者的变化快于后者的调整，这种内在矛盾成为国际秩序中权力之争的主要原因。</span></li></ol><p><img src="./国际秩序与国际体系.png" referrerpolicy="no-referrer" alt="国际秩序与国际体系"></p><center>图 2-1 国际秩序与国际体系</center><h4><a name="§4-国际格局" class="md-header-anchor"></a><span>§4 国际格局</span></h4><ol start='' ><li><p><span>极（polarity）：国际体系中相互对立的主导力量。</span></p></li><li><p><span>国际格局两要素</span></p><ol start='' ><li><span>大国实力对比：实力发展不平衡规律（the rule of unbalanced power development）</span></li><li><span>大国战略关系</span></li></ol></li><li><p><span>不同格局下大国与中小国家的行为空间不同。</span></p><ol start='' ><li><span>单极格局：超级大国到的约束小于中小国家</span></li><li><span>两极格局：超级大国与普通大国受到的约束大于中小国家</span></li><li><span>多极格局：大国与小国受到相似的格局影响力</span></li></ol></li></ol><h2><a name="第三章-国际行为体和国家主权" class="md-header-anchor"></a><span>第三章 国际行为体和国家主权</span></h2><h2><a name="第四章-国家利益和民族认同" class="md-header-anchor"></a><span>第四章 国家利益和民族认同</span></h2><h4><a name="§1-民族认同形成的社会条件" class="md-header-anchor"></a><span>§1 民族认同形成的社会条件</span></h4><ol start='' ><li><strong><span>青少年时期</span></strong><span>的生活环境。这一时期形成的民族认同一般会伴随一个人终生。</span></li><li><span>群体性民族认同变化的所需的时间一般为 35 到 50 年，即大概两代人。</span></li></ol><h4><a name="§2-民族主义的形成原因" class="md-header-anchor"></a><span>§2 民族主义的形成原因</span></h4><ol start='' ><li><span>这是一个非常复杂的问题，种种理论在解释上各有侧重。</span></li><li><span>但总得来说，民族主义是近现代社会的产物。</span></li></ol><h2><a name="第五章-综合国力与大国崛起" class="md-header-anchor"></a><span>第五章 综合国力与大国崛起</span></h2><h4><a name="§1-实力与权力" class="md-header-anchor"></a><span>§1 实力与权力</span></h4><ol start='' ><li><p><span>实力是物理概念，权力是关系概念。但 power 在英文中是双义的，存在一定程度的概念混乱。中文则不存在这个问题。</span></p></li><li><p><span>权力具有</span><strong><span>目标和手段的双重性质</span></strong><span>。国家有时将权力作为目标来争夺，有时以权力为手段扩大和维护国家利益。</span></p></li><li><p><span>国际权力由三个因素决定</span></p><ol start='' ><li><span>国家实力对比</span></li><li><span>国际规范</span><sup class='md-footnote'><a href='#dfref-footnote-2' name='ref-footnote-2'>2</a></sup></li></ol><ol start='3' ><li><span>该国与他国的关系</span></li></ol></li><li><p><span>权力不等于权威。国际权威需要靠不断地成功来赢得被领导国的信任。</span></p></li></ol><h4><a name="§2-综合国力" class="md-header-anchor"></a><span>§2 综合国力</span></h4><ol start='' ><li><p><span>综合国力（comprehensive national power）包括政治实力和军事实力、经济实力、文化实力。前者为</span><strong><span>操作性实力（operational power）</span></strong><span>，后三者为</span><strong><span>资源性实力（resourceful power）</span></strong><span>，政治实力会对资源性实力产生乘数放大作用，即</span><sup class='md-footnote'><a href='#dfref-footnote-3' name='ref-footnote-3'>3</a></sup><span> </span><span class="MathJax_SVG" tabindex="-1" style="font-size: 100%; display: inline-block;"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="53.528ex" height="9.759ex" viewBox="0 -2262.4 23046.7 4201.9" role="img" focusable="false" style="vertical-align: -4.505ex; margin-right: -0.028ex;"><defs><path stroke-width="0" id="E1-MJMAIN-3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path><path stroke-width="0" id="E1-MJMAIN-28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path><path stroke-width="0" id="E1-MJMAIN-2B" d="M56 237T56 250T70 270H369V420L370 570Q380 583 389 583Q402 583 409 568V270H707Q722 262 722 250T707 230H409V-68Q401 -82 391 -82H389H387Q375 -82 369 -68V230H70Q56 237 56 250Z"></path><path stroke-width="0" id="E1-MJSZ4-E150" d="M-18 -213L-24 -207V-172L-16 -158Q75 2 260 84Q334 113 415 119Q418 119 427 119T440 120Q454 120 457 117T460 98V60V25Q460 7 457 4T441 0Q308 0 193 -55T25 -205Q21 -211 18 -212T-1 -213H-18Z"></path><path stroke-width="0" id="E1-MJSZ4-E151" d="M-10 60Q-10 104 -10 111T-5 118Q-1 120 10 120Q96 120 190 84Q375 2 466 -158L474 -172V-207L468 -213H451H447Q437 -213 434 -213T428 -209T423 -202T414 -187T396 -163Q331 -82 224 -41T9 0Q-4 0 -7 3T-10 25V60Z"></path><path stroke-width="0" id="E1-MJSZ4-E153" d="M-10 60V95Q-10 113 -7 116T9 120Q151 120 250 171T396 284Q404 293 412 305T424 324T431 331Q433 333 451 333H468L474 327V292L466 278Q375 118 190 36Q95 0 8 0Q-5 0 -7 3T-10 24V60Z"></path><path stroke-width="0" id="E1-MJSZ4-E152" d="M-24 327L-18 333H-1Q11 333 15 333T22 329T27 322T35 308T54 284Q115 203 225 162T441 120Q454 120 457 117T460 95V60V28Q460 8 457 4T442 0Q355 0 260 36Q75 118 -16 278L-24 292V327Z"></path><path stroke-width="0" id="E1-MJSZ4-E154" d="M-10 0V120H410V0H-10Z"></path><path stroke-width="0" id="E1-MJMAIN-29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path><path stroke-width="0" id="E1-MJMAIN-D7" d="M630 29Q630 9 609 9Q604 9 587 25T493 118L389 222L284 117Q178 13 175 11Q171 9 168 9Q160 9 154 15T147 29Q147 36 161 51T255 146L359 250L255 354Q174 435 161 449T147 471Q147 480 153 485T168 490Q173 490 175 489Q178 487 284 383L389 278L493 382Q570 459 587 475T609 491Q630 491 630 471Q630 464 620 453T522 355L418 250L522 145Q606 61 618 48T630 29Z"></path></defs><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><text font-family="STIXGeneral,'Arial Unicode MS',serif" stroke="none" transform="scale(53.819) matrix(1 0 0 -1 0 0)">综</text><g transform="translate(867,0)"><text font-family="STIXGeneral,'Arial Unicode MS',serif" stroke="none" transform="scale(53.819) matrix(1 0 0 -1 0 0)">合</text></g><g transform="translate(1735,0)"><text font-family="STIXGeneral,'Arial Unicode MS',serif" stroke="none" transform="scale(53.819) matrix(1 0 0 -1 0 0)">国</text></g><g transform="translate(2596,0)"><text font-family="STIXGeneral,'Arial Unicode MS',serif" stroke="none" transform="scale(53.819) matrix(1 0 0 -1 0 0)">力</text></g><use xlink:href="#E1-MJMAIN-3D" x="3735" y="0"></use><g transform="translate(4791,0)"><use xlink:href="#E1-MJMAIN-28" x="0" y="0"></use><g transform="translate(389,0)"><text font-family="STIXGeneral,'Arial Unicode MS',serif" stroke="none" transform="scale(53.819) matrix(1 0 0 -1 0 0)">军</text></g><g transform="translate(1250,0)"><text font-family="STIXGeneral,'Arial Unicode MS',serif" stroke="none" transform="scale(53.819) matrix(1 0 0 -1 0 0)">事</text></g><g transform="translate(2111,0)"><text font-family="STIXGeneral,'Arial Unicode MS',serif" stroke="none" transform="scale(53.819) matrix(1 0 0 -1 0 0)">实</text></g><g transform="translate(2972,0)"><text font-family="STIXGeneral,'Arial Unicode MS',serif" stroke="none" transform="scale(53.819) matrix(1 0 0 -1 0 0)">力</text></g><use xlink:href="#E1-MJMAIN-2B" x="4055" y="0"></use><g transform="translate(5055,0)"><text font-family="STIXGeneral,'Arial Unicode MS',serif" stroke="none" transform="scale(53.819) matrix(1 0 0 -1 0 0)">经</text></g><g transform="translate(5923,0)"><text font-family="STIXGeneral,'Arial Unicode MS',serif" stroke="none" transform="scale(53.819) matrix(1 0 0 -1 0 0)">济</text></g><g transform="translate(6784,0)"><text font-family="STIXGeneral,'Arial Unicode MS',serif" stroke="none" transform="scale(53.819) matrix(1 0 0 -1 0 0)">实</text></g><g transform="translate(7645,0)"><text font-family="STIXGeneral,'Arial Unicode MS',serif" stroke="none" transform="scale(53.819) matrix(1 0 0 -1 0 0)">力</text></g><g transform="translate(12,1043)"><use xlink:href="#E1-MJSZ4-E150" x="24" y="0"></use><g transform="translate(563.0361410796958,0) scale(7.903614107969577,1)"><use xlink:href="#E1-MJSZ4-E154"></use></g><g transform="translate(3803,0)"><use xlink:href="#E1-MJSZ4-E153"></use><use xlink:href="#E1-MJSZ4-E152" x="450" y="0"></use></g><g transform="translate(4782.554066426918,0) scale(7.903614107969577,1)"><use xlink:href="#E1-MJSZ4-E154"></use></g><use xlink:href="#E1-MJSZ4-E151" x="8033" y="0"></use></g><g transform="translate(3337,1576)"><text font-family="STIXGeneral,'Arial Unicode MS',serif" stroke="none" transform="scale(38.056) matrix(1 0 0 -1 0 0)">硬</text><g transform="translate(613,0)"><text font-family="STIXGeneral,'Arial Unicode MS',serif" stroke="none" transform="scale(38.056) matrix(1 0 0 -1 0 0)">实</text></g><g transform="translate(1222,0)"><text font-family="STIXGeneral,'Arial Unicode MS',serif" stroke="none" transform="scale(38.056) matrix(1 0 0 -1 0 0)">力</text></g></g><use xlink:href="#E1-MJMAIN-2B" x="8729" y="0"></use><g transform="translate(9729,0)"><text font-family="STIXGeneral,'Arial Unicode MS',serif" stroke="none" transform="scale(53.819) matrix(1 0 0 -1 0 0)">文</text></g><g transform="translate(10590,0)"><text font-family="STIXGeneral,'Arial Unicode MS',serif" stroke="none" transform="scale(53.819) matrix(1 0 0 -1 0 0)">化</text></g><g transform="translate(11458,0)"><text font-family="STIXGeneral,'Arial Unicode MS',serif" stroke="none" transform="scale(53.819) matrix(1 0 0 -1 0 0)">实</text></g><g transform="translate(12319,0)"><text font-family="STIXGeneral,'Arial Unicode MS',serif" stroke="none" transform="scale(53.819) matrix(1 0 0 -1 0 0)">力</text></g><use xlink:href="#E1-MJMAIN-29" x="13180" y="0"></use><g transform="translate(12,-763)"><use xlink:href="#E1-MJSZ4-E152" x="24" y="0"></use><g transform="translate(623.3052345403439,0) scale(13.930523454034393,1)"><use xlink:href="#E1-MJSZ4-E154"></use></g><g transform="translate(6334,0)"><use xlink:href="#E1-MJSZ4-E151"></use><use xlink:href="#E1-MJSZ4-E150" x="450" y="0"></use></g><g transform="translate(7374.125085234789,0) scale(13.930523454034393,1)"><use xlink:href="#E1-MJSZ4-E154"></use></g><use xlink:href="#E1-MJSZ4-E153" x="13095" y="0"></use></g><g transform="translate(5257,-1672)"><text font-family="STIXGeneral,'Arial Unicode MS',serif" stroke="none" transform="scale(38.056) matrix(1 0 0 -1 0 0)">资</text><g transform="translate(608,0)"><text font-family="STIXGeneral,'Arial Unicode MS',serif" stroke="none" transform="scale(38.056) matrix(1 0 0 -1 0 0)">源</text></g><g transform="translate(1222,0)"><text font-family="STIXGeneral,'Arial Unicode MS',serif" stroke="none" transform="scale(38.056) matrix(1 0 0 -1 0 0)">性</text></g><g transform="translate(1836,0)"><text font-family="STIXGeneral,'Arial Unicode MS',serif" stroke="none" transform="scale(38.056) matrix(1 0 0 -1 0 0)">实</text></g><g transform="translate(2445,0)"><text font-family="STIXGeneral,'Arial Unicode MS',serif" stroke="none" transform="scale(38.056) matrix(1 0 0 -1 0 0)">力</text></g></g></g><use xlink:href="#E1-MJMAIN-D7" x="18583" y="0"></use><g transform="translate(19583,0)"><text font-family="STIXGeneral,'Arial Unicode MS',serif" stroke="none" transform="scale(53.819) matrix(1 0 0 -1 0 0)">政</text><g transform="translate(867,0)"><text font-family="STIXGeneral,'Arial Unicode MS',serif" stroke="none" transform="scale(53.819) matrix(1 0 0 -1 0 0)">治</text></g><g transform="translate(1728,0)"><text font-family="STIXGeneral,'Arial Unicode MS',serif" stroke="none" transform="scale(53.819) matrix(1 0 0 -1 0 0)">实</text></g><g transform="translate(2590,0)"><text font-family="STIXGeneral,'Arial Unicode MS',serif" stroke="none" transform="scale(53.819) matrix(1 0 0 -1 0 0)">力</text></g><g transform="translate(12,-634)"><use xlink:href="#E1-MJSZ4-E152" x="24" y="0"></use><g transform="translate(502.8471357886905,0) scale(1.8847135788690474,1)"><use xlink:href="#E1-MJSZ4-E154"></use></g><g transform="translate(1275,0)"><use xlink:href="#E1-MJSZ4-E151"></use><use xlink:href="#E1-MJSZ4-E150" x="450" y="0"></use></g><g transform="translate(2194.4268389136905,0) scale(1.8847135788690474,1)"><use xlink:href="#E1-MJSZ4-E154"></use></g><use xlink:href="#E1-MJSZ4-E153" x="2977" y="0"></use></g><g transform="translate(200,-1542)"><text font-family="STIXGeneral,'Arial Unicode MS',serif" stroke="none" transform="scale(38.056) matrix(1 0 0 -1 0 0)">操</text><g transform="translate(608,0)"><text font-family="STIXGeneral,'Arial Unicode MS',serif" stroke="none" transform="scale(38.056) matrix(1 0 0 -1 0 0)">作</text></g><g transform="translate(1217,0)"><text font-family="STIXGeneral,'Arial Unicode MS',serif" stroke="none" transform="scale(38.056) matrix(1 0 0 -1 0 0)">性</text></g><g transform="translate(1831,0)"><text font-family="STIXGeneral,'Arial Unicode MS',serif" stroke="none" transform="scale(38.056) matrix(1 0 0 -1 0 0)">实</text></g><g transform="translate(2440,0)"><text font-family="STIXGeneral,'Arial Unicode MS',serif" stroke="none" transform="scale(38.056) matrix(1 0 0 -1 0 0)">力</text></g></g></g></g></svg></span><script type="math/tex">综合国力=\underbrace{\overbrace{(军事实力+经济实力}^{硬实力}+文化实力)}_{资源性实力} \times \underbrace{政治实力}_{操作性实力}</script></p></li><li><p><span>综合国力的质量：实力要素的平衡度。定义式为 </span><span class="MathJax_SVG" tabindex="-1" style="font-size: 100%; display: inline-block;"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="10.873ex" height="2.884ex" viewBox="0 -863.1 4681.4 1241.8" role="img" focusable="false" style="vertical-align: -0.88ex;"><defs><path stroke-width="0" id="E2-MJMATHI-43" d="M50 252Q50 367 117 473T286 641T490 704Q580 704 633 653Q642 643 648 636T656 626L657 623Q660 623 684 649Q691 655 699 663T715 679T725 690L740 705H746Q760 705 760 698Q760 694 728 561Q692 422 692 421Q690 416 687 415T669 413H653Q647 419 647 422Q647 423 648 429T650 449T651 481Q651 552 619 605T510 659Q484 659 454 652T382 628T299 572T226 479Q194 422 175 346T156 222Q156 108 232 58Q280 24 350 24Q441 24 512 92T606 240Q610 253 612 255T628 257Q648 257 648 248Q648 243 647 239Q618 132 523 55T319 -22Q206 -22 128 53T50 252Z"></path><path stroke-width="0" id="E2-MJMATHI-50" d="M287 628Q287 635 230 637Q206 637 199 638T192 648Q192 649 194 659Q200 679 203 681T397 683Q587 682 600 680Q664 669 707 631T751 530Q751 453 685 389Q616 321 507 303Q500 302 402 301H307L277 182Q247 66 247 59Q247 55 248 54T255 50T272 48T305 46H336Q342 37 342 35Q342 19 335 5Q330 0 319 0Q316 0 282 1T182 2Q120 2 87 2T51 1Q33 1 33 11Q33 13 36 25Q40 41 44 43T67 46Q94 46 127 49Q141 52 146 61Q149 65 218 339T287 628ZM645 554Q645 567 643 575T634 597T609 619T560 635Q553 636 480 637Q463 637 445 637T416 636T404 636Q391 635 386 627Q384 621 367 550T332 412T314 344Q314 342 395 342H407H430Q542 342 590 392Q617 419 631 471T645 554Z"></path><path stroke-width="0" id="E2-MJMATHI-71" d="M33 157Q33 258 109 349T280 441Q340 441 372 389Q373 390 377 395T388 406T404 418Q438 442 450 442Q454 442 457 439T460 434Q460 425 391 149Q320 -135 320 -139Q320 -147 365 -148H390Q396 -156 396 -157T393 -175Q389 -188 383 -194H370Q339 -192 262 -192Q234 -192 211 -192T174 -192T157 -193Q143 -193 143 -185Q143 -182 145 -170Q149 -154 152 -151T172 -148Q220 -148 230 -141Q238 -136 258 -53T279 32Q279 33 272 29Q224 -10 172 -10Q117 -10 75 30T33 157ZM352 326Q329 405 277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q233 26 290 98L298 109L352 326Z"></path><path stroke-width="0" id="E2-MJMAIN-3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path><path stroke-width="0" id="E2-MJMATHI-65" d="M39 168Q39 225 58 272T107 350T174 402T244 433T307 442H310Q355 442 388 420T421 355Q421 265 310 237Q261 224 176 223Q139 223 138 221Q138 219 132 186T125 128Q125 81 146 54T209 26T302 45T394 111Q403 121 406 121Q410 121 419 112T429 98T420 82T390 55T344 24T281 -1T205 -11Q126 -11 83 42T39 168ZM373 353Q367 405 305 405Q272 405 244 391T199 357T170 316T154 280T149 261Q149 260 169 260Q282 260 327 284T373 353Z"></path><path stroke-width="0" id="E2-MJMAIN-2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"></path><path stroke-width="0" id="E2-MJMATHI-3C3" d="M184 -11Q116 -11 74 34T31 147Q31 247 104 333T274 430Q275 431 414 431H552Q553 430 555 429T559 427T562 425T565 422T567 420T569 416T570 412T571 407T572 401Q572 357 507 357Q500 357 490 357T476 358H416L421 348Q439 310 439 263Q439 153 359 71T184 -11ZM361 278Q361 358 276 358Q152 358 115 184Q114 180 114 178Q106 141 106 117Q106 67 131 47T188 26Q242 26 287 73Q316 103 334 153T356 233T361 278Z"></path></defs><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><use xlink:href="#E2-MJMATHI-43" x="0" y="0"></use><g transform="translate(760,0)"><use xlink:href="#E2-MJMATHI-50" x="0" y="0"></use><use transform="scale(0.707)" xlink:href="#E2-MJMATHI-71" x="907" y="-213"></use></g><use xlink:href="#E2-MJMAIN-3D" x="2105" y="0"></use><g transform="translate(3160,0)"><use xlink:href="#E2-MJMATHI-65" x="0" y="0"></use><g transform="translate(466,362)"><use transform="scale(0.707)" xlink:href="#E2-MJMAIN-2212" x="0" y="0"></use><use transform="scale(0.707)" xlink:href="#E2-MJMATHI-3C3" x="778" y="0"></use></g></g></g></svg></span><script type="math/tex">CP_q=e^{-\sigma}</script><span>，其中 </span><span class="MathJax_SVG" tabindex="-1" style="font-size: 100%; display: inline-block;"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1.329ex" height="1.509ex" viewBox="0 -540.2 572 649.8" role="img" focusable="false" style="vertical-align: -0.255ex;"><defs><path stroke-width="0" id="E3-MJMATHI-3C3" d="M184 -11Q116 -11 74 34T31 147Q31 247 104 333T274 430Q275 431 414 431H552Q553 430 555 429T559 427T562 425T565 422T567 420T569 416T570 412T571 407T572 401Q572 357 507 357Q500 357 490 357T476 358H416L421 348Q439 310 439 263Q439 153 359 71T184 -11ZM361 278Q361 358 276 358Q152 358 115 184Q114 180 114 178Q106 141 106 117Q106 67 131 47T188 26Q242 26 287 73Q316 103 334 153T356 233T361 278Z"></path></defs><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><use xlink:href="#E3-MJMATHI-3C3" x="0" y="0"></use></g></svg></span><script type="math/tex">\sigma</script><span> 为四个实力要素值的标准差。四种实力越接近，综合国力的质量越好。</span></p></li><li><p><span>实力要素的不可替代性（the irreplaceability of power elements）。不同实力要素发挥的功能不同，国家把一种实力要素转换成另一种需要花费较长的时间，因此四个实力要素在短期内不能互相替代。</span></p></li><li><p><span>政治实力是软实力的核心，中国提升软实力需要从政治实力入手</span><sup class='md-footnote'><a href='#dfref-footnote-4' name='ref-footnote-4'>4</a></sup><span>。</span></p></li></ol><p><img src="./对软实力构成的分解.png" referrerpolicy="no-referrer" alt="对软实力构成的分解"></p> <center>图 5-1 对软实力构成的分解</center><h4><a name="§3-大国崛起世界中心转移" class="md-header-anchor"></a><span>§3 大国崛起/世界中心转移</span></h4><ol start='' ><li><p><span>崛起不是一般的发展，崛起是</span><strong><span>新兴大国与霸权国之间</span></strong><span>相对实力差距的缩小和实力地位的换位。崛起通常是国际关系学研究的问题，核心内容是赶超霸权国。</span></p></li><li><p><span>结构性矛盾（structural conflict），与双方的国家战略无关，不因人的主观意志而转移。</span></p></li><li><p><span>新兴大国的崛起战略</span></p><ol start='' ><li><span>兼并战略（annexation strategy）</span></li><li><span>结盟战略（alliance strategy），以本国为盟主，通过向盟友提供好处获得盟友的追随</span></li><li><span>搭车战略（free ride strategy），以霸权国为盟主，从霸权国那里获得好处。只适用于崛起的早期阶段</span></li></ol></li></ol><h2><a name="第六章-国际安全与世界和平" class="md-header-anchor"></a><span>第六章 国际安全与世界和平</span></h2><h4><a name="§1-和平与安全" class="md-header-anchor"></a><span>§1 和平与安全</span></h4><figure><table><thead><tr><th><span>概念</span></th><th><span>定义</span></th></tr></thead><tbody><tr><td><span>和平</span></td><td><span>没有战争的客观状态</span></td></tr><tr><td><span>安全</span></td><td><span>利益受到保障的主观与客观相结合的状态</span></td></tr></tbody></table></figure><ol start='' ><li><strong><span>国家可能在和平状态下面临严重的安全威胁，也可能在战争状态下安全无虞</span></strong><span>。</span></li><li><span>和平不能保证一个国家的生存和利益，国家首要追求的是安全。</span></li><li><span>“安全”侧重不损失利益；“发展”侧重拓展利益。</span></li></ol><h4><a name="§2-国际安全困境" class="md-header-anchor"></a><span>§2 国际安全困境</span></h4><ol start='' ><li><span>安全困境（security dilemma）是一种典型的囚徒博弈。</span></li><li><span>传统安全威胁：国家之间相互构成的（以政治、军事手段为主的）安全威胁。</span></li><li><span>非传统安全威胁：（1）</span><strong><span>非国家行为体</span></strong><span>或（2）</span><strong><span>其他国家政府的非军事行为</span></strong><span>造成的国家安全威胁。</span></li><li><span>战略互信（strategic mutual trust）：双方在重大战略利益问题上有着相互认为对方不会采取与己敌对立场的信任。</span></li></ol><h4><a name="§3-国际和平" class="md-header-anchor"></a><span>§3 国际和平</span></h4><ol start='' ><li><span>保障和平有两个非常传统的方法：（1）维持均势；（2）建立单极霸权。</span></li></ol><h2><a name="第七章-国际冲突与国际合作" class="md-header-anchor"></a><span>第七章 国际冲突与国际合作</span></h2><h4><a name="§1-国际合作" class="md-header-anchor"></a><span>§1 国际合作</span></h4><ol start='' ><li><span>国际合作：有关当事方选择的</span><strong><span>相互妥协</span></strong><span>的行为。</span></li><li><span>合作与屈服的区别：合作是妥协行为，双方或多方都做出让步；屈服则是单方做出让步。</span></li><li><span>合作与和谐的区别：合作以利益冲突为前提，有冲突才有妥协和协调立场；和谐则不存在利益冲突。</span></li><li><span>战略互信不是战略合作的前提条件。只要有共同的战略利益存在，即使没有互信，也能开展合作。</span></li></ol><h4><a name="§2-绝对收益和相对收益" class="md-header-anchor"></a><span>§2 绝对收益和相对收益</span></h4><ol start='' ><li><span>绝对收益（absolute gain）：与自己纵向比较。</span></li><li><span>相对收益（relative gain）：与他方横向比较。</span></li><li><span>高阶政治（high politics）：有关安全（军事）利益和政治利益方面的问题。</span></li><li><span>低阶政治（low politics）：有关经济利益和文化利益方面的问题。</span></li></ol><figure><table><thead><tr><th>&nbsp;</th><th><span>更多考虑相对收益</span></th><th><span>更多考虑绝对收益</span></th></tr></thead><tbody><tr><td><span>合作领域</span></td><td><span>高阶政治</span></td><td><span>低阶政治</span></td></tr><tr><td><span>合作对象</span></td><td><span>敌人</span></td><td><span>朋友</span></td></tr><tr><td><span>合作期限</span></td><td><span>长期</span></td><td><span>短期</span></td></tr></tbody></table></figure><h4><a name="§3-积极合作与消极合作" class="md-header-anchor"></a><span>§3 积极合作与消极合作</span></h4><ol start='' ><li><p><span>积极合作（positive cooperation）：合作者共同应对第三方，如军事同盟。</span></p></li><li><p><span>消极合作（negative cooperation）或预防性合作（preventive cooperation）：应对合作者之间冲突的合作，如</span><a href='http://en.bosimedia.com/wiki/Organization_for_Security_and_Co-operation_in_Europe'><span>欧洲安全与合作组织</span></a><span>。</span></p></li><li><p><span>敌对国家之间也可以达成积极合作</span><sup class='md-footnote'><a href='#dfref-footnote-5' name='ref-footnote-5'>5</a></sup><span>；友好国家之间也可以达成消极合作。</span></p></li></ol><h4><a name="§4-全球治理" class="md-header-anchor"></a><span>§4 全球治理</span></h4><ol start='' ><li><span>全球治理（global governance）：通过制定</span><strong><span>有约束力</span></strong><span>的国际规制来解决人类面临的全球性问题。全球治理的核心是国际责任的分配，</span><strong><span>本质上是要求大国承担更多的国际责任</span></strong><span>。</span></li><li><span>现实主义者认为中国不可对全球治理抱有过高期望，防止奋发有为的外交政策落入好大喜功的歧途。</span></li></ol><h4><a name="§5-区域合作和区域一体）化" class="md-header-anchor"></a><span>§5 区域合作和区域（一体）化</span></h4><ol start='' ><li><p><span>区域合作（regional cooperation）和区域化（regionalization）的根本区别在于，是否存在部分国家主权让渡给地区组织机构的现象。</span></p></li><li><p><span>区域合作的原因</span></p><ol start='' ><li><span>应对其他地区国家的竞争压力（扩大版的国家保护主义）</span></li><li><span>缓解全球化的危害，如增强国际谈判能力</span></li><li><span>增强与邻国的政治和安全互信</span></li><li><span>为国内改革创造条件</span></li></ol></li><li><p><span>大国的政治领导是区域合作成功的先决条件。</span></p></li></ol><h2><a name="第八章-危机管理和对外决策" class="md-header-anchor"></a><span>第八章 危机管理和对外决策</span></h2><h4><a name="§1-国际危机" class="md-header-anchor"></a><span>§1 国际危机</span></h4><ol start='' ><li><p><span>国际危机：</span><strong><span>高强度的、有可能引发战争的国际冲突</span></strong><span>事件。如 1962 年古巴导弹危机、2012 年钓鱼岛危机。</span></p></li><li><p><span>三个特征：</span></p><ol start='' ><li><span>事发突然，用于解决冲突的决策时间有限。处理危机时，一个及时错误的决策比一个迟到的完美决策更有意义。</span></li><li><span>国家重大利益受到严重威胁</span></li><li><span>冲突本身有升级为军事冲突的危险</span></li></ol></li><li><p><span>政治解决国际危机的几种方式</span></p><ol start='' ><li><span>谈判：直接交涉和交换意见</span></li><li><span>协商：有时也邀请中立国参加</span></li><li><span>斡旋（good offices）：第三方采取和提供协助</span></li><li><span>调停（mediation）：第三方就争端解决提出方案，并直接参加或主持谈判</span></li><li><span>仲裁（arbitration）：具有公认地位的中立机构或第三方作出裁决。</span><strong><span>仲裁需要双方自愿</span></strong><span>。</span></li></ol></li><li><p><span>国际维和：为政治解决国际军事冲突提供条件，使冲突方和第三方有更多的时间和相对稳定的环境进行谈判、调解、斡旋。</span></p></li></ol><h4><a name="§2-决策与政策研究" class="md-header-anchor"></a><span>§2 决策与政策研究</span></h4><ol start='' ><li><p><span>影响决策正功率的因素</span></p><ol start='' ><li><span>领导者的决策能力。决策要对复杂的利益关系进行多维度的平衡，本质上是一种艺术。</span></li><li><span>作为基础的政策研究水平。政策研究更多地遵循科学方法，其水平高低会影响决策者的艺术表现。</span></li><li><span>合理的制度安排，如一个允许多种意见争论的决策机制、对错误决策进行及时纠偏的机制。决策过程的科学化有助于提高决策的成功率，但不能保证决策不出现失误。</span></li></ol></li><li><p><span>影响决策成功率的因素是复杂的，单一方面的发达并不能保证决策的成功。要对总体决策水平有更好的把握，多因素分析方法中必须融入</span><strong><span>历史感</span></strong><span>，即在一个组织、国家的兴衰周期中，多种因素的强势期不一致，使总的决策能力呈现一定的起伏规律。例如，霸主末世的研究积累一般基础雄厚、无人能敌，但一系列其他因素会腐蚀其作出成功决策的能力。新兴组织进行决策的制度安排可能不完善，但经历复杂斗争环境的领导者的决策能力可能非常高超。</span></p></li></ol><h4><a name="§3-政策分析的角度" class="md-header-anchor"></a><span>§3 政策分析的角度</span></h4><ol start='' ><li><p><span>国家目标</span></p><ol start='' ><li><span>普世性理性/工具理性：说人们具有这种理性，指他们的目标可能不同，但实现目标的手段是一致的、可预期的。</span></li><li><span>特殊理性：指人们的目标不尽相同。在国际关系领域，说不同国家具有不同理性，指不同国家对国家利益的排序标准不同。如冷战后的美国具有民主理性，伊朗具有伊斯兰理性或什叶理性，中国具有发展理性。</span></li></ol></li><li><p><span>部门利益/官僚化分析（bureaucratic analysis）</span></p></li><li><p><span>组织行为分析</span></p></li></ol><h4><a name="§4-国家类型领导类型和对外战略取向" class="md-header-anchor"></a><span>§4 国家类型、领导类型和对外战略取向</span></h4><ol start='' ><li><p><span>四种领导类型</span></p><ol start='' ><li><span>无为型：自知实力不足，（至少暂时）放弃战略利益以缓和矛盾。其他三种领导类型都不放弃战略利益，只是追求战略利益时倾向优先使用的手段不同。</span></li><li><span>守成型：倾向使用经济/互利手段追求战略利益</span></li><li><span>主动型：倾向使用政治/妥协手段追求战略利益</span></li><li><span>争斗型：倾向使用军事/威慑手段追求战略利益</span></li></ol></li><li><p><span>领导人</span></p><ol start='' ><li><span>同一个领导人可能随着时间的推移呈现出不同的领导类型</span></li><li><span>领导人的意识形态越复杂，认知能力越强，越能在危机时刻保持头脑清醒，制定出最有效的对外政策</span></li></ol></li></ol><figure><table><thead><tr><th style='text-align:left;' >&nbsp;</th><th style='text-align:center;' ><span>无为</span></th><th style='text-align:center;' ><span>守成</span></th><th style='text-align:center;' ><span>主动</span></th><th style='text-align:center;' ><span>争斗</span></th></tr></thead><tbody><tr><td style='text-align:left;' ><span>主导国</span></td><td style='text-align:center;' ><span>绥靖</span></td><td style='text-align:center;' ><span>军事收缩、拼经济</span></td><td style='text-align:center;' ><span>集体干预</span></td><td style='text-align:center;' ><span>全面遏制</span></td></tr><tr><td style='text-align:left;' ><span>崛起国</span></td><td style='text-align:center;' ><span>放弃崛起</span></td><td style='text-align:center;' ><span>拓展全球经济合作</span></td><td style='text-align:center;' ><span>睦邻结盟</span></td><td style='text-align:center;' ><span>军事扩张、挑战禁脔</span></td></tr><tr><td style='text-align:left;' ><span>地区大国</span></td><td style='text-align:center;' ><span>防止外部介入</span></td><td style='text-align:center;' ><span>强化区域经济合作</span></td><td style='text-align:center;' ><span>地区同盟</span></td><td style='text-align:center;' ><span>地区扩张</span></td></tr><tr><td style='text-align:left;' ><span>小国</span></td><td style='text-align:center;' ><span>对外中立</span></td><td style='text-align:center;' ><span>不结盟</span></td><td style='text-align:center;' ><span>参加同盟</span></td><td style='text-align:center;' ><span>自我封闭</span></td></tr></tbody></table></figure><h2><a name="第九章-国际军控和战略威慑" class="md-header-anchor"></a><span>第九章 国际军控和战略威慑</span></h2><h4><a name="§1-国际军控" class="md-header-anchor"></a><span>§1 国际军控</span></h4><ol start='' ><li><span>军控的目的是期望对方也采取同样的政策</span></li><li><span>原理：战略博弈</span></li></ol><h4><a name="§2-战略威慑" class="md-header-anchor"></a><span>§2 战略威慑</span></h4><ol start='' ><li><p><span>战略威慑（strategic deterrence）专指核威慑</span></p><ol start='' ><li><span>相互确保摧毁战略（mutual assured destruction）</span></li><li><span>不可接受的损失（unacceptable losses），如三分之一的人口和二分之一的工业</span></li><li><span>二次打击能力</span></li></ol></li><li><p><span>确保核武库的足够规模和相互平衡是实现有效战略威慑的根本保障。相反，不审慎的核裁军行动非但不能带来和平，反而有可能成为诱发核战争的因素。</span></p></li></ol><h4><a name="§3-外空和网络" class="md-header-anchor"></a><span>§3 外空和网络</span></h4><ol start='' ><li><span>外空战与核战争一样不会有赢家。外空战遗留的无数碎片会阻止新的航天器进入太空，导致人类再也无法利用太空资源、从事太空活动。</span></li><li><span>网络安全（cyber security）</span></li></ol><h2><a name="第十章-意识形态和宗教" class="md-header-anchor"></a><span>第十章 意识形态和宗教</span></h2><h4><a name="§1-意识形态对国际关系的影响" class="md-header-anchor"></a><span>§1 意识形态对国际关系的影响</span></h4><ol start='' ><li><p><span>意识形态（ideology）：一组用来解释人类社会应当如何运作的观念和原则，并且提供了建设某种社会秩序的蓝图。</span></p></li><li><p><span>意识形态的功能</span></p><ol start='' ><li><span>提供了认识和理解世界的思想框架</span></li><li><span>帮助人们明确他们的行动目的和行动指南</span></li><li><span>帮助人们建立共同的政治身份认同，从而促进他们之间的合作</span></li></ol></li><li><p><span>意识形态为国家利益披上了一层温情脉脉的面纱；但“政治正确”的泛滥可能导致意识形态原教旨主义，使国家利益受损。</span></p></li><li><p><span>意识形态因素在中国对外工作中的“回归”：中国总结“文革”教训，以及美国冷战后在全球推行民主价值观的教训，一度认将国家利益和意识形态对立起来，要求不以意识形态指导对外政策。但近年来，中国发现只讲国家利益无法在国际上提高道义感召力，不利于维护国家利益</span><sup class='md-footnote'><a href='#dfref-footnote-6' name='ref-footnote-6'>6</a></sup><span>。因此政府提出要建立核心价值观，意识形态对中国外交政策的影响力明显上升。</span></p></li></ol><h4><a name="§2-宗教与国际关系" class="md-header-anchor"></a><span>§2 宗教与国际关系</span></h4><ol start='' ><li><p><span>由于一神教在中国历史上没有占据主导地位</span><sup class='md-footnote'><a href='#dfref-footnote-7' name='ref-footnote-7'>7</a></sup><span>，绝大多数中国人对于宗教信仰的政治力量理解不深刻</span></p></li><li><p><span>宗教国家有其特殊理性，追求的目标与世俗国家有较大差异。</span></p></li></ol><h2><a name="第十一章-国际组织与国际规范" class="md-header-anchor"></a><span>第十一章 国际组织与国际规范</span></h2><h4><a name="§1-联合国改革问题" class="md-header-anchor"></a><span>§1 联合国改革问题</span></h4><blockquote><p><span>韩国与日本在二战后结下世仇，因此反对日本入常。意大利和德国都是二战的战败国，而且都被视为法西斯国家。</span><strong><font color='red'><span>德国入常意味着德国成为正常国家，而意大利仍要背负历史污名。因此意大利要求与德国同时入常</span></font></strong><span>。巴基斯坦与印度还处于全面军事对抗关系，因此担心印度入常后利用手中的权力打击巴基斯坦。</span><strong><font color='red'><span>智利担心巴西入常后成为南美的主导国，使自己失去目前与巴西平等的地位，因此宁可拉美没有常任理事国，也不能让巴西独自入常</span></font></strong><span>。埃及要求入常成为非洲的代表，但</span><strong><font color='red'><span>尼日利亚和南非都认为自己比埃及更能代表非洲</span></font></strong><span>。</span></p><div align="right">——P289</div></blockquote><p><span>所以，这真的不是一本正经地在讲笑话吗？(￣▽￣)~* </span></p><h2><a name="第十二章-国际经济关系和经济制度" class="md-header-anchor"></a><span>第十二章 国际经济关系和经济制度</span></h2><blockquote><p><span>国际政治经济学（IPE）已经成为国际关系学中的一个独立的专业学科，有了成体系的理论和专业术语。</span></p><div align="right">——P308</div></blockquote><blockquote><p><span>相对于世界上的绝大多数国家，包括绝大多数发达国家，我国在 IPE 方面的研究是比较先进的，但与美国相比还有较大差距。……我国 IPE 专业有巨大的发展潜力，值得青年学者进行研究。</span></p><div align="right">——P331</div></blockquote><h4><a name="§1-经济相互依存的敏感性和脆弱性" class="md-header-anchor"></a><span>§1 经济相互依存的敏感性和脆弱性</span></h4><ol start='' ><li><p><span>敏感性（sensitivity）：一个国际经济事件对一国内部的影响速度</span></p></li><li><p><span>脆弱性（vulnerable）：一国受到国际经济冲击后所要付出的代价大小</span></p></li><li><p><span>反全球化运动</span></p><ol start='' ><li><span>推动区域化的政府力量</span></li><li><span>反对全球化带来的全球不平等的民间力量</span></li></ol></li></ol><h2><a name="第十三章-国际关系预测方法和未来五年预测" class="md-header-anchor"></a><span>第十三章 国际关系预测方法和未来五年预测</span></h2><p>&nbsp;</p><div class='footnotes-area'  ><hr/>
+<div class='footnote-line'><span class='md-fn-count'>1</span> <span>这才是国际秩序中最重要的。</span> <a name='dfref-footnote-1' href='#ref-footnote-1' title='回到文档' class='reversefootnote' >↩</a></div>
+<div class='footnote-line'><span class='md-fn-count'>2</span> <span>主要体现路径依赖的历史因素。</span> <a name='dfref-footnote-2' href='#ref-footnote-2' title='回到文档' class='reversefootnote' >↩</a></div>
+<div class='footnote-line'><span class='md-fn-count'>3</span> <span>美国前中央情报局副局长克莱因（Ray S. Cline）最早提出了物质实力要素与精神实力要素之间相乘而非相加的关系。这个洞察太重要、太关键了。</span> <a name='dfref-footnote-3' href='#ref-footnote-3' title='回到文档' class='reversefootnote' >↩</a></div>
+<div class='footnote-line'><span class='md-fn-count'>4</span> <span>政治实力与行政技术、政体、社会结构（阶级关系）乃止历史传统、革命传统等因素都有关，而不是由政体这个单一因素决定的。特别是，在冷战后政体趋同的背景下，政体的差别更像一张皮，对政治实力的影响并不大。</span> <a name='dfref-footnote-4' href='#ref-footnote-4' title='回到文档' class='reversefootnote' >↩</a></div>
+<div class='footnote-line'><span class='md-fn-count'>5</span> <span>20 世纪 60 年代，美苏英三国达成《部分禁止核试验条约》，合作的目的是组织中国、法国进行核试验。</span> <a name='dfref-footnote-5' href='#ref-footnote-5' title='回到文档' class='reversefootnote' >↩</a></div>
+<div class='footnote-line'><span class='md-fn-count'>6</span> <span>如台湾人不是不知道大陆的快速发展，但他们认为大陆唯利是图、缺乏道德感，认为普通人生活在这样的社会中毫无幸福感可言，因此强烈地反对统一。</span> <a name='dfref-footnote-6' href='#ref-footnote-6' title='回到文档' class='reversefootnote' >↩</a></div>
+<div class='footnote-line'><span class='md-fn-count'>7</span> <span>不像多神教用神与神的冲突和差异粉饰人与人的冲突和差异，一神教为所有信徒允诺了平等的地位（所谓“上帝面前人人平等”），就像古代的国际共运，因而具有深刻的道德感和广泛的号召力。但中国的社会形态刚好也是平等的、非世袭的，因而不需要一神教的这一功能。</span> <a name='dfref-footnote-7' href='#ref-footnote-7' title='回到文档' class='reversefootnote' >↩</a></div></div></div>
+</body>
+</html>

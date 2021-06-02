@@ -1,0 +1,217 @@
+---
+title: "httr包"
+subtitle: ''
+author: "Humoon"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    df_print: paged
+    fig_caption: yes
+    theme: united
+    highlight: haddock
+    number_sections: yes
+    toc: yes
+    toc_depth: 3
+    toc_float:
+      collapsed: true
+      smooth_scroll: FALSE
+  rticles::ctex:
+    df_print: default
+    fig_caption: yes
+    number_sections: false
+  word_document:
+    fig_caption: yes
+    toc: yes
+    toc_depth: 3
+    reference_docx: 
+  pdf_document:
+    toc: yes
+    toc_depth: '2'
+documentclass: ctexart
+classoption: hyperref,
+---
+
+```{r setup, include = FALSE}
+## global options
+knitr::opts_chunk$set(
+  fig.width = 7, fig.asp = 0.618,
+  out.width = "90%", fig.align = "center",
+  fig.path = 'Figures/', fig.show = "hold",
+  warn = 1, warning = FALSE, message = FALSE,
+  echo = TRUE, comment = '#', collapse = F,
+  cache = F, cache.comments = F,
+  autodep = TRUE
+)
+
+## use necessary packages
+library('pacman')
+p_load(
+  # data processing
+  tidyverse, lubridate, data.table, magrittr,
+  # I/O 
+  sqldf,
+  # web crawler
+  rvest, reticulate, httr
+  )
+
+## database engine
+options(sqldf.driver = "SQLite")
+```
+
+# 主要函数
+
+简短教程：<https://cran.r-project.org/web/packages/httr/vignettes/quickstart.html>
+
+response对象的10个分量：
+
+1. url
+2. status_code
+3. headers
+4. all_headers
+5. cookies
+6. content
+7. date
+8. times
+9. request
+10. handle
+
+
+```{r}
+
+headers = c(
+  "Accept" = "*/*",
+  "Referer" = "https://www.baidu.com/",
+  # 从哪里跳转来
+  "Connection" =  "keep-alive",
+  "User-Agent" = 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.96 Mobile Safari/537.36',
+  "Cookie" = ""
+)
+response <-
+  GET("https://www.baidu.com", add_headers(.headers = headers))
+# 或直接用user_agent()
+# response <-
+#   GET("https://www.baidu.com", user_agent("Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.96 Mobile Safari/537.36"))
+
+
+## 1. 查看response的状态码
+status_code(response) # 响应状态码
+http_status(response) # 简要描述状态码
+warn_for_status(response) # 若状态码不对进行警告
+stop_for_status(response) # 若状态码不对终止程序
+
+
+## 2. 查看response的内容
+# 2.1 返回内容文本，编码方式可调
+htmlText <- content(response, "text", encoding = "utf-8")
+
+# 2.2 返回内容的二进制字符串
+htmlBin <- content(response, "raw")
+writeBin(htmlBin, "html-file.html")
+
+# 2.3 将抓取的json数据解析为R中的list
+r <- GET("http://httpbin.org/get", add_headers(.headers = headers))
+content(r, "text")
+htmlList <- content(r, "parsed")
+htmlList
+
+
+## 3. 查看response的header和cookie
+headers(response)
+
+r <- GET("http://httpbin.org/cookies/set", query = list(a = 1))
+cookies(r) # 封装好的数据框
+r <- GET("http://httpbin.org/cookies/set", query = list(b = 1))
+cookies(r)
+
+
+## 4. 查看request的相关信息
+r <- GET(
+  "http://httpbin.org/get",
+  add_headers(.headers = headers),
+  query = list(key1 = "value1", key2 = "value2")
+)
+content(r, "text", encoding = "utf-8")
+content(r, "parsed")
+content(r)$args
+
+
+## 5. 在链接中加入搜索参数
+adjustedUrl <- modify_url(
+  "https://www.baidu.com/",
+  scheme = NULL,
+  hostname = "www.baidu.com",
+  port = NULL,
+  path = "s",
+  query = list(wd = "爬虫"),
+  params = NULL,
+  fragment = NULL,
+  username = "humoonruc",
+  password = "huangmeng"
+)
+headers = c(
+  "Accept" = "*/*",
+  "Referer" = "https://www.baidu.com/",
+  # 从哪里跳转来
+  "Connection" =  "keep-alive",
+  "User-Agent" = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:85.0) Gecko/20100101 Firefox/85.0',
+  "Cookie" = ""
+)
+response <-
+  GET(adjustedUrl, add_headers(.headers = headers))
+htmlBin <- content(response, "raw")
+writeBin(htmlBin, "baidu-search.html")
+```
+
+# 实用模板
+
+```{r}
+# 构造的爬取页面函数，根据实际情况修改其中的参数
+getHTML <-
+  function(url,
+           hostname = NULL,
+           path = NULL,
+           query = NULL,
+           username = NULL,
+           password = NULL,
+           encoding = "utf-8") {
+    # 根据传入的参数构造url
+    adjustedUrl <- modify_url(
+      url,
+      scheme = NULL,
+      hostname = hostname,
+      port = NULL,
+      path = path,
+      query = query,
+      params = NULL,
+      fragment = NULL,
+      username = username,
+      password = password
+    )
+    print(adjustedUrl)
+    # 构造headers
+    headers = c(
+      "Accept" = "*/*",
+      "Referer" = "https://www.baidu.com/",
+      "Connection" =  "keep-alive",
+      "User-Agent" = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:85.0) Gecko/20100101 Firefox/85.0',
+      "Cookie" = ""
+    )
+    # 爬取页面
+    response <-
+      GET(adjustedUrl, add_headers(.headers = headers))
+    print(http_status(response)) # 简要描述状态码
+    stop_for_status(response) # 若状态码不对，立即终止程序
+    
+    htmlBin <-
+      content(response, "text", encoding = encoding) %T>%
+      writeBin("responseWebPage.html")
+    return(htmlBin)
+  }
+
+webPage <-
+  getHTML("http://www.guoxue123.com/shibu/0101/00sgzf/index.htm",
+          encoding = "gbk")
+rootNode <- webPage %>% read_html()
+```
+
+

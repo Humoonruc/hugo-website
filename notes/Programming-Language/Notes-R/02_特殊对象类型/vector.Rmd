@@ -1,0 +1,161 @@
+---
+title: "Vector"
+subtitle: ''
+author: "Humoon"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    df_print: paged
+    fig_caption: yes
+    theme: united
+    highlight: haddock
+    number_sections: yes
+    toc: yes
+    toc_depth: 3
+    toc_float:
+      collapsed: true
+      smooth_scroll: FALSE
+  rticles::ctex:
+    df_print: default
+    fig_caption: yes
+    number_sections: false
+  word_document:
+    fig_caption: yes
+    toc: yes
+    toc_depth: 3
+    reference_docx: 
+  pdf_document:
+    toc: yes
+    toc_depth: '2'
+documentclass: ctexart
+classoption: hyperref,
+---
+
+
+```{r setup, include = FALSE}
+
+## global options
+knitr::opts_chunk$set(
+  fig.width = 6, fig.asp = 0.618,
+  out.width = "80%", fig.align = "center",
+  fig.path = 'Figures/', fig.show = "hold",
+  warn = 1, warning = FALSE, message = FALSE, echo = TRUE, 
+  comment = '', collapse = F, 
+  cache = T, cache.comments = F, autodep = TRUE
+  )
+
+
+## use necessary packages
+library('pacman')
+p_load(tidyverse, lubridate, data.table, magrittr, # 数据整理
+       ggthemes, showtext, gridExtra, igraph, ggraph, # 可视化
+       sqldf, DT, # I/O
+       jiebaR, wordcloud2, webshot, htmlwidgets, tidytext # 文本分析
+       )
+options(sqldf.driver = "SQLite") 
+
+
+## pdf中图形内部的中文字体设置
+pdf.options(family = "GB1")
+
+showtext_auto(enable = TRUE)
+```
+
+
+
+# 向量
+
+## 创建与修改
+
+### `c()`
+
+将参数中的元素和向量顺序组成一个新向量
+
+### 生成有规则的序列
+
+- `A:B` A到B之间的连续序列  
+- `seq(from, to, by=1, length=?)` 四个参数有三个即可。by为步长，length为向量size  
+- `rep(x, times, ...)` 重复对象x times次。若x与times都是向量且长度一致，则为对应元素重复对应次数。  
+- `numeric(N)、logical(N)`等可以生成长度为N的特定类型向量
+```{r}
+rep(1:3, 2)
+rep(1:3, each=2)
+rep(1:3, rep(2,1)) # 即rep(1:3, 2)
+rep(1:3, rep(2,3)) # 即rep(1:3, c(2, 2, 2))
+rep(1:3, c(2,4,1))
+
+y<-numeric(6);y # numeric(6)表示长度为6的numeric型向量
+z <- logical(7);z
+w <- character();w
+w <- c(w, 'a');w
+```
+
+
+## 引用与排序
+```{r}
+x <- c(1, 2, 3, 4, 5, 7)
+
+x[3:5] # 引用x向量中的第3-5个元素
+x[c(1,4)] <- c(9,11);x # a中第1个和第3个元素，之所以这么写，是因为a[1,3]代表矩阵的(1,3)元素
+
+# which() 获取位置
+which.max(x)
+which.min(x)
+which(x > 4)
+# 匹配位置
+match(rep(1, 3), rep(1, 5)) # 返回第一个向量中各元素在第二个向量中的位置序列
+pmatch(rep(1, 3), rep(1, 5)) # 若第一个向量中某元素在第二个向量中匹配上了，则认为第二个向量中相应元素已被占用，再匹配第一个向量中的下一个元素时，跳过第二个向量中曾被匹配过的元素。
+
+# 返回各元素相对大小的排序（默认升序）
+rank(x)
+# 元素排序
+sort(x, decreasing = F) # 默认升序
+# 逆序
+rev(x)
+```
+
+## 增删改查
+```{r}
+x <- c(1, 2, 3, 4, 5, 7);x
+# 增
+x <- append(x, 100, after = 2);x # 在任意位置插入元素
+# 删
+x <- x[-1];x # 下标为负整数，表示返回删除相应正整数位置的元素后的向量
+# 改
+x <- replace(x,c(3,4),c(0,0));x # 替换：将x向量中第3个和第5个元素替换为5
+# 查
+which(x<4)
+x[x<4] # 索引可以为逻辑语句，返回满足条件的所有元素
+```
+
+## 向量运算
+
+向量之间的运算，对应元素分别运算。如果长度不一，表达式中短的向量将会被循环使用，表达式的值将是一个和最长的向量等长的向量。
+```{r}
+# 集合运算
+intersect(c(1, 2, 3, 3, 12, 4, 123, 12), c(1, 2, 3)) # 交
+union(c("狗熊会", "聚数据英才"), c("狗熊会", "助产业振兴")) # 并
+setdiff(10:2, 5:3) # 差
+
+# 算数运算：四则运算(+-*/)、幂(^)、除法取整(%/%)、取余(%%)
+remainder <- 5%%c(1,2,3,4,5) 
+remainder
+
+# 逻辑运算
+x<4 
+all(x>50) # 判断语句，一个向量的所有或部分元素是否满足某条件
+any(x>50)
+
+# 内积
+x <- 1:5; y <- 2:6
+x%*%y; 
+crossprod(x,y)
+t(x)%*%y
+
+# 外积
+x%o%y
+outer(x,y)
+tcrossprod(x,y)
+x%*%t(y)
+```
+

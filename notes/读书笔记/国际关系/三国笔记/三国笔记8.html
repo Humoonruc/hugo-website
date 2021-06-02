@@ -1,0 +1,1006 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
+<title>三国笔记8</title><link href='https://fonts.loli.net/css?family=PT+Serif:400,400italic,700,700italic&subset=latin,cyrillic-ext,cyrillic,latin-ext' rel='stylesheet' type='text/css' /><style type='text/css'>html {overflow-x: initial !important;}:root { --bg-color:#ffffff; --text-color:#333333; --select-text-bg-color:#B5D6FC; --select-text-font-color:auto; --monospace:"Lucida Console",Consolas,"Courier",monospace; --title-bar-height:20px; }
+.mac-os-11 { --title-bar-height:28px; }
+html { font-size: 14px; background-color: var(--bg-color); color: var(--text-color); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+body { margin: 0px; padding: 0px; height: auto; bottom: 0px; top: 0px; left: 0px; right: 0px; font-size: 1rem; line-height: 1.42857; overflow-x: hidden; background: inherit; tab-size: 4; }
+iframe { margin: auto; }
+a.url { word-break: break-all; }
+a:active, a:hover { outline: 0px; }
+.in-text-selection, ::selection { text-shadow: none; background: var(--select-text-bg-color); color: var(--select-text-font-color); }
+#write { margin: 0px auto; height: auto; width: inherit; word-break: normal; overflow-wrap: break-word; position: relative; white-space: normal; overflow-x: visible; padding-top: 36px; }
+#write.first-line-indent p { text-indent: 2em; }
+#write.first-line-indent li p, #write.first-line-indent p * { text-indent: 0px; }
+#write.first-line-indent li { margin-left: 2em; }
+.for-image #write { padding-left: 8px; padding-right: 8px; }
+body.typora-export { padding-left: 30px; padding-right: 30px; }
+.typora-export .footnote-line, .typora-export li, .typora-export p { white-space: pre-wrap; }
+.typora-export .task-list-item input { pointer-events: none; }
+@media screen and (max-width: 500px) {
+  body.typora-export { padding-left: 0px; padding-right: 0px; }
+  #write { padding-left: 20px; padding-right: 20px; }
+  .CodeMirror-sizer { margin-left: 0px !important; }
+  .CodeMirror-gutters { display: none !important; }
+}
+#write li > figure:last-child { margin-bottom: 0.5rem; }
+#write ol, #write ul { position: relative; }
+img { max-width: 100%; vertical-align: middle; image-orientation: from-image; }
+button, input, select, textarea { color: inherit; font: inherit; }
+input[type="checkbox"], input[type="radio"] { line-height: normal; padding: 0px; }
+*, ::after, ::before { box-sizing: border-box; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p, #write pre { width: inherit; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p { position: relative; }
+p { line-height: inherit; }
+h1, h2, h3, h4, h5, h6 { break-after: avoid-page; break-inside: avoid; orphans: 4; }
+p { orphans: 4; }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.8rem; }
+h3 { font-size: 1.6rem; }
+h4 { font-size: 1.4rem; }
+h5 { font-size: 1.2rem; }
+h6 { font-size: 1rem; }
+.md-math-block, .md-rawblock, h1, h2, h3, h4, h5, h6, p { margin-top: 1rem; margin-bottom: 1rem; }
+.hidden { display: none; }
+.md-blockmeta { color: rgb(204, 204, 204); font-weight: 700; font-style: italic; }
+a { cursor: pointer; }
+sup.md-footnote { padding: 2px 4px; background-color: rgba(238, 238, 238, 0.7); color: rgb(85, 85, 85); border-radius: 4px; cursor: pointer; }
+sup.md-footnote a, sup.md-footnote a:hover { color: inherit; text-transform: inherit; text-decoration: inherit; }
+#write input[type="checkbox"] { cursor: pointer; width: inherit; height: inherit; }
+figure { overflow-x: auto; margin: 1.2em 0px; max-width: calc(100% + 16px); padding: 0px; }
+figure > table { margin: 0px; }
+tr { break-inside: avoid; break-after: auto; }
+thead { display: table-header-group; }
+table { border-collapse: collapse; border-spacing: 0px; width: 100%; overflow: auto; break-inside: auto; text-align: left; }
+table.md-table td { min-width: 32px; }
+.CodeMirror-gutters { border-right: 0px; background-color: inherit; }
+.CodeMirror-linenumber { user-select: none; }
+.CodeMirror { text-align: left; }
+.CodeMirror-placeholder { opacity: 0.3; }
+.CodeMirror pre { padding: 0px 4px; }
+.CodeMirror-lines { padding: 0px; }
+div.hr:focus { cursor: none; }
+#write pre { white-space: pre-wrap; }
+#write.fences-no-line-wrapping pre { white-space: pre; }
+#write pre.ty-contain-cm { white-space: normal; }
+.CodeMirror-gutters { margin-right: 4px; }
+.md-fences { font-size: 0.9rem; display: block; break-inside: avoid; text-align: left; overflow: visible; white-space: pre; background: inherit; position: relative !important; }
+.md-diagram-panel { width: 100%; margin-top: 10px; text-align: center; padding-top: 0px; padding-bottom: 8px; overflow-x: auto; }
+#write .md-fences.mock-cm { white-space: pre-wrap; }
+.md-fences.md-fences-with-lineno { padding-left: 0px; }
+#write.fences-no-line-wrapping .md-fences.mock-cm { white-space: pre; overflow-x: auto; }
+.md-fences.mock-cm.md-fences-with-lineno { padding-left: 8px; }
+.CodeMirror-line, twitterwidget { break-inside: avoid; }
+.footnotes { opacity: 0.8; font-size: 0.9rem; margin-top: 1em; margin-bottom: 1em; }
+.footnotes + .footnotes { margin-top: 0px; }
+.md-reset { margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: top; background: 0px 0px; text-decoration: none; text-shadow: none; float: none; position: static; width: auto; height: auto; white-space: nowrap; cursor: inherit; -webkit-tap-highlight-color: transparent; line-height: normal; font-weight: 400; text-align: left; box-sizing: content-box; direction: ltr; }
+li div { padding-top: 0px; }
+blockquote { margin: 1rem 0px; }
+li .mathjax-block, li p { margin: 0.5rem 0px; }
+li blockquote { margin: 1rem 0px; }
+li { margin: 0px; position: relative; }
+blockquote > :last-child { margin-bottom: 0px; }
+blockquote > :first-child, li > :first-child { margin-top: 0px; }
+.footnotes-area { color: rgb(136, 136, 136); margin-top: 0.714rem; padding-bottom: 0.143rem; white-space: normal; }
+#write .footnote-line { white-space: pre-wrap; }
+@media print {
+  body, html { border: 1px solid transparent; height: 99%; break-after: avoid; break-before: avoid; font-variant-ligatures: no-common-ligatures; }
+  #write { margin-top: 0px; padding-top: 0px; border-color: transparent !important; }
+  .typora-export * { -webkit-print-color-adjust: exact; }
+  .typora-export #write { break-after: avoid; }
+  .typora-export #write::after { height: 0px; }
+  .is-mac table { break-inside: avoid; }
+}
+.footnote-line { margin-top: 0.714em; font-size: 0.7em; }
+a img, img a { cursor: pointer; }
+pre.md-meta-block { font-size: 0.8rem; min-height: 0.8rem; white-space: pre-wrap; background: rgb(204, 204, 204); display: block; overflow-x: hidden; }
+p > .md-image:only-child:not(.md-img-error) img, p > img:only-child { display: block; margin: auto; }
+#write.first-line-indent p > .md-image:only-child:not(.md-img-error) img { left: -2em; position: relative; }
+p > .md-image:only-child { display: inline-block; width: 100%; }
+#write .MathJax_Display { margin: 0.8em 0px 0px; }
+.md-math-block { width: 100%; }
+.md-math-block:not(:empty)::after { display: none; }
+.MathJax_ref { fill: currentcolor; }
+[contenteditable="true"]:active, [contenteditable="true"]:focus, [contenteditable="false"]:active, [contenteditable="false"]:focus { outline: 0px; box-shadow: none; }
+.md-task-list-item { position: relative; list-style-type: none; }
+.task-list-item.md-task-list-item { padding-left: 0px; }
+.md-task-list-item > input { position: absolute; top: 0px; left: 0px; margin-left: -1.2em; margin-top: calc(1em - 10px); border: none; }
+.math { font-size: 1rem; }
+.md-toc { min-height: 3.58rem; position: relative; font-size: 0.9rem; border-radius: 10px; }
+.md-toc-content { position: relative; margin-left: 0px; }
+.md-toc-content::after, .md-toc::after { display: none; }
+.md-toc-item { display: block; color: rgb(65, 131, 196); }
+.md-toc-item a { text-decoration: none; }
+.md-toc-inner:hover { text-decoration: underline; }
+.md-toc-inner { display: inline-block; cursor: pointer; }
+.md-toc-h1 .md-toc-inner { margin-left: 0px; font-weight: 700; }
+.md-toc-h2 .md-toc-inner { margin-left: 2em; }
+.md-toc-h3 .md-toc-inner { margin-left: 4em; }
+.md-toc-h4 .md-toc-inner { margin-left: 6em; }
+.md-toc-h5 .md-toc-inner { margin-left: 8em; }
+.md-toc-h6 .md-toc-inner { margin-left: 10em; }
+@media screen and (max-width: 48em) {
+  .md-toc-h3 .md-toc-inner { margin-left: 3.5em; }
+  .md-toc-h4 .md-toc-inner { margin-left: 5em; }
+  .md-toc-h5 .md-toc-inner { margin-left: 6.5em; }
+  .md-toc-h6 .md-toc-inner { margin-left: 8em; }
+}
+a.md-toc-inner { font-size: inherit; font-style: inherit; font-weight: inherit; line-height: inherit; }
+.footnote-line a:not(.reversefootnote) { color: inherit; }
+.md-attr { display: none; }
+.md-fn-count::after { content: "."; }
+code, pre, samp, tt { font-family: var(--monospace); }
+kbd { margin: 0px 0.1em; padding: 0.1em 0.6em; font-size: 0.8em; color: rgb(36, 39, 41); background: rgb(255, 255, 255); border: 1px solid rgb(173, 179, 185); border-radius: 3px; box-shadow: rgba(12, 13, 14, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; white-space: nowrap; vertical-align: middle; }
+.md-comment { color: rgb(162, 127, 3); opacity: 0.8; font-family: var(--monospace); }
+code { text-align: left; vertical-align: initial; }
+a.md-print-anchor { white-space: pre !important; border-width: initial !important; border-style: none !important; border-color: initial !important; display: inline-block !important; position: absolute !important; width: 1px !important; right: 0px !important; outline: 0px !important; background: 0px 0px !important; text-decoration: initial !important; text-shadow: initial !important; }
+.md-inline-math .MathJax_SVG .noError { display: none !important; }
+.html-for-mac .inline-math-svg .MathJax_SVG { vertical-align: 0.2px; }
+.md-math-block .MathJax_SVG_Display { text-align: center; margin: 0px; position: relative; text-indent: 0px; max-width: none; max-height: none; min-height: 0px; min-width: 100%; width: auto; overflow-y: hidden; display: block !important; }
+.MathJax_SVG_Display, .md-inline-math .MathJax_SVG_Display { width: auto; margin: inherit; display: inline-block !important; }
+.MathJax_SVG .MJX-monospace { font-family: var(--monospace); }
+.MathJax_SVG .MJX-sans-serif { font-family: sans-serif; }
+.MathJax_SVG { display: inline; font-style: normal; font-weight: 400; line-height: normal; zoom: 90%; text-indent: 0px; text-align: left; text-transform: none; letter-spacing: normal; word-spacing: normal; overflow-wrap: normal; white-space: nowrap; float: none; direction: ltr; max-width: none; max-height: none; min-width: 0px; min-height: 0px; border: 0px; padding: 0px; margin: 0px; }
+.MathJax_SVG * { transition: none 0s ease 0s; }
+.MathJax_SVG_Display svg { vertical-align: middle !important; margin-bottom: 0px !important; margin-top: 0px !important; }
+.os-windows.monocolor-emoji .md-emoji { font-family: "Segoe UI Symbol", sans-serif; }
+.md-diagram-panel > svg { max-width: 100%; }
+[lang="flow"] svg, [lang="mermaid"] svg { max-width: 100%; height: auto; }
+[lang="mermaid"] .node text { font-size: 1rem; }
+table tr th { border-bottom: 0px; }
+video { max-width: 100%; display: block; margin: 0px auto; }
+iframe { max-width: 100%; width: 100%; border: none; }
+.highlight td, .highlight tr { border: 0px; }
+mark { background: rgb(255, 255, 0); color: rgb(0, 0, 0); }
+.md-html-inline .md-plain, .md-html-inline strong, mark .md-inline-math, mark strong { color: inherit; }
+mark .md-meta { color: rgb(0, 0, 0); opacity: 0.3 !important; }
+@media print {
+  .typora-export h1, .typora-export h2, .typora-export h3, .typora-export h4, .typora-export h5, .typora-export h6 { break-inside: avoid; }
+}
+.md-diagram-panel .messageText { stroke: none !important; }
+.md-diagram-panel .start-state { fill: var(--node-fill); }
+.md-diagram-panel .edgeLabel rect { opacity: 1 !important; }
+.md-require-zoom-fix foreignobject { font-size: var(--mermaid-font-zoom); }
+
+
+/* meyer reset -- http://meyerweb.com/eric/tools/css/reset/ , v2.0 | 20110126 | License: none (public domain) */
+
+@include-when-export url(https://fonts.loli.net/css?family=PT+Serif:400,400italic,700,700italic&subset=latin,cyrillic-ext,cyrillic,latin-ext);
+
+/* =========== */
+
+/* pt-serif-regular - latin */
+/* pt-serif-italic - latin */
+/* pt-serif-700 - latin */
+/* pt-serif-700italic - latin */
+:root {
+	--active-file-bg-color: #dadada;
+	--active-file-bg-color: rgba(32, 43, 51, 0.63);
+	--active-file-text-color: white;
+	--bg-color: #f3f2ee;
+	--text-color: #1f0909;
+	--control-text-color: #444;
+	--rawblock-edit-panel-bd: #e5e5e5;
+
+	--select-text-bg-color: rgba(32, 43, 51, 0.63);
+  --select-text-font-color: white;
+}
+
+pre {
+	--select-text-bg-color: #36284e;
+	--select-text-font-color: #fff;
+}
+
+html {
+	font-size: 16px;
+}
+
+html, body {
+	background-color: #f3f2ee;
+	font-family: "PT Serif", 'Times New Roman', Times, serif;
+	color: #1f0909;
+	line-height: 1.5em;
+}
+
+/*#write {
+	overflow-x: auto;
+    max-width: initial;
+	padding-left: calc(50% - 17em);
+    padding-right: calc(50% - 17em);
+}
+
+@media (max-width: 36em) {
+ 	#write {
+ 		padding-left: 1em;
+    	padding-right: 1em;
+ 	}
+}*/
+
+#write {
+	max-width: 40em;
+}
+
+@media only screen and (min-width: 1400px) {
+	#write {
+			max-width: 914px;
+	}
+}
+
+ol li {
+	list-style-type: decimal;
+	list-style-position: outside;
+}
+ul li {
+	list-style-type: disc;
+	list-style-position: outside;
+}
+
+ol,
+ul {
+	list-style: none;
+}
+
+blockquote,
+q {
+	quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+/* styles */
+
+/* ====== */
+
+/* headings */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-weight: bold;
+}
+h1 {
+	font-size: 1.875em;
+	/*30 / 16*/
+	line-height: 1.6em;
+	/* 48 / 30*/
+	margin-top: 2em;
+}
+h2,
+h3 {
+	font-size: 1.3125em;
+	/*21 / 16*/
+	line-height: 1.15;
+	/*24 / 21*/
+	margin-top: 2.285714em;
+	/*48 / 21*/
+	margin-bottom: 1.15em;
+	/*24 / 21*/
+}
+h3 {
+	font-weight: normal;
+}
+h4 {
+	font-size: 1.125em;
+	/*18 / 16*/
+	margin-top: 2.67em;
+	/*48 / 18*/
+}
+h5,
+h6 {
+	font-size: 1em;
+	/*16*/
+}
+h1 {
+	border-bottom: 1px solid;
+	margin-bottom: 1.875em;
+	padding-bottom: 0.8125em;
+}
+/* links */
+
+a {
+	text-decoration: none;
+	color: #065588;
+}
+a:hover,
+a:active {
+	text-decoration: underline;
+}
+/* block spacing */
+
+p,
+blockquote,
+.md-fences {
+	margin-bottom: 1.5em;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	margin-bottom: 1.5em;
+}
+/* blockquote */
+
+blockquote {
+	font-style: italic;
+	border-left: 5px solid;
+	margin-left: 2em;
+	padding-left: 1em;
+}
+/* lists */
+
+ul,
+ol {
+	margin: 0 0 1.5em 1.5em;
+}
+/* tables */
+.md-meta,.md-before, .md-after {
+	color:#999;
+}
+
+table {
+	margin-bottom: 1.5em;
+	/*24 / 16*/
+	font-size: 1em;
+	/* width: 100%; */
+}
+thead th,
+tfoot th {
+	padding: .25em .25em .25em .4em;
+	text-transform: uppercase;
+}
+th {
+	text-align: left;
+}
+td {
+	vertical-align: top;
+	padding: .25em .25em .25em .4em;
+}
+
+code,
+.md-fences {
+	background-color: #dadada;
+}
+
+code {
+	padding-left: 2px;
+	padding-right: 2px;
+}
+
+.md-fences {
+	margin-left: 2em;
+	margin-bottom: 3em;
+	padding-left: 1ch;
+	padding-right: 1ch;
+}
+
+pre,
+code,
+tt {
+	font-size: .875em;
+	line-height: 1.714285em;
+}
+/* some fixes */
+
+h1 {
+	line-height: 1.3em;
+	font-weight: normal;
+	margin-bottom: 0.5em;
+}
+
+p + ul,
+p + ol{
+	margin-top: .5em;
+}
+
+h3 + ul,
+h4 + ul,
+h5 + ul,
+h6 + ul,
+h3 + ol,
+h4 + ol,
+h5 + ol,
+h6 + ol {
+	margin-top: .5em;
+}
+
+li > ul,
+li > ol {
+	margin-top: inherit;
+	margin-bottom: 0;
+}
+
+li ol>li {
+	list-style-type: lower-alpha;
+}
+
+li li ol>li{
+	list-style-type: lower-roman;
+}
+
+h2,
+h3 {
+	margin-bottom: .75em;
+}
+hr {
+	border-top: none;
+	border-right: none;
+	border-bottom: 1px solid;
+	border-left: none;
+}
+h1 {
+	border-color: #c5c5c5;
+}
+blockquote {
+	border-color: #bababa;
+	color: #656565;
+}
+
+blockquote ul,
+blockquote ol {
+	margin-left:0;
+}
+
+.ty-table-edit {
+	background-color: transparent;
+}
+thead {
+	background-color: #dadada;
+}
+tr:nth-child(even) {
+	background: #e8e7e7;
+}
+hr {
+	border-color: #c5c5c5;
+}
+.task-list{
+	padding-left: 1rem;
+}
+
+.md-task-list-item {
+	padding-left: 1.5rem;
+	list-style-type: none;
+}
+
+.md-task-list-item > input:before {
+	content: '\221A';
+	display: inline-block;
+	width: 1.25rem;
+  	height: 1.6rem;
+	vertical-align: middle;
+	text-align: center;
+	color: #ddd;
+	background-color: #F3F2EE;
+}
+
+.md-task-list-item > input:checked:before,
+.md-task-list-item > input[checked]:before{
+	color: inherit;
+}
+
+#write pre.md-meta-block {
+	min-height: 1.875rem;
+	color: #555;
+	border: 0px;
+	background: transparent;
+	margin-top: -4px;
+	margin-left: 1em;
+	margin-top: 1em;
+}
+
+.md-image>.md-meta {
+	color: #9B5146;
+}
+
+.md-image>.md-meta{
+	font-family: Menlo, 'Ubuntu Mono', Consolas, 'Courier New', 'Microsoft Yahei', 'Hiragino Sans GB', 'WenQuanYi Micro Hei', serif;
+}
+
+
+#write>h3.md-focus:before{
+	left: -1.5rem;
+	color:#999;
+	border-color:#999;
+}
+#write>h4.md-focus:before{
+	left: -1.5rem;
+	top: .25rem;
+	color:#999;
+	border-color:#999;
+}
+#write>h5.md-focus:before{
+	left: -1.5rem;
+	top: .0.3125rem;
+	color:#999;
+	border-color:#999;
+}
+#write>h6.md-focus:before{
+	left: -1.5rem;
+	top: 0.3125rem;
+	color:#999;
+	border-color:#999;
+}
+
+.md-toc:focus .md-toc-content{
+	margin-top: 19px;
+}
+
+.md-toc-content:empty:before{
+	color: #065588;
+}
+.md-toc-item {
+	color: #065588;
+}
+#write div.md-toc-tooltip {
+	background-color: #f3f2ee;
+}
+
+#typora-sidebar {
+	background-color: #f3f2ee;
+	-webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.375);
+  	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.375);
+}
+
+.pin-outline #typora-sidebar {
+	background: inherit;
+	box-shadow: none;
+	border-right: 1px dashed;
+}
+
+.pin-outline #typora-sidebar:hover .outline-title-wrapper {
+	border-left:1px dashed;
+}
+
+.outline-item:hover {
+  background-color: #dadada;
+  border-left: 28px solid #dadada;
+  border-right: 18px solid #dadada;
+}
+
+.typora-node .outline-item:hover {
+  	border-right: 28px solid #dadada;
+}
+
+.outline-expander:before {
+  content: "\f0da";
+  font-family: FontAwesome;
+  font-size:14px;
+  top: 1px;
+}
+
+.outline-expander:hover:before,
+.outline-item-open>.outline-item>.outline-expander:before {
+  content: "\f0d7";
+}
+
+.modal-content {
+	background-color: #f3f2ee;
+}
+
+.auto-suggest-container ul li {
+	list-style-type: none;
+}
+
+/** UI for electron */
+
+.megamenu-menu,
+#top-titlebar, #top-titlebar *,
+.megamenu-content {
+	background: #f3f2ee;
+	color: #1f0909;
+}
+
+.megamenu-menu-header {
+	border-bottom: 1px dashed #202B33;
+}
+
+.megamenu-menu {
+	box-shadow: none;
+	border-right: 1px dashed;
+}
+
+header, .context-menu, .megamenu-content, footer {
+	font-family: "PT Serif", 'Times New Roman', Times, serif;
+    color: #1f0909;
+}
+
+#megamenu-back-btn {
+	color: #1f0909;
+	border-color: #1f0909;
+}
+
+.megamenu-menu-header #megamenu-menu-header-title:before {
+	color: #1f0909;
+}
+
+.megamenu-menu-list li a:hover, .megamenu-menu-list li a.active {
+	color: inherit;
+	background-color: #e8e7df;
+}
+
+.long-btn:hover {
+	background-color: #e8e7df;
+}
+
+#recent-file-panel tbody tr:nth-child(2n-1) {
+    background-color: transparent !important;
+}
+
+.megamenu-menu-panel tbody tr:hover td:nth-child(2) {
+    color: inherit;
+}
+
+.megamenu-menu-panel .btn {
+	background-color: #D2D1D1;
+}
+
+.btn-default {
+	background-color: transparent;
+}
+
+.typora-sourceview-on #toggle-sourceview-btn,
+.ty-show-word-count #footer-word-count {
+	background: #c7c5c5;
+}
+
+#typora-quick-open {
+    background-color: inherit;
+}
+
+.md-diagram-panel {
+	margin-top: 8px;
+}
+
+.file-list-item-file-name {
+	font-weight: initial;
+}
+
+.file-list-item-summary {
+	opacity: 1;
+}
+
+.file-list-item {
+	color: #777;
+}
+
+.file-list-item.active {
+	background-color: inherit;
+	color: black;
+}
+
+.ty-side-sort-btn.active {
+	background-color: inherit;
+}
+
+.file-list-item.active .file-list-item-file-name  {
+	font-weight: bold;
+}
+
+.file-list-item{
+    opacity:1 !important;
+}
+
+.file-library-node.active>.file-node-background{
+	background-color: rgba(32, 43, 51, 0.63);
+	background-color: var(--active-file-bg-color);
+}
+
+.file-tree-node.active>.file-node-content{
+	color: white;
+	color: var(--active-file-text-color);
+}
+
+.md-task-list-item>input {
+	margin-left: -1.7em;
+	margin-top: calc(1rem - 12px);
+}
+
+input {
+	border: 1px solid #aaa;
+}
+
+.megamenu-menu-header #megamenu-menu-header-title,
+.megamenu-menu-header:hover, 
+.megamenu-menu-header:focus {
+	color: inherit;
+}
+
+.dropdown-menu .divider {
+	border-color: #e5e5e5;
+}
+
+/* https://github.com/typora/typora-issues/issues/2046 */
+.os-windows-7 strong,
+.os-windows-7 strong  {
+	font-weight: 760;
+}
+
+.ty-preferences .btn-default {
+	background: transparent;
+}
+
+.ty-preferences .window-header {
+	border-bottom: 1px dashed #202B33;
+	box-shadow: none;
+}
+
+#sidebar-loading-template, #sidebar-loading-template.file-list-item {
+	color: #777;
+}
+
+.searchpanel-search-option-btn.active {
+	background: #777;
+	color: white;
+}
+
+/* 自定义 */
+
+
+/* body {
+    margin-left: 200px;
+} */
+
+
+/* .md-toc {
+    width: 200px;
+    height: 100%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    font-weight: bold;
+} */
+
+html {
+    font-size: 20px;
+}
+
+
+/* 列表项 */
+
+ul,
+ol {
+    margin: 0 0 1.5em 0.5em;
+}
+
+h3+ul,
+h4+ul,
+h5+ul,
+h6+ul,
+h3+ol,
+h4+ol,
+h5+ol,
+h6+ol {
+    margin-top: 0.5em;
+}
+
+p+ul,
+p+ol {
+    margin-top: 0.5em;
+}
+
+li>ul,
+li>ol {
+    margin-top: inherit;
+    margin-bottom: 0;
+    margin-left: 0.5em;
+}
+
+ul>li {
+    list-style-type: disc;
+    list-style-position: outside;
+}
+
+li ul>li {
+    list-style-type: circle;
+}
+
+ol>li {
+    list-style-type: decimal;
+    list-style-position: outside;
+}
+
+li ol>li {
+    list-style-type: upper-alpha;
+}
+
+li li ol>li {
+    list-style-type: lower-greek;
+}
+
+
+/* 首行缩进 */
+
+p {
+    /* text-indent: 2em; */
+}
+
+
+/* 多级列表 */
+
+h1 {
+    font-weight: bolder;
+    font-size: 50px;
+    text-align: center;
+    color: red;
+    font-family: "Italic", STKaiTi;
+    font-weight: bold;
+}
+
+h2 {
+    font-size: 40px;
+    counter-increment: chapter;
+    counter-reset: section;
+    color: purple;
+    font-weight: bold;
+    text-align: center;
+}
+
+h3 {
+    /* background-color:lightgray; */
+    color: darkslateblue;
+    font-weight: bold;
+    line-height: 150%;
+    font-size: 36px;
+    margin-top: 2em;
+    margin-bottom: 1em;
+    /* counter-increment: section; */
+    /* counter-reset: counter1; */
+    text-align: center;
+    /* font-weight: bold; */
+}
+
+h4 {
+    /* background-color: lightgray; */
+    /* color: darkblue; */
+    /* line-height: 150%; */
+    font-size: 24px;
+    font-family: "Microsoft YaHei";
+    /* font-weight: bold; */
+    /* counter-increment: counter1; */
+    /* counter-reset: counter2; */
+}
+
+h5 {
+    font-size: 22px;
+    /* font-family: HeiTi; */
+    font-weight: bold;
+    /* counter-increment: counter2; */
+    /* counter-reset: counter3; */
+}
+
+h6 {
+    /* counter-increment: counter3; */
+}
+
+h2:before {
+    /* content: counter(chapter, cjk-ideographic)"、"; */
+}
+
+h3:before {
+    /* content: counter(section)' '; */
+}
+
+h4:before {
+    /* content: counter(counter1, cjk-ideographic)'、'; */
+}
+
+h5:before {
+    /* content: '（'counter(counter2, cjk-ideographic)'）'; */
+}
+
+h6:before {
+    /* content: counter(counter3)'. '; */
+}
+
+
+/* 三线表格 */
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin-bottom: 1.5em;
+    font-size: 1em;
+}
+
+tr:nth-child(even) {
+    background: #e8e7e7;
+}
+
+thead th,
+tfoot th {
+    padding: 0.25em 0.25em 0.25em 0.4em;
+    text-transform: uppercase;
+}
+
+table>caption {
+    margin-bottom: 0.5em;
+    font-size: 120%;
+    font-family: KaiTi;
+}
+
+th {
+    text-align: center;
+}
+
+td {
+    vertical-align: middle;
+    padding: 0.25em 0.25em 0.25em 0.4em;
+}
+
+table>thead>tr>th {
+    /* thead 表示表格的页眉 */
+    border-top: 2px solid #000;
+    border-bottom: 1px solid #000;
+}
+
+table>tbody>tr>th {
+    border-top: 2px solid #000;
+    border-bottom: 1px solid #000;
+}
+
+table>tbody>tr:last-child {
+    /* tbody 表示表格的主体 */
+    border-bottom: 2px solid #000;
+}
+
+
+/* 引用 */
+
+blockquote {
+    font-family: STKaiTi, KaiTi;
+    font-style: normal;
+    margin-left: 0em;
+    /* font-weight: bold; */
+    font-size: 18px;
+}
+
+
+/* 链接 */
+
+a {
+    color: blue;
+    font-family: Microsoft YaHei, STXihei, STHeiti, SimHei;
+    /* font-size: 16px; */
+    /* font-weight: bold; */
+}
+
+
+/* 注解 */
+
+code,
+.md-fences {
+    font-family: STKaiTi, KaiTi;
+    color: darkred;
+} :root {--mermaid-font-zoom:2em ;} 
+</style>
+</head>
+<body class='typora-export os-windows'>
+<div id='write'  class=''><div class='md-toc' mdtype='toc'><p class="md-toc-content" role="list"><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n2"><a class="md-toc-inner" href="#三国笔记之八生子当如孙伯符------197～200年孙策的地缘战略">三国笔记之八：生子当如孙伯符——197～200年孙策的地缘战略</a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n3"><a class="md-toc-inner" href="#197年反袁自立被曹算计">197年：反袁自立，被曹算计</a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n11"><a class="md-toc-inner" href="#198年战略克制韬光养晦">198年：战略克制，韬光养晦</a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n16"><a class="md-toc-inner" href="#199年名正言顺两岸扩张">199年：名正言顺，两岸扩张</a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n24"><a class="md-toc-inner" href="#200年气吞山河所谋者大">200年：气吞山河，所谋者大</a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n34"><a class="md-toc-inner" href="#后续">后续</a></span></p></div><h2><a name="三国笔记之八生子当如孙伯符------197～200年孙策的地缘战略" class="md-header-anchor"></a><span>三国笔记之八：生子当如孙伯符——197～200年孙策的地缘战略</span></h2><h3><a name="197年反袁自立被曹算计" class="md-header-anchor"></a><span>197年：反袁自立，被曹算计</span></h3><p><span>197年，袁术称帝，孙策反对无效后，与袁术绝交而正式独立。此时摆在孙策面前最紧要的任务，是如何把自己的身份从袁术这个乱臣贼子的部将</span><sup class='md-footnote'><a href='#dfref-footnote-1' name='ref-footnote-1'>1</a></sup><span>，洗白为朝廷认可的一方大员</span><sup class='md-footnote'><a href='#dfref-footnote-2' name='ref-footnote-2'>2</a></sup><span>。在给朝廷的上书中，孙策以自己年纪幼小为托辞，阐述自己当初依附于袁术的不得已。但仅有这些是远远不够的，要换取朝廷（曹操）对孙策统治江东三郡（吴郡、丹阳郡、会稽郡）的承认，</span><mark><span>孙策必须纳投名状：攻击袁术</span></mark><span>。</span></p><p><span>孙策对此无异议，接受了明汉将军</span><sup class='md-footnote'><a href='#dfref-footnote-3' name='ref-footnote-3'>3</a></sup><span>、会稽太守、乌程侯的正式封号，也同时接受了朝廷颁布的任务：与吕布、陈瑀共讨袁术。但这里隐含着朝廷（或者说曹操）的一个骚操作：朝廷同时任命陈瑀为代理吴郡太守，而吴郡目前明明在孙策治下——这是公然挑拨双方的关系。不仅如此，陈瑀甚至可能得到了曹操的直接授意，秘密筹备攻打孙策。他屯兵于与吴郡一江之隔的广陵郡，广泛联络江南丘陵中的山越，准备在孙策出征后与山越贼帅们里应外合，一举拿下孙策的老巢。看来，197年的曹操根本不信任孙策，他暂时无力大举东征，便想让袁术、吕布、孙策自相残杀，伺机把江东收回中央管辖。</span></p><p><img src="http://humoon-image-hosting-service.oss-cn-beijing.aliyuncs.com/img/typora/threekingdoms/围攻袁术.jpg" referrerpolicy="no-referrer" alt="围攻袁术"></p><p><span>此时的孙策还比较单纯，或者说无奈，他仍然打算北上与吕布、陈瑀会和，讨论共伐袁术的事宜——谁让孙策现在实力弱小、统治不稳、急于洗白，对朝廷的需要超过了曹操对他的需要呢！直到孙策得知了陈瑀的阴谋，他杀伐决断、先发制人，立即北上攻陈瑀，掳掠人口四千多；跨江攻击袁术的约定自然也作废了。孙策此举，无疑触怒了朝廷，寻求朝廷承认的进程半路搁浅。只是由于袁术未灭，他仍然有被朝廷拉拢的价值，朝廷才没有进一步追究。</span></p><h3><a name="198年战略克制韬光养晦" class="md-header-anchor"></a><span>198年：战略克制，韬光养晦</span></h3><p><span>上年险些被偷袭，陷入四年前袁绍那样的窘境</span><sup class='md-footnote'><a href='#dfref-footnote-4' name='ref-footnote-4'>4</a></sup><span>，使孙策下决心先平山越。此外，袁术一年来接连遭遇重大打击，已不再是曹操的主要威胁，孙策作为拉拢对象的价值也下降了。为了不被朝廷打压，孙策这一年可谓谨小慎微，除了深入丘陵地带平定山越，就是扫荡袁术在江东三郡的残余势力，而不敢再对外扩张。要知道，朝廷任命的扬州刺史刘繇被孙策击败后，率领残部就驻扎在紧邻江东三郡的豫章郡（今江西省），对孙策的统治是极大的威胁。孙策却不敢“宜将剩勇追穷寇”，就是害怕被朝廷针对。</span></p><p><span>不仅如此，孙策还积极拉近与朝廷的关系。这一年他对朝廷的上贡是上一次的两倍，令曹操颇感欣慰。一年来的低调和隐忍使曹操放松了对孙策的警惕之心，授予了孙策讨逆将军</span><sup class='md-footnote'><a href='#dfref-footnote-5' name='ref-footnote-5'>5</a></sup><span>和吴侯的封号，变相承认了孙策对以吴郡为中心的江东三郡的管辖。</span></p><h3><a name="199年名正言顺两岸扩张" class="md-header-anchor"></a><span>199年：名正言顺，两岸扩张</span></h3><p><span>199年，地缘格局又发生了重大变化：曹操、袁绍仿佛是以百米冲刺的速度，在三个月内分别诛杀了吕布和公孙瓒，再也没有什么能够阻止两人的决战了。陈琳写就《为袁绍檄豫州文》，传檄天下。文中要求刘表与张绣配合袁绍，南北夹击曹操。另一方面，袁术众叛亲离，穷途末路，决定把玉玺送给袁绍，至少都是袁家人，肥水不流外人田；却被曹操派出的刘备拦截，只好龟缩回淮南。但刘备完成拦截任务后，并没有返回许都，而是东下占领徐州，迅速与袁绍联络。一时间，曹操被袁绍、刘表、袁术、刘备包围，形势极端恶劣。虽然荆南四郡拥护中央，爆发了張羨对刘表的叛乱，牵制了刘表的大部分兵力，但淮南和徐州仍是曹操侧后方的隐患。此时，东南方拥护朝廷的势力中，豫章华歆一介书生，广陵陈登郡界残破，坐拥强兵的孙策竟成为唯一可以牵制袁术和刘表的势力。</span></p><p><img src="http://humoon-image-hosting-service.oss-cn-beijing.aliyuncs.com/img/typora/threekingdoms/199年形势图.png" referrerpolicy="no-referrer" alt="199年形势图"></p><p><span>曹操急忙拉拢孙策，将弟弟的女儿许配给孙匡（孙坚幼子），又为曹彰娶了孙贲的女儿，还让扬州刺史严象举荐孙权为茂才，为进一步授官做准备。孙策忍耐了一年多，自然也不会放过这个难得的机会，欣然接受朝廷命令，征讨袁术和刘表。</span></p><p><span>于是孙策在这一年内放开手脚，大规模用兵，不仅袭取了江北刘勋（袁术属下）的庐江郡、大败黄祖和刘表的联军，还攻占了江南华歆的豫章郡（当时是忠于朝廷的）。为了争取孙策的支持，曹操也不得不睁一只眼闭一只眼，默许了孙策打着朝廷名义、实则纯粹利己的扩张行为。</span></p><p><span>199年，被孙策打败后投降的前会稽太守</span><u><span>王朗</span></u><span>从江东回到中央。因王朗在江东政权已经待了两年多，熟悉孙氏集团的内情，曹操急忙向他了解孙策何以如此犀利？王朗回答孙策有大才，且能举贤任能</span><sup class='md-footnote'><a href='#dfref-footnote-6' name='ref-footnote-6'>6</a></sup><span>。曹操听后意识到，这个未来的敌人已成势，意不能平、喟叹不已</span><sup class='md-footnote'><a href='#dfref-footnote-7' name='ref-footnote-7'>7</a></sup><span>。</span></p><h3><a name="200年气吞山河所谋者大" class="md-header-anchor"></a><span>200年：气吞山河，所谋者大</span></h3><p><span>200年，袁曹的对峙还在继续，孙策的战略却有了变化。要分析这种变化，就不能不讨论一番江南割据的可能性：</span></p><p><span>在此前的中国历史上，局限于长江以南的政权从未统一过中国。即使是春秋战国时代的楚国，也是拥有了大片淮河流域甚至淮北的土地，才能与中原诸国抗衡。战国时地处泰山西麓的鲁国最终为楚国所灭，可知楚国兵锋已经扩展到了何处。虽然两汉四百年，江南经济有了很大的发展，但综合实力仍远远不及北方。</span></p><p><span>193年孙策在江都时，张紘为孙策所做的战略规划，是首先整合荆州和扬州，再图谋北上成为天下最强的诸侯</span><sup class='md-footnote'><a href='#dfref-footnote-8' name='ref-footnote-8'>8</a></sup><span>。但张紘的战略其实隐含着一条前提，即长江以北的分裂；一旦长江以北得到统一，江东便没有机会了。而在200年，孙策面对的恰恰是这样一种尴尬的处境：袁曹决战在即，不论谁胜，都将一统中原与河北，坐拥冀、青、幽、并、兖、豫、徐七州。此时即使孙策能鲸吞刘表，整合荆、扬二州，也无力与北方抗衡；最多凭借长江天险，苟延残喘若干年而已。那么，面临如此局面，还要继续执行张纮的战略，西击刘表吗？</span></p><p><img src="http://humoon-image-hosting-service.oss-cn-beijing.aliyuncs.com/img/typora/threekingdoms/200年形势图.png" referrerpolicy="no-referrer" alt="200年形势图"></p><p><span>翻开历史我们看到，孙策毅然调整了战略方向。他与刘表似乎达成了某种和解，而后腾出手来全力北伐：部将李术在西线攻击朝廷新任命的扬州刺史严象，孙权在东线攻击广陵太守陈登。这两个心腹之患若被拔除，孙策将不仅据有全部袁术故地，北上中原之路也将不再有侧翼的威胁。孙策将趁袁曹主力相距官渡，亲领大军沿水路直击许都</span><sup class='md-footnote'><a href='#dfref-footnote-9' name='ref-footnote-9'>9</a></sup><span>，劫持献帝回扬州。然后依靠中央政府的声望加成，分裂北方、招降纳叛，为江东政权统一天下创造一线生机。</span></p><p><span>孙策天才的战略构想可谓胆大包天。他谋求的不仅是地盘，更是战略上的主动权，是小国图霸的唯一希望。如此精当眼光、决绝雄心，更胜孙坚。</span></p><p><span>然而天不假年，先是孙权两征陈登不克，孙策不得不准备亲征广陵郡；继而在筹备阶段被仇人刺杀，年仅二十六岁。真是：出师未捷身先死，长使英雄泪满襟！</span></p><h3><a name="后续" class="md-header-anchor"></a><span>后续</span></h3><ol start='' ><li><p><span>孙策死时，孙氏虽拥有扬州六郡，但由于已经与曹操撕破脸，始终没有得到扬州牧的头衔，名不正言不顺。孙策活着时还镇得住，一朝去世，士族不附，叛乱四起。孙权继任之初，庐江太守李术独立，庐陵太守孙辅通曹，山越活跃，孙氏政权风雨飘摇，必须立即重建与曹操的战略伙伴关系，借朝廷的威望稳固统治。故孙氏政权再度与刘表为敌，帮助曹操牵制南线敌人，以换取中央的原谅。</span></p></li><li><p><span>从200年官渡之战到208年赤壁之战，孙氏政权回归西征荆州、全据长江的保守战略路线，八年间三征江夏郡的黄祖，互有胜负，打得异常艰难。直到赤壁之战前夕，江东政权才最终打垮黄祖，然而江夏郡已经有一部分在206年就被张辽攻克了。曹操因此对孙权大为轻视。</span></p></li><li><p><span>再体会一下孙策的遗言：</span></p><ol start='' ><li><blockquote><p><span>請張昭等謂曰：「中國方亂，夫以吳、越之眾，三江之固，足以觀成敗。公等善相吾弟！」</span></p></blockquote></li><li><blockquote><p><span>呼權佩以印綬，謂曰：「舉江東之眾，決機於兩陳之間，與天下爭衡，卿不如我；舉賢任能，各盡其心，以保江東，我不如卿。」</span></p></blockquote></li><li><p><span>孙策这话，其实很悲怆。他自己来，有可能创造奇迹，“與天下爭衡”；孙权就断无这个可能了，只能“保江东”、“观成败”。其实汉末大乱以来，还有两个“观成败”的人，一个是在易京划地自守的公孙瓒，一个是坐保荆州的刘表。</span></p></li></ol></li></ol><div class='footnotes-area'  ><hr/>
+<div class='footnote-line'><span class='md-fn-count'>1</span> <span>汉末军阀对其地盘的管辖，合法性不一。合法性最强的，是朝廷直接任命的徐州陶谦、荆州刘表、幽州刘虞、益州刘焉和冀州韓馥。袁绍从韓馥那里取得冀州，曹操为兖州郡国级地方官员私自拥立，公孙瓒胁迫朝廷使节、以下克上杀刘虞取幽州，三人的合法性便差了很多，因此都遭遇过郡县叛乱。但合法性最低的，还是外来军队的公然入侵，以袁术取淮南和孙策取江东为代表。在时人眼中，虽然军阀里没几个忠臣，但仍以袁术及其部将孙策为乱臣贼子的代表。如《三国志》卷38《许靖传》中，许靖给曹操写信，说自己在会稽时“正礼（刘繇）师退，术（袁术）兵前进，会稽倾覆，景兴（王朗）失据”，反映了时人对孙策进攻江东的看法。</span> <a name='dfref-footnote-1' href='#ref-footnote-1' title='回到文档' class='reversefootnote' >↩</a></div>
+<div class='footnote-line'><span class='md-fn-count'>2</span> <span>此时孙策在朝廷那儿连个将军号都没有，而张绣、张燕这样的小军阀都有将军号。</span> <a name='dfref-footnote-2' href='#ref-footnote-2' title='回到文档' class='reversefootnote' >↩</a></div>
+<div class='footnote-line'><span class='md-fn-count'>3</span> <span>朝廷本来只想给孙策一个骑都尉。孙策不满，使者临时自作主张给孙策一个“明汉将军”的头衔。</span> <a name='dfref-footnote-3' href='#ref-footnote-3' title='回到文档' class='reversefootnote' >↩</a></div>
+<div class='footnote-line'><span class='md-fn-count'>4</span> <span>193年，趁袁绍在幽冀边界一带与公孙瓒大战，朝廷任命的冀州牧壺壽与黑山贼联合偷袭位于冀州南部的邺城得手，袁绍和及其部下的家眷一度全部沦陷。</span> <a name='dfref-footnote-4' href='#ref-footnote-4' title='回到文档' class='reversefootnote' >↩</a></div>
+<div class='footnote-line'><span class='md-fn-count'>5</span> <span>孙坚为破虏将军，孙策的讨逆将军与父号颇为相似。</span> <a name='dfref-footnote-5' href='#ref-footnote-5' title='回到文档' class='reversefootnote' >↩</a></div>
+<div class='footnote-line'><span class='md-fn-count'>6</span> <span>《三国志》卷13《王朗传》注引《汉晋春秋》。</span> <a name='dfref-footnote-6' href='#ref-footnote-6' title='回到文档' class='reversefootnote' >↩</a></div>
+<div class='footnote-line'><span class='md-fn-count'>7</span> <span>《三国志》卷46《孙讨逆（孙策）传》注引《吴历》：“曹公聞策平定江南，意甚難之，常呼‘猘兒難與爭鋒也’。”</span> <a name='dfref-footnote-7' href='#ref-footnote-7' title='回到文档' class='reversefootnote' >↩</a></div>
+<div class='footnote-line'><span class='md-fn-count'>8</span> <span>《三国志》卷46《孙策传》注引《吴历》，张纮说：“若投丹楊，收兵吳會，則荊、揚可一，讎敵可報。據長江，奮威德，誅除群穢，匡輔漢室，功業侔於桓、文，豈徒外藩而已哉？”</span> <a name='dfref-footnote-8' href='#ref-footnote-8' title='回到文档' class='reversefootnote' >↩</a></div>
+<div class='footnote-line'><span class='md-fn-count'>9</span> <span>在九江郡郡界之内，从濡须水-巢湖-肥水一线可入淮河。再入淮河北岸的支流颍水，逆水而上可直达许都。这条路线非常利于东吴发挥水军优势。</span> <a name='dfref-footnote-9' href='#ref-footnote-9' title='回到文档' class='reversefootnote' >↩</a></div></div></div>
+</body>
+</html>

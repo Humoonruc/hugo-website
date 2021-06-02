@@ -1,0 +1,76 @@
+---
+title: "Frechet"
+subtitle: ''
+author: "Humoon"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    df_print: paged
+    fig_caption: yes
+    theme: united
+    highlight: haddock
+    number_sections: yes
+    toc: yes
+    toc_depth: 3
+    toc_float:
+      collapsed: true
+      smooth_scroll: FALSE
+  rticles::ctex:
+    df_print: default
+    fig_caption: yes
+    number_sections: false
+  word_document:
+    fig_caption: yes
+    toc: yes
+    toc_depth: 3
+    reference_docx: 
+  pdf_document:
+    toc: yes
+    toc_depth: '2'
+documentclass: ctexart
+classoption: hyperref,
+---
+
+
+```{r setup, include = FALSE}
+## global options
+knitr::opts_chunk$set(
+  fig.width = 10, fig.asp = 1,
+  out.width = "95%", fig.align = "center",
+  fig.path = 'Figures/', fig.show = "hold",
+  warn = 1, warning = FALSE, message = FALSE, echo = TRUE, 
+  comment = '', collapse = F, 
+  cache = T, cache.comments = F, autodep = TRUE
+  )
+```
+
+```{r}
+library(tidyverse)
+library(gridExtra)
+
+num_row = 3
+num_col = 3
+
+p <- list()
+n <- 0
+for (i in 1:num_row) {
+  t <- 10*10^i
+  string_t <- str_c('T = ', t)
+  for (j in 1:num_col) {
+    n = n + 1
+    theta <- 1+j*0.3
+    string_theta <- str_c(', θ = ', theta)
+    
+    x <- 1:10000 / 10
+    y <- t*theta*x^(-theta - 1)*exp(-t*(x^(-theta)))
+    data <- tibble(z = x, f = y)
+    p[[n]] <- ggplot(data, aes(x = z, y = f)) + 
+      geom_point(size = 0.2) + 
+      labs(title = str_c(string_t, string_theta))
+  }
+}
+
+graph <- arrangeGrob(grobs = p, ncol = num_row)
+grid.arrange(graph)
+ggsave(file = "Frechet.png", plot = graph, dpi = 600)
+```

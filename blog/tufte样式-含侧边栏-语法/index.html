@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>tufte样式（含侧边栏）语法 - 万水千山</title>
+    <meta property="og:title" content="tufte样式（含侧边栏）语法 - 万水千山">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+      
+    
+
+    
+      
+      <meta property="description" content="新建R Markdown文件 - from template - tufte包之Tufte Handout
+[&amp;hellip;] 建议最多两层
+[&amp;hellip;] 放在```{marginfigure} ```格式的中间
+[&amp;hellip;] 脚注形如^[]，自动转换为带编号的边栏附注。
+不带编号的边栏附注需要用tufte包中的margin_note()在行内代码中生成。格式如：
+反引号 r &amp;hellip;">
+      <meta property="og:description" content="新建R Markdown文件 - from template - tufte包之Tufte Handout
+[&amp;hellip;] 建议最多两层
+[&amp;hellip;] 放在```{marginfigure} ```格式的中间
+[&amp;hellip;] 脚注形如^[]，自动转换为带编号的边栏附注。
+不带编号的边栏附注需要用tufte包中的margin_note()在行内代码中生成。格式如：
+反引号 r &amp;hellip;">
+      
+    
+
+    
+    
+
+    
+
+    
+    
+
+
+<link href='//cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+
+  
+  <body class="blog">
+    <header class="masthead">
+      <h1><a href="/">万水千山</a></h1>
+
+<p class="tagline">From Mountain to Ocean.</p>
+
+      <nav class="menu">
+  <input id="menu-check" type="checkbox" />
+  <label id="menu-label" for="menu-check" class="unselectable">
+    <span class="icon close-icon">✕</span>
+    <span class="icon open-icon">☰</span>
+    <span class="text">Menu</span>
+  </label>
+  <ul>
+  
+  
+  <li><a href="/">Home·主页</a></li>
+  
+  <li><a href="/resume/">Resume·简历</a></li>
+  
+  <li><a href="/slide/">Slide·展示</a></li>
+  
+  <li><a href="/application/">Application·应用</a></li>
+  
+  <li><a href="/ebook/">Fiction·小说</a></li>
+  
+  <li><a href="/blog/">Blog·博客</a></li>
+  
+  <li><a href="/academics/">Academics·学术</a></li>
+  
+  <li><a href="/categories/">Categories·类别</a></li>
+  
+  <li><a href="/tags/">Tags·标签</a></li>
+  
+  <li><a href="/about/">About·关于</a></li>
+  
+  
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>tufte样式（含侧边栏）语法</h1>
+
+<h3>Humoon
+  /  2019-09-09</h3>
+<hr>
+
+
+      </header>
+
+
+
+
+
+
+<div id="section" class="section level2">
+<h2>一、使用</h2>
+<p>新建R Markdown文件 - from template - tufte包之Tufte Handout</p>
+</div>
+<div id="section-1" class="section level2">
+<h2>二、语法</h2>
+<div id="section-2" class="section level3">
+<h3>1 标题</h3>
+<p>建议最多两层</p>
+</div>
+<div id="section-3" class="section level3">
+<h3>2 任意边栏内容</h3>
+<p>放在<code>```{marginfigure} ```</code>格式的中间</p>
+</div>
+<div id="section-4" class="section level3">
+<h3>3 注释</h3>
+<p>脚注形如<code>^[]</code>，自动转换为带编号的边栏附注。</p>
+<p>不带编号的边栏附注需要用tufte包中的margin_note()在<strong>行内代码</strong>中生成。格式如：</p>
+<p><code>反引号</code> r margin_note(“无编号边栏附注。”) <code>反引号</code></p>
+</div>
+<div id="section-5" class="section level3">
+<h3>4 参考文献</h3>
+<p>html输出中：YAML元数据中设置<code>link-citations: yes</code>，则参考文献出现在边栏；YAML元数据中设置<code>link-citations: no</code>，则参考文献出现在末尾。</p>
+<p>pdf输出中，参考文献都在末尾。</p>
+</div>
+<div id="section-6" class="section level3">
+<h3>5 引文</h3>
+<p><code>&gt;</code>生成的引文，可以在最后用<strong>行内代码</strong>加<code>quote_footer()</code>函数注明引文来源，例如：</p>
+<pre><code>&gt; &quot;多亏了我的律师，要不然我现在还在牢里。两个人一起挖确实比一个人快很多啊。&quot;
+&gt;
+&gt; 反引号 r quote_footer(&#39;--- Joe Martin&#39;) 反引号</code></pre>
+</div>
+<div id="section-7" class="section level3">
+<h3>6 图</h3>
+<div id="section-8" class="section level4">
+<h4>(1) 边栏图</h4>
+<p>使用<strong>knitr</strong>代码段选项<code>fig.margin = TRUE</code>即可将图放置在边栏中。</p>
+<p>添加选项<code>fig.cap = "xxx"</code>、<code>fig.width=3.5</code>、<code>fig.height=3.5</code>可以设定图的标题和长宽。</p>
+</div>
+<div id="section-9" class="section level4">
+<h4>(2) 全宽插图</h4>
+<p>代码段选项<code>fig.fullwidth = TRUE</code>可以使得一幅图占用全部页宽</p>
+</div>
+<div id="section-10" class="section level4">
+<h4>(3) 主栏插图</h4>
+<p>默认情况下，R代码段生成的图形放置在主栏里，但其标题放在边栏中。</p>
+</div>
+</div>
+</div>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/blog/%E7%AE%97%E6%B3%95-%E7%94%B1%E5%8D%95%E6%9C%88%E6%B1%82%E7%B4%AF%E8%AE%A1%E5%8F%8A%E8%AE%A1%E7%AE%97%E5%90%8C%E6%AF%94%E5%A2%9E%E9%95%BF%E7%8E%87/">由单月求累计及计算同比增长率</a></span>
+  <span class="nav-next"><a href="/blog/shiny-%E8%AF%AD%E6%B3%95/">Shiny 语法</a> &rarr;</span>
+</nav>
+
+
+
+
+
+<script src="//yihui.name/js/math-code.js"></script>
+<script async src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+
+  
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/tex.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+  
+  <hr>
+  <div class="copyright">© 2019-2021 黄蒙 <a href="mailto:humoonruc@126.com">humoonruc@126.com</a></div>
+  
+  </footer>
+  </article>
+  
+  </body>
+</html>
+

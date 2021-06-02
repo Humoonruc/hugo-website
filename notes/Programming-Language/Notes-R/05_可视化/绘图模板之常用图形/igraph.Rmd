@@ -1,0 +1,228 @@
+---
+title: "Network Graph"
+subtitle: 'igraph包'
+author: "Humoon"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    df_print: paged
+    fig_caption: yes
+    theme: united
+    highlight: haddock
+    number_sections: yes
+    toc: yes
+    toc_depth: 3
+    toc_float:
+      collapsed: true
+      smooth_scroll: FALSE
+  rticles::ctex:
+    df_print: default
+    fig_caption: yes
+    number_sections: false
+  word_document:
+    fig_caption: yes
+    toc: yes
+    toc_depth: 3
+    reference_docx: 
+  pdf_document:
+    toc: yes
+    toc_depth: '2'
+documentclass: ctexart
+classoption: hyperref,
+---
+
+
+```{r setup, include = FALSE}
+
+## global options
+knitr::opts_chunk$set(
+  fig.width = 6, fig.asp = 0.618,
+  out.width = "80%", fig.align = "center",
+  fig.path = 'Figures/', fig.show = "hold",
+  warn = 1, warning = FALSE, message = FALSE, echo = TRUE, 
+  comment = '', collapse = F, 
+  cache = T, cache.comments = F, autodep = TRUE
+  )
+
+
+## use necessary packages
+library('pacman')
+p_load(tidyverse, lubridate, data.table, # 数据整理
+       ggthemes, showtext, gridExtra, igraph, ggraph, # 可视化
+       lmtest, plm, orcutt, stats, forecast, zoo, # 统计分析  
+       rvest, httr, xml2, # 爬虫
+       sqldf, DT, # I/O
+       jiebaR, wordcloud2, webshot, htmlwidgets, tidytext # 文本分析
+       )
+options(sqldf.driver = "SQLite") 
+
+
+## pdf中图形内部的中文字体设置
+pdf.options(family = "GB1")
+# 安装字体文件
+# font_add('YaHei','MS YaHei.ttf')
+windowsFonts(YaHei = windowsFont("Microsoft YaHei"))
+showtext_auto(enable = TRUE)
+# 包含图的代码块需要fig.showtext = TRUE选项
+# ggplot2图形需要在主题中显式指定中文字体才能正常显示图中的中文
+
+
+## 自定义一般图形主题
+mytheme <- theme_economist_white() +
+  theme(text = element_text(family = 'YaHei'),
+        plot.title = element_text(face = 'bold', size = 14), 
+        plot.subtitle = element_text(size = 12),
+        plot.caption = element_text(hjust = 0, size = 10, margin = margin(2,0,0,0,'pt')),
+        plot.margin = margin(12,10,12,0,'pt'),
+        legend.position = 'top',
+        legend.justification = 'left',
+        legend.margin = margin(4,0,0,0,'pt'),
+        legend.key.size = unit(1,'lines'),
+        legend.title = element_text(size = 12),
+        legend.text = element_text(size = 10, margin = margin(0,0,0,0,'pt')),
+        axis.text = element_text(size = 10, margin = margin(2,0,2,0,'pt')),
+        axis.ticks.length = unit(-4,'pt')
+        )
+
+# 自定义柱状图主题
+theme_bar <- theme_economist_white() +
+  theme(text = element_text(family = 'YaHei'), # 所有的文本字体
+        plot.title = element_text(face = 'bold', size = 14), 
+        plot.subtitle = element_text(size = 12),
+        plot.caption = element_text(hjust = 0, size = 10,
+                                    margin = margin(0,0,0,0,'pt')),
+        plot.margin = margin(12,0,12,10,'pt'),
+        legend.position = 'top',
+        legend.justification = 'left',
+        legend.margin = margin(4,0,0,0,'pt'),
+        legend.key.size = unit(0.7,'lines'),
+        legend.title = element_blank(),
+        legend.text = element_text(size = 10, margin = margin(0,8,0,4,'pt')),
+        axis.text = element_text(size = 10),
+        axis.ticks.length = unit(0,'pt') # 不要坐标轴须
+        )
+```
+
+
+# 创建 graph 的标准过程
+
+## 从数据框创建 graph
+
+对于 graph 这种数据结构而言，最基本的元素包括节点（vertex）和边（节点之间的连线，edge）。igraph 这个R包提供了很多种创建 graph 的方式，我们先看一个最基本的例子，从数据框创建一个graph：
+
+### 节点信息
+```{r}
+actors <- data.frame(
+  name = c("Alice", "Bob", "Cecil", "David", "Esmeralda"), 
+  age = c(48,33,45,34,21), 
+  gender = c("F","M","F","M","F"))
+actors
+```
+actors 这个数据框保存了图中所有节点的信息，共5个节点，有name, age, gender 3种属性。
+
+### 边的信息
+```{r}
+relations <- data.frame(
+  from = c("Bob", "Cecil", "Cecil", "David", "David", "Esmeralda"), 
+  to = c("Alice", "Bob", "Alice", "Alice", "Bob", "Alice"), 
+  same.dept = c(FALSE,FALSE,TRUE,FALSE,FALSE,TRUE), 
+  friendship = c(4,5,5,2,1,1), advice = c(4,5,5,4,2,3))
+relations
+```
+relations 数据框保存了节点之间的连线信息， from、to 两列描述了这条边是从哪个节点到哪个检点，最后的3列是每条边的一些自定义的属性。
+
+### 创建graph
+
+当两个数据框创建完成之后，就可以利用 graph_from_data_frame 函数创建一个graph：
+
+```{r}
+g <- graph_from_data_frame(d = relations, 
+                           vertices = actors, 
+                           directed = F)
+```
+第一个参数是保存edge 信息的数据框，directed 参数控制graph 有无方向，vertices 参数是保存节点信息的数据框。
+
+### 从graph对象访问节点属性和边的属性
+```{r}
+V(g)$name
+V(g)$age
+E(g)$friendship
+```
+
+### 可视化
+```{r}
+plot(g)
+```
+
+### 布局算法layout
+
+对于不同类型的 graph，有不同的自动化的布局算法。通过 layout 参数可以方便的指定，使用不同的布局算法：
+```{r}
+plot(g, layout = layout.fruchterman.reingold)
+```
+
+### 统计网络的拓扑属性
+```{r}
+# 统计节点的度
+degree(g, mode = "all")
+# 统计密度
+edge_density(g)
+# 统计clustering coefficient
+transitivity(g, type = "global")
+transitivity(g, type = "local")
+transitivity(g, type = "average")
+```
+
+### 挖掘聚类
+
+`cluster_fast_greedy()`调用fast greedy algorithm算法，来预测community，其他聚类函数的用法和上述用法一致
+```{r}
+cfg <- cluster_fast_greedy(g)
+plot(cfg, g)
+
+# 节点对应的community信息可以从cfg这个对象中得到
+cfg
+
+# 对于每个community, 可以通过如下方式得到其子图，
+nodes <- V(g)[cfg$membership == 1]
+g_sub <- induced_subgraph(g, nodes)
+plot(g_sub, layout = layout_in_circle)
+```
+
+
+# networkD3包的动态graph
+
+```{r}
+library(igraph)
+library(networkD3)
+
+# create a dataset:
+data <- data_frame(
+  from = c("A", "A", "B", "D", "C", "D", "E", "B", "C", "D", "K", "A", "M"),
+  to = c("B", "E", "F", "A", "C", "A", "B", "Z", "A", "C", "A", "B", "K")
+)
+
+# Plot
+p <- simpleNetwork(data, height = "100px", width = "100px")
+p
+
+# save the widget
+# library(htmlwidgets)
+# saveWidget(p, file=''))
+
+# Plot
+p <- simpleNetwork(data, height = "100px", width = "100px", 
+                   Source = 1, # column number of source
+                   Target = 2, # column number of target
+                   linkDistance = 10, # distance between node. Increase this value to have more space between nodes
+                   charge = -900, # numeric value indicating either the strength of the node repulsion (negative value) or attraction (positive value)
+        fontSize = 14, # size of the node names
+        fontFamily = "serif", # font og node names
+        linkColour = "#666", # colour of edges, MUST be a common colour for the whole graph
+        nodeColour = "#12b3a2", # colour of nodes, MUST be a common colour for the whole graph
+        opacity = 0.9, # opacity of nodes. 0=transparent. 1=no transparency
+        zoom = T # Can you zoom on the figure?
+        )
+p
+```
+

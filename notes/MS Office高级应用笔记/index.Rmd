@@ -1,0 +1,58 @@
+--- 
+title: "MS Office 高级应用笔记"
+author: "黄蒙"
+date: "`r Sys.Date()`"
+output:
+  bookdown::pdf_book:
+    keep_tex: yes
+    dev: "cairo_pdf"
+    latex_engine: xelatex
+    citation_package: natbib
+    template: tex/template_yihui_zh.tex
+    pandoc_args:  --top-level-division=chapter
+    toc_depth: 3
+    toc_unnumbered: no
+    toc_appendix: yes
+    quote_footer: ["\\begin{flushright}", "\\end{flushright}"]
+documentclass: ctexbook
+bibliography: [bib/bib.bib]
+biblio-style: apalike
+link-citations: yes
+colorlinks: no
+lot: yes
+lof: yes
+geometry: [b5paper, tmargin=2.5cm, bmargin=2.5cm, lmargin=3.5cm, rmargin=2.5cm]
+site: bookdown::bookdown_site
+description: "一个简单的中文书示例。"
+github-repo: yihui/bookdown-chinese
+#cover-image: images/cover.jpg
+---
+
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(
+  fig.width = 6, fig.asp = 0.618,
+  out.width = "70%",fig.align = "center",
+  fig.path = 'Figs/',fig.show = "hold",
+  warning = FALSE, message = FALSE, echo = TRUE,
+  cache = T, cache.comments = F, comment = '', 
+  options(digits = 4))
+```
+
+```{r setup, include=FALSE}
+# use necessary packages
+library('pacman')
+p_load(tidyverse,readxl,lubridate,reshape2, 
+       ggthemes,gridExtra,RColorBrewer,
+       lmtest, xtable, flextable, officer, DT, RODBC,
+       bookdown, bookdownplus, 
+       XML, xml2, rvest, rlist)
+
+pdf.options(height = 10/2.54, width = 10/2.54, family = "GB1") 
+# 最后一个参数可以使pdf支持含中文的图片。
+```
+
+
+　　
+
+\mainmatter

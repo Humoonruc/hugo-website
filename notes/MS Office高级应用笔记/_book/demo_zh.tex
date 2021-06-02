@@ -1,0 +1,769 @@
+\documentclass[]{ctexbook}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{xltxtra,xunicode}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[b5paper,tmargin=2.5cm,bmargin=2.5cm,lmargin=3.5cm,rmargin=2.5cm]{geometry}
+\usepackage[unicode=true]{hyperref}
+\PassOptionsToPackage{usenames,dvipsnames}{color} % color is loaded by hyperref
+\hypersetup{
+            pdftitle={MS Office 高级应用笔记},
+            pdfauthor={黄蒙},
+            colorlinks=true,
+            linkcolor=Maroon,
+            citecolor=Blue,
+            urlcolor=Blue,
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{natbib}
+\bibliographystyle{apalike}
+\usepackage{longtable,booktabs}
+% Fix footnotes in tables (requires footnote package)
+\IfFileExists{footnote.sty}{\usepackage{footnote}\makesavenoteenv{long table}}{}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+% set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+\usepackage{booktabs}
+\usepackage{longtable}
+
+\usepackage{framed,color}
+\definecolor{shadecolor}{RGB}{248,248,248}
+
+\renewcommand{\textfraction}{0.05}
+\renewcommand{\topfraction}{0.8}
+\renewcommand{\bottomfraction}{0.8}
+\renewcommand{\floatpagefraction}{0.75}
+
+\let\oldhref\href
+\renewcommand{\href}[2]{#2\footnote{\url{#1}}}
+
+\makeatletter
+\newenvironment{kframe}{%
+\medskip{}
+\setlength{\fboxsep}{.8em}
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+%\renewenvironment{Shaded}{\begin{kframe}}{\end{kframe}}
+
+\usepackage{makeidx}
+\makeindex
+
+\urlstyle{tt}
+
+\usepackage{amsthm}
+\makeatletter
+\def\thm@space@setup{%
+  \thm@preskip=8pt plus 2pt minus 4pt
+  \thm@postskip=\thm@preskip
+}
+\makeatother
+
+\frontmatter
+
+
+\title{MS Office 高级应用笔记}
+\author{黄蒙}
+\date{2020-05-23}
+
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+\listoftables
+\listoffigures
+
+　　
+
+\mainmatter
+
+\hypertarget{ux524dux8a00}{%
+\chapter*{前言}\label{ux524dux8a00}}
+
+
+该电子书使用 \textbf{Bookdown}\index{bookdown} 整理 MS Office 高级应用的相关知识。
+
+感谢\citep{R-bookdown}和\citep{R-bookdownplus}，贡献了如此强大的工具。
+
+\cleardoublepage
+
+\hypertarget{part-word-ux7bc7}{%
+\part{Word 篇}\label{part-word-ux7bc7}}
+
+\hypertarget{chapter-word-basic}{%
+\chapter{Word 基础}\label{chapter-word-basic}}
+
+\hypertarget{word-shortcut}{%
+\section{快捷键}\label{word-shortcut}}
+
+\begin{longtable}[]{@{}ll@{}}
+\caption{\label{tab:word-short} word中的常用快捷键}\tabularnewline
+\toprule
+\textbf{快捷键} & \textbf{功能}\tabularnewline
+\midrule
+\endfirsthead
+\toprule
+\textbf{快捷键} & \textbf{功能}\tabularnewline
+\midrule
+\endhead
+Ctrl + D & 字体\tabularnewline
+Ctrl + F & 查找\tabularnewline
+Ctrl + G & 定位\tabularnewline
+Ctrl + H & 替换\tabularnewline
+Ctrl + K & 插入超链接\tabularnewline
+Ctrl + N & 新建\tabularnewline
+Ctrl + O & 打开文件\tabularnewline
+Ctrl + P & 打印\tabularnewline
+Ctrl + W & 只关闭文件不关闭 Word 程序\footnote{Word 程序打开很耗时，如果只是要关闭一个文件，仍要继续使用 Word 处理其他文件，最好用这个快捷键。}\tabularnewline
+Alt + = & 插入公式\tabularnewline
+F4 & 重复操作\footnote{在excel中尤其好用！}\tabularnewline
+Tab & 变为下一级标题（降级）\tabularnewline
+Shift + Tab & 变为上一级标题（升级）\tabularnewline
+Shift + F5 & 将光标移到上次编辑的位置\tabularnewline
+Ctrl + Shift + F9 & 将域转变为纯文本\tabularnewline
+\textbf{选择文本} &\tabularnewline
+鼠标双击\footnote{或：光标在词头，按Ctrl + Shift + Right；光标在词尾，按Ctrl + Shift + Left。} & 选择一个单词\tabularnewline
+在段落的左侧空白处双击鼠标 & 选中一个段落\tabularnewline
+三击鼠标 & 选中一个段落\tabularnewline
+Ctrl + 单击 & 选中一个句子\tabularnewline
+Home/End & 光标移动到行头/行尾\tabularnewline
+Ctrl + Home/End & 光标移动到全文头/全文尾\tabularnewline
+Shift + Home/End & 选中从光标到行头/行尾\tabularnewline
+Ctrl + Shift + Home/End & 选中从光标到全文头/全文尾\tabularnewline
+Alt + 拖曳 & 垂直选中一块文本\footnote{很多行文字有相同的前缀、后缀和中间部分，当你想编辑的时候，可以垂直选中、统一修改。}\tabularnewline
+F8 & 开启选择模式，以光标为选择的基点\footnote{按1次F8开启选择模式，再按1次选中当前单词，2次选中句子，3次选中段落，4次选中全文。}；ESC取消\tabularnewline
+\textbf{复制粘贴} &\tabularnewline
+Ctrl + Shift + C/V & 复制粘贴格式\tabularnewline
+\bottomrule
+\end{longtable}
+
+\hypertarget{word-skills}{%
+\section{一些技巧}\label{word-skills}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  多样化粘贴，可以粘贴为链接，保持与数据源的更新能力
+\item
+  删除不连续的空行：将两个回车\^{}p替换为一个回车\^{}p
+\end{enumerate}
+
+\hypertarget{chapter-word-interface}{%
+\chapter{Word 界面}\label{chapter-word-interface}}
+
+\hypertarget{ux6587ux4ef6ux9009ux9879ux5361}{%
+\section{``文件''选项卡}\label{ux6587ux4ef6ux9009ux9879ux5361}}
+
+\begin{itemize}
+\tightlist
+\item
+  选项-校对-自动更正选项，该功能可以自动更正字词输入中的错误，也可以以自定义方式设定输入替换，如输入(a)自动替换为@，输入
+\end{itemize}
+
+\hypertarget{ux5f00ux59cbux9009ux9879ux5361}{%
+\section{``开始''选项卡}\label{ux5f00ux59cbux9009ux9879ux5361}}
+
+\begin{itemize}
+\tightlist
+\item
+  字体-更改大小写\\
+\item
+  Ctrl + H
+
+  \begin{itemize}
+  \tightlist
+  \item
+    编辑-查找-高级查找，灵活运用通配符，``*''代表零个或多个任意字符，``?''代表一个任意字符\\
+  \item
+    编辑-查找-高级查找，搜索选项里有``查找单词的所有形式(英文)''，例如可以通过动词原形查找到动词的其他形式
+  \item
+    编辑-查找-转到-定位，可以输入页号迅速前往某一页
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{ux63d2ux5165ux9009ux9879ux5361}{%
+\section{``插入''选项卡}\label{ux63d2ux5165ux9009ux9879ux5361}}
+
+\begin{itemize}
+\tightlist
+\item
+  插图-屏幕截图-屏幕剪辑，可以很方便地截屏
+\item
+  插入日期时间可以勾选``自动更新''，便能够随系统日期自动更新
+\item
+  文本-首字下沉
+\item
+  文本-对象，若以这种方式插入图片，显示的只是一个图标，显示这里有一个图片对象，而非显示图片本身
+\item
+  文本-文档部件，文档部件库就是对某一段指定文档内容的封装手段，也就是对这段文档内容的保存和重复利用。因此，一些经常使用的表格、图片、自定义公式、公文版头、签名、段落等元素，都可以保存到文档部件库中。
+\item
+  链接-书签，用于记忆定位
+\end{itemize}
+
+\hypertarget{ux8bbeux8ba1ux9009ux9879ux5361}{%
+\section{``设计''选项卡}\label{ux8bbeux8ba1ux9009ux9879ux5361}}
+
+\begin{itemize}
+\tightlist
+\item
+  页面背景-水印，配合文档加密。
+\item
+  文档格式-颜色-自定义颜色-``新建主题颜色''对话框，例如可以修改已访问的链接的颜色
+\end{itemize}
+
+\hypertarget{ux5ba1ux9605ux9009ux9879ux5361}{%
+\section{``审阅''选项卡}\label{ux5ba1ux9605ux9009ux9879ux5361}}
+
+\begin{itemize}
+\tightlist
+\item
+  保护-限制编辑，可以选定部分内容，只有这些内容可以编辑，其他内容都不能编辑，以此保护固定不变的内容，防止误编辑和误删除
+\end{itemize}
+
+\hypertarget{ux89c6ux56feux9009ux9879ux5361}{%
+\section{``视图''选项卡}\label{ux89c6ux56feux9009ux9879ux5361}}
+
+\begin{itemize}
+\tightlist
+\item
+  使用自动多级列表时，要删除原有的手动编号，最快捷的方法是在\texttt{大纲}视图中删除
+\end{itemize}
+
+\hypertarget{ux6837ux5f0f}{%
+\chapter{样式}\label{ux6837ux5f0f}}
+
+\begin{itemize}
+\tightlist
+\item
+  开始-编辑-选择-选定所有格式类似的文本\footnote{强大的功能！特别时候修理未经样式整顿的文档。}
+\item
+  开始-样式功能组右下角-样式窗格最下面一行第三个按钮-管理样式对话框-导入/导出-管理器对话框，可以将某个文件已经调好的样式应用到其他文件
+\item
+  保存与应用样式集\footnote{相比模板功能，只保存了样式，没有保存内容} ：设计-文档格式功能组中样式的下拉框。
+\end{itemize}
+
+\hypertarget{ux8868ux683c}{%
+\chapter{表格}\label{ux8868ux683c}}
+
+\begin{itemize}
+\tightlist
+\item
+  表格中加入斜线：表格工具\textbar 设计-边框-边框-斜下框线
+\item
+  Ctrl + Shift + Enter 可以将表格纵向拆分为两个表格
+\item
+  表格工具-布局-重复标题行，可以使标题行出现在跨页表格的每页顶端
+\item
+  选中五段文字，复制，再选择表格的五行，粘贴，就可以一格一段了
+\item
+  表题注段落定义``开始-段落-换行与分页-与下段同页''，可以保持题注与表格始终处于同一页，避免表格的题注孤零零位于一页末尾的情况
+\item
+  表格工具-设计-表格样式，可以自定义表格样式，而后应用于所有表格
+\end{itemize}
+
+\hypertarget{ux56feux7247}{%
+\chapter{图片}\label{ux56feux7247}}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{图片工具\textbar{}格式}-\texttt{排列}，从\texttt{嵌入}变成\texttt{环绕}，将图片\texttt{下移一层}，点击\texttt{选择窗格}才能同时出现图片和其上覆盖的文本框，在选择窗格中同时选中它们，\texttt{组合}，可以使其成为一个捆绑在一起的整体，再变回\texttt{嵌入}
+\end{itemize}
+
+\hypertarget{ux9875ux9762ux8bbeux7f6e}{%
+\chapter{页面设置}\label{ux9875ux9762ux8bbeux7f6e}}
+
+\begin{itemize}
+\tightlist
+\item
+  开始-段落-换行与分页：(1)孤行控制，避免页面顶部仅显示段落的最后一行和底部的仅显示段落的第一行；(2)与下段同页，保证前后两个段落始终在同一页中，特别适合表标题、表、图、图标题、图注释等段落样式。
+\item
+  布局-页面设置对话框-页边距-页码范围，选择``对称页边距''，就像书籍杂志一样，打印出来是左右对称的
+\item
+  布局-稿纸设置，可以使文字填写在稿纸中
+\item
+  设计-页面背景-页面颜色-填充效果，可以插入图片作为页面背景
+\end{itemize}
+
+\hypertarget{ux57df}{%
+\chapter{域}\label{ux57df}}
+
+\begin{itemize}
+\tightlist
+\item
+  插入-文档部件-域
+\end{itemize}
+
+类别中选择``链接和引用''，域名选择 StyleRef，就可以链接到某级标题了
+
+\cleardoublepage
+
+\hypertarget{part-excel-ux7bc7}{%
+\part{Excel 篇}\label{part-excel-ux7bc7}}
+
+\hypertarget{chapter-Excel-basic}{%
+\chapter{Excel 基础}\label{chapter-Excel-basic}}
+
+\hypertarget{ux5febux6377ux952e}{%
+\section{快捷键}\label{ux5febux6377ux952e}}
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule
+快捷键 & 功能\tabularnewline
+\midrule
+\endhead
+Alt + Enter & 单元格内换行\tabularnewline
+\textbf{选择有数据的区域} &\tabularnewline
+选中有数据的单元格然后 Ctrl + A & 选择当前连续的数据区域\tabularnewline
+Ctrl + Shift + 箭头 & 将单元格的选定范围扩展至活动单元格所在行列的下一个非空单元格\tabularnewline
+Ctrl + Shift + Home/End & 将单元格的选定范围扩展至活动单元格所在行列的最初/后一个非空单元格\tabularnewline
+\bottomrule
+\end{longtable}
+
+\hypertarget{ux8f93ux5165ux548cux7f16ux8f91ux6570ux636e}{%
+\section{输入和编辑数据}\label{ux8f93ux5165ux548cux7f16ux8f91ux6570ux636e}}
+
+\begin{itemize}
+\tightlist
+\item
+  在多个单元格中输入统一数据
+
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    选中所有单元格
+  \item
+    输入数据
+  \item
+    按 Ctrl + Enter
+  \end{enumerate}
+\item
+  输入西文撇号\texttt{\textquotesingle{}}加数字即可获得文本类型的数值，如18位身份证号\texttt{\textquotesingle{}110100199911110202}
+\item
+  自动填充数据
+
+  \begin{itemize}
+  \tightlist
+  \item
+    可以通过序列方式定义填充类型、步长和终止值
+  \item
+    可以填充自定义序列。文件-选项-高级-常规-编辑自定义列表-自定义序列对话框，添加\footnote{每输入一项按 Enter 换行输入下一项。} 或导入\footnote{从一系列单元格。} 新序列
+  \item
+    按住右键拖动填充柄，可以选择如何填充，等比还是等差，按月还是按年，etc
+  \end{itemize}
+\item
+  控制数据的有效性。数据-数据工具-数据验证，教材P179
+\item
+  选择性粘贴功能极其强大，可以加减乘除，可以粘贴各种元素
+\item
+  移动行列：鼠标移到行列边缘变形后，按下 Shift 拖动
+\end{itemize}
+
+\hypertarget{ux4feeux9970ux7f8eux5316}{%
+\section{修饰美化}\label{ux4feeux9970ux7f8eux5316}}
+
+\hypertarget{ux81eaux5b9aux4e49ux6570ux5b57ux683cux5f0f}{%
+\subsection{自定义数字格式}\label{ux81eaux5b9aux4e49ux6570ux5b57ux683cux5f0f}}
+
+建议先从已有的分类中点击一种，再点击``自定义''并在这个基础上修改。P187
+
+\hypertarget{ux8868ux683cux6982ux5ff5}{%
+\subsection{``表格''概念}\label{ux8868ux683cux6982ux5ff5}}
+
+指工作表中的部分区域，堪称表中表，点击后出现表格工具\textbar 设计选项卡。
+
+\begin{itemize}
+\tightlist
+\item
+  两种创建方法：
+
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    插入-表格功能组-表格
+  \item
+    开始-样式功能组-套用表格格式
+  \end{enumerate}
+\item
+  将表格转换为普通区域：表格工具\textbar 设计-工具-转换为区域
+\end{itemize}
+
+\hypertarget{ux6761ux4ef6ux683cux5f0f}{%
+\subsection{条件格式}\label{ux6761ux4ef6ux683cux5f0f}}
+
+开始-样式组-条件格式
+
+\hypertarget{ux6253ux5370}{%
+\section{打印}\label{ux6253ux5370}}
+
+页面布局-页面设置组
+
+\hypertarget{ux5bf9ux6570ux636eux7684ux4fddux62a4}{%
+\section{对数据的保护}\label{ux5bf9ux6570ux636eux7684ux4fddux62a4}}
+
+\begin{itemize}
+\tightlist
+\item
+  在审阅-更改-保护工作表中限制对数据的改动
+
+  \begin{itemize}
+  \tightlist
+  \item
+    有些单元格仍然是允许改动的，比如原始数据的输入，此时选定这部分允许改动的单元格，设置单元格格式对话框-保护选项卡-取消勾选锁定复选框，这部分单元格就会被排除在保护范围之外
+  \item
+    对于那些通过公式计算出来的单元格，不仅需要锁定，还需要隐藏公式，在设置单元格格式对话框-保护选项卡-勾选隐藏复选框，则公式不但不能被修改，还不能被看到
+  \item
+    若有一个区域，\textbf{数据和公式都希望隐藏}，而其他单元格不受影响\footnote{哪怕是同一行列的其他单元格} 。则首先需要在设置单元格格式对话框-数字选项卡中将这个区域的分类设定为自定义格式、类型输入\texttt{;;;}，然后保护选项卡-勾选隐藏复选框，再审阅-更改-保护工作表
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{ux540cux65f6ux5bf9ux591aux5f20ux5de5ux4f5cux8868ux8fdbux884cux64cdux4f5c}{%
+\section{同时对多张工作表进行操作}\label{ux540cux65f6ux5bf9ux591aux5f20ux5de5ux4f5cux8868ux8fdbux884cux64cdux4f5c}}
+
+\begin{itemize}
+\tightlist
+\item
+  选中多张工作表，形成工作表组后，可以批量操作
+\item
+  填充成组工作表：选中一块区域，选择其他工作表形成工作表组，开始-编辑-填充-至同组工作表
+\end{itemize}
+
+\hypertarget{ux591aux7a97ux53e3ux63a7ux5236}{%
+\section{多窗口控制}\label{ux591aux7a97ux53e3ux63a7ux5236}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  视图-窗口-新建窗口\\
+\item
+  视图-窗口-并排查看
+\end{enumerate}
+
+\hypertarget{excel-ux516cux5f0fux548cux51fdux6570}{%
+\chapter{Excel 公式和函数}\label{excel-ux516cux5f0fux548cux51fdux6570}}
+
+\hypertarget{ux5b9aux4e49ux4e0eux5f15ux7528ux540dux79f0}{%
+\section{定义与引用名称}\label{ux5b9aux4e49ux4e0eux5f15ux7528ux540dux79f0}}
+
+\begin{itemize}
+\tightlist
+\item
+  定义名称
+
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    在名称框中为一些常用单元格或区域定义名称，方便导航或绝对引用。
+  \item
+    公式-定义的名称-定义名称/根据所选内容创建
+  \end{enumerate}
+\end{itemize}
+
+\hypertarget{ux65e5ux671fux548cux65f6ux95f4ux51fdux6570}{%
+\section{日期和时间函数}\label{ux65e5ux671fux548cux65f6ux95f4ux51fdux6570}}
+
+日期和时间格式的数据，不论外观是什么，都是以数字形式储存的，如2013年1月20日是41294。必须使用专门处理日期的函数来处理，而其他如字符串函数取到的都是``41294''的一部分。
+
+\begin{itemize}
+\tightlist
+\item
+  日期之间可以直接比较大小
+\item
+  日期单元格格式设定，周几为aaa，星期几为aaaa
+\item
+  weekday(,2) 返回1-7对应周一到周日
+\end{itemize}
+
+\hypertarget{ux663eux793aux516cux5f0fux6240ux5f15ux7528ux7684ux5355ux5143ux683cux4e4bux95f4ux7684ux5173ux7cfb}{%
+\section{显示公式所引用的单元格之间的关系}\label{ux663eux793aux516cux5f0fux6240ux5f15ux7528ux7684ux5355ux5143ux683cux4e4bux95f4ux7684ux5173ux7cfb}}
+
+\begin{itemize}
+\tightlist
+\item
+  公式-公式审核-追踪引用单元格/追踪从属单元格
+\end{itemize}
+
+\hypertarget{ux4f7fux7528ux516cux5f0fux7684ux5e38ux89c1ux9519ux8bef}{%
+\section{使用公式的常见错误}\label{ux4f7fux7528ux516cux5f0fux7684ux5e38ux89c1ux9519ux8bef}}
+
+P240
+
+\hypertarget{excel-ux56feux8868}{%
+\chapter{Excel 图表}\label{excel-ux56feux8868}}
+
+\hypertarget{ux8ff7ux4f60ux56fe}{%
+\section{迷你图}\label{ux8ff7ux4f60ux56fe}}
+
+折线；柱形；盈亏
+
+\hypertarget{ux56feux8868ux7684ux79fbux52a8}{%
+\section{图表的移动}\label{ux56feux8868ux7684ux79fbux52a8}}
+
+图表工具\textbar 设计-位置-移动图表
+
+\hypertarget{ux6570ux636eux5904ux7406ux548cux5206ux6790}{%
+\chapter{数据处理和分析}\label{ux6570ux636eux5904ux7406ux548cux5206ux6790}}
+
+\begin{itemize}
+\tightlist
+\item
+  数据-数据工具-合并计算，对应 R 中 \texttt{rbind()\ \%\textgreater{}\%\ group\_by()\ \%\textgreater{}\%\ summarize()}
+\item
+  数据-排序和筛选-排序，添加条件：主要关键字-次要关键字
+\item
+  数据-排序和筛选-高级，可以根据事先写好的条件区域进行复杂条件的高级筛选
+\item
+  数据-分级显示，分类汇总与分级显示
+\item
+  插入-表格-数据透视表，数据透视表是一种交互式表格
+\end{itemize}
+
+\cleardoublepage
+
+\hypertarget{part-powerpoint-ux7bc7}{%
+\part{PowerPoint 篇}\label{part-powerpoint-ux7bc7}}
+
+\hypertarget{chapter-PowerPoint-basic}{%
+\chapter{PowerPoint 基础}\label{chapter-PowerPoint-basic}}
+
+\hypertarget{ux5febux6377ux952e-1}{%
+\section{快捷键}\label{ux5febux6377ux952e-1}}
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule
+快捷键 & 功能\tabularnewline
+\midrule
+\endhead
+大纲视图下按 Enter & 同一级别新的段落；若为标题级别，则新插入一张幻灯片\tabularnewline
+大纲视图下按 Ctrl + Enter & 低一级别新的段落\tabularnewline
+\bottomrule
+\end{longtable}
+
+\hypertarget{ux4ece-word-ux521bux5efaux5e7bux706fux7247}{%
+\section{从 Word 创建幻灯片}\label{ux4ece-word-ux521bux5efaux5e7bux706fux7247}}
+
+要求 Word 为大纲视图，只显示3级，然后关闭 Word ，在 PPT 中点击：开始-幻灯片-新建幻灯片-幻灯片（从大纲）
+
+\hypertarget{ux7531ux5e7bux706fux7247ux521bux5efaux8bb2ux4e49}{%
+\section{由幻灯片创建讲义}\label{ux7531ux5e7bux706fux7247ux521bux5efaux8bb2ux4e49}}
+
+文件-导出-创建讲义-创建讲义
+
+\hypertarget{ux5206ux8282ux7ba1ux7406}{%
+\section{分节管理}\label{ux5206ux8282ux7ba1ux7406}}
+
+右键新增节
+
+\hypertarget{ux7f16ux8f91ux548cux7f8eux5316}{%
+\chapter{编辑和美化}\label{ux7f16ux8f91ux548cux7f8eux5316}}
+
+\hypertarget{ux4e3bux9898ux548cux80ccux666f}{%
+\section{主题和背景}\label{ux4e3bux9898ux548cux80ccux666f}}
+
+\begin{itemize}
+\tightlist
+\item
+  设计-主题，在下拉菜单中选择``浏览主题''，就可以选择另一个ppt文件，应用其主题
+\item
+  设计-背景格式
+\end{itemize}
+
+\hypertarget{ux5e7bux706fux7247ux6bcdux7248}{%
+\section{幻灯片母版}\label{ux5e7bux706fux7247ux6bcdux7248}}
+
+\begin{itemize}
+\tightlist
+\item
+  创建：视图-母版视图-幻灯片母版，幻灯片母版选项卡-编辑母版-插入幻灯片母版/删除
+\item
+  应用：开始-幻灯片-版式
+\end{itemize}
+
+\hypertarget{ux5e7bux706fux7247ux9875ux7801}{%
+\section{幻灯片页码}\label{ux5e7bux706fux7247ux9875ux7801}}
+
+\begin{itemize}
+\tightlist
+\item
+  插入：插入-文本-幻灯片编号
+\item
+  设置起始编号：设计-自定义-幻灯片大小-幻灯片编号起始值
+\end{itemize}
+
+\hypertarget{ux5220ux9664ux5907ux6ce8}{%
+\section{删除备注}\label{ux5220ux9664ux5907ux6ce8}}
+
+文件-信息-检查问题-检查文档-演示文稿备注，检查完毕后将备注全部删除
+
+\hypertarget{ux6279ux91cfux63d2ux5165ux56feux7247}{%
+\section{批量插入图片}\label{ux6279ux91cfux63d2ux5165ux56feux7247}}
+
+插入-图像-相册-新建相册，选中要插入的多张图片，可以一次性插入PPT中，每张幻灯片里一张图片
+
+\hypertarget{ux591aux4e2aux5bf9ux8c61ux76f8ux4e92ux906eux6321}{%
+\section{多个对象相互遮挡}\label{ux591aux4e2aux5bf9ux8c61ux76f8ux4e92ux906eux6321}}
+
+开始-编辑-选择-选择窗格，可以轻松选择被遮挡的对象（Word 中同理）
+
+\hypertarget{smartart}{%
+\section{SmartArt}\label{smartart}}
+
+\begin{itemize}
+\tightlist
+\item
+  快速创建：在一张已经定义文本层级的幻灯片上，右键单击后选择：转换为 SmartArt
+\item
+  大纲操作：欲添加一个同级图形块，不能直接在图上选中一块回车，这只会使图内文字换行；而应该在 SmartArt 的文本窗格（类似大纲视图）中将光标置于首行之前并回车
+\end{itemize}
+
+\hypertarget{ux52a8ux4f5cux6309ux94ae}{%
+\section{动作按钮}\label{ux52a8ux4f5cux6309ux94ae}}
+
+插入-形状的最后一行，有各种动作按钮
+
+\hypertarget{ux653eux6620}{%
+\chapter{放映}\label{ux653eux6620}}
+
+\hypertarget{ux52a8ux753b}{%
+\section{动画}\label{ux52a8ux753b}}
+
+为 SmartArt 图形设置统一的动画后，可以\textbf{点击：动画-效果选项-系列-逐个，使 SmartArt 图形的每个形状逐个播放}。
+
+\hypertarget{ux5207ux6362ux9009ux9879ux5361}{%
+\section{``切换''选项卡}\label{ux5207ux6362ux9009ux9879ux5361}}
+
+幻灯片切换的出现方式和时间
+
+\hypertarget{ux653eux6620ux5e7bux706fux7247}{%
+\section{放映幻灯片}\label{ux653eux6620ux5e7bux706fux7247}}
+
+\begin{itemize}
+\tightlist
+\item
+  幻灯片放映-开始放映幻灯片-自定义幻灯片放映，可以自定义n种放映方案，以适应不同场合
+\item
+  可以另存为.ppsx格式，ppsx只能在幻灯片放映视图（而不是普通视图）中打开，并\textbf{可以在没有安装 PowerPoint 的计算机上播放}
+\end{itemize}
+
+\cleardoublepage
+
+\hypertarget{appendix-ux9644ux5f55}{%
+\appendix \addcontentsline{toc}{chapter}{\appendixname}}
+
+
+\hypertarget{chapter-shortcut}{%
+\chapter{系统快捷键}\label{chapter-shortcut}}
+
+\begin{longtable}[]{@{}ll@{}}
+\caption{\label{tab:sys-short} 系统快捷键}\tabularnewline
+\toprule
+\textbf{快捷键} & \textbf{功能}\tabularnewline
+\midrule
+\endfirsthead
+\toprule
+\textbf{快捷键} & \textbf{功能}\tabularnewline
+\midrule
+\endhead
+Windows + R & 运行命令行\tabularnewline
+Windows + E & 打开文件资源管理器\tabularnewline
+Windows + tab & 平铺所有程序\tabularnewline
+Windows + Up & 最大化窗口\tabularnewline
+Windows + Down & 窗口变小\tabularnewline
+Ctrl + Shift + N & 新建文件夹/RStudio中新建脚本文件\tabularnewline
+F2 & 重命名文件和文件夹\tabularnewline
+Alt + Up & 在资源管理器中查看文件夹上一级目录\tabularnewline
+Alt + Enter & 快速显示所选选项属性\tabularnewline
+\bottomrule
+\end{longtable}
+
+\begin{longtable}[]{@{}ll@{}}
+\caption{\label{tab:input-short} 输入法快捷键}\tabularnewline
+\toprule
+\textbf{功能} & \textbf{快捷键}\tabularnewline
+\midrule
+\endfirsthead
+\toprule
+\textbf{功能} & \textbf{快捷键}\tabularnewline
+\midrule
+\endhead
+日中英输入法切换 & Alt + Shift 或 Win + 空格\tabularnewline
+\textbf{MS日语输入法内} &\tabularnewline
+日语平假名-\textgreater 片假名 & ALT + CapsLock\tabularnewline
+日语片假名-\textgreater 平假名 & Ctrl + CapsLock\tabularnewline
+日英切换 & CapsLock + Shift 或 ALT + \textasciitilde{}\tabularnewline
+\textbf{输入后，有横线时（确认之前）} &\tabularnewline
+平假名 & F6\tabularnewline
+片假名 & F7\tabularnewline
+全角拉丁字母 & F9\tabularnewline
+半角拉丁字母 & F10\tabularnewline
+\bottomrule
+\end{longtable}
+
+\bibliography{bib/bib.bib}
+
+
+\backmatter
+\printindex
+
+\end{document}

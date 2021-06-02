@@ -1,0 +1,8 @@
+bookdown::epub_book: default
+bookdown::gitbook:
+  css: style/gitbook.css
+  config:
+    toc:
+      collapse: none
+      after: |
+        <li><a href="https://bookdown.org/baydap/bookdownplus/" target="blank">Supported by bookdownplus</a></li>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Categories on 万水千山</title>
+    <link>/categories/</link>
+    <description>Recent content in Categories on 万水千山</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 26 Nov 2020 00:00:00 +0000</lastBuildDate><atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>International Relation</title>
+      <link>/categories/international-relation/</link>
+      <pubDate>Thu, 26 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/international-relation/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>经济</title>
+      <link>/categories/%E7%BB%8F%E6%B5%8E/</link>
+      <pubDate>Thu, 26 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/%E7%BB%8F%E6%B5%8E/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ICT</title>
+      <link>/categories/ict/</link>
+      <pubDate>Fri, 30 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/ict/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>文史</title>
+      <link>/categories/%E6%96%87%E5%8F%B2/</link>
+      <pubDate>Mon, 04 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/%E6%96%87%E5%8F%B2/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>社会</title>
+      <link>/categories/%E7%A4%BE%E4%BC%9A/</link>
+      <pubDate>Sun, 27 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/%E7%A4%BE%E4%BC%9A/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>R</title>
+      <link>/categories/r/</link>
+      <pubDate>Fri, 11 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/r/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

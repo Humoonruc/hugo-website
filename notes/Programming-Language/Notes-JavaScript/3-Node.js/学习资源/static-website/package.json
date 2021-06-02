@@ -1,0 +1,14 @@
+{
+  "name": "302-static-website",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "mime": "^2.5.2"
+  }
+}

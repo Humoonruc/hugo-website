@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <title>R：科研与办公整体解决方案</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="黄 蒙" />
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <script src="libs/htmlwidgets/htmlwidgets.js"></script>
+    <script src="libs/jquery/jquery.min.js"></script>
+    <link href="libs/datatables-css/datatables-crosstalk.css" rel="stylesheet" />
+    <script src="libs/datatables-binding/datatables.js"></script>
+    <link href="libs/dt-core/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="libs/dt-core/css/jquery.dataTables.extra.css" rel="stylesheet" />
+    <script src="libs/dt-core/js/jquery.dataTables.min.js"></script>
+    <link href="libs/crosstalk/css/crosstalk.css" rel="stylesheet" />
+    <script src="libs/crosstalk/js/crosstalk.min.js"></script>
+    <link href="libs/leaflet/leaflet.css" rel="stylesheet" />
+    <script src="libs/leaflet/leaflet.js"></script>
+    <link href="libs/leafletfix/leafletfix.css" rel="stylesheet" />
+    <script src="libs/Proj4Leaflet/proj4-compressed.js"></script>
+    <script src="libs/Proj4Leaflet/proj4leaflet.js"></script>
+    <link href="libs/rstudio_leaflet/rstudio_leaflet.css" rel="stylesheet" />
+    <script src="libs/leaflet-binding/leaflet.js"></script>
+    <link rel="stylesheet" href="zh-CN.css" type="text/css" />
+    <link rel="stylesheet" href="extra.css" type="text/css" />
+    <link rel="stylesheet" href="https:\\cdnjs.cloudflare.com\ajax\libs\animate.css\3.7.0\animate.min.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# R：科研与办公整体解决方案
+### 黄 蒙
+### &amp;#9993; <a href="mailto:huangmeng@ucass.edu.cn" class="email">huangmeng@ucass.edu.cn</a>
+### 2020-05-22 @ GSCASS
+
+---
+
+
+
+
+
+class: inverse, center, middle
+
+# 工欲善其事，必先利其器
+
+# .right[——《论语·卫灵公》]
+
+---
+
+layout: false
+class: inverse, center, middle, animated, zoomIn
+
+# 数据采集
+
+---
+
+# 结构型数据：与数据库交互
+
+1. 建立个人数据库
+
+  - 保存数据的专业工具，数据库有利于知识积累和纵向比较
+  
+--
+
+  - 数据库的含义很广，包括数值数据库、文本数据库和参考文献数据库等
+  
+--
+
+- 尽量不在Excel中分析数据
+
+  - 过于灵活，易被修改
+  
+  - 结构性差，管理不便
+  
+  - 无法记录数据处理的全过程
+
+--
+
+- 有些收费数据库无法在R环境中直接访问，只能手动将数据导出为csv、xls、xlsx等格式，作为项目的数据源。即使是这种万不得已的情况，仍然要避免在excel中处理数据。同时，尽可能将原始数据导入个人数据库，以便在重复性研究中使用。
+
+???
+
+R对Office Access的支持不太好，可以考虑使用MySQL建立个人数据库——MySQL数据库同样有图形化操作界面。
+
+文本数据库如党和国家重要文献、国际组织报告、美国政策文件汇编等。尽量以自然段 + 层级信息的方式储存，便于后续处理和导出。  
+
+添加提示。提示不会直接显示在幻灯片中，而是在演讲者模式中才会出现（键盘上按 p 键）
+
+---
+# 非结构型数据：R爬虫&lt;sup&gt;1&lt;/sup&gt;
+
+- 抓取-&gt;清理-&gt;添加至个人数据库
+
+.center[&lt;img src="http://5b0988e595225.cdn.sohucs.com/images/20180926/84570a88c0b2462db0d306e355e087fb.jpeg" width="70%"/&gt;]
+
+.footnote[
+[1] 学名：基于R语言的自动数据收集。
+]
+
+---
+
+
+```r
+# 爬取一个月内的波罗的海干散货指数 
+'https://cn.investing.com/indices/baltic-dry-historical-data' %&gt;% 
+  read_html(encoding = 'UTF-8') %&gt;% html_node("table") %&gt;% 
+  html_table(header = T, fill = T) %&gt;% select(-6) %&gt;% 
+  DT::datatable(options = list(pageLength = 5), 
+            fillContainer = F, caption = 'BDI指数每日行情')
+```
+
+<div id="htmlwidget-7d64fe6123d80c136d5c" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-7d64fe6123d80c136d5c">{"x":{"filter":"none","caption":"<caption>BDI指数每日行情<\/caption>","fillContainer":false,"data":[["1"],["No results found..."],["No results found..."],["No results found..."],["No results found..."],["No results found..."],["No results found..."]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>日期<\/th>\n      <th>收盘<\/th>\n      <th>开盘<\/th>\n      <th>高<\/th>\n      <th>低<\/th>\n      <th>涨跌幅<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"order":[],"autoWidth":false,"orderClasses":false,"columnDefs":[{"orderable":false,"targets":0}],"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+
+???
+这个表是可交互的，只有基于网络技术的html格式的幻灯片可以做出可交互图表。
+
+---
+class: inverse, center, middle, animated, zoomIn
+
+# 数据分析
+
+---
+background-image: url(https://www.rstudio.com/wp-content/uploads/2014/04/magrittr-200x232.png)
+background-size: 150px
+background-position: 85% 70% 
+
+# 优雅的代码风格
+
+
+```r
+flights %&gt;% group_by(dest) %&gt;% # 分组
+  summarize(count = n(), dist = mean(distance, na.rm = TRUE),
+            delay = mean(arr_delay, na.rm = TRUE)) %&gt;% # 统计
+  filter(count &gt; 29, dest != "HNL") %&gt;% # 筛选观测
+  ggplot(aes(x = dist,y = delay)) + geom_smooth(method = 'lm') + 
+  geom_point(aes(size = count),alpha = 1/3) # 作图
+```
+
+&lt;img src="Figs/unnamed-chunk-2-1.png" width="70%" style="display: block; margin: auto auto auto 0;" /&gt;
+
+???
+
+用管道运算符写代码很清晰，每一行是一步操作
+
+优雅与否，不在于外观，而在于思维上的优化
+
+节省内存，不用定义变量
+
+---
+
+# 强大的统计和计量功能
+
+- 不忘初心，牢记使命
+
+```
+
+Call:
+lm(formula = dist ~ speed, data = cars)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+-29.07  -9.53  -2.27   9.21  43.20 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  -17.579      6.758   -2.60    0.012 *  
+speed          3.932      0.416    9.46  1.5e-12 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 15.4 on 48 degrees of freedom
+Multiple R-squared:  0.651,	Adjusted R-squared:  0.644 
+F-statistic: 89.6 on 1 and 48 DF,  p-value: 1.49e-12
+```
+
+--
+
+### 若论“短平快”，[**R是最值得学习的编程语言**](http://blog.fens.me/r-ideal/)
+
+???
+
+R的理念是关注问题本身，不深究算法的效率。换句话说，它能为你节约脑细胞，代价是不会节约内存空间和运算时间。这是由R的基因决定的，它不是程序员设计的语言。
+
+---
+# 模拟计算
+
+&lt;img src="Figs/plot2.png" width="95%" style="display: block; margin: auto;" /&gt;
+
+---
+# 机器学习 (Machine Learning)
+
+- 人工智能的核心
+
+- 虽然在理论解释上偏弱，但在实践应用中异常强大
+
+  - 不关注 `\(\hat\beta\)`，全力预测 `\(\hat Y\)`
+
+- 与 Econometrics 的关系不是竞争而是互补
+
+  - Varian, Hal R. "Big data: New tricks for econometrics." _Journal of Economic Perspectives_, 2014, 28(2): 3-28.
+  
+  - Mullainathan, Sendhil, and Jann Spiess. "Machine learning: an applied econometric approach." _Journal of Economic Perspectives_, 2017, 31(2): 87-106.
+
+  - Athey, Susan. "The impact of machine learning on economics." _The Economics of Artificial Intelligence: An Agenda_. University of Chicago Press, 2018.
+  
+---
+class: inverse, center, middle, animated, zoomIn
+
+# 可视化：R的核心竞争力之一
+
+---
+background-image: url(https://www.rstudio.com/wp-content/uploads/2014/04/ggplot2-200x232.png)
+background-size: 120px
+background-position: 80% 5% 
+
+
+# 完备的图形语法
+
+&amp;nbsp;
+
+&gt;     
+&gt; 可以将任何图形的内容精确地描述为(1)数据集(data)、(2)几何对象(geom_function)、(3)映射集合(aes)、(4)统计变换(stat)、(5)位置调整(position)、(6)坐标系(coordinate)和(7)刻面模式(facet)的一种组合。
+
+&gt; .right[—— Hadley Wickham]
+
+按照下述模板，可以构建你能够想象到的任何图形。
+
+```r
+* ggplot(data = &lt;DATA&gt;) +
+*   &lt;GEOM_FUNCTION&gt;(     
+*     mapping = aes(&lt;MAPPINGS&gt;), 
+*       stat = &lt;STAT&gt;, 
+*       position = &lt;POSITION&gt;) + 
+*     &lt;COORDINATE_FUNCTION&gt; + 
+*   &lt;FACET_FUNCTION&gt;
+```
+
+--
+
+### .center.red[**一套用图形反映数据的标准框架**]
+
+---
+
+# 图形内容与形式的分离
+
+--
+
+- 我们希望
+
+  - 探索、研究 vs 排版、展示，不同阶段关注重点不同
+  
+  - 图形的大小、颜色、字体、字号、线型等，形成统一风格
+
+--
+
+- 套用主题
+
+--
+
+.pull-left[
+&lt;img src="Figs/unnamed-chunk-5-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+.pull-right[
+&lt;img src="Figs/unnamed-chunk-6-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+# 自定义主题
+
+- 例：柱状图主题
+
+&lt;img src="Figs/EU_gdp.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+- 华尔街日报的色系：使用颜色表达情绪
+
+
+---
+# “图层”概念
+
+- 类似 Photoshop，可任意组合、无限叠加
+
+--
+  
+&lt;img src="Figs/plot3.png" width="70%" style="display: block; margin: auto;" /&gt;
+
+--
+
+- 常用的图形组合可通过自定义函数模板化：如
+
+  - 直方图 + 概率密度曲线
+  
+  - 散点图 + 拟合线 + 预测的置信区间
+
+---
+# 可交互图形
+
+
+```r
+library(leaflet)
+*leaflet() %&gt;% addTiles() %&gt;% setView(116.426, 39.908, zoom = 17)
+```
+
+<div id="htmlwidget-bfe8ee3e5221d174bce6" style="width:100%;height:345.6px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-bfe8ee3e5221d174bce6">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]}],"setView":[[39.908,116.426],17,[]]},"evals":[],"jsHooks":[]}</script>
+
+---
+exclude: false
+
+class: inverse, center, middle, animated, zoomIn
+
+# 报告呈现
+
+---
+
+background-image: url(https://www.rstudio.com/wp-content/uploads/2014/04/rmarkdown-200x232.png)
+background-size: 150px
+background-position: 92% 80% 
+
+# 本体：文本文件R Markdown
+
+--
+
+.pull-left[
+
+- 项目全要素打包
+
+  - 数据源
+
+  - 思路：注释
+
+  - 代码
+
+  - 数学公式&lt;sup&gt;1&lt;/sup&gt;
+
+  - 图表
+
+  - 分析和结论
+]
+
+--
+
+.pull-right[
+
+- 灵活选择导出内容
+
+- 灵活选择导出格式
+  
+  - docx
+  
+  - pdf
+  
+  - .red[**epub**]
+  
+  - markdown
+  
+  - html&lt;sup&gt;2&lt;/sup&gt;
+]
+
+.footnote[
+[1] 见下页。
+
+[2] 网页的功能极其强大，而且可以是可交互的，是未来展示与交流的发展方向。
+]
+
+---
+
+# Mathpix Snipping Tool
+
+.pull-left[
+
+* 只需要框选就能自动识别公式，并生成该公式的 `\(\LaTeX\)`代码——而 `\(\LaTeX\)`代码在R Markdown中是可以正确显示为公式的。
+
+* 抛弃 MathType, 输入复杂公式只需采取如下步骤：
+
+  1. 找到文献中类似公式 
+
+  2. Mathpix识别
+
+  3. 粘贴 `\(\LaTeX\)`代码至R Markdown
+  
+  4. 微调修改
+]
+
+.pull-right[
+
+.center[![](https://mathpix.com/images/snip-page/gif_2.gif)]
+
+.center[![](Figs/mathpix.png)]
+
+]
+---
+
+background-image: url(Figs/RMarkdown示例.png)
+background-size: contain
+background-position: 50% 80%
+
+class: inverse, center, top
+
+# 公式编号、交叉引用效果图
+
+---
+
+# 论文与书稿：Word
+
+--
+
+- 公式自动编号的老大难问题
+
+--
+
+- 参考文献的交叉引用和文末列表不能动态更新
+
+--
+
+- 图文混排时，图无法灵活浮动，经常导致页面出现大片空白
+
+--
+
+- 不同版本的兼容性问题
+
+--
+
+- 夹杂大量公式、交叉引用的长文档打开缓慢、易崩溃
+
+--
+
+### 哪怕你熟练掌握了样式、题注和交叉引用，Word 仍然意味着大量手动调格式的工作
+
+---
+
+# 论文与书稿： `\(\LaTeX\)`
+ 
+- 排版华丽
+
+- 格式语法太复杂，满屏斜杠("\\")反人类
+
+  - 学习曲线过于陡峭
+
+- 当你满怀热情教人用 `\(\LaTeX\)`的时候：
+
+--
+
+.center[![](https://slides.yihui.name/gif/latex-ignore.gif)]
+
+---
+
+background-image: url(http://bookdown.org/yihui/bookdown/images/logo.png)
+background-size: 200px
+background-position: 90% 50% 
+
+# 论文与书稿：bookdown
+
+Word与 `\(\LaTeX\)`的完美折衷：bookdown，不可挡！
+
+--
+
+- 自动编号，包括章节标题、图题、表题、公式
+  
+- 自动生成目录和图表目录
+
+- 交叉引用，包括图题、表题、公式序号、参考文献
+
+- 生成参考文献的动态列表
+
+- 生成动态索引
+
+--
+
+
+- 例：[bookdown官方手册](https://bookdown.org/yihui/bookdown/), [R文本文件的语法](https://humoon-website.netlify.com/notes/201905_r%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6%E7%9A%84%E8%AF%AD%E6%B3%95/_book/)
+
+--
+
+- 完美，强大，省心——真可谓：
+
+--
+
+### .center[.red[R环境一入深似海，从此Word是路人]]
+---
+
+class: inverse, center, middle, animated, zoomIn
+
+# 办公
+
+---
+background-image: url(https://cloud.githubusercontent.com/assets/163582/25060238/2975308c-215e-11e7-8afd-2e9200d7afe3.png)
+background-size: 200px
+background-position: 90% 40% 
+
+
+# 制作幻灯片：xaringan
+
+- 抛弃了Excel，扔掉了Word，连PowerPoint也要丢开吗？
+
+- html 格式的幻灯片才是未来发展的方向
+
+  - 多媒体
+  
+  - 可交互
+  
+  - 无需携带储存设备
+  
+  - 不用担心不同终端的兼容性问题
+  
+--
+
+- 在强限制下专注于内容
+
+  - xaringan 不如 PowerPoint 功能全面、形式多样，但这未尝不是一件好事
+
+  - 决策不管大小，都会消耗人的意志力；如果作者总在为调整形式而作决策，就不会有足够的动力撰写正文
+  
+---
+# 搭建小型网站：R blogdown
+
+&lt;img src="https://bookdown.org/yihui/blogdown/images/logo.png" width="30%" align="right" /&gt;
+
+- R blogdown + Hugo + Netlify平台&lt;sup&gt;1&lt;/sup&gt; = 免费个人网站。
+
+--
+
+  - 个人经验教训的记录
+  
+--
+
+  - 分享、交流知识与观点的平台
+  
+--
+
+  - 从此不必传输文件，发送网址（或二维码）即可，尤其是面向多人时
+
+--
+
+  - 例：[R blogdown示例网站](https://yihui.name/)
+      
+&lt;img src="Figs/网站二维码.png" width="20%" align="center" /&gt;
+
+.footnote[
+[1] Netlify 网站已被微信屏蔽，但在微信外可以打开。
+]
+
+---
+
+# 办公自动化
+
+- 批量处理文件
+  
+  - 生成大量格式统一的报表
+  
+  - 从大量文件中提取汇总信息
+
+--
+
+- 与 cmd 或 PowerShell 强强联手
+
+  - R可以通过代码直接调用cmd，也可以调用写有cmd命令的.bat批处理文件，实现不同程序之间的联动。例：.red[数据分析运行完毕后调用cmd运行Outlook自动发送结果至他人的邮箱，这在重复进行数据分析时尤其有用]
+  
+  - cmd也可以调用R，如通过计划任务定期自动运行R脚本。例：.red[自动定期从海关总署网站上 (1)爬取月度外贸数据; (2)存入个人数据库; (3)生成图表; (4)撰写格式固定的简单报告]
+  
+  - 没有做不到，只有想不到
+
+---
+
+# 开发交互式Web应用：Shiny
+
+- 接受定制，服务于他人需求&lt;img src="https://www.rstudio.com/wp-content/uploads/2014/04/shiny-200x232.png" width="30%" align="right" /&gt;
+
+- 傻瓜化操作，不需要使用者懂 R
+
+- 实时更新，不需要手动刷新浏览器
+
+- 不仅能看图表，还能上传文件、下载数据&lt;sup&gt;1&lt;/sup&gt;
+
+--
+
+- 例：
+  - [《三国志》系列人物数据查询系统](https://nathanpan.shinyapps.io/RoTC-Searching/)  
+  
+  - [中国月度贸易数据查询系统](https://humoon.shinyapps.io/China_trade/)
+
+.footnote[
+[1]就像各国统计局一样，允许你按照一定的查询条件下载数据。
+]
+
+---
+
+class: inverse, center, middle, animated, zoomIn
+
+# 总结
+
+---
+
+# What's R? 
+
+- An Open Access .red[**Environment/Ecosystem**] for Data Analysis
+
+--
+
+  - 从数据获取、分析挖掘到成果编纂、网络发布，R环境提供了一条龙式支持
+
+--
+
+  - 可以实现.red[**自动化报告与可重复研究**]
+  
+--
+
+.center[&lt;img src="Figs/一条龙.png"/&gt;]
+
+???
+自动化报告的例子：回归-参数-模型-应用，全部要手动
+
+可重复研究的例子：更新数据-重跑一边；给别人跑
+
+---
+
+# R: 新世界大门的钥匙
+
+--
+
+.pull-left[
+## 使用R前
+
+.center[![](https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1558605491465&amp;di=c777dec460b8be4c85c014f9fff2d73b&amp;imgtype=0&amp;src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20171005%2Fe09a35e01b7643ba8ee7302fe2e83d42.gif)]
+]
+
+--
+
+.pull-right[
+## 使用R后
+
+.center[![](https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1558604332371&amp;di=3ea0c0f3189262f347bcfecd7295ab12&amp;imgtype=0&amp;src=http%3A%2F%2F51xiao.com%2Fupload%2Fimages%2F2018%2F5%2F363128932.gif)]
+
+]
+
+---
+
+background-image: url(https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1558810596866&amp;di=5d827520860e34ff72167c3c7151b876&amp;imgtype=0&amp;src=http%3A%2F%2Fp.showyu.com%2Fuploads%2F20180402%2F15226371469589.jpg)
+background-size: 1350px
+background-position: 70% 50%
+
+
+class: inverse, center, middle, animated, fadeIn
+
+# **拒绝繁琐 解放创意**
+# **通过 R 拥抱新时代**
+
+
+.center[&lt;audio src="bgm/走进新时代.mp3"
+controls="controls" name="media" 
+&lt;/audio&gt;]
+
+---
+
+class: inverse, center, middle, animated, zoomIn
+
+# 那么，为何R还没有被推广？
+
+---
+
+# Office办公套件的优缺点
+
+--
+
+### 图形化界面
+
+- 优点：学习成本低，不用记命令
+
+- 缺点：无法记录和保留动作痕迹
+
+--
+
+### 所见即所得
+
+- 所见是否所得？反映了思维方式的不同：
+
+  - 新手用笔画图，老手用方程“画”图——内容先于形式，得其神而忘其形
+  
+--
+
+- 无论画图还是写作，都应该将内容和形式分开，依次进行。Office让人很难.red[**在思考内容时忽略形式**]，这会极大地干扰思路、降低效率。
+
+---
+
+# Office办公套件的优缺点
+
+### 所有元素封装为一个文件
+
+- 一个程序、一个文件包含文本、数据、图表，解决从内容到格式的一切，便于传输和共享
+
+- 会形成数据源、图表的n个副本，无法动态更新，不符合数据库的管理思想
+
+- R环境正相反：相互调用的文件体系，便于实现动态更新，但传输和共享比较复杂，需要更多地结合个人网站、云服务来简化
+
+--
+
+### .red[上手简单、共享方便，使Office成为商业标准]
+
+---
+
+# R环境&lt;sup&gt;1&lt;/sup&gt;的优势
+
+- 项目管理
+
+  - 数据源唯一，通过代码来引用
+
+--
+
+- 动态报告与可重复研究
+
+--
+
+- 写作-渲染，两阶段分开
+
+  - 写作阶段以纯文本文件为载体 
+
+      - 形式朴素，使作者专注于内容
+  
+      - 易读取，复制粘贴稳定，没有格式问题
+
+--
+
+### .red[R环境更适合追求工作效率的专业人士]
+
+--
+
+.footnote[
+[1] 这一套上下链条全覆盖的R环境是逐渐形成的，最近一两年刚刚取得了决定性的突破，还在不断完善中。
+]
+---
+# 未来
+
+- 5G + AI = 万物互联
+
+  - 传输速度加快，自然语言式交互&lt;sup&gt;1&lt;/sup&gt;，终端 I/O&lt;sup&gt;2&lt;/sup&gt; 化
+  
+--
+
+  - 有可能形成数据储存、计算过程、多样化输出全部在云上，个人仅在终端编写和提交脚本文件的写作模式
+
+--
+
+  - 如果人工智能取得突破，甚至可以通过口述来实现想要的编辑效果
+
+--
+
+- 研究与办公的效率将进一步提高
+
+.footnote[
+[1]自然语言可以被识别、翻译为程序指令，编程门槛将大大降低。
+
+[2]Input-Output，终端将大大“瘦身”，只包含输入和输出功能。
+]
+
+---
+class: center, bottom
+
+--
+
+# **Reference**
+
+--
+
+### Robert I. Kabacoff, .red[__*R in Action*__]
+
+--
+
+### Hadley Wickham, .red[__*R for Data Science*__]
+
+--
+
+### Yihui Xie, .red[__*R Markdown: The Definitive Guide*__]
+
+--
+
+### 赵鹏, .red[__*学R：零基础学习R语言*__]
+
+--
+
+### 李东风, .red[__*R语言教程*__]
+
+--
+
+### 赵鹏个人网站：[__*openr*__](https://openr.pzhao.org/)
+
+---
+background-image: url(Figs/幻灯片二维码.png)
+background-size: 400px
+background-position: 50% 25%
+
+class: bottom
+
+- 幻灯片网址: https://humoon-website.netlify.com/slides/201905_r课程总结/user_slides
+
+- 幻灯片制作官方教程: https://slides.yihui.name/xaringan/zh-CN.html
+
+- 源代码下载：https://humoon-website.netlify.com/slides/201905_r课程总结/user_slides.Rmd
+
+---
+background-image: url(https://cran.r-project.org/Rlogo.svg)
+background-size: 300px
+background-position: 75% 50%
+
+class: inverse, middle, animated, zoomInDown
+  
+# **Working with**
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function(time) {
+  var d2 = function(number) {
+    return ('0' + number).slice(-2); // left-pad 0 to minutes/seconds
+  },
+
+  time_format = function(total) {
+    var secs = Math.abs(total) / 1000;
+    var h = Math.floor(secs / 3600);
+    var m = Math.floor(secs % 3600 / 60);
+    var s = Math.round(secs % 60);
+    var res = d2(m) + ':' + d2(s);
+    if (h > 0) res = h + ':' + res;
+    return res;  // [hh:]mm:ss
+  },
+
+  slide_number_div = function(i) {
+    return document.getElementsByClassName('remark-slide-number').item(i);
+  },
+
+  current_page_number = function(i) {
+    return slide_number_div(i).firstChild.textContent;  // text "i / N"
+  };
+
+  var timer = document.createElement('span'); timer.id = 'slide-time-left';
+  var time_left = time, k = slideshow.getCurrentSlideIndex(),
+      last_page_number = current_page_number(k);
+
+  setInterval(function() {
+    time_left = time_left - 1000;
+    timer.innerHTML = ' ' + time_format(time_left);
+    if (time_left < 0) timer.style.color = 'red';
+  }, 1000);
+
+  slide_number_div(k).appendChild(timer);
+
+  slideshow.on('showSlide', function(slide) {
+    var i = slide.getSlideIndex(), n = current_page_number(i);
+    // reset timer when a new slide is shown and the page number is changed
+    if (last_page_number !== n) {
+      time_left = time; last_page_number = n;
+      timer.innerHTML = ' ' + time_format(time); timer.style.color = null;
+    }
+    slide_number_div(i).appendChild(timer);
+  });
+})(120000);
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

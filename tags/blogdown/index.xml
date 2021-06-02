@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>blogdown on 万水千山</title>
+    <link>/tags/blogdown/</link>
+    <description>Recent content in blogdown on 万水千山</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 09 Sep 2019 00:00:00 +0000</lastBuildDate><atom:link href="/tags/blogdown/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>blogdown语法</title>
+      <link>/blog/blogdown%E8%AF%AD%E6%B3%95/</link>
+      <pubDate>Mon, 09 Sep 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/blogdown%E8%AF%AD%E6%B3%95/</guid>
+      <description>Step 1 安装# install.packages(&amp;quot;blogdown&amp;quot;)# blogdown::install_hugo() Step 2 初始化打开 Rstudio-&amp;gt;File-&amp;gt;New Project-&amp;gt;New Directory
+选择 Website using blogdown 创建一个项目
+或使用代码：
+# blogdown::new_site(theme = &amp;quot;yihui/hugo-lithium&amp;quot;)# blogdown::new_site(theme = &amp;#39;imzeuk/hugo-theme-zozo&amp;#39;)Step 3 编辑和编译# 添加新文章# blogdown:::new_post_addin()# 编译，生成新博客# blogdown::serve_site()Step 4 部署 (deploy)打开 GitHub Desktop，选择 Add existing repository，将 blogdown 所创建的网站项目添加到 GitHub Desktop 中，然后 Push 到自己的 GitHub 网页上。
+登陆 Netlify 网站，选择 New site from Git，一步步选择刚刚 Push 到 GitHub上的项目。Build Command 填 “hugo” 或不填，Publish directory 填 “Public”，然后部署即可，Netlify 会为用户分配一个可以自定义的免费域名。</description>
+    </item>
+    
+  </channel>
+</rss>

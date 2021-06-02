@@ -1,0 +1,255 @@
+---
+title: "R的语法特性"
+subtitle: ''
+author: "Humoon"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    df_print: paged
+    fig_caption: yes
+    theme: united
+    highlight: haddock
+    number_sections: yes
+    toc: yes
+    toc_depth: 3
+    toc_float:
+      collapsed: true
+      smooth_scroll: FALSE
+  rticles::ctex:
+    df_print: default
+    fig_caption: yes
+    number_sections: false
+  word_document:
+    fig_caption: yes
+    toc: yes
+    toc_depth: 3
+    reference_docx: 
+  pdf_document:
+    toc: yes
+    toc_depth: '2'
+documentclass: ctexart
+classoption: hyperref,
+---
+
+```{r setup, include = FALSE}
+## global options
+knitr::opts_chunk$set(
+  fig.width = 7, fig.asp = 0.618,
+  out.width = "90%", fig.align = "center",
+  fig.path = 'Figures/', fig.show = "hold",
+  warn = 1, warning = FALSE, message = FALSE,
+  echo = TRUE, comment = '#', collapse = F,
+  cache = T, cache.comments = F,
+  autodep = TRUE
+)
+
+## use necessary packages
+library('pacman')
+p_load(
+  # data processing
+  tidyverse, lubridate, data.table,
+  # visualization
+  ggthemes, showtext, gridExtra,
+  # 可交互表格 DT::datatable()
+  DT,
+  # I/O 
+  sqldf,
+  # web crawler
+  XML, rvest, httr, reticulate
+  )
+
+## database engine
+options(sqldf.driver = "SQLite")
+
+## plotting
+# 包含图的代码块需要fig.showtext = TRUE选项
+showtext_auto(enable = TRUE)
+# ggplot2图形需要在主题中显式指定中文字体才能正常显示图中的中文
+windowsFonts(YaHei = windowsFont("Microsoft YaHei"))
+# pdf中图形内部的中文字体设置
+pdf.options(family = "GB1")
+
+## 自定义图形主题
+# common template
+mytheme <- theme_economist_white() +
+  theme(
+    text = element_text(family = 'YaHei'),
+    plot.title = element_text(face = 'bold', size = 14),
+    plot.subtitle = element_text(size = 12),
+    plot.caption = element_text(
+      hjust = 0,
+      size = 10,
+      margin = margin(2, 0, 0, 0, 'pt')
+    ),
+    plot.margin = margin(12, 10, 12, 0, 'pt'),
+    legend.position = 'top',
+    legend.justification = 'left',
+    legend.margin = margin(4, 0, 0, 0, 'pt'),
+    legend.key.size = unit(1, 'lines'),
+    legend.title = element_text(size = 12),
+    legend.text = element_text(size = 10, margin = margin(0, 0, 0, 0, 'pt')),
+    axis.text = element_text(size = 10, margin = margin(2, 0, 2, 0, 'pt')),
+    axis.ticks.length = unit(-4, 'pt')
+  )
+# histogram template
+theme_bar <- theme_economist_white() +
+  theme(
+    text = element_text(family = 'YaHei'),
+    plot.title = element_text(face = 'bold', size = 14),
+    plot.subtitle = element_text(size = 12),
+    plot.caption = element_text(
+      hjust = 0,
+      size = 10,
+      margin = margin(0, 0, 0, 0, 'pt')
+    ),
+    plot.margin = margin(12, 0, 12, 10, 'pt'),
+    legend.position = 'top',
+    legend.justification = 'left',
+    legend.margin = margin(4, 0, 0, 0, 'pt'),
+    legend.key.size = unit(0.7, 'lines'),
+    legend.title = element_blank(),
+    legend.text = element_text(size = 10, margin = margin(0, 8, 0, 4, 'pt')),
+    axis.text = element_text(size = 10),
+    axis.ticks.length = unit(0, 'pt') # 不要坐标轴须
+  )
+```
+
+
+# R的内部机制
+
+## 惰性求值
+
+在函数调用时，参数的值只有被实际用到时才会被执行。这样可以避免不必要的计算，节省时间。
+
+```{r}
+test0 <- function(x, y) {
+  if (x > 0)
+    x
+  else
+    y
+}
+
+# 生成大量随机数的耗时
+system.time(rnorm(10000000))
+
+# 惰性求值，第二个参数并未执行
+system.time(test0(1, rnorm(10000000)))
+```
+## 复制-修改机制
+
+若多个变量指向同一个对象，或一个对象作为参数传递给函数，当修改这个对象时，便会生成该对象的一个副本，然后修改这个副本。
+
+## 词法作用域
+
+函数优先在内部搜索用到的变量，搜索不到时，就到上一级作用域搜索。
+
+## 环境
+
+词法作用域的机理通过环境实现。
+
+每加载一个扩展包，这个包的环境都会插入搜索路径，并位于全局环境之前。
+
+
+# 函数式编程
+
+## 闭包 closure
+
+函数内部定义的函数
+
+```{r}
+addn <- function(y) {
+  function(x) {
+    return(x + y)
+  }
+}
+addn
+```
+
+addn()返回一个闭包，此闭包计算x+y的值，其中x是闭包本身的参数，y是闭包所在环境中的参数。
+
+因此，addn()并不是一个计算器，而是一个产生计算器的计算器工厂。
+
+```{r}
+add1 <- addn(1)
+add2 <- addn(2)
+add1 
+environment(add1)$y
+# add1的输出结果除了函数表达式，还包含了环境
+# 这表明add1不在当前环境（全局环境）中
+add2
+environment(add2)$y
+add1(1:10)
+add2(1:10)
+```
+
+### 创建专用函数
+
+```{r}
+# 自定义绘图模板
+color_line <- function(col){
+  function(...){
+    plot(..., type = "l", lty = 1, col = col)
+  }
+}
+red_line <- color_line("red")
+red_line(rnorm(30), main = "Red line plot")
+```
+
+```{r}
+# 极大似然估计
+# 传递数据，返回包含待估参数的闭包
+nloglik <- function(x) {
+  n <- length(x)
+  function(mean, sd) {
+    log(2 * pi) * n / 2 + n * log(sd) + sum((x - mean) ^ 2) / (2 * sd ^ 2)
+  }
+}
+data <- rnorm(10000, 1, 2)
+fit <-
+  stats4::mle(
+    nloglik(data),
+    start = list(mean = 0, sd = 1),
+    method = "L-BFGS-B",
+    lower = c(-5, 0.01),
+    upper = c(5, 10)
+  )
+fit@coef
+hist(data, freq = F, ylim = c(0, 0.25))
+```
+
+## 高阶函数
+
+参数中包含函数。
+
+使代码可读性更高，有助于抽象层级的分离，便于调试。
+
+```{r}
+add <- function(x, y, z) {
+  x + y + z
+}
+product <- function(x, y, z) {
+  x * y * z
+}
+combine <- function(f, x, y, z) {
+  f(x, y, z)
+}
+
+combine(add, 3, 4, 5)
+combine(product, 3, 4, 5)
+```
+
+lapply实现的伪代码（实际是用C语言实现的）：
+```
+lapply <- function(x, f, ...){
+  result <- list()
+  for (i in seq_along(x)) {
+    result[[i]] <- f(x[i], ...)
+  }
+}
+```
+
+```{r}
+lapply(1:3, `+`, 3) 
+lapply(1:3, addn(3)) # 传入一个闭包作为参数
+```
+

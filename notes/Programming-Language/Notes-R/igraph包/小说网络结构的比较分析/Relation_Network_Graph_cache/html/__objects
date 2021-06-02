@@ -1,0 +1,4 @@
+unnamed-chunk-1	detect_matrix	if_in_para	replace_name	replace_over	result	roles	roles_name	roles_title	total
+unnamed-chunk-2	count_n	count_name	count_words	p1	role_freq
+unnamed-chunk-3	i	intimate	intimate_matrix	j	most_intimate	n
+unnamed-chunk-4	cfg	graph	graph_tg	i	j	main_role	mainrole_intimate_matrix	p2	relations	role_freq	temp	title_tg	.Random.seed

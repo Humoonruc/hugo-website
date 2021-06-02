@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>web应用 on 万水千山</title>
+    <link>/tags/web%E5%BA%94%E7%94%A8/</link>
+    <description>Recent content in web应用 on 万水千山</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 09 Sep 2019 00:00:00 +0000</lastBuildDate><atom:link href="/tags/web%E5%BA%94%E7%94%A8/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Shiny 语法</title>
+      <link>/blog/shiny-%E8%AF%AD%E6%B3%95/</link>
+      <pubDate>Mon, 09 Sep 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/shiny-%E8%AF%AD%E6%B3%95/</guid>
+      <description>Lesson 1 Welcome to Shiny1 创建一个 Shiny App 的过程：新建一个项目文件夹，每一个app都要有一个单独的文件夹。在文件夹中新建app.R，注意这个文件名是不能改动的。app.R包含四个部分：（1）library(shiny)；（2）ui1 对象，设定界面的布局和外观；（3）server对象，在后台进行数据处理；（4）shinyApp(ui = ui, server = server)创建应用在R中通过runApp(&#34;app文件夹目录&#34;)2 来启动应用；runApp(&#34;app文件夹目录&#34;, display.mode = &#34;showcase&#34;)可以在应用底部显示源代码。2 官方示例library(shiny)runExample(&amp;quot;01_hello&amp;quot;) # a histogramrunExample(&amp;quot;02_text&amp;quot;) # tables and data framesrunExample(&amp;quot;03_reactivity&amp;quot;) # a reactive expressionrunExample(&amp;quot;04_mpg&amp;quot;) # global variablesrunExample(&amp;quot;05_sliders&amp;quot;) # slider barsrunExample(&amp;quot;06_tabsets&amp;quot;) # tabbed panelsrunExample(&amp;quot;07_widgets&amp;quot;) # help text and submit buttonsrunExample(&amp;quot;08_html&amp;quot;) # Shiny app built from HTMLrunExample(&amp;quot;09_upload&amp;quot;) # file upload wizardrunExample(&amp;quot;10_download&amp;quot;) # file download wizardrunExample(&amp;quot;11_timer&amp;quot;) # an automated timerLesson 2 Build a user interface1 ui的基本布局ui &amp;lt;- fluidPage( # 流动页面titlePanel(&amp;quot;title Panel&amp;quot;), # 标题栏sidebarLayout( # 边栏布局sidebarPanel(&amp;quot;sidebar&amp;quot;), # 边栏（一般是输入）mainPanel(&amp;quot;main panler&amp;quot;) # 主体部分（一般是输出）))2 ui的内容在每一个子区域中，用“,”分隔多个内容</description>
+    </item>
+    
+  </channel>
+</rss>

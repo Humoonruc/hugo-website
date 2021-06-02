@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>排版 on 万水千山</title>
+    <link>/tags/%E6%8E%92%E7%89%88/</link>
+    <description>Recent content in 排版 on 万水千山</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 09 Sep 2019 00:00:00 +0000</lastBuildDate><atom:link href="/tags/%E6%8E%92%E7%89%88/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>R文本文件的语法</title>
+      <link>/blog/r%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6%E7%9A%84%E8%AF%AD%E6%B3%95/</link>
+      <pubDate>Mon, 09 Sep 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/r%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6%E7%9A%84%E8%AF%AD%E6%B3%95/</guid>
+      <description>网页版电子书
+源代码</description>
+    </item>
+    
+    <item>
+      <title>tufte样式（含侧边栏）语法</title>
+      <link>/blog/tufte%E6%A0%B7%E5%BC%8F-%E5%90%AB%E4%BE%A7%E8%BE%B9%E6%A0%8F-%E8%AF%AD%E6%B3%95/</link>
+      <pubDate>Mon, 09 Sep 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/tufte%E6%A0%B7%E5%BC%8F-%E5%90%AB%E4%BE%A7%E8%BE%B9%E6%A0%8F-%E8%AF%AD%E6%B3%95/</guid>
+      <description>一、使用新建R Markdown文件 - from template - tufte包之Tufte Handout
+二、语法1 标题建议最多两层
+2 任意边栏内容放在```{marginfigure} ```格式的中间
+3 注释脚注形如^[]，自动转换为带编号的边栏附注。
+不带编号的边栏附注需要用tufte包中的margin_note()在行内代码中生成。格式如：
+反引号 r margin_note(“无编号边栏附注。”) 反引号
+4 参考文献html输出中：YAML元数据中设置link-citations: yes，则参考文献出现在边栏；YAML元数据中设置link-citations: no，则参考文献出现在末尾。
+pdf输出中，参考文献都在末尾。
+5 引文&amp;gt;生成的引文，可以在最后用行内代码加quote_footer()函数注明引文来源，例如：
+&amp;gt; &amp;quot;多亏了我的律师，要不然我现在还在牢里。两个人一起挖确实比一个人快很多啊。&amp;quot;&amp;gt;&amp;gt; 反引号 r quote_footer(&amp;#39;--- Joe Martin&amp;#39;) 反引号6 图(1) 边栏图使用knitr代码段选项fig.margin = TRUE即可将图放置在边栏中。
+添加选项fig.cap = &#34;xxx&#34;、fig.width=3.5、fig.height=3.5可以设定图的标题和长宽。
+(2) 全宽插图代码段选项fig.fullwidth = TRUE可以使得一幅图占用全部页宽
+(3) 主栏插图默认情况下，R代码段生成的图形放置在主栏里，但其标题放在边栏中。</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,30 @@
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.11.11)  15 JAN 2021 20:12
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**EK_tufte.tex
+(./EK_tufte.tex
+LaTeX2e <2020-10-01> patch level 2
+L3 programming layer <2020-10-27> xparse <2020-03-03>
+
+! LaTeX Error: File `tufte-handout.cls' not found.
+
+Type X to quit or <RETURN> to proceed,
+or enter new name. (Default extension: cls)
+
+Enter file name: 
+! Emergency stop.
+<read *> 
+         
+l.2 ^^M
+        
+Here is how much of TeX's memory you used:
+ 19 strings out of 479393
+ 356 string characters out of 5877705
+ 270354 words of memory out of 5000000
+ 19516 multiletter control sequences out of 15000+600000
+ 535088 words of font info for 29 fonts, out of 8000000 for 9000
+ 14 hyphenation exceptions out of 8191
+ 32i,0n,39p,75b,13s stack positions out of 5000i,500n,10000p,200000b,80000s
+
+No pages of output.

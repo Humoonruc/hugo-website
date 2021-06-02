@@ -1,0 +1,38 @@
+
+# (APPENDIX) 附录 {-}
+
+# 系统快捷键 {#chapter-shortcut}
+ 
+Table: (\#tab:sys-short) 系统快捷键
+
+**快捷键**|**功能**
+----------|---------
+Windows + R|运行命令行
+Windows + E|打开文件资源管理器
+Windows + tab|平铺所有程序
+Windows + Up|最大化窗口
+Windows + Down|窗口变小
+Ctrl + Shift + N|新建文件夹/RStudio中新建脚本文件
+F2|重命名文件和文件夹
+Alt + Up|在资源管理器中查看文件夹上一级目录
+Alt + Enter|快速显示所选选项属性
+
+
+Table: (\#tab:input-short) 输入法快捷键
+
+**功能**|**快捷键**
+----------|--------
+日中英输入法切换|Alt + Shift 或 Win + 空格
+**MS日语输入法内**|
+日语平假名->片假名|ALT + CapsLock
+日语片假名->平假名|Ctrl + CapsLock
+日英切换|CapsLock + Shift 或 ALT + ~
+**输入后，有横线时（确认之前）**|
+平假名|F6
+片假名|F7
+全角拉丁字母|F9
+半角拉丁字母|F10
+
+
+
+`r if (knitr::is_html_output()) '# 参考文献 {-}'`

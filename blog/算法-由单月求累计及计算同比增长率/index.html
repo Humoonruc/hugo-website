@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>由单月求累计及计算同比增长率 - 万水千山</title>
+    <meta property="og:title" content="由单月求累计及计算同比增长率 - 万水千山">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+      
+    
+
+    
+      
+      <meta property="description" content="现有一个月度贸易数据框，名为total，各列为 year, month, export, import, trade surplus
+[&amp;hellip;] # 对于单个变量而言，增加一列累计值的代码如下sqldf(&amp;quot;SELECT *, SUM(export) OVER (PARTITION BY year ORDER BY month) AS acc_exportFROM &amp;hellip;">
+      <meta property="og:description" content="现有一个月度贸易数据框，名为total，各列为 year, month, export, import, trade surplus
+[&amp;hellip;] # 对于单个变量而言，增加一列累计值的代码如下sqldf(&amp;quot;SELECT *, SUM(export) OVER (PARTITION BY year ORDER BY month) AS acc_exportFROM &amp;hellip;">
+      
+    
+
+    
+    
+
+    
+
+    
+    
+
+
+<link href='//cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+
+  
+  <body class="blog">
+    <header class="masthead">
+      <h1><a href="/">万水千山</a></h1>
+
+<p class="tagline">From Mountain to Ocean.</p>
+
+      <nav class="menu">
+  <input id="menu-check" type="checkbox" />
+  <label id="menu-label" for="menu-check" class="unselectable">
+    <span class="icon close-icon">✕</span>
+    <span class="icon open-icon">☰</span>
+    <span class="text">Menu</span>
+  </label>
+  <ul>
+  
+  
+  <li><a href="/">Home·主页</a></li>
+  
+  <li><a href="/resume/">Resume·简历</a></li>
+  
+  <li><a href="/slide/">Slide·展示</a></li>
+  
+  <li><a href="/application/">Application·应用</a></li>
+  
+  <li><a href="/ebook/">Fiction·小说</a></li>
+  
+  <li><a href="/blog/">Blog·博客</a></li>
+  
+  <li><a href="/academics/">Academics·学术</a></li>
+  
+  <li><a href="/categories/">Categories·类别</a></li>
+  
+  <li><a href="/tags/">Tags·标签</a></li>
+  
+  <li><a href="/about/">About·关于</a></li>
+  
+  
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>由单月求累计及计算同比增长率</h1>
+
+<h3>Humoon
+  /  2019-08-30</h3>
+<hr>
+
+
+      </header>
+
+
+
+
+
+
+<p>现有一个月度贸易数据框，名为total，各列为 year, month, export, import, trade surplus</p>
+<div id="section" class="section level2">
+<h2>1 由单月值求累计值</h2>
+<div id="sqldf--sql-" class="section level3">
+<h3>(1) 使用sqldf() 和 SQL 语句</h3>
+<pre class="r"><code># 对于单个变量而言，增加一列累计值的代码如下
+sqldf(
+&quot;SELECT *, SUM(export) OVER (PARTITION BY year ORDER BY month) AS acc_export
+FROM total&quot;)
+
+# 对于多个要累计的变量，便需要合并查询字符串。在此基础上封装代码，追求通用性。
+joint &lt;- function(string){
+  str_c(&#39;SUM(&#39;, string, &#39;) OVER (PARTITION BY year ORDER BY month) AS acc_&#39;, string)
+}
+
+add_acc &lt;- function(df){
+  vars &lt;- colnames(df %&gt;% select(-(year:month))) # 要用到的变量名
+  string_acc &lt;- joint(vars) %&gt;% str_c(collapse = &#39;, &#39;) # joint(vars)使用了向量化运算
+  df_name &lt;- deparse(substitute(df)) # 解析任一对象的名字为字符串
+  query &lt;- str_c(&#39;SELECT *, &#39;, string_acc, &#39; FROM &#39;, df_name) # 组建SQL查询字符串
+  sqldf(query) %&gt;% return()
+}
+
+total_sql &lt;- add_acc(total)</code></pre>
+</div>
+<div id="r--cumsum-" class="section level3">
+<h3>(2) 使用 R 基本包内置的 cumsum() 函数</h3>
+<pre class="r"><code>total_cumsum &lt;- total %&gt;% arrange(year, month) %&gt;% group_by(year) %&gt;% 
+  mutate(acc_ex = cumsum(export), acc_im = cumsum(import),
+         acc_tra = cumsum(trade), acc_sur = cumsum(surplus)) %&gt;% 
+  ungroup()</code></pre>
+<p>不难发现，当表中所含列比较少时，用 group_by() + cumsum() 比较方便；而当表的列很多时，就会变得很繁琐，还是 sqldf() + SQL 语句的扩展性更强。</p>
+</div>
+</div>
+<div id="section-1" class="section level2">
+<h2>2 由累计值求单月值</h2>
+<pre class="r"><code># 自定义求单月值的差分函数
+dif_mon &lt;- function(acc) {
+  c(acc[1], diff(acc)) %&gt;% return()
+}
+
+total_month &lt;- total_cumsum %&gt;% arrange(year, month) %&gt;% group_by(year) %&gt;% 
+  mutate(export = dif_mon(acc_ex), import = dif_mon(acc_im),
+         trade = dif_mon(acc_tra), surplus = dif_mon(acc_sur)) %&gt;% 
+  ungroup()</code></pre>
+</div>
+<div id="section-2" class="section level2">
+<h2>3 求同比增长率</h2>
+<div id="section-3" class="section level3">
+<h3>(1) 使用差分法</h3>
+<p>这种方法高度依赖数据的完整性，1年12个月不能有任何缺失，故此方法其实是不可靠的。</p>
+<pre class="r"><code># 自定义同比增长率函数，a为时间序列, n为一个大周期的阶段数
+growth &lt;- function(a, n) {
+  Fai &lt;- rep(NA, n)
+  b &lt;- c(Fai, diff(a,n))
+  round(100*b/(a - b), 2) %&gt;% return()
+}
+
+# apply()函数族或map()函数族
+# 下面四种写法的结果一样，即使返回list，也可以一步转化为数据框
+temp &lt;- total_cumsum[,-(1:2)] %&gt;% apply(2, growth, 12) %&gt;% as.data.frame()
+temp &lt;- total_cumsum[,-(1:2)] %&gt;% sapply(growth, 12) %&gt;% as.data.frame()
+temp &lt;- total_cumsum[,-(1:2)] %&gt;% map_dfc(growth, 12)
+temp &lt;- total_cumsum[,-(1:2)] %&gt;% map(growth,12) %&gt;% as.data.frame()
+
+# growth前面的参数是可变的，后面的参数是不变的, n = 12
+colnames(temp) &lt;- str_c(&quot;g_&quot;, colnames(total_cumsum)[-(1:2)]) # 向量化运算
+total_g &lt;- cbind(total_cumsum, temp)</code></pre>
+</div>
+<div id="sqldf--sql--1" class="section level3">
+<h3>(2) 使用sqldf() 和 SQL 语句</h3>
+<p>对数据框total中的单个变量而言，求同比增长率的查询语句如下</p>
+<pre><code>SELECT a.*, 100*(a.export/b.export-1) AS g_export
+FROM total AS a LEFT OUTER JOIN total AS b
+  ON a.year = b.year + 1 AND a.month = b.month;</code></pre>
+<p>在此基础上封装代码，追求通用性。</p>
+<pre class="r"><code>## 辅助字符串函数，参数为求同比的关键词
+joint &lt;- function(string){
+    str_c(&#39;100*(a.&#39;, string, &#39;/b.&#39;, string, &#39;-1) AS g_&#39;, string) %&gt;% return()
+}
+
+## 求同比函数，输入输出均为一个数据框，输入中没有同比列，输出中补全同比列
+add_g &lt;- function(df){
+  vars &lt;- colnames(df %&gt;% select(-(year:month)))
+  string_g &lt;- joint(vars) %&gt;% str_c(collapse = &#39;, &#39;) 
+  df_name &lt;- deparse(substitute(df))
+  query &lt;- str_c(
+    &#39;SELECT a.*,&#39;, string_g, 
+    &#39; FROM &#39;, df_name, &#39; AS a LEFT OUTER JOIN &#39;, df_name, 
+    &#39; AS b ON a.year = b.year + 1 AND a.month = b.month&#39;)
+  sqldf(query) %&gt;% return()
+}
+
+total_g &lt;- add_g(total_cumsum)</code></pre>
+</div>
+</div>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/blog/%E8%84%82%E6%B1%87%E6%9C%AC%E7%BA%A2%E6%A5%BC%E6%A2%A6%E6%B3%A8%E8%A7%A3-tufte%E7%BD%91%E9%A1%B5%E7%89%88/">《脂汇本红楼梦注解》tufte网页版</a></span>
+  <span class="nav-next"><a href="/blog/tufte%E6%A0%B7%E5%BC%8F-%E5%90%AB%E4%BE%A7%E8%BE%B9%E6%A0%8F-%E8%AF%AD%E6%B3%95/">tufte样式（含侧边栏）语法</a> &rarr;</span>
+</nav>
+
+
+
+
+
+<script src="//yihui.name/js/math-code.js"></script>
+<script async src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+
+  
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/tex.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+  
+  <hr>
+  <div class="copyright">© 2019-2021 黄蒙 <a href="mailto:humoonruc@126.com">humoonruc@126.com</a></div>
+  
+  </footer>
+  </article>
+  
+  </body>
+</html>
+

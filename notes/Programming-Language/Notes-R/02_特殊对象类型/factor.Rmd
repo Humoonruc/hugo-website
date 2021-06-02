@@ -1,0 +1,215 @@
+---
+title: "Factor"
+subtitle: ''
+author: "Humoon"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    df_print: paged
+    fig_caption: yes
+    theme: united
+    highlight: haddock
+    number_sections: yes
+    toc: yes
+    toc_depth: 3
+    toc_float:
+      collapsed: true
+      smooth_scroll: FALSE
+  rticles::ctex:
+    df_print: default
+    fig_caption: yes
+    number_sections: false
+  word_document:
+    fig_caption: yes
+    toc: yes
+    toc_depth: 3
+    reference_docx: 
+  pdf_document:
+    toc: yes
+    toc_depth: '2'
+documentclass: ctexart
+classoption: hyperref,
+---
+
+
+```{r setup, include = FALSE}
+## global options
+knitr::opts_chunk$set(
+  fig.width = 6, fig.asp = 0.618,
+  out.width = "80%", fig.align = "center",
+  fig.path = 'Figures/', fig.show = "hold",
+  warn = 1, warning = FALSE, message = FALSE, echo = TRUE, 
+  comment = '', collapse = F, 
+  cache = T, cache.comments = F, autodep = TRUE
+  )
+
+
+## use necessary packages
+library('pacman')
+p_load(tidyverse, lubridate, data.table, magrittr, # 数据整理
+       ggthemes, showtext, gridExtra, igraph, ggraph, # 可视化
+       sqldf, DT, # I/O
+       jiebaR, wordcloud2, webshot, htmlwidgets, tidytext # 文本分析
+       )
+options(sqldf.driver = "SQLite") 
+```
+
+
+# 原生 R 环境处理 factor
+
+## R 中储存 factor 的步骤
+
+1. 建立 levels 与整数的映射关系
+2. 按照映射关系，将 factor 转换为整数向量存储
+
+## levels 的排序
+
+1. 默认按字母顺序排序
+```{r}
+(class = factor(c("Poor", "Improved", "Excellent"), ordered = T))
+```
+
+2. 通过 levels 参数人工设定因子型数据各水平的顺序
+```{r}
+(class = factor(c("Poor", "Improved", "Excellent"), ordered = T,
+              levels = c("Poor", "Improved", "Excellent")))
+```
+
+3. 与 levels 出现的顺序保持一致
+
+在创建因子时，将水平设置为unique(x)；或者在创建因子后再对其使用fct_inorder()函数，需要forcats包（包含在tidyverse全家桶中）。
+```{r}
+x <- c("A", "T", "T", 'A', 'C', 'K')
+y <- factor(x, levels = unique(x));y
+x %>% factor() %>% fct_inorder()
+```
+
+
+# 使用forcats处理factor
+
+想要以非字母表顺序显示字符向量时，就需要用到因子。forcats 包中含有大量处理因子的函数。
+
+从历史上看，因子远比字符串更容易处理。因此，R 基础包中的很多函数都自动将字符串转换为因子。这意味着因子经常出现在并不真正适合它们的地方。好在不用担心tidyverse 中会出现这种问题，可以将注意力集中于因子能够真正发挥作用的问题。
+
+```{r}
+library(forcats)
+```
+
+
+## 创建因子
+
+要想创建一个因子，必须先创建有效水平的一个列表，这个列表是有顺序的：
+```{r}
+month_levels <- c("Jan", "Feb", "Mar", "Apr", "May", "Jun",
+"Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
+```
+
+### 排序问题
+```{r}
+## 非因子遵循字母表排序
+x1 <- c("Dec", "Apr", "Jan", "Mar")
+x1
+sort(x1) 
+
+
+## 因子：预先声明排序
+y1 <- factor(x1, levels = month_levels)
+y1
+sort(y1) 
+
+
+## 因子：字母表排序
+y2 <- factor(x1) # 如果省略了定义水平的这个步骤直接创建因子
+y2
+sort(y2) # 会按字母顺序排序并作为水平
+
+
+## 因子：以初始数据的顺序作为默认排序
+# 令levels参数为unique(x)
+y3 <- factor(x1, levels = unique(x1)) 
+y3 
+sort(y3) 
+
+# 或在创建因子后使用fct_inorder()函数
+y4 <- factor(x1) %>% fct_inorder()
+y4
+sort(y4)
+```
+
+### 输入错误问题
+```{r}
+x2 <- c("Dec", "Apr", "Jam", "Mar")
+y5 <- factor(x2, levels = month_levels)
+y5 # 不再水平范围内的值自动转换为NA
+```
+
+### 查看水平：levels()
+```{r}
+levels(y1)
+levels(y2)
+levels(y3)
+```
+
+## 例：综合社会调查
+
+```{r}
+forcats::gss_cat %>% head(n = 5)
+
+## 查看因子水平
+gss_cat %>% count(race) # count()函数
+ggplot(gss_cat, aes(race)) + 
+  geom_bar() # 条形图，不显示记数为0的水平
+ggplot(gss_cat, aes(race)) + geom_bar() + 
+  scale_x_discrete(drop = FALSE) # 显示记数为0的水平
+```
+
+## 修改因子的水平
+
+修改水平不仅可以使得图形标签更美观清晰，以满足出版发行的要求，还可以将水平汇集成更高层次的显示。
+
+修改水平最常用、最强大的工具是 fct_recode() 函数，它可以对每个水平进行修改或重新编码。fct_recode() 会让没有明确提及的水平保持原样，如果不小心修改了一个不存在的水平，那么它也会给出警告。
+
+```{r}
+gss_cat %>% count(partyid)
+
+gss_cat %>% 
+  mutate(partyid = fct_recode(partyid,
+    "Republican, strong" = "Strong republican",
+    "Republican, weak" = "Not str republican",
+    "Independent, near rep" = "Ind,near rep",
+    "Independent, near dem" = "Ind,near dem",
+    "Democrat, weak" = "Not str democrat",
+    "Democrat, strong" = "Strong democrat"
+  )) %>%
+  count(partyid)
+```
+
+可以将多个原水平赋给同一个新水平，这样就可以合并原来的分类：
+```{r}
+gss_cat %>% 
+  mutate(partyid = fct_recode(partyid,
+    "Republican, strong" = "Strong republican",
+    "Republican, weak" = "Not str republican",
+    "Independent, near rep" = "Ind,near rep",
+    "Independent, near dem" = "Ind,near dem",
+    "Democrat, weak" = "Not str democrat",
+    "Democrat, strong" = "Strong democrat",
+    "Other" = "No answer",
+    "Other" = "Don't know",
+    "Other" = "Other party"
+  )) %>% 
+  count(partyid)
+```
+
+也可以使用 fct_recode() 函数的变体 fct_collapse() 函数。对于每个新水平，你都可以提供一个包含原水平的向量：
+
+```{r}
+gss_cat %>%
+  mutate(partyid = fct_collapse(partyid,
+    other = c("No answer", "Don't know", "Other party"),
+    rep = c("Strong republican", "Not str republican"),
+    ind = c("Ind,near rep", "Independent", "Ind,near dem"),
+    dem = c("Not str democrat", "Strong democrat")
+  )) %>% 
+  count(partyid)
+```

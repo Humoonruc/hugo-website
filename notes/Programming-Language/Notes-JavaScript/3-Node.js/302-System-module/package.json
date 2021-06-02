@@ -1,0 +1,15 @@
+{
+  "name": "301-node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "get-request.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "bl": "^5.0.0"
+  }
+}

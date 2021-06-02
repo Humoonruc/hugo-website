@@ -1,0 +1,734 @@
+---
+title: "Character String"
+subtitle: 'stringr package'
+author: "Humoon"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    df_print: paged
+    fig_caption: yes
+    fig_height: 4.5
+    fig_width: 6
+    theme: united
+    highlight: haddock
+    number_sections: yes
+    toc: yes
+    toc_depth: 3
+    toc_float:
+      collapsed: true
+      smooth_scroll: FALSE
+  rticles::ctex:
+    df_print: default
+    fig_caption: yes
+    number_sections: false
+  word_document:
+    fig_caption: yes
+    toc: yes
+    toc_depth: 3
+    reference_docx: 
+  pdf_document:
+    toc: yes
+    toc_depth: '2'
+documentclass: ctexart
+classoption: hyperref,
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(fig.width = 6, fig.height=4.5, 
+                      fig.path='Figs/', warning=FALSE, 
+                      message=FALSE, cache = T, 
+                      cache.comments = T, comment = '#>')
+# 输出结果每行以"#>"开头，是为了复制粘贴代码时，结果自动被理解为注释从而不必运行
+
+# load necessary packages
+library('tidyverse')
+library('reshape2')
+library('nycflights13')
+library('stringr')
+```
+
+**字符串函数一般都是向量化的，对输入的字符串向量的每个元素进行操作**。
+
+# 字符串基础
+
+## readLines()
+
+1.  在R中读入一个文本文件可以用`readLines()`函数，它返回一个字符型向量，文件中每一行都是向量中对应的一个元素。这个文件可以是本地文件，也可以是一个网址。
+
+```{r}
+xie = readLines("https://yihui.name")  # 我的主页
+head(xie)  # HTML代码
+```
+
+2.  `readline()`支持从键盘直接输入一行文本，显然，R必须在交互式模式下运行，否则人没法输入任何东西。它有一个常用的地方，就是在代码运行过程中要求用户输入一些回答，例如：
+
+```{r, eval=FALSE}
+x = readline("Answer yes or no: ")
+```
+
+当R运行到这一行时会停下来等待用户输入（回车表示输入结束），然后根据输入的结果，代码可以接着执行。
+
+3.  在Windows系统中，`readLines()`读utf-8编码的txt文件会导致乱码，只能顺利读取ANSI编码的txt文件。
+
+## writeLines()
+
+1.  注意，字符串的打印形式与其本身的内容不是相同的，因为打印形式中会显示出转义字符。**如果想要查看字符串的真正内容，可以使用`writeLines()`**
+
+> writeLines(text, con = stdout(), sep = "\n", useBytes = FALSE)
+
+2.  Windows系统中`writeLines()`写入txt文件会导致乱码，替代方案是用`writeBin(charToRaw(string), file)`写入文件
+
+## 字符串包含引文时引号的使用
+
+若一个字符串包含引文，为了符合行文习惯(双引号)，并使代码引号有层次的区别，外层应用单引号。
+
+```{r quote, results='hold'}
+# string1 <- 'When putting a 'quote' inside a string, use single quotation marks.'
+# string1 <- "When putting a "quote" inside a string, use double quotation marks."
+string3 <- "When putting a 'quote' inside a string, use single quotation marks inside and double quotation marks outside."
+string4 <- 'When putting a "quote" inside a string, use double quotation marks inside and single quotation marks outside.'
+
+# 字符串的打印形式
+string3
+string4
+```
+
+```{r, results='hold'}
+# 字符串编译后导出的形式
+writeLines(string3)
+writeLines(string4)
+```
+
+string1和string2有语法错误，前后两个字符串中间夹了一个编译器不认识的quote。
+
+string3和string4在语法上没问题，但编译时效果不同。string4才是我们想要的。
+
+## 转义符号"\\"
+
+反斜杠"\\"可以将R语言及R Markdown的语法部件转义为字符。\
+如果想要在字符串中包含一个单引号或双引号，可以使用"\\'"和"\\""对其进行转义。
+
+```{r, results='hold'}
+string5 <- 'I don\'t know why they called us "Chinese".'
+string6 <- "When putting a \"quote\" inside a string, you can use backslash as well."
+writeLines(string5)
+writeLines(string6)
+```
+
+如果想要在字符串中包含一个反斜杠，就需要使用两个反斜杠："\\\\"
+
+```{r, results='hold'}
+string7 <- "I think the backslash \"\\\" is amazing!"
+print(string7) # 或 string7 
+writeLines(string7)
+```
+
+## 特殊字符
+
+其他几种特殊字符。最常用的是换行符"\\n"、制表符"\\t"和退格"\\b"，你可以使用 ?'"' 或 ?"'" 调出帮助文件来查看完整的特殊字符列表。
+
+```{r, results='hold'}
+string8 <- 'The special characters "\n", "\t" and "\b" are very interesing.'
+string9 <- "The special characters \"\\n\", \"\\t\" and \"\\b\" are very interesing."
+writeLines(string8)
+writeLines(string9)
+```
+
+生成的html文件中"\\b"变成了一个奇怪的方框，控制台显示的则是正确的。可能R Markdown与R语言中"\\b"的含义不同。
+
+## C-style 的字符串格式化
+
+### base::sprintf()
+
+`sprintf(包含占位符的字符串，欲填充的字符串)`
+
+| **占位符**      |                                                                                                  |
+|-----------------|--------------------------------------------------------------------------------------------------|
+| \%              | 如果要在占位符内部使用%，需要写成%%                                                              |
+| **转换符**      | **类型**                                                                                         |
+| d               | 十进制整数                                                                                       |
+| o               | 八进制整数                                                                                       |
+| x, X            | 小/大写十六进制整数                                                                              |
+| f               | 十进制浮点数                                                                                     |
+| e, E            | 科学计数法表示的数，e小写或大写                                                                  |
+| g, G            | 智能选择使用浮点数还是科学计数法（g对应e，G对应E），默认显示6位有效数字                          |
+| s               | 字符串                                                                                           |
+| **浮点数格式**  |                                                                                                  |
+| width.precision | 输出的最小宽度（不足以空格补齐）.输出精度（对f和e/E意味着小数点后几位，对g/G意味着有效数字位数） |
+| \-              | 指定左对齐（默认右对齐），即宽度不足时从右边补充空格                                             |
+| \+              | 永远带符号（默认只有负数带一个负号，正数不带符号）                                               |
+| 空格            | 首字符并非负号时，空一格                                                                         |
+| 0               | 宽度不足时补0，而非默认的空格                                                                    |
+
+```{r}
+sprintf("The ratio is %d%%", 10)
+
+
+sprintf("%f", pi) # 浮点数
+sprintf("%.3f", pi) # 保留小数点后3位
+sprintf("%.0f", pi) # 保留小数点后0位
+sprintf("%5.1f", pi) # 最小宽度为5，保留小数点后1位，不足补空格
+sprintf("%05.1f", pi) # 用0补齐
+sprintf("%+f", pi) # 永远带符号
+sprintf("% f", pi)
+sprintf("%-10f", pi) # 左对齐，宽度为10
+sprintf("%e", pi)
+sprintf("%E", pi)
+sprintf("%g", pi)
+sprintf("%g",   1e6 * pi) 
+sprintf("%.9g", 1e6 * pi) 
+sprintf("%.2g", 23.75) 
+
+sprintf("min 10-char string '%10s'",
+        c("a", "ABC", "and an even longer one"))
+```
+
+### 借助 python
+
+加入 python 代码块，使用 python 中的字符串格式化方法 .format()
+
+`模板字符串.format(以逗号分隔的填充参数序列)`
+
+其中，`{}`为模板中的槽，槽内部定义每个槽的格式化样式，形如：
+
+`id:[fill][align][sign][width][,][.precision][type]`
+
++------------+-----------------------------------------------------------------------------------------------+
+| 类别       | 含义                                                                                          |
++============+===============================================================================================+
+| fill       | 宽度不足时填充的字符                                                                          |
++------------+-----------------------------------------------------------------------------------------------+
+| align      | 对齐方式. `<` 左对齐；`>` 右对齐；`=` 内容右对齐，符号放置在填充字符（如"0"）的左侧；`^` 居中 |
++------------+-----------------------------------------------------------------------------------------------+
+| sign       | `+` 正数加`+`，负数加`-`                                                                      |
+|            |                                                                                               |
+|            | 空格，正数加空格，负数加`-`                                                                   |
++------------+-----------------------------------------------------------------------------------------------+
+| ,          | 为数字添加千位分隔符                                                                          |
++------------+-----------------------------------------------------------------------------------------------+
+| width      | 输出的最小宽度（不足以 fill 补齐）                                                            |
++------------+-----------------------------------------------------------------------------------------------+
+| .precision | 小数点后保留精度                                                                              |
++------------+-----------------------------------------------------------------------------------------------+
+| type       | 格式化类型                                                                                    |
++------------+-----------------------------------------------------------------------------------------------+
+|            | s 字符串（不指定type时默认）                                                                  |
++------------+-----------------------------------------------------------------------------------------------+
+|            | d 十进制整数                                                                                  |
++------------+-----------------------------------------------------------------------------------------------+
+|            | o 八进制整数                                                                                  |
++------------+-----------------------------------------------------------------------------------------------+
+|            | x, X 小/大写十六进制整数                                                                      |
++------------+-----------------------------------------------------------------------------------------------+
+|            | f 十进制浮点数                                                                                |
++------------+-----------------------------------------------------------------------------------------------+
+|            | e, E 科学计数法表示的数，e小写或大写                                                          |
++------------+-----------------------------------------------------------------------------------------------+
+|            | g, G 智能选择使用浮点数还是科学计数法（g对应e，G对应E），默认显示6位有效数字                  |
++------------+-----------------------------------------------------------------------------------------------+
+|            | \% 百分比，默认显示小数点后6位                                                                |
++------------+-----------------------------------------------------------------------------------------------+
+|            | b 二进制整数                                                                                  |
++------------+-----------------------------------------------------------------------------------------------+
+|            | c 10进制整数转换为 Unicode 字符                                                               |
++------------+-----------------------------------------------------------------------------------------------+
+
+这种方法的缺点在于，输出宽度、精度等参数必须是确定的常数，而不能是变量。因此当这些数值必须取变量时，仍要使用`.rjust()`、`.ljust()`和`.center()`方法。
+
+示例：
+
+```{python}
+str1 = "{0:=^20}".format("Python") 
+str1 # 用 '=' 填充，居中对齐，槽宽度为20
+
+str2 = "{:=^20}".format("Python") 
+str2 # 参数索引0可以省略
+
+str3 = "{:*>20}".format("BIT") 
+str3 # 用 '*' 填充，右对齐，槽宽度为20
+
+str4 = "{:10}".format("BIT")
+str4 # 默认左对齐，空格填充
+
+str5 = "{:,.2f}".format(12345.6789)
+str5 # 使用千位分隔符，保留两位小数的浮点型
+
+str6 = "{0:b}, {0:c}, {0:d}, {0:o}, {0:x}, {0:X}".format(426)
+str6 # 一个参数填到所有槽中，分别转换为：二进制，Unicode 编码，十进制，八进制，十六进制，大写的十六进制
+
+str7 = "{0:.2e}, {0:.2E}, {0:.2f}, {0:.2%}".format(3.14)
+str7 # 分别转换为：科学记数法，大写科学记数法，浮点数，百分数
+
+str8  = "I am {:s}, age {:d}, money {:.2f}".format("seven", 18, 88888.1)
+str8 # 槽与填充参数的顺序恰好对应时，也可以省略参数索引
+```
+
+# stringr包函数
+
+## 分类
+
+**字符串拼接函数**
+
+-   str_c: 字符串拼接。\
+-   str_trim: 去掉字符串的空格和TAB(\\t)\
+-   str_pad: 补充字符串的长度\
+-   str_squish：删除字符串中多于1个的空格
+-   str_dup: 复制字符串\
+-   str_sub: 字符串切片
+-   str_sub\<- 字符串切片，并赋值，同str_sub
+
+**字符串计算函数**
+
+-   str_count: 字符串计数\
+-   str_length: 字符串长度，同`nchar()`\
+-   str_sort: 字符串值排序\
+-   str_order: 字符串索引排序，规则同str_sort
+
+**字符串匹配函数**
+
+-   str_split: 字符串分割
+-   str_split_fixed: 字符串分割，同str_split
+-   str_subset: 返回匹配的字符串
+-   word: 从文本中提取单词
+-   str_detect: 检查匹配字符串的字符
+-   str_match: 从字符串中提取匹配组。
+-   str_match_all: 从字符串中提取匹配组，同str_match
+-   str_replace: 字符串替换
+-   str_replace_all: 字符串替换，同str_replace
+-   str_replace_na: 把NA替换为字符串"NA"
+-   str_remove：删除匹配的字符串
+-   str_remove_all：删除所有匹配的字符
+-   str_locate: 找到匹配的字符串的位置。
+-   str_locate_all: 找到匹配的字符串的位置,同str_locate
+-   str_extract: 从字符串中提取匹配字符
+-   str_extract_all: 从字符串中提取匹配字符，同str_extract
+
+**字符串格式化**
+
+-   str_glue：{}占位符，同javascript的`${}`
+-   str_wrap: 控制长字符串输出排版
+-   str_conv: 字符编码转换
+-   str_to_upper: 字符串转成大写
+-   str_to_lower: 字符串转成小写,规则同str_to_upper
+-   str_to_title: 字符串转成首字母大写,规则同str_to_upper
+-   str_to_sentence: 只有一句的首字母大写
+
+**参数控制函数，仅用于构造功能的参数，不能独立使用。**
+
+-   boundary: 定义使用边界
+-   coll: 定义字符串标准排序规则。
+-   fixed: 定义用于匹配的字符，包括正则表达式中的转义符
+-   regex: 定义正则表达式
+
+## `str_length()` 字符串长度
+
+使用 RStudio，那么通用前缀 str\_ 会特别有用，因为输入 str\_ 后会触发自动完成功能，你可以看到所有的字符串函数：
+
+```{r}
+str_length(c("a", "R for data science")) 
+str_length(c("a", "R for data science")) %>% sum()
+```
+
+## `str_c()` 字符串组合
+
+> str_c(..., sep = "", collapse = NULL)
+
+合并若干个字符串或字符向量的对应元素，默认无间隔符
+
+```{r}
+# 向量化操作，自动循环短向量
+str_c("prefix-", c("a", "b", "c"), "-suffix")
+```
+
+```{r}
+# 合并一个字符向量的各元素为一个长字符串，使用参数collapse =
+str_c(c("x", "y", "z"), collapse = "+")
+```
+
+> str_replace_na(string, replacement = "NA")
+
+```{r}
+x <- c("abc", NA)
+str_c("|-", x, "-|")
+# 默认将na转化为字符串"NA"
+str_c("|-", str_replace_na(x), "-|")
+```
+
+## `str_trim()` 去掉字符串首尾的空格和制表符(\\t)
+
+> str_trim(string, side = c("both", "left", "right"))
+
+side: 过滤方式，both两边都过滤，left左边过滤，right右边过滤
+
+## `str_pad()` 补充字符串的长度
+
+> str_pad(string, width, side = c("left", "right", "both"), pad = " ")
+
+width: 字符串填充后的长度\
+side: 填充方向，both两边都填充，left左边填充，right右边填充\
+pad: 用于填充的字符
+
+## `str_dup()` 复制字符串
+
+> str_dup(string, times)
+
+times: 复制次数
+
+```{r}
+val <- c("abca4", 123, "cba2")
+
+# 复制2次
+str_dup(val, 2)
+
+# 按位置复制
+str_dup(val, 1:3)
+```
+
+## `str_wrap()` 控制长字符串输出排版
+
+> str_wrap(string, width = 80, indent = 0, exdent = 0)
+
+width: 设置一行所占的宽度。\
+indent: 段落首行的缩进值\
+exdent: 段落非首行的缩进值
+
+```{r}
+txt <- 'R语言作为统计学一门语言，一直在小众领域闪耀着光芒。直到大数据的爆发，R语言变成了一门炙手可热的数据分析的利器。随着越来越多的工程背景的人的加入，R语言的社区在迅速扩大成长。现在已不仅仅是统计领域，教育，银行，电商，互联网….都在使用R语言。'
+
+# 设置宽度为40个字符
+cat(str_wrap(txt, width = 40), "\n")
+
+# 设置宽度为60字符，首行缩进4字符
+cat(str_wrap(txt, width = 60, indent = 4), "\n")
+
+# 设置宽度为10字符，非首行缩进4字符
+cat(str_wrap(txt, width = 10, exdent = 4), "\n")
+
+```
+
+## `str_split()` 拆分字符串
+
+> str_split(string, pattern, n = Inf) str_split_fixed(string, pattern, n)
+
+pattern: 匹配的字符。\
+n: 分割个数
+
+```{r}
+val <- "abc,123,234,iuuu"
+
+# 以,进行分割
+s1 <- str_split(val, ","); s1
+
+# 以,进行分割，且只保留2块
+s2 <- str_split(val, ",",2); s2
+
+# 查看str_split()函数操作的结果类型list
+class(s1)
+
+# 用str_split_fixed()函数分割，结果类型是matrix
+s3 <- str_split_fixed(val, ",",2); s3
+class(s3)
+
+
+fruits <- c("apples and oranges and pears and bananas", 
+            "pineapples and mangos and guavas")
+str_split(fruits, " and ")
+
+
+gpl = readLines(file.path(R.home(), "COPYING"))
+words = unlist(strsplit(gpl, "\\W")) # \\W 意为非单词字符
+words = words[words != ""]  # 去掉空字符
+tail(sort(table(tolower(words))), 10) # 频数最大的10个单词
+```
+
+## `str_sub()` 字符串取子集
+
+> str_sub(string, start = 1L, end = -1L)
+
+> str_sub(string, start = 1L, end = -1L) \<- value
+
+两个参数分别为始末位置，符号代表从后往前数第多少个字符
+
+```{r}
+txt <- "I am Conan."
+
+# 分2段截取字符串
+str_sub(txt, c(1, 4), c(6, 8))
+
+# 通过负坐标截取字符串
+str_sub(txt, -3)
+str_sub(txt, end = -3)
+
+# 赋值
+x <- c("Apple", "Banana", "Pear")
+# str_sub()对x向量化操作；str_to_lower全部转换为小写字母
+str_sub(x, 1, 1) <- str_to_lower(str_sub(x, 1, 1))
+x
+```
+
+## `str_to_*()` 大小写函数族
+
+> str_to_upper(string, locale = "") str_to_lower(string, locale = "") str_to_title(string, locale = "")
+
+locale:按哪种语言习惯排序
+
+```{r}
+dog <- "Look the quick brown dog!"
+str_to_upper(dog) # 转换为全大写字母
+str_to_lower(dog) # 转换为全小写字母
+str_to_title(dog) # 单词首字母大写
+str_to_sentence("look the quick brown dog!") # 全句首字母大写
+```
+
+## `str_count()` 字符串计数
+
+> str_count(string, pattern = "")
+
+```{r}
+# 注意正则表达式的特殊字符
+str_count(c("a.", ".", ".a.", NA), ".")
+
+# 用fixed匹配字符
+str_count(c("a.", ".", ".a.",NA), fixed("."))
+
+# 用\\匹配字符
+str_count(c("a.", ".", ".a.",NA), "\\.")
+```
+
+## `str_sort()` 字符串排序
+
+> str_sort(x, decreasing = FALSE, na_last = TRUE, locale = "", ...) str_order(x, decreasing = FALSE, na_last = TRUE, locale = "", ...)
+
+x: 字符串，字符串向量。 decreasing: 排序方向。 na_last: NA值的存放位置，一共3个值，TRUE放到最后，FALSE放到最前，NA过滤处理 locale: 按哪种语言习惯排序
+
+```{r}
+# 按ASCII字母排序
+str_sort(c('a',1,2,'11'), locale = "en")  
+
+# 倒序排序
+str_sort(letters,decreasing = TRUE)         
+
+# 按拼音排序
+str_sort(c('你','好','粉','丝','日','志'), locale = "zh")  
+```
+
+对NA的排序处理：
+
+```{r}
+# 把NA放最后面
+str_sort(c(NA,'1',NA),na_last = TRUE) 
+
+# 把NA放最前面
+str_sort(c(NA,'1',NA),na_last = FALSE) 
+
+# 去掉NA值 
+str_sort(c(NA,'1',NA),na_last = NA)    
+```
+
+## `str_detect()` 检测是否匹配，返回T/F
+
+```{r}
+val <- c("abca4", 123, "cba2")
+
+# 检查字符串向量，是否包括a
+str_detect(val, "a")
+
+# 检查字符串向量，是否以a为开头
+str_detect(val, "^a")
+
+
+# 检查字符串向量，是否以a为结尾
+str_detect(val, "a$")
+```
+
+## `str_subset()` 返回成功匹配的字符串
+
+```{r}
+val <- c("abc", 123, "cba")
+
+# 全文匹配
+str_subset(val, "a")
+
+
+# 开头匹配
+str_subset(val, "^a")
+
+
+# 结尾匹配
+str_subset(val, "a$")
+```
+
+## `str_match()` 从字符串中提取匹配组
+
+该函数主要与正则表达式配合使用
+
+> str_match(string, pattern) str_match_all(string, pattern) 从字符串中提取匹配组，以字符串matrix格式返回
+
+```{r}
+val <- c("abc", 123, "cba")
+
+# 匹配字符a，并返回对应的字符
+str_match(val, "a")
+
+# 匹配字符0-9，限1个，并返回对应的字符
+str_match(val, "[0-9]")
+
+# 匹配字符0-9，不限数量，并返回对应的字符
+str_match(val, "[0-9]*")
+
+# 返回matrix
+str_match_all(val, "a")
+str_match_all(val, "[0-9]")
+```
+
+## `word()` 从文本中提取单词（以单词为单位看待字符串）
+
+> word(string, start = 1L, end = start, sep = fixed(" "))
+
+start: 从第几个词开始。 end: 到第几个词结束。 sep: 分词间隔字符，默认为空格。
+
+```{r}
+val <- c("I am Conan.", "http://fens.me, ok")
+
+# 默认以空格分割，取第一个位置的字符串
+word(val, 1)
+word(val, -1)
+word(val, 2, -1)
+
+# 以,分割，取第一个位置的字符串 
+val <- '111,222,333,444'
+word(val, 1, sep = fixed(','))
+word(val, 3, sep = fixed(','))
+```
+
+## `str_replace()` 字符串替换
+
+> str_replace(string, pattern, replacement) str_replace_all(string, pattern, replacement) str_replace_na(string, replacement = "NA"), 将NA（默认）替换为'NA'
+
+```{r}
+val <- c("abc", 123, "cba")
+
+# 把目标字符串第一个出现的a或b，替换为-
+str_replace(val, "[ab]", "-")
+
+# 把目标字符串所有出现的a或b，替换为-
+str_replace_all(val, "[ab]", "-")
+
+# 把目标字符串所有出现的a，替换为被转义的字符
+str_replace_all(val, "[a]", "\1\1")
+```
+
+## `str_locate()` 找到模式在字符串中的始末位置
+
+> str_locate(string, pattern) str_locate_all(string, pattern)
+
+```{r}
+val <- c("abca", 123, "cba")
+
+# 匹配a在字符串中的位置
+str_locate(val, "a")
+
+# 用向量匹配
+str_locate(val, c("a", 12, "b"))
+
+# 以字符串matrix格式返回
+str_locate_all(val, "a")
+
+# 匹配a或b字符，以字符串matrix格式返回
+str_locate_all(val, "[ab]")
+```
+
+## `str_extract()` 从字符串中提取匹配模式
+
+> str_extract(string, pattern) str_extract_all(string, pattern, simplify = FALSE)
+
+simplify: 返回值，TRUE返回matrix，FALSE返回字符串向量
+
+```{r}
+val <- c("abca4", 123, "cba2")
+
+# 返回匹配的数字
+str_extract(val, "\\d")
+
+# 返回匹配的字符
+str_extract(val, "[a-z]+")
+
+val <- c("abca4", 123, "cba2")
+str_extract_all(val, "\\d")
+
+str_extract_all(val, "[a-z]+")
+```
+
+## `str_conv` 字符编码转换
+
+> str_conv(string, encoding)
+
+```{r}
+# 把中文字符字节化
+x <- charToRaw('你好');x
+
+# 默认win系统字符集为GBK，GB2312为GBK字集，转码正常
+str_conv(x, "GBK")
+str_conv(x, "GB2312")
+
+# 转UTF-8失败
+str_conv(x, "UTF-8")
+
+# 把unicode转UTF-8
+x1 <- "\u5317\u4eac"
+str_conv(x1, "UTF-8")
+```
+
+# 基本包中的字符串处理函数
+
+## 字符替换
+
+字符替换函数 chartr(old, new, x)
+
+```{r chartr}
+chartr(old = "a", new = "c", x = "a123")
+# 注意，old和new参数可以都是字符串，一一对应的字符进行任意次数的替换
+chartr("Tt", "Uu", "AtGCtttACC")
+```
+
+## 字符串分割
+
+字符串分割函数 strsplit(x, split, fixed = FALSE)
+
+```{r strsplit}
+# fixed=F, 第2个参数为正则表达式。'.'可匹配除“\n”和"\r"之外的任何单个字符。
+splited <- unlist(strsplit("a.b.c", ".")); splited
+# fixed=T，第2个参数为文本字符串
+splited <- unlist(strsplit("a.b.c", ".", fixed = T)); splited
+```
+
+## 字符串匹配
+
+字符串匹配函数 grep(pattern, x, fixed=FALSE)和grepl()
+
+```{r grep}
+cstr <- c("b","A","c",'a.a')
+# fixed=T，第1个参数为文本字符串
+grep(".",cstr,fixed=TRUE)
+# fixed=F，第1个参数为正则表达式
+grep(".",cstr,fixed=F)
+# grep仅返回匹配项的下标；而grepl返回逻辑向量表示有没有找到匹配
+grepl(".",cstr,fixed=TRUE)
+# 用于提取子集是一样的
+cstr[grep(".",cstr,fixed=TRUE)]
+cstr[grepl(".",cstr,fixed=TRUE)]
+```
+
+## 字符串替换
+
+字符串替换函数 sub(pattern, replacement, x, fixed=FALSE)
+
+```{r sub}
+# fixed=F, 第1个参数为正则表达式，'\\s'表示空白
+sub("\\s", ".", "Hello There")
+# fixed=T, 第1个参数为文本字符串，在'Hello There'中找不到'\\s'
+sub("\\s", ".", "Hello There", fixed = T)
+# sub()与gsub()的区别，替换一次和替换任意次（只要匹配成功）
+sub("e", "E", "Hello There", fixed = T)
+gsub("e", "E", "Hello There", fixed = T)
+```

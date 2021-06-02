@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Canvas</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas class="myCanvas">
+    <!-- 不明确指定宽高时，画布默认尺寸为 300 × 150 像素。 -->
+    <p>添加恰当的反馈信息。</p>
+  </canvas>
+
+  <script>
+    const canvas = document.querySelector('.myCanvas');
+    let width = canvas.width = window.innerWidth;
+    let height = canvas.height = window.innerHeight;
+    // 我们的“全窗尺寸画布”包含 <body> 元素的外边距（margin），使得文档比窗口略宽。
+    // 为使滚动条消失，需要删除 <body> 元素的 margin 并将 overflow 设置为 hidden。
+
+    const ctx = canvas.getContext('2d'); //创建2D画布
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
+    ctx.fillRect(0, 0, width, height); // 矩形蒙版
+
+
+    //1. 矩形
+    ctx.fillStyle = 'rgb(255, 0, 0)';
+    ctx.fillRect(50, 50, 100, 150);
+    ctx.fillStyle = 'rgb(0, 255, 0)';
+    ctx.fillRect(75, 75, 100, 100);
+    ctx.fillStyle = 'rgba(255, 0, 255, 0.75)';
+    ctx.fillRect(25, 100, 175, 50);
+
+    //2. 描边（stroke）和线条宽度
+    ctx.strokeStyle = 'rgb(255, 255, 255)';
+    ctx.lineWidth = 5;
+    ctx.strokeRect(25, 25, 175, 200);
+
+    //3. 路径path
+    function degToRad(degrees) {
+      return degrees * Math.PI / 180;
+    };
+
+    ctx.fillStyle = 'rgb(0, 0, 0)';
+    ctx.beginPath();
+    ctx.moveTo(250, 50); //笔尖跳跃一段距离
+    ctx.lineTo(350, 50);
+    var triHeight = 50 * Math.tan(degToRad(60));
+    ctx.lineTo(300, 50 + triHeight);
+    ctx.lineTo(250, 50); //笔尖走了三条之间，围起来的部分填充颜色
+    ctx.fill();
+
+    //4. 画圆、弧
+    ctx.fillStyle = 'rgb(0, 0, 255)';
+    ctx.beginPath();
+    ctx.arc(250, 250, 50, degToRad(0), degToRad(360), false); //arc() 函数有六个参数。前两个指定圆心的位置坐标，第三个是圆的半径，第四、五个是绘制弧的起、止角度（给定 0° 和 360° 便能绘制一个完整的圆），第六个是绘制方向（false 是顺时针，true 是逆时针）。
+    ctx.fill();
+
+    ctx.fillStyle = 'yellow';
+    ctx.beginPath();
+    ctx.arc(200, 106, 50, degToRad(-45), degToRad(45), true);
+    ctx.lineTo(200, 106);
+    ctx.fill();
+
+    //5. 文本
+    ctx.strokeStyle = 'white';
+    ctx.lineWidth = 1;
+    ctx.font = '36px arial';
+    ctx.strokeText('Canvas text', 50, 250);
+
+    ctx.fillStyle = 'red';
+    ctx.font = '48px georgia';
+    ctx.fillText('Canvas text', 50, 350);
+
+    //6. 图片
+    const image = new Image();
+    image.src = 'firefox.png';
+    image.onload = function () {
+      ctx.drawImage(image, 0, 0);
+      ctx.drawImage(image, 20, 20, 185, 175, 0, -150, 185, 175);
+      //参数 2、3 表示裁切部分左上顶点的坐标，参考原点为原图片本身左上角的坐标。原图片在该坐标左、上的部分均不会绘制出来。
+      // 参数 4、5 表示裁切部分的长、宽。
+      // 参数 6、7 表示裁切部分左上顶点在画布中的位置坐标，参考原点为画布左上顶点。
+      // 参数 8、9 表示裁切部分在画布中绘制的长、宽。本例中绘制时与裁切时面积相同，你也可以定制绘制的尺寸。
+    }
+
+    //7. 循环
+    ctx.translate(width / 2, height / 2);
+
+    function degToRad(degrees) {
+      return degrees * Math.PI / 180;
+    };
+
+    function rand(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + (min);
+    }
+
+    var length = 250;
+    var moveOffset = 20;
+
+    for (var i = 0; i < length; i++) {
+      ctx.fillStyle = 'rgba(' + (255 - length) + ', 0, ' + (255 - length) + ', 0.9)';
+      ctx.beginPath();
+      ctx.moveTo(moveOffset, moveOffset);
+      ctx.lineTo(moveOffset + length, moveOffset);
+      var triHeight = length / 2 * Math.tan(degToRad(60));
+      ctx.lineTo(moveOffset + (length / 2), moveOffset + triHeight);
+      ctx.lineTo(moveOffset, moveOffset);
+      ctx.fill();
+
+      length--;
+      moveOffset += 0.7;
+      ctx.rotate(degToRad(5));
+    }
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,326 @@
+---
+title: "Date & Time Processing"
+subtitle: 'lubridate package'
+author: "Humoon"
+date: "`r lubridate::today()`"
+output:
+  html_document:
+    df_print: paged
+    fig_caption: yes
+    fig_height: 4.5
+    fig_width: 6
+    theme: united
+    highlight: haddock
+    number_sections: yes
+    toc: yes
+    toc_depth: 3
+    toc_float:
+      collapsed: true
+      smooth_scroll: FALSE
+---
+
+
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(fig.width = 6, fig.height = 4.5, 
+                      fig.path = 'Figs/', warning = FALSE, 
+                      cache = T, cache.comments = F, 
+                      message = FALSE, comment = '#>')
+```
+
+```{r setup}
+library(tidyverse)
+library(lubridate)
+library(nycflights13)
+library(hms)
+```
+
+# 基础包
+
+获取系统日期：`Sys.Date()`
+获取系统时间：`Sys.time()`
+
+格式化时间
+```{r}
+(m = Sys.Date())
+format(m, format = "%B %d %Y")  # 改成月日年的格式
+format(m, format = "%B %d %Y %A")  # 加入星期信息
+format(m, format = "%B")  # 只提取出月份信息
+format(Sys.time(), format = "%Y/%B/%a %H:%M:%S")  # 提取部分时间信息
+```
+
+
+# 使用 lubricate 包处理日期和时间
+
+表示日期或时间的数据有 3 种类型：  
+- 日期：在 tibble 中显示为`<date>`  
+- 时间：一天中的某个时刻，在 tibble 中显示为`<time>`  
+- 日期时间：可以唯一标识某个时刻（通常精确到秒）的日期加时间，在 tibble 中显示为`<dttm>`  
+
+要想得到当前日期或当前日期时间，你可以使用 `today()` 或 `now()` 函数：
+```{r}
+today()
+now()
+```
+
+## 创建日期或时间
+
+### 通过字符串创建
+
+`ymd()`**系列函数**是从字符串创建单个日期时间对象的最简方法，也可以接受不带引号的数值。它不需要指定参数，便能自动处理标点和月份、星期的英文全称、缩写。
+```{r}
+x = c(20090101, "2009-01-02", "2009 01 03", "2009-1-4", "2009-1,5", "Created on 2009 1 6", "200901 !!! 07")
+ymd(x)
+class(x)
+mdy("January 31st, 2017")
+dmy("31-Jan-2017")
+ymd(20170131)
+ymd_hms("2017-01-31 20:11:59") # 精确到秒的时间戳
+mdy_hm("01/31/2017 08:01")
+
+# 通过添加一个时区参数，可以将一个日期强制转换为日期时间：
+ymd(20170131, tz = "UTC")
+```
+
+### 通过各个成分创建
+
+使用 `make_date()` 函数创建日期，使用 `make_datetime()` 函数创建日期时间
+
+```{r}
+flights %>% 
+  select(year, month, day, hour, minute) %>% 
+  mutate(
+    departure = make_datetime(year, month, day, hour, minute)
+  )
+
+## flights 数据集中的某些时间是将小时和分钟数简单地排列在一起的，需要将其分离
+
+# 自定义分离函数
+make_datetime_100 <- function(year, month, day, time) {
+  make_datetime(year, month, day, time %/% 100, time %% 100)
+}
+
+# 应用分离函数
+flights_dt <- flights %>% 
+  filter(!is.na(dep_time), !is.na(arr_time)) %>% 
+  mutate(
+    dep_time = make_datetime_100(year, month, day, dep_time),
+    arr_time = make_datetime_100(year, month, day, arr_time),
+    sched_dep_time = make_datetime_100(year, month, day, sched_dep_time),
+    sched_arr_time = make_datetime_100(year, month, day, sched_arr_time)) %>% 
+  select(origin, dest, ends_with("delay"), ends_with("time"))
+
+flights_dt
+
+# 以天为宽度汇总起飞航班的频数
+flights_dt %>% 
+  ggplot(aes(dep_time)) + 
+  geom_freqpoly(binwidth = 86400) 
+# 86400秒 = 1天，由于横轴是日期时间型数据，1代表1秒
+
+# 以10分钟为宽度，汇总2013年1月1日起飞航班的频数
+flights_dt %>% 
+  filter(dep_time < ymd(20130102)) %>% 
+  ggplot(aes(dep_time)) + 
+  geom_freqpoly(binwidth = 600) # 600秒 = 10分钟
+```
+
+### 通过其他数据类型创建
+
+`as_datetime()` 和 `as_date()` 在日期和日期时间型数据之间切换
+
+```{r}
+as_datetime(today())
+as_date(now())
+```
+
+
+**可以用相对偏移量表示时间，基准为1970年1月1日0时。**
+```{r}
+as_date(365 * 10 + 2) # 基准时间之后10年，考虑到两个闰年加两天
+as_datetime(60 * 60 * 10) # 基准时间滞后10个小时
+```
+
+## 日期和时间成分
+
+### 获取成分
+
+如果想要提取出日期中的独立成分，可以使用以下访问器函数： year()、 month()、 mday()（一个月中的第几天）、 yday()（一年中的第几天）、 wday()（一周中的第几天）、 hour()、minute() 和 second()：
+```{r}
+datetime <- ymd_hms("2016-07-08 12:34:56")
+year(datetime)
+month(datetime)
+mday(datetime)
+yday(datetime)
+wday(datetime)
+```
+
+对于 month() 和 wday() 函数，你可以设置 label = TRUE 来返回月份名称和星期数的缩写，还可以设置 abbr = FALSE 来返回全名：
+```{r}
+# 注意，lubricate中的这两个函数会被data.table包的同名函数覆盖
+# 因此，用到这个功能的时候，不能用data.table包
+month(datetime, label = TRUE)
+wday(datetime, label = TRUE, abbr = FALSE)
+```
+
+应用于flights数据：
+```{r}
+flights_dt %>% 
+  mutate(wday = wday(dep_time, label = TRUE)) %>% 
+  ggplot(aes(x = wday)) + geom_bar()
+
+# 查看一小时内每分钟的平均出发延误
+flights_dt %>% 
+  mutate(minute = minute(dep_time)) %>% 
+  group_by(minute) %>% 
+  summarize(avg_delay = mean(arr_delay, na.rm = TRUE), 
+            n = n()) %>% 
+  ggplot(aes(minute, avg_delay)) + 
+  geom_line()
+# 我们发现，似乎在第20~30分钟和第50~60分钟内出发的航班的延误时间远远低于其他时间出发的航班
+```
+
+### 舍入
+
+通过 floor_date()、 round_date() 和 ceiling_date() 函数将日期舍入到临近的一个时间单位。
+
+```{r}
+flights_dt %>% 
+  count(week = floor_date(dep_time, "week")) %>% 
+  ggplot(aes(week, n)) + geom_line()
+```
+
+### 修改成分
+```{r}
+(datetime <- ymd_hms("2016-07-08 12:34:56"))
+year(datetime) <- 2020
+datetime
+month(datetime) <- 01
+datetime
+hour(datetime) <- hour(datetime) + 1
+```
+
+除了原地修改，你还可以通过 update() 函数创建一个新日期时间，这样也可以同时设置多个成分。如果设置的值过大，那么可以自动向后滚动。
+```{r}
+update(datetime, year = 2020, month = 2, mday = 2, hour = 2)
+
+ymd("2015-02-01") %>% update(mday = 30) # 2月没有30号，所以从1号开始往后推30天
+ymd("2015-02-01") %>% update(hour = 400)
+
+flights_dt %>% 
+  mutate(dep_hour = update(dep_time, yday = 1)) %>% 
+  ggplot(aes(dep_hour)) + 
+  geom_freqpoly(binwidth = 300)
+```
+
+## 时间间隔
+
+### difftime 类型
+
+```{r}
+time_length <- today() - ymd(19791014)
+time_length
+class(time_length)
+
+# 基础包的difftime()函数
+difftime(today(), ymd(19791014)) 
+difftime(today(), ymd(19791014), units = 'weeks') 
+difftime(today(), ymd(19791014), units = 'hours') 
+```
+
+### 时期 duration （**统一单位为秒**）
+
+用difftime数据类型构造duration
+```{r}
+# Hadley多大了？
+as.duration(today() - ymd(19791014))
+```
+
+构造时期的系列函数（都有"d"前缀和"s"后缀）：
+```{r}
+dseconds(15)
+dminutes(10)
+dhours(c(12, 24))
+ddays(0:5)
+dweeks(3)
+dyears(1)
+```
+
+可以对duration进行加法和乘法操作，时期也可以与日期型数据相加或相减，仍然得到日期型：
+```{r}
+dyears(1) + dweeks(12) + dhours(15)
+tomorrow <- today() + ddays(1)
+class(tomorrow)
+last_year <- today() - dyears(1)
+class(last_year)
+```
+
+### <font color = 'red'>阶段</font>
+
+lubridate 提供了阶段对象。阶段也是一种时间间隔，但它不以秒为单位；相反，它使用“人工”时间，比如日和月，这使得它们使用起来更加直观。
+
+构造阶段的系列函数(只有"s"后缀)：
+```{r}
+seconds(15)
+minutes(10)
+hours(c(12, 24))
+days(7)
+months(1:6)
+weeks(3)
+years(1)
+```
+
+可以对阶段进行加法和乘法操作：
+```{r}
+10 * (months(6) + days(1))
+days(50) + hours(25) + minutes(2)
+```
+
+<strong><font color = "red">阶段可以和日期相加。与时期相比，阶段更容易符合我们的预期，因为它自动考虑了历法的种种规则</font></strong>：
+```{r}
+## 闰年问题
+ymd("2016-01-01") + dyears(1) # dyears()产生的时期只是简单地加了365天
+ymd("2016-01-01") + years(1) # 考虑到2016年为闰年，years()产生的阶段加了366天
+```
+
+### 区间
+
+阶段的一年years(1)到底是365天还是366天是不确定的，因此有了新的类：区间。区间是带有起点的时期，这使得你可以确切地知道它的长度。
+
+```{r}
+next_year <- today() + years(1)
+next_year
+(today() %--% next_year) / ddays(1)
+```
+
+### 总结
+
+如果只关心物理时间，那么就使用时期；如果还需要考虑人工时间，那么就使用阶段；如果需要找出人工时间范围内有多长的时间间隔，那么就使用区间。
+
+## 时区
+
+为了避免混淆， R 使用国际标准 IANA 时区。这些时区使用统一带有“/”的命名方式，一般的形式为“< 大陆 >/< 城市 >”（存在例外，因为不是所有城市都位于一块大陆）。如“America/New_York”、“Europe/Paris”和“Pacific/Auckland”。之所以使用城市名，是因为IANA 数据库必须记录十年间的时区，而在十年时间中，国家更名（或分裂）的情况非常多，但城市名是基本保持不变的。
+
+Sys.timezone() 函数找出你的当前时区。OlsonNames() 函数来查看完整的时区名称列表。
+```{r}
+Sys.timezone()
+head(OlsonNames())
+```
+
+在 R 中，时区是日期时间型数据的一个属性，仅用于控制输出。例如，以下 3 个对象表示的是同一时刻：
+```{r}
+(x1 <- ymd_hms("2015-06-01 12:00:00", 
+               tz = "America/New_York"));
+
+(x2 <- ymd_hms("2015-06-01 18:00:00", tz = "Europe/Copenhagen"));
+
+(x3 <- ymd_hms("2015-06-02 04:00:00", 
+               tz = "Pacific/Auckland"));
+
+x4 <- c(x1, x2, x3)
+x4
+x4a <- with_tz(x4, tzone = "Asia/Taipei")
+x4a
+x4b <- force_tz(x4, tzone = "Asia/Taipei")
+x4b
+```
+

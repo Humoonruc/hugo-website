@@ -1,0 +1,294 @@
+---
+title: "R与MySQL数据库的通信"
+subtitle: '——RMySQL包'
+author: 'Humoon'
+date: "`r Sys.Date()`"
+documentclass: ctexart
+output:
+  bookdown::html_document2:
+    code_folding: show
+    df_print: paged
+    fig_caption: yes
+    highlight: haddock
+    number_sections: yes
+    theme: united
+    toc: yes
+    toc_depth: 3
+    toc_float:
+      collapsed: yes
+      smooth_scroll: no
+  bookdown::epub_book: default
+  rticles::ctex:
+    fig_caption: yes
+    number_sections: yes
+    toc: yes
+classoption: "hyperref,"
+---
+
+```{r setup, include=FALSE}
+## global options
+knitr::opts_chunk$set(
+  fig.width = 6, fig.asp = 0.618,
+  out.width = "80%",fig.align = "center",
+  fig.path = 'Figs/',fig.show = "hold",
+  warning = FALSE, message = FALSE, echo = TRUE, 
+  comment = '', collapse = F, 
+  cache = F, cache.comments = F, autodep = TRUE,
+  options(digits = 7, scipen = 7, signif = 7)
+  )
+
+## use necessary packages
+library('pacman')
+p_load(tidyverse, lubridate, reshape2, magrittr, RMySQL)
+```
+
+# 准备工作
+
+- 安装好MySQL数据库，此时还不能写入数据，因为用户尚未拥有写入的权限。要在MySQL命令行中输入 `SET GLOBAL local_infile = true;`或`set persist local_infile = 1;`，并用 `SHOW GLOBAL VARIABLES LIKE 'local_infile';` 查看，修改成功后才能写入数据
+
+- MySQL对中文的支持不好。因此要将数据库的编码方式设定为GBK，然后在R与之通信时用 `dbSendQuery(channel,'SET NAMES gbk')` 注明
+
+```{r}
+library(RMySQL)
+```
+
+```{r}
+# 建立本地连接
+con <- dbConnect(MySQL(), username = "root", 
+                 password = "1234", dbname = "world")
+
+# MySQL中数据库的编码为GBK，故R与之通信时要注明编码
+dbSendQuery(con,'SET NAMES gbk')
+
+# 建立远程连接时，要注明主机IP和端口
+# con <- dbConnect(MySQL(), dbname = "rmysql", username = "rmysql", password = "rmysql", host = "192.168.1.201", port = 3306)
+```
+
+若提示错误：  
+`Failed to connect to database: Error: Plugin caching_sha2_password could not be loaded: 找不到指定的模块。`
+
+则以如下方式补救：
+
+1. 打开mysql cmd
+
+2. 执行语句
+```
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'password' PASSWORD EXPIRE NEVER; #修改加密规则 
+
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password'; #更新一下用户的密码 
+
+FLUSH PRIVILEGES; #刷新权限
+
+alter user 'root'@'localhost' identified by '1234'; #重置密码
+```
+
+# 对表的基本操作
+
+```{r basic}
+# 列出与MySQL所有的通信连接
+dbListConnections(MySQL())
+
+# 查看所有的数据库
+dbGetQuery(con, "SHOW DATABASES")
+
+# 查看现在连接的数据库中所有的表
+dbGetQuery(con, "SHOW TABLES")
+dbListTables(con)
+
+# 查询某表的字段（变量名），参数为表名
+dbListFields(con, "city")
+
+# 系列演示，将mtcars数据框作为新表写入数据库
+# 建立新表并查看
+dbSendQuery(con, 'drop table if exists mtcars')
+dbWriteTable(con, "mtcars", mtcars[1:5, ])
+dbReadTable(con, "mtcars")
+# 在表中添加行
+dbWriteTable(con, "mtcars", mtcars[6:10, ], append = TRUE)
+dbReadTable(con, "mtcars")
+# 覆盖表
+dbWriteTable(con, "mtcars", mtcars[1:10, ], overwrite = TRUE)
+dbReadTable(con, "mtcars")
+# 不要行名
+dbWriteTable(con, "mtcars", mtcars[1:10, ], overwrite = TRUE, row.names = FALSE)
+dbReadTable(con, "mtcars")
+
+# 自己建表并写入数据库
+t_demo <- data.frame(a = seq(1:10),b = letters[1:10],c = rnorm(10))
+dbWriteTable(con, "t_demo", t_demo)
+dbReadTable(con, "t_demo")
+
+# 删除一张表
+dbSendQuery(con, 'drop table if exists mtcars')
+dbSendQuery(con, 'drop table if exists t_demo')
+
+# 不担心出错的删除方法：
+if (dbExistsTable(con,'t_demo')) {
+  dbRemoveTable(con, "t_demo")
+}
+
+# 关闭连接
+dbDisconnect(con)
+```
+
+
+# 查询操作
+
+资料来源：[易百MySQL教程](https://www.yiibai.com/mysql)
+
+## 查询函数
+
+- dbGetQuery()和dbSendQuery()
+  - 前者返回查询所得的数据框
+  - 后者的查询在MySql中执行，返回一个查询结果指针对象，使用R的dbFetch()或fetch()从指针对象位置读取指定的行数，最后将此结果作为数据框存储在R中
+
+## 实例
+
+### 准备示例数据库
+
+1. 下载链接<http://www.yiibai.com/downloads/yiibaidb.zip>
+
+2. 在MySQL8.0 Command Line Client中输入以下命令导入示例数据库yiibaidb.sql
+
+```
+CREATE DATABASE IF NOT EXISTS yiibaidb DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
+USE yiibaidb;
+SOURCE C:/Users/humoo/OneDrive/2019Spring/Courses/R_CASS/章节目录/09_RMySQL/yiibaidb.sql;
+SELECT city, phone, country FROM `offices`;
+```
+于是显示：
+```
++---------------+------------------+-----------+
+| city          | phone            | country   |
++---------------+------------------+-----------+
+| San Francisco | +1 650 219 4782  | USA       |
+| Boston        | +1 215 837 0825  | USA       |
+| NYC           | +1 212 555 3000  | USA       |
+| Paris         | +33 14 723 4404  | France    |
+| Beijing       | +86 33 224 5000  | China     |
+| Sydney        | +61 2 9264 2451  | Australia |
+| London        | +44 20 7877 2041 | UK        |
++---------------+------------------+-----------+
+7 rows in set (0.00 sec)
+```
+
+3. MySQL示例数据库模式由以下表组成：
+
+  - `customers`: 存储客户的数据。
+  - `products`: 存储汽车的数据。
+  - `productLines`: 存储产品类别数据。
+  - `orders`: 存储客户订购的销售订单。
+  - `orderDetails`: 存储每个销售订单的订单产品数据项。
+  - `payments`: 存储客户订单的付款数据信息。
+  - `employees`: 存储所有员工信息以及组织结构，例如，直接上级(谁向谁报告工作)。
+  - `offices`: 存储销售处数据，类似于各个分公司。
+  
+![ER图](ER.png)
+```{r}
+con <- dbConnect(MySQL(), username = 'root', password = '1234', 
+                 dbname = "yiibaidb", host = 'localhost')
+dbListTables(con)
+```
+
+
+4. 查询示例
+
+```{r}
+result3 = dbGetQuery(con, 
+"SELECT lastname, firstname, jobtitle 
+FROM employees 
+WHERE jobtitle IN ('Sales Rep', 'VP Sales')")
+
+# BETWEEN AND 表示范围（数字、日期等）
+result10 = dbGetQuery(con, 
+"SELECT orderNumber, requiredDate, status 
+FROM orders 
+WHERE requireddate 
+  BETWEEN CAST('2013-01-01' AS DATE) 
+  AND CAST('2013-01-31' AS DATE);")
+
+# 计算 amount + 100，用一个新字段 after 显示计算结果
+result22 <- dbSendQuery(con, 
+"SELECT amount, amount+100 AS after
+FROM payments;")
+resultdb22 = fetch(result22, n = -1); resultdb22
+dbClearResult(dbListResults(con)[[1]])
+
+# 用GROUP BY子句来获取订单号，查看每个订单销售的商品数量和销售总额
+# HAVING字句查询(过滤)哪些订单的总销售额大于55000
+result26 <- dbGetQuery(con, "
+SELECT ordernumber, 
+       SUM(quantityOrdered) AS itemsCount,
+       SUM(priceeach*quantityOrdered) AS total
+FROM orderdetails
+GROUP BY ordernumber
+  HAVING total > 55000")
+```
+
+# 数据插入、更新、删除
+
+## INSERT 
+
+插入一行
+```
+INSERT INTO table (column1,column2...)
+VALUES (value1,value2,...);
+```
+插入多行
+```
+INSERT INTO table (column1,column2...)
+VALUES (value1,value2,...), (value1,value2,...), ... ;
+```
+
+## UPDATE 
+
+```
+UPDATE [LOW_PRIORITY] [IGNORE] table_name
+SET
+  column_name1 = expr1,
+  column_name2 = expr2,
+...
+WHERE
+  condition;
+```
+
+SET 子句选择更新的列，WHERE 子句过滤行。
+
+可以使用SELECT语句查询来自其他表的结果来提供给SET子句的值。   
+
+例：在customers表中，有些客户没有任何销售代表，salesRepEmployeeNumber列的值为NULL，需要从employees表中随机选择^[order by rand()为随机排序，配合limit 1就是随机选取一个。] 一个职位为Sales Rep的雇员，并将其更新到customers表中。
+```{r}
+dbGetQuery(con,
+"UPDATE customers
+SET salesRepEmployeeNumber = (
+  SELECT employeeNumber 
+  FROM employees 
+  WHERE jobtitle = 'Sales Rep' 
+  order by rand() 
+  LIMIT 1)
+WHERE salesRepEmployeeNumber IS NULL;")
+```
+
+#### DELETE
+```
+DELETE FROM table_name
+WHERE condition
+ORDER BY c1, c2, ...
+LIMIT row_count; 
+```
+
+例如
+```{r, eval=FALSE}
+dbGetQuery(con,
+"DELETE FROM employees
+WHERE officeCode = 4;")
+
+dbSendQuery(con,
+"DELETE FROM customers
+ORDER BY customerName
+LIMIT 10;") # 只删除10个观测
+```
+
+```{r}
+dbDisconnect(con)
+```

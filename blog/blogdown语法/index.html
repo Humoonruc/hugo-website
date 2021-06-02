@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>blogdown语法 - 万水千山</title>
+    <meta property="og:title" content="blogdown语法 - 万水千山">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+      
+    
+
+    
+      
+      <meta property="description" content="# install.packages(&amp;quot;blogdown&amp;quot;)# blogdown::install_hugo() Step 2 初始化打开 Rstudio-&amp;gt;File-&amp;gt;New Project-&amp;gt;New Directory
+选择 Website using blogdown 创建一个项目
+或使用代码：
+# &amp;hellip;">
+      <meta property="og:description" content="# install.packages(&amp;quot;blogdown&amp;quot;)# blogdown::install_hugo() Step 2 初始化打开 Rstudio-&amp;gt;File-&amp;gt;New Project-&amp;gt;New Directory
+选择 Website using blogdown 创建一个项目
+或使用代码：
+# &amp;hellip;">
+      
+    
+
+    
+    
+
+    
+
+    
+    
+
+
+<link href='//cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+
+  
+  <body class="blog">
+    <header class="masthead">
+      <h1><a href="/">万水千山</a></h1>
+
+<p class="tagline">From Mountain to Ocean.</p>
+
+      <nav class="menu">
+  <input id="menu-check" type="checkbox" />
+  <label id="menu-label" for="menu-check" class="unselectable">
+    <span class="icon close-icon">✕</span>
+    <span class="icon open-icon">☰</span>
+    <span class="text">Menu</span>
+  </label>
+  <ul>
+  
+  
+  <li><a href="/">Home·主页</a></li>
+  
+  <li><a href="/resume/">Resume·简历</a></li>
+  
+  <li><a href="/slide/">Slide·展示</a></li>
+  
+  <li><a href="/application/">Application·应用</a></li>
+  
+  <li><a href="/ebook/">Fiction·小说</a></li>
+  
+  <li><a href="/blog/">Blog·博客</a></li>
+  
+  <li><a href="/academics/">Academics·学术</a></li>
+  
+  <li><a href="/categories/">Categories·类别</a></li>
+  
+  <li><a href="/tags/">Tags·标签</a></li>
+  
+  <li><a href="/about/">About·关于</a></li>
+  
+  
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>blogdown语法</h1>
+
+<h3>
+  2019-09-09</h3>
+<hr>
+
+
+      </header>
+
+
+
+
+
+
+<div id="step-1-" class="section level1">
+<h1>Step 1 安装</h1>
+<pre class="r"><code># install.packages(&quot;blogdown&quot;)
+# blogdown::install_hugo() </code></pre>
+</div>
+<div id="step-2-" class="section level1">
+<h1>Step 2 初始化</h1>
+<p>打开 Rstudio-&gt;File-&gt;New Project-&gt;New Directory</p>
+<p>选择 Website using blogdown 创建一个项目</p>
+<p>或使用代码：</p>
+<pre class="r"><code># blogdown::new_site(theme = &quot;yihui/hugo-lithium&quot;)
+# blogdown::new_site(theme = &#39;imzeuk/hugo-theme-zozo&#39;)</code></pre>
+</div>
+<div id="step-3-" class="section level1">
+<h1>Step 3 编辑和编译</h1>
+<pre class="r"><code># 添加新文章
+# blogdown:::new_post_addin()
+# 编译，生成新博客
+# blogdown::serve_site()</code></pre>
+</div>
+<div id="step-4--deploy" class="section level1">
+<h1>Step 4 部署 (deploy)</h1>
+<p>打开 GitHub Desktop，选择 Add existing repository，将 blogdown 所创建的网站项目添加到 GitHub Desktop 中，然后 Push 到自己的 GitHub 网页上。</p>
+<p>登陆 Netlify 网站，选择 New site from Git，一步步选择刚刚 Push 到 GitHub上的项目。Build Command 填 “hugo” 或不填，Publish directory 填 “Public”，然后部署即可，Netlify 会为用户分配一个可以自定义的免费域名。</p>
+<p>每次对网站有所修改，都要用<code>blogdown::serve_site()</code>重新编译，然后用 GitHub Desktop 将更新 push 到 GitHub 上，Netlify 上的网页便会自动更新，非常方便。</p>
+</div>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/blog/ms-office%E9%AB%98%E7%BA%A7%E5%BA%94%E7%94%A8%E7%AC%94%E8%AE%B0/">MS Office高级应用笔记</a></span>
+  <span class="nav-next"><a href="/blog/%E6%88%98%E5%9B%BD%E6%97%B6%E4%BB%A3%E6%89%8D%E6%98%AF%E5%A4%A7%E5%95%86%E8%BE%88%E5%87%BA%E7%9A%84%E6%97%B6%E4%BB%A3/">战国时代才是大商辈出的时代</a> &rarr;</span>
+</nav>
+
+
+
+
+
+<script src="//yihui.name/js/math-code.js"></script>
+<script async src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+
+  
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/tex.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+  
+  <hr>
+  <div class="copyright">© 2019-2021 黄蒙 <a href="mailto:humoonruc@126.com">humoonruc@126.com</a></div>
+  
+  </footer>
+  </article>
+  
+  </body>
+</html>
+

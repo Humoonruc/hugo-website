@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Shiny 语法 - 万水千山</title>
+    <meta property="og:title" content="Shiny 语法 - 万水千山">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+      
+    
+
+    
+      
+      <meta property="description" content="library(shiny)runExample(&amp;quot;01_hello&amp;quot;) # a histogramrunExample(&amp;quot;02_text&amp;quot;) # tables and data framesrunExample(&amp;quot;03_reactivity&amp;quot;) # a reactive expression &amp;hellip;">
+      <meta property="og:description" content="library(shiny)runExample(&amp;quot;01_hello&amp;quot;) # a histogramrunExample(&amp;quot;02_text&amp;quot;) # tables and data framesrunExample(&amp;quot;03_reactivity&amp;quot;) # a reactive expression &amp;hellip;">
+      
+    
+
+    
+    
+
+    
+
+    
+    
+
+
+<link href='//cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+
+  
+  <body class="blog">
+    <header class="masthead">
+      <h1><a href="/">万水千山</a></h1>
+
+<p class="tagline">From Mountain to Ocean.</p>
+
+      <nav class="menu">
+  <input id="menu-check" type="checkbox" />
+  <label id="menu-label" for="menu-check" class="unselectable">
+    <span class="icon close-icon">✕</span>
+    <span class="icon open-icon">☰</span>
+    <span class="text">Menu</span>
+  </label>
+  <ul>
+  
+  
+  <li><a href="/">Home·主页</a></li>
+  
+  <li><a href="/resume/">Resume·简历</a></li>
+  
+  <li><a href="/slide/">Slide·展示</a></li>
+  
+  <li><a href="/application/">Application·应用</a></li>
+  
+  <li><a href="/ebook/">Fiction·小说</a></li>
+  
+  <li><a href="/blog/">Blog·博客</a></li>
+  
+  <li><a href="/academics/">Academics·学术</a></li>
+  
+  <li><a href="/categories/">Categories·类别</a></li>
+  
+  <li><a href="/tags/">Tags·标签</a></li>
+  
+  <li><a href="/about/">About·关于</a></li>
+  
+  
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>Shiny 语法</h1>
+
+<h3>Humoon
+  /  2019-09-09</h3>
+<hr>
+
+
+      </header>
+
+
+
+
+
+
+<div id="lesson-1-welcome-to-shiny" class="section level2">
+<h2>Lesson 1 Welcome to Shiny</h2>
+<div id="shiny-app-" class="section level3">
+<h3>1 创建一个 Shiny App 的过程：</h3>
+<ul>
+<li>新建一个项目文件夹，每一个app都要有一个单独的文件夹。</li>
+<li>在文件夹中新建app.R，注意这个文件名是不能改动的。</li>
+<li>app.R包含四个部分：（1）<code>library(shiny)</code>；（2）ui<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> 对象，设定界面的布局和外观；（3）server对象，在后台进行数据处理；（4）<code>shinyApp(ui = ui, server = server)</code>创建应用</li>
+<li>在R中通过<code>runApp("app文件夹目录")</code><a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> 来启动应用；<code>runApp("app文件夹目录", display.mode = "showcase")</code>可以在应用底部显示源代码。</li>
+</ul>
+</div>
+<div id="section" class="section level3">
+<h3>2 官方示例</h3>
+<pre><code>library(shiny)
+runExample(&quot;01_hello&quot;)      # a histogram
+runExample(&quot;02_text&quot;)       # tables and data frames
+runExample(&quot;03_reactivity&quot;) # a reactive expression
+runExample(&quot;04_mpg&quot;)        # global variables
+runExample(&quot;05_sliders&quot;)    # slider bars
+runExample(&quot;06_tabsets&quot;)    # tabbed panels
+runExample(&quot;07_widgets&quot;)    # help text and submit buttons
+runExample(&quot;08_html&quot;)       # Shiny app built from HTML
+runExample(&quot;09_upload&quot;)     # file upload wizard
+runExample(&quot;10_download&quot;)   # file download wizard
+runExample(&quot;11_timer&quot;)      # an automated timer</code></pre>
+</div>
+</div>
+<div id="lesson-2-build-a-user-interface" class="section level2">
+<h2>Lesson 2 Build a user interface</h2>
+<div id="ui" class="section level3">
+<h3>1 ui的基本布局</h3>
+<pre><code>ui &lt;- fluidPage( # 流动页面
+  titlePanel(&quot;title Panel&quot;), # 标题栏
+  sidebarLayout( # 边栏布局
+    sidebarPanel(&quot;sidebar&quot;), # 边栏（一般是输入）
+    mainPanel(&quot;main panler&quot;) # 主体部分（一般是输出）
+  )
+)</code></pre>
+</div>
+<div id="ui-1" class="section level3">
+<h3>2 ui的内容</h3>
+<p>在每一个子区域中，用“,”分隔多个内容</p>
+<table style="width:100%;">
+<colgroup>
+<col width="42%" />
+<col width="28%" />
+<col width="28%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>添加内容的 shiny 函数</th>
+<th>等价的 HTML5 标签</th>
+<th>添加的对象</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>p()</td>
+<td><code>&lt;p&gt;</code></td>
+<td>A paragraph of text</td>
+</tr>
+<tr class="even">
+<td>h1()</td>
+<td><code>&lt;h1&gt;</code></td>
+<td>A first level header</td>
+</tr>
+<tr class="odd">
+<td>h2()</td>
+<td><code>&lt;h2&gt;</code></td>
+<td>A second level header</td>
+</tr>
+<tr class="even">
+<td>h3()</td>
+<td><code>&lt;h3&gt;</code></td>
+<td>A third level header</td>
+</tr>
+<tr class="odd">
+<td>h4()</td>
+<td><code>&lt;h4&gt;</code></td>
+<td>A fourth level header</td>
+</tr>
+<tr class="even">
+<td>h5()</td>
+<td><code>&lt;h5&gt;</code></td>
+<td>A fifth level header</td>
+</tr>
+<tr class="odd">
+<td>h6()</td>
+<td><code>&lt;h6&gt;</code></td>
+<td>A sixth level header</td>
+</tr>
+<tr class="even">
+<td>a()</td>
+<td><code>&lt;a&gt;</code></td>
+<td>A hyper link</td>
+</tr>
+<tr class="odd">
+<td>br()</td>
+<td><code>&lt;br&gt;</code></td>
+<td>A line break (e.g. a blank line)</td>
+</tr>
+<tr class="even">
+<td>div()</td>
+<td><code>&lt;div&gt;</code></td>
+<td>A division of text with a uniform style 分隔文本</td>
+</tr>
+<tr class="odd">
+<td>span()</td>
+<td><code>&lt;span&gt;</code></td>
+<td>An in-line division of text with a uniform style 行内分隔本文</td>
+</tr>
+<tr class="even">
+<td>pre()</td>
+<td><code>&lt;pre&gt;</code></td>
+<td>Text ‘as is’ in a fixed width font 等宽文本，像代码块</td>
+</tr>
+<tr class="odd">
+<td>code()</td>
+<td><code>&lt;code&gt;</code></td>
+<td>A formatted block of code</td>
+</tr>
+<tr class="even">
+<td>img()</td>
+<td><code>&lt;img&gt;</code></td>
+<td>An image 必须放在与app.R同级的www文件夹中</td>
+</tr>
+<tr class="odd">
+<td>strong()</td>
+<td><code>&lt;strong&gt;</code></td>
+<td>Bold text 加粗</td>
+</tr>
+<tr class="even">
+<td>em()</td>
+<td><code>&lt;em&gt;</code></td>
+<td>Italicized text 斜体</td>
+</tr>
+<tr class="odd">
+<td>HTML()</td>
+<td><code></code></td>
+<td>Directly passes a character string as HTML code 直接在其中书写HTML格式的代码</td>
+</tr>
+<tr class="even">
+<td>tags$</td>
+<td><code></code></td>
+<td>当上述函数不够用时，或者为了添加更多层级，可以用shiny::tags$xx()函数构建html元素，共110种，见<a href="http://shiny.rstudio.com/articles/html-tags.html">Customize your UI with HTML</a>和<a href="http://shiny.rstudio.com/articles/tag-glossary.html">Shiny HTML Tags Glossary</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="ui-2" class="section level3">
+<h3>3 ui的样式</h3>
+<p>align 参数决定位置</p>
+<p>style 参数可以定义字体、字号、颜色</p>
+<table>
+<thead>
+<tr class="header">
+<th>中文字体</th>
+<th>英文名称</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>华文细黑</td>
+<td>STHeiti Light [STXihei]</td>
+</tr>
+<tr class="even">
+<td>华文黑体</td>
+<td>STHeiti</td>
+</tr>
+<tr class="odd">
+<td>华文楷体</td>
+<td>STKaiti</td>
+</tr>
+<tr class="even">
+<td>华文宋体</td>
+<td>STSong</td>
+</tr>
+<tr class="odd">
+<td>华文仿宋</td>
+<td>STFangsong</td>
+</tr>
+<tr class="even">
+<td>俪黑 Pro</td>
+<td>LiHei Pro Medium</td>
+</tr>
+<tr class="odd">
+<td>俪宋 Pro</td>
+<td>LiSong Pro Light</td>
+</tr>
+<tr class="even">
+<td>标楷体</td>
+<td>BiauKai</td>
+</tr>
+<tr class="odd">
+<td>苹果俪中黑</td>
+<td>Apple LiGothic Medium</td>
+</tr>
+<tr class="even">
+<td>苹果俪细宋</td>
+<td>Apple LiSung Light</td>
+</tr>
+<tr class="odd">
+<td>新细明体</td>
+<td>PMingLiU</td>
+</tr>
+<tr class="even">
+<td>细明体</td>
+<td>MingLiU</td>
+</tr>
+<tr class="odd">
+<td>标楷体</td>
+<td>DFKai-SB</td>
+</tr>
+<tr class="even">
+<td>黑体</td>
+<td>SimHei</td>
+</tr>
+<tr class="odd">
+<td>宋体</td>
+<td>SimSun</td>
+</tr>
+<tr class="even">
+<td>新宋体</td>
+<td>NSimSun</td>
+</tr>
+<tr class="odd">
+<td>仿宋</td>
+<td>FangSong</td>
+</tr>
+<tr class="even">
+<td>楷体</td>
+<td>KaiTi</td>
+</tr>
+<tr class="odd">
+<td>仿宋_GB2312</td>
+<td>FangSong_GB2312</td>
+</tr>
+<tr class="even">
+<td>楷体_GB2312</td>
+<td>KaiTi_GB2312</td>
+</tr>
+<tr class="odd">
+<td>微软正黑体</td>
+<td>Microsoft JhengHei</td>
+</tr>
+<tr class="even">
+<td>微软雅黑体</td>
+<td>Microsoft YaHei</td>
+</tr>
+<tr class="odd">
+<td>隶书</td>
+<td>LiSu</td>
+</tr>
+<tr class="even">
+<td>幼圆</td>
+<td>YouYuan</td>
+</tr>
+<tr class="odd">
+<td>华文细黑</td>
+<td>STXihei</td>
+</tr>
+<tr class="even">
+<td>华文楷体</td>
+<td>STKaiti</td>
+</tr>
+<tr class="odd">
+<td>华文宋体</td>
+<td>STSong</td>
+</tr>
+<tr class="even">
+<td>华文中宋</td>
+<td>STZhongsong</td>
+</tr>
+<tr class="odd">
+<td>华文仿宋</td>
+<td>STFangsong</td>
+</tr>
+<tr class="even">
+<td>方正舒体</td>
+<td>FZShuTi</td>
+</tr>
+<tr class="odd">
+<td>方正姚体</td>
+<td>FZYaoti</td>
+</tr>
+<tr class="even">
+<td>华文彩云</td>
+<td>STCaiyun</td>
+</tr>
+<tr class="odd">
+<td>华文琥珀</td>
+<td>STHupo</td>
+</tr>
+<tr class="even">
+<td>华文隶书</td>
+<td>STLiti</td>
+</tr>
+<tr class="odd">
+<td>华文行楷</td>
+<td>STXingkai</td>
+</tr>
+<tr class="even">
+<td>华文新魏</td>
+<td>STXinwei</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="lesson-3-add-control-widgets" class="section level2">
+<h2>Lesson 3 Add control widgets</h2>
+<p>每个控件都有唯一的控件名，和用于在web中显示的标签</p>
+<div id="section-1" class="section level3">
+<h3>基本控件表</h3>
+<table>
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>function</th>
+<th>widget</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>actionButton()</td>
+<td>Action Button 按钮，可以点击</td>
+</tr>
+<tr class="even">
+<td>checkboxInput()</td>
+<td>A single check box 单个复选框</td>
+</tr>
+<tr class="odd">
+<td>checkboxGroupInput()</td>
+<td>A group of check boxes 一组复选框</td>
+</tr>
+<tr class="even">
+<td>dateInput()</td>
+<td>A calendar to aid date selection 日期输入</td>
+</tr>
+<tr class="odd">
+<td>dateRangeInput()</td>
+<td>A pair of calendars for selecting a date range 日期范围</td>
+</tr>
+<tr class="even">
+<td>fileInput()</td>
+<td>A file upload control wizard 上传文件</td>
+</tr>
+<tr class="odd">
+<td>helpText()</td>
+<td>Help text that can be added to an input form 说明文本</td>
+</tr>
+<tr class="even">
+<td>numericInput()</td>
+<td>A field to enter numbers 输入数字</td>
+</tr>
+<tr class="odd">
+<td>radioButtons()</td>
+<td>A set of radio buttons 单选按钮</td>
+</tr>
+<tr class="even">
+<td>selectInput()</td>
+<td>A box with choices to select from 单选框。常与server部分的Switch函数一起使用。</td>
+</tr>
+<tr class="odd">
+<td>sliderInput()</td>
+<td>A slider bar 滑动条</td>
+</tr>
+<tr class="even">
+<td>submitButton()</td>
+<td>A submit button 提交按钮</td>
+</tr>
+<tr class="odd">
+<td>textInput()</td>
+<td>A field to enter text 输入文本</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="section-2" class="section level3">
+<h3>基本控件图</h3>
+<p><img src="/note/2019-07-31-shiny-app的语法_files/basic-widgets.png" /></p>
+<p>这个图也可以用shiny来画，且为动态的：</p>
+<pre class="r"><code>library(shiny)
+
+# 基本控件的模板
+
+ui &lt;- fluidPage(
+  titlePanel(&quot;Basic widgets&quot;),
+  
+  # ui为三行布局，这是第一行
+  fluidRow(
+    
+    column(3, # 这句的意思是这个控件占据三列的宽度，一下皆同。
+           h3(&quot;Buttons&quot;),
+           actionButton(&quot;action&quot;, &quot;Action&quot;),
+           br(),
+           br(), 
+           submitButton(&quot;Submit&quot;)),
+    
+    column(3,
+           h3(&quot;Single checkbox&quot;),
+           checkboxInput(&quot;checkbox&quot;, &quot;Choice A&quot;, value = TRUE)),
+    
+    column(3, 
+           checkboxGroupInput(&quot;checkGroup&quot;, 
+                              h3(&quot;Checkbox group&quot;), 
+                              choices = list(&quot;Choice 1&quot; = 1, 
+                                             &quot;Choice 2&quot; = 2, 
+                                             &quot;Choice 3&quot; = 3),
+                              selected = 1)),
+    
+    column(3, 
+           dateInput(&quot;date&quot;, 
+                     h3(&quot;Date input&quot;), 
+                     value = &quot;2014-01-01&quot;))   
+  ),
+  
+  # 这是第二行
+  fluidRow(
+    
+    column(3,
+           dateRangeInput(&quot;dates&quot;, h3(&quot;Date range&quot;))),
+    
+    column(3,
+           fileInput(&quot;file&quot;, h3(&quot;File input&quot;))),
+    
+    column(3, 
+           h3(&quot;Help text&quot;),
+           helpText(&quot;Note: help text isn&#39;t a true widget, but it provides an easy way to add text to accompany other widgets.&quot;)),
+    
+    column(3, 
+           numericInput(&quot;num&quot;, 
+                        h3(&quot;Numeric input&quot;), 
+                        value = 1))   
+  ),
+  
+  # 这是第三行
+  fluidRow(
+    
+    column(3,
+           radioButtons(&quot;radio&quot;, h3(&quot;Radio buttons&quot;),
+                        choices = list(&quot;Choice 1&quot; = 1, &quot;Choice 2&quot; = 2,
+                                       &quot;Choice 3&quot; = 3),selected = 1)),
+    
+    column(3,
+           selectInput(&quot;select&quot;, h3(&quot;Select box&quot;), 
+                       choices = list(&quot;Choice 1&quot; = 1, &quot;Choice 2&quot; = 2,
+                                      &quot;Choice 3&quot; = 3), selected = 1)),
+    
+    column(3, 
+           sliderInput(&quot;slider1&quot;, h3(&quot;Sliders&quot;),
+                       min = 0, max = 100, value = 50),
+           sliderInput(&quot;slider2&quot;, &quot;&quot;,
+                       min = 0, max = 100, value = c(25, 75))
+    ),
+    
+    column(3, 
+           textInput(&quot;text&quot;, h3(&quot;Text input&quot;), 
+                     value = &quot;Enter text...&quot;))   
+  )
+  
+)
+
+# Define server logic ----
+server &lt;- function(input, output) {
+  
+}
+
+# Run the app ----
+shinyApp(ui = ui, server = server)</code></pre>
+</div>
+<div id="uiserver" class="section level3">
+<h3>基本控件在ui和server中的实现</h3>
+<p>官方代码：<a href="http://shiny.rstudio.com/gallery/widget-gallery.html">Shiny Widgets Gallery</a></p>
+<p>更多样的控件模板：<a href="http://shiny.rstudio.com/gallery/">Gallery</a></p>
+</div>
+</div>
+<div id="lesson-4-display-reactive-output" class="section level2">
+<h2>Lesson 4 Display reactive output</h2>
+<p>上一课通过控件有了输入，本课要在页面中添加输出。</p>
+<div id="ui-3" class="section level3">
+<h3>ui中的输出函数</h3>
+<table>
+<thead>
+<tr class="header">
+<th>输出函数</th>
+<th>显示对象</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>dataTableOutput()</td>
+<td>DataTable 数据表</td>
+</tr>
+<tr class="even">
+<td>htmlOutput()</td>
+<td>raw HTML 原始html</td>
+</tr>
+<tr class="odd">
+<td>imageOutput()</td>
+<td>image 图片</td>
+</tr>
+<tr class="even">
+<td>plotOutput()</td>
+<td>plot 作图结果（基于数据）</td>
+</tr>
+<tr class="odd">
+<td>tableOutput()</td>
+<td>table 表格</td>
+</tr>
+<tr class="even">
+<td>textOutput()</td>
+<td>text 文本</td>
+</tr>
+<tr class="odd">
+<td>uiOutput()</td>
+<td>raw HTML 原始html</td>
+</tr>
+<tr class="even">
+<td>verbatimTextOutput()</td>
+<td>text 文本</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="server" class="section level3">
+<h3>server中的输出函数</h3>
+<table>
+<thead>
+<tr class="header">
+<th>render 函数<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a></th>
+<th>返回对象</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>renderDataTable()</td>
+<td>DataTable 数据表</td>
+</tr>
+<tr class="even">
+<td>renderImage()</td>
+<td>images (saved as a link to a source file) 图片（本地的静态文件）</td>
+</tr>
+<tr class="odd">
+<td>renderPlot()</td>
+<td>plots 作图结果</td>
+</tr>
+<tr class="even">
+<td>renderPrint()</td>
+<td>any printed output 任何可打印的输出</td>
+</tr>
+<tr class="odd">
+<td>renderTable()</td>
+<td>data frame, matrix, other table like structures 表格结构</td>
+</tr>
+<tr class="even">
+<td>renderText()</td>
+<td>character strings 字符串</td>
+</tr>
+<tr class="odd">
+<td>renderUI()</td>
+<td>a Shiny tag object or HTML Shiny Tag 对象或HTML</td>
+</tr>
+</tbody>
+</table>
+<p><strong>这些函数，使用前最好用 help 查一查，他们有各自的独特设定。比如 renderImage() 默认在发送本地图片给客户端后便会将其删除，必须改一个参数才能反复发送。</strong></p>
+</div>
+</div>
+<div id="lesson-5-use-r-scripts-and-data" class="section level2">
+<h2>Lesson 5 Use R scripts and data</h2>
+<div id="section-3" class="section level3">
+<h3>代码执行</h3>
+<p>在shiny应用中，不同部分的代码的执行次数不同，规律如下:</p>
+<ul>
+<li>最后的<code>shinyApp</code>函数在启动app时运行一次</li>
+<li>每有一个新的用户访问你的shiny应用，就会运行一次server函数，保证每个用户有不同的响应式对象(reactivate object)</li>
+<li>每次用户进行交互时，render*函数都会运行一次</li>
+</ul>
+<p>因此，为了提高shiny app的运行速度，</p>
+<ul>
+<li>调用包和脚本、读取数据，都应该放在app.R的开始，server函数之外，保证其只运行一次</li>
+<li>对每一个访问者不同的代码，放在server函数内，render*函数外</li>
+<li>只有涉及不同输入和输出的代码，才放在render*函数之内</li>
+</ul>
+</div>
+</div>
+<div id="lesson-6-use-reactive-expressions" class="section level2">
+<h2>Lesson 6 Use reactive expressions</h2>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>user interface<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p>直接路径相对路径均可<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
+<li id="fn3"><p>反应式函数，可以根据输出的不同实时更新。<a href="#fnref3" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/blog/tufte%E6%A0%B7%E5%BC%8F-%E5%90%AB%E4%BE%A7%E8%BE%B9%E6%A0%8F-%E8%AF%AD%E6%B3%95/">tufte样式（含侧边栏）语法</a></span>
+  <span class="nav-next"><a href="/blog/r%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6%E7%9A%84%E8%AF%AD%E6%B3%95/">R文本文件的语法</a> &rarr;</span>
+</nav>
+
+
+
+
+
+<script src="//yihui.name/js/math-code.js"></script>
+<script async src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+
+  
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/tex.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+  
+  <hr>
+  <div class="copyright">© 2019-2021 黄蒙 <a href="mailto:humoonruc@126.com">humoonruc@126.com</a></div>
+  
+  </footer>
+  </article>
+  
+  </body>
+</html>
+

@@ -1,0 +1,15 @@
+base
+tufte
+pacman
+tidyverse
+ggplot2
+tibble
+tidyr
+readr
+purrr
+dplyr
+stringr
+forcats
+sysfonts
+showtextdb
+showtext

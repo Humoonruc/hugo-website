@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Module in Browser</title>
+  <!-- <script src="./d3/d3.min.js"></script> -->
+</head>
+
+<body>
+  <div id='mainText'>
+    <h1>title</h1>
+  </div>
+
+  <script type='module'>
+    import * as config from './js/config.js';
+
+    const main = document.querySelector('#mainText');
+    const p = document.createElement('p');
+    p.textContent = `width = ${config.SVG_WIDTH}, height = ${config.SVG_HEIGHT}`;
+    main.appendChild(p);
+
+    // const svg = d3.select('body').append('svg').attr('width', config.SVG_WIDTH).attr('height', config.SVG_HEIGHT)
+  </script>
+</body>
+
+</html>

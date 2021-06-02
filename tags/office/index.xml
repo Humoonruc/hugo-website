@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Office on 万水千山</title>
+    <link>/tags/office/</link>
+    <description>Recent content in Office on 万水千山</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 09 Sep 2019 00:00:00 +0000</lastBuildDate><atom:link href="/tags/office/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>MS Office高级应用笔记</title>
+      <link>/blog/ms-office%E9%AB%98%E7%BA%A7%E5%BA%94%E7%94%A8%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Mon, 09 Sep 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/ms-office%E9%AB%98%E7%BA%A7%E5%BA%94%E7%94%A8%E7%AC%94%E8%AE%B0/</guid>
+      <description>网页版电子书</description>
+    </item>
+    
+  </channel>
+</rss>

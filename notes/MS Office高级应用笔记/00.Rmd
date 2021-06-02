@@ -1,0 +1,8 @@
+
+# 前言 {-}
+
+该电子书使用 **Bookdown**\index{bookdown} 整理 MS Office 高级应用的相关知识。
+
+感谢[@R-bookdown]和[@R-bookdownplus]，贡献了如此强大的工具。
+
+\cleardoublepage 

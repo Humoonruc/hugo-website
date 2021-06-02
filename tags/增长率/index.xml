@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>增长率 on 万水千山</title>
+    <link>/tags/%E5%A2%9E%E9%95%BF%E7%8E%87/</link>
+    <description>Recent content in 增长率 on 万水千山</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 30 Aug 2019 00:00:00 +0000</lastBuildDate><atom:link href="/tags/%E5%A2%9E%E9%95%BF%E7%8E%87/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>由单月求累计及计算同比增长率</title>
+      <link>/blog/%E7%AE%97%E6%B3%95-%E7%94%B1%E5%8D%95%E6%9C%88%E6%B1%82%E7%B4%AF%E8%AE%A1%E5%8F%8A%E8%AE%A1%E7%AE%97%E5%90%8C%E6%AF%94%E5%A2%9E%E9%95%BF%E7%8E%87/</link>
+      <pubDate>Fri, 30 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/%E7%AE%97%E6%B3%95-%E7%94%B1%E5%8D%95%E6%9C%88%E6%B1%82%E7%B4%AF%E8%AE%A1%E5%8F%8A%E8%AE%A1%E7%AE%97%E5%90%8C%E6%AF%94%E5%A2%9E%E9%95%BF%E7%8E%87/</guid>
+      <description>现有一个月度贸易数据框，名为total，各列为 year, month, export, import, trade surplus
+1 由单月值求累计值(1) 使用sqldf() 和 SQL 语句# 对于单个变量而言，增加一列累计值的代码如下sqldf(&amp;quot;SELECT *, SUM(export) OVER (PARTITION BY year ORDER BY month) AS acc_exportFROM total&amp;quot;)# 对于多个要累计的变量，便需要合并查询字符串。在此基础上封装代码，追求通用性。joint &amp;lt;- function(string){str_c(&amp;#39;SUM(&amp;#39;, string, &amp;#39;) OVER (PARTITION BY year ORDER BY month) AS acc_&amp;#39;, string)}add_acc &amp;lt;- function(df){vars &amp;lt;- colnames(df %&amp;gt;% select(-(year:month))) # 要用到的变量名string_acc &amp;lt;- joint(vars) %&amp;gt;% str_c(collapse = &amp;#39;, &amp;#39;) # joint(vars)使用了向量化运算df_name &amp;lt;- deparse(substitute(df)) # 解析任一对象的名字为字符串query &amp;lt;- str_c(&amp;#39;SELECT *, &amp;#39;, string_acc, &amp;#39; FROM &amp;#39;, df_name) # 组建SQL查询字符串sqldf(query) %&amp;gt;% return()}total_sql &amp;lt;- add_acc(total)(2) 使用 R 基本包内置的 cumsum() 函数total_cumsum &amp;lt;- total %&amp;gt;% arrange(year, month) %&amp;gt;% group_by(year) %&amp;gt;% mutate(acc_ex = cumsum(export), acc_im = cumsum(import),acc_tra = cumsum(trade), acc_sur = cumsum(surplus)) %&amp;gt;% ungroup()不难发现，当表中所含列比较少时，用 group_by() + cumsum() 比较方便；而当表的列很多时，就会变得很繁琐，还是 sqldf() + SQL 语句的扩展性更强。</description>
+    </item>
+    
+  </channel>
+</rss>
