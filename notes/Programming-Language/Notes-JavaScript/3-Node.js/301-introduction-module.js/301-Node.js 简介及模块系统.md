@@ -2,6 +2,8 @@
 
 # Node.js 简介及模块系统
 
+![imgbin_node-js-javascript-web-application-express-js-computer-software-png](http://humoon-image-hosting-service.oss-cn-beijing.aliyuncs.com/img/typora/JavaScript/imgbin_node-js-javascript-web-application-express-js-computer-software-png.png)
+
 官方文档：https://nodejs.org/dist/latest-v14.x/docs/api/
 
 中文版：http://nodejs.cn/api/

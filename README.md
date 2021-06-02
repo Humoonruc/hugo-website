@@ -1,0 +1,1 @@
+Netlify 新建 website 从 GitHub 导入时，注意 Deploy 选项要全部空着，否则会部署失败
