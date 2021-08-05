@@ -97,11 +97,12 @@
 
 
 
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
 
 
 <div id="lesson-1-welcome-to-shiny" class="section level2">
 <h2>Lesson 1 Welcome to Shiny</h2>
-<div id="shiny-app-" class="section level3">
+<div id="创建一个-shiny-app-的过程" class="section level3">
 <h3>1 创建一个 Shiny App 的过程：</h3>
 <ul>
 <li>新建一个项目文件夹，每一个app都要有一个单独的文件夹。</li>
@@ -110,7 +111,7 @@
 <li>在R中通过<code>runApp("app文件夹目录")</code><a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> 来启动应用；<code>runApp("app文件夹目录", display.mode = "showcase")</code>可以在应用底部显示源代码。</li>
 </ul>
 </div>
-<div id="section" class="section level3">
+<div id="官方示例" class="section level3">
 <h3>2 官方示例</h3>
 <pre><code>library(shiny)
 runExample(&quot;01_hello&quot;)      # a histogram
@@ -128,7 +129,7 @@ runExample(&quot;11_timer&quot;)      # an automated timer</code></pre>
 </div>
 <div id="lesson-2-build-a-user-interface" class="section level2">
 <h2>Lesson 2 Build a user interface</h2>
-<div id="ui" class="section level3">
+<div id="ui的基本布局" class="section level3">
 <h3>1 ui的基本布局</h3>
 <pre><code>ui &lt;- fluidPage( # 流动页面
   titlePanel(&quot;title Panel&quot;), # 标题栏
@@ -138,7 +139,7 @@ runExample(&quot;11_timer&quot;)      # an automated timer</code></pre>
   )
 )</code></pre>
 </div>
-<div id="ui-1" class="section level3">
+<div id="ui的内容" class="section level3">
 <h3>2 ui的内容</h3>
 <p>在每一个子区域中，用“,”分隔多个内容</p>
 <table style="width:100%;">
@@ -248,7 +249,7 @@ runExample(&quot;11_timer&quot;)      # an automated timer</code></pre>
 </tbody>
 </table>
 </div>
-<div id="ui-2" class="section level3">
+<div id="ui的样式" class="section level3">
 <h3>3 ui的样式</h3>
 <p>align 参数决定位置</p>
 <p>style 参数可以定义字体、字号、颜色</p>
@@ -411,7 +412,7 @@ runExample(&quot;11_timer&quot;)      # an automated timer</code></pre>
 <div id="lesson-3-add-control-widgets" class="section level2">
 <h2>Lesson 3 Add control widgets</h2>
 <p>每个控件都有唯一的控件名，和用于在web中显示的标签</p>
-<div id="section-1" class="section level3">
+<div id="基本控件表" class="section level3">
 <h3>基本控件表</h3>
 <table>
 <colgroup>
@@ -480,7 +481,7 @@ runExample(&quot;11_timer&quot;)      # an automated timer</code></pre>
 </tbody>
 </table>
 </div>
-<div id="section-2" class="section level3">
+<div id="基本控件图" class="section level3">
 <h3>基本控件图</h3>
 <p><img src="/note/2019-07-31-shiny-app的语法_files/basic-widgets.png" /></p>
 <p>这个图也可以用shiny来画，且为动态的：</p>
@@ -573,7 +574,7 @@ server &lt;- function(input, output) {
 # Run the app ----
 shinyApp(ui = ui, server = server)</code></pre>
 </div>
-<div id="uiserver" class="section level3">
+<div id="基本控件在ui和server中的实现" class="section level3">
 <h3>基本控件在ui和server中的实现</h3>
 <p>官方代码：<a href="http://shiny.rstudio.com/gallery/widget-gallery.html">Shiny Widgets Gallery</a></p>
 <p>更多样的控件模板：<a href="http://shiny.rstudio.com/gallery/">Gallery</a></p>
@@ -582,7 +583,7 @@ shinyApp(ui = ui, server = server)</code></pre>
 <div id="lesson-4-display-reactive-output" class="section level2">
 <h2>Lesson 4 Display reactive output</h2>
 <p>上一课通过控件有了输入，本课要在页面中添加输出。</p>
-<div id="ui-3" class="section level3">
+<div id="ui中的输出函数" class="section level3">
 <h3>ui中的输出函数</h3>
 <table>
 <thead>
@@ -627,7 +628,7 @@ shinyApp(ui = ui, server = server)</code></pre>
 </tbody>
 </table>
 </div>
-<div id="server" class="section level3">
+<div id="server中的输出函数" class="section level3">
 <h3>server中的输出函数</h3>
 <table>
 <thead>
@@ -672,7 +673,7 @@ shinyApp(ui = ui, server = server)</code></pre>
 </div>
 <div id="lesson-5-use-r-scripts-and-data" class="section level2">
 <h2>Lesson 5 Use R scripts and data</h2>
-<div id="section-3" class="section level3">
+<div id="代码执行" class="section level3">
 <h3>代码执行</h3>
 <p>在shiny应用中，不同部分的代码的执行次数不同，规律如下:</p>
 <ul>

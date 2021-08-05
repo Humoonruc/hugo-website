@@ -99,12 +99,13 @@
 
 
 
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
 
 
 <p>现有一个月度贸易数据框，名为total，各列为 year, month, export, import, trade surplus</p>
-<div id="section" class="section level2">
+<div id="由单月值求累计值" class="section level2">
 <h2>1 由单月值求累计值</h2>
-<div id="sqldf--sql-" class="section level3">
+<div id="使用sqldf-和-sql-语句" class="section level3">
 <h3>(1) 使用sqldf() 和 SQL 语句</h3>
 <pre class="r"><code># 对于单个变量而言，增加一列累计值的代码如下
 sqldf(
@@ -126,7 +127,7 @@ add_acc &lt;- function(df){
 
 total_sql &lt;- add_acc(total)</code></pre>
 </div>
-<div id="r--cumsum-" class="section level3">
+<div id="使用-r-基本包内置的-cumsum-函数" class="section level3">
 <h3>(2) 使用 R 基本包内置的 cumsum() 函数</h3>
 <pre class="r"><code>total_cumsum &lt;- total %&gt;% arrange(year, month) %&gt;% group_by(year) %&gt;% 
   mutate(acc_ex = cumsum(export), acc_im = cumsum(import),
@@ -135,7 +136,7 @@ total_sql &lt;- add_acc(total)</code></pre>
 <p>不难发现，当表中所含列比较少时，用 group_by() + cumsum() 比较方便；而当表的列很多时，就会变得很繁琐，还是 sqldf() + SQL 语句的扩展性更强。</p>
 </div>
 </div>
-<div id="section-1" class="section level2">
+<div id="由累计值求单月值" class="section level2">
 <h2>2 由累计值求单月值</h2>
 <pre class="r"><code># 自定义求单月值的差分函数
 dif_mon &lt;- function(acc) {
@@ -147,9 +148,9 @@ total_month &lt;- total_cumsum %&gt;% arrange(year, month) %&gt;% group_by(year)
          trade = dif_mon(acc_tra), surplus = dif_mon(acc_sur)) %&gt;% 
   ungroup()</code></pre>
 </div>
-<div id="section-2" class="section level2">
+<div id="求同比增长率" class="section level2">
 <h2>3 求同比增长率</h2>
-<div id="section-3" class="section level3">
+<div id="使用差分法" class="section level3">
 <h3>(1) 使用差分法</h3>
 <p>这种方法高度依赖数据的完整性，1年12个月不能有任何缺失，故此方法其实是不可靠的。</p>
 <pre class="r"><code># 自定义同比增长率函数，a为时间序列, n为一个大周期的阶段数
@@ -170,7 +171,7 @@ temp &lt;- total_cumsum[,-(1:2)] %&gt;% map(growth,12) %&gt;% as.data.frame()
 colnames(temp) &lt;- str_c(&quot;g_&quot;, colnames(total_cumsum)[-(1:2)]) # 向量化运算
 total_g &lt;- cbind(total_cumsum, temp)</code></pre>
 </div>
-<div id="sqldf--sql--1" class="section level3">
+<div id="使用sqldf-和-sql-语句-1" class="section level3">
 <h3>(2) 使用sqldf() 和 SQL 语句</h3>
 <p>对数据框total中的单个变量而言，求同比增长率的查询语句如下</p>
 <pre><code>SELECT a.*, 100*(a.export/b.export-1) AS g_export
