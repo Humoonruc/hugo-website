@@ -1,0 +1,114 @@
+---
+title: "主页·Home"
+editor_options: 
+  markdown: 
+    wrap: 80
+---
+
+<h1 style="font-size:44px; color:royalblue; font-family: STKaiTi, &#39;Times New Roman&#39;, Times, serif; font-weight: bold; " align="center">
+
+工欲善其事    必先利其器
+
+</h1>
+
+<h1 style="font-size:32px; color:royalblue; font-family: STKaiTi, &#39;Times New Roman&#39;, Times, serif; font-weight: bold; " align="center">
+
+Work With Code    关注工具变革的力量
+
+</h1>
+
+<br/>
+
+<img src="http://humoon-image-hosting-service.oss-cn-beijing.aliyuncs.com/img/typora/JavaScript/imgbin_node-js-javascript-web-application-express-js-computer-software-png.png" alt="Github repo" style="width:120px;float:right;"/>
+
+> <div>
+>
+> <br/> <strong>任何能用 JavaScript 实现的</strong><br/> <strong>终将用
+> JavaScript 实现</strong><br/>
+>
+> </div>
+
+<br/>
+
+<img src="https://cran.r-project.org/Rlogo.svg" alt="Github repo" style="width:120px;float:right;"/>
+
+> <div>
+>
+> <br/> <strong>R 生态一入深似海</strong><br/> <strong>从此 Office
+> 是路人</strong><br/>
+>
+> </div>
+
+<br/>
+
+<img src="http://humoon-image-hosting-service.oss-cn-beijing.aliyuncs.com/img/typora/JavaScript/python-logo.png" alt="Github repo" style="width:120px;float:right;"/>
+
+> <div>
+>
+> <br/> <strong>Life is Short</strong><br/> <strong>You Need
+> Python</strong><br/>
+>
+> </div>
+
+<br/>
+
+## 名言警句
+
+> <div>
+>
+> <p>
+>
+> <strong>"未来是传统行业利用互联网技术在云端用人工智能的方式处理大数据。"</strong>
+>
+> </p>
+>
+> <p align="right">
+>
+> ------马化腾
+>
+> </p>
+>
+> <br/>
+>
+> <p>
+>
+> <strong>"在财政和信贷之间、通胀和资产泡沫之间，可能存在几十年一个轮回的周期转换。"</strong>
+>
+> </p>
+>
+> <p align="right">
+>
+> ------彭文生
+>
+> </p>
+>
+> </div>
+
+<br>
+
+
+# **编程语言笔记**
+
+## **JavaScript: 前端之王，全栈信仰**
+
+笔记地址：[CODING](https://humoonruc.coding.net/p/notes/d/Notes-of-Programming-Languages/git/tree/master/Notes-JavaScript); [GitHub](https://github.com/Humoonruc/Notes-of-Programming-Languages/tree/master/Notes-JavaScript)
+
+1.  ECMAScript 基本语法
+2.  浏览器 API
+3.  Node.js
+4.  JavaScript 爬虫
+5.  前端工程化
+6.  JavaScript 数据可视化
+7.  JavaScript 深度学习
+
+## **R: 为数据科学而生**
+
+笔记地址：[CODING](https://humoonruc.coding.net/p/notes/d/Notes-of-Programming-Languages/git/tree/master/Notes-R); [GitHub](https://github.com/Humoonruc/Notes-of-Programming-Languages/tree/master/Notes-R)
+
+## **Python: 万能胶水**
+
+笔记地址：[CODING](https://humoonruc.coding.net/p/notes/d/Notes-of-Programming-Languages/git/tree/master/Notes-Python); [GitHub](https://github.com/Humoonruc/Notes-of-Programming-Languages/tree/master/Notes-Python)
+
+
+
+# **近期随笔**

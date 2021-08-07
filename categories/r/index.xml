@@ -2,27 +2,27 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>R on 万水千山</title>
-    <link>/categories/r/</link>
+    <link>public/categories/r/</link>
     <description>Recent content in R on 万水千山</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 11 Oct 2019 00:00:00 +0000</lastBuildDate><atom:link href="/categories/r/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 11 Oct 2019 00:00:00 +0000</lastBuildDate><atom:link href="public/categories/r/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>将阿拉伯数字金额转换为人民币大写形式</title>
-      <link>/blog/%E5%B0%86%E9%98%BF%E6%8B%89%E4%BC%AF%E6%95%B0%E5%AD%97%E9%87%91%E9%A2%9D%E8%BD%AC%E6%8D%A2%E4%B8%BA%E4%BA%BA%E6%B0%91%E5%B8%81%E5%A4%A7%E5%86%99%E5%BD%A2%E5%BC%8F/</link>
+      <link>public/blog/%E5%B0%86%E9%98%BF%E6%8B%89%E4%BC%AF%E6%95%B0%E5%AD%97%E9%87%91%E9%A2%9D%E8%BD%AC%E6%8D%A2%E4%B8%BA%E4%BA%BA%E6%B0%91%E5%B8%81%E5%A4%A7%E5%86%99%E5%BD%A2%E5%BC%8F/</link>
       <pubDate>Fri, 11 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>/blog/%E5%B0%86%E9%98%BF%E6%8B%89%E4%BC%AF%E6%95%B0%E5%AD%97%E9%87%91%E9%A2%9D%E8%BD%AC%E6%8D%A2%E4%B8%BA%E4%BA%BA%E6%B0%91%E5%B8%81%E5%A4%A7%E5%86%99%E5%BD%A2%E5%BC%8F/</guid>
+      <guid>public/blog/%E5%B0%86%E9%98%BF%E6%8B%89%E4%BC%AF%E6%95%B0%E5%AD%97%E9%87%91%E9%A2%9D%E8%BD%AC%E6%8D%A2%E4%B8%BA%E4%BA%BA%E6%B0%91%E5%B8%81%E5%A4%A7%E5%86%99%E5%BD%A2%E5%BC%8F/</guid>
       <description>本程序理论上可以转换任意位数，但由于 R 语言储存数据的精度问题，当包含角、分时，只能转换百万亿人民币以下数量级的金额数。
 library(tidyverse)## -- Attaching packages --------------------------------------- tidyverse 1.3.1 --## v ggplot2 3.3.5 v purrr 0.3.4## v tibble 3.1.3 v dplyr 1.0.7## v tidyr 1.1.3 v stringr 1.4.0## v readr 2.0.0 v forcats 0.5.1## -- Conflicts ------------------------------------------ tidyverse_conflicts() --## x dplyr::filter() masks stats::filter()## x dplyr::lag() masks stats::lag()library(data.table)## ## 载入程辑包：&amp;#39;data.table&amp;#39;## The following objects are masked from &amp;#39;package:dplyr&amp;#39;:## ## between, first, last## The following object is masked from &amp;#39;package:purrr&amp;#39;:## ## transposehan_list = c(&amp;quot;零&amp;quot; , &amp;quot;壹&amp;quot; , &amp;quot;贰&amp;quot; , &amp;quot;叁&amp;quot; , &amp;quot;肆&amp;quot;, &amp;quot;伍&amp;quot; , &amp;quot;陆&amp;quot; , &amp;quot;柒&amp;quot; , &amp;quot;捌&amp;quot; , &amp;quot;玖&amp;quot;)# 划分整数和小数部分的函数divide &amp;lt;- function(num){integer &amp;lt;- floor(num)fraction &amp;lt;- round((num - integer)*100)c(integer, fraction) %&amp;gt;% return()}# 输出小数部分的函数fraction_to_rmb &amp;lt;- function(fraction){a &amp;lt;- fraction %/% 10b &amp;lt;- fraction %% 10if (a^2 + b^2 == 0) {return(&amp;#39;整&amp;#39;)} else if (a == 0 &amp;amp; b !</description>
     </item>
     
     <item>
       <title>blogdown语法</title>
-      <link>/blog/blogdown%E8%AF%AD%E6%B3%95/</link>
+      <link>public/blog/blogdown%E8%AF%AD%E6%B3%95/</link>
       <pubDate>Mon, 09 Sep 2019 00:00:00 +0000</pubDate>
       
-      <guid>/blog/blogdown%E8%AF%AD%E6%B3%95/</guid>
+      <guid>public/blog/blogdown%E8%AF%AD%E6%B3%95/</guid>
       <description>Step 1 安装# install.packages(&amp;quot;blogdown&amp;quot;)# blogdown::install_hugo() Step 2 初始化打开 Rstudio-&amp;gt;File-&amp;gt;New Project-&amp;gt;New Directory
 选择 Website using blogdown 创建一个项目
 或使用代码：
@@ -32,29 +32,29 @@ library(tidyverse)## -- Attaching packages ------------------------------------
     
     <item>
       <title>R文本文件的语法</title>
-      <link>/blog/r%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6%E7%9A%84%E8%AF%AD%E6%B3%95/</link>
+      <link>public/blog/r%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6%E7%9A%84%E8%AF%AD%E6%B3%95/</link>
       <pubDate>Mon, 09 Sep 2019 00:00:00 +0000</pubDate>
       
-      <guid>/blog/r%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6%E7%9A%84%E8%AF%AD%E6%B3%95/</guid>
+      <guid>public/blog/r%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6%E7%9A%84%E8%AF%AD%E6%B3%95/</guid>
       <description>网页版电子书
 源代码</description>
     </item>
     
     <item>
       <title>Shiny 语法</title>
-      <link>/blog/shiny-%E8%AF%AD%E6%B3%95/</link>
+      <link>public/blog/shiny-%E8%AF%AD%E6%B3%95/</link>
       <pubDate>Mon, 09 Sep 2019 00:00:00 +0000</pubDate>
       
-      <guid>/blog/shiny-%E8%AF%AD%E6%B3%95/</guid>
+      <guid>public/blog/shiny-%E8%AF%AD%E6%B3%95/</guid>
       <description>Lesson 1 Welcome to Shiny1 创建一个 Shiny App 的过程：新建一个项目文件夹，每一个app都要有一个单独的文件夹。在文件夹中新建app.R，注意这个文件名是不能改动的。app.R包含四个部分：（1）library(shiny)；（2）ui1 对象，设定界面的布局和外观；（3）server对象，在后台进行数据处理；（4）shinyApp(ui = ui, server = server)创建应用在R中通过runApp(&#34;app文件夹目录&#34;)2 来启动应用；runApp(&#34;app文件夹目录&#34;, display.mode = &#34;showcase&#34;)可以在应用底部显示源代码。2 官方示例library(shiny)runExample(&amp;quot;01_hello&amp;quot;) # a histogramrunExample(&amp;quot;02_text&amp;quot;) # tables and data framesrunExample(&amp;quot;03_reactivity&amp;quot;) # a reactive expressionrunExample(&amp;quot;04_mpg&amp;quot;) # global variablesrunExample(&amp;quot;05_sliders&amp;quot;) # slider barsrunExample(&amp;quot;06_tabsets&amp;quot;) # tabbed panelsrunExample(&amp;quot;07_widgets&amp;quot;) # help text and submit buttonsrunExample(&amp;quot;08_html&amp;quot;) # Shiny app built from HTMLrunExample(&amp;quot;09_upload&amp;quot;) # file upload wizardrunExample(&amp;quot;10_download&amp;quot;) # file download wizardrunExample(&amp;quot;11_timer&amp;quot;) # an automated timerLesson 2 Build a user interface1 ui的基本布局ui &amp;lt;- fluidPage( # 流动页面titlePanel(&amp;quot;title Panel&amp;quot;), # 标题栏sidebarLayout( # 边栏布局sidebarPanel(&amp;quot;sidebar&amp;quot;), # 边栏（一般是输入）mainPanel(&amp;quot;main panler&amp;quot;) # 主体部分（一般是输出）))2 ui的内容在每一个子区域中，用“,”分隔多个内容</description>
     </item>
     
     <item>
       <title>tufte样式（含侧边栏）语法</title>
-      <link>/blog/tufte%E6%A0%B7%E5%BC%8F-%E5%90%AB%E4%BE%A7%E8%BE%B9%E6%A0%8F-%E8%AF%AD%E6%B3%95/</link>
+      <link>public/blog/tufte%E6%A0%B7%E5%BC%8F-%E5%90%AB%E4%BE%A7%E8%BE%B9%E6%A0%8F-%E8%AF%AD%E6%B3%95/</link>
       <pubDate>Mon, 09 Sep 2019 00:00:00 +0000</pubDate>
       
-      <guid>/blog/tufte%E6%A0%B7%E5%BC%8F-%E5%90%AB%E4%BE%A7%E8%BE%B9%E6%A0%8F-%E8%AF%AD%E6%B3%95/</guid>
+      <guid>public/blog/tufte%E6%A0%B7%E5%BC%8F-%E5%90%AB%E4%BE%A7%E8%BE%B9%E6%A0%8F-%E8%AF%AD%E6%B3%95/</guid>
       <description>一、使用新建R Markdown文件 - from template - tufte包之Tufte Handout
 二、语法1 标题建议最多两层
 2 任意边栏内容放在```{marginfigure} ```格式的中间
@@ -72,10 +72,10 @@ pdf输出中，参考文献都在末尾。
     
     <item>
       <title>由单月求累计及计算同比增长率</title>
-      <link>/blog/%E7%AE%97%E6%B3%95-%E7%94%B1%E5%8D%95%E6%9C%88%E6%B1%82%E7%B4%AF%E8%AE%A1%E5%8F%8A%E8%AE%A1%E7%AE%97%E5%90%8C%E6%AF%94%E5%A2%9E%E9%95%BF%E7%8E%87/</link>
+      <link>public/blog/%E7%AE%97%E6%B3%95-%E7%94%B1%E5%8D%95%E6%9C%88%E6%B1%82%E7%B4%AF%E8%AE%A1%E5%8F%8A%E8%AE%A1%E7%AE%97%E5%90%8C%E6%AF%94%E5%A2%9E%E9%95%BF%E7%8E%87/</link>
       <pubDate>Fri, 30 Aug 2019 00:00:00 +0000</pubDate>
       
-      <guid>/blog/%E7%AE%97%E6%B3%95-%E7%94%B1%E5%8D%95%E6%9C%88%E6%B1%82%E7%B4%AF%E8%AE%A1%E5%8F%8A%E8%AE%A1%E7%AE%97%E5%90%8C%E6%AF%94%E5%A2%9E%E9%95%BF%E7%8E%87/</guid>
+      <guid>public/blog/%E7%AE%97%E6%B3%95-%E7%94%B1%E5%8D%95%E6%9C%88%E6%B1%82%E7%B4%AF%E8%AE%A1%E5%8F%8A%E8%AE%A1%E7%AE%97%E5%90%8C%E6%AF%94%E5%A2%9E%E9%95%BF%E7%8E%87/</guid>
       <description>现有一个月度贸易数据框，名为total，各列为 year, month, export, import, trade surplus
 1 由单月值求累计值(1) 使用sqldf() 和 SQL 语句# 对于单个变量而言，增加一列累计值的代码如下sqldf(&amp;quot;SELECT *, SUM(export) OVER (PARTITION BY year ORDER BY month) AS acc_exportFROM total&amp;quot;)# 对于多个要累计的变量，便需要合并查询字符串。在此基础上封装代码，追求通用性。joint &amp;lt;- function(string){str_c(&amp;#39;SUM(&amp;#39;, string, &amp;#39;) OVER (PARTITION BY year ORDER BY month) AS acc_&amp;#39;, string)}add_acc &amp;lt;- function(df){vars &amp;lt;- colnames(df %&amp;gt;% select(-(year:month))) # 要用到的变量名string_acc &amp;lt;- joint(vars) %&amp;gt;% str_c(collapse = &amp;#39;, &amp;#39;) # joint(vars)使用了向量化运算df_name &amp;lt;- deparse(substitute(df)) # 解析任一对象的名字为字符串query &amp;lt;- str_c(&amp;#39;SELECT *, &amp;#39;, string_acc, &amp;#39; FROM &amp;#39;, df_name) # 组建SQL查询字符串sqldf(query) %&amp;gt;% return()}total_sql &amp;lt;- add_acc(total)(2) 使用 R 基本包内置的 cumsum() 函数total_cumsum &amp;lt;- total %&amp;gt;% arrange(year, month) %&amp;gt;% group_by(year) %&amp;gt;% mutate(acc_ex = cumsum(export), acc_im = cumsum(import),acc_tra = cumsum(trade), acc_sur = cumsum(surplus)) %&amp;gt;% ungroup()不难发现，当表中所含列比较少时，用 group_by() + cumsum() 比较方便；而当表的列很多时，就会变得很繁琐，还是 sqldf() + SQL 语句的扩展性更强。</description>
     </item>

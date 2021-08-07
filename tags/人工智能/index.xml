@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>人工智能 on 万水千山</title>
-    <link>/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/</link>
+    <link>public/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/</link>
     <description>Recent content in 人工智能 on 万水千山</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 25 Oct 2019 00:00:00 +0000</lastBuildDate><atom:link href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 25 Oct 2019 00:00:00 +0000</lastBuildDate><atom:link href="public/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>人工智能普及的恐怖未来——《未来世界的幸存者》读书笔记</title>
-      <link>/blog/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E6%99%AE%E5%8F%8A%E7%9A%84%E6%81%90%E6%80%96%E6%9C%AA%E6%9D%A5-%E6%9C%AA%E6%9D%A5%E4%B8%96%E7%95%8C%E7%9A%84%E5%B9%B8%E5%AD%98%E8%80%85-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</link>
+      <link>public/blog/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E6%99%AE%E5%8F%8A%E7%9A%84%E6%81%90%E6%80%96%E6%9C%AA%E6%9D%A5-%E6%9C%AA%E6%9D%A5%E4%B8%96%E7%95%8C%E7%9A%84%E5%B9%B8%E5%AD%98%E8%80%85-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</link>
       <pubDate>Fri, 25 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>/blog/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E6%99%AE%E5%8F%8A%E7%9A%84%E6%81%90%E6%80%96%E6%9C%AA%E6%9D%A5-%E6%9C%AA%E6%9D%A5%E4%B8%96%E7%95%8C%E7%9A%84%E5%B9%B8%E5%AD%98%E8%80%85-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</guid>
+      <guid>public/blog/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E6%99%AE%E5%8F%8A%E7%9A%84%E6%81%90%E6%80%96%E6%9C%AA%E6%9D%A5-%E6%9C%AA%E6%9D%A5%E4%B8%96%E7%95%8C%E7%9A%84%E5%B9%B8%E5%AD%98%E8%80%85-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</guid>
       <description>有了汽车，骡马几乎彻底消失，马车夫全部再就业；机械普及，女性的就业机会空前增加，性别平等取得突破性进展。科技的重大进步，对经济结构乃止社会结构总会产生深远的影响。而这一次的智能革命，甚至有可能颠覆我们熟知的全部社会架构。
 1 技术迭代与中年失业技术迭代越来越快，但“终身学习”对于绝大多数人都是不现实的。人到中年，精力衰退，上有老下有小。只有高收入阶层凭借积蓄可以整装再出发，大多数人则根本没有条件对一个新领域重头学起。
 2 教育不足与无用人口人类社会出现一个庞大的、无用的无产阶级，他们对“国家”不再有用，国家便很有可能会忽略他们的需求。只把他们圈养起来，甚至实施绝育。

@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>竞争 on 万水千山</title>
-    <link>/tags/%E7%AB%9E%E4%BA%89/</link>
+    <link>public/tags/%E7%AB%9E%E4%BA%89/</link>
     <description>Recent content in 竞争 on 万水千山</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 08 Oct 2019 00:00:00 +0000</lastBuildDate><atom:link href="/tags/%E7%AB%9E%E4%BA%89/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 08 Oct 2019 00:00:00 +0000</lastBuildDate><atom:link href="public/tags/%E7%AB%9E%E4%BA%89/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>战国时代才是大商辈出的时代</title>
-      <link>/blog/%E6%88%98%E5%9B%BD%E6%97%B6%E4%BB%A3%E6%89%8D%E6%98%AF%E5%A4%A7%E5%95%86%E8%BE%88%E5%87%BA%E7%9A%84%E6%97%B6%E4%BB%A3/</link>
+      <link>public/blog/%E6%88%98%E5%9B%BD%E6%97%B6%E4%BB%A3%E6%89%8D%E6%98%AF%E5%A4%A7%E5%95%86%E8%BE%88%E5%87%BA%E7%9A%84%E6%97%B6%E4%BB%A3/</link>
       <pubDate>Tue, 08 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>/blog/%E6%88%98%E5%9B%BD%E6%97%B6%E4%BB%A3%E6%89%8D%E6%98%AF%E5%A4%A7%E5%95%86%E8%BE%88%E5%87%BA%E7%9A%84%E6%97%B6%E4%BB%A3/</guid>
+      <guid>public/blog/%E6%88%98%E5%9B%BD%E6%97%B6%E4%BB%A3%E6%89%8D%E6%98%AF%E5%A4%A7%E5%95%86%E8%BE%88%E5%87%BA%E7%9A%84%E6%97%B6%E4%BB%A3/</guid>
       <description>至少自汉代以来，中国容易形成垄断的产业便被国家所把持，一定程度上，这些行业产生的垄断利润被用于公共项目；但不以盈利为目的，也就产生了效率低下的问题。
 在战国时代，效率是第一位的，为了在技术上领先，各国必须容忍大型商业组织的存在，而势必产生贫富分化的问题。有朝一日天下大同，自然垄断行业一定会被政府收回，以缓和社会矛盾。</description>
     </item>
