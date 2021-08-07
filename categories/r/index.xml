@@ -31,16 +31,6 @@ library(tidyverse)## -- Attaching packages ------------------------------------
     </item>
     
     <item>
-      <title>R文本文件的语法</title>
-      <link>/blog/r%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6%E7%9A%84%E8%AF%AD%E6%B3%95/</link>
-      <pubDate>Mon, 09 Sep 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/blog/r%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6%E7%9A%84%E8%AF%AD%E6%B3%95/</guid>
-      <description>网页版电子书
-源代码</description>
-    </item>
-    
-    <item>
       <title>Shiny 语法</title>
       <link>/blog/shiny-%E8%AF%AD%E6%B3%95/</link>
       <pubDate>Mon, 09 Sep 2019 00:00:00 +0000</pubDate>
