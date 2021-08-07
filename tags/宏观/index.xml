@@ -2,26 +2,26 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>宏观 on 万水千山</title>
-    <link>public/tags/%E5%AE%8F%E8%A7%82/</link>
+    <link>/tags/%E5%AE%8F%E8%A7%82/</link>
     <description>Recent content in 宏观 on 万水千山</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 11 Nov 2019 00:00:00 +0000</lastBuildDate><atom:link href="public/tags/%E5%AE%8F%E8%A7%82/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 11 Nov 2019 00:00:00 +0000</lastBuildDate><atom:link href="/tags/%E5%AE%8F%E8%A7%82/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>康捷拉季耶夫“周期”存在吗？</title>
-      <link>public/blog/%E5%BA%B7%E6%8D%B7%E6%8B%89%E5%AD%A3%E8%80%B6%E5%A4%AB-%E5%91%A8%E6%9C%9F-%E5%AD%98%E5%9C%A8%E5%90%97/</link>
+      <link>/blog/%E5%BA%B7%E6%8D%B7%E6%8B%89%E5%AD%A3%E8%80%B6%E5%A4%AB-%E5%91%A8%E6%9C%9F-%E5%AD%98%E5%9C%A8%E5%90%97/</link>
       <pubDate>Mon, 11 Nov 2019 00:00:00 +0000</pubDate>
       
-      <guid>public/blog/%E5%BA%B7%E6%8D%B7%E6%8B%89%E5%AD%A3%E8%80%B6%E5%A4%AB-%E5%91%A8%E6%9C%9F-%E5%AD%98%E5%9C%A8%E5%90%97/</guid>
+      <guid>/blog/%E5%BA%B7%E6%8D%B7%E6%8B%89%E5%AD%A3%E8%80%B6%E5%A4%AB-%E5%91%A8%E6%9C%9F-%E5%AD%98%E5%9C%A8%E5%90%97/</guid>
       <description>康德拉季耶夫周期就像中国的王朝周期率/治乱循环一样，乍一看似乎有一个统一的模式，细究则发现不但各个周期在时间上长短不一，甚至归纳不出一个共同的主要原因。一轮一轮的科技革命浪潮（影响投资）？贫富差距程度的钟摆运动（影响消费）？资本主义世界体系的规模变化（影响分工和市场深化）？国际政治格局（影响方方面面）？以及诸多因素的相互作用模式？所有这些异常复杂地纠缠在一起，甚至让人怀疑是否存在最终解开这些谜团的前景。理论上，用历史上的长周期规律作为论据，是不大可靠的。实践上，没有人能预测一个朝代何时灭亡；同样，预测经济何时陷入长周期的底部恐怕也是自讨苦吃——这些都是超越了人类认知能力的事物。或许，唯一可以确定的，就是经济系统的开放性、复杂性和非线性，人类应当保持谦逊，不要动不动就觉得自己驯服了经济波动。</description>
     </item>
     
     <item>
       <title>德国经济与其保守的货币财政政策</title>
-      <link>public/blog/%E5%BE%B7%E5%9B%BD%E7%BB%8F%E6%B5%8E%E4%B8%8E%E5%85%B6%E4%BF%9D%E5%AE%88%E7%9A%84%E8%B4%A7%E5%B8%81%E8%B4%A2%E6%94%BF%E6%94%BF%E7%AD%96/</link>
+      <link>/blog/%E5%BE%B7%E5%9B%BD%E7%BB%8F%E6%B5%8E%E4%B8%8E%E5%85%B6%E4%BF%9D%E5%AE%88%E7%9A%84%E8%B4%A7%E5%B8%81%E8%B4%A2%E6%94%BF%E6%94%BF%E7%AD%96/</link>
       <pubDate>Mon, 14 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>public/blog/%E5%BE%B7%E5%9B%BD%E7%BB%8F%E6%B5%8E%E4%B8%8E%E5%85%B6%E4%BF%9D%E5%AE%88%E7%9A%84%E8%B4%A7%E5%B8%81%E8%B4%A2%E6%94%BF%E6%94%BF%E7%AD%96/</guid>
+      <guid>/blog/%E5%BE%B7%E5%9B%BD%E7%BB%8F%E6%B5%8E%E4%B8%8E%E5%85%B6%E4%BF%9D%E5%AE%88%E7%9A%84%E8%B4%A7%E5%B8%81%E8%B4%A2%E6%94%BF%E6%94%BF%E7%AD%96/</guid>
       <description>出处：https://zhuanlan.zhihu.com/p/34061679
 德国经济（一） 欧盟和欧元是上帝赐予德国的大礼欧盟和欧元对德国是否有利？答案是勿庸置疑的。可以说，欧盟和欧元是上帝给予德国最好的礼物。
 欧盟为什么对德国有利？德国是一个只有八千万人口的国家。这个数量级在欧洲算是个大国，但在亚洲却比比皆是，算不上什么。
@@ -79,10 +79,10 @@
     
     <item>
       <title>读《渐行渐近的金融周期》</title>
-      <link>public/blog/%E8%AF%BB-%E6%B8%90%E8%A1%8C%E6%B8%90%E8%BF%91%E7%9A%84%E9%87%91%E8%9E%8D%E5%91%A8%E6%9C%9F/</link>
+      <link>/blog/%E8%AF%BB-%E6%B8%90%E8%A1%8C%E6%B8%90%E8%BF%91%E7%9A%84%E9%87%91%E8%9E%8D%E5%91%A8%E6%9C%9F/</link>
       <pubDate>Mon, 14 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>public/blog/%E8%AF%BB-%E6%B8%90%E8%A1%8C%E6%B8%90%E8%BF%91%E7%9A%84%E9%87%91%E8%9E%8D%E5%91%A8%E6%9C%9F/</guid>
+      <guid>/blog/%E8%AF%BB-%E6%B8%90%E8%A1%8C%E6%B8%90%E8%BF%91%E7%9A%84%E9%87%91%E8%9E%8D%E5%91%A8%E6%9C%9F/</guid>
       <description>来源：https://www.metaquant.org/financial-cycel.html
 读《渐行渐近的金融周期》现在国内的媒体经济学家大体上处于供给过剩的状态，他们在媒体上、网络上发表对目前重大经济问题的看法，很多却只顾吸引眼球，贩卖焦虑，立论基础通常薄弱，而结论与政策建议又老生常谈，怎么说都不会错，仔细读完也不会增加太多真知灼见。而另一方面，学院经济学家们的研究则曲高和寡，计量工具用得甚是娴熟，却经常与国内经济的现实问题无涉，这也不能怪他们，毕竟中国的经济现实大多比较魔幻，恐怕是那些优美的模型无法涵盖的。
 正因为此，当我读到彭文生博士的《渐行渐远的红利》时，就觉得分外难得。这本书在2013年出版，关心的主要问题是中国近十几年增长红利尤其是人口红利的逐渐丧失。人口红利主要表现为人口结构中生产者(青壮年)相对于消费者(老人及孩子)比例的增加以及农村隐性失业人口进入城市从事更高劳动生产率的工作，以上红利导致了中国近年经济的高速增长，也塑造了中国特殊的经济结构(比如中国奇高的储蓄率导致经济增长特别依赖于投资拉动)。整本书以人口结构变迁为主线，串起了近年中国经济种种让人疑惑的现象，给予了非常有说服力的解释框架，而相关数据的支撑也非常扎实。应该说，这种既有理论框架、又有数据支撑，更能关注现实的经济学研究在当代中国仍然比较稀有，读来颇有醍醐灌顶之感，看到纷繁复杂的经济现象背后都有类似的经济逻辑，不得不佩服作者观察之敏锐，思索之深刻。

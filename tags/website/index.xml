@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>website on 万水千山</title>
-    <link>public/tags/website/</link>
+    <link>/tags/website/</link>
     <description>Recent content in website on 万水千山</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 09 Sep 2019 00:00:00 +0000</lastBuildDate><atom:link href="public/tags/website/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 09 Sep 2019 00:00:00 +0000</lastBuildDate><atom:link href="/tags/website/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>blogdown语法</title>
-      <link>public/blog/blogdown%E8%AF%AD%E6%B3%95/</link>
+      <link>/blog/blogdown%E8%AF%AD%E6%B3%95/</link>
       <pubDate>Mon, 09 Sep 2019 00:00:00 +0000</pubDate>
       
-      <guid>public/blog/blogdown%E8%AF%AD%E6%B3%95/</guid>
+      <guid>/blog/blogdown%E8%AF%AD%E6%B3%95/</guid>
       <description>Step 1 安装# install.packages(&amp;quot;blogdown&amp;quot;)# blogdown::install_hugo() Step 2 初始化打开 Rstudio-&amp;gt;File-&amp;gt;New Project-&amp;gt;New Directory
 选择 Website using blogdown 创建一个项目
 或使用代码：

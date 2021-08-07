@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>红楼梦 on 万水千山</title>
-    <link>public/tags/%E7%BA%A2%E6%A5%BC%E6%A2%A6/</link>
+    <link>/tags/%E7%BA%A2%E6%A5%BC%E6%A2%A6/</link>
     <description>Recent content in 红楼梦 on 万水千山</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 14 Oct 2019 00:00:00 +0000</lastBuildDate><atom:link href="public/tags/%E7%BA%A2%E6%A5%BC%E6%A2%A6/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 14 Oct 2019 00:00:00 +0000</lastBuildDate><atom:link href="/tags/%E7%BA%A2%E6%A5%BC%E6%A2%A6/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>德国经济与其保守的货币财政政策</title>
-      <link>public/blog/%E5%BE%B7%E5%9B%BD%E7%BB%8F%E6%B5%8E%E4%B8%8E%E5%85%B6%E4%BF%9D%E5%AE%88%E7%9A%84%E8%B4%A7%E5%B8%81%E8%B4%A2%E6%94%BF%E6%94%BF%E7%AD%96/</link>
+      <link>/blog/%E5%BE%B7%E5%9B%BD%E7%BB%8F%E6%B5%8E%E4%B8%8E%E5%85%B6%E4%BF%9D%E5%AE%88%E7%9A%84%E8%B4%A7%E5%B8%81%E8%B4%A2%E6%94%BF%E6%94%BF%E7%AD%96/</link>
       <pubDate>Mon, 14 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>public/blog/%E5%BE%B7%E5%9B%BD%E7%BB%8F%E6%B5%8E%E4%B8%8E%E5%85%B6%E4%BF%9D%E5%AE%88%E7%9A%84%E8%B4%A7%E5%B8%81%E8%B4%A2%E6%94%BF%E6%94%BF%E7%AD%96/</guid>
+      <guid>/blog/%E5%BE%B7%E5%9B%BD%E7%BB%8F%E6%B5%8E%E4%B8%8E%E5%85%B6%E4%BF%9D%E5%AE%88%E7%9A%84%E8%B4%A7%E5%B8%81%E8%B4%A2%E6%94%BF%E6%94%BF%E7%AD%96/</guid>
       <description>出处：https://zhuanlan.zhihu.com/p/34061679
 德国经济（一） 欧盟和欧元是上帝赐予德国的大礼欧盟和欧元对德国是否有利？答案是勿庸置疑的。可以说，欧盟和欧元是上帝给予德国最好的礼物。
 欧盟为什么对德国有利？德国是一个只有八千万人口的国家。这个数量级在欧洲算是个大国，但在亚洲却比比皆是，算不上什么。
@@ -70,10 +70,10 @@
     
     <item>
       <title>《脂汇本红楼梦注解》tufte网页版</title>
-      <link>public/blog/%E8%84%82%E6%B1%87%E6%9C%AC%E7%BA%A2%E6%A5%BC%E6%A2%A6%E6%B3%A8%E8%A7%A3-tufte%E7%BD%91%E9%A1%B5%E7%89%88/</link>
+      <link>/blog/%E8%84%82%E6%B1%87%E6%9C%AC%E7%BA%A2%E6%A5%BC%E6%A2%A6%E6%B3%A8%E8%A7%A3-tufte%E7%BD%91%E9%A1%B5%E7%89%88/</link>
       <pubDate>Tue, 30 Jul 2019 00:00:00 +0000</pubDate>
       
-      <guid>public/blog/%E8%84%82%E6%B1%87%E6%9C%AC%E7%BA%A2%E6%A5%BC%E6%A2%A6%E6%B3%A8%E8%A7%A3-tufte%E7%BD%91%E9%A1%B5%E7%89%88/</guid>
+      <guid>/blog/%E8%84%82%E6%B1%87%E6%9C%AC%E7%BA%A2%E6%A5%BC%E6%A2%A6%E6%B3%A8%E8%A7%A3-tufte%E7%BD%91%E9%A1%B5%E7%89%88/</guid>
       <description>目录列表自序前言凡例楔子第一单元第1回第2回第3回第4回第5回第6回第7回第8回第9回第二单元第10回第11回第12回第13回第14回第15回第16回第17回第18回第三单元第19回第20回第21回第22回第23回第24回第25回第26回第27回第四单元第28回第29回第30回第31回第32回第33回第34回第35回第36回第五单元第37回第38回第39回第40回第41回第42回第43回第44回第45回第六单元第46回第47回第48回第49回第50回第51回第52回第53回第54回第七单元第55回第56回第57回第58回第59回第60回第61回第62回第63回第八单元第64回第65回第66回第67回第68回第69回第70回第71回第72回第九单元第73回第74回第75回第76回第77回第78回第79回第80回附录附录1附录2附录3附录4附录5附录6附录7附录8附录9附录10附录11附录12附录13附录14附录15附录16附录17后记   </description>
     </item>
     

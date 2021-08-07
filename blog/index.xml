@@ -2,53 +2,45 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>博客·Blog on 万水千山</title>
-    <link>public/blog/</link>
+    <link>/blog/</link>
     <description>Recent content in 博客·Blog on 万水千山</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 06 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="public/blog/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>fffffffffffff</title>
-      <link>public/blog/fffffffffffff/</link>
-      <pubDate>Fri, 06 Aug 2021 00:00:00 +0000</pubDate>
-      
-      <guid>public/blog/fffffffffffff/</guid>
-      <description>adf</description>
-    </item>
-    
+    <lastBuildDate>Fri, 06 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="/blog/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>印度惆怅意难平——广义次大陆的地缘边界和三大区域</title>
-      <link>public/blog/%E5%8D%B0%E5%BA%A6%E6%83%86%E6%80%85%E6%84%8F%E9%9A%BE%E5%B9%B3%E5%B9%BF%E4%B9%89%E6%AC%A1%E5%A4%A7%E9%99%86%E7%9A%84%E5%9C%B0%E7%BC%98%E8%BE%B9%E7%95%8C%E5%92%8C%E4%B8%89%E5%A4%A7%E5%8C%BA%E5%9F%9F/</link>
+      <link>/blog/pan-india/</link>
       <pubDate>Fri, 06 Aug 2021 00:00:00 +0000</pubDate>
       
-      <guid>public/blog/%E5%8D%B0%E5%BA%A6%E6%83%86%E6%80%85%E6%84%8F%E9%9A%BE%E5%B9%B3%E5%B9%BF%E4%B9%89%E6%AC%A1%E5%A4%A7%E9%99%86%E7%9A%84%E5%9C%B0%E7%BC%98%E8%BE%B9%E7%95%8C%E5%92%8C%E4%B8%89%E5%A4%A7%E5%8C%BA%E5%9F%9F/</guid>
-      <description>以印度河和恒河这“南亚两河流域”为核心的次大陆，自古是一个文明世界。从文明边界的角度看，广义次大陆的范围远超今日印度，可以分为三大区域：
-第一部分，包括印度河流域和阿富汗大部，甚至北至撒马尔罕，是西北部的绿圈。印度历代都城绝大多数位于喀布尔-白沙瓦-伊斯兰堡-拉哈尔-德里一线。其中，伊斯兰堡西北的几座都城都处于高地与平原的交接地带。第二部分，以恒河流域为主，是北部的红圈。第三部分，以德干高原为主，是南部的黄圈。广义次大陆的这三大区域可以类比以黄河和长江这“东亚两河流域”为核心的中国：
-第一部分，北方黄河流域及其边缘高地。中国历代都城中，长安-北京也处于高地与平原的交接地带，是为“天子守国门”。洛阳、开封则相对靠南，但也仍在北方。第二部分，南方长江流域。第三部分，华南的丘陵、高原。中国历史上的强大王朝，一般发源于北方农耕区，或为边缘高地南下入侵的马上民族；鼎盛时能够控制长江流域。但直到明清，继承了蒙古帝国的征服成果，才稳定控制了云贵高原。
-南亚次大陆同样，强大王朝一般发源于第一部分的绿圈中，或为印度河流域农耕区，或为从阿富汗和中亚南下的马上民族，鼎盛时期能控制恒河流域，典型如伽色尼王朝、莫卧儿帝国。相对于印度河和恒河流域，德干高原价值偏低而（水路）运输不便，在英国人征服南亚前始终没有被次大陆北方政权稳定的控制。
-就像黄河流域、长江流域之间的秦岭-淮河常常成为中国历史上分裂时期的南北政治分界线，以及事实上今天的文化分界线；印度河平原与恒河平原相接的德里一带，则是广义次大陆西北部和北部的政治、文化分界线。德里西北，是伊斯兰文化区；东南，则是梵-印地文化区。
-所以，当代印度，按历史标准评价，实为偏安于东南的“南朝”——充其量相当于北宋（相对于辽，北宋也是“南朝”），远远没有实现“南亚两河流域”陆上地缘潜力的峰值。印度不得不倾注大量资源于陆上西北方向。中国则相反，继承了清王朝的广阔边疆，实现了“东亚两河流域”陆地地缘潜力的峰值，因而能够集中资源于当代的海权争夺。
-但印度精英心里明白印度的历史和地理环境，因此本能地对印度河流域、阿富汗抱有强烈的兴趣和持续的关注——因为这里是他们的古都，和天然的陆上威胁区。试想，假如今日中国和北宋一样，没有控制北方高地和燕云、河套两片重要的农耕区，哪怕比历史上大多数时间巩固了对华南的控制，能不对西北和幽云十六州念念不忘吗？！
+      <guid>/blog/pan-india/</guid>
+      <description>以印度河和恒河这&amp;quot;南亚两河流域&amp;ldquo;为核心的次大陆，自古是一个文明世界。从文明边界的角度看，广义次大陆的范围远超今日印度，可以分为三大区域：
+ 第一部分，包括印度河流域和阿富汗大部，甚至北至撒马尔罕，是西北部的绿圈。印度历代都城绝大多数位于喀布尔-白沙瓦-伊斯兰堡-拉哈尔-德里一线。其中，伊斯兰堡西北的几座都城都处于高地与平原的交接地带。 第二部分，以恒河流域为主，是北部的红圈。 第三部分，以德干高原为主，是南部的黄圈。  广义次大陆的这三大区域可以类比以黄河和长江这&amp;rdquo;东亚两河流域&amp;ldquo;为核心的中国：
+ 第一部分，北方黄河流域及其边缘高地。中国历代都城中，长安-北京也处于高地与平原的交接地带，是为&amp;quot;天子守国门&amp;rdquo;。洛阳、开封则相对靠南，但也仍在北方。 第二部分，南方长江流域。 第三部分，华南的丘陵、高原。  中国历史上的强大王朝，一般发源于北方农耕区，或为边缘高地南下入侵的马上民族；鼎盛时能够控制长江流域。但直到明清，继承了蒙古帝国的征服成果，才稳定控制了云贵高原。
+南亚次大陆同样，强大王朝一般发源于第一部分的绿圈中，或为印度河流域农耕区，或为从阿富汗和中亚南下的马上民族，鼎盛时期能控制恒河流域，典型如贵霜帝国、伽色尼王朝、莫卧儿帝国。
+相对于印度河和恒河流域，德干高原价值偏低而（水路）运输不便，在英国人征服南亚前始终没有被次大陆北方政权稳定的控制。
+就像黄河流域、长江流域之间的秦岭-淮河常常成为中国历史上分裂时期的南北政治分界线，以及事实上今天的文化分界线；印度河平原与恒河平原相接的德里西北一带，则是广义次大陆西北部和北部的政治、文化分界线。这一分界线的西北，是伊斯兰文化区；东南，则是梵-印地文化区。
+所以，当代印度，按历史标准评价，实为偏安于东南的&amp;quot;南朝&amp;quot;&amp;mdash;&amp;mdash;充其量相当于北宋（相对于辽，北宋也是&amp;quot;南朝&amp;quot;），远远没有实现&amp;quot;南亚两河流域&amp;quot;陆上地缘潜力的峰值。印度不得不倾注大量资源于陆上西北方向。中国则相反，继承了清王朝的广阔边疆，实现了&amp;quot;东亚两河流域&amp;quot;陆地地缘潜力的峰值，因而能够集中资源于当代的海权争夺。
+但印度精英心里明白印度的历史和地理环境，因此本能地对印度河流域、阿富汗抱有强烈的兴趣和持续的关注&amp;mdash;&amp;mdash;因为这里是他们的古都，和天然的陆上威胁区。试想，假如今日中国和北宋一样，没有控制北方高地和燕云、河套两片重要的农耕区，哪怕比历史上大多数时间巩固了对华南的控制，能不对西北和幽云十六州念念不忘吗？！
 其实，包括美国在内的大国，都明白印度地缘潜力的可怕，因此都对巴基斯坦优待有加。如果印度吞并了巴基斯坦甚至阿富汗，恢复其历史疆域的峰值，加之它已经稳定控制了德干高原，将毫无疑问成为世界一极。
 参考：【美】罗伯特·卡普兰《The Revenge of Geography》</description>
     </item>
     
     <item>
       <title>当前区域一体化的总体格局</title>
-      <link>public/blog/%E5%BD%93%E5%89%8D%E5%8C%BA%E5%9F%9F%E4%B8%80%E4%BD%93%E5%8C%96%E7%9A%84%E6%80%BB%E4%BD%93%E6%A0%BC%E5%B1%80/</link>
+      <link>/blog/%E5%BD%93%E5%89%8D%E5%8C%BA%E5%9F%9F%E4%B8%80%E4%BD%93%E5%8C%96%E7%9A%84%E6%80%BB%E4%BD%93%E6%A0%BC%E5%B1%80/</link>
       <pubDate>Thu, 26 Nov 2020 00:00:00 +0000</pubDate>
       
-      <guid>public/blog/%E5%BD%93%E5%89%8D%E5%8C%BA%E5%9F%9F%E4%B8%80%E4%BD%93%E5%8C%96%E7%9A%84%E6%80%BB%E4%BD%93%E6%A0%BC%E5%B1%80/</guid>
+      <guid>/blog/%E5%BD%93%E5%89%8D%E5%8C%BA%E5%9F%9F%E4%B8%80%E4%BD%93%E5%8C%96%E7%9A%84%E6%80%BB%E4%BD%93%E6%A0%BC%E5%B1%80/</guid>
       <description>点击访问图片版网页版
 </description>
     </item>
     
     <item>
       <title>我们对未来的局势预期是不是太乐观了？</title>
-      <link>public/blog/%E6%88%91%E4%BB%AC%E5%AF%B9%E6%9C%AA%E6%9D%A5%E7%9A%84%E5%B1%80%E5%8A%BF%E9%A2%84%E6%9C%9F%E6%98%AF%E4%B8%8D%E6%98%AF%E5%A4%AA%E4%B9%90%E8%A7%82%E4%BA%86/</link>
+      <link>/blog/%E6%88%91%E4%BB%AC%E5%AF%B9%E6%9C%AA%E6%9D%A5%E7%9A%84%E5%B1%80%E5%8A%BF%E9%A2%84%E6%9C%9F%E6%98%AF%E4%B8%8D%E6%98%AF%E5%A4%AA%E4%B9%90%E8%A7%82%E4%BA%86/</link>
       <pubDate>Wed, 11 Nov 2020 00:00:00 +0000</pubDate>
       
-      <guid>public/blog/%E6%88%91%E4%BB%AC%E5%AF%B9%E6%9C%AA%E6%9D%A5%E7%9A%84%E5%B1%80%E5%8A%BF%E9%A2%84%E6%9C%9F%E6%98%AF%E4%B8%8D%E6%98%AF%E5%A4%AA%E4%B9%90%E8%A7%82%E4%BA%86/</guid>
+      <guid>/blog/%E6%88%91%E4%BB%AC%E5%AF%B9%E6%9C%AA%E6%9D%A5%E7%9A%84%E5%B1%80%E5%8A%BF%E9%A2%84%E6%9C%9F%E6%98%AF%E4%B8%8D%E6%98%AF%E5%A4%AA%E4%B9%90%E8%A7%82%E4%BA%86/</guid>
       <description>十九届五中全会公报对于未来国际局势和 2035 年远景目标有这么几句话：
 全会深入分析了我国发展环境面临的深刻复杂变化，认为当前和今后一个时期，我国发展仍然处于重要战略机遇期，但机遇和挑战都有新的发展变化。当今世界正经历百年未有之大变局，新一轮科技革命和产业变革深入发展，国际力量对比深刻调整，和平与发展仍然是时代主题，人类命运共同体理念深入人心，同时国际环境日趋复杂，不稳定性不确定性明显增加。
 全会提出了到二〇三五年基本实现社会主义现代化远景目标，这就是：……；形成对外开放新格局，参与国际经济合作和竞争新优势明显增强；人均国内生产总值达到中等发达国家水平，中等收入群体显著扩大，基本公共服务实现均等化，城乡区域发展差距和居民生活水平差距显著缩小；……
@@ -70,20 +62,20 @@
     
     <item>
       <title>幻灯片设计原理</title>
-      <link>public/blog/%E5%B9%BB%E7%81%AF%E7%89%87%E8%AE%BE%E8%AE%A1%E5%8E%9F%E7%90%86/</link>
+      <link>/blog/%E5%B9%BB%E7%81%AF%E7%89%87%E8%AE%BE%E8%AE%A1%E5%8E%9F%E7%90%86/</link>
       <pubDate>Fri, 30 Oct 2020 00:00:00 +0000</pubDate>
       
-      <guid>public/blog/%E5%B9%BB%E7%81%AF%E7%89%87%E8%AE%BE%E8%AE%A1%E5%8E%9F%E7%90%86/</guid>
+      <guid>/blog/%E5%B9%BB%E7%81%AF%E7%89%87%E8%AE%BE%E8%AE%A1%E5%8E%9F%E7%90%86/</guid>
       <description>点击访问网页版图片版
 </description>
     </item>
     
     <item>
       <title>《钢铁是怎样炼成的》手稿被删减内容</title>
-      <link>public/blog/%E9%92%A2%E9%93%81%E6%98%AF%E6%80%8E%E6%A0%B7%E7%82%BC%E6%88%90%E7%9A%84-%E6%89%8B%E7%A8%BF%E8%A2%AB%E5%88%A0%E5%87%8F%E5%86%85%E5%AE%B9/</link>
+      <link>/blog/%E9%92%A2%E9%93%81%E6%98%AF%E6%80%8E%E6%A0%B7%E7%82%BC%E6%88%90%E7%9A%84-%E6%89%8B%E7%A8%BF%E8%A2%AB%E5%88%A0%E5%87%8F%E5%86%85%E5%AE%B9/</link>
       <pubDate>Mon, 04 May 2020 00:00:00 +0000</pubDate>
       
-      <guid>public/blog/%E9%92%A2%E9%93%81%E6%98%AF%E6%80%8E%E6%A0%B7%E7%82%BC%E6%88%90%E7%9A%84-%E6%89%8B%E7%A8%BF%E8%A2%AB%E5%88%A0%E5%87%8F%E5%86%85%E5%AE%B9/</guid>
+      <guid>/blog/%E9%92%A2%E9%93%81%E6%98%AF%E6%80%8E%E6%A0%B7%E7%82%BC%E6%88%90%E7%9A%84-%E6%89%8B%E7%A8%BF%E8%A2%AB%E5%88%A0%E5%87%8F%E5%86%85%E5%AE%B9/</guid>
       <description>《钢铁是怎样炼成的》手稿与通行本差异见译林出版社 2010 年版1附注。
 
 删减内容关于冬妮娅冬妮娅性格和思想特点从始至终的发展全过程，甚至包括冬妮娅母亲的成长经历。
@@ -130,10 +122,10 @@
     
     <item>
       <title>世界革命的高潮与低潮：四个甲子的轮回</title>
-      <link>public/blog/2020-04-24-%E9%9D%A9%E5%91%BD%E9%AB%98%E6%BD%AE%E4%B8%8E%E4%BD%8E%E6%BD%AE-%E5%9B%9B%E4%B8%AA%E7%94%B2%E5%AD%90%E7%9A%84%E8%BD%AE%E5%9B%9E/</link>
+      <link>/blog/2020-04-24-%E9%9D%A9%E5%91%BD%E9%AB%98%E6%BD%AE%E4%B8%8E%E4%BD%8E%E6%BD%AE-%E5%9B%9B%E4%B8%AA%E7%94%B2%E5%AD%90%E7%9A%84%E8%BD%AE%E5%9B%9E/</link>
       <pubDate>Fri, 24 Apr 2020 00:00:00 +0000</pubDate>
       
-      <guid>public/blog/2020-04-24-%E9%9D%A9%E5%91%BD%E9%AB%98%E6%BD%AE%E4%B8%8E%E4%BD%8E%E6%BD%AE-%E5%9B%9B%E4%B8%AA%E7%94%B2%E5%AD%90%E7%9A%84%E8%BD%AE%E5%9B%9E/</guid>
+      <guid>/blog/2020-04-24-%E9%9D%A9%E5%91%BD%E9%AB%98%E6%BD%AE%E4%B8%8E%E4%BD%8E%E6%BD%AE-%E5%9B%9B%E4%B8%AA%E7%94%B2%E5%AD%90%E7%9A%84%E8%BD%AE%E5%9B%9E/</guid>
       <description>世界革命的高潮与低潮：四个甲子的轮回说明世界已进入多事之秋。在国际上，有经济全球化的逆转、大国间敌意的增强和合作共识的衰退；在发达国家内部，有阶层分化的加剧、政治光谱的极化和反建制主义的兴起。一系列与之前运转了几十年的国际规范和主流价值观明显相悖的现象呈集群状喷涌而出，显然不能再用黑天鹅这种小概率事件来解释。
 其实，目前这些现象，就像露出水面的礁石，乍一看似乎是零星的几个点；我们只有潜入水下，才会发现一条壮观的暗礁“山脉”，才能明白水面之上的那星星点点，是如何在水下连成一体的。只有对这条暗礁“山脉”的规模有了大概的估计和判断，我们才能因势利导，规划出安全的航线。
 同理，要理解近年来的国际乱象，我们迫切地需要一个总体框架，将这些现象统一纳入，揭示其“水下部分”的轮廓和规模——即这一系列革命性现象的历史定位。只有这样，我们才能真正理解“百年大变局”所处的是怎样一种历史关头，才能比较有信心地推演其变化趋势。正是在这个意义上，我认为宏大叙事还是有价值的。而且，越是在历史性转折的关头，各种因素错综复杂，世界的发展脱离了人们习以为常的框架时，宏大叙事越是有其不可替代的价值。
@@ -147,10 +139,10 @@
     
     <item>
       <title>国际格局决定贸易格局</title>
-      <link>public/blog/%E5%9B%BD%E9%99%85%E6%A0%BC%E5%B1%80%E5%86%B3%E5%AE%9A%E8%B4%B8%E6%98%93%E6%A0%BC%E5%B1%80/</link>
+      <link>/blog/%E5%9B%BD%E9%99%85%E6%A0%BC%E5%B1%80%E5%86%B3%E5%AE%9A%E8%B4%B8%E6%98%93%E6%A0%BC%E5%B1%80/</link>
       <pubDate>Wed, 15 Apr 2020 00:00:00 +0000</pubDate>
       
-      <guid>public/blog/%E5%9B%BD%E9%99%85%E6%A0%BC%E5%B1%80%E5%86%B3%E5%AE%9A%E8%B4%B8%E6%98%93%E6%A0%BC%E5%B1%80/</guid>
+      <guid>/blog/%E5%9B%BD%E9%99%85%E6%A0%BC%E5%B1%80%E5%86%B3%E5%AE%9A%E8%B4%B8%E6%98%93%E6%A0%BC%E5%B1%80/</guid>
       <description>贸易成本有很多种，关税只是其中之一。假设 WTO 谈判协商的贸易成本平均为 5%，形形色色的高水平自贸区是为了在这个水平的基础上再进一步降低贸易成本。得益于贸易创造和贸易转移效应，以及规模经济，自贸区内部国家企业的平均生产成本下降，外部国家企业的平均生产成本上升。因此，在国际战略竞争层面，自贸区是扩大了地理范围的贸易保护主义。区域化是对全球化的反动。
 近年来自贸区的大发展，背后有很强的国际政治推动力。例如，假如 TPP 谈成了，中国的平均成本上升，从供给侧就削弱了中国的资源配置效率。削弱中国，是美国牵头组织 TPP 的动力1。
 由于大国竞争关系，大国可能都希望：与没有威胁的国家建立自贸区，并将战略竞争者排除在外。如果只有两个大国，系统的解很简单，就是每个国家都竭力建立一套排他的自贸体系，并且都尽量增加本国贸易圈的国家数量。美苏争霸时期，就是这样的。美国搞 WTO，苏联搞经互会。当前之所以有这么复杂的自贸体系，是因为多极格局，多头竞争，没有那么明显的一对一决斗。日欧建立自贸区，尽量削弱一下中美；欧盟本身是个关税同盟，尽量削弱一下美中日；RCEP 自贸区，削弱一下美欧；等等等等。大国都抢着加入更多自贸区，力争让自己成为损失最小的那一个。
@@ -163,10 +155,10 @@
     
     <item>
       <title>英国的安全困境和俾斯麦大战略：1870~1907</title>
-      <link>public/blog/%E8%8B%B1%E5%9B%BD%E7%9A%84%E5%AE%89%E5%85%A8%E5%9B%B0%E5%A2%83%E5%92%8C%E4%BF%BE%E6%96%AF%E9%BA%A6%E5%A4%A7%E6%88%98%E7%95%A5-1870-1907/</link>
+      <link>/blog/%E8%8B%B1%E5%9B%BD%E7%9A%84%E5%AE%89%E5%85%A8%E5%9B%B0%E5%A2%83%E5%92%8C%E4%BF%BE%E6%96%AF%E9%BA%A6%E5%A4%A7%E6%88%98%E7%95%A5-1870-1907/</link>
       <pubDate>Tue, 14 Apr 2020 00:00:00 +0000</pubDate>
       
-      <guid>public/blog/%E8%8B%B1%E5%9B%BD%E7%9A%84%E5%AE%89%E5%85%A8%E5%9B%B0%E5%A2%83%E5%92%8C%E4%BF%BE%E6%96%AF%E9%BA%A6%E5%A4%A7%E6%88%98%E7%95%A5-1870-1907/</guid>
+      <guid>/blog/%E8%8B%B1%E5%9B%BD%E7%9A%84%E5%AE%89%E5%85%A8%E5%9B%B0%E5%A2%83%E5%92%8C%E4%BF%BE%E6%96%AF%E9%BA%A6%E5%A4%A7%E6%88%98%E7%95%A5-1870-1907/</guid>
       <description>19世纪维也纳体系下五大国争霸可能是人类有史以来最复杂的国际体系。因为英国这个海权国作为最强一级的加入，使陆地争霸中的黄金定律——远交近攻——失效了。
 英国在拿破仑战争后已经成为英法普奥俄五大国中最强大的两个之一（另一个是沙皇俄国），工业革命则进一步大大加强了它的力量。1860 年前后，英国达到极盛。这是历史上第一次，出现了全球霸权国。16~17世纪哈布斯堡帝国极盛时，仍面临势均力敌的反对者联盟。19世纪的英国则处于超然地位：挑拨离间其他强国相互争斗，自己则不断加强相对于他国的优势。
 19世纪后半叶，英国有三个主要用兵方向：与法国争夺地中海和非洲，与俄国争夺近东、中亚和远东，打击破坏欧陆均势的德国。理想状态下，英国将利用时间差，合纵连横，逐一解决三个敌人。但如果三条战线的安全形势同时恶化，那么英国将只能集中力量对付最可怕的一个敌人。因此，俾斯麦在 1875 年后为德国设计的战略，就是“韬光养晦”、“不出头”，千方百计地不要刺激英国人，不要过早地谋求欧陆霸权。要鼓励法国和俄国在各自的扩张方向上有所发展，使英国同时面对两三个方向的挑战，从而顾此失彼，为德国获取更长久的战略机遇期。俾斯麦认为，给定德国人口的数量、素质和后发态势，德国等得起。当然，法国和俄国如果扩张得太过顺利，也将成为德国的后患，所以最好让他们与英国互相消耗而所得有限。
@@ -201,10 +193,10 @@
     
     <item>
       <title>理解“百年大变局”的袖珍框架 v2.0</title>
-      <link>public/blog/%E7%90%86%E8%A7%A3-%E7%99%BE%E5%B9%B4%E5%A4%A7%E5%8F%98%E5%B1%80-%E4%B8%80%E4%B8%AA%E8%A2%96%E7%8F%8D%E6%A1%86%E6%9E%B6/</link>
+      <link>/blog/%E7%90%86%E8%A7%A3-%E7%99%BE%E5%B9%B4%E5%A4%A7%E5%8F%98%E5%B1%80-%E4%B8%80%E4%B8%AA%E8%A2%96%E7%8F%8D%E6%A1%86%E6%9E%B6/</link>
       <pubDate>Mon, 13 Apr 2020 00:00:00 +0000</pubDate>
       
-      <guid>public/blog/%E7%90%86%E8%A7%A3-%E7%99%BE%E5%B9%B4%E5%A4%A7%E5%8F%98%E5%B1%80-%E4%B8%80%E4%B8%AA%E8%A2%96%E7%8F%8D%E6%A1%86%E6%9E%B6/</guid>
+      <guid>/blog/%E7%90%86%E8%A7%A3-%E7%99%BE%E5%B9%B4%E5%A4%A7%E5%8F%98%E5%B1%80-%E4%B8%80%E4%B8%AA%E8%A2%96%E7%8F%8D%E6%A1%86%E6%9E%B6/</guid>
       <description>认识更新： ---v2.0 (1) 局部战争会发生在美国解决内政危机之前，而非之后。(2) 金融霸权的丧失是战争的直接后果，而后美国经济和社会将遭遇极其痛苦的折磨。(3) 美国与新兴大国的较量将是一对一的，欧洲和日本都不会参与其中。---一、定义“百年大变局”“百年大变局”的实质是国际格局 1由单极向两极剧烈演变的过渡期，将在十年之内结束，而后出现新的世界格局。单极格局的崩溃还会导致以下三种现象：
 意识形态：作为主流意识形态的（极端）自由主义在全球范围内崩溃 2。各国将展开制度改革竞赛，其深度与广度将成为在新时代胜出的关键。
 国际货币体系：美元丧失单一主导货币的地位
@@ -228,29 +220,29 @@
     
     <item>
       <title>日本与欧洲的新抉择</title>
-      <link>public/blog/%E6%97%A5%E6%9C%AC%E4%B8%8E%E6%AC%A7%E6%B4%B2%E7%9A%84%E6%96%B0%E6%8A%89%E6%8B%A9/</link>
+      <link>/blog/%E6%97%A5%E6%9C%AC%E4%B8%8E%E6%AC%A7%E6%B4%B2%E7%9A%84%E6%96%B0%E6%8A%89%E6%8B%A9/</link>
       <pubDate>Mon, 02 Dec 2019 00:00:00 +0000</pubDate>
       
-      <guid>public/blog/%E6%97%A5%E6%9C%AC%E4%B8%8E%E6%AC%A7%E6%B4%B2%E7%9A%84%E6%96%B0%E6%8A%89%E6%8B%A9/</guid>
+      <guid>/blog/%E6%97%A5%E6%9C%AC%E4%B8%8E%E6%AC%A7%E6%B4%B2%E7%9A%84%E6%96%B0%E6%8A%89%E6%8B%A9/</guid>
       <description>在国际格局上，日本精英面临两大难题。第一是对跳反时机的拿捏。跳得早了，中国保护不了它，它会被美国残酷地对待（杀鸡给猴看），为中国火中取栗的事儿它不想干。但跳得晚了，它又会卖不出价，正如49年起义的国民党将领多半享受不到45、46年起义的待遇；而如果跳反不能给日本带来实实在在的好处，又何必甘冒奇险去做呢？第二是跳反要克服的内外阻力。从内部讲，宣传部门实际上掌握在亲美集团手里，老百姓大多对中国没有好感；从外部讲，美国驻军密切地监视着日本人的动向，日本在行动上有多大的自主性还很值得怀疑。总结一下就是，（1）在何种条件下反叛美国的理论规划问题，和（2）如何迈出这一步的实际执行问题。二者没有任何一个是容易的，日本需要智慧，也需要合适的时机。马克龙直言“北约脑死亡”，把法美、欧美在战略上的矛盾公开化了。长期以来，美欧同盟是一种美国向欧洲输送经济利益换取欧洲政治忠诚的关系，尽管美国会通过微观上的商业、法律操作拿回一些利益，也会蓄意阻挠欧洲一体化防止出现一个强大的对手，但在诸如单方面市场开放、提供军事保护等大的格局上还是有利于欧洲的。现在，随着美国在与中国的较量中告急，它的第一反应是逆转对盟友的利益输送，甚至凭借强力从盟友吸血——对此，美国甚至没什么心理负担，因为它觉得它曾经给予了盟友太多太多。欧洲这才惊醒，美国不再是之前的美国了，不会向欧洲让利了。欧洲现在还能靠谁呢？中国与欧洲即使合作，最多是互利共赢的，而不会单方面向欧洲输送利益。一夜之间，欧洲发现，它不能再做小弟了，即使想做都做不成了。相反，它必须武装起来，做自己命运的主人，在中美俄三个大流氓之间合纵连横，自己为自己争取利益。从制度上到心理上，这个转变都是极其艰难的，尤其是把战略主导权拱手让出两三代人之后，尤其是欧洲连一个坚强的领导核心都没有的情况下，欧洲人都快忘了如何进行大战略思考了。马克龙的志向或许超越了法国的能力，但他至少第一个公开、坦诚地指出了问题。那么无论成败，无论法国最终是否会为德国做嫁衣1 ，他都已经是欧洲心理断乳的一个先驱者了。马克龙这次的“北约已死”论还有个小算盘，就是把俄罗斯拉进欧洲，恢复法俄同盟，以抵消德国的影响力。这就是为什么，德国之前也有过欧洲要独立的类似表态，这次却猛烈抨击马克龙的言论。另一个猛烈抨击者是波兰——这个恐俄症晚期患者，唯恐自己会成为欧盟交给俄罗斯的投名状。↩︎
 </description>
     </item>
     
     <item>
       <title>康捷拉季耶夫“周期”存在吗？</title>
-      <link>public/blog/%E5%BA%B7%E6%8D%B7%E6%8B%89%E5%AD%A3%E8%80%B6%E5%A4%AB-%E5%91%A8%E6%9C%9F-%E5%AD%98%E5%9C%A8%E5%90%97/</link>
+      <link>/blog/%E5%BA%B7%E6%8D%B7%E6%8B%89%E5%AD%A3%E8%80%B6%E5%A4%AB-%E5%91%A8%E6%9C%9F-%E5%AD%98%E5%9C%A8%E5%90%97/</link>
       <pubDate>Mon, 11 Nov 2019 00:00:00 +0000</pubDate>
       
-      <guid>public/blog/%E5%BA%B7%E6%8D%B7%E6%8B%89%E5%AD%A3%E8%80%B6%E5%A4%AB-%E5%91%A8%E6%9C%9F-%E5%AD%98%E5%9C%A8%E5%90%97/</guid>
+      <guid>/blog/%E5%BA%B7%E6%8D%B7%E6%8B%89%E5%AD%A3%E8%80%B6%E5%A4%AB-%E5%91%A8%E6%9C%9F-%E5%AD%98%E5%9C%A8%E5%90%97/</guid>
       <description>康德拉季耶夫周期就像中国的王朝周期率/治乱循环一样，乍一看似乎有一个统一的模式，细究则发现不但各个周期在时间上长短不一，甚至归纳不出一个共同的主要原因。一轮一轮的科技革命浪潮（影响投资）？贫富差距程度的钟摆运动（影响消费）？资本主义世界体系的规模变化（影响分工和市场深化）？国际政治格局（影响方方面面）？以及诸多因素的相互作用模式？所有这些异常复杂地纠缠在一起，甚至让人怀疑是否存在最终解开这些谜团的前景。理论上，用历史上的长周期规律作为论据，是不大可靠的。实践上，没有人能预测一个朝代何时灭亡；同样，预测经济何时陷入长周期的底部恐怕也是自讨苦吃——这些都是超越了人类认知能力的事物。或许，唯一可以确定的，就是经济系统的开放性、复杂性和非线性，人类应当保持谦逊，不要动不动就觉得自己驯服了经济波动。</description>
     </item>
     
     <item>
       <title>中国结婚率下降的原因</title>
-      <link>public/blog/%E4%B8%AD%E5%9B%BD%E7%BB%93%E5%A9%9A%E7%8E%87%E4%B8%8B%E9%99%8D%E7%9A%84%E5%8E%9F%E5%9B%A0/</link>
+      <link>/blog/%E4%B8%AD%E5%9B%BD%E7%BB%93%E5%A9%9A%E7%8E%87%E4%B8%8B%E9%99%8D%E7%9A%84%E5%8E%9F%E5%9B%A0/</link>
       <pubDate>Sun, 27 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>public/blog/%E4%B8%AD%E5%9B%BD%E7%BB%93%E5%A9%9A%E7%8E%87%E4%B8%8B%E9%99%8D%E7%9A%84%E5%8E%9F%E5%9B%A0/</guid>
+      <guid>/blog/%E4%B8%AD%E5%9B%BD%E7%BB%93%E5%A9%9A%E7%8E%87%E4%B8%8B%E9%99%8D%E7%9A%84%E5%8E%9F%E5%9B%A0/</guid>
       <description>一 宏观经济女性在婚姻市场中与商品(在中国主要是住房）紧密地连接在一起，因而其供求规律类似于商品。
 这一轮金融扩张造成资本收益份额的提高和劳动收益份额的下降，于是财富向资本所有者集中、向中老年人集中。而对女性的需求非常缺乏收入弹性，且恰恰是年轻男性对女性有需求，因此全社会对女性的“有效需求”不足1 ，造成当今愈演愈烈的“剩女”现象。
 用苏联式政治经济学的术语讲，资本主义的分配方式必然导致对商品的有效需求不足，同理，必然导致婚姻市场上对女性的有效需求不足。虽然这套理论非常不严谨，但有其道理：放任经济增长、牺牲社会平等的时代，会对结婚率产生负面的影响。
@@ -267,10 +259,10 @@
     
     <item>
       <title>人工智能普及的恐怖未来——《未来世界的幸存者》读书笔记</title>
-      <link>public/blog/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E6%99%AE%E5%8F%8A%E7%9A%84%E6%81%90%E6%80%96%E6%9C%AA%E6%9D%A5-%E6%9C%AA%E6%9D%A5%E4%B8%96%E7%95%8C%E7%9A%84%E5%B9%B8%E5%AD%98%E8%80%85-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</link>
+      <link>/blog/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E6%99%AE%E5%8F%8A%E7%9A%84%E6%81%90%E6%80%96%E6%9C%AA%E6%9D%A5-%E6%9C%AA%E6%9D%A5%E4%B8%96%E7%95%8C%E7%9A%84%E5%B9%B8%E5%AD%98%E8%80%85-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</link>
       <pubDate>Fri, 25 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>public/blog/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E6%99%AE%E5%8F%8A%E7%9A%84%E6%81%90%E6%80%96%E6%9C%AA%E6%9D%A5-%E6%9C%AA%E6%9D%A5%E4%B8%96%E7%95%8C%E7%9A%84%E5%B9%B8%E5%AD%98%E8%80%85-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</guid>
+      <guid>/blog/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E6%99%AE%E5%8F%8A%E7%9A%84%E6%81%90%E6%80%96%E6%9C%AA%E6%9D%A5-%E6%9C%AA%E6%9D%A5%E4%B8%96%E7%95%8C%E7%9A%84%E5%B9%B8%E5%AD%98%E8%80%85-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</guid>
       <description>有了汽车，骡马几乎彻底消失，马车夫全部再就业；机械普及，女性的就业机会空前增加，性别平等取得突破性进展。科技的重大进步，对经济结构乃止社会结构总会产生深远的影响。而这一次的智能革命，甚至有可能颠覆我们熟知的全部社会架构。
 1 技术迭代与中年失业技术迭代越来越快，但“终身学习”对于绝大多数人都是不现实的。人到中年，精力衰退，上有老下有小。只有高收入阶层凭借积蓄可以整装再出发，大多数人则根本没有条件对一个新领域重头学起。
 2 教育不足与无用人口人类社会出现一个庞大的、无用的无产阶级，他们对“国家”不再有用，国家便很有可能会忽略他们的需求。只把他们圈养起来，甚至实施绝育。
@@ -292,10 +284,10 @@ Author: Ted Kaczynski
     
     <item>
       <title>德国经济与其保守的货币财政政策</title>
-      <link>public/blog/%E5%BE%B7%E5%9B%BD%E7%BB%8F%E6%B5%8E%E4%B8%8E%E5%85%B6%E4%BF%9D%E5%AE%88%E7%9A%84%E8%B4%A7%E5%B8%81%E8%B4%A2%E6%94%BF%E6%94%BF%E7%AD%96/</link>
+      <link>/blog/%E5%BE%B7%E5%9B%BD%E7%BB%8F%E6%B5%8E%E4%B8%8E%E5%85%B6%E4%BF%9D%E5%AE%88%E7%9A%84%E8%B4%A7%E5%B8%81%E8%B4%A2%E6%94%BF%E6%94%BF%E7%AD%96/</link>
       <pubDate>Mon, 14 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>public/blog/%E5%BE%B7%E5%9B%BD%E7%BB%8F%E6%B5%8E%E4%B8%8E%E5%85%B6%E4%BF%9D%E5%AE%88%E7%9A%84%E8%B4%A7%E5%B8%81%E8%B4%A2%E6%94%BF%E6%94%BF%E7%AD%96/</guid>
+      <guid>/blog/%E5%BE%B7%E5%9B%BD%E7%BB%8F%E6%B5%8E%E4%B8%8E%E5%85%B6%E4%BF%9D%E5%AE%88%E7%9A%84%E8%B4%A7%E5%B8%81%E8%B4%A2%E6%94%BF%E6%94%BF%E7%AD%96/</guid>
       <description>出处：https://zhuanlan.zhihu.com/p/34061679
 德国经济（一） 欧盟和欧元是上帝赐予德国的大礼欧盟和欧元对德国是否有利？答案是勿庸置疑的。可以说，欧盟和欧元是上帝给予德国最好的礼物。
 欧盟为什么对德国有利？德国是一个只有八千万人口的国家。这个数量级在欧洲算是个大国，但在亚洲却比比皆是，算不上什么。
@@ -353,10 +345,10 @@ Author: Ted Kaczynski
     
     <item>
       <title>读《渐行渐近的金融周期》</title>
-      <link>public/blog/%E8%AF%BB-%E6%B8%90%E8%A1%8C%E6%B8%90%E8%BF%91%E7%9A%84%E9%87%91%E8%9E%8D%E5%91%A8%E6%9C%9F/</link>
+      <link>/blog/%E8%AF%BB-%E6%B8%90%E8%A1%8C%E6%B8%90%E8%BF%91%E7%9A%84%E9%87%91%E8%9E%8D%E5%91%A8%E6%9C%9F/</link>
       <pubDate>Mon, 14 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>public/blog/%E8%AF%BB-%E6%B8%90%E8%A1%8C%E6%B8%90%E8%BF%91%E7%9A%84%E9%87%91%E8%9E%8D%E5%91%A8%E6%9C%9F/</guid>
+      <guid>/blog/%E8%AF%BB-%E6%B8%90%E8%A1%8C%E6%B8%90%E8%BF%91%E7%9A%84%E9%87%91%E8%9E%8D%E5%91%A8%E6%9C%9F/</guid>
       <description>来源：https://www.metaquant.org/financial-cycel.html
 读《渐行渐近的金融周期》现在国内的媒体经济学家大体上处于供给过剩的状态，他们在媒体上、网络上发表对目前重大经济问题的看法，很多却只顾吸引眼球，贩卖焦虑，立论基础通常薄弱，而结论与政策建议又老生常谈，怎么说都不会错，仔细读完也不会增加太多真知灼见。而另一方面，学院经济学家们的研究则曲高和寡，计量工具用得甚是娴熟，却经常与国内经济的现实问题无涉，这也不能怪他们，毕竟中国的经济现实大多比较魔幻，恐怕是那些优美的模型无法涵盖的。
 正因为此，当我读到彭文生博士的《渐行渐远的红利》时，就觉得分外难得。这本书在2013年出版，关心的主要问题是中国近十几年增长红利尤其是人口红利的逐渐丧失。人口红利主要表现为人口结构中生产者(青壮年)相对于消费者(老人及孩子)比例的增加以及农村隐性失业人口进入城市从事更高劳动生产率的工作，以上红利导致了中国近年经济的高速增长，也塑造了中国特殊的经济结构(比如中国奇高的储蓄率导致经济增长特别依赖于投资拉动)。整本书以人口结构变迁为主线，串起了近年中国经济种种让人疑惑的现象，给予了非常有说服力的解释框架，而相关数据的支撑也非常扎实。应该说，这种既有理论框架、又有数据支撑，更能关注现实的经济学研究在当代中国仍然比较稀有，读来颇有醍醐灌顶之感，看到纷繁复杂的经济现象背后都有类似的经济逻辑，不得不佩服作者观察之敏锐，思索之深刻。
@@ -398,30 +390,30 @@ Author: Ted Kaczynski
     
     <item>
       <title>将阿拉伯数字金额转换为人民币大写形式</title>
-      <link>public/blog/%E5%B0%86%E9%98%BF%E6%8B%89%E4%BC%AF%E6%95%B0%E5%AD%97%E9%87%91%E9%A2%9D%E8%BD%AC%E6%8D%A2%E4%B8%BA%E4%BA%BA%E6%B0%91%E5%B8%81%E5%A4%A7%E5%86%99%E5%BD%A2%E5%BC%8F/</link>
+      <link>/blog/%E5%B0%86%E9%98%BF%E6%8B%89%E4%BC%AF%E6%95%B0%E5%AD%97%E9%87%91%E9%A2%9D%E8%BD%AC%E6%8D%A2%E4%B8%BA%E4%BA%BA%E6%B0%91%E5%B8%81%E5%A4%A7%E5%86%99%E5%BD%A2%E5%BC%8F/</link>
       <pubDate>Fri, 11 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>public/blog/%E5%B0%86%E9%98%BF%E6%8B%89%E4%BC%AF%E6%95%B0%E5%AD%97%E9%87%91%E9%A2%9D%E8%BD%AC%E6%8D%A2%E4%B8%BA%E4%BA%BA%E6%B0%91%E5%B8%81%E5%A4%A7%E5%86%99%E5%BD%A2%E5%BC%8F/</guid>
+      <guid>/blog/%E5%B0%86%E9%98%BF%E6%8B%89%E4%BC%AF%E6%95%B0%E5%AD%97%E9%87%91%E9%A2%9D%E8%BD%AC%E6%8D%A2%E4%B8%BA%E4%BA%BA%E6%B0%91%E5%B8%81%E5%A4%A7%E5%86%99%E5%BD%A2%E5%BC%8F/</guid>
       <description>本程序理论上可以转换任意位数，但由于 R 语言储存数据的精度问题，当包含角、分时，只能转换百万亿人民币以下数量级的金额数。
 library(tidyverse)## -- Attaching packages --------------------------------------- tidyverse 1.3.1 --## v ggplot2 3.3.5 v purrr 0.3.4## v tibble 3.1.3 v dplyr 1.0.7## v tidyr 1.1.3 v stringr 1.4.0## v readr 2.0.0 v forcats 0.5.1## -- Conflicts ------------------------------------------ tidyverse_conflicts() --## x dplyr::filter() masks stats::filter()## x dplyr::lag() masks stats::lag()library(data.table)## ## 载入程辑包：&amp;#39;data.table&amp;#39;## The following objects are masked from &amp;#39;package:dplyr&amp;#39;:## ## between, first, last## The following object is masked from &amp;#39;package:purrr&amp;#39;:## ## transposehan_list = c(&amp;quot;零&amp;quot; , &amp;quot;壹&amp;quot; , &amp;quot;贰&amp;quot; , &amp;quot;叁&amp;quot; , &amp;quot;肆&amp;quot;, &amp;quot;伍&amp;quot; , &amp;quot;陆&amp;quot; , &amp;quot;柒&amp;quot; , &amp;quot;捌&amp;quot; , &amp;quot;玖&amp;quot;)# 划分整数和小数部分的函数divide &amp;lt;- function(num){integer &amp;lt;- floor(num)fraction &amp;lt;- round((num - integer)*100)c(integer, fraction) %&amp;gt;% return()}# 输出小数部分的函数fraction_to_rmb &amp;lt;- function(fraction){a &amp;lt;- fraction %/% 10b &amp;lt;- fraction %% 10if (a^2 + b^2 == 0) {return(&amp;#39;整&amp;#39;)} else if (a == 0 &amp;amp; b !</description>
     </item>
     
     <item>
       <title>战国时代才是大商辈出的时代</title>
-      <link>public/blog/%E6%88%98%E5%9B%BD%E6%97%B6%E4%BB%A3%E6%89%8D%E6%98%AF%E5%A4%A7%E5%95%86%E8%BE%88%E5%87%BA%E7%9A%84%E6%97%B6%E4%BB%A3/</link>
+      <link>/blog/%E6%88%98%E5%9B%BD%E6%97%B6%E4%BB%A3%E6%89%8D%E6%98%AF%E5%A4%A7%E5%95%86%E8%BE%88%E5%87%BA%E7%9A%84%E6%97%B6%E4%BB%A3/</link>
       <pubDate>Tue, 08 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>public/blog/%E6%88%98%E5%9B%BD%E6%97%B6%E4%BB%A3%E6%89%8D%E6%98%AF%E5%A4%A7%E5%95%86%E8%BE%88%E5%87%BA%E7%9A%84%E6%97%B6%E4%BB%A3/</guid>
+      <guid>/blog/%E6%88%98%E5%9B%BD%E6%97%B6%E4%BB%A3%E6%89%8D%E6%98%AF%E5%A4%A7%E5%95%86%E8%BE%88%E5%87%BA%E7%9A%84%E6%97%B6%E4%BB%A3/</guid>
       <description>至少自汉代以来，中国容易形成垄断的产业便被国家所把持，一定程度上，这些行业产生的垄断利润被用于公共项目；但不以盈利为目的，也就产生了效率低下的问题。
 在战国时代，效率是第一位的，为了在技术上领先，各国必须容忍大型商业组织的存在，而势必产生贫富分化的问题。有朝一日天下大同，自然垄断行业一定会被政府收回，以缓和社会矛盾。</description>
     </item>
     
     <item>
       <title>blogdown语法</title>
-      <link>public/blog/blogdown%E8%AF%AD%E6%B3%95/</link>
+      <link>/blog/blogdown%E8%AF%AD%E6%B3%95/</link>
       <pubDate>Mon, 09 Sep 2019 00:00:00 +0000</pubDate>
       
-      <guid>public/blog/blogdown%E8%AF%AD%E6%B3%95/</guid>
+      <guid>/blog/blogdown%E8%AF%AD%E6%B3%95/</guid>
       <description>Step 1 安装# install.packages(&amp;quot;blogdown&amp;quot;)# blogdown::install_hugo() Step 2 初始化打开 Rstudio-&amp;gt;File-&amp;gt;New Project-&amp;gt;New Directory
 选择 Website using blogdown 创建一个项目
 或使用代码：
@@ -431,38 +423,38 @@ library(tidyverse)## -- Attaching packages ------------------------------------
     
     <item>
       <title>MS Office高级应用笔记</title>
-      <link>public/blog/ms-office%E9%AB%98%E7%BA%A7%E5%BA%94%E7%94%A8%E7%AC%94%E8%AE%B0/</link>
+      <link>/blog/ms-office%E9%AB%98%E7%BA%A7%E5%BA%94%E7%94%A8%E7%AC%94%E8%AE%B0/</link>
       <pubDate>Mon, 09 Sep 2019 00:00:00 +0000</pubDate>
       
-      <guid>public/blog/ms-office%E9%AB%98%E7%BA%A7%E5%BA%94%E7%94%A8%E7%AC%94%E8%AE%B0/</guid>
+      <guid>/blog/ms-office%E9%AB%98%E7%BA%A7%E5%BA%94%E7%94%A8%E7%AC%94%E8%AE%B0/</guid>
       <description>网页版电子书</description>
     </item>
     
     <item>
       <title>R文本文件的语法</title>
-      <link>public/blog/r%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6%E7%9A%84%E8%AF%AD%E6%B3%95/</link>
+      <link>/blog/r%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6%E7%9A%84%E8%AF%AD%E6%B3%95/</link>
       <pubDate>Mon, 09 Sep 2019 00:00:00 +0000</pubDate>
       
-      <guid>public/blog/r%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6%E7%9A%84%E8%AF%AD%E6%B3%95/</guid>
+      <guid>/blog/r%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6%E7%9A%84%E8%AF%AD%E6%B3%95/</guid>
       <description>网页版电子书
 源代码</description>
     </item>
     
     <item>
       <title>Shiny 语法</title>
-      <link>public/blog/shiny-%E8%AF%AD%E6%B3%95/</link>
+      <link>/blog/shiny-%E8%AF%AD%E6%B3%95/</link>
       <pubDate>Mon, 09 Sep 2019 00:00:00 +0000</pubDate>
       
-      <guid>public/blog/shiny-%E8%AF%AD%E6%B3%95/</guid>
+      <guid>/blog/shiny-%E8%AF%AD%E6%B3%95/</guid>
       <description>Lesson 1 Welcome to Shiny1 创建一个 Shiny App 的过程：新建一个项目文件夹，每一个app都要有一个单独的文件夹。在文件夹中新建app.R，注意这个文件名是不能改动的。app.R包含四个部分：（1）library(shiny)；（2）ui1 对象，设定界面的布局和外观；（3）server对象，在后台进行数据处理；（4）shinyApp(ui = ui, server = server)创建应用在R中通过runApp(&#34;app文件夹目录&#34;)2 来启动应用；runApp(&#34;app文件夹目录&#34;, display.mode = &#34;showcase&#34;)可以在应用底部显示源代码。2 官方示例library(shiny)runExample(&amp;quot;01_hello&amp;quot;) # a histogramrunExample(&amp;quot;02_text&amp;quot;) # tables and data framesrunExample(&amp;quot;03_reactivity&amp;quot;) # a reactive expressionrunExample(&amp;quot;04_mpg&amp;quot;) # global variablesrunExample(&amp;quot;05_sliders&amp;quot;) # slider barsrunExample(&amp;quot;06_tabsets&amp;quot;) # tabbed panelsrunExample(&amp;quot;07_widgets&amp;quot;) # help text and submit buttonsrunExample(&amp;quot;08_html&amp;quot;) # Shiny app built from HTMLrunExample(&amp;quot;09_upload&amp;quot;) # file upload wizardrunExample(&amp;quot;10_download&amp;quot;) # file download wizardrunExample(&amp;quot;11_timer&amp;quot;) # an automated timerLesson 2 Build a user interface1 ui的基本布局ui &amp;lt;- fluidPage( # 流动页面titlePanel(&amp;quot;title Panel&amp;quot;), # 标题栏sidebarLayout( # 边栏布局sidebarPanel(&amp;quot;sidebar&amp;quot;), # 边栏（一般是输入）mainPanel(&amp;quot;main panler&amp;quot;) # 主体部分（一般是输出）))2 ui的内容在每一个子区域中，用“,”分隔多个内容</description>
     </item>
     
     <item>
       <title>tufte样式（含侧边栏）语法</title>
-      <link>public/blog/tufte%E6%A0%B7%E5%BC%8F-%E5%90%AB%E4%BE%A7%E8%BE%B9%E6%A0%8F-%E8%AF%AD%E6%B3%95/</link>
+      <link>/blog/tufte%E6%A0%B7%E5%BC%8F-%E5%90%AB%E4%BE%A7%E8%BE%B9%E6%A0%8F-%E8%AF%AD%E6%B3%95/</link>
       <pubDate>Mon, 09 Sep 2019 00:00:00 +0000</pubDate>
       
-      <guid>public/blog/tufte%E6%A0%B7%E5%BC%8F-%E5%90%AB%E4%BE%A7%E8%BE%B9%E6%A0%8F-%E8%AF%AD%E6%B3%95/</guid>
+      <guid>/blog/tufte%E6%A0%B7%E5%BC%8F-%E5%90%AB%E4%BE%A7%E8%BE%B9%E6%A0%8F-%E8%AF%AD%E6%B3%95/</guid>
       <description>一、使用新建R Markdown文件 - from template - tufte包之Tufte Handout
 二、语法1 标题建议最多两层
 2 任意边栏内容放在```{marginfigure} ```格式的中间
@@ -480,29 +472,29 @@ pdf输出中，参考文献都在末尾。
     
     <item>
       <title>由单月求累计及计算同比增长率</title>
-      <link>public/blog/%E7%AE%97%E6%B3%95-%E7%94%B1%E5%8D%95%E6%9C%88%E6%B1%82%E7%B4%AF%E8%AE%A1%E5%8F%8A%E8%AE%A1%E7%AE%97%E5%90%8C%E6%AF%94%E5%A2%9E%E9%95%BF%E7%8E%87/</link>
+      <link>/blog/%E7%AE%97%E6%B3%95-%E7%94%B1%E5%8D%95%E6%9C%88%E6%B1%82%E7%B4%AF%E8%AE%A1%E5%8F%8A%E8%AE%A1%E7%AE%97%E5%90%8C%E6%AF%94%E5%A2%9E%E9%95%BF%E7%8E%87/</link>
       <pubDate>Fri, 30 Aug 2019 00:00:00 +0000</pubDate>
       
-      <guid>public/blog/%E7%AE%97%E6%B3%95-%E7%94%B1%E5%8D%95%E6%9C%88%E6%B1%82%E7%B4%AF%E8%AE%A1%E5%8F%8A%E8%AE%A1%E7%AE%97%E5%90%8C%E6%AF%94%E5%A2%9E%E9%95%BF%E7%8E%87/</guid>
+      <guid>/blog/%E7%AE%97%E6%B3%95-%E7%94%B1%E5%8D%95%E6%9C%88%E6%B1%82%E7%B4%AF%E8%AE%A1%E5%8F%8A%E8%AE%A1%E7%AE%97%E5%90%8C%E6%AF%94%E5%A2%9E%E9%95%BF%E7%8E%87/</guid>
       <description>现有一个月度贸易数据框，名为total，各列为 year, month, export, import, trade surplus
 1 由单月值求累计值(1) 使用sqldf() 和 SQL 语句# 对于单个变量而言，增加一列累计值的代码如下sqldf(&amp;quot;SELECT *, SUM(export) OVER (PARTITION BY year ORDER BY month) AS acc_exportFROM total&amp;quot;)# 对于多个要累计的变量，便需要合并查询字符串。在此基础上封装代码，追求通用性。joint &amp;lt;- function(string){str_c(&amp;#39;SUM(&amp;#39;, string, &amp;#39;) OVER (PARTITION BY year ORDER BY month) AS acc_&amp;#39;, string)}add_acc &amp;lt;- function(df){vars &amp;lt;- colnames(df %&amp;gt;% select(-(year:month))) # 要用到的变量名string_acc &amp;lt;- joint(vars) %&amp;gt;% str_c(collapse = &amp;#39;, &amp;#39;) # joint(vars)使用了向量化运算df_name &amp;lt;- deparse(substitute(df)) # 解析任一对象的名字为字符串query &amp;lt;- str_c(&amp;#39;SELECT *, &amp;#39;, string_acc, &amp;#39; FROM &amp;#39;, df_name) # 组建SQL查询字符串sqldf(query) %&amp;gt;% return()}total_sql &amp;lt;- add_acc(total)(2) 使用 R 基本包内置的 cumsum() 函数total_cumsum &amp;lt;- total %&amp;gt;% arrange(year, month) %&amp;gt;% group_by(year) %&amp;gt;% mutate(acc_ex = cumsum(export), acc_im = cumsum(import),acc_tra = cumsum(trade), acc_sur = cumsum(surplus)) %&amp;gt;% ungroup()不难发现，当表中所含列比较少时，用 group_by() + cumsum() 比较方便；而当表的列很多时，就会变得很繁琐，还是 sqldf() + SQL 语句的扩展性更强。</description>
     </item>
     
     <item>
       <title>《脂汇本红楼梦注解》tufte网页版</title>
-      <link>public/blog/%E8%84%82%E6%B1%87%E6%9C%AC%E7%BA%A2%E6%A5%BC%E6%A2%A6%E6%B3%A8%E8%A7%A3-tufte%E7%BD%91%E9%A1%B5%E7%89%88/</link>
+      <link>/blog/%E8%84%82%E6%B1%87%E6%9C%AC%E7%BA%A2%E6%A5%BC%E6%A2%A6%E6%B3%A8%E8%A7%A3-tufte%E7%BD%91%E9%A1%B5%E7%89%88/</link>
       <pubDate>Tue, 30 Jul 2019 00:00:00 +0000</pubDate>
       
-      <guid>public/blog/%E8%84%82%E6%B1%87%E6%9C%AC%E7%BA%A2%E6%A5%BC%E6%A2%A6%E6%B3%A8%E8%A7%A3-tufte%E7%BD%91%E9%A1%B5%E7%89%88/</guid>
+      <guid>/blog/%E8%84%82%E6%B1%87%E6%9C%AC%E7%BA%A2%E6%A5%BC%E6%A2%A6%E6%B3%A8%E8%A7%A3-tufte%E7%BD%91%E9%A1%B5%E7%89%88/</guid>
       <description>目录列表自序前言凡例楔子第一单元第1回第2回第3回第4回第5回第6回第7回第8回第9回第二单元第10回第11回第12回第13回第14回第15回第16回第17回第18回第三单元第19回第20回第21回第22回第23回第24回第25回第26回第27回第四单元第28回第29回第30回第31回第32回第33回第34回第35回第36回第五单元第37回第38回第39回第40回第41回第42回第43回第44回第45回第六单元第46回第47回第48回第49回第50回第51回第52回第53回第54回第七单元第55回第56回第57回第58回第59回第60回第61回第62回第63回第八单元第64回第65回第66回第67回第68回第69回第70回第71回第72回第九单元第73回第74回第75回第76回第77回第78回第79回第80回附录附录1附录2附录3附录4附录5附录6附录7附录8附录9附录10附录11附录12附录13附录14附录15附录16附录17后记   </description>
     </item>
     
     <item>
       <title>读麦金德《民主的理想与现实》</title>
-      <link>public/blog/%E8%AF%BB%E9%BA%A6%E9%87%91%E5%BE%B7-%E6%B0%91%E4%B8%BB%E7%9A%84%E7%90%86%E6%83%B3%E4%B8%8E%E7%8E%B0%E5%AE%9E/</link>
+      <link>/blog/%E8%AF%BB%E9%BA%A6%E9%87%91%E5%BE%B7-%E6%B0%91%E4%B8%BB%E7%9A%84%E7%90%86%E6%83%B3%E4%B8%8E%E7%8E%B0%E5%AE%9E/</link>
       <pubDate>Thu, 04 Jul 2019 00:00:00 +0000</pubDate>
       
-      <guid>public/blog/%E8%AF%BB%E9%BA%A6%E9%87%91%E5%BE%B7-%E6%B0%91%E4%B8%BB%E7%9A%84%E7%90%86%E6%83%B3%E4%B8%8E%E7%8E%B0%E5%AE%9E/</guid>
+      <guid>/blog/%E8%AF%BB%E9%BA%A6%E9%87%91%E5%BE%B7-%E6%B0%91%E4%B8%BB%E7%9A%84%E7%90%86%E6%83%B3%E4%B8%8E%E7%8E%B0%E5%AE%9E/</guid>
       <description>基本信息书名民主的理想与现实：重建的政治学之研究（Democratic Ideals and Reality: A Study in the Politics of Reconstruction）
 写作时间1919年，麦金德58岁。
 概念：新地理学自然地理与政治地理的结合。
@@ -517,20 +509,20 @@ pdf输出中，参考文献都在末尾。
     
     <item>
       <title>赵柯论文四篇：德国与欧洲</title>
-      <link>public/blog/%E8%B5%B5%E6%9F%AF%E8%AE%BA%E6%96%87%E5%9B%9B%E7%AF%87-%E5%BE%B7%E5%9B%BD%E4%B8%8E%E6%AC%A7%E6%B4%B2/</link>
+      <link>/blog/%E8%B5%B5%E6%9F%AF%E8%AE%BA%E6%96%87%E5%9B%9B%E7%AF%87-%E5%BE%B7%E5%9B%BD%E4%B8%8E%E6%AC%A7%E6%B4%B2/</link>
       <pubDate>Sun, 30 Jun 2019 00:00:00 +0000</pubDate>
       
-      <guid>public/blog/%E8%B5%B5%E6%9F%AF%E8%AE%BA%E6%96%87%E5%9B%9B%E7%AF%87-%E5%BE%B7%E5%9B%BD%E4%B8%8E%E6%AC%A7%E6%B4%B2/</guid>
+      <guid>/blog/%E8%B5%B5%E6%9F%AF%E8%AE%BA%E6%96%87%E5%9B%9B%E7%AF%87-%E5%BE%B7%E5%9B%BD%E4%B8%8E%E6%AC%A7%E6%B4%B2/</guid>
       <description>赵柯, 中共中央党校国际战略研究院副教授
 信任的代价@article{赵柯-630,Author = {赵柯},Title = {信任的代价},Journal = {中国投资},Number = {23},Pages = {22-23},Note = {页数: 2},Abstract = {},Keywords = {},Year = {2018}}1949年，苏联原子弹爆炸成功，美国无法单方面对苏联进行核讹诈。1950年，朝鲜战争爆发，苏东阵营在东亚采取攻势。美国感到巨大压力，决定重新武装德国，利用德国的资源抵御苏联可能的进攻。对此，法国极度惊恐。1950年，法国提出煤钢联营，使德国无法秘密进行战争准备。 1990年，德国统一，改变了整个欧洲的安全格局。以法国为首的欧洲国家向德国施压，要求德国放弃已是全球第二大储备货币的马克，共同创建欧元。1991年，《欧洲联盟条约》（马约）签署，马克消失，德国将主权货币置于欧洲共同监管之下，便在很大程度上剥夺了德国发动战争的能力。欧元的创建并非出于单纯的经济考量，而更是出于战略考量。因为主权货币和煤钢一样，都是可以用来发动战争的战略物资。法国事与愿违：欧元成倍地放大了德国的工业竞争力，使德国权倾欧洲，成为欧洲一体化唯一可能的领导者。“后默克尔”时代德国向何处去?@article{赵柯李刚-629,Author = {赵柯 and 李刚},Title = {“后默克尔”时代德国向何处去?},Journal = {当代世界},Number = {01},Pages = {33-38},Note = {页数: 6},Abstract = {随着德国总理默克尔卸任基督教民主联盟党主席,她将逐步淡出德国的权力中心,但其留下的政治&amp;quot;遗产&amp;quot;更多地会被继承和修正,而非被颠覆性的抛弃。&amp;quot;后默克尔&amp;quot;时代的德国在内政方面将会重点聚焦于重建&amp;quot;共识政治&amp;quot;,维护社会公正,发展&amp;quot;数字经济&amp;quot;;外交领域的优先议题是继续推动欧元区的改革,确保欧元区经济金融的稳定。美国仍是德国在欧盟之外最重要的伙伴,跨大西洋战略同盟关系会进一步稳固。},Keywords = {“后默克尔”时代;共识政治;数字经济;跨大西洋战略同盟关系;欧元区},Year = {2019} }议题德国内部对默克尔的不满和批评未来趋势内政无力维系“共识政治”，没有及时意识到右翼民粹政党的崛起对主流政治的巨大威胁重建“共识政治”内政没有回应2008年后时代潮流和大众心理的呼唤，对平等的重视不足，使基民盟在选举中遭遇惨败增加对社会平等的关注内政产业结构老化，支柱仍是汽车、化工、机械、电气，在新兴产业中落后加快发展数字经济，尤其希望在标准领域大有作为外交对欧元区改革和财政一体化态度消极、浪费时机唯有加速欧洲一体化，才有助于德国根本利益的实现外交德国暂时离不开美国，对美国仍然深度依赖资本主义制度再平衡:全民基本收入的理念与实践@article{赵柯李刚-631,Author = {赵柯 and 李刚},Title = {资本主义制度再平衡:全民基本收入的理念与实践},Journal = {欧洲研究},Volume = {37},Number = {01},Pages = {1-21+156},Note = {页数: 22},Abstract = {近年来,全民基本收入已成为西方学界和政界的一股新的政策理念思潮。本文对全民基本收入思想的起源与发展、制度实践和影响进行了分析,认为当前全民基本收入从学术理念到成为政策选择,是西方资本主义国家面对经济全球化带来的不平等加剧、民粹势力兴起,以及科技革命即将带来的大量失业的前景下进行的一次制度&amp;quot;再平衡&amp;quot;,试图缓和市场经济与民主政治之间、经济效率与社会公平之间的内在张力。全民基本收入制度也面临高昂财政负担、道德风险等问题,一些国家已经通过制度试验对其进行改进。在此过程中,全民基本收入也产生了多样化的过渡性制度形态,这在一定程度上预示着西方资本主义制度自我修复和变革的新方向。},Keywords = {全民基本收入;不平等;效率;经济增长;资本主义制度},Year = {2019} }性质：对里根-撒切尔革命的反革命。</description>
     </item>
     
     <item>
       <title>对未来国际格局的思考</title>
-      <link>public/blog/2019-06-21-%E5%AF%B9%E6%9C%AA%E6%9D%A5%E5%9B%BD%E9%99%85%E6%A0%BC%E5%B1%80%E7%9A%84%E6%80%9D%E8%80%83/</link>
+      <link>/blog/2019-06-21-%E5%AF%B9%E6%9C%AA%E6%9D%A5%E5%9B%BD%E9%99%85%E6%A0%BC%E5%B1%80%E7%9A%84%E6%80%9D%E8%80%83/</link>
       <pubDate>Fri, 21 Jun 2019 00:00:00 +0000</pubDate>
       
-      <guid>public/blog/2019-06-21-%E5%AF%B9%E6%9C%AA%E6%9D%A5%E5%9B%BD%E9%99%85%E6%A0%BC%E5%B1%80%E7%9A%84%E6%80%9D%E8%80%83/</guid>
+      <guid>/blog/2019-06-21-%E5%AF%B9%E6%9C%AA%E6%9D%A5%E5%9B%BD%E9%99%85%E6%A0%BC%E5%B1%80%E7%9A%84%E6%80%9D%E8%80%83/</guid>
       <description>对唯一的超级大国（“一超”）而言，最理想的国际格局是一超无强；其次是一超多强；最最不愿看到的则是一超一准超多强——就像现在这样。
 超级大国统御世界的精髓是分而治之，引导地区强国互相对立，而尽量不要亲自下场，避免过多地消耗自身的力量，才能历经岁月考验而长久地维持支配性地位。
 19世纪末的英国，在欧陆有德法互相牵制，在亚洲有日俄势不两立，英国居中协调，便可立于不败之地。
@@ -549,10 +541,10 @@ pdf输出中，参考文献都在末尾。
     
     <item>
       <title>读《李鸿章时代》</title>
-      <link>public/blog/%E6%9D%8E%E9%B8%BF%E7%AB%A0%E6%97%B6%E4%BB%A3/</link>
+      <link>/blog/%E6%9D%8E%E9%B8%BF%E7%AB%A0%E6%97%B6%E4%BB%A3/</link>
       <pubDate>Tue, 18 Jun 2019 00:00:00 +0000</pubDate>
       
-      <guid>public/blog/%E6%9D%8E%E9%B8%BF%E7%AB%A0%E6%97%B6%E4%BB%A3/</guid>
+      <guid>/blog/%E6%9D%8E%E9%B8%BF%E7%AB%A0%E6%97%B6%E4%BB%A3/</guid>
       <description>本书题录王鼎杰. 李鸿章时代：1870-1895. 当代中国出版社, 2013.
 首章英国的霸权地位是工业革命之前形成的，蒸汽机的普及恰恰削弱了英国的地缘优势：
 风帆木质舰 -&amp;gt; 蒸汽铁甲舰，突破气候、洋流限制，对熟练水手和海军军官经验积累的要求降低了铁路+蒸汽机车 -&amp;gt; 陆权复兴，广土众民的大陆国家调配资源的能力空前提高，战略潜力得以释放交通改善后，对人员、物资和信息空前集中的管理需要，催生了总参谋部制度。总参谋部具有四重特性：
@@ -566,10 +558,10 @@ pdf输出中，参考文献都在末尾。
     
     <item>
       <title>国际乱象背后的结构性格局转变</title>
-      <link>public/blog/%E5%9B%BD%E9%99%85%E4%B9%B1%E8%B1%A1%E8%83%8C%E5%90%8E%E7%9A%84%E7%BB%93%E6%9E%84%E6%80%A7%E6%A0%BC%E5%B1%80%E8%BD%AC%E5%8F%98/</link>
+      <link>/blog/%E5%9B%BD%E9%99%85%E4%B9%B1%E8%B1%A1%E8%83%8C%E5%90%8E%E7%9A%84%E7%BB%93%E6%9E%84%E6%80%A7%E6%A0%BC%E5%B1%80%E8%BD%AC%E5%8F%98/</link>
       <pubDate>Sat, 16 Dec 2017 00:00:00 +0000</pubDate>
       
-      <guid>public/blog/%E5%9B%BD%E9%99%85%E4%B9%B1%E8%B1%A1%E8%83%8C%E5%90%8E%E7%9A%84%E7%BB%93%E6%9E%84%E6%80%A7%E6%A0%BC%E5%B1%80%E8%BD%AC%E5%8F%98/</guid>
+      <guid>/blog/%E5%9B%BD%E9%99%85%E4%B9%B1%E8%B1%A1%E8%83%8C%E5%90%8E%E7%9A%84%E7%BB%93%E6%9E%84%E6%80%A7%E6%A0%BC%E5%B1%80%E8%BD%AC%E5%8F%98/</guid>
       <description>历史将证明：是美国爆发全面金融危机的2008年，而非2000或2001年，由于引致了一系列新现象、新局面，而将作为21世纪的真正起点被后世所铭记——正如19世纪的真正起点是1789年，而20世纪的真正起点是1914年那样。
 就最近二百多年的世界历史而言，新世纪总是一个全新的阶段，体现着截然不同的时代氛围和集体心理特征。造成这种跨世纪变化的深层技术性原因或许有很多，但技术因素引起的变化大多是渐进的，有摩擦、有延迟；而像1789、1914、2008年这样，积聚已久的势能以一种戏剧性的方式爆发出来，在短短几年内引起人们对世界观感的极大变化，则往往是国际格局结构性转变的结果。
 一、当今国际乱象2008年之后的世界，相对于之前二十年我们听惯的老生常谈，有太多新鲜事物。当俄罗斯说“人权高于主权”，当美国说“主权神圣不可侵犯”1；当英国表态坚决支持国家统一与领土完整，当中国成为全球鼓吹自由贸易的最主要成员；当奥巴马誓言再领导世界一百年，当秦刚说“中国也曾做过世界老大，还不止一百年”；当欧美民众走上街头打砸抢烧，当游行学潮发生在香港、台湾；当东南亚小国元首公然蔑视奥巴马，当特朗普将“农村包围城市”贯彻在美利坚：唯一清楚的一点，就是局势已经发生了彻底改变。

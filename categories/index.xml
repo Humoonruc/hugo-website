@@ -2,62 +2,62 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on 万水千山</title>
-    <link>public/categories/</link>
+    <link>/categories/</link>
     <description>Recent content in Categories on 万水千山</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 06 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="public/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 06 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>International Relation</title>
-      <link>public/categories/international-relation/</link>
+      <link>/categories/international-relation/</link>
       <pubDate>Fri, 06 Aug 2021 00:00:00 +0000</pubDate>
       
-      <guid>public/categories/international-relation/</guid>
+      <guid>/categories/international-relation/</guid>
       <description></description>
     </item>
     
     <item>
       <title>经济</title>
-      <link>public/categories/%E7%BB%8F%E6%B5%8E/</link>
+      <link>/categories/%E7%BB%8F%E6%B5%8E/</link>
       <pubDate>Thu, 26 Nov 2020 00:00:00 +0000</pubDate>
       
-      <guid>public/categories/%E7%BB%8F%E6%B5%8E/</guid>
+      <guid>/categories/%E7%BB%8F%E6%B5%8E/</guid>
       <description></description>
     </item>
     
     <item>
       <title>ICT</title>
-      <link>public/categories/ict/</link>
+      <link>/categories/ict/</link>
       <pubDate>Fri, 30 Oct 2020 00:00:00 +0000</pubDate>
       
-      <guid>public/categories/ict/</guid>
+      <guid>/categories/ict/</guid>
       <description></description>
     </item>
     
     <item>
       <title>文史</title>
-      <link>public/categories/%E6%96%87%E5%8F%B2/</link>
+      <link>/categories/%E6%96%87%E5%8F%B2/</link>
       <pubDate>Mon, 04 May 2020 00:00:00 +0000</pubDate>
       
-      <guid>public/categories/%E6%96%87%E5%8F%B2/</guid>
+      <guid>/categories/%E6%96%87%E5%8F%B2/</guid>
       <description></description>
     </item>
     
     <item>
       <title>社会</title>
-      <link>public/categories/%E7%A4%BE%E4%BC%9A/</link>
+      <link>/categories/%E7%A4%BE%E4%BC%9A/</link>
       <pubDate>Sun, 27 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>public/categories/%E7%A4%BE%E4%BC%9A/</guid>
+      <guid>/categories/%E7%A4%BE%E4%BC%9A/</guid>
       <description></description>
     </item>
     
     <item>
       <title>R</title>
-      <link>public/categories/r/</link>
+      <link>/categories/r/</link>
       <pubDate>Fri, 11 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>public/categories/r/</guid>
+      <guid>/categories/r/</guid>
       <description></description>
     </item>
     

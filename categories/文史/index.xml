@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>文史 on 万水千山</title>
-    <link>public/categories/%E6%96%87%E5%8F%B2/</link>
+    <link>/categories/%E6%96%87%E5%8F%B2/</link>
     <description>Recent content in 文史 on 万水千山</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 04 May 2020 00:00:00 +0000</lastBuildDate><atom:link href="public/categories/%E6%96%87%E5%8F%B2/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 04 May 2020 00:00:00 +0000</lastBuildDate><atom:link href="/categories/%E6%96%87%E5%8F%B2/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>《钢铁是怎样炼成的》手稿被删减内容</title>
-      <link>public/blog/%E9%92%A2%E9%93%81%E6%98%AF%E6%80%8E%E6%A0%B7%E7%82%BC%E6%88%90%E7%9A%84-%E6%89%8B%E7%A8%BF%E8%A2%AB%E5%88%A0%E5%87%8F%E5%86%85%E5%AE%B9/</link>
+      <link>/blog/%E9%92%A2%E9%93%81%E6%98%AF%E6%80%8E%E6%A0%B7%E7%82%BC%E6%88%90%E7%9A%84-%E6%89%8B%E7%A8%BF%E8%A2%AB%E5%88%A0%E5%87%8F%E5%86%85%E5%AE%B9/</link>
       <pubDate>Mon, 04 May 2020 00:00:00 +0000</pubDate>
       
-      <guid>public/blog/%E9%92%A2%E9%93%81%E6%98%AF%E6%80%8E%E6%A0%B7%E7%82%BC%E6%88%90%E7%9A%84-%E6%89%8B%E7%A8%BF%E8%A2%AB%E5%88%A0%E5%87%8F%E5%86%85%E5%AE%B9/</guid>
+      <guid>/blog/%E9%92%A2%E9%93%81%E6%98%AF%E6%80%8E%E6%A0%B7%E7%82%BC%E6%88%90%E7%9A%84-%E6%89%8B%E7%A8%BF%E8%A2%AB%E5%88%A0%E5%87%8F%E5%86%85%E5%AE%B9/</guid>
       <description>《钢铁是怎样炼成的》手稿与通行本差异见译林出版社 2010 年版1附注。
 
 删减内容关于冬妮娅冬妮娅性格和思想特点从始至终的发展全过程，甚至包括冬妮娅母亲的成长经历。
@@ -59,10 +59,10 @@
     
     <item>
       <title>《脂汇本红楼梦注解》tufte网页版</title>
-      <link>public/blog/%E8%84%82%E6%B1%87%E6%9C%AC%E7%BA%A2%E6%A5%BC%E6%A2%A6%E6%B3%A8%E8%A7%A3-tufte%E7%BD%91%E9%A1%B5%E7%89%88/</link>
+      <link>/blog/%E8%84%82%E6%B1%87%E6%9C%AC%E7%BA%A2%E6%A5%BC%E6%A2%A6%E6%B3%A8%E8%A7%A3-tufte%E7%BD%91%E9%A1%B5%E7%89%88/</link>
       <pubDate>Tue, 30 Jul 2019 00:00:00 +0000</pubDate>
       
-      <guid>public/blog/%E8%84%82%E6%B1%87%E6%9C%AC%E7%BA%A2%E6%A5%BC%E6%A2%A6%E6%B3%A8%E8%A7%A3-tufte%E7%BD%91%E9%A1%B5%E7%89%88/</guid>
+      <guid>/blog/%E8%84%82%E6%B1%87%E6%9C%AC%E7%BA%A2%E6%A5%BC%E6%A2%A6%E6%B3%A8%E8%A7%A3-tufte%E7%BD%91%E9%A1%B5%E7%89%88/</guid>
       <description>目录列表自序前言凡例楔子第一单元第1回第2回第3回第4回第5回第6回第7回第8回第9回第二单元第10回第11回第12回第13回第14回第15回第16回第17回第18回第三单元第19回第20回第21回第22回第23回第24回第25回第26回第27回第四单元第28回第29回第30回第31回第32回第33回第34回第35回第36回第五单元第37回第38回第39回第40回第41回第42回第43回第44回第45回第六单元第46回第47回第48回第49回第50回第51回第52回第53回第54回第七单元第55回第56回第57回第58回第59回第60回第61回第62回第63回第八单元第64回第65回第66回第67回第68回第69回第70回第71回第72回第九单元第73回第74回第75回第76回第77回第78回第79回第80回附录附录1附录2附录3附录4附录5附录6附录7附录8附录9附录10附录11附录12附录13附录14附录15附录16附录17后记   </description>
     </item>
     
