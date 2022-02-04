@@ -3,18 +3,6 @@ title: "Monopolistic Competition and Optimum Product Diversity"
 author: "Dixit & Stiglitz"
 date: "AER, 1977"
 output:
-  bookdown::html_document2:
-    code_folding: show
-    df_print: paged
-    fig_caption: yes
-    highlight: haddock
-    number_sections: yes
-    theme: united
-    toc: yes
-    toc_depth: 3
-    toc_float:
-      collapsed: yes
-      smooth_scroll: no
   bookdown::gitbook:
     config:
       download: pdf
@@ -29,6 +17,18 @@ output:
         before: D-S Lite
     includes:
       in_header: _header.html
+  bookdown::html_document2:
+    code_folding: show
+    df_print: paged
+    fig_caption: yes
+    highlight: haddock
+    number_sections: yes
+    theme: united
+    toc: yes
+    toc_depth: 3
+    toc_float:
+      collapsed: yes
+      smooth_scroll: no
   bookdown::pdf_book:
     citation_package: natbib
     includes:
@@ -38,7 +38,7 @@ output:
     toc_depth: 3
   bookdown::word_document2:
     reference_docx: default
-csl: china-journal-of-economic-research.csl
+csl: chinese-gb7714-2005-numeric.csl
 biblio-style: apalike
 delete_merged_file: yes
 description: ''
@@ -75,22 +75,30 @@ knitr::opts_chunk$set(
 pdf.options(height = 10/2.54, width = 10/2.54, family = "SimSun") # 注意：此设置要放在最后
 ```
 
-# 说明 {-}
+# 说明 {.unnumbered}
 
-1. The paper [@DS1977] actually contains three distinct models, yet **economic literature has mostly taken up only the first one (constant elasticity of substitution case)** and its market equilibrium solution. 本文仅推导这一部分。
+1.  The paper [@DS1977] actually contains three distinct models, yet **economic literature has mostly taken up only the first one (constant elasticity of substitution case)** and its market equilibrium solution. 本文仅推导这一部分。
 
-2. 规模经济 VS 多样化偏好
-    - Modeling 规模经济：$C(x_i)=a+cx_i$，总成本可分为固定成本和不变的边际成本，则平均成本随产量增加而下降。
-    - Modeling 多样化偏好：D-S 效用函数
-      - 形如 $u=U[x_0,V(x_1,x_2,⋯,x_n)]$，$V(\cdot)$中是一个部门，$x_0$ 与 $(x_1,x_2,⋯,x_n)$ 是不同的部门。$u$ 满足 separable^[从而可以使用两阶段最优化的方法。With weakly-separable utility functions, the MRS (and thus the elasticity of substitution) of two goods from the same group is independent of the quantities of goods in other sub-groups (see Gravelle and Rees,2004, 67).]、homothetic，并拥有 convex 无差异曲线。
-      - 忽略收入分配。即假定 $U(\cdot)$ 为社会效用函数或代表性消费者的效用函数的加总^[Either a social indifference curve or the multiple of a representative consumer’s utility.]。    
+2.  Modeling 规模经济 & 多样化偏好
 
-3. 本节假设：部门内替代弹性为常数（CES）；部门间替代弹性未知。
+    -   Modeling 规模经济：$C(x_i)=a+cx_i$，总成本可分为固定成本和不变的边际成本，则平均成本随产量增加而下降。
 
-4. 文献中<font color = 'red'>后人继续简化的典型的“Dixit-Stiglitz lite”</font>在上述假设的基础上，还要同时满足以下三个特征，从而使数学处理变得简单许多。
-    - symmetry of $V(\cdot)$ 
-    - CES specification for $V(\cdot)$
-    - Cobb-Douglas form for $U(\cdot)$
+    -   Modeling 多样化偏好：D-S Utility Function
+
+        -   $U[x_0,V(x_1,x_2,⋯,x_n)]$，$V(\cdot)$ 中的 $(x_1,x_2,⋯,x_n)$ 代表一个部门，$x_0$ 是另一个部门。$U(·)$ 满足 separable[^1]、homothetic，并拥有 convex 无差异曲线。
+        -   忽略收入分配。即假定 $U(\cdot)$ 为社会效用函数或代表性消费者的效用函数的加总。
+
+3.  本节假设：部门内替代弹性为常数（CES）；部门间替代弹性未知。
+
+4.  <font color = 'red'>后人继续简化的典型 "Dixit-Stiglitz lite[^2]" </font>在上述假设的基础上，还规定了以下三个特征，从而使数学处理变得简单许多。
+
+    -   symmetry of $V(\cdot)$
+    -   CES specification for $V(\cdot)$，如 $\left(\sum_{i} x_{i}^{\rho}\right)^{1 / \rho}$
+    -   Cobb-Douglas form for $U(\cdot)$
+
+[^1]: separable 意味着可以使用两阶段最优化的方法。With weakly-separable utility functions, the MRS (and thus the elasticity of substitution) of two goods from the same group is independent of the quantities of goods in other sub-groups (see Gravelle and Rees, 2004, 67).
+
+[^2]: lite, 简化物。(used after a noun) used to say that a thing is similar to sth else but lacks many of its serious or important qualities.
 
 # Constant-Elasticity Case
 
@@ -99,21 +107,22 @@ pdf.options(height = 10/2.54, width = 10/2.54, family = "SimSun") # 注意：此
 ### 两阶段最优化问题
 
 $$
-\begin{aligned} \max _{x} u= & U\left[x_{0},\left(\sum_{i} x_{i}^{\rho}\right)^{1 / \rho}\right], \rho \in(0,1) \\ 
-& \text { s.t. } x_{0}+\sum_{i} P_{i} x_{i}=I 
-\end{aligned}
+\begin{align}
+& \max _{x}  U\left[x_{0},\left(\sum_{i} x_{i}^{\rho}\right)^{1 / \rho}\right], \rho \in(0,1) \\ 
+& \text {s.t. } x_{0}+\sum_{i} P_{i} x_{i}=I
+\end{align}
 $$
-
-
 
 ### 第一阶段最优化：部门之间的消费选择
 
-由于 $u=U[x_0,V(x_1,x_2,⋯,x_n)]$ is separable，可以使用两阶段最优化方法，在第一阶段引入数量指数和价格指数，仅讨论部门之间抉择的最优化。令数量指数 $y \equiv\left(\sum_{i} x_{i}^{\rho}\right)^{1 / \rho}$，价格指数 $q \equiv \sum_{i} P_{i} x_{i} /\left(\sum_{i} x_{i}^{\rho}\right)^{1 / \rho}$，则问题化为
+由于 $U[x_0,V(x_1,x_2,⋯,x_n)]$ is separable，可以使用两阶段最优化方法，在第一阶段引入数量指数和价格指数，仅讨论部门之间抉择的最优化。
+
+令数量指数 $y \equiv\left(\sum_{i} x_{i}^{\rho}\right)^{1 / \rho}$，价格指数 $q \equiv \frac{\sum_{i} P_{i} x_{i}}{\left(\sum_{i} x_{i}^{\rho}\right)^{1 / \rho}}$，则问题化为
 
 $$
 \begin{aligned}
-{\max _{x_0,y} u=U\left(x_{0}, y\right)} \\ 
-{\text { s.t. } x_{0}+q y=I}
+& \max _{x_0,y} u=U\left(x_{0}, y\right) \\ 
+& \text { s.t. } x_{0}+q y=I
 \end{aligned}
 $$
 
@@ -124,13 +133,13 @@ $$
 \frac{\partial \mathcal{L}}{\partial x_{0}} &=U_{0}-\lambda=0 \\ \frac{\partial \mathcal{L}}{\partial y} &=U_{y}-\lambda q=0 \\ \frac{\partial \mathcal{L}}{\partial \lambda} &=I-x_{0}-q y=0 \end{aligned}
 $$
 
-从而有 $U_y/U_0=q$. 若把 $q$ 视为参数，则由于效用函数的同位性，必有最优化时的 $(y/x_0 )^*$ 仅为 $q$ 的函数，而与 $I$ 无关。从而 $(qy/x_0 )^*$ 以及 $(qy/I)^*$ 均为 $q$ 的函数。因此可以定义最优化时用于 $y$ 类产品（或该产业）的支出份额（标志着资源在部门间的配置）:
+从而有 $U_y/U_0=q$. 若把 $q$ 视为参数，则由于 $U(·)$ 的同位性（C-D形式是一种简单的特例），必有最优化时的 $(y/x_0 )^*$ 仅为 $q$ 的函数，而与 $I$ 无关。从而 $(qy/x_0 )^*$ 以及 $(qy/I)^*$ 均为 $q$ 的函数。因此可以定义最优化时用于 $y$ 类产品/部门的支出份额:
 
 $$s\equiv qy/I=s(q)$$
 
 注意，此函数的具体形式由 $U(x_0,y)$ 的具体形式唯一确定。我们目前只知道 $U(x_0,y)$ 是凸的、同位的，而没有其他任何信息，因此无法得出 $s(q)$ 的解析式。
 
-反解得 $y=sI/q$ 和 $x_0=(1-s)I$. 因此，只要知道了 $U(x_0,y)$ 的具体形式，就可以在第一阶段最优化中得到 $y$ 和 $x_0$ 对 $q$ 的函数关系。
+反解得 $y=sI/q$ 和 $x_0=(1-s)I$. 因此，若把收入视为外生变量，只要知道了 $U(x_0,y)$ 的具体形式，就可以在第一阶段最优化中得到 $y$ 和 $x_0$ 对 $q$ 的函数关系。
 
 #### 讨论：两个弹性
 
@@ -140,9 +149,7 @@ $$s\equiv qy/I=s(q)$$
 
 $$
 \sigma(q) \equiv-\frac{d \ln \left(y / x_{0}\right)}{d \ln \left(P_{y} / P_{x_{0}}\right)}=-\frac{d \ln \left[\frac{s}{q(1-s)}\right]}{d \ln q}=1-\frac{q s^{\prime}}{s(1-s)}
-$$
-和
-$$
+$$ 和 $$
 \theta(q) \equiv \frac{d \ln s(q)}{d \ln q}=\frac{q s^{\prime}}{s}
 $$
 
@@ -151,13 +158,12 @@ $$
 ##### 数量指数 $y$ 与价格指数 $q$ 的关系 {#y-q}
 
 $$
-\frac{d y}{d q}=I \frac{d(s / q)}{d q}=\frac{s I}{q^{2}}(\theta(q)-1)<0
-$$
-故 $q$ 越大， $y$ 越小， $y$ 的最大化等价于 $q$ 的最小化。
+\frac{d y}{d q}=I \frac{d(s / q)}{d q}=\frac{s I}{q^{2}}\left[\theta(q)-1\right]<0
+$$ 故 $q$ 越大， $y$ 越小， $y$ 的最大化等价于 $q$ 的最小化。
 
 ##### 支出份额与价格指数的关系
 
-$\theta(q)$ 与零的相对大小取决于 $\sigma(q)$ 与1的相对大小。
+$\theta(q)$ 与零的相对大小取决于 $\sigma(q)$ 与 1 的相对大小。
 
 ### 第二阶段最优化：部门之内的消费选择
 
@@ -165,36 +171,38 @@ $\theta(q)$ 与零的相对大小取决于 $\sigma(q)$ 与1的相对大小。
 
 $$
 \begin{aligned}
-{\min_{x} \sum_{i} P_{i} x_{i}} \\ 
-{\text { s.t. }\left(\sum_{i} x_{i}^{\rho}\right)^{1 / \rho}=y}
+& \min_{x} \sum_{i} P_{i} x_{i} \\ 
+& \text { s.t. }\left(\sum_{i} x_{i}^{\rho}\right)^{1 / \rho}=y
 \end{aligned}
 $$
 
-等效于解对偶问题
-$$
+等效于解对偶问题 $$
 \begin{aligned}
-{\max _{x} y=\left(\sum_{i} x_{i}^{\rho}\right)^{1 / \rho}} \\ {\text { s.t. } \sum_{i} P_{i} x_{i}=s I}
+&{\max _{x} y=\left(\sum_{i} x_{i}^{\rho}\right)^{1 / \rho}} \\ 
+&{\text { s.t. } \sum_{i} P_{i} x_{i}=s I}
 \end{aligned}
 $$
 
 解之，令 $\mathcal{L} \equiv\left(\sum_{i} x_{i}^{\rho}\right)^{1 / \rho}+\lambda\left(s I-\sum_{i} P_{i} x_{i}\right)$，则有
 
+```{=tex}
 \begin{align}
 \frac{\partial \mathcal{L}}{\partial x_{i}}=\left(\frac{x_{i}}{y}\right)^{\rho-1}-\lambda P_{i}=0 (\#eq:1)
 \end{align}
-
+```
+```{=tex}
 \begin{align}
 \frac{\partial \mathcal{L}}{\partial \lambda}=s I-\sum_{i} P_{i} x_{i}=0 (\#eq:2)
 \end{align}
-
+```
 由\@ref(eq:1)得
 
+```{=tex}
 \begin{align}
 x_{i}=y\left(\lambda P_{i}\right)^{\frac{1}{\rho-1}} (\#eq:3)
 \end{align}
-
-代入\@ref(eq:2)有
-$$
+```
+代入\@ref(eq:2)有 $$
 \sum_{i} P_{i} y\left(\lambda P_{i}\right)^{\frac{1}{\rho-1}}=y \lambda^{\frac{1}{\rho-1}} \sum_{i} P_{i}^{\frac{\rho}{\rho-1}}=s I
 $$
 
@@ -204,31 +212,32 @@ $$\lambda^{\frac{1}{\rho-1}}=\frac{s I}{y} \cdot \frac{1}{\sum_{i} P_{i}^{\frac{
 
 代回\@ref(eq:3)得
 
+```{=tex}
 \begin{align}
 x_{i}=\frac{P_{i}^{\frac{1}{\rho-1}}}{\sum_{j} P_{j}^{\frac{\rho}{\rho^{-1}}}} \cdot s I (\#eq:4)
 \end{align}
-
-从而有
-$$
+```
+从而有 $$
 y \equiv\left(\sum_{i} x_{i}^{\rho}\right)^{1 / \rho}=\frac{s I}{\left(\sum_{i} P_{i}^{\frac{\rho}{\rho-1}}\right)^{\frac{\rho-1}{\rho}}}
 $$
+
 于是
 
+```{=tex}
 \begin{align}
 q=s I / y=\left(\sum_{i} P_{i}^{\frac{\rho}{\rho-1}}\right)^{\frac{\rho-1}{\rho}} (\#eq:5)
 \end{align}
-
+```
 至此，我们得到了 $q$ 与 $P$ 的函数关系，再结合第一阶段最优化，即可得到 $y$ 和 $x_0$ 对 $P$ 的函数关系。
 
 将\@ref(eq:4)中的 $\sum_{j} P_{j}^{\frac{\rho}{\rho-1}}$ 和 $sI$ 用 $q$ 和 $qy$ 代替，则有
 
-
+```{=tex}
 \begin{align}
 x_{i}=y\left(\frac{q}{P_{i}}\right)^{\frac{1}{1-\rho}} (\#eq:6)
 \end{align}
-
+```
 于是，以 $y$ 为中介，$x_i$ 对 $P$ 的函数关系也就得到了，至此，给定 $P$ 计算 $x$ 的需求函数便完全确定了。
-
 
 ### 解的性质
 
@@ -242,11 +251,9 @@ $$
 
 #### 一家厂商面对的需求价格弹性（dd curve的弹性）
 
-当商品种类很多即 $n \rightarrow \infty$ 时，由\@ref(eq:5)知
-$$
+当商品种类很多即 $n \rightarrow \infty$ 时，由\@ref(eq:5)知 $$
 \frac{\partial \ln (q)}{\partial \ln \left(P_{i}\right)}=\left(\frac{q}{P_{i}}\right)^{\rho /(1-\rho)} \rightarrow 0
 $$
-
 
 故一家厂商的价格变化对价格指数 $q$ 的影响可以忽略，此时可以将 $q$ 视为常数。因 $y=sI/q$，$y$ 也可视为常数。故由\@ref(eq:6)知
 
@@ -270,47 +277,49 @@ $$
 
 #### 简化表示
 
-令常数 $\sigma \equiv 1 /(1-\rho)$，表示 D-S 偏好的价格弹性和替代弹性，则D-S偏好可以表示为 $u=U(x_0,y)$，两个指数 $y=\left(\sum_{i} x_{i}^{1-1 / \sigma}\right)^{1 /(1-1 / \sigma)}$ 和 $q=\left(\sum_{i} P_{i}^{1-\sigma}\right)^{1 /(1-\sigma)}$
+令常数 $\sigma \equiv 1 /(1-\rho)$，表示 D-S 偏好的价格弹性和替代弹性，则 D-S 偏好可以表示为 $u=U(x_0,y)$，其中包含两个指数：$y=\left(\sum_{i} x_{i}^{1-1 / \sigma}\right)^{1 /(1-1 / \sigma)}$ 和 $q=\left(\sum_{i} P_{i}^{1-\sigma}\right)^{1 /(1-\sigma)}$
 
-#### 整个产业面对的需求价格弹性（DD curve的弹性）{#E.5}
-
+#### 整个产业面对的需求价格弹性（DD curve的弹性） {#E.5}
 
 若存在 $n$ 种商品且有同样地价格和消费量，令 $P_i=P$ 和 $x_i=x$，则预算约束可以写成 $nPx=sI$，从而有
 
+```{=tex}
 \begin{align}
 x=s(q)I/Pn (\#eq:7)
 \end{align}
-
+```
 且由\@ref(eq:5)知
 
+```{=tex}
 \begin{align}
 q=\left(n P^{\frac{\rho}{\rho-1}}\right)^{\frac{\rho-1}{\rho}}=P n^{1-\frac{1}{\rho}} (\#eq:8)
 \end{align}
-
-故 DD curve 的弹性为
-$$
+```
+故 DD curve 的弹性为 $$
 \epsilon_{D} \equiv-\frac{\partial \ln (n x)}{\partial \ln (P)}=1-\frac{\partial \ln (s)}{\partial \ln (q)} \cdot \frac{\partial \ln (q)}{\partial \ln (P)}=1-\theta(q)>0
 $$
 
 #### dd curve 比 DD curve 更有弹性（更平坦）的条件
 
-$\epsilon_{d}>\epsilon_{D}$，或
+$\epsilon_{d}>\epsilon_{D} \Rightarrow$
 
+```{=tex}
 \begin{align}
 1+(\frac 1{\rho}-1) \theta(q)>0 (\#eq:9)
 \end{align}
-
+```
 <font color = 'red'><strong>本文假定该条件自动得到满足</strong></font>。
 
 #### 多样性偏好
 
 在\@ref(eq:5)的条件下，有
 
+```{=tex}
 \begin{align}
 y \equiv\left(\sum_{i} x^{\rho}\right)^{1 / \rho}=\left(n x^{\rho}\right)^{1 / \rho}=x n^{1 / \rho}=n x \cdot n^{1 / \rho-1} (\#eq:10)
 \end{align}
-
-\@ref(eq:10)的经济含义为，一个产业中 $n$ 种商品的总消费量 $nx$ 一定的前提下，产品种类越多，消费者效用越大——这就是多样化偏好。
+```
+\@ref(eq:10)的经济含义为，一个产业中 $n$ 种商品的总消费量 $nx$ 一定的前提下，产品种类越多，消费者效用越大------这就是多样化偏好。
 
 ## 加入供给侧：Market Equilibrium
 
@@ -322,31 +331,29 @@ $$C(x_i)=a+cx_i$$
 
 #### 均衡价格
 
-
 由利润最大化条件：$MR=P_i (1-1/ϵ_d )=c=MC$，可解得均衡价格为
 
+```{=tex}
 \begin{align}
 P_e=c/\rho (\#eq:11)
 \end{align}
-
+```
 #### 均衡产量 {#solution-2}
 
 企业零利润条件为：$P=AC=a/x+c$，代入\@ref(eq:11)解得均衡时每个厂商的产量为
 
-
+```{=tex}
 \begin{align}
 x_e=\frac {a\rho}{c(1-\rho)} (\#eq:12)
 \end{align}
-
+```
 #### 均衡厂商数量 {#solution-3}
 
-将\@ref(eq:11)\@ref(eq:12)代入\@ref(eq:7)\@ref(eq:8)得
-$$
+将\@ref(eq:11)\@ref(eq:12)代入\@ref(eq:7)\@ref(eq:8)得 $$
 \frac{s\left(P_{e} n_{e}^{1-1 / \rho}\right) I}{P_{e} n_{e}}=x_{e}=\frac{a \rho}{c(1-\rho)}
-$$
-式中唯一的未知数 $n_e$ 可以被解出
+$$ 式中唯一的未知数 $n_e$ 可以被解出
 
-**注：事实上，每个企业有一定的市场势力，自主选择利润最大化产量，同时也就选择了价格。但随着厂商动态地进入和退出，这个“最大化”的利润最终一定为零。上述求解过程关注的仅仅是这个最终结果，求解的逻辑顺序不同于行业达到均衡的实际博弈逻辑顺序。**
+**注：每个企业有一定的市场势力，自主选择利润最大化产量，同时也就选择了价格。但随着厂商动态地进入和退出，这个最大化的利润最终一定为零。上述求解过程关注的仅仅是这个最终结果，求解的逻辑顺序不同于行业达到均衡的实际博弈逻辑顺序。**
 
 #### 均衡时对 $y$ 类产品的支出份额
 
@@ -358,19 +365,15 @@ $$
 
 #### 单一品种消费量对品种数量的弹性
 
-由\@ref(eq:9)知
-$$
+由\@ref(eq:9)知 $$
 \frac{\partial \ln \left(x_{e}\right)}{\partial \ln \left(n_{e}\right)}=-\left[1+\left(\frac{1}{\rho}-1\right) \theta(q)\right]<0
-$$
-故均衡时厂商（产品）数量越大，消费者对每一种产品的消费量越小（由作者假设得出）。
+$$ 故均衡时厂商（产品）数量越大，消费者对每一种产品的消费量越小（由作者假设得出）。
 
 #### 若整个产业的总产量保持恒定
 
-即 $n_ex_e$ 与 $n_e$ 无关，或$\frac{\partial\ln{\left(x_e\right)}}{\partial\ln{\left(n_e\right)}}=-1$，从而必有
-$$
+即 $n_ex_e$ 与 $n_e$ 无关，或$\frac{\partial\ln{\left(x_e\right)}}{\partial\ln{\left(n_e\right)}}=-1$，从而必有 $$
 \theta\left(q\right)=\frac{\partial\ln{\left(s\right)}}{\partial\ln{\left(q\right)}}=0
-$$
-此时有：（1）整个产业获得的预算份额为常量（事实上，此时 $U(\cdot)$ 为 Cobb-Douglas form）；（2）DD曲线为单位弹性。这是被应用很广的一种设定。
+$$ 此时有：（1）整个产业获得的预算份额为常量（事实上，此时 $U(\cdot)$ 为 Cobb-Douglas form）；（2）DD曲线为单位弹性。这是被应用很广的一种设定。
 
 ## Constrained Social Optimum
 
@@ -388,14 +391,13 @@ $$
 
 ### 求解
 
-将 $(1-1/\rho)$ 换元为 $-\beta$ 后，令 $\mathcal{L}\equiv Pn^{-\beta}+\lambda(a-\ \left(P-c\right)\frac{s\left(Pn^{-\beta}\right)I}{Pn})$，则有一阶条件：
+将 $(1-1/\rho)$ 换元为 $-\beta$ 后，令 $\mathcal{L}\equiv Pn^{-\beta}+\lambda\left[a-\ \left(P-c\right)\frac{s\left(Pn^{-\beta}\right)I}{Pn}\right]$，则有一阶条件：
 
 $$
 \begin{array}{l}{\frac{\partial \mathcal{L}}{\partial P}=n^{-\beta}-\lambda\left[\frac{s}{P n}+(P-c) \frac{P \frac{\partial s}{\partial P}-s}{P^{2} n}\right] I=0} \\ {\frac{\partial \mathcal{L}}{\partial n}=-\beta P n^{-\beta-1}-\lambda \frac{P-c}{P} \frac{\partial s}{n^{2}} I=0}\end{array}
 $$
 
-两式相除消去 $\lambda$ 得
-$$\frac{1}{\beta}=\frac{\frac{c}{P-c}+\theta(q)}{1+\beta\theta(q)}$$
+两式相除消去 $\lambda$ 得 $$\frac{1}{\beta}=\frac{\frac{c}{P-c}+\theta(q)}{1+\beta\theta(q)}$$
 
 从中解得 $P=c\left(1+\beta\right)=P_e$，再按照与\@ref(solution-2)和\@ref(solution-3)相同的过程，可知 $x=x_e$ 和 $n=n_e$。
 
@@ -416,18 +418,19 @@ $$\frac{1}{\beta}=\frac{\frac{c}{P-c}+\theta(q)}{1+\beta\theta(q)}$$
 $$\max_{n,x}{u=U\left(I-n\left(a+cx\right),xn^{1+\beta}\right)}$$
 
 ### 求解
-一阶条件为
-$$
+
+一阶条件为 $$
 \begin{array}{l}{\frac{\partial u}{\partial x}=-n c U_{0}+n^{1+\beta} U_{y}=0} \\ {\frac{\partial u}{\partial n}=-(a+c x) U_{0}+(1+\beta) x n^{\beta} U_{y}=0}\end{array}
 $$
 
 由于 $q=U_y/U_0$ 和\@ref(eq:8)式 $q=Pn^{-\beta}$，与上面两式分别联立，可得无约束最优化的解：
 
+```{=tex}
 \begin{align}
 P_u &= c < P_c \nonumber \\
 x_u &= \frac {a}{\beta c} = x_c (\#eq:13)
 \end{align}
-
+```
 可见，居民直接支付给企业的价格刚好能 cover 可变成本，故居民支付给政府的税收应恰好能 cover 固定成本 $an$，于是居民的可支配收入为 $\left(I-an\right)$。在这部分收入中，居民再进行最优化的资源配置，分配 $s(\cdot)$ 的比例给该产业。故有居民对该产业产品的预算约束方程
 
 $$n_uP_ux_u=s(\cdot)(I-an)$$
@@ -442,7 +445,9 @@ $$\left(\frac{1}{n_u}-a\right)s\left(cn_u^{-\beta}\right)=\frac{a}{\beta}$$
 
 #### 企业规模
 
-企业在平均成本最低处生产（where all economies of scale are exhausted）未必是社会最优的。因为存在消费者对多样化的偏好，企业规模小一点、产品种类多一点，即使价格更高一些，也能使消费者获得更高的效用。<font color = 'red'><strong>传统上认为，只要企业规模偏小，无法实现在最低成本处生产，便存在excess capacity（超额生产能力或过剩设备），是一种浪费。而无论有无约束，最优化求解过程表明，这种传统观点是错误的。</strong></font>无法充分exploit规模经济造成的成本上升，可能在产品多样化上得到了补偿^[大量文化产品的成本结构近乎边际零成本，却没有形成自然垄断。因为消费者对产品多样化有需求，宁愿接受更小的企业规模和更高的平均成本。] 。
+企业在平均成本最低处生产（where all economies of scale are exhausted）未必是社会最优的。因为存在消费者对多样化的偏好，企业规模小一点、产品种类多一点，即使价格更高一些，也能使消费者获得更高的效用。<font color = 'red'><strong>传统上认为，只要企业规模偏小，无法实现在最低成本处生产，便存在excess capacity（超额生产能力或过剩设备），是一种浪费。而无论有无约束，最优化求解过程表明，这种传统观点是错误的。</strong></font>无法充分exploit规模经济造成的成本上升，可能在产品多样化上得到了补偿[^3] 。
+
+[^3]: 大量文化产品的成本结构近乎边际零成本，却没有形成自然垄断。因为消费者对产品多样化有需求，宁愿接受更小的企业规模和更高的平均成本。
 
 #### 企业数量
 
