@@ -3,6 +3,18 @@ title: "Monopolistic Competition and Optimum Product Diversity"
 author: "Dixit & Stiglitz"
 date: "AER, 1977"
 output:
+  bookdown::html_document2:
+    code_folding: show
+    df_print: paged
+    fig_caption: yes
+    highlight: haddock
+    number_sections: yes
+    theme: united
+    toc: yes
+    toc_depth: 3
+    toc_float:
+      collapsed: yes
+      smooth_scroll: no
   bookdown::gitbook:
     config:
       download: pdf
@@ -17,18 +29,6 @@ output:
         before: D-S Lite
     includes:
       in_header: _header.html
-  bookdown::html_document2:
-    code_folding: show
-    df_print: paged
-    fig_caption: yes
-    highlight: haddock
-    number_sections: yes
-    theme: united
-    toc: yes
-    toc_depth: 3
-    toc_float:
-      collapsed: yes
-      smooth_scroll: no
   bookdown::pdf_book:
     citation_package: natbib
     includes:
