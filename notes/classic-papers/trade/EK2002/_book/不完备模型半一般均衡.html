@@ -262,29 +262,24 @@ G_{ni}(p) =1-e^{-T_{i} ( {{c_i}d_{ni}})^{-\theta}p^{\theta}}  \tag{2.5}
 \end{align}
 \]</span></p>
 <blockquote>
-<p>证明 <a href="不完备模型半一般均衡.html#eq:5">(2.5)</a>：<span class="math display">\[
-\begin{aligned}
+<p>证明 <a href="不完备模型半一般均衡.html#eq:5">(2.5)</a>：<span class="math display">\[\begin{aligned}
 G_{ni}(p) &amp; \equiv Pr[P_{ni} \le p] \\  
 &amp;= Pr[\frac {{c_i}d_{ni}}{Z_i} \le p]  = Pr[Z_i \geq \frac {{c_i}d_{ni}}{p}] \\ &amp; = 1-Pr[Z_i \le \frac {{c_i}d_{ni}}{p}] = 1 - F_i(\frac {{c_i}d_{ni}}{p}) \\  
 &amp;= 1 - e^{-T_{i} (\frac {{c_i}d_{ni}}{p})^{-\theta}} = 1-e^{-T_{i} ( {{c_i}d_{ni}})^{-\theta}p^{\theta}} \quad \blacksquare 
-\end{aligned}
-\]</span></p>
+\end{aligned}\]</span></p>
 </blockquote>
 <p>这是 <span class="math inline">\(i\)</span> 国出口到 <span class="math inline">\(n\)</span> 国的某种产品价格小于等于 <span class="math inline">\(p\)</span> 的概率，经过市场竞争，最终 <span class="math inline">\(n\)</span> 国该种产品的价格小于等于 <span class="math inline">\(p\)</span> 的概率为</p>
 <p><span class="math display">\[
 G_n(p) =1-\prod_{i}{(1-G_{ni}\left(p\right))}
 \]</span></p>
 <blockquote>
-<p>证明：
-<span class="math display">\[
-\begin{aligned}
+<p>证明：<span class="math display">\[\begin{aligned}
 G_n(p) &amp;= Pr[P_n \le p] \\ 
 &amp;=Pr[ \min \left\{P_{n i} ; i=1, \cdots, N\right\} \le p] \\ 
 &amp;= 1 - Pr[ \min \left\{P_{n i} ; i=1, \cdots, N\right\} \geq p] \\ 
 &amp;= 1- Pr[ P_{n i}  \geq p; i=1, \cdots, N]\\ &amp;=1-\prod_{i}Pr\left\{P_{ni}\geq p\right\} \\ 
 &amp;=1-\prod_{i}{(1-G_{ni}\left(p\right))} \quad \blacksquare 
-\end{aligned}
-\]</span></p>
+\end{aligned}\]</span></p>
 </blockquote>
 <p>将<a href="不完备模型半一般均衡.html#eq:5">(2.5)</a>代入，得</p>
 <p><span class="math display">\[
@@ -327,9 +322,7 @@ G_{n}(p)=1-e^{-\Phi_{n} p^{\theta}}  \tag{2.6}
 \]</span></p>
 <blockquote>
 <p>证明 <a href="不完备模型半一般均衡.html#eq:8">(2.8)</a>：
-由于独立同分布，<span class="math inline">\(N\)</span> 维空间中的联合概率密度函数可以表示为 <span class="math inline">\(N\)</span> 个概率密度函数的积
-<span class="math display">\[
-\begin{aligned}
+由于独立同分布，<span class="math inline">\(N\)</span> 维空间中的联合概率密度函数可以表示为 <span class="math inline">\(N\)</span> 个概率密度函数的积<span class="math display">\[\begin{aligned}
 \pi_{n i}&amp;=\operatorname{Pr}\left[P_{n i} \leq \min \left\{P_{n s}; s \neq i\right\}\right] \\ 
 &amp;=\int\cdots\int_{\left[P_{n i} \leq \min \left\{P_{n s}; s \neq i\right\}\right]}{ f(p_{n 1}, \cdots ,p_{n n}) d p_{n 1} \cdots d p_{n n}}\\
 &amp;=\int\cdots\int_{\left[P_{n i} \leq \min \left\{P_{n s}; s \neq i\right\}\right]}{ \prod_{i=1}^{N}f_{ni}(p_{ni})d p_{n 1} \cdots d p_{n n}}\\
@@ -338,9 +331,7 @@ G_{n}(p)=1-e^{-\Phi_{n} p^{\theta}}  \tag{2.6}
 &amp;=\int_{0}^{\infty} \prod_{s \neq i}\left[1-G_{n s}(p_{ni})\right] d G_{ni}(p_{ni}) \\ 
 &amp;=\int_{0}^{\infty} \prod_{s \neq i}e^{ -T_{s}\left(c_{s} d_{n s}\right)^{-\theta} p_{ni}^{\theta}} \cdot e^{ -T_{i}\left(c_{i} d_{n i}\right)^{-\theta} p_{ni}^{\theta}} T_{i}\left(c_{i} d_{n i}\right)^{-\theta} d p_{ni}^{\theta}\\
 &amp;=T_{i}\left(c_{i} d_{n i}\right)^{-\theta}\int_{0}^{\infty} e^{ -\Phi_n p_{ni}^{\theta}}  d p_{ni}^{\theta}\\
-&amp;=\frac{T_{i}\left(c_{i} d_{n i}\right)^{-\theta}}{\Phi_{n}} \quad \blacksquare 
-\end{aligned}
-\]</span></p>
+&amp;=\frac{T_{i}\left(c_{i} d_{n i}\right)^{-\theta}}{\Phi_{n}} \quad \blacksquare \end{aligned}\]</span></p>
 </blockquote>
 <p>同时，<span class="math inline">\(\pi_{ni}\)</span> 也是 <span class="math inline">\(\Phi_{n}\)</span> 中 <span class="math inline">\(i\)</span> 国的贡献比例。</p>
 <p>由无限种商品连续统的假设，结合大数定律知，<span class="math inline">\(n\)</span> 国最终从 <span class="math inline">\(i\)</span> 国购买的产品种类占 <span class="math inline">\(n\)</span> 国消费全部产品种类的比例也是 <span class="math inline">\(\pi_{ni}\)</span>.</p>
@@ -349,8 +340,7 @@ G_{n}(p)=1-e^{-\Phi_{n} p^{\theta}}  \tag{2.6}
 <h4><span class="header-section-number">2.2.3.2</span> 性质2</h4>
 <p><span class="math inline">\(n\)</span> 国最终选择从 <span class="math inline">\(i\)</span> 国购买某种产品，其价格的条件概率分布也是 <span class="math inline">\(G_{n}(p)\)</span>。</p>
 <blockquote>
-<p>证明该条件概率分布：
-<span class="math display">\[
+<p>证明该条件概率分布：<span class="math display">\[
 \begin{aligned}
 &amp; \operatorname{Pr}\left[ P_{n i} \leq p \mid P_{n i} \leq \min \left\{P_{n s}; s \neq i\right\}\right] \\ 
 =&amp; \frac{\operatorname{Pr}\left[P_{n i} \leq p, P_{n i} \leq \min \left\{P_{n s}; s \neq i\right\}\right]}{\operatorname{Pr}\left[P_{n i} \leq \min \left\{P_{n s}; s \neq i\right\}\right]}\\ 
@@ -361,8 +351,7 @@ G_{n}(p)=1-e^{-\Phi_{n} p^{\theta}}  \tag{2.6}
 =&amp; \frac{\left[T_{i}\left(c_{i} d_{n i}\right)^{-\theta}\right]\int_{0}^{p} e^{-\Phi_{n} p_{n i}^{\theta}} d p_{n i}^{\theta}}{\pi_{n i}}\\ 
 =&amp; 1-e^{-\Phi_{n} p^{\theta}} \\
 =&amp; G_n(p) \quad \blacksquare 
-\end{aligned}
-\]</span></p>
+\end{aligned}\]</span></p>
 </blockquote>
 <p>由大数定律知，最终 <span class="math inline">\(n\)</span> 国从 <span class="math inline">\(i\)</span> 国进口的所有产品的价格分布也是 <span class="math inline">\(G_{n}(p)\)</span>。因此，不同来源国产品价格的概率分布一致。</p>
 <p>如何理解这条性质呢？由<a href="不完备模型半一般均衡.html#eq:11">(2.11)</a>知，技术水平高、投入成本低、到 <span class="math inline">\(n\)</span> 国地理障碍少的国家，以所有产品计算，到达 <span class="math inline">\(n\)</span> 国的商品到岸价格的均值会更低。但事实上，<span class="math inline">\(n\)</span> 国只会购买该国生产最有效率的一部分产品。而对于缺乏竞争优势的国家，虽然以所有产品计算，到达 <span class="math inline">\(n\)</span> 国的商品到岸价格的均值会高一些，但 <span class="math inline">\(n\)</span> 国购买其产品更少，集中在其最有竞争力的商品上。最终，A source with a higher state of technology, lower input cost, or lower barriers exploits its advantage by selling a wider range of goods, exactly to the point at which the distribution of prices for what it sells in <span class="math inline">\(n\)</span> is the same as <span class="math inline">\(n\)</span>’s overall price distribution. 两国在 <span class="math inline">\(n\)</span> 国出售商品的价格分布刚好一致。</p>
@@ -380,8 +369,7 @@ p_{n}=\gamma \Phi_{n}^{-1 / \theta}  \tag{2.9}
 <p>因各国的 <span class="math inline">\(\Phi_{n}\)</span> 受到地理障碍的影响而不同，故各国的价格指数不同。因此，地理障碍这个因素使各国价格偏离一价定律，且越远离其他国家的国家，其价格指数越大。</p>
 <blockquote>
 <p>证明：
-<br> <span class="math inline">\(n\)</span> 国价格指数为 <span class="math inline">\(p_n=\left[\int_0^1 p_n(j)^{1-\sigma}dj\right]^{\frac{1}{1-\sigma}}\)</span>. 方括号中的统计量实际上是对商品连续统的一个积分，可以将其写成面积和的形式：将 <span class="math inline">\([0,1]\)</span> 区间划分为 <span class="math inline">\(S\)</span> 份，计算每份的面积：
-<span class="math display">\[\int_0^1 p_n(j)^{1-\sigma}dj=\lim_{S \to \infty} \sum_{k=1}^{S} \left[\frac{1}{S}\cdot p_{n}(k)^{1-\sigma}\right]\]</span>
+<span class="math inline">\(n\)</span> 国价格指数为 <span class="math inline">\(p_n=\left[\int_0^1 p_n(j)^{1-\sigma}dj\right]^{\frac{1}{1-\sigma}}\)</span>. 方括号中的统计量实际上是对商品连续统的一个积分，可以将其写成面积和的形式：将 <span class="math inline">\([0,1]\)</span> 区间划分为 <span class="math inline">\(S\)</span> 份，计算每份的面积：<span class="math inline">\(\int_0^1 p_n(j)^{1-\sigma}dj=\lim_{S \to \infty} \sum_{k=1}^{S} \left[\frac{1}{S}\cdot p_{n}(k)^{1-\sigma}\right]\)</span>
 由于 <span class="math inline">\(p_n(k)\sim G_n(p)\)</span> 独立同分布，上式中的面积和可以视为同一个随机变量 <span class="math inline">\((P_n)^{1-\sigma}\)</span> 多次抽样的均值 <span class="math inline">\(\frac{1}{S}\cdot\sum_{k=1}^{S} p_{n}(k)^{1-\sigma}\)</span>。当抽样次数趋于无穷大时，根据大数定律，该均值等于 <span class="math inline">\((P_n)^{1-\sigma}\)</span> 的期望。则
 <span class="math display">\[\begin{aligned}
 \int_0^1 p_n(j)^{1-\sigma}dj &amp; = E\left[P_n^{1-\sigma}\right] = \int_{0}^{\infty}p^{1-\sigma}f_n(p)dp \\
