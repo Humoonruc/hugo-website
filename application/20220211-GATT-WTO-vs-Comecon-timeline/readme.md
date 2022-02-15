@@ -1,4 +1,4 @@
-# GATT/WTO 与 Comecon 的此消彼长
+# GATT/WTO 与 Comecon 势力范围的此消彼长
 
 ## ——天下大势，分久必合，合久必分
 

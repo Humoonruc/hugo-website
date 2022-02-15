@@ -1,5 +1,5 @@
 ﻿code,id,name,chinese_name
-ALA,248,?land Island,奥兰群岛
+ALA,248,Åland islands,奥兰群岛
 AFG,4,Afghanistan,阿富汗
 ALB,8,Albania,阿尔巴尼亚
 DZA,12,Algeria,阿尔及利亚
@@ -35,7 +35,7 @@ BRN,96,Brunei,文莱
 BGR,100,Bulgaria,保加利亚
 BFA,854,Burkina Faso,布基纳法索
 BDI,108,Burundi,布隆迪
-CIV,384,C?te d'Ivoire,科特迪瓦
+CIV,384,Côte d'Ivoire,科特迪瓦
 KHM,116,Cambodia,柬埔寨
 CMR,120,Cameroon,喀麦隆
 CAN,124,Canada,加拿大
@@ -214,7 +214,7 @@ SYR,760,Syria,叙利亚
 TWN,158,Taiwan,中华民国（台湾）
 TJK,762,Tajikistan,塔吉克斯坦
 TZA,834,Tanzania,坦桑尼亚
-SJM,744,Template:Country data SJM Svalbard,斯瓦尔巴群岛和 扬马延岛
+SJM,744,Svalbard and Jan Mayen,斯瓦尔巴和扬马延岛
 THA,764,Thailand,泰国
 BHS,44,The Bahamas,巴哈马
 COM,174,The Comoros,科摩罗

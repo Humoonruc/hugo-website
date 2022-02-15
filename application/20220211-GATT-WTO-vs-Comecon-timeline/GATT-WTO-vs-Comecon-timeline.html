@@ -55,7 +55,7 @@
       .attr('transform', `translate(${margin.left}, ${margin.top})`);
     let chartTitle = mainGroup.append("text").classed("chartTitle", true)
       .attr("x", innerWidth / 2).attr("y", -15)
-      .text("GATT/WTO 与 Comecon 的此消彼长");
+      .text("GATT/WTO 与 Comecon 势力范围的此消彼长");
     let yearPanel = mainGroup.append("text").classed("yearPanel", true)
       .attr("x", innerWidth / 2).attr("y", innerHeight - 30);
 
@@ -76,6 +76,7 @@
 
       // render map
       d3.json('./data/countries-50m.json').then(
+        // 用 50m.json 比较合适，10m 的地图太精细，渲染起来太费资源，不流畅
 
         // 用匿名函数包裹
         function (topoJsonData) {
