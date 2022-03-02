@@ -1,0 +1,51 @@
+﻿code,member,id,name,chinese_name
+ALB,CEFTA,'008,Albania,阿尔巴尼亚
+ARM,EAEU,'051,Armenia,亚美尼亚
+AUT,EuropeanUnion,'040,Austria,奥地利
+AZE,white,'031,Azerbaijan,阿塞拜疆
+BLR,EAEU,'112,Belarus,白俄罗斯
+BEL,EuropeanUnion,'056,Belgium,比利时
+BIH,CEFTA,'070,Bosnia and Herzegovina,波黑
+BGR,EuropeanUnion,'100,Bulgaria,保加利亚
+HRV,EuropeanUnion,'191,Croatia,克罗地亚
+CYP,EuropeanUnion,'196,Cyprus,塞浦路斯
+CZE,EuropeanUnion,'203,Czech Republic,捷克
+DNK,EuropeanUnion,'208,Denmark,丹麦
+EST,EuropeanUnion,'233,Estonia,爱沙尼亚
+FIN,EuropeanUnion,'246,Finland,芬兰
+FRA,EuropeanUnion,'250,France,法国
+GEO,white,'268,Georgia,格鲁吉亚
+DEU,EuropeanUnion,'276,Germany,德国
+GRC,EuropeanUnion,'300,Greece,希腊
+HUN,EuropeanUnion,'348,Hungary,匈牙利
+ISL,EFTA,'352,Iceland,冰岛
+IRL,EuropeanUnion,'372,Ireland,爱尔兰
+ITA,EuropeanUnion,'380,Italy,意大利
+KAZ,EAEU,'398,Kazakhstan,哈萨克斯坦
+KGZ,EAEU,'417,Kyrgyz Republic,吉尔吉斯斯坦
+LVA,EuropeanUnion,'428,Latvia,拉脱维亚
+LIE,EFTA,'438,Liechtenstein,列支敦士登
+LTU,EuropeanUnion,'440,Lithuania,立陶宛
+LUX,EuropeanUnion,'442,Luxembourg,卢森堡
+MLT,EuropeanUnion,'470,Malta,马耳他
+MDA,CEFTA,'498,Moldova,摩尔多瓦
+MNE,CEFTA,'499,Montenegro,黑山
+NLD,EuropeanUnion,'528,Netherlands,荷兰
+MKD,CEFTA,'807,North Macedonia,北马其顿
+NOR,EFTA,'578,Norway,挪威
+POL,EuropeanUnion,'616,Poland,波兰
+PRT,EuropeanUnion,'620,Portugal,葡萄牙
+ROU,EuropeanUnion,'642,Romania,罗马尼亚
+RUS,EAEU,'643,Russian Federation,俄罗斯
+SRB,CEFTA,'688,Serbia,塞尔维亚
+SVK,EuropeanUnion,'703,Slovak Republic,斯洛伐克
+SVN,EuropeanUnion,'705,Slovenia,斯洛文尼亚
+ESP,EuropeanUnion,'724,Spain,西班牙
+SWE,EuropeanUnion,'752,Sweden,瑞典
+CHE,EFTA,'756,Switzerland,瑞士
+TJK,white,'762,Tajikistan,塔吉克斯坦
+UKR,white,'804,Ukraine,乌克兰
+GBR,white,'826,United Kingdom,英国
+UZB,white,'860,Uzbekistan,乌兹别克斯坦
+TKM,white,'795,Turkmenistan,土库曼斯坦
+XKX,CEFTA,'383,KOSOVO,科索沃

@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+
+<head>
+  <meta charset="utf-8">
+  <title>Economic Integration in Europe</title>
+  <!-- <script src="https://d3js.org/d3.v6.min.js"></script> -->
+  <script src="./js/d3.min.js"></script>
+  <script src="./js/topojson.js"></script>
+  <script src="./js/d3-tip.js"></script>
+  <link rel="stylesheet" href="./css/earth.css">
+  <link rel="stylesheet" href="./css/d3tip.css">
+</head>
+
+
+<body>
+
+  <script>
+
+    //config
+    const width = 1200, height = 700;
+    const margin = { top: 50, right: 0, bottom: 0, left: 0 };
+    let innerWidth = width - margin.left - margin.right;
+    let innerHeight = height - margin.top - margin.bottom;
+
+    let geoJsonData; // geoJson 格式的数据
+    let grid; // 地图网格
+
+    let countryNameTextTip; //提示文本框生成器
+    let countryClicked;
+
+    let ftaMembership = [];
+    const titleText = 'Economic Integration in Europe, 2022';
+
+
+    // data
+    d3.csv("./data/Europe-country-list.csv")
+      .then(data => {
+        // 每行被作为一个对象读取，所有行组成一个数组，即 .then() 中匿名函数的自变量
+        // 遍历这个数组中的每一个对象（原 csv 中的每一行）
+        data.forEach(d => {
+          ftaMembership.push({
+            id: d.id.substring(1), //字符串的第一个字符都是'
+            member: d.member
+          });
+        });
+      });
+
+
+    //tip generator
+    // de-tip.js是一个辅助d3的库，其中的d3.tip()返回一个对象
+    // 该对象的.show(selection)和.hide(selection)方法作用于selection，可以自动在画布中selection附近合适的位置生成/删除文本框，由html(selection => text)定义文本框中的文本内容
+    countryNameTextTip = d3.tip()
+      .attr('class', 'd3-tip') //该文本框在DOM中class属性的值
+      .html(d => d.properties.name); //定义从selection到text的映射
+
+
+    //svg
+    const svg1 = d3.select("body").append("svg")
+      .attr("width", width).attr("height", height);
+    svg1.call(countryNameTextTip); //提示文本框的实现
+    countryClicked = undefined; //起初不定义
+
+
+    // 投影比例尺
+    let projection1 = d3.geoNaturalEarth1()
+      .center([35, 50]) // 投影中心的经、纬度
+      .translate([innerWidth / 2, innerHeight / 2]) // 投影中心在svg中平移的像素。以上两个参数重合，完成地图与容器的定位
+      // .fitSize([innerWidth, innerHeight], geoJsonData)
+      .clipExtent([[0, 0], [width, height]])
+      .scale(650); // 缩放因子
+    let initTran1 = projection1.translate();
+    let initScale1 = projection1.scale();
+    let pathGenerator1 = d3.geoPath().projection(projection1);
+
+
+    // 经纬度网格在最底层
+    let grid1 = d3.geoGraticule10();
+    let gridPath1 = svg1.append('path').datum(grid1)
+      .attr('class', 'graticule').attr('d', pathGenerator1);
+
+    svg1.append("rect")
+      .attr("x", margin.left).attr("y", 0)
+      .attr("width", innerWidth).attr("height", margin.top)
+      .style("fill", "white");
+
+
+    // 国家所在的 group
+    const mainGroup1 = svg1.append('g')
+      .attr('transform', `translate(${margin.left}, ${margin.top})`);
+    let chartTitle = mainGroup1.append("text").classed("chartTitle", true)
+      .attr("x", innerWidth / 2).attr("y", -17)
+      .text(titleText);
+
+
+    // render countries
+    d3.json('./data/countries-10m.json') // 50m.json 的地图适中，10m 的地图很精细
+      .then(topoJsonData => {
+
+        geoJsonData = topojson.feature(topoJsonData, topoJsonData.objects.countries);
+        // console.log(geoJsonData.features)
+
+        let countries = mainGroup1.selectAll('path')
+          .data(geoJsonData.features, d => d.id)
+          .enter()
+          .append('path')
+          .attr('d', pathGenerator1) // 用 path 生成器生成各国
+          .attr('class', 'country')
+          .style('stroke', 'black')
+          .style('stroke-width', 1)
+          .style("fill", d => {
+            let member;
+            ftaMembership.forEach(europeanCountry => {
+              if (europeanCountry.id === d.id) {
+                member = europeanCountry.member;
+              }
+            });
+            if (member === 'EuropeanUnion') return 'rgb(0,85,164)';
+            if (member === 'EAEU') return 'orangered';
+            if (member === 'CEFTA') return 'yellow';
+            if (member === 'EFTA') return 'green';
+            return 'lightgrey';
+          })
+          .on('mouseover', function (d) { //用到 this 的时候，不能写箭头函数
+            d3.select(this)
+              .attr("opacity", 0.5)
+              .attr("stroke", "white")
+              .attr("stroke-width", 10);
+
+            if (countryClicked !== d.properties.name) {
+              //显示一个与SVG平级的div.d3-tip标签，并根据事件对应的selection更新其text内容
+              countryNameTextTip.show(d);
+              countryClicked = d.properties.name;
+            } else {
+              countryNameTextTip.hide(d); //并未删除div.d3-tip标签，只是将其透明度设为0
+              countryClicked = undefined;
+            }
+          })
+          .on('mouseout', function (d) {
+            d3.select(this)
+              .attr("opacity", 1)
+              .attr("stroke", "black")
+              .attr("stroke-width", 1);
+
+            countryNameTextTip.hide(d); //并未删除div.d3-tip标签，只是将其透明度设为0
+            countryClicked = undefined;
+          });
+        // .on('click', d => {
+        //   if (countryClicked !== d.properties.name) {
+        //     //显示一个与SVG平级的div.d3-tip标签，并根据事件对应的selection更新其text内容
+        //     countryNameTextTip.show(d);
+        //     countryClicked = d.properties.name;
+        //   } else {
+        //     countryNameTextTip.hide(d); //并未删除div.d3-tip标签，只是将其透明度设为0
+        //     countryClicked = undefined;
+        //   }
+        // });
+
+
+        svg1.call(d3.zoom().scaleExtent([0.4, 5]).on("zoom", function () {
+          projection1.translate([initTran1[0] + d3.event.transform.x, initTran1[1] + d3.event.transform.y]);
+          projection1.scale(initScale1 * d3.event.transform.k);
+          pathGenerator1 = d3.geoPath().projection(projection1);
+          countries.attr('d', pathGenerator1);
+          gridPath1.attr('d', pathGenerator1);
+        }));
+
+      });
+
+
+  </script>
+  <br>
+  <br>
+  <font size="4">
+    注：蓝色为欧盟（EU）成员国，橘红色为欧亚经济联盟（EAEU）成员国，绿色为欧洲自由贸易联盟（EFTA）成员国，黄色为中欧自由贸易协定（CEFTA）签约国。
+  </font>
+  <br>
+  <br>
+
+  <script>
+
+    const svg2 = d3.select("body").append("svg")
+      .attr("width", width).attr("height", height);
+    svg2.call(countryNameTextTip); //提示文本框的实现
+    countryClicked = undefined; //起初不定义
+
+
+    let projection2 = d3.geoOrthographic()
+      .rotate([-30, -48, 0]) // 球坐标系最好不用 center() 定位，用 ratate() 更好
+      .clipAngle(50)
+      .scale(650);
+    let initRotate2 = projection2.rotate();
+    let initScale2 = projection2.scale();
+    pathGenerator2 = d3.geoPath().projection(projection2);
+
+
+    // 经纬度网格在最底层
+    let graticule2 = d3.geoGraticule().step([5, 5]);
+    let grid2 = graticule2();
+    let gridPath2 = svg2.append('path').datum(grid2)
+      .attr('class', 'graticule').attr('d', pathGenerator2);
+
+
+    const mainGroup2 = svg2.append('g')
+      .attr('transform', `translate(${margin.left}, ${margin.top})`);
+
+    d3.json('./data/countries-50m.json')
+      .then(topoJsonData => {
+        geoJsonData = topojson.feature(topoJsonData, topoJsonData.objects.countries);
+
+        let countries = mainGroup2
+          .selectAll('path')
+          .data(geoJsonData.features, d => d.id)
+          .enter()
+          .append('path')
+          .attr('d', pathGenerator2)
+          .attr('class', 'country')
+          .style('stroke', 'black')
+          .style('stroke-width', 1)
+          .style("fill", d => {
+            let member;
+            ftaMembership.forEach(europeanCountry => {
+              if (europeanCountry.id === d.id) {
+                member = europeanCountry.member;
+              }
+            });
+            if (member === 'EuropeanUnion') return 'rgb(0,85,164)';
+            if (member === 'EAEU') return 'orangered';
+            if (member === 'CEFTA') return 'yellow';
+            if (member === 'EFTA') return 'green';
+            return 'lightgrey';
+          })
+          .on('mouseover', function (d) {
+            d3.select(this)
+              .attr("opacity", 0.5)
+              .attr("stroke", "white")
+              .attr("stroke-width", 10);
+
+            if (countryClicked !== d.properties.name) {
+              //显示一个与SVG平级的div.d3-tip标签，并根据事件对应的selection更新其text内容
+              countryNameTextTip.show(d);
+              countryClicked = d.properties.name;
+            } else {
+              countryNameTextTip.hide(d); //并未删除div.d3-tip标签，只是将其透明度设为0
+              countryClicked = undefined;
+            }
+          })
+          .on('mouseout', function (d) {
+            d3.select(this)
+              .attr("opacity", 1)
+              .attr("stroke", "black")
+              .attr("stroke-width", 1);
+
+            countryNameTextTip.hide(d); //并未删除div.d3-tip标签，只是将其透明度设为0
+            countryClicked = undefined;
+          });
+
+
+        svg2.call(d3.zoom().scaleExtent([0.4, 3]).on("zoom", function () {
+          projection2.rotate([
+            initRotate2[0] + 180 * d3.event.transform.x / width,
+            initRotate2[1] - 180 * d3.event.transform.y / height],
+            initRotate2[2]
+          );
+          projection2.scale(initScale2 * d3.event.transform.k);
+          pathGenerator2 = d3.geoPath().projection(projection2);
+          countries.attr('d', pathGenerator2);
+          gridPath2.attr('d', pathGenerator2);
+        }));
+
+      });
+
+
+  </script>
+
+
+</body>
+
+</html>
