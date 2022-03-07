@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>dynamicHistogram</title>
+  <!-- 本地 D3 -->
+  <!-- <script src="../d3/d3.js"></script> -->
+  <!-- <script src="../d3/d3.min.js"></script> -->
+  <!-- 官网 D3，不稳定 -->
+  <script src="https://d3js.org/d3.v6.min.js"></script>
+  <!-- 微软CDN上的jQuery -->
+  <!-- <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.5.1.min.js"></script> -->
+  <!-- 百度CDN上的jQuery -->
+  <!-- <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script> -->
+  <!-- 自定义css文件 -->
+  <!-- <link rel="stylesheet" href="./css/index.css" /> -->
+
+  <style type="text/css">
+    #yAxis>path.domain {
+      display: none;
+      /* 隐藏数轴本身 */
+    }
+
+    #yAxis>g.tick>line {
+      stroke: lightgrey;
+      /* stroke-dasharray: 5,5; 虚线 */
+    }
+
+    .axis text {
+      font-faimily: Optima, Futura, sans-serif;
+      font-size: 14px;
+      fill: black;
+    }
+
+    #chartTitle {
+      text-anchor: middle;
+      font-size: 30px;
+      font-weight: bold;
+    }
+
+    #measureUnit {
+      text-anchor: end;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    text.barLabel {
+      fill: black;
+      font-size: 12px;
+      text-anchor: middle
+    }
+  </style>
+</head>
+
+
+<body>
+  <script>
+
+    //config settings
+    const width = 950, height = 550;
+    const margin = { top: 100, bottom: 50, left: 20, right: 50 };
+    const periodTimeInTicker = 350;
+    const barsInScreen = 25; //一屏最多容纳这么多bar，再多了，每当enter一个，就必须同时exit一个
+
+    //Data and Slice
+    let dataCsv = [];
+    let dataJoinX = [];
+    let dataJoinY = [];
+    let dataJoinBar = [];
+
+    //global variables
+    let innerWidth = width - margin.left - margin.right;
+    let innerHeight = height - margin.top - margin.bottom;
+    let rectStep, rectWidth;
+    let svg, mainGroup, xGroup, yGroup;
+    let tickerId = 1; //计时器循环的索引
+    let keepTwoDecimals = d3.format(",.2f");
+
+
+    //read the data
+    function readCsv(dataPath) {
+      d3.csv(dataPath)
+        .then(data => {
+          data.forEach(d => {
+            let parseRow = {
+              year: +d.year,
+              value: +d.gdp, //d3.format()返回一个函数对象
+              color: d.color
+            };
+            dataCsv.push(parseRow);
+          });
+        });
+    }
+
+
+    //render svg and g
+    function createSvgStructure() {
+      svg = d3.select("body").append("svg")
+        .attr("width", width).attr("height", height);
+      mainGroup = svg.append("g")
+        .attr("id", "mainGroup")
+        .attr("transform", `translate(${margin.left},${margin.top})`);
+      xGroup = mainGroup.append("g")
+        .attr("id", "xAxis").attr("class", "axis")
+      yGroup = mainGroup.append("g")
+        .attr("id", "yAxis").attr("class", "axis")
+      mainGroup.append("text")
+        .text("1952-2020年中国GDP")
+        .attr("id", "chartTitle")
+        .attr("x", innerWidth / 2).attr('y', -margin.top / 2)
+      mainGroup.append("text").text("单位：万亿元人民币")
+        .attr("id", "measureUnit")
+        .attr("x", innerWidth).attr('y', -margin.top / 2)
+    }
+
+
+    //slice data
+    function getDataJoinX() {
+      if (tickerId <= barsInScreen) {
+        return dataCsv.slice(0, barsInScreen);
+      } else if (tickerId <= dataCsv.length) {
+        return dataCsv.slice(tickerId - barsInScreen, tickerId);
+      } else {
+        return dataCsv;
+      }
+    }
+    function getDataJoinY() {
+      if (tickerId <= Math.ceil(barsInScreen / 2)) {
+        return dataCsv.slice(0, Math.ceil(barsInScreen / 2));
+      } else {
+        return dataCsv.slice(0, tickerId);
+      }
+    }
+    function getDataJoinBar() {
+      if (tickerId <= barsInScreen) {
+        return dataCsv.slice(0, tickerId);
+      } else if (tickerId <= dataCsv.length) {
+        return dataCsv.slice(tickerId - barsInScreen, tickerId);
+      } else {
+        return dataCsv;
+      }
+    }
+
+
+    //render scale and axis
+    function renderXScale(dataJoinX) {
+      let xScale = d3.scaleLinear()
+        .domain([d3.min(dataJoinX, d => d.year) - 1, d3.max(dataJoinX, d => d.year) + 1])
+        .range([0, innerWidth])
+      return xScale;
+    }
+    function renderYScale(dataJoinY) {
+      let yScale = d3.scaleLinear()
+        .domain([0, d3.max(dataJoinY, d => d.value)])
+        .range([innerHeight, 0])
+      return yScale;
+    }
+    function renderXAxis(xScale) {
+      let xAxis = d3.axisBottom().scale(xScale)
+        .tickFormat(d3.format(""))
+        .tickSize(0)
+        .tickPadding(15)
+        .ticks(10)
+      xGroup.call(xAxis).attr("transform", `translate(0, ${innerHeight})`);
+    }
+    function renderYAxis(yScale) {
+      let yAxis = d3.axisRight().scale(yScale)
+        .tickSize(-innerWidth)
+        .ticks(4)
+        .tickPadding(15);
+      yGroup.call(yAxis).attr("transform", `translate(${innerWidth}, 0)`);
+    }
+
+
+    //update DOM elements
+    function updateX() {
+      dataJoinX = getDataJoinX();
+      xScale = renderXScale(dataJoinX);
+      renderXAxis(xScale);
+    }
+    function updateY() {
+      dataJoinY = getDataJoinY();
+      yScale = renderYScale(dataJoinY);
+      renderYAxis(yScale);
+    }
+    //对bars的操作如果写成一个函数，内部用条件判断，会比较复杂，不如写成三个函数
+    function updateBar1() {
+      rectStep = innerWidth / (dataJoinX.length + 1)
+      rectWidth = 0.6 * rectStep
+      dataJoinBar = getDataJoinBar();
+
+      //updateRects， enterRects 和 exitRects 千万要注意作用域，写成全局变量会出大乱子
+      let updateRects = mainGroup.selectAll("rect").data(dataJoinBar, d => d.year);
+      let enterRects = updateRects.enter().append("rect");
+      updateRects
+        .transition().duration(periodTimeInTicker).ease(d3.easeLinear)
+        .attr("height", d => innerHeight - yScale(d.value))
+        .attr("y", d => yScale(d.value));
+      enterRects
+        .attr("width", rectWidth).attr("x", (d, i) => (i + 1) * rectStep - rectWidth / 2)
+        .attr("height", 0).attr("y", innerHeight)
+        .style("rx", rectWidth / 3).style("ry", rectWidth / 3)
+        .style("fill", d => d.color)
+        .style("opacity", 0)
+        .transition().duration(periodTimeInTicker).ease(d3.easeLinear)
+        .attr("height", d => innerHeight - yScale(d.value))
+        .attr("y", d => yScale(d.value))
+        .style("opacity", 0.8)
+
+      let updateTexts = mainGroup.selectAll("text.barLabel").data(dataJoinBar, d => d.year);
+      let enterTexts = updateTexts.enter().append("text").classed("barLabel", true)
+      updateTexts
+        .transition().duration(periodTimeInTicker).ease(d3.easeLinear)
+        .attr("y", d => yScale(d.value)).attr("dy", "-0.5em")
+      enterTexts
+        .text(d => keepTwoDecimals(d.value))
+        .attr("x", (d, i) => (i + 1) * rectStep)
+        .attr("y", 0)
+        .transition().duration(periodTimeInTicker).ease(d3.easeLinear)
+        .attr("y", d => yScale(d.value)).attr("dy", "-0.5em")
+    }
+
+    function updateBar2() {
+      rectStep = innerWidth / (dataJoinX.length + 1)
+      rectWidth = 0.6 * rectStep
+      dataJoinBar = getDataJoinBar();
+
+      let updateRects = mainGroup.selectAll("rect").data(dataJoinBar, d => d.year)
+      let enterRects = updateRects.enter().append("rect")
+      let exitRects = updateRects.exit()
+      updateRects
+        .transition().duration(periodTimeInTicker).ease(d3.easeLinear)
+        .attr("width", rectWidth)
+        .attr("x", (d, i) => (i + 1) * rectStep - rectWidth / 2)
+        .attr("height", d => innerHeight - yScale(d.value))
+        .attr("y", d => yScale(d.value))
+        .style("rx", rectWidth / 3).style("ry", rectWidth / 3)
+      enterRects
+        .attr("width", rectWidth)
+        .attr("x", (d, i) => (i + 3) * rectStep - rectWidth / 2)
+        .attr("height", 0)
+        .attr("y", innerHeight)
+        .style("rx", rectWidth / 3).style("ry", rectWidth / 3)
+        .style("fill", d => d.color)
+        .style("opacity", 0)
+        .transition().duration(periodTimeInTicker).ease(d3.easeLinear)
+        .attr("x", (d, i) => (i + 1) * rectStep - rectWidth / 2)
+        .attr("height", d => innerHeight - yScale(d.value))
+        .attr("y", d => yScale(d.value))
+        .style("opacity", 0.8);
+      exitRects.classed("shouldDelete", true)
+        .transition().duration(periodTimeInTicker).ease(d3.easeLinear)
+        .attr("height", d => innerHeight - yScale(d.value))
+        .attr("y", d => yScale(d.value))
+        .attr("x", - rectStep - rectWidth / 2)
+        .style("opacity", 0)
+        .remove() //不知为何此处的remove()不起作用，影响到了第三步的绑定
+      //只好为本该被删除的rect设置shouldDelete属性
+      //并于第三阶段一开始就删掉所有这个属性的rect，通过这种方式实现正确绑定
+      //之所以不在此处删除，如单写一行 exitRects.remove()
+      //是因为那样会先执行删除，后执行过渡，动画效果就没有了
+
+      let updateTexts = mainGroup.selectAll("text.barLabel").data(dataJoinBar, d => d.year);
+      let enterTexts = updateTexts.enter().append("text").classed("barLabel", true)
+      let exitTexts = updateTexts.exit()
+      updateTexts
+        .transition().duration(periodTimeInTicker).ease(d3.easeLinear)
+        .attr("x", (d, i) => (i + 1) * rectStep)
+        .attr("y", d => yScale(d.value)).attr("dy", "-0.5em")
+      enterTexts
+        .text(d => keepTwoDecimals(d.value))
+        .attr("x", (d, i) => (i + 2) * rectStep)
+        .attr("y", 0)
+        .transition().duration(periodTimeInTicker).ease(d3.easeLinear)
+        .attr("x", (d, i) => (i + 1) * rectStep)
+        .attr("y", d => yScale(d.value)).attr("dy", "-0.5em")
+      exitTexts.transition().duration(periodTimeInTicker).ease(d3.easeLinear)
+        .attr("y", d => yScale(d.value))
+        .attr("x", - rectStep - rectWidth / 2)
+        .remove()
+    }
+
+    function updateBar3() {
+      mainGroup.selectAll("rect.shouldDelete").remove();
+
+      rectStep = innerWidth / (dataJoinX.length + 1)
+      rectWidth = 0.6 * rectStep
+      dataJoinBar = getDataJoinBar();
+
+      let updateRects = mainGroup.selectAll("rect").data(dataJoinBar, d => d.year);
+      let enterRects = updateRects.enter().append("rect");
+      updateRects
+        .transition().duration(periodTimeInTicker).ease(d3.easeLinear)
+        .attr("width", rectWidth)
+        .attr("x", (d, i) => (i + 1) * rectStep - rectWidth / 2)
+        .style("rx", rectWidth / 3).style("ry", rectWidth / 3)
+      enterRects
+        .attr("width", rectWidth).attr("x", (d, i) => (i + 1) * rectStep - rectWidth / 2)
+        .style("rx", rectWidth / 3).style("ry", rectWidth / 3)
+        .style("fill", d => d.color)
+        .attr("height", 0).attr("y", innerHeight)
+        .transition().duration(periodTimeInTicker).ease(d3.easeLinear)
+        .attr("height", d => innerHeight - yScale(d.value))
+        .attr("y", d => yScale(d.value))
+        .style("opacity", 0.8)
+
+      mainGroup.selectAll("text.barLabel").data(dataJoinBar, d => d.year)
+        .style("opacity", 0)
+      // .style("opacity", 0)同样可以起到看不见的效果，不涉及绑定时，不需要用remove()
+    }
+
+
+    //three stages
+    function notFulfillScreen() { //更新y轴和bars，x轴无变化
+      updateX();
+      updateY();
+      updateBar1();
+    }
+    function dynamicUpdate() { //同时更新两个坐标轴和bars
+      updateX();
+      updateY();
+      updateBar2();
+    }
+    function displayOverview() { //同时更新x轴和bars（y轴无变化，不必更新）
+      updateX();
+      updateBar3(); //此时bars的enter方式为从底部向上
+    }
+
+
+    //定时器
+    function ticker() {
+      const ticker = d3.interval(() => {
+        if (tickerId <= barsInScreen) {
+          notFulfillScreen(tickerId); //第一阶段，bars填满屏幕之前，只执行enter
+          tickerId++;
+        } else if (tickerId <= dataCsv.length) {
+          dynamicUpdate(tickerId); //第二阶段，成对地enter和exit bars
+          tickerId++;
+        } else if (tickerId === dataCsv.length + 1) {
+          displayOverview(tickerId); //第三阶段，展示图形全貌
+          tickerId++;
+        } else {
+          ticker.stop();
+        }
+      }, periodTimeInTicker);
+    }
+    function autoRun() {
+      // ticker();
+    }
+
+    //main
+    function main() {
+      readCsv("./data/ChinaGDP.csv");
+      createSvgStructure();
+      ticker();
+    }
+    main();
+
+  </script>
+</body>

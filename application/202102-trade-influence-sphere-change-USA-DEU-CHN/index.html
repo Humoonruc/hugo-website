@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>World Map</title>
+  <!-- <script src="https://d3js.org/d3.v6.min.js"></script> -->
+  <script src="./js/d3.min.js"></script>
+  <script src="./js/topojson.js"></script>
+  <script src="./js/d3-tip.js"></script>
+  <link rel="stylesheet" href="./css/earth.css">
+  <link rel="stylesheet" href="./css/d3tip.css">
+</head>
+
+<body>
+  <script>
+    //config
+    const width = 1000, height = 590;
+    const margin = { top: 50, right: 0, bottom: 0, left: 0 };
+    const ticker_period = 1000;
+    const firstYear = 1996, lastYear = 2019;
+    let innerWidth = width - margin.left - margin.right;
+    let innerHeight = height - margin.top - margin.bottom;
+    let geoJsonData, projectionScale, mapPathGenerator;
+    let countryColor = [];
+    let timeSeries = [];
+    let yearArray = [];
+    let yearSet;
+    let obj;
+
+
+
+    d3.csv("./data/processedData.csv")
+      .then(data => {
+        data.forEach(function (d) {
+          obj = {
+            id: d.id.substring(1), //字符串的第一个字符都是'
+            year: +d.year,
+            color: d.color
+          };
+          countryColor.push(obj);
+        });
+      });
+
+
+    //svg structure
+    const svg = d3.select("body").append("svg")
+      .attr("width", width).attr("height", height);
+    svg.append("rect")
+      .attr("x", margin.left).attr("y", margin.top)
+      .attr("width", innerWidth).attr("height", innerHeight)
+      .style("fill", "lightgrey");
+    const mainGroup = svg.append('g').attr('id', 'maingroup')
+      .attr('transform', `translate(${margin.left}, ${margin.top})`);
+    let chartTitle = mainGroup.append("text").classed("chartTitle", true)
+      .attr("x", innerWidth / 2).attr("y", -15)
+      .text("中美德三大贸易国的相对影响力");
+    let yearPanel = mainGroup.append("text").classed("yearPanel", true)
+      .attr("x", innerWidth / 2).attr("y", innerHeight - 30);
+
+    //tip generator
+    //现在希望鼠标点击某个国家时，弹出其名称。但在哪里弹出呢？每个国家在SVG中对应一个path，设置相对于path的坐标很难。
+    // de-tip.js是一个辅助d3的库，其中的d3.tip()返回一个对象
+    // 该对象的.show(selection)和.hide(selection)方法作用于selection，可以自动在画布中selection附近合适的位置生成/删除文本框，由html(selection => text)定义文本框中的文本内容
+    let countryNameTextTip = d3.tip() //提示文本框生成器
+      .attr('class', 'd3-tip') //该文本框在DOM中class属性的值
+      .html(d => d.properties.name); //定义从selection到text的映射
+    svg.call(countryNameTextTip); //提示文本框的实现
+    let countryClicked = undefined; //起初不定义
+
+
+    // render map
+    d3.json('./data/countries-50m.json').then(
+      function (topoJsonData) {
+
+        geoJsonData = topojson.feature(topoJsonData, topoJsonData.objects.countries);
+        // console.log(geoJsonData.features)
+        projectionScale = d3.geoNaturalEarth1()
+          .fitSize([innerWidth, innerHeight], geoJsonData)
+          .translate([innerWidth / 2 - 60, innerHeight / 2 + 40])
+          .scale(200);
+        mapPathGenerator = d3.geoPath().projection(projectionScale);
+
+
+        let updateSelection = mainGroup.selectAll('path')
+          .data(geoJsonData.features, d => d.id);
+        let enterSelection = updateSelection.enter().append('path');
+        updateSelection.merge(enterSelection)
+          .attr('d', mapPathGenerator)
+          .style('stroke', 'black')
+          .style('stroke-width', 1)
+          .on('mouseover', function (d) {
+            d3.select(this)
+              .attr("opacity", 0.5)
+              .attr("stroke", "white")
+              .attr("stroke-width", 10);
+          })
+          .on('mouseout', function (d) {
+            d3.select(this)
+              .attr("opacity", 1)
+              .attr("stroke", "black")
+              .attr("stroke-width", 1);
+          })
+          .on('click', function (d) {
+            if (countryClicked !== d.properties.name) {
+              //显示一个与SVG平级的div.d3-tip标签，并根据事件对应的selection更新其text内容
+              countryNameTextTip.show(d);
+              countryClicked = d.properties.name;
+            } else {
+              countryNameTextTip.hide(d); //并未删除div.d3-tip标签，只是将其透明度设为0
+            }
+          });
+
+
+        function updateChart(year) {
+
+          mainGroup.select("text.yearPanel").text(year);
+
+          mainGroup.selectAll('path').filter(d => {
+            let isNotNa = false;
+            if (d.id === "156" || d.id === "276" || d.id === "840") { isNotNa = true; }
+            countryColor
+              .filter(data => data.year === year)
+              .forEach(data => {
+                if (data.id === d.id) {
+                  isNotNa = true;
+                }
+              });
+            return isNotNa;
+          }).transition().duration(ticker_period).ease(d3.easeLinear)
+            .style("fill", function (d) {
+              let color;
+              if (d.id === "156") { color = "red"; }
+              if (d.id === "276") { color = "green"; }
+              if (d.id === "840") { color = "blue"; }
+
+              countryColor
+                .filter(data => data.year === year)
+                .forEach(data => {
+                  if (data.id === d.id) {
+                    color = data.color;
+                  }
+                });
+              return color;
+            });
+        }
+
+
+        let year = firstYear;
+        const ticker = d3.interval(() => {
+          if (year <= lastYear) {
+            updateChart(year);
+            console.log(year);
+            year++;
+          } else {
+            ticker.stop();
+          }
+        }, ticker_period);
+
+
+      }
+    );
+
+
+
+
+
+
+
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,25 @@
+body {
+    /* background-color: #d3d3e2; */
+}
+
+
+path {
+    /* fill: rgb(110, 149, 221); */
+    fill: white;
+    stroke: black;
+    stroke-opacity: 0.2;
+}
+
+text.yearPanel{
+  font-size: 55px;
+  font-weight: bolder;
+  text-anchor: middle;
+  fill:gray;
+}
+
+text.chartTitle{
+  font-size: 30px;
+  font-weight: bolder;
+  text-anchor: middle;
+  fill:black;
+}

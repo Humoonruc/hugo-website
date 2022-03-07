@@ -1,0 +1,3951 @@
+code,year,color,id,name
+AND,1995,"rgb(32,123,100)",'020,Andorra
+ARG,1995,"rgb(26,55,174)",'032,Argentina
+AUS,1995,"rgb(49,48,158)",'036,Australia
+AUT,1995,"rgb(6,229,20)",'040,Austria
+BDI,1995,"rgb(56,134,65)",'108,Burundi
+BEL,1995,"rgb(7,203,45)",'056,Belgium
+BFA,1995,"rgb(42,85,129)",'854,Burkina
+BGD,1995,"rgb(55,41,158)",'050,Bangladesh
+BLZ,1995,"rgb(2,13,239)",'084,Belize
+BMU,1995,"rgb(0,2,253)",'060,Bermuda
+BOL,1995,"rgb(5,41,209)",'068,Bolivia
+BRA,1995,"rgb(13,63,179)",'076,Brazil
+CAF,1995,"rgb(12,148,95)",'140,Central African Republic
+CAN,1995,"rgb(6,6,244)",'124,Canada
+CHE,1995,"rgb(7,197,52)",'756,Switzerland
+CHL,1995,"rgb(21,50,184)",'152,Chile
+CIV,1995,"rgb(24,126,105)",'384,C?te d'Ivoire
+CMR,1995,"rgb(42,108,105)",'120,Cameroon
+COG,1995,"rgb(1,18,236)",'178,Republic of the Congo
+COL,1995,"rgb(4,38,213)",'170,Colombia
+COM,1995,"rgb(97,37,121)",'174,The Comoros
+CRI,1995,"rgb(4,24,226)",'188,Costa Rica
+CYP,1995,"rgb(19,100,135)",'196,Cyprus
+CZE,1995,"rgb(4,232,18)",'203,Czech Republic
+DMA,1995,"rgb(3,17,235)",'212,Dominica
+DNK,1995,"rgb(11,205,39)",'208,Denmark
+DZA,1995,"rgb(16,56,183)",'012,Algeria
+ECU,1995,"rgb(3,26,226)",'218,Ecuador
+EGY,1995,"rgb(18,74,163)",'818,Egypt
+ESP,1995,"rgb(17,174,63)",'724,Spain
+EST,1995,"rgb(6,194,55)",'233,Estonia
+ETH,1995,"rgb(17,130,108)",'231,Ethiopia
+FIN,1995,"rgb(16,161,78)",'246,Finland
+FRA,1995,"rgb(14,175,66)",'250,France
+GBR,1995,"rgb(8,136,111)",'826,Great Britain (United Kingdom; England)
+GIN,1995,"rgb(14,41,200)",'324,Guinea
+GLP,1995,"rgb(28,108,120)",'312,Guadeloupe
+GMB,1995,"rgb(89,108,58)",'270,Gambia
+GRC,1995,"rgb(11,207,37)",'300,Greece
+GRD,1995,"rgb(3,12,239)",'308,Grenada
+GRL,1995,"rgb(19,105,131)",'304,Greenland
+GTM,1995,"rgb(4,25,226)",'320,Guatemala
+GUF,1995,"rgb(23,103,129)",'254,French Guiana
+HKG,1995,"rgb(169,15,71)",'344,Hong Kong
+HND,1995,"rgb(2,34,219)",'340,Honduras
+HRV,1995,"rgb(6,223,26)",'191,Croatia
+HTI,1995,"rgb(0,17,238)",'332,Haiti
+HUN,1995,"rgb(5,224,27)",'348,Hungary
+IDN,1995,"rgb(45,58,153)",'360,Indonesia
+IND,1995,"rgb(19,84,153)",'356,India
+IRL,1995,"rgb(5,119,130)",'372,Ireland
+ISL,1995,"rgb(8,135,112)",'352,Iceland
+ISR,1995,"rgb(4,64,187)",'376,Israel
+ITA,1995,"rgb(15,181,59)",'380,Italy
+JOR,1995,"rgb(32,98,126)",'400,Jordan
+JPN,1995,"rgb(51,30,174)",'392,Japan
+KAZ,1995,"rgb(102,118,35)",'398,Kazakhstan
+KGZ,1995,"rgb(161,45,50)",'417,Kyrgyzstan
+KIR,1995,"rgb(129,4,122)",'296,Kiribati
+KNA,1995,"rgb(0,1,253)",'659,St. Kitts & Nevis
+KOR,1995,"rgb(50,38,167)",'410,South Korea
+LCA,1995,"rgb(7,10,238)",'662,St. Lucia
+LTU,1995,"rgb(0,232,23)",'440,Lithuania
+LVA,1995,"rgb(1,228,26)",'428,Latvia
+MAC,1995,"rgb(89,33,134)",'446,Macao
+MAR,1995,"rgb(32,112,111)",'504,Morocco
+MDA,1995,"rgb(1,211,43)",'498,Moldova
+MDG,1995,"rgb(34,146,76)",'450,Madagascar
+MDV,1995,"rgb(9,143,103)",'462,Maldives
+MEX,1995,"rgb(1,7,247)",'484,Mexico
+MKD,1995,"rgb(2,208,45)",'807,Republic of Macedonia (FYROM)
+MLT,1995,"rgb(13,155,87)",'470,Malta
+MOZ,1995,"rgb(14,72,169)",'508,Mozambique
+MTQ,1995,"rgb(21,119,115)",'474,Martinique
+MUS,1995,"rgb(29,88,138)",'480,Mauritius
+MWI,1995,"rgb(23,139,93)",'454,Malawi
+MYS,1995,"rgb(25,40,190)",'458,Malaysia
+NER,1995,"rgb(70,71,115)",'562,Niger
+NIC,1995,"rgb(1,34,220)",'558,Nicaragua
+NLD,1995,"rgb(7,200,47)",'528,Netherlands
+NOR,1995,"rgb(14,161,80)",'578,Norway
+NZL,1995,"rgb(37,44,175)",'554,New Zealand
+OMN,1995,"rgb(123,44,88)",'512,Oman
+PAN,1995,"rgb(1,22,232)",'591,Panama
+PER,1995,"rgb(37,37,180)",'604,Peru
+POL,1995,"rgb(7,224,24)",'616,Poland
+PRT,1995,"rgb(5,206,44)",'620,Portugal
+PRY,1995,"rgb(0,45,210)",'600,Paraguay
+REU,1995,"rgb(53,167,35)",'638,Réunion
+ROU,1995,"rgb(17,200,38)",'642,Romania
+SAU,1995,"rgb(13,42,200)",'682,Saudi Arabia
+SDN,1995,"rgb(58,71,127)",'729,Sudan
+SGP,1995,"rgb(31,38,185)",'702,Singapore
+SLV,1995,"rgb(2,38,215)",'222,El Salvador
+SUR,1995,"rgb(3,4,248)",'740,Suriname
+SVK,1995,"rgb(6,224,25)",'703,Slovakia
+SVN,1995,"rgb(3,226,26)",'705,Slovenia
+SWE,1995,"rgb(12,170,73)",'752,Sweden
+SYC,1995,"rgb(23,100,131)",'690,Seychelles
+TCD,1995,"rgb(69,33,153)",'148,Chad
+TGO,1995,"rgb(35,123,97)",'768,Togo
+THA,1995,"rgb(34,50,171)",'764,Thailand
+TTO,1995,"rgb(3,15,237)",'780,Trinidad & Tobago
+TUN,1995,"rgb(9,196,50)",'788,Tunisia
+TUR,1995,"rgb(9,164,81)",'792,Turkey
+TZA,1995,"rgb(60,127,67)",'834,Tanzania
+UGA,1995,"rgb(43,143,69)",'800,Uganda
+URY,1995,"rgb(51,72,132)",'858,Uruguay
+VCT,1995,"rgb(6,10,239)",'670,St. Vincent & the Grenadines
+VEN,1995,"rgb(0,15,240)",'862,Venezuela
+ZAF,1995,"rgb(17,124,113)",'710,South Africa
+ZMB,1995,"rgb(8,59,187)",'894,Zambia
+ZWE,1995,"rgb(37,126,91)",'716,Zimbabwe
+ALB,1996,"rgb(4,200,51)",'008,Albania
+AND,1996,"rgb(32,117,106)",'020,Andorra
+ARG,1996,"rgb(33,51,171)",'032,Argentina
+AUS,1996,"rgb(50,42,163)",'036,Australia
+AUT,1996,"rgb(5,228,22)",'040,Austria
+AZE,1996,"rgb(8,200,47)",'031,Azerbaijan
+BDI,1996,"rgb(47,140,68)",'108,Burundi
+BEL,1996,"rgb(7,197,51)",'056,Belgium
+BFA,1996,"rgb(33,108,114)",'854,Burkina
+BGD,1996,"rgb(26,53,176)",'050,Bangladesh
+BGR,1996,"rgb(14,197,44)",'100,Bulgaria
+BLZ,1996,"rgb(2,6,248)",'084,Belize
+BOL,1996,"rgb(4,27,223)",'068,Bolivia
+BRA,1996,"rgb(19,58,178)",'076,Brazil
+CAF,1996,"rgb(19,126,110)",'140,Central African Republic
+CAN,1996,"rgb(5,5,245)",'124,Canada
+CHE,1996,"rgb(8,189,58)",'756,Switzerland
+CHL,1996,"rgb(26,43,187)",'152,Chile
+CIV,1996,"rgb(19,103,133)",'384,C?te d'Ivoire
+CMR,1996,"rgb(38,99,119)",'120,Cameroon
+COL,1996,"rgb(3,33,219)",'170,Colombia
+COM,1996,"rgb(35,147,73)",'174,The Comoros
+CRI,1996,"rgb(2,25,228)",'188,Costa Rica
+CYP,1996,"rgb(14,81,160)",'196,Cyprus
+CZE,1996,"rgb(5,230,20)",'203,Czech Republic
+DMA,1996,"rgb(2,9,244)",'212,Dominica
+DNK,1996,"rgb(12,201,42)",'208,Denmark
+DOM,1996,"rgb(0,4,251)",'214,Dominican Republic
+DZA,1996,"rgb(14,60,181)",'012,Algeria
+ECU,1996,"rgb(5,25,225)",'218,Ecuador
+EGY,1996,"rgb(16,69,170)",'818,Egypt
+ESP,1996,"rgb(16,176,63)",'724,Spain
+EST,1996,"rgb(7,197,51)",'233,Estonia
+FIN,1996,"rgb(17,151,87)",'246,Finland
+FRA,1996,"rgb(15,171,70)",'250,France
+FRO,1996,"rgb(11,196,47)",'234,Faroe Islands
+GAB,1996,"rgb(16,5,234)",'266,Gabon
+GBR,1996,"rgb(8,131,116)",'826,Great Britain (United Kingdom; England)
+GEO,1996,"rgb(5,122,127)",'268,Georgia
+GHA,1996,"rgb(15,142,98)",'288,Ghana
+GIN,1996,"rgb(12,31,212)",'324,Guinea
+GMB,1996,"rgb(65,121,69)",'270,Gambia
+GRC,1996,"rgb(16,196,43)",'300,Greece
+GRD,1996,"rgb(3,11,241)",'308,Grenada
+GRL,1996,"rgb(21,87,147)",'304,Greenland
+GTM,1996,"rgb(1,22,233)",'320,Guatemala
+HKG,1996,"rgb(171,15,68)",'344,Hong Kong
+HND,1996,"rgb(1,22,231)",'340,Honduras
+HRV,1996,"rgb(8,220,27)",'191,Croatia
+HTI,1996,"rgb(0,4,251)",'332,Haiti
+HUN,1996,"rgb(6,219,30)",'348,Hungary
+IDN,1996,"rgb(47,57,151)",'360,Indonesia
+IND,1996,"rgb(21,74,159)",'356,India
+IRL,1996,"rgb(6,114,135)",'372,Ireland
+ISL,1996,"rgb(8,129,118)",'352,Iceland
+ISR,1996,"rgb(4,60,191)",'376,Israel
+ITA,1996,"rgb(15,178,62)",'380,Italy
+JAM,1996,"rgb(3,5,247)",'388,Jamaica
+JPN,1996,"rgb(55,29,171)",'392,Japan
+KAZ,1996,"rgb(126,97,32)",'398,Kazakhstan
+KGZ,1996,"rgb(85,67,103)",'417,Kyrgyzstan
+KIR,1996,"rgb(120,17,118)",'296,Kiribati
+KNA,1996,"rgb(1,1,254)",'659,St. Kitts & Nevis
+KOR,1996,"rgb(58,35,162)",'410,South Korea
+LCA,1996,"rgb(6,14,235)",'662,St. Lucia
+LTU,1996,"rgb(1,228,27)",'440,Lithuania
+LVA,1996,"rgb(2,227,26)",'428,Latvia
+MAC,1996,"rgb(99,33,123)",'446,Macao
+MAR,1996,"rgb(25,108,122)",'504,Morocco
+MDA,1996,"rgb(2,179,74)",'498,Moldova
+MDG,1996,"rgb(55,113,87)",'450,Madagascar
+MDV,1996,"rgb(5,140,110)",'462,Maldives
+MEX,1996,"rgb(2,6,247)",'484,Mexico
+MKD,1996,"rgb(2,194,59)",'807,Republic of Macedonia (FYROM)
+MLI,1996,"rgb(88,67,100)",'466,Mali
+MLT,1996,"rgb(9,134,112)",'470,Malta
+MNG,1996,"rgb(194,45,15)",'496,Mongolia
+MOZ,1996,"rgb(14,64,178)",'508,Mozambique
+MUS,1996,"rgb(43,88,125)",'480,Mauritius
+MWI,1996,"rgb(0,123,132)",'454,Malawi
+MYS,1996,"rgb(27,41,187)",'458,Malaysia
+NER,1996,"rgb(72,56,127)",'562,Niger
+NGA,1996,"rgb(8,27,219)",'566,Nigeria
+NIC,1996,"rgb(1,29,225)",'558,Nicaragua
+NLD,1996,"rgb(8,199,48)",'528,Netherlands
+NOR,1996,"rgb(14,153,89)",'578,Norway
+NZL,1996,"rgb(41,46,168)",'554,New Zealand
+OMN,1996,"rgb(14,88,153)",'512,Oman
+PAN,1996,"rgb(1,13,241)",'591,Panama
+PER,1996,"rgb(35,35,186)",'604,Peru
+PHL,1996,"rgb(16,32,207)",'608,The Philippines
+POL,1996,"rgb(9,219,26)",'616,Poland
+PRT,1996,"rgb(6,204,46)",'620,Portugal
+PRY,1996,"rgb(0,57,198)",'600,Paraguay
+PYF,1996,"rgb(22,39,194)",'258,French polynesia
+ROU,1996,"rgb(12,206,37)",'642,Romania
+RUS,1996,"rgb(56,120,78)",'643,Russian Federation
+RWA,1996,"rgb(25,171,59)",'646,Rwanda
+SAU,1996,"rgb(13,39,204)",'682,Saudi Arabia
+SCG,1996,"rgb(17,194,44)",NA,NA
+SDN,1996,"rgb(80,64,112)",'729,Sudan
+SEN,1996,"rgb(52,112,91)",'686,Senegal
+SGP,1996,"rgb(33,36,186)",'702,Singapore
+SLB,1996,"rgb(145,23,88)",'090,Solomon Islands
+SLV,1996,"rgb(1,43,211)",'222,El Salvador
+SUR,1996,"rgb(2,3,250)",'740,Suriname
+SVK,1996,"rgb(6,230,19)",'703,Slovakia
+SVN,1996,"rgb(3,224,28)",'705,Slovenia
+SWE,1996,"rgb(13,163,79)",'752,Sweden
+SYC,1996,"rgb(2,24,229)",'690,Seychelles
+TGO,1996,"rgb(40,102,113)",'768,Togo
+THA,1996,"rgb(35,48,173)",'764,Thailand
+TTO,1996,"rgb(4,14,238)",'780,Trinidad & Tobago
+TUN,1996,"rgb(9,203,44)",'788,Tunisia
+TUR,1996,"rgb(9,178,69)",'792,Turkey
+TZA,1996,"rgb(63,89,102)",'834,Tanzania
+UGA,1996,"rgb(37,146,72)",'800,Uganda
+UKR,1996,"rgb(68,114,74)",'804,Ukraine
+URY,1996,"rgb(46,54,154)",'858,Uruguay
+VCT,1996,"rgb(0,2,253)",'670,St. Vincent & the Grenadines
+VEN,1996,"rgb(0,12,243)",'862,Venezuela
+ZAF,1996,"rgb(16,115,123)",'710,South Africa
+ZMB,1996,"rgb(12,79,164)",'894,Zambia
+ALB,1997,"rgb(4,230,21)",'008,Albania
+AND,1997,"rgb(28,112,115)",'020,Andorra
+ARG,1997,"rgb(39,45,172)",'032,Argentina
+ARM,1997,"rgb(4,53,198)",'051,Armenia
+AUS,1997,"rgb(56,39,160)",'036,Australia
+AUT,1997,"rgb(6,223,26)",'040,Austria
+AZE,1997,"rgb(26,149,80)",'031,Azerbaijan
+BDI,1997,"rgb(26,202,28)",'108,Burundi
+BEL,1997,"rgb(10,184,61)",'056,Belgium
+BFA,1997,"rgb(23,113,118)",'854,Burkina
+BGD,1997,"rgb(52,49,154)",'050,Bangladesh
+BGR,1997,"rgb(13,186,56)",'100,Bulgaria
+BHS,1997,"rgb(0,2,253)",'044,The Bahamas
+BLZ,1997,"rgb(2,2,251)",'084,Belize
+BMU,1997,"rgb(0,2,252)",'060,Bermuda
+BOL,1997,"rgb(3,35,217)",'068,Bolivia
+BRA,1997,"rgb(18,58,180)",'076,Brazil
+BRB,1997,"rgb(6,10,239)",'052,Barbados
+BRN,1997,"rgb(29,75,152)",'096,Brunei
+CAF,1997,"rgb(13,174,67)",'140,Central African Republic
+CAN,1997,"rgb(5,5,245)",'124,Canada
+CHE,1997,"rgb(8,182,65)",'756,Switzerland
+CHL,1997,"rgb(29,43,183)",'152,Chile
+CIV,1997,"rgb(24,95,137)",'384,C?te d'Ivoire
+CMR,1997,"rgb(55,93,107)",'120,Cameroon
+COL,1997,"rgb(4,33,218)",'170,Colombia
+COM,1997,"rgb(12,155,88)",'174,The Comoros
+CPV,1997,"rgb(7,68,180)",'132,Cape Verde
+CRI,1997,"rgb(3,17,234)",'188,Costa Rica
+CYP,1997,"rgb(15,64,176)",'196,Cyprus
+CZE,1997,"rgb(10,219,26)",'203,Czech Republic
+DMA,1997,"rgb(5,7,243)",'212,Dominica
+DNK,1997,"rgb(18,192,45)",'208,Denmark
+DOM,1997,"rgb(0,3,252)",'214,Dominican Republic
+DZA,1997,"rgb(11,49,195)",'012,Algeria
+ECU,1997,"rgb(7,30,218)",'218,Ecuador
+EGY,1997,"rgb(20,92,142)",'818,Egypt
+ESP,1997,"rgb(18,172,66)",'724,Spain
+EST,1997,"rgb(8,182,66)",'233,Estonia
+ETH,1997,"rgb(37,137,81)",'231,Ethiopia
+FIN,1997,"rgb(21,149,85)",'246,Finland
+FRA,1997,"rgb(18,161,76)",'250,France
+FRO,1997,"rgb(14,181,60)",'234,Faroe Islands
+GAB,1997,"rgb(21,6,228)",'266,Gabon
+GBR,1997,"rgb(9,121,125)",'826,Great Britain (United Kingdom; England)
+GEO,1997,"rgb(5,96,154)",'268,Georgia
+GHA,1997,"rgb(18,119,118)",'288,Ghana
+GIN,1997,"rgb(18,34,204)",'324,Guinea
+GMB,1997,"rgb(58,119,77)",'270,Gambia
+GRC,1997,"rgb(17,192,46)",'300,Greece
+GRD,1997,"rgb(4,11,240)",'308,Grenada
+GRL,1997,"rgb(22,78,156)",'304,Greenland
+GTM,1997,"rgb(1,22,233)",'320,Guatemala
+GUY,1997,"rgb(7,19,229)",'328,Guyana
+HKG,1997,"rgb(172,15,68)",'344,Hong Kong
+HND,1997,"rgb(1,13,241)",'340,Honduras
+HRV,1997,"rgb(6,218,31)",'191,Croatia
+HTI,1997,"rgb(0,1,254)",'332,Haiti
+HUN,1997,"rgb(5,225,24)",'348,Hungary
+IDN,1997,"rgb(47,51,157)",'360,Indonesia
+IND,1997,"rgb(28,68,159)",'356,India
+IRL,1997,"rgb(6,108,141)",'372,Ireland
+IRN,1997,"rgb(40,211,4)",'364,Iran
+ISL,1997,"rgb(9,126,120)",'352,Iceland
+ISR,1997,"rgb(4,57,194)",'376,Israel
+ITA,1997,"rgb(16,173,66)",'380,Italy
+JAM,1997,"rgb(5,4,246)",'388,Jamaica
+JOR,1997,"rgb(31,114,110)",'400,Jordan
+JPN,1997,"rgb(56,27,172)",'392,Japan
+KAZ,1997,"rgb(80,119,56)",'398,Kazakhstan
+KEN,1997,"rgb(23,125,107)",'404,Kenya
+KIR,1997,"rgb(76,5,174)",'296,Kiribati
+KNA,1997,"rgb(0,1,253)",'659,St. Kitts & Nevis
+KOR,1997,"rgb(70,31,154)",'410,South Korea
+LBN,1997,"rgb(37,104,114)",'422,Lebanon
+LCA,1997,"rgb(6,6,243)",'662,St. Lucia
+LTU,1997,"rgb(2,224,29)",'440,Lithuania
+LVA,1997,"rgb(3,223,29)",'428,Latvia
+MAC,1997,"rgb(99,29,127)",'446,Macao
+MAR,1997,"rgb(40,97,118)",'504,Morocco
+MDA,1997,"rgb(1,139,115)",'498,Moldova
+MDG,1997,"rgb(65,98,92)",'450,Madagascar
+MDV,1997,"rgb(5,91,159)",'462,Maldives
+MEX,1997,"rgb(2,6,247)",'484,Mexico
+MKD,1997,"rgb(2,173,79)",'807,Republic of Macedonia (FYROM)
+MLI,1997,"rgb(95,65,95)",'466,Mali
+MLT,1997,"rgb(8,127,120)",'470,Malta
+MNG,1997,"rgb(194,17,43)",'496,Mongolia
+MOZ,1997,"rgb(24,52,179)",'508,Mozambique
+MUS,1997,"rgb(43,85,128)",'480,Mauritius
+MWI,1997,"rgb(0,114,141)",'454,Malawi
+MYS,1997,"rgb(28,39,189)",'458,Malaysia
+NER,1997,"rgb(66,46,143)",'562,Niger
+NGA,1997,"rgb(22,24,209)",'566,Nigeria
+NIC,1997,"rgb(1,22,232)",'558,Nicaragua
+NLD,1997,"rgb(9,188,58)",'528,Netherlands
+NOR,1997,"rgb(17,155,83)",'578,Norway
+NZL,1997,"rgb(45,40,170)",'554,New Zealand
+OMN,1997,"rgb(160,33,62)",'512,Oman
+PAN,1997,"rgb(1,10,244)",'591,Panama
+PER,1997,"rgb(34,33,187)",'604,Peru
+PHL,1997,"rgb(16,29,210)",'608,The Philippines
+POL,1997,"rgb(11,214,30)",'616,Poland
+PRT,1997,"rgb(6,203,45)",'620,Portugal
+PRY,1997,"rgb(0,55,200)",'600,Paraguay
+PYF,1997,"rgb(22,30,203)",'258,French polynesia
+ROU,1997,"rgb(10,198,47)",'642,Romania
+RUS,1997,"rgb(50,125,81)",'643,Russian Federation
+RWA,1997,"rgb(25,165,66)",'646,Rwanda
+SCG,1997,"rgb(18,202,35)",NA,NA
+SDN,1997,"rgb(90,94,70)",'729,Sudan
+SEN,1997,"rgb(55,91,109)",'686,Senegal
+SGP,1997,"rgb(39,33,183)",'702,Singapore
+SLV,1997,"rgb(3,18,234)",'222,El Salvador
+SVK,1997,"rgb(6,224,25)",'703,Slovakia
+SVN,1997,"rgb(4,224,27)",'705,Slovenia
+SWE,1997,"rgb(13,161,81)",'752,Sweden
+SYC,1997,"rgb(20,179,56)",'690,Seychelles
+TGO,1997,"rgb(61,110,84)",'768,Togo
+THA,1997,"rgb(36,39,180)",'764,Thailand
+TKM,1997,"rgb(16,87,152)",'795,Turkmenistan
+TTO,1997,"rgb(3,13,239)",'780,Trinidad & Tobago
+TUN,1997,"rgb(10,204,41)",'788,Tunisia
+TUR,1997,"rgb(10,165,79)",'792,Turkey
+TUV,1997,"rgb(216,5,34)",'798,Tuvalu
+TZA,1997,"rgb(35,142,77)",'834,Tanzania
+UGA,1997,"rgb(39,109,108)",'800,Uganda
+UKR,1997,"rgb(78,116,60)",'804,Ukraine
+URY,1997,"rgb(47,59,149)",'858,Uruguay
+VCT,1997,"rgb(5,7,243)",'670,St. Vincent & the Grenadines
+VEN,1997,"rgb(0,10,245)",'862,Venezuela
+ZAF,1997,"rgb(19,114,123)",'710,South Africa
+ZMB,1997,"rgb(79,176,0)",'894,Zambia
+TWN,1997,"rgb(17,35,203)",'158,Taiwan
+ALB,1998,"rgb(18,190,48)",'008,Albania
+AND,1998,"rgb(39,151,65)",'020,Andorra
+ANT,1998,"rgb(1,24,230)",NA,NA
+ARG,1998,"rgb(37,49,169)",'032,Argentina
+AUS,1998,"rgb(52,39,164)",'036,Australia
+AUT,1998,"rgb(6,224,25)",'040,Austria
+AZE,1998,"rgb(16,118,121)",'031,Azerbaijan
+BDI,1998,"rgb(36,99,120)",'108,Burundi
+BEL,1998,"rgb(10,182,63)",'056,Belgium
+BEN,1998,"rgb(87,67,101)",'204,Benin
+BFA,1998,"rgb(36,105,115)",'854,Burkina
+BGD,1998,"rgb(53,43,158)",'050,Bangladesh
+BGR,1998,"rgb(10,193,53)",'100,Bulgaria
+BHS,1998,"rgb(0,1,254)",'044,The Bahamas
+BLR,1998,"rgb(27,184,44)",'112,Belarus
+BLZ,1998,"rgb(1,6,247)",'084,Belize
+BOL,1998,"rgb(4,21,230)",'068,Bolivia
+BRA,1998,"rgb(15,62,178)",'076,Brazil
+BRB,1998,"rgb(6,11,239)",'052,Barbados
+BRN,1998,"rgb(11,30,214)",'096,Brunei
+BTN,1998,"rgb(56,99,100)",'064,Bhutan
+CAF,1998,"rgb(29,136,90)",'140,Central African Republic
+CAN,1998,"rgb(5,5,245)",'124,Canada
+CHE,1998,"rgb(7,185,62)",'756,Switzerland
+CHL,1998,"rgb(35,39,181)",'152,Chile
+CIV,1998,"rgb(22,91,142)",'384,C?te d'Ivoire
+CMR,1998,"rgb(31,101,123)",'120,Cameroon
+COL,1998,"rgb(6,35,214)",'170,Colombia
+COM,1998,"rgb(1,227,27)",'174,The Comoros
+CPV,1998,"rgb(19,108,129)",'132,Cape Verde
+CRI,1998,"rgb(3,15,237)",'188,Costa Rica
+CYP,1998,"rgb(22,99,133)",'196,Cyprus
+CZE,1998,"rgb(6,231,18)",'203,Czech Republic
+DNK,1998,"rgb(13,199,43)",'208,Denmark
+DZA,1998,"rgb(15,59,181)",'012,Algeria
+ECU,1998,"rgb(8,24,223)",'218,Ecuador
+EGY,1998,"rgb(24,91,140)",'818,Egypt
+ESP,1998,"rgb(18,176,61)",'724,Spain
+EST,1998,"rgb(10,174,71)",'233,Estonia
+ETH,1998,"rgb(42,141,73)",'231,Ethiopia
+FIN,1998,"rgb(27,144,84)",'246,Finland
+FRA,1998,"rgb(17,160,78)",'250,France
+FRO,1998,"rgb(13,200,41)",'234,Faroe Islands
+GAB,1998,"rgb(13,7,236)",'266,Gabon
+GBR,1998,"rgb(10,118,127)",'826,Great Britain (United Kingdom; England)
+GEO,1998,"rgb(4,131,120)",'268,Georgia
+GHA,1998,"rgb(23,109,123)",'288,Ghana
+GIN,1998,"rgb(43,46,166)",'324,Guinea
+GMB,1998,"rgb(73,97,85)",'270,Gambia
+GRC,1998,"rgb(17,184,54)",'300,Greece
+GRD,1998,"rgb(4,10,241)",'308,Grenada
+GRL,1998,"rgb(40,88,127)",'304,Greenland
+GTM,1998,"rgb(1,20,234)",'320,Guatemala
+GUY,1998,"rgb(9,3,243)",'328,Guyana
+HKG,1998,"rgb(172,14,69)",'344,Hong Kong
+HND,1998,"rgb(2,10,243)",'340,Honduras
+HRV,1998,"rgb(6,215,34)",'191,Croatia
+HUN,1998,"rgb(6,220,29)",'348,Hungary
+IDN,1998,"rgb(41,56,158)",'360,Indonesia
+IND,1998,"rgb(24,62,169)",'356,India
+IRL,1998,"rgb(7,109,139)",'372,Ireland
+IRN,1998,"rgb(66,183,6)",'364,Iran
+ISL,1998,"rgb(9,128,118)",'352,Iceland
+ISR,1998,"rgb(6,51,198)",'376,Israel
+ITA,1998,"rgb(15,172,68)",'380,Italy
+JAM,1998,"rgb(6,5,244)",'388,Jamaica
+JOR,1998,"rgb(35,111,109)",'400,Jordan
+JPN,1998,"rgb(53,28,174)",'392,Japan
+KAZ,1998,"rgb(78,116,61)",'398,Kazakhstan
+KEN,1998,"rgb(26,105,124)",'404,Kenya
+KIR,1998,"rgb(114,6,135)",'296,Kiribati
+KOR,1998,"rgb(65,28,162)",'410,South Korea
+LBN,1998,"rgb(42,101,112)",'422,Lebanon
+LCA,1998,"rgb(10,8,237)",'662,St. Lucia
+LTU,1998,"rgb(2,219,34)",'440,Lithuania
+LVA,1998,"rgb(4,220,31)",'428,Latvia
+MAC,1998,"rgb(94,27,134)",'446,Macao
+MAR,1998,"rgb(31,128,96)",'504,Morocco
+MDA,1998,"rgb(2,175,78)",'498,Moldova
+MDG,1998,"rgb(66,109,79)",'450,Madagascar
+MDV,1998,"rgb(4,109,142)",'462,Maldives
+MEX,1998,"rgb(2,7,246)",'484,Mexico
+MKD,1998,"rgb(2,167,86)",'807,Republic of Macedonia (FYROM)
+MLI,1998,"rgb(95,65,95)",'466,Mali
+MLT,1998,"rgb(8,117,130)",'470,Malta
+MNG,1998,"rgb(184,21,50)",'496,Mongolia
+MUS,1998,"rgb(45,72,138)",'480,Mauritius
+MWI,1998,"rgb(0,118,137)",'454,Malawi
+MYS,1998,"rgb(27,32,195)",'458,Malaysia
+NER,1998,"rgb(73,37,145)",'562,Niger
+NGA,1998,"rgb(14,42,199)",'566,Nigeria
+NIC,1998,"rgb(1,27,227)",'558,Nicaragua
+NLD,1998,"rgb(11,185,58)",'528,Netherlands
+NOR,1998,"rgb(17,154,84)",'578,Norway
+NPL,1998,"rgb(51,101,103)",'524,Nepal
+NZL,1998,"rgb(43,39,173)",'554,New Zealand
+OMN,1998,"rgb(113,53,89)",'512,Oman
+PAN,1998,"rgb(3,10,242)",'591,Panama
+PER,1998,"rgb(22,28,205)",'604,Peru
+PHL,1998,"rgb(21,24,211)",'608,The Philippines
+PNG,1998,"rgb(19,66,169)",'598,Papua New Guinea
+POL,1998,"rgb(12,219,24)",'616,Poland
+PRT,1998,"rgb(6,204,45)",'620,Portugal
+PRY,1998,"rgb(0,45,210)",'600,Paraguay
+PYF,1998,"rgb(23,45,187)",'258,French polynesia
+ROU,1998,"rgb(11,200,44)",'642,Romania
+RUS,1998,"rgb(45,115,95)",'643,Russian Federation
+RWA,1998,"rgb(21,158,76)",'646,Rwanda
+SAU,1998,"rgb(27,49,179)",'682,Saudi Arabia
+SCG,1998,"rgb(15,206,34)",NA,NA
+SDN,1998,"rgb(253,2,0)",'729,Sudan
+SEN,1998,"rgb(39,95,121)",'686,Senegal
+SGP,1998,"rgb(40,31,184)",'702,Singapore
+SLV,1998,"rgb(8,33,214)",'222,El Salvador
+SVK,1998,"rgb(6,231,18)",'703,Slovakia
+SVN,1998,"rgb(6,223,26)",'705,Slovenia
+SWE,1998,"rgb(15,160,79)",'752,Sweden
+SYC,1998,"rgb(17,168,70)",'690,Seychelles
+TGO,1998,"rgb(47,134,74)",'768,Togo
+THA,1998,"rgb(36,34,184)",'764,Thailand
+TKM,1998,"rgb(18,128,110)",'795,Turkmenistan
+TTO,1998,"rgb(4,10,240)",'780,Trinidad & Tobago
+TUN,1998,"rgb(12,208,35)",'788,Tunisia
+TUR,1998,"rgb(11,163,80)",'792,Turkey
+TUV,1998,"rgb(216,2,37)",'798,Tuvalu
+TZA,1998,"rgb(55,91,109)",'834,Tanzania
+UGA,1998,"rgb(30,103,121)",'800,Uganda
+UKR,1998,"rgb(58,125,72)",'804,Ukraine
+URY,1998,"rgb(39,60,156)",'858,Uruguay
+VCT,1998,"rgb(5,10,240)",'670,St. Vincent & the Grenadines
+VEN,1998,"rgb(0,15,240)",'862,Venezuela
+ZAF,1998,"rgb(19,113,123)",'710,South Africa
+ZMB,1998,"rgb(21,90,143)",'894,Zambia
+TWN,1998,"rgb(20,37,198)",'158,Taiwan
+ALB,1999,"rgb(8,182,65)",'008,Albania
+AND,1999,"rgb(42,143,70)",'020,Andorra
+ARE,1999,"rgb(62,73,120)",'784,United Arab Emirates
+ARG,1999,"rgb(34,46,174)",'032,Argentina
+ARM,1999,"rgb(8,74,173)",'051,Armenia
+ATG,1999,"rgb(2,6,247)",'028,Antigua & Barbuda
+AUS,1999,"rgb(57,39,159)",'036,Australia
+AUT,1999,"rgb(6,221,28)",'040,Austria
+AZE,1999,"rgb(20,76,159)",'031,Azerbaijan
+BDI,1999,"rgb(62,125,67)",'108,Burundi
+BEL,1999,"rgb(12,179,64)",'056,Belgium
+BEN,1999,"rgb(94,60,101)",'204,Benin
+BFA,1999,"rgb(42,112,101)",'854,Burkina
+BGR,1999,"rgb(10,194,51)",'100,Bulgaria
+BHS,1999,"rgb(0,2,253)",'044,The Bahamas
+BLR,1999,"rgb(40,175,40)",'112,Belarus
+BLZ,1999,"rgb(4,4,247)",'084,Belize
+BOL,1999,"rgb(8,16,230)",'068,Bolivia
+BRA,1999,"rgb(13,59,184)",'076,Brazil
+BRB,1999,"rgb(6,9,240)",'052,Barbados
+BTN,1999,"rgb(151,0,103)",'064,Bhutan
+CAF,1999,"rgb(67,138,50)",'140,Central African Republic
+CAN,1999,"rgb(5,4,245)",'124,Canada
+CHE,1999,"rgb(8,181,66)",'756,Switzerland
+CHL,1999,"rgb(32,38,185)",'152,Chile
+CIV,1999,"rgb(24,78,153)",'384,C?te d'Ivoire
+CMR,1999,"rgb(53,112,90)",'120,Cameroon
+COL,1999,"rgb(6,23,227)",'170,Colombia
+COM,1999,"rgb(10,101,144)",'174,The Comoros
+CPV,1999,"rgb(23,95,137)",'132,Cape Verde
+CRI,1999,"rgb(2,11,241)",'188,Costa Rica
+CUB,1999,"rgb(193,59,3)",'192,Cuba
+CYP,1999,"rgb(31,90,134)",'196,Cyprus
+CZE,1999,"rgb(7,228,20)",'203,Czech Republic
+DMA,1999,"rgb(3,7,245)",'212,Dominica
+DNK,1999,"rgb(15,195,44)",'208,Denmark
+DZA,1999,"rgb(20,61,175)",'012,Algeria
+ECU,1999,"rgb(11,21,222)",'218,Ecuador
+EGY,1999,"rgb(33,78,143)",'818,Egypt
+ESP,1999,"rgb(20,175,60)",'724,Spain
+EST,1999,"rgb(14,169,72)",'233,Estonia
+ETH,1999,"rgb(55,121,80)",'231,Ethiopia
+FIN,1999,"rgb(25,146,83)",'246,Finland
+FRA,1999,"rgb(19,157,79)",'250,France
+FRO,1999,"rgb(17,167,71)",'234,Faroe Islands
+GAB,1999,"rgb(28,9,218)",'266,Gabon
+GBR,1999,"rgb(13,119,123)",'826,Great Britain (United Kingdom; England)
+GEO,1999,"rgb(5,114,136)",'268,Georgia
+GHA,1999,"rgb(36,100,119)",'288,Ghana
+GIN,1999,"rgb(68,65,122)",'324,Guinea
+GMB,1999,"rgb(64,141,50)",'270,Gambia
+GRC,1999,"rgb(16,181,58)",'300,Greece
+GRD,1999,"rgb(4,14,237)",'308,Grenada
+GRL,1999,"rgb(46,78,131)",'304,Greenland
+GTM,1999,"rgb(1,19,235)",'320,Guatemala
+GUY,1999,"rgb(10,5,240)",'328,Guyana
+HKG,1999,"rgb(173,13,69)",'344,Hong Kong
+HND,1999,"rgb(2,10,243)",'340,Honduras
+HRV,1999,"rgb(8,212,35)",'191,Croatia
+HUN,1999,"rgb(8,219,28)",'348,Hungary
+IDN,1999,"rgb(53,43,159)",'360,Indonesia
+IND,1999,"rgb(27,53,176)",'356,India
+IRL,1999,"rgb(7,94,155)",'372,Ireland
+IRN,1999,"rgb(69,179,7)",'364,Iran
+ISL,1999,"rgb(10,121,124)",'352,Iceland
+ISR,1999,"rgb(8,48,200)",'376,Israel
+ITA,1999,"rgb(15,171,68)",'380,Italy
+JAM,1999,"rgb(7,5,243)",'388,Jamaica
+JOR,1999,"rgb(42,102,111)",'400,Jordan
+JPN,1999,"rgb(57,26,171)",'392,Japan
+KAZ,1999,"rgb(89,99,67)",'398,Kazakhstan
+KEN,1999,"rgb(34,114,107)",'404,Kenya
+KIR,1999,"rgb(89,3,164)",'296,Kiribati
+KNA,1999,"rgb(1,1,253)",'659,St. Kitts & Nevis
+KOR,1999,"rgb(68,24,163)",'410,South Korea
+LBN,1999,"rgb(48,106,100)",'422,Lebanon
+LCA,1999,"rgb(9,6,241)",'662,St. Lucia
+LKA,1999,"rgb(17,35,203)",'144,Sri Lanka
+LTU,1999,"rgb(3,210,42)",'440,Lithuania
+LUX,1999,"rgb(3,191,61)",'442,Luxembourg
+LVA,1999,"rgb(4,207,44)",'428,Latvia
+MAC,1999,"rgb(100,33,122)",'446,Macao
+MAR,1999,"rgb(31,118,105)",'504,Morocco
+MDA,1999,"rgb(2,182,71)",'498,Moldova
+MDG,1999,"rgb(92,95,68)",'450,Madagascar
+MDV,1999,"rgb(4,83,167)",'462,Maldives
+MEX,1999,"rgb(2,8,245)",'484,Mexico
+MKD,1999,"rgb(4,182,69)",'807,Republic of Macedonia (FYROM)
+MLI,1999,"rgb(89,77,88)",'466,Mali
+MLT,1999,"rgb(9,110,136)",'470,Malta
+MNG,1999,"rgb(185,17,53)",'496,Mongolia
+MOZ,1999,"rgb(4,21,230)",'508,Mozambique
+MSR,1999,"rgb(1,1,253)",'500,Montserrat
+MUS,1999,"rgb(50,60,145)",'480,Mauritius
+MWI,1999,"rgb(5,146,104)",'454,Malawi
+MYS,1999,"rgb(30,27,199)",'458,Malaysia
+NCL,1999,"rgb(35,66,154)",'540,New Caledonia
+NER,1999,"rgb(126,38,91)",'562,Niger
+NGA,1999,"rgb(13,15,227)",'566,Nigeria
+NIC,1999,"rgb(1,24,229)",'558,Nicaragua
+NLD,1999,"rgb(12,181,62)",'528,Netherlands
+NOR,1999,"rgb(22,137,96)",'578,Norway
+NPL,1999,"rgb(63,89,103)",'524,Nepal
+NZL,1999,"rgb(45,39,171)",'554,New Zealand
+OMN,1999,"rgb(142,38,74)",'512,Oman
+PAN,1999,"rgb(3,18,234)",'591,Panama
+PER,1999,"rgb(25,27,203)",'604,Peru
+PHL,1999,"rgb(21,25,209)",'608,The Philippines
+POL,1999,"rgb(14,217,24)",'616,Poland
+PRT,1999,"rgb(6,204,45)",'620,Portugal
+PRY,1999,"rgb(0,53,202)",'600,Paraguay
+PYF,1999,"rgb(21,41,193)",'258,French polynesia
+ROU,1999,"rgb(11,202,42)",'642,Romania
+RUS,1999,"rgb(51,121,83)",'643,Russian Federation
+RWA,1999,"rgb(33,150,72)",'646,Rwanda
+SAU,1999,"rgb(13,36,206)",'682,Saudi Arabia
+SCG,1999,"rgb(30,198,27)",NA,NA
+SDN,1999,"rgb(216,0,39)",'729,Sudan
+SEN,1999,"rgb(60,100,94)",'686,Senegal
+SGP,1999,"rgb(43,30,182)",'702,Singapore
+SLV,1999,"rgb(3,28,224)",'222,El Salvador
+STP,1999,"rgb(0,58,197)",'678,Sao Tome & Principe
+SUR,1999,"rgb(10,3,241)",'740,Suriname
+SVK,1999,"rgb(6,231,18)",'703,Slovakia
+SVN,1999,"rgb(7,222,26)",'705,Slovenia
+SWE,1999,"rgb(19,158,78)",'752,Sweden
+SYC,1999,"rgb(36,151,68)",'690,Seychelles
+TCA,1999,"rgb(0,0,255)",'796,Turks & Caicos Islands
+TGO,1999,"rgb(54,140,61)",'768,Togo
+THA,1999,"rgb(42,29,184)",'764,Thailand
+TKM,1999,"rgb(28,115,112)",'795,Turkmenistan
+TTO,1999,"rgb(5,8,242)",'780,Trinidad & Tobago
+TUN,1999,"rgb(13,196,46)",'788,Tunisia
+TUR,1999,"rgb(13,163,79)",'792,Turkey
+TUV,1999,"rgb(217,8,30)",'798,Tuvalu
+TZA,1999,"rgb(47,119,89)",'834,Tanzania
+UGA,1999,"rgb(53,83,119)",'800,Uganda
+UKR,1999,"rgb(69,119,67)",'804,Ukraine
+URY,1999,"rgb(43,60,152)",'858,Uruguay
+VCT,1999,"rgb(5,6,244)",'670,St. Vincent & the Grenadines
+VEN,1999,"rgb(1,12,242)",'862,Venezuela
+ZAF,1999,"rgb(22,113,121)",'710,South Africa
+ZMB,1999,"rgb(40,215,0)",'894,Zambia
+TWN,1999,"rgb(27,36,193)",'158,Taiwan
+ABW,2000,"rgb(3,6,246)",'533,Aruba
+AIA,2000,"rgb(0,0,255)",'660,Anguilla
+ALB,2000,"rgb(32,183,40)",'008,Albania
+AND,2000,"rgb(38,155,62)",'020,Andorra
+ARE,2000,"rgb(84,72,99)",'784,United Arab Emirates
+ARG,2000,"rgb(42,40,172)",'032,Argentina
+ARM,2000,"rgb(2,64,188)",'051,Armenia
+ATG,2000,"rgb(1,4,250)",'028,Antigua & Barbuda
+AUS,2000,"rgb(68,33,155)",'036,Australia
+AUT,2000,"rgb(7,217,31)",'040,Austria
+AZE,2000,"rgb(31,84,140)",'031,Azerbaijan
+BDI,2000,"rgb(92,98,65)",'108,Burundi
+BEL,2000,"rgb(14,172,69)",'056,Belgium
+BEN,2000,"rgb(111,74,71)",'204,Benin
+BFA,2000,"rgb(74,127,55)",'854,Burkina
+BGD,2000,"rgb(54,47,154)",'050,Bangladesh
+BGR,2000,"rgb(11,190,54)",'100,Bulgaria
+BHR,2000,"rgb(42,50,163)",'048,Bahrain
+BHS,2000,"rgb(0,2,253)",'044,The Bahamas
+BLR,2000,"rgb(38,168,49)",'112,Belarus
+BLZ,2000,"rgb(2,7,245)",'084,Belize
+BOL,2000,"rgb(19,15,221)",'068,Bolivia
+BRA,2000,"rgb(16,50,189)",'076,Brazil
+BRB,2000,"rgb(7,9,239)",'052,Barbados
+BWA,2000,"rgb(27,77,151)",'072,Botswana
+CAF,2000,"rgb(26,192,37)",'140,Central African Republic
+CAN,2000,"rgb(6,5,244)",'124,Canada
+CHE,2000,"rgb(9,174,72)",'756,Switzerland
+CHL,2000,"rgb(51,29,174)",'152,Chile
+CIV,2000,"rgb(27,77,151)",'384,C?te d'Ivoire
+CMR,2000,"rgb(117,65,73)",'120,Cameroon
+COK,2000,"rgb(0,2,253)",'184,Cook Islands
+COL,2000,"rgb(8,20,227)",'170,Colombia
+COM,2000,"rgb(38,100,117)",'174,The Comoros
+CPV,2000,"rgb(36,83,135)",'132,Cape Verde
+CRI,2000,"rgb(4,10,241)",'188,Costa Rica
+CUB,2000,"rgb(183,71,2)",'192,Cuba
+CYP,2000,"rgb(40,89,126)",'196,Cyprus
+CZE,2000,"rgb(8,225,23)",'203,Czech Republic
+DMA,2000,"rgb(3,6,246)",'212,Dominica
+DNK,2000,"rgb(18,189,48)",'208,Denmark
+DZA,2000,"rgb(9,60,186)",'012,Algeria
+ECU,2000,"rgb(11,20,224)",'218,Ecuador
+EGY,2000,"rgb(38,76,140)",'818,Egypt
+ESP,2000,"rgb(22,170,63)",'724,Spain
+EST,2000,"rgb(45,160,50)",'233,Estonia
+ETH,2000,"rgb(74,121,60)",'231,Ethiopia
+FIN,2000,"rgb(32,143,79)",'246,Finland
+FJI,2000,"rgb(26,10,219)",'242,Fiji
+FRA,2000,"rgb(20,150,84)",'250,France
+FRO,2000,"rgb(17,145,93)",'234,Faroe Islands
+GAB,2000,"rgb(24,5,226)",'266,Gabon
+GBR,2000,"rgb(24,105,125)",'826,Great Britain (United Kingdom; England)
+GEO,2000,"rgb(6,134,115)",'268,Georgia
+GHA,2000,"rgb(42,103,110)",'288,Ghana
+GIN,2000,"rgb(37,67,151)",'324,Guinea
+GMB,2000,"rgb(55,169,31)",'270,Gambia
+GRC,2000,"rgb(25,174,56)",'300,Greece
+GRD,2000,"rgb(2,15,238)",'308,Grenada
+GRL,2000,"rgb(13,2,240)",'304,Greenland
+GTM,2000,"rgb(4,18,233)",'320,Guatemala
+GUY,2000,"rgb(11,3,241)",'328,Guyana
+HKG,2000,"rgb(175,13,67)",'344,Hong Kong
+HND,2000,"rgb(2,11,242)",'340,Honduras
+HRV,2000,"rgb(10,207,38)",'191,Croatia
+HUN,2000,"rgb(11,213,31)",'348,Hungary
+IDN,2000,"rgb(63,35,157)",'360,Indonesia
+IND,2000,"rgb(31,51,172)",'356,India
+IRL,2000,"rgb(7,87,161)",'372,Ireland
+IRN,2000,"rgb(69,172,14)",'364,Iran
+ISL,2000,"rgb(13,132,111)",'352,Iceland
+ISR,2000,"rgb(9,46,200)",'376,Israel
+ITA,2000,"rgb(18,161,76)",'380,Italy
+JAM,2000,"rgb(6,7,242)",'388,Jamaica
+JOR,2000,"rgb(43,108,104)",'400,Jordan
+JPN,2000,"rgb(65,25,164)",'392,Japan
+KAZ,2000,"rgb(97,104,54)",'398,Kazakhstan
+KEN,2000,"rgb(59,104,92)",'404,Kenya
+KGZ,2000,"rgb(67,141,47)",'417,Kyrgyzstan
+KHM,2000,"rgb(35,19,200)",'116,Cambodia
+KNA,2000,"rgb(1,2,253)",'659,St. Kitts & Nevis
+KOR,2000,"rgb(74,23,158)",'410,South Korea
+KWT,2000,"rgb(51,84,119)",'414,Kuwait
+LBN,2000,"rgb(55,103,97)",'422,Lebanon
+LCA,2000,"rgb(12,8,235)",'662,St. Lucia
+LKA,2000,"rgb(21,32,202)",'144,Sri Lanka
+LSO,2000,"rgb(10,0,245)",'426,Lesotho
+LTU,2000,"rgb(12,197,45)",'440,Lithuania
+LUX,2000,"rgb(5,202,48)",'442,Luxembourg
+LVA,2000,"rgb(6,214,35)",'428,Latvia
+MAC,2000,"rgb(109,22,124)",'446,Macao
+MAR,2000,"rgb(36,111,107)",'504,Morocco
+MDA,2000,"rgb(5,165,85)",'498,Moldova
+MDG,2000,"rgb(80,42,133)",'450,Madagascar
+MDV,2000,"rgb(5,59,191)",'462,Maldives
+MEX,2000,"rgb(3,7,246)",'484,Mexico
+MKD,2000,"rgb(5,168,82)",'807,Republic of Macedonia (FYROM)
+MLI,2000,"rgb(8,46,201)",'466,Mali
+MLT,2000,"rgb(9,82,164)",'470,Malta
+MNG,2000,"rgb(169,14,71)",'496,Mongolia
+MOZ,2000,"rgb(76,3,175)",'508,Mozambique
+MRT,2000,"rgb(24,140,91)",'478,Mauritania
+MSR,2000,"rgb(1,1,253)",'500,Montserrat
+MUS,2000,"rgb(61,52,141)",'480,Mauritius
+MWI,2000,"rgb(28,115,112)",'454,Malawi
+MYS,2000,"rgb(36,28,192)",'458,Malaysia
+MYT,2000,"rgb(71,136,48)",'175,Mayotte
+NAM,2000,"rgb(17,100,138)",'516,Namibia
+NCL,2000,"rgb(50,70,135)",'540,New Caledonia
+NER,2000,"rgb(75,20,160)",'562,Niger
+NGA,2000,"rgb(8,14,234)",'566,Nigeria
+NIC,2000,"rgb(3,28,223)",'558,Nicaragua
+NLD,2000,"rgb(15,180,60)",'528,Netherlands
+NOR,2000,"rgb(17,138,100)",'578,Norway
+NPL,2000,"rgb(65,70,120)",'524,Nepal
+NZL,2000,"rgb(50,35,169)",'554,New Zealand
+OMN,2000,"rgb(215,14,26)",'512,Oman
+PAN,2000,"rgb(4,11,241)",'591,Panama
+PER,2000,"rgb(41,19,195)",'604,Peru
+PHL,2000,"rgb(18,25,212)",'608,The Philippines
+PNG,2000,"rgb(43,75,137)",'598,Papua New Guinea
+POL,2000,"rgb(14,212,29)",'616,Poland
+PRT,2000,"rgb(8,196,51)",'620,Portugal
+PRY,2000,"rgb(128,34,93)",'600,Paraguay
+PYF,2000,"rgb(29,53,172)",'258,French polynesia
+QAT,2000,"rgb(76,50,128)",'634,Qatar
+ROU,2000,"rgb(14,198,43)",'642,Romania
+RUS,2000,"rgb(59,126,70)",'643,Russian Federation
+SAU,2000,"rgb(32,62,161)",'682,Saudi Arabia
+SCG,2000,"rgb(26,204,24)",NA,NA
+SDN,2000,"rgb(242,0,13)",'729,Sudan
+SEN,2000,"rgb(77,93,85)",'686,Senegal
+SGP,2000,"rgb(49,33,173)",'702,Singapore
+SLE,2000,"rgb(75,88,92)",'694,Sierra Leone
+SLV,2000,"rgb(5,24,227)",'222,El Salvador
+STP,2000,"rgb(17,77,161)",'678,Sao Tome & Principe
+SUR,2000,"rgb(20,6,229)",'740,Suriname
+SVK,2000,"rgb(7,232,16)",'703,Slovakia
+SVN,2000,"rgb(8,218,30)",'705,Slovenia
+SWE,2000,"rgb(19,149,87)",'752,Sweden
+SWZ,2000,"rgb(13,6,236)",'748,Swaziland
+SYC,2000,"rgb(31,171,53)",'690,Seychelles
+TCA,2000,"rgb(0,0,255)",'796,Turks & Caicos Islands
+TGO,2000,"rgb(78,132,45)",'768,Togo
+THA,2000,"rgb(50,29,177)",'764,Thailand
+TJK,2000,"rgb(0,201,54)",'762,Tajikistan
+TKM,2000,"rgb(39,91,124)",'795,Turkmenistan
+TON,2000,"rgb(30,4,220)",'776,Tonga
+TTO,2000,"rgb(4,5,246)",'780,Trinidad & Tobago
+TUN,2000,"rgb(12,189,53)",'788,Tunisia
+TUR,2000,"rgb(17,152,86)",'792,Turkey
+TZA,2000,"rgb(68,113,74)",'834,Tanzania
+UGA,2000,"rgb(76,79,100)",'800,Uganda
+UKR,2000,"rgb(52,127,76)",'804,Ukraine
+URY,2000,"rgb(56,54,146)",'858,Uruguay
+VCT,2000,"rgb(4,7,244)",'670,St. Vincent & the Grenadines
+VEN,2000,"rgb(2,8,245)",'862,Venezuela
+VNM,2000,"rgb(148,52,55)",'704,Vietnam
+VUT,2000,"rgb(74,82,99)",'548,Vanuatu
+WLF,2000,"rgb(103,32,119)",'876,Wallis and Futuna
+ZAF,2000,"rgb(27,112,116)",'710,South Africa
+ZMB,2000,"rgb(31,79,144)",'894,Zambia
+ZWE,2000,"rgb(60,90,105)",'716,Zimbabwe
+TWN,2000,"rgb(33,33,189)",'158,Taiwan
+ABW,2001,"rgb(3,5,247)",'533,Aruba
+AIA,2001,"rgb(0,1,254)",'660,Anguilla
+ALB,2001,"rgb(50,175,30)",'008,Albania
+AND,2001,"rgb(39,171,44)",'020,Andorra
+ARE,2001,"rgb(80,81,94)",'784,United Arab Emirates
+ARG,2001,"rgb(54,37,164)",'032,Argentina
+ARM,2001,"rgb(3,61,191)",'051,Armenia
+AUS,2001,"rgb(76,35,143)",'036,Australia
+AUT,2001,"rgb(8,215,31)",'040,Austria
+AZE,2001,"rgb(30,58,166)",'031,Azerbaijan
+BDI,2001,"rgb(84,106,65)",'108,Burundi
+BEL,2001,"rgb(15,176,64)",'056,Belgium
+BEN,2001,"rgb(130,55,70)",'204,Benin
+BFA,2001,"rgb(56,136,63)",'854,Burkina
+BGD,2001,"rgb(55,46,154)",'050,Bangladesh
+BGR,2001,"rgb(11,188,56)",'100,Bulgaria
+BHR,2001,"rgb(43,44,168)",'048,Bahrain
+BHS,2001,"rgb(0,3,252)",'044,The Bahamas
+BLR,2001,"rgb(38,174,43)",'112,Belarus
+BLZ,2001,"rgb(3,3,249)",'084,Belize
+BOL,2001,"rgb(36,18,200)",'068,Bolivia
+BRA,2001,"rgb(22,49,184)",'076,Brazil
+BRB,2001,"rgb(11,9,235)",'052,Barbados
+BRN,2001,"rgb(78,18,159)",'096,Brunei
+BWA,2001,"rgb(29,66,160)",'072,Botswana
+CAF,2001,"rgb(36,167,52)",'140,Central African Republic
+CAN,2001,"rgb(7,5,243)",'124,Canada
+CHE,2001,"rgb(10,181,64)",'756,Switzerland
+CHL,2001,"rgb(54,32,169)",'152,Chile
+CIV,2001,"rgb(29,83,143)",'384,C?te d'Ivoire
+CMR,2001,"rgb(78,84,93)",'120,Cameroon
+COK,2001,"rgb(38,2,215)",'184,Cook Islands
+COL,2001,"rgb(11,22,222)",'170,Colombia
+COM,2001,"rgb(20,103,132)",'174,The Comoros
+CPV,2001,"rgb(131,56,69)",'132,Cape Verde
+CRI,2001,"rgb(5,11,239)",'188,Costa Rica
+CUB,2001,"rgb(211,42,1)",'192,Cuba
+CYP,2001,"rgb(44,92,119)",'196,Cyprus
+CZE,2001,"rgb(10,223,22)",'203,Czech Republic
+DMA,2001,"rgb(5,5,245)",'212,Dominica
+DNK,2001,"rgb(17,189,49)",'208,Denmark
+DOM,2001,"rgb(5,12,238)",'214,Dominican Republic
+DZA,2001,"rgb(14,51,189)",'012,Algeria
+ECU,2001,"rgb(11,23,220)",'218,Ecuador
+EGY,2001,"rgb(37,72,146)",'818,Egypt
+ESP,2001,"rgb(24,175,56)",'724,Spain
+EST,2001,"rgb(85,126,44)",'233,Estonia
+ETH,2001,"rgb(86,56,113)",'231,Ethiopia
+FIN,2001,"rgb(29,138,88)",'246,Finland
+FJI,2001,"rgb(30,9,216)",'242,Fiji
+FRA,2001,"rgb(21,149,85)",'250,France
+FRO,2001,"rgb(26,170,59)",'234,Faroe Islands
+GAB,2001,"rgb(21,6,228)",'266,Gabon
+GBR,2001,"rgb(26,105,123)",'826,Great Britain (United Kingdom; England)
+GEO,2001,"rgb(8,132,115)",'268,Georgia
+GHA,2001,"rgb(53,94,108)",'288,Ghana
+GIN,2001,"rgb(37,58,160)",'324,Guinea
+GMB,2001,"rgb(46,182,27)",'270,Gambia
+GRC,2001,"rgb(30,173,53)",'300,Greece
+GRD,2001,"rgb(3,12,240)",'308,Grenada
+GRL,2001,"rgb(5,30,219)",'304,Greenland
+GTM,2001,"rgb(4,15,236)",'320,Guatemala
+GUY,2001,"rgb(11,6,239)",'328,Guyana
+HKG,2001,"rgb(179,12,63)",'344,Hong Kong
+HND,2001,"rgb(3,12,240)",'340,Honduras
+HRV,2001,"rgb(13,204,38)",'191,Croatia
+HUN,2001,"rgb(16,208,32)",'348,Hungary
+IDN,2001,"rgb(59,38,159)",'360,Indonesia
+IND,2001,"rgb(39,52,164)",'356,India
+IRL,2001,"rgb(9,95,151)",'372,Ireland
+IRN,2001,"rgb(73,168,14)",'364,Iran
+ISL,2001,"rgb(17,132,106)",'352,Iceland
+ISR,2001,"rgb(12,44,199)",'376,Israel
+ITA,2001,"rgb(20,162,73)",'380,Italy
+JAM,2001,"rgb(12,5,239)",'388,Jamaica
+JOR,2001,"rgb(52,87,116)",'400,Jordan
+JPN,2001,"rgb(75,24,157)",'392,Japan
+KAZ,2001,"rgb(91,109,55)",'398,Kazakhstan
+KEN,2001,"rgb(28,64,163)",'404,Kenya
+KGZ,2001,"rgb(79,137,39)",'417,Kyrgyzstan
+KHM,2001,"rgb(38,25,192)",'116,Cambodia
+KNA,2001,"rgb(1,3,251)",'659,St. Kitts & Nevis
+KOR,2001,"rgb(85,24,146)",'410,South Korea
+KWT,2001,"rgb(53,96,106)",'414,Kuwait
+LBN,2001,"rgb(65,100,90)",'422,Lebanon
+LCA,2001,"rgb(11,6,238)",'662,St. Lucia
+LKA,2001,"rgb(21,31,203)",'144,Sri Lanka
+LSO,2001,"rgb(7,1,247)",'426,Lesotho
+LTU,2001,"rgb(15,197,43)",'440,Lithuania
+LUX,2001,"rgb(4,209,41)",'442,Luxembourg
+LVA,2001,"rgb(7,219,29)",'428,Latvia
+MAC,2001,"rgb(117,21,117)",'446,Macao
+MAR,2001,"rgb(42,121,92)",'504,Morocco
+MDA,2001,"rgb(12,170,74)",'498,Moldova
+MDG,2001,"rgb(57,43,155)",'450,Madagascar
+MDV,2001,"rgb(8,49,198)",'462,Maldives
+MEX,2001,"rgb(4,7,243)",'484,Mexico
+MKD,2001,"rgb(8,185,62)",'807,Republic of Macedonia (FYROM)
+MLI,2001,"rgb(48,86,121)",'466,Mali
+MLT,2001,"rgb(11,99,144)",'470,Malta
+MMR,2001,"rgb(208,22,25)",'104,Myanmar (Burma)
+MNG,2001,"rgb(165,16,74)",'496,Mongolia
+MOZ,2001,"rgb(92,37,126)",'508,Mozambique
+MRT,2001,"rgb(17,127,112)",'478,Mauritania
+MSR,2001,"rgb(1,1,253)",'500,Montserrat
+MUS,2001,"rgb(55,62,138)",'480,Mauritius
+MWI,2001,"rgb(27,94,135)",'454,Malawi
+MYS,2001,"rgb(46,29,180)",'458,Malaysia
+MYT,2001,"rgb(61,140,54)",'175,Mayotte
+NAM,2001,"rgb(49,90,116)",'516,Namibia
+NCL,2001,"rgb(89,0,166)",'540,New Caledonia
+NER,2001,"rgb(54,11,191)",'562,Niger
+NGA,2001,"rgb(17,27,211)",'566,Nigeria
+NIC,2001,"rgb(9,23,223)",'558,Nicaragua
+NLD,2001,"rgb(18,180,57)",'528,Netherlands
+NOR,2001,"rgb(21,145,89)",'578,Norway
+NZL,2001,"rgb(57,38,160)",'554,New Zealand
+OMN,2001,"rgb(159,31,65)",'512,Oman
+PAN,2001,"rgb(5,13,237)",'591,Panama
+PER,2001,"rgb(43,24,188)",'604,Peru
+PHL,2001,"rgb(24,28,203)",'608,The Philippines
+PNG,2001,"rgb(56,50,149)",'598,Papua New Guinea
+POL,2001,"rgb(16,217,22)",'616,Poland
+PRT,2001,"rgb(7,194,54)",'620,Portugal
+PRY,2001,"rgb(138,35,82)",'600,Paraguay
+PYF,2001,"rgb(42,50,163)",'258,French polynesia
+QAT,2001,"rgb(66,52,136)",'634,Qatar
+ROU,2001,"rgb(16,198,41)",'642,Romania
+RUS,2001,"rgb(62,129,64)",'643,Russian Federation
+RWA,2001,"rgb(53,73,130)",'646,Rwanda
+SAU,2001,"rgb(42,63,150)",'682,Saudi Arabia
+SCG,2001,"rgb(33,193,28)",NA,NA
+SDN,2001,"rgb(220,30,5)",'729,Sudan
+SEN,2001,"rgb(59,107,89)",'686,Senegal
+SGP,2001,"rgb(55,35,165)",'702,Singapore
+SLV,2001,"rgb(7,20,227)",'222,El Salvador
+STP,2001,"rgb(13,219,23)",'678,Sao Tome & Principe
+SUR,2001,"rgb(36,6,214)",'740,Suriname
+SVK,2001,"rgb(8,232,15)",'703,Slovakia
+SVN,2001,"rgb(9,219,28)",'705,Slovenia
+SWE,2001,"rgb(20,145,90)",'752,Sweden
+SWZ,2001,"rgb(203,14,38)",'748,Swaziland
+SYC,2001,"rgb(4,20,231)",'690,Seychelles
+SYR,2001,"rgb(59,97,99)",'760,Syria
+TCA,2001,"rgb(0,0,255)",'796,Turks & Caicos Islands
+TGO,2001,"rgb(61,104,90)",'768,Togo
+THA,2001,"rgb(54,34,167)",'764,Thailand
+TON,2001,"rgb(26,5,223)",'776,Tonga
+TTO,2001,"rgb(5,10,240)",'780,Trinidad & Tobago
+TUN,2001,"rgb(16,188,50)",'788,Tunisia
+TUR,2001,"rgb(16,150,89)",'792,Turkey
+TUV,2001,"rgb(240,4,11)",'798,Tuvalu
+TZA,2001,"rgb(70,105,80)",'834,Tanzania
+UGA,2001,"rgb(75,108,72)",'800,Uganda
+UKR,2001,"rgb(47,139,69)",'804,Ukraine
+URY,2001,"rgb(66,56,133)",'858,Uruguay
+VCT,2001,"rgb(5,5,245)",'670,St. Vincent & the Grenadines
+VEN,2001,"rgb(5,10,240)",'862,Venezuela
+VNM,2001,"rgb(137,51,67)",'704,Vietnam
+WLF,2001,"rgb(109,47,99)",'876,Wallis and Futuna
+WSM,2001,"rgb(15,2,238)",'882,Samoa
+ZAF,2001,"rgb(27,109,119)",'710,South Africa
+ZMB,2001,"rgb(100,83,73)",'894,Zambia
+ZWE,2001,"rgb(39,114,101)",'716,Zimbabwe
+TWN,2001,"rgb(42,34,179)",'158,Taiwan
+ABW,2002,"rgb(2,4,250)",'533,Aruba
+AIA,2002,"rgb(0,0,255)",'660,Anguilla
+ALB,2002,"rgb(56,153,46)",'008,Albania
+AND,2002,"rgb(44,170,41)",'020,Andorra
+ARE,2002,"rgb(90,75,89)",'784,United Arab Emirates
+ARG,2002,"rgb(49,41,165)",'032,Argentina
+ARM,2002,"rgb(16,98,141)",'051,Armenia
+AUS,2002,"rgb(83,35,137)",'036,Australia
+AUT,2002,"rgb(10,215,30)",'040,Austria
+AZE,2002,"rgb(42,91,122)",'031,Azerbaijan
+BDI,2002,"rgb(126,85,44)",'108,Burundi
+BEL,2002,"rgb(15,172,69)",'056,Belgium
+BEN,2002,"rgb(148,56,50)",'204,Benin
+BFA,2002,"rgb(100,76,79)",'854,Burkina
+BGD,2002,"rgb(53,49,152)",'050,Bangladesh
+BGR,2002,"rgb(17,189,50)",'100,Bulgaria
+BHR,2002,"rgb(43,63,149)",'048,Bahrain
+BHS,2002,"rgb(1,2,252)",'044,The Bahamas
+BLR,2002,"rgb(45,177,33)",'112,Belarus
+BLZ,2002,"rgb(4,2,249)",'084,Belize
+BOL,2002,"rgb(40,16,200)",'068,Bolivia
+BRA,2002,"rgb(28,48,179)",'076,Brazil
+BRB,2002,"rgb(13,9,232)",'052,Barbados
+BRN,2002,"rgb(81,13,160)",'096,Brunei
+BWA,2002,"rgb(34,79,142)",'072,Botswana
+CAF,2002,"rgb(36,191,28)",'140,Central African Republic
+CAN,2002,"rgb(9,5,242)",'124,Canada
+CHE,2002,"rgb(11,177,67)",'756,Switzerland
+CHL,2002,"rgb(62,31,162)",'152,Chile
+CIV,2002,"rgb(24,77,154)",'384,C?te d'Ivoire
+CMR,2002,"rgb(69,54,132)",'120,Cameroon
+COK,2002,"rgb(31,4,220)",'184,Cook Islands
+COL,2002,"rgb(13,20,222)",'170,Colombia
+COM,2002,"rgb(36,78,141)",'174,The Comoros
+CPV,2002,"rgb(25,123,107)",'132,Cape Verde
+CRI,2002,"rgb(6,12,237)",'188,Costa Rica
+CUB,2002,"rgb(175,29,52)",'192,Cuba
+CYP,2002,"rgb(54,127,73)",'196,Cyprus
+CZE,2002,"rgb(16,217,22)",'203,Czech Republic
+DMA,2002,"rgb(5,4,246)",'212,Dominica
+DNK,2002,"rgb(17,190,48)",'208,Denmark
+DOM,2002,"rgb(7,4,244)",'214,Dominican Republic
+DZA,2002,"rgb(20,60,176)",'012,Algeria
+ECU,2002,"rgb(15,22,219)",'218,Ecuador
+EGY,2002,"rgb(53,62,140)",'818,Egypt
+ESP,2002,"rgb(27,176,52)",'724,Spain
+EST,2002,"rgb(58,146,51)",'233,Estonia
+ETH,2002,"rgb(98,72,85)",'231,Ethiopia
+FIN,2002,"rgb(32,139,85)",'246,Finland
+FJI,2002,"rgb(48,7,199)",'242,Fiji
+FRA,2002,"rgb(22,154,78)",'250,France
+FRO,2002,"rgb(26,180,50)",'234,Faroe Islands
+FSM,2002,"rgb(0,0,255)",'583,Federated States of Micronesia
+GAB,2002,"rgb(18,6,232)",'266,Gabon
+GBR,2002,"rgb(29,109,117)",'826,Great Britain (United Kingdom; England)
+GEO,2002,"rgb(16,106,133)",'268,Georgia
+GHA,2002,"rgb(63,93,99)",'288,Ghana
+GIN,2002,"rgb(62,74,118)",'324,Guinea
+GMB,2002,"rgb(22,205,28)",'270,Gambia
+GRC,2002,"rgb(33,157,65)",'300,Greece
+GRD,2002,"rgb(5,17,232)",'308,Grenada
+GRL,2002,"rgb(0,69,186)",'304,Greenland
+GTM,2002,"rgb(5,14,236)",'320,Guatemala
+GUY,2002,"rgb(16,4,236)",'328,Guyana
+HKG,2002,"rgb(185,11,59)",'344,Hong Kong
+HND,2002,"rgb(3,14,238)",'340,Honduras
+HRV,2002,"rgb(22,198,35)",'191,Croatia
+HUN,2002,"rgb(22,208,25)",'348,Hungary
+IDN,2002,"rgb(75,35,144)",'360,Indonesia
+IND,2002,"rgb(47,49,160)",'356,India
+IRL,2002,"rgb(14,70,171)",'372,Ireland
+IRN,2002,"rgb(57,188,9)",'364,Iran
+ISL,2002,"rgb(17,135,103)",'352,Iceland
+ISR,2002,"rgb(14,38,203)",'376,Israel
+ITA,2002,"rgb(23,159,73)",'380,Italy
+JAM,2002,"rgb(13,8,233)",'388,Jamaica
+JOR,2002,"rgb(59,73,122)",'400,Jordan
+JPN,2002,"rgb(84,22,149)",'392,Japan
+KAZ,2002,"rgb(125,76,54)",'398,Kazakhstan
+KEN,2002,"rgb(40,99,116)",'404,Kenya
+KGZ,2002,"rgb(121,40,93)",'417,Kyrgyzstan
+KHM,2002,"rgb(40,25,190)",'116,Cambodia
+KNA,2002,"rgb(2,2,252)",'659,St. Kitts & Nevis
+KOR,2002,"rgb(98,23,134)",'410,South Korea
+KWT,2002,"rgb(58,90,106)",'414,Kuwait
+LBN,2002,"rgb(72,98,85)",'422,Lebanon
+LCA,2002,"rgb(12,6,236)",'662,St. Lucia
+LKA,2002,"rgb(27,32,196)",'144,Sri Lanka
+LSO,2002,"rgb(39,1,215)",'426,Lesotho
+LTU,2002,"rgb(19,193,43)",'440,Lithuania
+LUX,2002,"rgb(4,217,33)",'442,Luxembourg
+LVA,2002,"rgb(9,213,33)",'428,Latvia
+MAC,2002,"rgb(121,19,115)",'446,Macao
+MAR,2002,"rgb(45,117,92)",'504,Morocco
+MDA,2002,"rgb(15,147,93)",'498,Moldova
+MDG,2002,"rgb(42,56,157)",'450,Madagascar
+MDV,2002,"rgb(14,40,202)",'462,Maldives
+MEX,2002,"rgb(7,7,241)",'484,Mexico
+MKD,2002,"rgb(9,195,51)",'807,Republic of Macedonia (FYROM)
+MLI,2002,"rgb(62,101,93)",'466,Mali
+MLT,2002,"rgb(17,108,131)",'470,Malta
+MNG,2002,"rgb(157,2,96)",'496,Mongolia
+MOZ,2002,"rgb(78,43,134)",'508,Mozambique
+MRT,2002,"rgb(23,157,75)",'478,Mauritania
+MSR,2002,"rgb(1,1,253)",'500,Montserrat
+MUS,2002,"rgb(67,44,144)",'480,Mauritius
+MWI,2002,"rgb(21,83,151)",'454,Malawi
+MYS,2002,"rgb(60,27,168)",'458,Malaysia
+MYT,2002,"rgb(107,90,58)",'175,Mayotte
+NAM,2002,"rgb(29,103,123)",'516,Namibia
+NCL,2002,"rgb(90,0,165)",'540,New Caledonia
+NER,2002,"rgb(106,16,133)",'562,Niger
+NGA,2002,"rgb(24,26,205)",'566,Nigeria
+NIC,2002,"rgb(20,15,220)",'558,Nicaragua
+NLD,2002,"rgb(20,180,55)",'528,Netherlands
+NOR,2002,"rgb(32,139,85)",'578,Norway
+NZL,2002,"rgb(65,42,148)",'554,New Zealand
+OMN,2002,"rgb(165,32,58)",'512,Oman
+PAN,2002,"rgb(7,9,239)",'591,Panama
+PER,2002,"rgb(54,25,176)",'604,Peru
+PHL,2002,"rgb(30,25,201)",'608,The Philippines
+PNG,2002,"rgb(54,63,137)",'598,Papua New Guinea
+POL,2002,"rgb(18,214,23)",'616,Poland
+PRT,2002,"rgb(8,203,44)",'620,Portugal
+PRY,2002,"rgb(140,37,78)",'600,Paraguay
+PYF,2002,"rgb(43,45,167)",'258,French polynesia
+QAT,2002,"rgb(46,55,154)",'634,Qatar
+ROU,2002,"rgb(23,188,44)",'642,Romania
+RUS,2002,"rgb(76,121,58)",'643,Russian Federation
+RWA,2002,"rgb(73,103,79)",'646,Rwanda
+SAU,2002,"rgb(50,66,139)",'682,Saudi Arabia
+SCG,2002,"rgb(35,192,29)",NA,NA
+SDN,2002,"rgb(218,33,4)",'729,Sudan
+SEN,2002,"rgb(44,106,105)",'686,Senegal
+SGP,2002,"rgb(67,34,153)",'702,Singapore
+SLB,2002,"rgb(223,16,16)",'090,Solomon Islands
+SLE,2002,"rgb(78,60,117)",'694,Sierra Leone
+SLV,2002,"rgb(10,17,228)",'222,El Salvador
+STP,2002,"rgb(4,92,160)",'678,Sao Tome & Principe
+SUR,2002,"rgb(37,8,210)",'740,Suriname
+SVK,2002,"rgb(12,226,17)",'703,Slovakia
+SVN,2002,"rgb(12,215,28)",'705,Slovenia
+SWE,2002,"rgb(19,146,89)",'752,Sweden
+SWZ,2002,"rgb(139,4,112)",'748,Swaziland
+SYC,2002,"rgb(14,215,26)",'690,Seychelles
+SYR,2002,"rgb(59,99,97)",'760,Syria
+TCA,2002,"rgb(0,0,255)",'796,Turks & Caicos Islands
+TGO,2002,"rgb(66,99,90)",'768,Togo
+THA,2002,"rgb(67,32,156)",'764,Thailand
+TON,2002,"rgb(42,9,204)",'776,Tonga
+TTO,2002,"rgb(5,18,231)",'780,Trinidad & Tobago
+TUN,2002,"rgb(18,194,42)",'788,Tunisia
+TUR,2002,"rgb(20,157,78)",'792,Turkey
+TUV,2002,"rgb(224,3,28)",'798,Tuvalu
+TZA,2002,"rgb(75,82,98)",'834,Tanzania
+UGA,2002,"rgb(86,83,86)",'800,Uganda
+UKR,2002,"rgb(55,142,58)",'804,Ukraine
+URY,2002,"rgb(68,72,116)",'858,Uruguay
+VCT,2002,"rgb(4,6,245)",'670,St. Vincent & the Grenadines
+VEN,2002,"rgb(4,10,241)",'862,Venezuela
+VNM,2002,"rgb(119,42,94)",'704,Vietnam
+WLF,2002,"rgb(127,30,98)",'876,Wallis and Futuna
+WSM,2002,"rgb(37,1,217)",'882,Samoa
+ZAF,2002,"rgb(35,114,106)",'710,South Africa
+ZMB,2002,"rgb(99,69,87)",'894,Zambia
+ZWE,2002,"rgb(30,117,108)",'716,Zimbabwe
+TWN,2002,"rgb(64,30,161)",'158,Taiwan
+ABW,2003,"rgb(1,10,244)",'533,Aruba
+AIA,2003,"rgb(0,0,254)",'660,Anguilla
+ALB,2003,"rgb(82,147,26)",'008,Albania
+AND,2003,"rgb(50,168,37)",'020,Andorra
+ARE,2003,"rgb(98,81,76)",'784,United Arab Emirates
+ARG,2003,"rgb(81,38,136)",'032,Argentina
+ARM,2003,"rgb(12,79,164)",'051,Armenia
+AUS,2003,"rgb(95,38,122)",'036,Australia
+AUT,2003,"rgb(10,218,27)",'040,Austria
+AZE,2003,"rgb(59,93,103)",'031,Azerbaijan
+BDI,2003,"rgb(59,32,164)",'108,Burundi
+BEL,2003,"rgb(17,178,60)",'056,Belgium
+BEN,2003,"rgb(182,36,37)",'204,Benin
+BFA,2003,"rgb(87,101,67)",'854,Burkina
+BGD,2003,"rgb(62,70,122)",'050,Bangladesh
+BGR,2003,"rgb(26,181,47)",'100,Bulgaria
+BHR,2003,"rgb(55,71,129)",'048,Bahrain
+BHS,2003,"rgb(0,3,252)",'044,The Bahamas
+BIH,2003,"rgb(20,216,19)",'070,Bosnia & Herzegovina
+BLR,2003,"rgb(35,183,37)",'112,Belarus
+BLZ,2003,"rgb(4,2,248)",'084,Belize
+BOL,2003,"rgb(36,16,202)",'068,Bolivia
+BRA,2003,"rgb(42,46,167)",'076,Brazil
+BRB,2003,"rgb(15,10,230)",'052,Barbados
+BRN,2003,"rgb(102,13,140)",'096,Brunei
+BWA,2003,"rgb(51,98,106)",'072,Botswana
+CAF,2003,"rgb(64,153,38)",'140,Central African Republic
+CAN,2003,"rgb(11,5,239)",'124,Canada
+CHE,2003,"rgb(12,182,60)",'756,Switzerland
+CHL,2003,"rgb(81,30,144)",'152,Chile
+CIV,2003,"rgb(52,62,141)",'384,C?te d'Ivoire
+CMR,2003,"rgb(84,47,124)",'120,Cameroon
+COK,2003,"rgb(37,7,211)",'184,Cook Islands
+COL,2003,"rgb(16,19,220)",'170,Colombia
+COM,2003,"rgb(116,133,6)",'174,The Comoros
+CPV,2003,"rgb(32,84,139)",'132,Cape Verde
+CRI,2003,"rgb(9,13,233)",'188,Costa Rica
+CUB,2003,"rgb(141,34,80)",'192,Cuba
+CYP,2003,"rgb(70,119,65)",'196,Cyprus
+CZE,2003,"rgb(18,219,18)",'203,Czech Republic
+DMA,2003,"rgb(6,4,245)",'212,Dominica
+DNK,2003,"rgb(22,190,43)",'208,Denmark
+DOM,2003,"rgb(6,4,244)",'214,Dominican Republic
+DZA,2003,"rgb(21,40,194)",'012,Algeria
+ECU,2003,"rgb(28,22,206)",'218,Ecuador
+EGY,2003,"rgb(50,65,140)",'818,Egypt
+ERI,2003,"rgb(35,20,200)",'232,Eritrea
+ESP,2003,"rgb(30,178,48)",'724,Spain
+EST,2003,"rgb(54,147,54)",'233,Estonia
+ETH,2003,"rgb(93,43,119)",'231,Ethiopia
+FIN,2003,"rgb(38,145,72)",'246,Finland
+FJI,2003,"rgb(36,6,212)",'242,Fiji
+FRA,2003,"rgb(28,160,67)",'250,France
+FRO,2003,"rgb(21,212,22)",'234,Faroe Islands
+FSM,2003,"rgb(11,0,244)",'583,Federated States of Micronesia
+GAB,2003,"rgb(21,5,230)",'266,Gabon
+GBR,2003,"rgb(32,111,112)",'826,Great Britain (United Kingdom; England)
+GEO,2003,"rgb(28,106,121)",'268,Georgia
+GHA,2003,"rgb(65,101,89)",'288,Ghana
+GMB,2003,"rgb(30,212,13)",'270,Gambia
+GNB,2003,"rgb(250,5,1)",'624,Guinea-Bissau
+GRC,2003,"rgb(31,158,67)",'300,Greece
+GRD,2003,"rgb(6,20,229)",'308,Grenada
+GRL,2003,"rgb(45,113,97)",'304,Greenland
+GTM,2003,"rgb(6,13,236)",'320,Guatemala
+GUY,2003,"rgb(17,7,231)",'328,Guyana
+HKG,2003,"rgb(190,12,53)",'344,Hong Kong
+HND,2003,"rgb(5,15,235)",'340,Honduras
+HRV,2003,"rgb(27,193,35)",'191,Croatia
+HUN,2003,"rgb(27,205,23)",'348,Hungary
+IDN,2003,"rgb(89,34,132)",'360,Indonesia
+IND,2003,"rgb(57,48,150)",'356,India
+IRL,2003,"rgb(19,70,166)",'372,Ireland
+IRN,2003,"rgb(83,161,10)",'364,Iran
+ISL,2003,"rgb(23,147,85)",'352,Iceland
+ISR,2003,"rgb(18,43,194)",'376,Israel
+ITA,2003,"rgb(26,165,63)",'380,Italy
+JAM,2003,"rgb(21,13,221)",'388,Jamaica
+JOR,2003,"rgb(64,58,133)",'400,Jordan
+JPN,2003,"rgb(99,23,133)",'392,Japan
+KAZ,2003,"rgb(153,62,40)",'398,Kazakhstan
+KEN,2003,"rgb(41,91,123)",'404,Kenya
+KGZ,2003,"rgb(131,53,71)",'417,Kyrgyzstan
+KHM,2003,"rgb(38,27,190)",'116,Cambodia
+KNA,2003,"rgb(2,1,252)",'659,St. Kitts & Nevis
+KOR,2003,"rgb(113,25,117)",'410,South Korea
+KWT,2003,"rgb(56,90,109)",'414,Kuwait
+LBN,2003,"rgb(84,93,78)",'422,Lebanon
+LCA,2003,"rgb(10,7,238)",'662,St. Lucia
+LKA,2003,"rgb(32,35,187)",'144,Sri Lanka
+LSO,2003,"rgb(18,2,235)",'426,Lesotho
+LTU,2003,"rgb(25,189,41)",'440,Lithuania
+LUX,2003,"rgb(7,229,19)",'442,Luxembourg
+LVA,2003,"rgb(14,212,29)",'428,Latvia
+MAC,2003,"rgb(120,22,112)",'446,Macao
+MAR,2003,"rgb(57,112,85)",'504,Morocco
+MDA,2003,"rgb(20,174,62)",'498,Moldova
+MDG,2003,"rgb(88,36,131)",'450,Madagascar
+MDV,2003,"rgb(13,49,193)",'462,Maldives
+MEX,2003,"rgb(10,8,238)",'484,Mexico
+MKD,2003,"rgb(21,192,43)",'807,Republic of Macedonia (FYROM)
+MLI,2003,"rgb(76,87,92)",'466,Mali
+MLT,2003,"rgb(22,105,128)",'470,Malta
+MNG,2003,"rgb(175,16,64)",'496,Mongolia
+MOZ,2003,"rgb(73,59,122)",'508,Mozambique
+MRT,2003,"rgb(39,171,46)",'478,Mauritania
+MSR,2003,"rgb(2,1,252)",'500,Montserrat
+MUS,2003,"rgb(69,44,142)",'480,Mauritius
+MWI,2003,"rgb(34,75,146)",'454,Malawi
+MYS,2003,"rgb(67,30,158)",'458,Malaysia
+MYT,2003,"rgb(113,108,33)",'175,Mayotte
+NAM,2003,"rgb(50,101,104)",'516,Namibia
+NCL,2003,"rgb(77,80,98)",'540,New Caledonia
+NER,2003,"rgb(113,22,119)",'562,Niger
+NGA,2003,"rgb(21,28,205)",'566,Nigeria
+NIC,2003,"rgb(25,15,215)",'558,Nicaragua
+NLD,2003,"rgb(23,181,51)",'528,Netherlands
+NOR,2003,"rgb(27,146,82)",'578,Norway
+NPL,2003,"rgb(101,29,125)",'524,Nepal
+NZL,2003,"rgb(74,43,138)",'554,New Zealand
+OMN,2003,"rgb(126,43,86)",'512,Oman
+PAK,2003,"rgb(52,51,152)",'586,Pakistan
+PAN,2003,"rgb(9,8,237)",'591,Panama
+PER,2003,"rgb(58,22,175)",'604,Peru
+PHL,2003,"rgb(45,26,184)",'608,The Philippines
+PNG,2003,"rgb(64,60,130)",'598,Papua New Guinea
+POL,2003,"rgb(20,216,19)",'616,Poland
+PRT,2003,"rgb(10,199,46)",'620,Portugal
+PRY,2003,"rgb(165,25,65)",'600,Paraguay
+PYF,2003,"rgb(55,48,152)",'258,French polynesia
+QAT,2003,"rgb(63,70,122)",'634,Qatar
+ROU,2003,"rgb(29,191,35)",'642,Romania
+RUS,2003,"rgb(79,127,49)",'643,Russian Federation
+RWA,2003,"rgb(105,123,27)",'646,Rwanda
+SAU,2003,"rgb(57,71,127)",'682,Saudi Arabia
+SDN,2003,"rgb(226,26,3)",'729,Sudan
+SEN,2003,"rgb(77,86,92)",'686,Senegal
+SGP,2003,"rgb(78,34,142)",'702,Singapore
+SLB,2003,"rgb(229,9,18)",'090,Solomon Islands
+SLV,2003,"rgb(12,16,227)",'222,El Salvador
+STP,2003,"rgb(23,129,103)",'678,Sao Tome & Principe
+SUR,2003,"rgb(28,7,220)",'740,Suriname
+SVK,2003,"rgb(12,216,27)",'703,Slovakia
+SVN,2003,"rgb(14,211,31)",'705,Slovenia
+SWE,2003,"rgb(23,146,86)",'752,Sweden
+SWZ,2003,"rgb(22,2,231)",'748,Swaziland
+SYC,2003,"rgb(27,169,59)",'690,Seychelles
+SYR,2003,"rgb(81,55,119)",'760,Syria
+TCA,2003,"rgb(0,0,255)",'796,Turks & Caicos Islands
+TGO,2003,"rgb(109,91,54)",'768,Togo
+THA,2003,"rgb(81,30,144)",'764,Thailand
+TON,2003,"rgb(38,0,217)",'776,Tonga
+TTO,2003,"rgb(6,14,235)",'780,Trinidad & Tobago
+TUN,2003,"rgb(22,199,34)",'788,Tunisia
+TUR,2003,"rgb(29,158,68)",'792,Turkey
+TZA,2003,"rgb(102,84,69)",'834,Tanzania
+UGA,2003,"rgb(85,61,109)",'800,Uganda
+UKR,2003,"rgb(60,146,48)",'804,Ukraine
+URY,2003,"rgb(57,65,132)",'858,Uruguay
+VCT,2003,"rgb(5,4,246)",'670,St. Vincent & the Grenadines
+VEN,2003,"rgb(6,8,241)",'862,Venezuela
+VNM,2003,"rgb(111,32,112)",'704,Vietnam
+WLF,2003,"rgb(93,9,153)",'876,Wallis and Futuna
+WSM,2003,"rgb(33,5,217)",'882,Samoa
+ZAF,2003,"rgb(44,108,103)",'710,South Africa
+ZMB,2003,"rgb(118,62,74)",'894,Zambia
+ZWE,2003,"rgb(96,89,70)",'716,Zimbabwe
+TWN,2003,"rgb(100,27,128)",'158,Taiwan
+ABW,2004,"rgb(3,2,250)",'533,Aruba
+AIA,2004,"rgb(0,0,254)",'660,Anguilla
+ALB,2004,"rgb(87,136,32)",'008,Albania
+AND,2004,"rgb(59,167,29)",'020,Andorra
+ARE,2004,"rgb(105,70,80)",'784,United Arab Emirates
+ARG,2004,"rgb(79,37,140)",'032,Argentina
+ARM,2004,"rgb(26,104,125)",'051,Armenia
+AUS,2004,"rgb(108,35,112)",'036,Australia
+AUT,2004,"rgb(11,217,27)",'040,Austria
+AZE,2004,"rgb(79,105,70)",'031,Azerbaijan
+BDI,2004,"rgb(76,152,27)",'108,Burundi
+BEL,2004,"rgb(18,179,58)",'056,Belgium
+BEN,2004,"rgb(207,23,25)",'204,Benin
+BFA,2004,"rgb(119,70,66)",'854,Burkina
+BGD,2004,"rgb(72,73,110)",'050,Bangladesh
+BGR,2004,"rgb(29,181,44)",'100,Bulgaria
+BHR,2004,"rgb(66,67,122)",'048,Bahrain
+BHS,2004,"rgb(0,2,253)",'044,The Bahamas
+BIH,2004,"rgb(26,209,19)",'070,Bosnia & Herzegovina
+BLR,2004,"rgb(49,168,38)",'112,Belarus
+BLZ,2004,"rgb(6,2,247)",'084,Belize
+BOL,2004,"rgb(42,15,198)",'068,Bolivia
+BRA,2004,"rgb(46,46,162)",'076,Brazil
+BRB,2004,"rgb(15,9,231)",'052,Barbados
+BRN,2004,"rgb(85,19,151)",'096,Brunei
+BWA,2004,"rgb(35,41,179)",'072,Botswana
+CAF,2004,"rgb(105,68,82)",'140,Central African Republic
+CAN,2004,"rgb(13,5,237)",'124,Canada
+CHE,2004,"rgb(14,184,57)",'756,Switzerland
+CHL,2004,"rgb(92,28,135)",'152,Chile
+CIV,2004,"rgb(40,45,170)",'384,C?te d'Ivoire
+CMR,2004,"rgb(77,59,119)",'120,Cameroon
+COK,2004,"rgb(116,15,124)",'184,Cook Islands
+COL,2004,"rgb(25,17,213)",'170,Colombia
+COM,2004,"rgb(55,111,89)",'174,The Comoros
+CPV,2004,"rgb(16,36,203)",'132,Cape Verde
+CRI,2004,"rgb(16,15,225)",'188,Costa Rica
+CUB,2004,"rgb(134,31,90)",'192,Cuba
+CYP,2004,"rgb(63,152,40)",'196,Cyprus
+CZE,2004,"rgb(18,219,17)",'203,Czech Republic
+DMA,2004,"rgb(8,5,242)",'212,Dominica
+DNK,2004,"rgb(25,185,45)",'208,Denmark
+DOM,2004,"rgb(9,4,242)",'214,Dominican Republic
+DZA,2004,"rgb(26,33,196)",'012,Algeria
+ECU,2004,"rgb(33,18,204)",'218,Ecuador
+EGY,2004,"rgb(54,68,133)",'818,Egypt
+ESP,2004,"rgb(34,175,46)",'724,Spain
+EST,2004,"rgb(53,153,49)",'233,Estonia
+ETH,2004,"rgb(107,49,99)",'231,Ethiopia
+FIN,2004,"rgb(50,142,63)",'246,Finland
+FJI,2004,"rgb(50,7,198)",'242,Fiji
+FRA,2004,"rgb(31,159,65)",'250,France
+FRO,2004,"rgb(48,177,30)",'234,Faroe Islands
+FSM,2004,"rgb(11,0,244)",'583,Federated States of Micronesia
+GAB,2004,"rgb(30,4,222)",'266,Gabon
+GBR,2004,"rgb(36,115,104)",'826,Great Britain (United Kingdom; England)
+GEO,2004,"rgb(25,128,102)",'268,Georgia
+GHA,2004,"rgb(84,77,94)",'288,Ghana
+GIN,2004,"rgb(59,62,134)",'324,Guinea
+GMB,2004,"rgb(100,95,60)",'270,Gambia
+GNB,2004,"rgb(254,1,1)",'624,Guinea-Bissau
+GRC,2004,"rgb(33,164,57)",'300,Greece
+GRD,2004,"rgb(9,11,235)",'308,Grenada
+GRL,2004,"rgb(2,117,136)",'304,Greenland
+GTM,2004,"rgb(10,13,232)",'320,Guatemala
+GUY,2004,"rgb(21,6,228)",'328,Guyana
+HKG,2004,"rgb(195,11,49)",'344,Hong Kong
+HND,2004,"rgb(9,25,221)",'340,Honduras
+HRV,2004,"rgb(35,189,31)",'191,Croatia
+HUN,2004,"rgb(20,218,16)",'348,Hungary
+IDN,2004,"rgb(92,36,127)",'360,Indonesia
+IND,2004,"rgb(73,45,137)",'356,India
+IRL,2004,"rgb(24,70,161)",'372,Ireland
+IRN,2004,"rgb(73,175,7)",'364,Iran
+ISL,2004,"rgb(22,140,92)",'352,Iceland
+ISR,2004,"rgb(21,42,192)",'376,Israel
+ITA,2004,"rgb(30,165,60)",'380,Italy
+JAM,2004,"rgb(31,13,210)",'388,Jamaica
+JOR,2004,"rgb(65,50,140)",'400,Jordan
+JPN,2004,"rgb(108,23,124)",'392,Japan
+KAZ,2004,"rgb(144,67,44)",'398,Kazakhstan
+KEN,2004,"rgb(23,129,103)",'404,Kenya
+KGZ,2004,"rgb(137,64,55)",'417,Kyrgyzstan
+KHM,2004,"rgb(47,33,176)",'116,Cambodia
+KIR,2004,"rgb(232,1,22)",'296,Kiribati
+KNA,2004,"rgb(2,3,250)",'659,St. Kitts & Nevis
+KOR,2004,"rgb(120,26,109)",'410,South Korea
+KWT,2004,"rgb(62,96,97)",'414,Kuwait
+LBN,2004,"rgb(89,92,74)",'422,Lebanon
+LCA,2004,"rgb(12,7,237)",'662,St. Lucia
+LKA,2004,"rgb(40,39,176)",'144,Sri Lanka
+LSO,2004,"rgb(19,7,229)",'426,Lesotho
+LTU,2004,"rgb(20,194,41)",'440,Lithuania
+LUX,2004,"rgb(6,223,26)",'442,Luxembourg
+LVA,2004,"rgb(14,205,36)",'428,Latvia
+MAC,2004,"rgb(128,24,103)",'446,Macao
+MAR,2004,"rgb(61,107,86)",'504,Morocco
+MDA,2004,"rgb(29,170,55)",'498,Moldova
+MDG,2004,"rgb(90,33,132)",'450,Madagascar
+MDV,2004,"rgb(31,65,160)",'462,Maldives
+MEX,2004,"rgb(13,8,235)",'484,Mexico
+MKD,2004,"rgb(24,196,35)",'807,Republic of Macedonia (FYROM)
+MLI,2004,"rgb(129,70,56)",'466,Mali
+MLT,2004,"rgb(17,133,106)",'470,Malta
+MNG,2004,"rgb(183,13,59)",'496,Mongolia
+MOZ,2004,"rgb(111,37,107)",'508,Mozambique
+MRT,2004,"rgb(43,146,66)",'478,Mauritania
+MSR,2004,"rgb(3,1,252)",'500,Montserrat
+MUS,2004,"rgb(88,50,117)",'480,Mauritius
+MWI,2004,"rgb(43,77,135)",'454,Malawi
+MYS,2004,"rgb(74,29,152)",'458,Malaysia
+MYT,2004,"rgb(126,94,35)",'175,Mayotte
+NAM,2004,"rgb(40,54,161)",'516,Namibia
+NCL,2004,"rgb(109,65,81)",'540,New Caledonia
+NER,2004,"rgb(68,18,169)",'562,Niger
+NIC,2004,"rgb(31,15,209)",'558,Nicaragua
+NLD,2004,"rgb(28,177,50)",'528,Netherlands
+NOR,2004,"rgb(29,151,75)",'578,Norway
+NZL,2004,"rgb(81,40,133)",'554,New Zealand
+OMN,2004,"rgb(202,20,33)",'512,Oman
+PAK,2004,"rgb(53,45,157)",'586,Pakistan
+PAN,2004,"rgb(13,8,234)",'591,Panama
+PER,2004,"rgb(61,20,174)",'604,Peru
+PHL,2004,"rgb(58,28,168)",'608,The Philippines
+PNG,2004,"rgb(78,82,94)",'598,Papua New Guinea
+POL,2004,"rgb(23,213,19)",'616,Poland
+PRT,2004,"rgb(10,193,52)",'620,Portugal
+PRY,2004,"rgb(176,23,57)",'600,Paraguay
+PYF,2004,"rgb(64,49,143)",'258,French polynesia
+QAT,2004,"rgb(65,54,136)",'634,Qatar
+ROU,2004,"rgb(29,190,36)",'642,Romania
+RUS,2004,"rgb(78,125,52)",'643,Russian Federation
+RWA,2004,"rgb(74,85,96)",'646,Rwanda
+SAU,2004,"rgb(66,63,126)",'682,Saudi Arabia
+SCG,2004,"rgb(49,169,38)",NA,NA
+SDN,2004,"rgb(232,20,3)",'729,Sudan
+SEN,2004,"rgb(95,76,84)",'686,Senegal
+SGP,2004,"rgb(92,35,128)",'702,Singapore
+SLB,2004,"rgb(227,7,21)",'090,Solomon Islands
+SLV,2004,"rgb(14,16,225)",'222,El Salvador
+STP,2004,"rgb(17,135,104)",'678,Sao Tome & Principe
+SUR,2004,"rgb(37,8,210)",'740,Suriname
+SVK,2004,"rgb(13,216,26)",'703,Slovakia
+SVN,2004,"rgb(16,209,29)",'705,Slovenia
+SWE,2004,"rgb(24,151,80)",'752,Sweden
+SWZ,2004,"rgb(115,9,131)",'748,Swaziland
+SYC,2004,"rgb(31,156,68)",'690,Seychelles
+SYR,2004,"rgb(107,49,99)",'760,Syria
+TCA,2004,"rgb(0,0,255)",'796,Turks & Caicos Islands
+TGO,2004,"rgb(164,52,39)",'768,Togo
+THA,2004,"rgb(91,28,136)",'764,Thailand
+TLS,2004,"rgb(45,19,191)",'626,Timor-Leste (East Timor)
+TON,2004,"rgb(90,4,162)",'776,Tonga
+TTO,2004,"rgb(5,18,232)",'780,Trinidad & Tobago
+TUN,2004,"rgb(29,182,44)",'788,Tunisia
+TUR,2004,"rgb(35,152,68)",'792,Turkey
+TUV,2004,"rgb(187,0,68)",'798,Tuvalu
+TZA,2004,"rgb(139,63,53)",'834,Tanzania
+UGA,2004,"rgb(98,49,108)",'800,Uganda
+UKR,2004,"rgb(48,143,64)",'804,Ukraine
+URY,2004,"rgb(54,44,156)",'858,Uruguay
+VCT,2004,"rgb(10,4,242)",'670,St. Vincent & the Grenadines
+VEN,2004,"rgb(6,6,243)",'862,Venezuela
+VNM,2004,"rgb(124,29,102)",'704,Vietnam
+WLF,2004,"rgb(177,15,63)",'876,Wallis and Futuna
+WSM,2004,"rgb(38,4,213)",'882,Samoa
+YEM,2004,"rgb(182,22,51)",'887,Yemen
+ZAF,2004,"rgb(50,109,96)",'710,South Africa
+ZMB,2004,"rgb(128,52,75)",'894,Zambia
+ZWE,2004,"rgb(129,68,59)",'716,Zimbabwe
+TWN,2004,"rgb(117,24,115)",'158,Taiwan
+ABW,2005,"rgb(3,2,249)",'533,Aruba
+ALB,2005,"rgb(117,109,29)",'008,Albania
+AND,2005,"rgb(0,253,2)",'020,Andorra
+ANT,2005,"rgb(9,4,242)",NA,NA
+ARE,2005,"rgb(102,70,84)",'784,United Arab Emirates
+ARG,2005,"rgb(75,34,146)",'032,Argentina
+ARM,2005,"rgb(20,140,94)",'051,Armenia
+ATG,2005,"rgb(4,2,248)",'028,Antigua & Barbuda
+AUS,2005,"rgb(122,33,101)",'036,Australia
+AUT,2005,"rgb(13,216,26)",'040,Austria
+AZE,2005,"rgb(93,99,63)",'031,Azerbaijan
+BDI,2005,"rgb(92,104,59)",'108,Burundi
+BEL,2005,"rgb(21,176,58)",'056,Belgium
+BEN,2005,"rgb(219,24,12)",'204,Benin
+BFA,2005,"rgb(98,61,97)",'854,Burkina
+BGD,2005,"rgb(75,68,112)",'050,Bangladesh
+BGR,2005,"rgb(38,178,40)",'100,Bulgaria
+BHR,2005,"rgb(75,71,109)",'048,Bahrain
+BHS,2005,"rgb(0,4,251)",'044,The Bahamas
+BIH,2005,"rgb(35,188,32)",'070,Bosnia & Herzegovina
+BLR,2005,"rgb(60,154,41)",'112,Belarus
+BLZ,2005,"rgb(8,7,240)",'084,Belize
+BMU,2005,"rgb(1,2,253)",'060,Bermuda
+BOL,2005,"rgb(42,16,197)",'068,Bolivia
+BRA,2005,"rgb(53,48,154)",'076,Brazil
+BRB,2005,"rgb(17,11,226)",'052,Barbados
+BTN,2005,"rgb(99,109,47)",'064,Bhutan
+BWA,2005,"rgb(39,64,153)",'072,Botswana
+CAF,2005,"rgb(148,63,44)",'140,Central African Republic
+CAN,2005,"rgb(15,5,235)",'124,Canada
+CHE,2005,"rgb(15,181,59)",'756,Switzerland
+CHL,2005,"rgb(93,25,136)",'152,Chile
+CIV,2005,"rgb(42,30,183)",'384,C?te d'Ivoire
+CMR,2005,"rgb(86,58,110)",'120,Cameroon
+COK,2005,"rgb(180,17,58)",'184,Cook Islands
+COL,2005,"rgb(26,16,213)",'170,Colombia
+COM,2005,"rgb(182,72,1)",'174,The Comoros
+CPV,2005,"rgb(32,93,129)",'132,Cape Verde
+CRI,2005,"rgb(19,12,223)",'188,Costa Rica
+CUB,2005,"rgb(138,47,69)",'192,Cuba
+CYP,2005,"rgb(66,156,32)",'196,Cyprus
+CZE,2005,"rgb(19,218,18)",'203,Czech Republic
+DMA,2005,"rgb(13,7,235)",'212,Dominica
+DNK,2005,"rgb(30,183,42)",'208,Denmark
+DOM,2005,"rgb(12,5,238)",'214,Dominican Republic
+DZA,2005,"rgb(25,40,189)",'012,Algeria
+ECU,2005,"rgb(20,14,221)",'218,Ecuador
+EGY,2005,"rgb(53,59,142)",'818,Egypt
+ESP,2005,"rgb(43,168,45)",'724,Spain
+EST,2005,"rgb(55,156,44)",'233,Estonia
+ETH,2005,"rgb(124,44,87)",'231,Ethiopia
+FIN,2005,"rgb(51,146,58)",'246,Finland
+FJI,2005,"rgb(55,19,182)",'242,Fiji
+FRA,2005,"rgb(36,156,64)",'250,France
+FRO,2005,"rgb(44,113,98)",'234,Faroe Islands
+FSM,2005,"rgb(18,0,237)",'583,Federated States of Micronesia
+GAB,2005,"rgb(16,2,237)",'266,Gabon
+GBR,2005,"rgb(42,112,102)",'826,Great Britain (United Kingdom; England)
+GEO,2005,"rgb(29,130,97)",'268,Georgia
+GHA,2005,"rgb(91,74,89)",'288,Ghana
+GIN,2005,"rgb(50,63,142)",'324,Guinea
+GMB,2005,"rgb(86,107,62)",'270,Gambia
+GNB,2005,"rgb(252,3,0)",'624,Guinea-Bissau
+GRC,2005,"rgb(39,167,49)",'300,Greece
+GRD,2005,"rgb(19,7,229)",'308,Grenada
+GRL,2005,"rgb(15,118,121)",'304,Greenland
+GTM,2005,"rgb(27,10,218)",'320,Guatemala
+GUY,2005,"rgb(25,2,227)",'328,Guyana
+HKG,2005,"rgb(198,11,46)",'344,Hong Kong
+HND,2005,"rgb(12,19,223)",'340,Honduras
+HRV,2005,"rgb(43,178,34)",'191,Croatia
+HUN,2005,"rgb(23,214,17)",'348,Hungary
+IDN,2005,"rgb(107,30,118)",'360,Indonesia
+IND,2005,"rgb(86,45,124)",'356,India
+IRL,2005,"rgb(29,70,156)",'372,Ireland
+IRN,2005,"rgb(83,166,6)",'364,Iran
+ISL,2005,"rgb(33,137,86)",'352,Iceland
+ISR,2005,"rgb(24,39,193)",'376,Israel
+ITA,2005,"rgb(33,162,61)",'380,Italy
+JAM,2005,"rgb(23,13,220)",'388,Jamaica
+JOR,2005,"rgb(72,61,123)",'400,Jordan
+JPN,2005,"rgb(113,22,120)",'392,Japan
+KAZ,2005,"rgb(129,60,66)",'398,Kazakhstan
+KEN,2005,"rgb(59,51,145)",'404,Kenya
+KGZ,2005,"rgb(137,44,74)",'417,Kyrgyzstan
+KHM,2005,"rgb(48,26,181)",'116,Cambodia
+KIR,2005,"rgb(116,2,136)",'296,Kiribati
+KNA,2005,"rgb(3,1,251)",'659,St. Kitts & Nevis
+KOR,2005,"rgb(133,27,96)",'410,South Korea
+LBN,2005,"rgb(95,84,76)",'422,Lebanon
+LCA,2005,"rgb(11,8,236)",'662,St. Lucia
+LKA,2005,"rgb(51,35,169)",'144,Sri Lanka
+LTU,2005,"rgb(21,182,52)",'440,Lithuania
+LUX,2005,"rgb(7,219,29)",'442,Luxembourg
+LVA,2005,"rgb(17,206,32)",'428,Latvia
+MAC,2005,"rgb(140,20,95)",'446,Macao
+MAR,2005,"rgb(83,100,72)",'504,Morocco
+MDA,2005,"rgb(49,155,51)",'498,Moldova
+MDG,2005,"rgb(116,42,97)",'450,Madagascar
+MDV,2005,"rgb(83,105,67)",'462,Maldives
+MEX,2005,"rgb(14,8,232)",'484,Mexico
+MKD,2005,"rgb(35,195,25)",'807,Republic of Macedonia (FYROM)
+MLI,2005,"rgb(135,47,73)",'466,Mali
+MLT,2005,"rgb(19,129,107)",'470,Malta
+MNG,2005,"rgb(196,12,47)",'496,Mongolia
+MOZ,2005,"rgb(118,35,102)",'508,Mozambique
+MRT,2005,"rgb(36,112,107)",'478,Mauritania
+MSR,2005,"rgb(4,2,249)",'500,Montserrat
+MUS,2005,"rgb(109,56,90)",'480,Mauritius
+MWI,2005,"rgb(51,92,112)",'454,Malawi
+MYS,2005,"rgb(78,28,149)",'458,Malaysia
+MYT,2005,"rgb(153,60,42)",'175,Mayotte
+NAM,2005,"rgb(43,71,141)",'516,Namibia
+NCL,2005,"rgb(121,60,74)",'540,New Caledonia
+NER,2005,"rgb(103,27,125)",'562,Niger
+NIC,2005,"rgb(39,13,203)",'558,Nicaragua
+NLD,2005,"rgb(33,172,50)",'528,Netherlands
+NOR,2005,"rgb(30,153,72)",'578,Norway
+NZL,2005,"rgb(86,40,130)",'554,New Zealand
+OMN,2005,"rgb(195,23,36)",'512,Oman
+PAK,2005,"rgb(70,47,138)",'586,Pakistan
+PAN,2005,"rgb(16,8,231)",'591,Panama
+PER,2005,"rgb(66,21,169)",'604,Peru
+PHL,2005,"rgb(69,24,161)",'608,The Philippines
+POL,2005,"rgb(26,211,18)",'616,Poland
+PRT,2005,"rgb(13,195,47)",'620,Portugal
+PRY,2005,"rgb(179,17,59)",'600,Paraguay
+PYF,2005,"rgb(79,37,139)",'258,French polynesia
+QAT,2005,"rgb(69,72,114)",'634,Qatar
+ROU,2005,"rgb(34,179,42)",'642,Romania
+RUS,2005,"rgb(81,131,43)",'643,Russian Federation
+RWA,2005,"rgb(81,105,69)",'646,Rwanda
+SAU,2005,"rgb(72,62,121)",'682,Saudi Arabia
+SDN,2005,"rgb(229,20,6)",'729,Sudan
+SEN,2005,"rgb(92,58,104)",'686,Senegal
+SGP,2005,"rgb(103,31,121)",'702,Singapore
+SLB,2005,"rgb(205,10,41)",'090,Solomon Islands
+SLV,2005,"rgb(12,9,234)",'222,El Salvador
+STP,2005,"rgb(71,148,35)",'678,Sao Tome & Principe
+SUR,2005,"rgb(50,15,190)",'740,Suriname
+SVK,2005,"rgb(18,216,21)",'703,Slovakia
+SVN,2005,"rgb(19,213,23)",'705,Slovenia
+SWE,2005,"rgb(25,151,79)",'752,Sweden
+SWZ,2005,"rgb(122,8,125)",'748,Swaziland
+SYC,2005,"rgb(13,217,25)",'690,Seychelles
+SYR,2005,"rgb(107,55,92)",'760,Syria
+TCA,2005,"rgb(0,0,255)",'796,Turks & Caicos Islands
+TGO,2005,"rgb(180,52,23)",'768,Togo
+THA,2005,"rgb(101,26,128)",'764,Thailand
+TLS,2005,"rgb(31,32,192)",'626,Timor-Leste (East Timor)
+TON,2005,"rgb(63,3,189)",'776,Tonga
+TTO,2005,"rgb(6,5,245)",'780,Trinidad & Tobago
+TUN,2005,"rgb(36,180,39)",'788,Tunisia
+TUR,2005,"rgb(46,144,64)",'792,Turkey
+TUV,2005,"rgb(245,0,10)",'798,Tuvalu
+TZA,2005,"rgb(134,70,51)",'834,Tanzania
+UGA,2005,"rgb(100,72,82)",'800,Uganda
+UKR,2005,"rgb(73,134,48)",'804,Ukraine
+URY,2005,"rgb(56,36,163)",'858,Uruguay
+VCT,2005,"rgb(18,7,230)",'670,St. Vincent & the Grenadines
+VEN,2005,"rgb(8,8,239)",'862,Venezuela
+VNM,2005,"rgb(132,25,98)",'704,Vietnam
+WLF,2005,"rgb(168,18,69)",'876,Wallis and Futuna
+WSM,2005,"rgb(40,3,212)",'882,Samoa
+YEM,2005,"rgb(194,14,47)",'887,Yemen
+ZAF,2005,"rgb(61,106,89)",'710,South Africa
+ZMB,2005,"rgb(184,33,38)",'894,Zambia
+ZWE,2005,"rgb(124,55,77)",'716,Zimbabwe
+TWN,2005,"rgb(128,22,105)",'158,Taiwan
+ABW,2006,"rgb(5,2,248)",'533,Aruba
+AIA,2006,"rgb(2,1,253)",'660,Anguilla
+ALB,2006,"rgb(115,119,21)",'008,Albania
+AND,2006,"rgb(70,165,20)",'020,Andorra
+ANT,2006,"rgb(15,3,236)",NA,NA
+ARE,2006,"rgb(102,71,82)",'784,United Arab Emirates
+ARG,2006,"rgb(95,39,121)",'032,Argentina
+ARM,2006,"rgb(55,120,81)",'051,Armenia
+ATG,2006,"rgb(9,5,241)",'028,Antigua & Barbuda
+AUS,2006,"rgb(128,29,98)",'036,Australia
+AUT,2006,"rgb(13,215,26)",'040,Austria
+AZE,2006,"rgb(62,112,81)",'031,Azerbaijan
+BDI,2006,"rgb(111,81,63)",'108,Burundi
+BEL,2006,"rgb(22,177,56)",'056,Belgium
+BEN,2006,"rgb(210,23,22)",'204,Benin
+BGD,2006,"rgb(93,61,101)",'050,Bangladesh
+BGR,2006,"rgb(42,176,36)",'100,Bulgaria
+BHR,2006,"rgb(79,62,114)",'048,Bahrain
+BHS,2006,"rgb(0,3,252)",'044,The Bahamas
+BIH,2006,"rgb(35,184,36)",'070,Bosnia & Herzegovina
+BLR,2006,"rgb(59,151,45)",'112,Belarus
+BLZ,2006,"rgb(18,2,235)",'084,Belize
+BMU,2006,"rgb(2,4,250)",'060,Bermuda
+BOL,2006,"rgb(54,20,181)",'068,Bolivia
+BRA,2006,"rgb(61,46,148)",'076,Brazil
+BRB,2006,"rgb(16,9,230)",'052,Barbados
+BRN,2006,"rgb(77,11,167)",'096,Brunei
+BTN,2006,"rgb(119,85,51)",'064,Bhutan
+BWA,2006,"rgb(56,53,146)",'072,Botswana
+CAF,2006,"rgb(18,230,7)",'140,Central African Republic
+CAN,2006,"rgb(17,6,232)",'124,Canada
+CHE,2006,"rgb(16,179,61)",'756,Switzerland
+CHL,2006,"rgb(87,28,141)",'152,Chile
+CIV,2006,"rgb(53,72,130)",'384,C?te d'Ivoire
+CMR,2006,"rgb(106,45,105)",'120,Cameroon
+COL,2006,"rgb(33,16,207)",'170,Colombia
+COM,2006,"rgb(238,17,0)",'174,The Comoros
+CPV,2006,"rgb(70,111,74)",'132,Cape Verde
+CRI,2006,"rgb(32,10,214)",'188,Costa Rica
+CUB,2006,"rgb(145,62,48)",'192,Cuba
+CYP,2006,"rgb(70,158,28)",'196,Cyprus
+CZE,2006,"rgb(23,215,16)",'203,Czech Republic
+DMA,2006,"rgb(23,9,222)",'212,Dominica
+DNK,2006,"rgb(31,179,45)",'208,Denmark
+DOM,2006,"rgb(18,5,232)",'214,Dominican Republic
+DZA,2006,"rgb(22,24,209)",'012,Algeria
+ECU,2006,"rgb(24,11,221)",'218,Ecuador
+EGY,2006,"rgb(62,59,134)",'818,Egypt
+ESP,2006,"rgb(47,162,47)",'724,Spain
+EST,2006,"rgb(64,136,56)",'233,Estonia
+ETH,2006,"rgb(160,55,41)",'231,Ethiopia
+FIN,2006,"rgb(59,139,57)",'246,Finland
+FJI,2006,"rgb(71,26,158)",'242,Fiji
+FRA,2006,"rgb(39,152,64)",'250,France
+FRO,2006,"rgb(63,167,25)",'234,Faroe Islands
+FSM,2006,"rgb(19,0,236)",'583,Federated States of Micronesia
+GAB,2006,"rgb(40,3,213)",'266,Gabon
+GBR,2006,"rgb(42,114,99)",'826,Great Britain (United Kingdom; England)
+GEO,2006,"rgb(42,144,69)",'268,Georgia
+GHA,2006,"rgb(100,71,84)",'288,Ghana
+GIN,2006,"rgb(78,63,114)",'324,Guinea
+GMB,2006,"rgb(79,71,105)",'270,Gambia
+GRC,2006,"rgb(42,178,35)",'300,Greece
+GRD,2006,"rgb(28,9,219)",'308,Grenada
+GRL,2006,"rgb(57,115,83)",'304,Greenland
+GTM,2006,"rgb(23,11,221)",'320,Guatemala
+GUY,2006,"rgb(38,7,211)",'328,Guyana
+HKG,2006,"rgb(202,10,43)",'344,Hong Kong
+HND,2006,"rgb(11,15,230)",'340,Honduras
+HRV,2006,"rgb(49,177,29)",'191,Croatia
+HUN,2006,"rgb(23,215,17)",'348,Hungary
+IDN,2006,"rgb(113,26,116)",'360,Indonesia
+IND,2006,"rgb(93,44,119)",'356,India
+IRL,2006,"rgb(34,76,145)",'372,Ireland
+IRN,2006,"rgb(219,29,7)",'364,Iran
+ISL,2006,"rgb(31,117,108)",'352,Iceland
+ISR,2006,"rgb(27,39,189)",'376,Israel
+ITA,2006,"rgb(37,162,56)",'380,Italy
+JAM,2006,"rgb(42,11,203)",'388,Jamaica
+JOR,2006,"rgb(79,58,118)",'400,Jordan
+JPN,2006,"rgb(115,21,118)",'392,Japan
+KAZ,2006,"rgb(149,64,42)",'398,Kazakhstan
+KEN,2006,"rgb(79,60,116)",'404,Kenya
+KGZ,2006,"rgb(168,25,61)",'417,Kyrgyzstan
+KHM,2006,"rgb(51,23,181)",'116,Cambodia
+KIR,2006,"rgb(106,3,146)",'296,Kiribati
+KNA,2006,"rgb(3,1,251)",'659,St. Kitts & Nevis
+KOR,2006,"rgb(139,25,91)",'410,South Korea
+KWT,2006,"rgb(85,66,104)",'414,Kuwait
+LBN,2006,"rgb(79,68,108)",'422,Lebanon
+LCA,2006,"rgb(10,9,237)",'662,St. Lucia
+LKA,2006,"rgb(58,39,158)",'144,Sri Lanka
+LTU,2006,"rgb(22,190,43)",'440,Lithuania
+LUX,2006,"rgb(10,218,27)",'442,Luxembourg
+LVA,2006,"rgb(19,216,20)",'428,Latvia
+MAC,2006,"rgb(148,20,86)",'446,Macao
+MAR,2006,"rgb(85,89,80)",'504,Morocco
+MDA,2006,"rgb(69,156,31)",'498,Moldova
+MDG,2006,"rgb(131,41,83)",'450,Madagascar
+MDV,2006,"rgb(72,82,101)",'462,Maldives
+MEX,2006,"rgb(17,8,229)",'484,Mexico
+MKD,2006,"rgb(38,200,17)",'807,Republic of Macedonia (FYROM)
+MLI,2006,"rgb(147,41,67)",'466,Mali
+MLT,2006,"rgb(35,120,100)",'470,Malta
+MNE,2006,"rgb(57,171,27)",'499,Montenegro
+MNG,2006,"rgb(222,8,25)",'496,Mongolia
+MOZ,2006,"rgb(95,72,89)",'508,Mozambique
+MRT,2006,"rgb(93,70,92)",'478,Mauritania
+MSR,2006,"rgb(4,1,250)",'500,Montserrat
+MUS,2006,"rgb(107,62,85)",'480,Mauritius
+MWI,2006,"rgb(34,108,113)",'454,Malawi
+MYS,2006,"rgb(84,28,143)",'458,Malaysia
+MYT,2006,"rgb(143,78,34)",'175,Mayotte
+NAM,2006,"rgb(84,99,71)",'516,Namibia
+NCL,2006,"rgb(139,56,61)",'540,New Caledonia
+NER,2006,"rgb(127,17,111)",'562,Niger
+NGA,2006,"rgb(23,9,222)",'566,Nigeria
+NIC,2006,"rgb(43,15,198)",'558,Nicaragua
+NLD,2006,"rgb(33,171,51)",'528,Netherlands
+NOR,2006,"rgb(35,153,67)",'578,Norway
+NZL,2006,"rgb(93,36,126)",'554,New Zealand
+OMN,2006,"rgb(196,19,41)",'512,Oman
+PAK,2006,"rgb(76,42,138)",'586,Pakistan
+PAN,2006,"rgb(108,8,140)",'591,Panama
+PER,2006,"rgb(73,25,157)",'604,Peru
+PHL,2006,"rgb(74,28,153)",'608,The Philippines
+POL,2006,"rgb(30,208,17)",'616,Poland
+PRT,2006,"rgb(15,195,45)",'620,Portugal
+PRY,2006,"rgb(185,13,57)",'600,Paraguay
+PYF,2006,"rgb(79,42,135)",'258,French polynesia
+QAT,2006,"rgb(74,84,97)",'634,Qatar
+ROU,2006,"rgb(35,189,31)",'642,Romania
+RUS,2006,"rgb(84,126,45)",'643,Russian Federation
+RWA,2006,"rgb(94,77,84)",'646,Rwanda
+SAU,2006,"rgb(79,62,114)",'682,Saudi Arabia
+SDN,2006,"rgb(233,18,4)",'729,Sudan
+SEN,2006,"rgb(112,61,82)",'686,Senegal
+SGP,2006,"rgb(110,27,118)",'702,Singapore
+SLB,2006,"rgb(219,6,30)",'090,Solomon Islands
+SLV,2006,"rgb(17,11,228)",'222,El Salvador
+SRB,2006,"rgb(67,161,27)",'688,Serbia
+STP,2006,"rgb(59,71,125)",'678,Sao Tome & Principe
+SUR,2006,"rgb(47,16,192)",'740,Suriname
+SVK,2006,"rgb(22,211,22)",'703,Slovakia
+SVN,2006,"rgb(20,210,25)",'705,Slovenia
+SWE,2006,"rgb(28,154,74)",'752,Sweden
+SWZ,2006,"rgb(58,59,138)",'748,Swaziland
+SYC,2006,"rgb(81,92,82)",'690,Seychelles
+SYR,2006,"rgb(117,68,70)",'760,Syria
+TCA,2006,"rgb(0,0,255)",'796,Turks & Caicos Islands
+THA,2006,"rgb(109,24,122)",'764,Thailand
+TON,2006,"rgb(74,0,181)",'776,Tonga
+TTO,2006,"rgb(6,3,246)",'780,Trinidad & Tobago
+TUN,2006,"rgb(41,161,53)",'788,Tunisia
+TUR,2006,"rgb(57,135,63)",'792,Turkey
+TUV,2006,"rgb(244,0,11)",'798,Tuvalu
+TZA,2006,"rgb(134,78,43)",'834,Tanzania
+UGA,2006,"rgb(101,81,72)",'800,Uganda
+UKR,2006,"rgb(69,135,51)",'804,Ukraine
+URY,2006,"rgb(80,41,134)",'858,Uruguay
+VCT,2006,"rgb(21,13,222)",'670,St. Vincent & the Grenadines
+VEN,2006,"rgb(11,9,235)",'862,Venezuela
+VNM,2006,"rgb(124,28,103)",'704,Vietnam
+VUT,2006,"rgb(170,10,75)",'548,Vanuatu
+WLF,2006,"rgb(201,11,42)",'876,Wallis and Futuna
+WSM,2006,"rgb(42,2,211)",'882,Samoa
+YEM,2006,"rgb(171,16,68)",'887,Yemen
+ZAF,2006,"rgb(70,97,88)",'710,South Africa
+ZMB,2006,"rgb(194,29,32)",'894,Zambia
+ZWE,2006,"rgb(45,48,163)",'716,Zimbabwe
+TWN,2006,"rgb(137,20,99)",'158,Taiwan
+ABW,2007,"rgb(6,2,247)",'533,Aruba
+AGO,2007,"rgb(139,1,115)",'024,Angola
+AIA,2007,"rgb(3,1,251)",'660,Anguilla
+ALB,2007,"rgb(126,106,23)",'008,Albania
+AND,2007,"rgb(69,163,23)",'020,Andorra
+ANT,2007,"rgb(11,8,236)",NA,NA
+ARE,2007,"rgb(111,65,79)",'784,United Arab Emirates
+ARG,2007,"rgb(112,37,106)",'032,Argentina
+ARM,2007,"rgb(77,109,69)",'051,Armenia
+ATG,2007,"rgb(5,3,246)",'028,Antigua & Barbuda
+AUS,2007,"rgb(137,29,89)",'036,Australia
+AUT,2007,"rgb(16,214,25)",'040,Austria
+AZE,2007,"rgb(55,94,106)",'031,Azerbaijan
+BDI,2007,"rgb(124,94,37)",'108,Burundi
+BEL,2007,"rgb(25,177,54)",'056,Belgium
+BEN,2007,"rgb(175,20,60)",'204,Benin
+BFA,2007,"rgb(120,40,95)",'854,Burkina
+BGD,2007,"rgb(81,65,109)",'050,Bangladesh
+BGR,2007,"rgb(54,171,30)",'100,Bulgaria
+BHR,2007,"rgb(81,55,119)",'048,Bahrain
+BHS,2007,"rgb(1,2,252)",'044,The Bahamas
+BIH,2007,"rgb(43,180,32)",'070,Bosnia & Herzegovina
+BLR,2007,"rgb(67,150,38)",'112,Belarus
+BLZ,2007,"rgb(33,2,220)",'084,Belize
+BMU,2007,"rgb(1,4,250)",'060,Bermuda
+BOL,2007,"rgb(66,20,169)",'068,Bolivia
+BRA,2007,"rgb(71,49,135)",'076,Brazil
+BRB,2007,"rgb(20,11,224)",'052,Barbados
+BRN,2007,"rgb(85,15,155)",'096,Brunei
+BTN,2007,"rgb(170,54,31)",'064,Bhutan
+BWA,2007,"rgb(121,63,71)",'072,Botswana
+CAF,2007,"rgb(145,79,31)",'140,Central African Republic
+CAN,2007,"rgb(19,6,230)",'124,Canada
+CHE,2007,"rgb(18,183,55)",'756,Switzerland
+CHL,2007,"rgb(116,24,116)",'152,Chile
+CIV,2007,"rgb(74,67,113)",'384,C?te d'Ivoire
+CMR,2007,"rgb(98,41,116)",'120,Cameroon
+COG,2007,"rgb(199,1,55)",'178,Republic of the Congo
+COK,2007,"rgb(134,4,116)",'184,Cook Islands
+COL,2007,"rgb(42,18,195)",'170,Colombia
+COM,2007,"rgb(226,29,0)",'174,The Comoros
+CPV,2007,"rgb(70,116,69)",'132,Cape Verde
+CRI,2007,"rgb(40,10,205)",'188,Costa Rica
+CYP,2007,"rgb(80,154,20)",'196,Cyprus
+CZE,2007,"rgb(30,210,15)",'203,Czech Republic
+DMA,2007,"rgb(16,6,233)",'212,Dominica
+DNK,2007,"rgb(35,176,44)",'208,Denmark
+DOM,2007,"rgb(30,6,219)",'214,Dominican Republic
+DZA,2007,"rgb(35,20,200)",'012,Algeria
+ECU,2007,"rgb(28,13,214)",'218,Ecuador
+EGY,2007,"rgb(62,68,124)",'818,Egypt
+ESP,2007,"rgb(52,159,44)",'724,Spain
+EST,2007,"rgb(58,149,48)",'233,Estonia
+ETH,2007,"rgb(170,33,52)",'231,Ethiopia
+FIN,2007,"rgb(60,140,56)",'246,Finland
+FJI,2007,"rgb(67,8,180)",'242,Fiji
+FRA,2007,"rgb(43,152,59)",'250,France
+FRO,2007,"rgb(64,164,28)",'234,Faroe Islands
+FSM,2007,"rgb(20,0,234)",'583,Federated States of Micronesia
+GAB,2007,"rgb(41,4,210)",'266,Gabon
+GBR,2007,"rgb(47,110,98)",'826,Great Britain (United Kingdom; England)
+GEO,2007,"rgb(55,114,86)",'268,Georgia
+GHA,2007,"rgb(110,62,84)",'288,Ghana
+GIN,2007,"rgb(49,63,143)",'324,Guinea
+GMB,2007,"rgb(84,65,107)",'270,Gambia
+GRC,2007,"rgb(53,166,36)",'300,Greece
+GRD,2007,"rgb(17,8,230)",'308,Grenada
+GRL,2007,"rgb(61,106,87)",'304,Greenland
+GTM,2007,"rgb(24,9,222)",'320,Guatemala
+GUY,2007,"rgb(52,7,197)",'328,Guyana
+HKG,2007,"rgb(205,10,40)",'344,Hong Kong
+HND,2007,"rgb(17,17,222)",'340,Honduras
+HRV,2007,"rgb(56,170,29)",'191,Croatia
+HUN,2007,"rgb(25,214,15)",'348,Hungary
+IDN,2007,"rgb(119,28,108)",'360,Indonesia
+IND,2007,"rgb(106,42,107)",'356,India
+IRL,2007,"rgb(38,76,141)",'372,Ireland
+ISL,2007,"rgb(31,120,104)",'352,Iceland
+ISR,2007,"rgb(31,38,186)",'376,Israel
+ITA,2007,"rgb(41,162,52)",'380,Italy
+JAM,2007,"rgb(19,8,228)",'388,Jamaica
+JOR,2007,"rgb(82,62,111)",'400,Jordan
+JPN,2007,"rgb(122,22,112)",'392,Japan
+KAZ,2007,"rgb(165,54,37)",'398,Kazakhstan
+KEN,2007,"rgb(86,52,117)",'404,Kenya
+KGZ,2007,"rgb(184,27,44)",'417,Kyrgyzstan
+KHM,2007,"rgb(59,19,177)",'116,Cambodia
+KIR,2007,"rgb(126,1,129)",'296,Kiribati
+KNA,2007,"rgb(4,6,244)",'659,St. Kitts & Nevis
+KOR,2007,"rgb(146,25,84)",'410,South Korea
+KWT,2007,"rgb(95,60,100)",'414,Kuwait
+LBN,2007,"rgb(89,65,100)",'422,Lebanon
+LBY,2007,"rgb(54,121,80)",'434,Libya
+LCA,2007,"rgb(6,6,243)",'662,St. Lucia
+LKA,2007,"rgb(64,44,147)",'144,Sri Lanka
+LTU,2007,"rgb(25,195,35)",'440,Lithuania
+LUX,2007,"rgb(8,220,27)",'442,Luxembourg
+LVA,2007,"rgb(26,209,20)",'428,Latvia
+MAC,2007,"rgb(153,23,79)",'446,Macao
+MAR,2007,"rgb(82,78,95)",'504,Morocco
+MDA,2007,"rgb(77,154,24)",'498,Moldova
+MDG,2007,"rgb(133,35,87)",'450,Madagascar
+MDV,2007,"rgb(85,88,82)",'462,Maldives
+MEX,2007,"rgb(20,9,226)",'484,Mexico
+MKD,2007,"rgb(45,186,24)",'807,Republic of Macedonia (FYROM)
+MLI,2007,"rgb(136,46,72)",'466,Mali
+MLT,2007,"rgb(27,130,99)",'470,Malta
+MNE,2007,"rgb(71,156,28)",'499,Montenegro
+MNG,2007,"rgb(233,9,13)",'496,Mongolia
+MOZ,2007,"rgb(137,40,77)",'508,Mozambique
+MRT,2007,"rgb(103,108,44)",'478,Mauritania
+MSR,2007,"rgb(4,1,250)",'500,Montserrat
+MUS,2007,"rgb(134,48,73)",'480,Mauritius
+MWI,2007,"rgb(58,93,104)",'454,Malawi
+MYS,2007,"rgb(99,32,124)",'458,Malaysia
+MYT,2007,"rgb(140,83,32)",'175,Mayotte
+NAM,2007,"rgb(101,83,71)",'516,Namibia
+NCL,2007,"rgb(148,54,54)",'540,New Caledonia
+NER,2007,"rgb(84,35,136)",'562,Niger
+NGA,2007,"rgb(38,19,198)",'566,Nigeria
+NIC,2007,"rgb(47,11,197)",'558,Nicaragua
+NLD,2007,"rgb(36,170,49)",'528,Netherlands
+NOR,2007,"rgb(35,152,68)",'578,Norway
+NZL,2007,"rgb(104,37,114)",'554,New Zealand
+OMN,2007,"rgb(202,25,28)",'512,Oman
+PAK,2007,"rgb(93,36,126)",'586,Pakistan
+PAN,2007,"rgb(104,7,144)",'591,Panama
+PER,2007,"rgb(86,25,143)",'604,Peru
+PHL,2007,"rgb(84,29,141)",'608,The Philippines
+PLW,2007,"rgb(29,1,225)",'585,Palau
+POL,2007,"rgb(35,205,15)",'616,Poland
+PRT,2007,"rgb(18,197,40)",'620,Portugal
+PRY,2007,"rgb(184,30,40)",'600,Paraguay
+PSE,2007,"rgb(160,64,31)",'275,Palestinian territories
+PYF,2007,"rgb(96,36,123)",'258,French polynesia
+QAT,2007,"rgb(67,72,115)",'634,Qatar
+ROU,2007,"rgb(28,208,19)",'642,Romania
+RUS,2007,"rgb(99,114,42)",'643,Russian Federation
+RWA,2007,"rgb(104,70,81)",'646,Rwanda
+SAU,2007,"rgb(84,66,105)",'682,Saudi Arabia
+SDN,2007,"rgb(191,57,7)",'729,Sudan
+SEN,2007,"rgb(132,69,54)",'686,Senegal
+SGP,2007,"rgb(116,27,113)",'702,Singapore
+SLB,2007,"rgb(245,4,6)",'090,Solomon Islands
+SLV,2007,"rgb(18,10,226)",'222,El Salvador
+SRB,2007,"rgb(70,161,24)",'688,Serbia
+STP,2007,"rgb(197,50,9)",'678,Sao Tome & Principe
+SUR,2007,"rgb(55,11,190)",'740,Suriname
+SVK,2007,"rgb(31,206,18)",'703,Slovakia
+SVN,2007,"rgb(24,208,23)",'705,Slovenia
+SWE,2007,"rgb(30,162,62)",'752,Sweden
+SWZ,2007,"rgb(184,3,67)",'748,Swaziland
+SYC,2007,"rgb(27,204,24)",'690,Seychelles
+SYR,2007,"rgb(130,59,66)",'760,Syria
+TCA,2007,"rgb(0,0,255)",'796,Turks & Caicos Islands
+TGO,2007,"rgb(182,23,49)",'768,Togo
+THA,2007,"rgb(120,26,109)",'764,Thailand
+TON,2007,"rgb(87,2,166)",'776,Tonga
+TTO,2007,"rgb(9,12,234)",'780,Trinidad & Tobago
+TUN,2007,"rgb(40,166,49)",'788,Tunisia
+TUR,2007,"rgb(65,134,56)",'792,Turkey
+TZA,2007,"rgb(135,61,59)",'834,Tanzania
+UGA,2007,"rgb(132,67,56)",'800,Uganda
+UKR,2007,"rgb(70,139,46)",'804,Ukraine
+URY,2007,"rgb(92,42,121)",'858,Uruguay
+VCT,2007,"rgb(21,4,229)",'670,St. Vincent & the Grenadines
+VEN,2007,"rgb(47,16,192)",'862,Venezuela
+VNM,2007,"rgb(133,26,96)",'704,Vietnam
+VUT,2007,"rgb(188,26,41)",'548,Vanuatu
+WSM,2007,"rgb(46,1,208)",'882,Samoa
+YEM,2007,"rgb(165,22,68)",'887,Yemen
+ZAF,2007,"rgb(79,90,85)",'710,South Africa
+ZMB,2007,"rgb(183,35,36)",'894,Zambia
+ZWE,2007,"rgb(125,39,91)",'716,Zimbabwe
+TWN,2007,"rgb(143,19,93)",'158,Taiwan
+ABW,2008,"rgb(6,1,248)",'533,Aruba
+AFG,2008,"rgb(213,32,10)",'004,Afghanistan
+AIA,2008,"rgb(2,5,248)",'660,Anguilla
+ALB,2008,"rgb(128,106,21)",'008,Albania
+AND,2008,"rgb(93,142,20)",'020,Andorra
+ANT,2008,"rgb(12,8,235)",NA,NA
+ARE,2008,"rgb(111,64,81)",'784,United Arab Emirates
+ARG,2008,"rgb(115,34,106)",'032,Argentina
+ARM,2008,"rgb(103,90,61)",'051,Armenia
+AUS,2008,"rgb(143,28,84)",'036,Australia
+AUT,2008,"rgb(18,215,22)",'040,Austria
+AZE,2008,"rgb(31,25,199)",'031,Azerbaijan
+BDI,2008,"rgb(115,122,17)",'108,Burundi
+BEL,2008,"rgb(26,179,50)",'056,Belgium
+BEN,2008,"rgb(213,17,25)",'204,Benin
+BFA,2008,"rgb(137,29,89)",'854,Burkina
+BGD,2008,"rgb(103,58,94)",'050,Bangladesh
+BGR,2008,"rgb(58,167,30)",'100,Bulgaria
+BHR,2008,"rgb(107,55,93)",'048,Bahrain
+BHS,2008,"rgb(0,3,252)",'044,The Bahamas
+BIH,2008,"rgb(45,170,40)",'070,Bosnia & Herzegovina
+BLR,2008,"rgb(83,147,26)",'112,Belarus
+BLZ,2008,"rgb(35,1,218)",'084,Belize
+BMU,2008,"rgb(2,4,249)",'060,Bermuda
+BOL,2008,"rgb(83,18,154)",'068,Bolivia
+BRA,2008,"rgb(84,48,123)",'076,Brazil
+BRB,2008,"rgb(19,9,226)",'052,Barbados
+BRN,2008,"rgb(77,28,150)",'096,Brunei
+BTN,2008,"rgb(176,59,20)",'064,Bhutan
+BWA,2008,"rgb(173,30,52)",'072,Botswana
+CAF,2008,"rgb(154,74,27)",'140,Central African Republic
+CAN,2008,"rgb(20,7,228)",'124,Canada
+CHE,2008,"rgb(19,182,54)",'756,Switzerland
+CHL,2008,"rgb(105,24,126)",'152,Chile
+CIV,2008,"rgb(56,88,111)",'384,C?te d'Ivoire
+CMR,2008,"rgb(131,52,72)",'120,Cameroon
+COG,2008,"rgb(175,2,78)",'178,Republic of the Congo
+COK,2008,"rgb(237,0,18)",'184,Cook Islands
+COL,2008,"rgb(39,17,200)",'170,Colombia
+COM,2008,"rgb(224,22,9)",'174,The Comoros
+CPV,2008,"rgb(83,124,48)",'132,Cape Verde
+CRI,2008,"rgb(33,11,211)",'188,Costa Rica
+CYP,2008,"rgb(85,141,29)",'196,Cyprus
+CZE,2008,"rgb(33,208,14)",'203,Czech Republic
+DMA,2008,"rgb(12,5,239)",'212,Dominica
+DNK,2008,"rgb(37,177,41)",'208,Denmark
+DOM,2008,"rgb(34,7,214)",'214,Dominican Republic
+DZA,2008,"rgb(41,24,190)",'012,Algeria
+ECU,2008,"rgb(35,12,209)",'218,Ecuador
+EGY,2008,"rgb(79,61,115)",'818,Egypt
+ESP,2008,"rgb(57,150,48)",'724,Spain
+EST,2008,"rgb(56,141,59)",'233,Estonia
+ETH,2008,"rgb(181,29,45)",'231,Ethiopia
+FIN,2008,"rgb(59,141,55)",'246,Finland
+FJI,2008,"rgb(67,6,181)",'242,Fiji
+FRA,2008,"rgb(45,154,56)",'250,France
+FRO,2008,"rgb(55,167,34)",'234,Faroe Islands
+FSM,2008,"rgb(22,1,232)",'583,Federated States of Micronesia
+GAB,2008,"rgb(53,2,200)",'266,Gabon
+GBR,2008,"rgb(51,106,98)",'826,Great Britain (United Kingdom; England)
+GEO,2008,"rgb(70,106,78)",'268,Georgia
+GHA,2008,"rgb(123,44,88)",'288,Ghana
+GIN,2008,"rgb(83,61,111)",'324,Guinea
+GMB,2008,"rgb(92,73,90)",'270,Gambia
+GRC,2008,"rgb(55,157,43)",'300,Greece
+GRD,2008,"rgb(23,13,219)",'308,Grenada
+GRL,2008,"rgb(78,108,69)",'304,Greenland
+GTM,2008,"rgb(23,8,224)",'320,Guatemala
+GUY,2008,"rgb(38,9,209)",'328,Guyana
+HKG,2008,"rgb(206,11,38)",'344,Hong Kong
+HRV,2008,"rgb(57,168,29)",'191,Croatia
+HUN,2008,"rgb(27,211,17)",'348,Hungary
+IDN,2008,"rgb(128,26,100)",'360,Indonesia
+IND,2008,"rgb(101,42,112)",'356,India
+IRL,2008,"rgb(35,69,151)",'372,Ireland
+ISL,2008,"rgb(52,123,79)",'352,Iceland
+ISR,2008,"rgb(36,38,181)",'376,Israel
+ITA,2008,"rgb(45,159,51)",'380,Italy
+JAM,2008,"rgb(17,8,230)",'388,Jamaica
+JOR,2008,"rgb(101,55,99)",'400,Jordan
+JPN,2008,"rgb(129,22,105)",'392,Japan
+KAZ,2008,"rgb(174,45,36)",'398,Kazakhstan
+KEN,2008,"rgb(114,57,84)",'404,Kenya
+KGZ,2008,"rgb(158,72,25)",'417,Kyrgyzstan
+KHM,2008,"rgb(73,12,170)",'116,Cambodia
+KIR,2008,"rgb(195,0,60)",'296,Kiribati
+KNA,2008,"rgb(4,0,251)",'659,St. Kitts & Nevis
+KOR,2008,"rgb(154,23,78)",'410,South Korea
+KWT,2008,"rgb(96,59,100)",'414,Kuwait
+LBN,2008,"rgb(84,61,110)",'422,Lebanon
+LBY,2008,"rgb(73,102,80)",'434,Libya
+LCA,2008,"rgb(6,5,244)",'662,St. Lucia
+LKA,2008,"rgb(73,43,138)",'144,Sri Lanka
+LSO,2008,"rgb(5,63,187)",'426,Lesotho
+LTU,2008,"rgb(28,183,44)",'440,Lithuania
+LUX,2008,"rgb(10,221,23)",'442,Luxembourg
+LVA,2008,"rgb(29,205,21)",'428,Latvia
+MAC,2008,"rgb(162,16,78)",'446,Macao
+MAR,2008,"rgb(82,79,94)",'504,Morocco
+MDA,2008,"rgb(97,126,32)",'498,Moldova
+MDG,2008,"rgb(130,41,84)",'450,Madagascar
+MDV,2008,"rgb(80,83,92)",'462,Maldives
+MEX,2008,"rgb(21,10,223)",'484,Mexico
+MKD,2008,"rgb(74,157,24)",'807,Republic of Macedonia (FYROM)
+MLI,2008,"rgb(137,32,86)",'466,Mali
+MLT,2008,"rgb(36,147,71)",'470,Malta
+MNE,2008,"rgb(76,144,35)",'499,Montenegro
+MOZ,2008,"rgb(111,48,96)",'508,Mozambique
+MRT,2008,"rgb(119,106,30)",'478,Mauritania
+MSR,2008,"rgb(4,1,250)",'500,Montserrat
+MUS,2008,"rgb(145,43,67)",'480,Mauritius
+MWI,2008,"rgb(97,61,98)",'454,Malawi
+MYS,2008,"rgb(108,31,115)",'458,Malaysia
+MYT,2008,"rgb(115,112,29)",'175,Mayotte
+NAM,2008,"rgb(113,41,101)",'516,Namibia
+NCL,2008,"rgb(119,64,72)",'540,New Caledonia
+NER,2008,"rgb(105,18,132)",'562,Niger
+NGA,2008,"rgb(26,18,211)",'566,Nigeria
+NIC,2008,"rgb(35,9,211)",'558,Nicaragua
+NLD,2008,"rgb(32,174,49)",'528,Netherlands
+NOR,2008,"rgb(37,160,59)",'578,Norway
+NZL,2008,"rgb(109,36,110)",'554,New Zealand
+OMN,2008,"rgb(211,17,26)",'512,Oman
+PAK,2008,"rgb(103,44,108)",'586,Pakistan
+PAN,2008,"rgb(85,8,162)",'591,Panama
+PER,2008,"rgb(94,23,138)",'604,Peru
+PHL,2008,"rgb(86,31,138)",'608,The Philippines
+PLW,2008,"rgb(20,2,233)",'585,Palau
+POL,2008,"rgb(39,200,15)",'616,Poland
+PRT,2008,"rgb(22,198,34)",'620,Portugal
+PRY,2008,"rgb(194,22,38)",'600,Paraguay
+PSE,2008,"rgb(128,85,42)",'275,Palestinian territories
+PYF,2008,"rgb(90,37,127)",'258,French polynesia
+QAT,2008,"rgb(92,77,86)",'634,Qatar
+ROU,2008,"rgb(35,201,19)",'642,Romania
+RUS,2008,"rgb(95,114,47)",'643,Russian Federation
+RWA,2008,"rgb(134,63,58)",'646,Rwanda
+SAU,2008,"rgb(94,56,106)",'682,Saudi Arabia
+SDN,2008,"rgb(250,4,1)",'729,Sudan
+SEN,2008,"rgb(135,72,48)",'686,Senegal
+SGP,2008,"rgb(116,28,111)",'702,Singapore
+SLB,2008,"rgb(185,12,58)",'090,Solomon Islands
+SLV,2008,"rgb(20,11,224)",'222,El Salvador
+SRB,2008,"rgb(72,160,24)",'688,Serbia
+STP,2008,"rgb(228,6,21)",'678,Sao Tome & Principe
+SUR,2008,"rgb(65,5,185)",'740,Suriname
+SVK,2008,"rgb(34,205,15)",'703,Slovakia
+SVN,2008,"rgb(28,203,24)",'705,Slovenia
+SWE,2008,"rgb(32,164,58)",'752,Sweden
+SWZ,2008,"rgb(58,12,184)",'748,Swaziland
+SYC,2008,"rgb(41,177,37)",'690,Seychelles
+SYR,2008,"rgb(107,108,39)",'760,Syria
+TCA,2008,"rgb(0,0,255)",'796,Turks & Caicos Islands
+TGO,2008,"rgb(205,24,26)",'768,Togo
+THA,2008,"rgb(122,26,107)",'764,Thailand
+TON,2008,"rgb(73,1,181)",'776,Tonga
+TTO,2008,"rgb(11,10,235)",'780,Trinidad & Tobago
+TUN,2008,"rgb(49,153,54)",'788,Tunisia
+TUR,2008,"rgb(67,124,64)",'792,Turkey
+TUV,2008,"rgb(224,0,31)",'798,Tuvalu
+TZA,2008,"rgb(162,47,46)",'834,Tanzania
+UGA,2008,"rgb(143,62,50)",'800,Uganda
+UKR,2008,"rgb(79,115,61)",'804,Ukraine
+URY,2008,"rgb(126,41,88)",'858,Uruguay
+VCT,2008,"rgb(16,13,226)",'670,St. Vincent & the Grenadines
+VEN,2008,"rgb(26,16,213)",'862,Venezuela
+VNM,2008,"rgb(136,23,95)",'704,Vietnam
+WSM,2008,"rgb(92,2,161)",'882,Samoa
+YEM,2008,"rgb(188,17,50)",'887,Yemen
+ZAF,2008,"rgb(81,89,85)",'710,South Africa
+ZMB,2008,"rgb(190,28,37)",'894,Zambia
+ZWE,2008,"rgb(122,39,94)",'716,Zimbabwe
+TWN,2008,"rgb(148,20,87)",'158,Taiwan
+ABW,2009,"rgb(7,3,245)",'533,Aruba
+AFG,2009,"rgb(162,65,28)",'004,Afghanistan
+AGO,2009,"rgb(164,4,88)",'024,Angola
+ALB,2009,"rgb(123,107,24)",'008,Albania
+AND,2009,"rgb(102,130,22)",'020,Andorra
+ARE,2009,"rgb(100,63,91)",'784,United Arab Emirates
+ARG,2009,"rgb(104,42,109)",'032,Argentina
+ARM,2009,"rgb(107,87,61)",'051,Armenia
+ATG,2009,"rgb(17,3,235)",'028,Antigua & Barbuda
+AUS,2009,"rgb(162,25,68)",'036,Australia
+AUT,2009,"rgb(20,214,20)",'040,Austria
+AZE,2009,"rgb(48,50,157)",'031,Azerbaijan
+BDI,2009,"rgb(144,64,47)",'108,Burundi
+BEL,2009,"rgb(28,173,54)",'056,Belgium
+BEN,2009,"rgb(195,34,26)",'204,Benin
+BFA,2009,"rgb(139,48,68)",'854,Burkina
+BGD,2009,"rgb(93,62,100)",'050,Bangladesh
+BGR,2009,"rgb(56,172,27)",'100,Bulgaria
+BHR,2009,"rgb(117,49,89)",'048,Bahrain
+BHS,2009,"rgb(0,1,254)",'044,The Bahamas
+BIH,2009,"rgb(45,182,28)",'070,Bosnia & Herzegovina
+BLR,2009,"rgb(65,166,24)",'112,Belarus
+BLZ,2009,"rgb(37,2,216)",'084,Belize
+BMU,2009,"rgb(2,5,248)",'060,Bermuda
+BOL,2009,"rgb(79,18,158)",'068,Bolivia
+BRA,2009,"rgb(106,46,103)",'076,Brazil
+BRB,2009,"rgb(20,7,227)",'052,Barbados
+BRN,2009,"rgb(129,18,107)",'096,Brunei
+BTN,2009,"rgb(151,69,35)",'064,Bhutan
+BWA,2009,"rgb(128,46,81)",'072,Botswana
+CAF,2009,"rgb(91,37,127)",'140,Central African Republic
+CAN,2009,"rgb(25,7,223)",'124,Canada
+CHE,2009,"rgb(21,178,56)",'756,Switzerland
+CHL,2009,"rgb(136,19,100)",'152,Chile
+CIV,2009,"rgb(56,95,104)",'384,C?te d'Ivoire
+CMR,2009,"rgb(151,52,52)",'120,Cameroon
+COG,2009,"rgb(163,7,85)",'178,Republic of the Congo
+COK,2009,"rgb(113,2,140)",'184,Cook Islands
+COL,2009,"rgb(41,15,199)",'170,Colombia
+COM,2009,"rgb(227,11,18)",'174,The Comoros
+CPV,2009,"rgb(53,149,53)",'132,Cape Verde
+CRI,2009,"rgb(36,9,210)",'188,Costa Rica
+CYP,2009,"rgb(82,146,27)",'196,Cyprus
+CZE,2009,"rgb(36,206,13)",'203,Czech Republic
+DJI,2009,"rgb(106,10,138)",'262,Djibouti
+DMA,2009,"rgb(16,3,236)",'212,Dominica
+DNK,2009,"rgb(40,171,44)",'208,Denmark
+DOM,2009,"rgb(36,8,211)",'214,Dominican Republic
+DZA,2009,"rgb(68,37,150)",'012,Algeria
+ECU,2009,"rgb(30,17,208)",'218,Ecuador
+EGY,2009,"rgb(81,68,106)",'818,Egypt
+ESP,2009,"rgb(55,152,48)",'724,Spain
+EST,2009,"rgb(58,137,61)",'233,Estonia
+ETH,2009,"rgb(187,21,47)",'231,Ethiopia
+FIN,2009,"rgb(64,132,60)",'246,Finland
+FJI,2009,"rgb(97,8,150)",'242,Fiji
+FRA,2009,"rgb(49,148,58)",'250,France
+FRO,2009,"rgb(57,124,74)",'234,Faroe Islands
+FSM,2009,"rgb(18,1,236)",'583,Federated States of Micronesia
+GAB,2009,"rgb(35,4,215)",'266,Gabon
+GBR,2009,"rgb(57,98,100)",'826,Great Britain (United Kingdom; England)
+GEO,2009,"rgb(59,107,88)",'268,Georgia
+GHA,2009,"rgb(125,41,89)",'288,Ghana
+GMB,2009,"rgb(154,72,29)",'270,Gambia
+GRC,2009,"rgb(60,152,43)",'300,Greece
+GRD,2009,"rgb(24,8,224)",'308,Grenada
+GRL,2009,"rgb(82,94,79)",'304,Greenland
+GTM,2009,"rgb(32,9,214)",'320,Guatemala
+GUY,2009,"rgb(35,8,213)",'328,Guyana
+HKG,2009,"rgb(209,11,36)",'344,Hong Kong
+HND,2009,"rgb(22,17,216)",'340,Honduras
+HRV,2009,"rgb(60,163,32)",'191,Croatia
+HUN,2009,"rgb(32,206,17)",'348,Hungary
+IDN,2009,"rgb(135,25,95)",'360,Indonesia
+IND,2009,"rgb(112,46,96)",'356,India
+IRL,2009,"rgb(27,58,169)",'372,Ireland
+ISL,2009,"rgb(49,134,73)",'352,Iceland
+ISR,2009,"rgb(36,38,180)",'376,Israel
+ITA,2009,"rgb(48,159,49)",'380,Italy
+JAM,2009,"rgb(22,8,225)",'388,Jamaica
+JOR,2009,"rgb(94,53,109)",'400,Jordan
+JPN,2009,"rgb(141,20,94)",'392,Japan
+KAZ,2009,"rgb(167,52,36)",'398,Kazakhstan
+KEN,2009,"rgb(112,44,99)",'404,Kenya
+KGZ,2009,"rgb(199,33,23)",'417,Kyrgyzstan
+KHM,2009,"rgb(86,13,157)",'116,Cambodia
+KIR,2009,"rgb(97,0,157)",'296,Kiribati
+KNA,2009,"rgb(3,1,252)",'659,St. Kitts & Nevis
+KOR,2009,"rgb(157,24,75)",'410,South Korea
+KWT,2009,"rgb(208,14,33)",'414,Kuwait
+LBN,2009,"rgb(82,71,102)",'422,Lebanon
+LBY,2009,"rgb(142,77,35)",'434,Libya
+LCA,2009,"rgb(5,4,246)",'662,St. Lucia
+LKA,2009,"rgb(71,45,139)",'144,Sri Lanka
+LSO,2009,"rgb(5,17,233)",'426,Lesotho
+LTU,2009,"rgb(25,193,36)",'440,Lithuania
+LUX,2009,"rgb(13,217,25)",'442,Luxembourg
+LVA,2009,"rgb(26,205,24)",'428,Latvia
+MAC,2009,"rgb(180,19,56)",'446,Macao
+MAR,2009,"rgb(90,75,90)",'504,Morocco
+MDA,2009,"rgb(99,131,25)",'498,Moldova
+MDG,2009,"rgb(122,42,91)",'450,Madagascar
+MDV,2009,"rgb(91,77,88)",'462,Maldives
+MEX,2009,"rgb(26,10,220)",'484,Mexico
+MKD,2009,"rgb(54,179,22)",'807,Republic of Macedonia (FYROM)
+MLT,2009,"rgb(42,143,70)",'470,Malta
+MNE,2009,"rgb(101,126,28)",'499,Montenegro
+MOZ,2009,"rgb(123,45,87)",'508,Mozambique
+MRT,2009,"rgb(163,66,26)",'478,Mauritania
+MSR,2009,"rgb(3,1,251)",'500,Montserrat
+MUS,2009,"rgb(144,42,69)",'480,Mauritius
+MWI,2009,"rgb(118,57,80)",'454,Malawi
+MYS,2009,"rgb(121,31,103)",'458,Malaysia
+MYT,2009,"rgb(126,103,26)",'175,Mayotte
+NAM,2009,"rgb(126,57,72)",'516,Namibia
+NCL,2009,"rgb(136,54,65)",'540,New Caledonia
+NER,2009,"rgb(189,17,48)",'562,Niger
+NGA,2009,"rgb(74,8,173)",'566,Nigeria
+NIC,2009,"rgb(46,10,200)",'558,Nicaragua
+NLD,2009,"rgb(35,170,49)",'528,Netherlands
+NOR,2009,"rgb(49,144,62)",'578,Norway
+NPL,2009,"rgb(182,27,46)",'524,Nepal
+NZL,2009,"rgb(121,31,103)",'554,New Zealand
+OMN,2009,"rgb(186,26,43)",'512,Oman
+PAK,2009,"rgb(103,43,109)",'586,Pakistan
+PAN,2009,"rgb(69,7,180)",'591,Panama
+PER,2009,"rgb(104,25,126)",'604,Peru
+PHL,2009,"rgb(78,39,137)",'608,The Philippines
+PLW,2009,"rgb(14,2,238)",'585,Palau
+POL,2009,"rgb(43,195,17)",'616,Poland
+PRT,2009,"rgb(24,197,34)",'620,Portugal
+PRY,2009,"rgb(194,24,37)",'600,Paraguay
+PSE,2009,"rgb(135,81,39)",'275,Palestinian territories
+PYF,2009,"rgb(93,42,121)",'258,French polynesia
+QAT,2009,"rgb(174,10,71)",'634,Qatar
+ROU,2009,"rgb(35,205,14)",'642,Romania
+RUS,2009,"rgb(103,104,48)",'643,Russian Federation
+RWA,2009,"rgb(132,60,63)",'646,Rwanda
+SAU,2009,"rgb(95,57,103)",'682,Saudi Arabia
+SDN,2009,"rgb(235,11,9)",'729,Sudan
+SEN,2009,"rgb(148,59,48)",'686,Senegal
+SGP,2009,"rgb(120,28,108)",'702,Singapore
+SLB,2009,"rgb(201,2,52)",'090,Solomon Islands
+SLV,2009,"rgb(17,10,227)",'222,El Salvador
+SRB,2009,"rgb(66,164,25)",'688,Serbia
+STP,2009,"rgb(221,8,26)",'678,Sao Tome & Principe
+SUR,2009,"rgb(45,9,201)",'740,Suriname
+SVK,2009,"rgb(40,202,13)",'703,Slovakia
+SVN,2009,"rgb(31,200,24)",'705,Slovenia
+SWE,2009,"rgb(39,157,58)",'752,Sweden
+SWZ,2009,"rgb(87,38,130)",'748,Swaziland
+SYR,2009,"rgb(98,105,52)",'760,Syria
+TCA,2009,"rgb(0,0,255)",'796,Turks & Caicos Islands
+TGO,2009,"rgb(190,48,17)",'768,Togo
+THA,2009,"rgb(131,24,100)",'764,Thailand
+TON,2009,"rgb(69,1,185)",'776,Tonga
+TTO,2009,"rgb(13,8,234)",'780,Trinidad & Tobago
+TUN,2009,"rgb(53,152,50)",'788,Tunisia
+TUR,2009,"rgb(73,122,60)",'792,Turkey
+TZA,2009,"rgb(177,47,31)",'834,Tanzania
+UGA,2009,"rgb(149,60,47)",'800,Uganda
+UKR,2009,"rgb(98,120,36)",'804,Ukraine
+URY,2009,"rgb(126,39,90)",'858,Uruguay
+VCT,2009,"rgb(19,5,231)",'670,St. Vincent & the Grenadines
+VEN,2009,"rgb(66,20,169)",'862,Venezuela
+VNM,2009,"rgb(141,22,92)",'704,Vietnam
+VUT,2009,"rgb(194,10,51)",'548,Vanuatu
+WSM,2009,"rgb(88,2,164)",'882,Samoa
+YEM,2009,"rgb(186,22,47)",'887,Yemen
+ZAF,2009,"rgb(103,80,72)",'710,South Africa
+ZMB,2009,"rgb(215,22,18)",'894,Zambia
+ZWE,2009,"rgb(87,22,146)",'716,Zimbabwe
+TWN,2009,"rgb(153,20,82)",'158,Taiwan
+ABW,2010,"rgb(7,2,246)",'533,Aruba
+AFG,2010,"rgb(149,89,17)",'004,Afghanistan
+AGO,2010,"rgb(167,2,85)",'024,Angola
+ALB,2010,"rgb(124,99,31)",'008,Albania
+AND,2010,"rgb(113,126,16)",'020,Andorra
+ARE,2010,"rgb(104,62,89)",'784,United Arab Emirates
+ARG,2010,"rgb(121,45,88)",'032,Argentina
+ARM,2010,"rgb(122,81,52)",'051,Armenia
+ATG,2010,"rgb(48,6,201)",'028,Antigua & Barbuda
+AUS,2010,"rgb(174,22,59)",'036,Australia
+AUT,2010,"rgb(22,211,22)",'040,Austria
+AZE,2010,"rgb(68,46,141)",'031,Azerbaijan
+BDI,2010,"rgb(195,36,24)",'108,Burundi
+BEL,2010,"rgb(29,169,56)",'056,Belgium
+BEN,2010,"rgb(181,43,31)",'204,Benin
+BFA,2010,"rgb(138,58,59)",'854,Burkina
+BGD,2010,"rgb(102,58,95)",'050,Bangladesh
+BGR,2010,"rgb(35,202,18)",'100,Bulgaria
+BHR,2010,"rgb(119,52,84)",'048,Bahrain
+BHS,2010,"rgb(0,1,254)",'044,The Bahamas
+BIH,2010,"rgb(46,174,35)",'070,Bosnia & Herzegovina
+BLR,2010,"rgb(100,132,23)",'112,Belarus
+BLZ,2010,"rgb(32,1,222)",'084,Belize
+BMU,2010,"rgb(3,2,249)",'060,Bermuda
+BOL,2010,"rgb(90,15,150)",'068,Bolivia
+BRA,2010,"rgb(116,43,96)",'076,Brazil
+BRB,2010,"rgb(22,9,224)",'052,Barbados
+BRN,2010,"rgb(178,19,59)",'096,Brunei
+BTN,2010,"rgb(137,81,36)",'064,Bhutan
+BWA,2010,"rgb(166,29,60)",'072,Botswana
+CAF,2010,"rgb(150,59,46)",'140,Central African Republic
+CAN,2010,"rgb(26,7,223)",'124,Canada
+CHE,2010,"rgb(24,176,55)",'756,Switzerland
+CHL,2010,"rgb(146,18,91)",'152,Chile
+CIV,2010,"rgb(60,71,124)",'384,C?te d'Ivoire
+CMR,2010,"rgb(147,43,65)",'120,Cameroon
+COG,2010,"rgb(160,7,87)",'178,Republic of the Congo
+COK,2010,"rgb(87,6,162)",'184,Cook Islands
+COL,2010,"rgb(51,13,191)",'170,Colombia
+COM,2010,"rgb(215,30,11)",'174,The Comoros
+CPV,2010,"rgb(124,79,52)",'132,Cape Verde
+CRI,2010,"rgb(28,10,217)",'188,Costa Rica
+CYP,2010,"rgb(79,152,24)",'196,Cyprus
+CZE,2010,"rgb(44,197,14)",'203,Czech Republic
+DMA,2010,"rgb(22,3,231)",'212,Dominica
+DNK,2010,"rgb(46,169,40)",'208,Denmark
+DOM,2010,"rgb(41,8,206)",'214,Dominican Republic
+DZA,2010,"rgb(60,29,166)",'012,Algeria
+ECU,2010,"rgb(34,14,207)",'218,Ecuador
+EGY,2010,"rgb(83,71,101)",'818,Egypt
+ESP,2010,"rgb(65,142,48)",'724,Spain
+EST,2010,"rgb(71,131,53)",'233,Estonia
+ETH,2010,"rgb(183,26,46)",'231,Ethiopia
+FIN,2010,"rgb(70,128,57)",'246,Finland
+FJI,2010,"rgb(106,4,146)",'242,Fiji
+FRA,2010,"rgb(51,151,52)",'250,France
+FSM,2010,"rgb(17,0,238)",'583,Federated States of Micronesia
+GBR,2010,"rgb(60,100,95)",'826,Great Britain (United Kingdom; England)
+GEO,2010,"rgb(84,86,85)",'268,Georgia
+GHA,2010,"rgb(107,33,116)",'288,Ghana
+GMB,2010,"rgb(140,53,62)",'270,Gambia
+GRC,2010,"rgb(65,149,41)",'300,Greece
+GRL,2010,"rgb(88,67,100)",'304,Greenland
+GTM,2010,"rgb(27,9,220)",'320,Guatemala
+GUY,2010,"rgb(39,7,209)",'328,Guyana
+HKG,2010,"rgb(211,9,34)",'344,Hong Kong
+HND,2010,"rgb(33,17,204)",'340,Honduras
+HRV,2010,"rgb(64,160,31)",'191,Croatia
+HUN,2010,"rgb(35,204,16)",'348,Hungary
+IDN,2010,"rgb(140,23,92)",'360,Indonesia
+IND,2010,"rgb(126,37,92)",'356,India
+IRL,2010,"rgb(24,59,171)",'372,Ireland
+IRN,2010,"rgb(170,81,5)",'364,Iran
+IRQ,2010,"rgb(100,24,131)",'368,Iraq
+ISL,2010,"rgb(39,139,77)",'352,Iceland
+ISR,2010,"rgb(46,37,172)",'376,Israel
+ITA,2010,"rgb(56,153,47)",'380,Italy
+JAM,2010,"rgb(22,5,228)",'388,Jamaica
+JOR,2010,"rgb(101,53,102)",'400,Jordan
+JPN,2010,"rgb(145,19,91)",'392,Japan
+KAZ,2010,"rgb(181,46,28)",'398,Kazakhstan
+KEN,2010,"rgb(143,40,72)",'404,Kenya
+KGZ,2010,"rgb(165,22,67)",'417,Kyrgyzstan
+KHM,2010,"rgb(93,10,152)",'116,Cambodia
+KIR,2010,"rgb(97,0,158)",'296,Kiribati
+KNA,2010,"rgb(4,9,243)",'659,St. Kitts & Nevis
+KOR,2010,"rgb(158,21,76)",'410,South Korea
+KWT,2010,"rgb(113,53,89)",'414,Kuwait
+LAO,2010,"rgb(210,23,22)",'418,Laos
+LBN,2010,"rgb(86,67,101)",'422,Lebanon
+LBY,2010,"rgb(144,60,52)",'434,Libya
+LCA,2010,"rgb(7,5,243)",'662,St. Lucia
+LKA,2010,"rgb(87,43,126)",'144,Sri Lanka
+LSO,2010,"rgb(52,7,196)",'426,Lesotho
+LTU,2010,"rgb(26,194,35)",'440,Lithuania
+LUX,2010,"rgb(13,221,21)",'442,Luxembourg
+LVA,2010,"rgb(32,205,19)",'428,Latvia
+MAC,2010,"rgb(187,19,49)",'446,Macao
+MAR,2010,"rgb(96,65,94)",'504,Morocco
+MDA,2010,"rgb(106,122,28)",'498,Moldova
+MDG,2010,"rgb(135,50,70)",'450,Madagascar
+MDV,2010,"rgb(98,69,88)",'462,Maldives
+MEX,2010,"rgb(28,8,218)",'484,Mexico
+MKD,2010,"rgb(53,186,16)",'807,Republic of Macedonia (FYROM)
+MLI,2010,"rgb(117,26,112)",'466,Mali
+MLT,2010,"rgb(44,141,71)",'470,Malta
+MMR,2010,"rgb(249,0,6)",'104,Myanmar (Burma)
+MNE,2010,"rgb(101,136,18)",'499,Montenegro
+MOZ,2010,"rgb(134,64,58)",'508,Mozambique
+MRT,2010,"rgb(201,39,15)",'478,Mauritania
+MSR,2010,"rgb(0,0,255)",'500,Montserrat
+MUS,2010,"rgb(145,35,75)",'480,Mauritius
+MWI,2010,"rgb(132,52,72)",'454,Malawi
+MYS,2010,"rgb(124,33,99)",'458,Malaysia
+NAM,2010,"rgb(97,69,88)",'516,Namibia
+NCL,2010,"rgb(175,32,47)",'540,New Caledonia
+NER,2010,"rgb(202,10,43)",'562,Niger
+NGA,2010,"rgb(47,4,204)",'566,Nigeria
+NIC,2010,"rgb(50,10,196)",'558,Nicaragua
+NLD,2010,"rgb(41,167,47)",'528,Netherlands
+NOR,2010,"rgb(52,140,63)",'578,Norway
+NPL,2010,"rgb(191,22,43)",'524,Nepal
+NZL,2010,"rgb(133,28,94)",'554,New Zealand
+OMN,2010,"rgb(213,16,26)",'512,Oman
+PAK,2010,"rgb(122,36,97)",'586,Pakistan
+PAN,2010,"rgb(107,7,142)",'591,Panama
+PER,2010,"rgb(108,25,122)",'604,Peru
+PHL,2010,"rgb(96,34,125)",'608,The Philippines
+PLW,2010,"rgb(8,1,246)",'585,Palau
+POL,2010,"rgb(44,193,18)",'616,Poland
+PRT,2010,"rgb(27,195,33)",'620,Portugal
+PRY,2010,"rgb(199,22,34)",'600,Paraguay
+PSE,2010,"rgb(146,69,40)",'275,Palestinian territories
+PYF,2010,"rgb(102,36,117)",'258,French polynesia
+QAT,2010,"rgb(115,46,94)",'634,Qatar
+ROU,2010,"rgb(39,200,15)",'642,Romania
+RUS,2010,"rgb(122,88,45)",'643,Russian Federation
+RWA,2010,"rgb(150,48,57)",'646,Rwanda
+SAU,2010,"rgb(104,54,97)",'682,Saudi Arabia
+SDN,2010,"rgb(227,25,4)",'729,Sudan
+SEN,2010,"rgb(160,44,51)",'686,Senegal
+SGP,2010,"rgb(124,27,104)",'702,Singapore
+SLB,2010,"rgb(245,2,8)",'090,Solomon Islands
+SLV,2010,"rgb(37,9,209)",'222,El Salvador
+SRB,2010,"rgb(72,164,19)",'688,Serbia
+STP,2010,"rgb(226,11,18)",'678,Sao Tome & Principe
+SUR,2010,"rgb(47,7,201)",'740,Suriname
+SVK,2010,"rgb(46,196,13)",'703,Slovakia
+SVN,2010,"rgb(35,198,22)",'705,Slovenia
+SWE,2010,"rgb(45,153,58)",'752,Sweden
+SWZ,2010,"rgb(63,17,176)",'748,Swaziland
+SYC,2010,"rgb(78,117,60)",'690,Seychelles
+SYR,2010,"rgb(86,117,51)",'760,Syria
+TGO,2010,"rgb(191,32,33)",'768,Togo
+THA,2010,"rgb(138,24,93)",'764,Thailand
+TON,2010,"rgb(71,1,183)",'776,Tonga
+TTO,2010,"rgb(13,8,234)",'780,Trinidad & Tobago
+TUN,2010,"rgb(61,136,57)",'788,Tunisia
+TUR,2010,"rgb(77,115,64)",'792,Turkey
+TZA,2010,"rgb(190,40,25)",'834,Tanzania
+UGA,2010,"rgb(145,67,42)",'800,Uganda
+UKR,2010,"rgb(104,106,45)",'804,Ukraine
+URY,2010,"rgb(127,37,91)",'858,Uruguay
+VCT,2010,"rgb(34,6,215)",'670,St. Vincent & the Grenadines
+VEN,2010,"rgb(67,20,168)",'862,Venezuela
+VNM,2010,"rgb(142,21,92)",'704,Vietnam
+VUT,2010,"rgb(203,5,47)",'548,Vanuatu
+WSM,2010,"rgb(83,8,164)",'882,Samoa
+YEM,2010,"rgb(187,16,52)",'887,Yemen
+ZAF,2010,"rgb(105,79,71)",'710,South Africa
+ZMB,2010,"rgb(236,8,11)",'894,Zambia
+ZWE,2010,"rgb(97,20,139)",'716,Zimbabwe
+TWN,2010,"rgb(156,20,79)",'158,Taiwan
+ABW,2011,"rgb(8,2,244)",'533,Aruba
+AFG,2011,"rgb(161,68,26)",'004,Afghanistan
+AGO,2011,"rgb(149,2,104)",'024,Angola
+ALB,2011,"rgb(117,109,29)",'008,Albania
+AND,2011,"rgb(113,122,20)",'020,Andorra
+ARE,2011,"rgb(100,56,99)",'784,United Arab Emirates
+ARG,2011,"rgb(122,45,89)",'032,Argentina
+ARM,2011,"rgb(110,84,61)",'051,Armenia
+ATG,2011,"rgb(19,4,233)",'028,Antigua & Barbuda
+AUS,2011,"rgb(179,20,56)",'036,Australia
+AUT,2011,"rgb(22,209,24)",'040,Austria
+AZE,2011,"rgb(34,71,150)",'031,Azerbaijan
+BDI,2011,"rgb(128,58,69)",'108,Burundi
+BEL,2011,"rgb(33,167,55)",'056,Belgium
+BEN,2011,"rgb(165,60,30)",'204,Benin
+BFA,2011,"rgb(136,55,64)",'854,Burkina
+BGD,2011,"rgb(68,78,109)",'050,Bangladesh
+BGR,2011,"rgb(39,198,18)",'100,Bulgaria
+BHR,2011,"rgb(130,40,84)",'048,Bahrain
+BHS,2011,"rgb(1,1,253)",'044,The Bahamas
+BIH,2011,"rgb(47,170,38)",'070,Bosnia & Herzegovina
+BLR,2011,"rgb(91,143,21)",'112,Belarus
+BLZ,2011,"rgb(51,1,203)",'084,Belize
+BMU,2011,"rgb(3,3,249)",'060,Bermuda
+BOL,2011,"rgb(108,14,133)",'068,Bolivia
+BRA,2011,"rgb(122,38,95)",'076,Brazil
+BRB,2011,"rgb(26,13,216)",'052,Barbados
+BRN,2011,"rgb(164,21,70)",'096,Brunei
+BTN,2011,"rgb(130,106,19)",'064,Bhutan
+BWA,2011,"rgb(194,11,50)",'072,Botswana
+CAF,2011,"rgb(122,111,22)",'140,Central African Republic
+CAN,2011,"rgb(26,7,222)",'124,Canada
+CHE,2011,"rgb(26,176,53)",'756,Switzerland
+CHL,2011,"rgb(134,18,103)",'152,Chile
+CIV,2011,"rgb(48,85,122)",'384,C?te d'Ivoire
+CMR,2011,"rgb(153,52,50)",'120,Cameroon
+COG,2011,"rgb(169,1,85)",'178,Republic of the Congo
+COK,2011,"rgb(81,1,173)",'184,Cook Islands
+COL,2011,"rgb(54,14,188)",'170,Colombia
+COM,2011,"rgb(171,65,18)",'174,The Comoros
+CPV,2011,"rgb(58,162,35)",'132,Cape Verde
+CRI,2011,"rgb(31,10,215)",'188,Costa Rica
+CYP,2011,"rgb(76,137,42)",'196,Cyprus
+CZE,2011,"rgb(45,197,13)",'203,Czech Republic
+DNK,2011,"rgb(44,172,39)",'208,Denmark
+DOM,2011,"rgb(40,7,208)",'214,Dominican Republic
+DZA,2011,"rgb(65,29,162)",'012,Algeria
+ECU,2011,"rgb(46,15,194)",'218,Ecuador
+EGY,2011,"rgb(83,62,109)",'818,Egypt
+ESP,2011,"rgb(60,144,51)",'724,Spain
+EST,2011,"rgb(76,111,68)",'233,Estonia
+ETH,2011,"rgb(168,35,52)",'231,Ethiopia
+FIN,2011,"rgb(55,154,46)",'246,Finland
+FJI,2011,"rgb(116,6,133)",'242,Fiji
+FRA,2011,"rgb(53,152,51)",'250,France
+FSM,2011,"rgb(12,0,243)",'583,Federated States of Micronesia
+GBR,2011,"rgb(59,104,92)",'826,Great Britain (United Kingdom; England)
+GEO,2011,"rgb(96,92,67)",'268,Georgia
+GHA,2011,"rgb(129,29,97)",'288,Ghana
+GMB,2011,"rgb(166,59,30)",'270,Gambia
+GRC,2011,"rgb(61,148,46)",'300,Greece
+GRL,2011,"rgb(101,82,72)",'304,Greenland
+GTM,2011,"rgb(24,8,223)",'320,Guatemala
+GUY,2011,"rgb(36,6,213)",'328,Guyana
+HKG,2011,"rgb(212,9,34)",'344,Hong Kong
+HND,2011,"rgb(31,22,202)",'340,Honduras
+HRV,2011,"rgb(63,159,33)",'191,Croatia
+HUN,2011,"rgb(31,207,17)",'348,Hungary
+IDN,2011,"rgb(151,21,84)",'360,Indonesia
+IND,2011,"rgb(122,39,94)",'356,India
+IRL,2011,"rgb(23,60,172)",'372,Ireland
+IRN,2011,"rgb(187,66,2)",'364,Iran
+IRQ,2011,"rgb(0,120,135)",'368,Iraq
+ISL,2011,"rgb(39,133,82)",'352,Iceland
+ISR,2011,"rgb(49,39,168)",'376,Israel
+ITA,2011,"rgb(54,152,49)",'380,Italy
+JAM,2011,"rgb(23,5,227)",'388,Jamaica
+JOR,2011,"rgb(105,41,109)",'400,Jordan
+JPN,2011,"rgb(148,20,87)",'392,Japan
+KAZ,2011,"rgb(196,34,25)",'398,Kazakhstan
+KGZ,2011,"rgb(185,30,40)",'417,Kyrgyzstan
+KHM,2011,"rgb(107,20,127)",'116,Cambodia
+KIR,2011,"rgb(127,1,127)",'296,Kiribati
+KNA,2011,"rgb(7,2,246)",'659,St. Kitts & Nevis
+KOR,2011,"rgb(162,19,74)",'410,South Korea
+KWT,2011,"rgb(128,47,81)",'414,Kuwait
+LAO,2011,"rgb(217,19,19)",'418,Laos
+LBN,2011,"rgb(87,62,107)",'422,Lebanon
+LCA,2011,"rgb(9,4,242)",'662,St. Lucia
+LKA,2011,"rgb(103,40,112)",'144,Sri Lanka
+LSO,2011,"rgb(6,4,245)",'426,Lesotho
+LTU,2011,"rgb(24,193,38)",'440,Lithuania
+LUX,2011,"rgb(12,207,36)",'442,Luxembourg
+LVA,2011,"rgb(33,204,18)",'428,Latvia
+MAC,2011,"rgb(193,17,45)",'446,Macao
+MAR,2011,"rgb(77,65,114)",'504,Morocco
+MDA,2011,"rgb(102,127,26)",'498,Moldova
+MDG,2011,"rgb(166,46,42)",'450,Madagascar
+MDV,2011,"rgb(142,54,59)",'462,Maldives
+MEX,2011,"rgb(28,8,218)",'484,Mexico
+MKD,2011,"rgb(48,195,12)",'807,Republic of Macedonia (FYROM)
+MLI,2011,"rgb(174,47,35)",'466,Mali
+MLT,2011,"rgb(45,130,80)",'470,Malta
+MMR,2011,"rgb(242,0,13)",'104,Myanmar (Burma)
+MNE,2011,"rgb(109,131,15)",'499,Montenegro
+MOZ,2011,"rgb(142,29,84)",'508,Mozambique
+MRT,2011,"rgb(199,42,14)",'478,Mauritania
+MSR,2011,"rgb(1,0,254)",'500,Montserrat
+MUS,2011,"rgb(150,35,69)",'480,Mauritius
+MWI,2011,"rgb(128,35,93)",'454,Malawi
+MYS,2011,"rgb(133,32,90)",'458,Malaysia
+NAM,2011,"rgb(94,50,111)",'516,Namibia
+NCL,2011,"rgb(138,46,70)",'540,New Caledonia
+NER,2011,"rgb(163,24,68)",'562,Niger
+NGA,2011,"rgb(54,19,181)",'566,Nigeria
+NIC,2011,"rgb(55,11,189)",'558,Nicaragua
+NLD,2011,"rgb(40,169,46)",'528,Netherlands
+NOR,2011,"rgb(54,134,67)",'578,Norway
+NPL,2011,"rgb(198,20,37)",'524,Nepal
+NZL,2011,"rgb(135,28,92)",'554,New Zealand
+OMN,2011,"rgb(218,12,25)",'512,Oman
+PAK,2011,"rgb(129,37,89)",'586,Pakistan
+PAN,2011,"rgb(105,6,144)",'591,Panama
+PER,2011,"rgb(113,26,116)",'604,Peru
+PHL,2011,"rgb(108,28,120)",'608,The Philippines
+PLW,2011,"rgb(11,2,242)",'585,Palau
+PNG,2011,"rgb(123,62,70)",'598,Papua New Guinea
+POL,2011,"rgb(41,196,17)",'616,Poland
+PRT,2011,"rgb(28,189,38)",'620,Portugal
+PRY,2011,"rgb(176,38,41)",'600,Paraguay
+PSE,2011,"rgb(144,75,36)",'275,Palestinian territories
+PYF,2011,"rgb(98,36,121)",'258,French polynesia
+QAT,2011,"rgb(204,4,47)",'634,Qatar
+ROU,2011,"rgb(34,205,17)",'642,Romania
+RUS,2011,"rgb(123,90,42)",'643,Russian Federation
+RWA,2011,"rgb(154,42,58)",'646,Rwanda
+SAU,2011,"rgb(117,47,91)",'682,Saudi Arabia
+SDN,2011,"rgb(242,10,3)",'729,Sudan
+SEN,2011,"rgb(128,35,91)",'686,Senegal
+SGP,2011,"rgb(130,27,98)",'702,Singapore
+SLB,2011,"rgb(240,7,9)",'090,Solomon Islands
+SLV,2011,"rgb(35,10,210)",'222,El Salvador
+SRB,2011,"rgb(72,166,18)",'688,Serbia
+STP,2011,"rgb(69,15,171)",'678,Sao Tome & Principe
+SUR,2011,"rgb(35,5,215)",'740,Suriname
+SVK,2011,"rgb(46,195,13)",'703,Slovakia
+SVN,2011,"rgb(31,199,25)",'705,Slovenia
+SWE,2011,"rgb(41,161,53)",'752,Sweden
+SWZ,2011,"rgb(139,37,79)",'748,Swaziland
+SYC,2011,"rgb(79,97,79)",'690,Seychelles
+TCA,2011,"rgb(0,0,255)",'796,Turks & Caicos Islands
+TGO,2011,"rgb(194,39,22)",'768,Togo
+THA,2011,"rgb(144,23,88)",'764,Thailand
+TON,2011,"rgb(87,2,166)",'776,Tonga
+TTO,2011,"rgb(13,6,236)",'780,Trinidad & Tobago
+TUN,2011,"rgb(63,143,49)",'788,Tunisia
+TUR,2011,"rgb(75,115,64)",'792,Turkey
+TZA,2011,"rgb(177,42,36)",'834,Tanzania
+UGA,2011,"rgb(146,54,55)",'800,Uganda
+UKR,2011,"rgb(104,106,46)",'804,Ukraine
+URY,2011,"rgb(129,37,90)",'858,Uruguay
+VCT,2011,"rgb(23,5,227)",'670,St. Vincent & the Grenadines
+VEN,2011,"rgb(83,15,157)",'862,Venezuela
+VNM,2011,"rgb(146,22,86)",'704,Vietnam
+VUT,2011,"rgb(187,7,61)",'548,Vanuatu
+WSM,2011,"rgb(89,2,163)",'882,Samoa
+YEM,2011,"rgb(179,20,56)",'887,Yemen
+ZAF,2011,"rgb(115,70,70)",'710,South Africa
+ZMB,2011,"rgb(236,8,11)",'894,Zambia
+ZWE,2011,"rgb(108,22,125)",'716,Zimbabwe
+TWN,2011,"rgb(158,20,77)",'158,Taiwan
+ABW,2012,"rgb(8,4,243)",'533,Aruba
+AFG,2012,"rgb(187,68,0)",'004,Afghanistan
+AGO,2012,"rgb(203,2,49)",'024,Angola
+ALB,2012,"rgb(111,109,35)",'008,Albania
+AND,2012,"rgb(117,118,21)",'020,Andorra
+ARE,2012,"rgb(120,45,90)",'784,United Arab Emirates
+ARG,2012,"rgb(115,44,96)",'032,Argentina
+ARM,2012,"rgb(113,85,57)",'051,Armenia
+ATG,2012,"rgb(25,2,228)",'028,Antigua & Barbuda
+AUS,2012,"rgb(179,19,57)",'036,Australia
+AUT,2012,"rgb(23,206,26)",'040,Austria
+AZE,2012,"rgb(43,91,121)",'031,Azerbaijan
+BDI,2012,"rgb(154,31,70)",'108,Burundi
+BEL,2012,"rgb(31,161,62)",'056,Belgium
+BEN,2012,"rgb(201,26,28)",'204,Benin
+BFA,2012,"rgb(120,39,96)",'854,Burkina
+BGD,2012,"rgb(106,64,85)",'050,Bangladesh
+BGR,2012,"rgb(50,184,20)",'100,Bulgaria
+BHR,2012,"rgb(119,40,96)",'048,Bahrain
+BHS,2012,"rgb(4,3,248)",'044,The Bahamas
+BIH,2012,"rgb(50,179,25)",'070,Bosnia & Herzegovina
+BLR,2012,"rgb(90,145,20)",'112,Belarus
+BLZ,2012,"rgb(53,2,200)",'084,Belize
+BMU,2012,"rgb(4,4,248)",'060,Bermuda
+BOL,2012,"rgb(90,12,153)",'068,Bolivia
+BRA,2012,"rgb(123,35,97)",'076,Brazil
+BRB,2012,"rgb(26,6,223)",'052,Barbados
+BRN,2012,"rgb(155,23,77)",'096,Brunei
+BTN,2012,"rgb(190,36,29)",'064,Bhutan
+BWA,2012,"rgb(124,28,103)",'072,Botswana
+CAF,2012,"rgb(161,61,33)",'140,Central African Republic
+CAN,2012,"rgb(27,7,221)",'124,Canada
+CHE,2012,"rgb(29,155,71)",'756,Switzerland
+CHL,2012,"rgb(128,15,111)",'152,Chile
+CIV,2012,"rgb(70,89,96)",'384,C?te d'Ivoire
+CMR,2012,"rgb(173,29,53)",'120,Cameroon
+COG,2012,"rgb(189,3,63)",'178,Republic of the Congo
+COL,2012,"rgb(63,13,179)",'170,Colombia
+COM,2012,"rgb(204,38,14)",'174,The Comoros
+CPV,2012,"rgb(54,34,167)",'132,Cape Verde
+CRI,2012,"rgb(28,7,220)",'188,Costa Rica
+CYP,2012,"rgb(88,131,36)",'196,Cyprus
+CZE,2012,"rgb(41,199,15)",'203,Czech Republic
+DMA,2012,"rgb(15,5,235)",'212,Dominica
+DNK,2012,"rgb(45,170,40)",'208,Denmark
+DOM,2012,"rgb(41,7,207)",'214,Dominican Republic
+DZA,2012,"rgb(91,30,134)",'012,Algeria
+ECU,2012,"rgb(38,11,206)",'218,Ecuador
+EGY,2012,"rgb(94,68,93)",'818,Egypt
+ESP,2012,"rgb(60,142,53)",'724,Spain
+EST,2012,"rgb(73,114,68)",'233,Estonia
+ETH,2012,"rgb(191,26,38)",'231,Ethiopia
+FIN,2012,"rgb(74,126,55)",'246,Finland
+FJI,2012,"rgb(123,6,126)",'242,Fiji
+FRA,2012,"rgb(52,148,55)",'250,France
+FSM,2012,"rgb(11,1,244)",'583,Federated States of Micronesia
+GBR,2012,"rgb(55,104,96)",'826,Great Britain (United Kingdom; England)
+GEO,2012,"rgb(98,89,68)",'268,Georgia
+GHA,2012,"rgb(139,31,85)",'288,Ghana
+GMB,2012,"rgb(181,46,28)",'270,Gambia
+GRC,2012,"rgb(65,152,39)",'300,Greece
+GRL,2012,"rgb(116,83,56)",'304,Greenland
+GTM,2012,"rgb(27,8,220)",'320,Guatemala
+GUY,2012,"rgb(52,5,198)",'328,Guyana
+HKG,2012,"rgb(217,7,31)",'344,Hong Kong
+HND,2012,"rgb(32,22,201)",'340,Honduras
+HRV,2012,"rgb(62,159,34)",'191,Croatia
+HUN,2012,"rgb(30,206,18)",'348,Hungary
+IDN,2012,"rgb(153,22,80)",'360,Indonesia
+IND,2012,"rgb(116,37,103)",'356,India
+IRL,2012,"rgb(25,65,164)",'372,Ireland
+IRQ,2012,"rgb(0,60,195)",'368,Iraq
+ISL,2012,"rgb(46,126,83)",'352,Iceland
+ISR,2012,"rgb(50,39,166)",'376,Israel
+ITA,2012,"rgb(49,150,57)",'380,Italy
+JAM,2012,"rgb(23,6,226)",'388,Jamaica
+JOR,2012,"rgb(100,38,117)",'400,Jordan
+JPN,2012,"rgb(142,19,94)",'392,Japan
+KAZ,2012,"rgb(200,34,21)",'398,Kazakhstan
+KGZ,2012,"rgb(186,31,37)",'417,Kyrgyzstan
+KHM,2012,"rgb(124,25,106)",'116,Cambodia
+KIR,2012,"rgb(141,0,114)",'296,Kiribati
+KNA,2012,"rgb(6,1,248)",'659,St. Kitts & Nevis
+KOR,2012,"rgb(160,19,76)",'410,South Korea
+LAO,2012,"rgb(234,15,6)",'418,Laos
+LBN,2012,"rgb(83,57,114)",'422,Lebanon
+LCA,2012,"rgb(10,6,240)",'662,St. Lucia
+LKA,2012,"rgb(118,34,103)",'144,Sri Lanka
+LSO,2012,"rgb(32,1,222)",'426,Lesotho
+LTU,2012,"rgb(28,199,28)",'440,Lithuania
+LUX,2012,"rgb(14,191,50)",'442,Luxembourg
+LVA,2012,"rgb(36,201,18)",'428,Latvia
+MAC,2012,"rgb(202,17,36)",'446,Macao
+MAR,2012,"rgb(84,72,98)",'504,Morocco
+MDA,2012,"rgb(109,118,28)",'498,Moldova
+MDG,2012,"rgb(159,46,51)",'450,Madagascar
+MDV,2012,"rgb(118,55,82)",'462,Maldives
+MEX,2012,"rgb(29,8,218)",'484,Mexico
+MKD,2012,"rgb(55,186,14)",'807,Republic of Macedonia (FYROM)
+MLI,2012,"rgb(192,28,35)",'466,Mali
+MLT,2012,"rgb(46,141,69)",'470,Malta
+MMR,2012,"rgb(247,3,5)",'104,Myanmar (Burma)
+MNE,2012,"rgb(124,118,14)",'499,Montenegro
+MOZ,2012,"rgb(185,10,59)",'508,Mozambique
+MRT,2012,"rgb(201,32,22)",'478,Mauritania
+MSR,2012,"rgb(0,0,254)",'500,Montserrat
+MUS,2012,"rgb(163,31,61)",'480,Mauritius
+MWI,2012,"rgb(154,37,64)",'454,Malawi
+MYS,2012,"rgb(140,30,85)",'458,Malaysia
+NAM,2012,"rgb(122,64,69)",'516,Namibia
+NCL,2012,"rgb(145,41,69)",'540,New Caledonia
+NER,2012,"rgb(157,28,70)",'562,Niger
+NGA,2012,"rgb(84,17,155)",'566,Nigeria
+NIC,2012,"rgb(39,7,210)",'558,Nicaragua
+NLD,2012,"rgb(40,168,47)",'528,Netherlands
+NOR,2012,"rgb(50,144,61)",'578,Norway
+NPL,2012,"rgb(207,18,30)",'524,Nepal
+NZL,2012,"rgb(143,28,85)",'554,New Zealand
+OMN,2012,"rgb(125,38,92)",'512,Oman
+PAK,2012,"rgb(143,33,79)",'586,Pakistan
+PAN,2012,"rgb(124,4,127)",'591,Panama
+PER,2012,"rgb(119,25,111)",'604,Peru
+PHL,2012,"rgb(107,28,120)",'608,The Philippines
+PLW,2012,"rgb(7,0,248)",'585,Palau
+PNG,2012,"rgb(122,54,79)",'598,Papua New Guinea
+POL,2012,"rgb(43,192,20)",'616,Poland
+PRT,2012,"rgb(33,180,42)",'620,Portugal
+PRY,2012,"rgb(162,32,61)",'600,Paraguay
+PSE,2012,"rgb(136,79,40)",'275,Palestinian territories
+PYF,2012,"rgb(106,31,117)",'258,French polynesia
+QAT,2012,"rgb(158,30,66)",'634,Qatar
+ROU,2012,"rgb(29,207,19)",'642,Romania
+RUS,2012,"rgb(125,89,41)",'643,Russian Federation
+RWA,2012,"rgb(172,40,44)",'646,Rwanda
+SAU,2012,"rgb(112,48,95)",'682,Saudi Arabia
+SDN,2012,"rgb(218,26,12)",'729,Sudan
+SEN,2012,"rgb(142,47,66)",'686,Senegal
+SGP,2012,"rgb(132,26,96)",'702,Singapore
+SLB,2012,"rgb(242,1,12)",'090,Solomon Islands
+SLV,2012,"rgb(36,9,210)",'222,El Salvador
+SRB,2012,"rgb(69,165,20)",'688,Serbia
+STP,2012,"rgb(110,35,110)",'678,Sao Tome & Principe
+SUR,2012,"rgb(37,4,214)",'740,Suriname
+SVK,2012,"rgb(44,196,15)",'703,Slovakia
+SVN,2012,"rgb(33,200,21)",'705,Slovenia
+SWE,2012,"rgb(43,158,55)",'752,Sweden
+SWZ,2012,"rgb(82,106,67)",'748,Swaziland
+SYC,2012,"rgb(94,78,83)",'690,Seychelles
+TCA,2012,"rgb(0,0,255)",'796,Turks & Caicos Islands
+TGO,2012,"rgb(153,22,80)",'768,Togo
+THA,2012,"rgb(149,22,84)",'764,Thailand
+TON,2012,"rgb(77,8,170)",'776,Tonga
+TTO,2012,"rgb(14,6,235)",'780,Trinidad & Tobago
+TUN,2012,"rgb(76,132,48)",'788,Tunisia
+TUR,2012,"rgb(78,112,64)",'792,Turkey
+TZA,2012,"rgb(174,49,32)",'834,Tanzania
+UGA,2012,"rgb(176,49,30)",'800,Uganda
+UKR,2012,"rgb(112,98,45)",'804,Ukraine
+URY,2012,"rgb(144,30,81)",'858,Uruguay
+VCT,2012,"rgb(21,3,231)",'670,St. Vincent & the Grenadines
+VEN,2012,"rgb(96,13,146)",'862,Venezuela
+VNM,2012,"rgb(147,23,86)",'704,Vietnam
+WSM,2012,"rgb(109,2,144)",'882,Samoa
+YEM,2012,"rgb(219,7,29)",'887,Yemen
+ZAF,2012,"rgb(117,67,72)",'710,South Africa
+ZMB,2012,"rgb(223,10,21)",'894,Zambia
+ZWE,2012,"rgb(100,18,138)",'716,Zimbabwe
+TWN,2012,"rgb(162,18,76)",'158,Taiwan
+ABW,2013,"rgb(12,0,243)",'533,Aruba
+AFG,2013,"rgb(119,136,0)",'004,Afghanistan
+AGO,2013,"rgb(213,1,41)",'024,Angola
+ALB,2013,"rgb(119,101,35)",'008,Albania
+AND,2013,"rgb(125,111,19)",'020,Andorra
+ARE,2013,"rgb(95,54,106)",'784,United Arab Emirates
+ARG,2013,"rgb(124,41,90)",'032,Argentina
+ARM,2013,"rgb(125,72,57)",'051,Armenia
+ATG,2013,"rgb(24,4,227)",'028,Antigua & Barbuda
+AUS,2013,"rgb(192,18,46)",'036,Australia
+AUT,2013,"rgb(24,205,26)",'040,Austria
+AZE,2013,"rgb(40,132,83)",'031,Azerbaijan
+BDI,2013,"rgb(142,55,58)",'108,Burundi
+BEL,2013,"rgb(31,161,63)",'056,Belgium
+BEN,2013,"rgb(169,18,67)",'204,Benin
+BFA,2013,"rgb(143,42,70)",'854,Burkina
+BGD,2013,"rgb(112,63,80)",'050,Bangladesh
+BGR,2013,"rgb(48,189,17)",'100,Bulgaria
+BHR,2013,"rgb(122,35,98)",'048,Bahrain
+BHS,2013,"rgb(1,1,252)",'044,The Bahamas
+BIH,2013,"rgb(54,177,24)",'070,Bosnia & Herzegovina
+BLR,2013,"rgb(96,139,19)",'112,Belarus
+BLZ,2013,"rgb(53,2,200)",'084,Belize
+BMU,2013,"rgb(4,3,248)",'060,Bermuda
+BOL,2013,"rgb(100,17,138)",'068,Bolivia
+BRA,2013,"rgb(128,33,94)",'076,Brazil
+BRB,2013,"rgb(29,8,218)",'052,Barbados
+BRN,2013,"rgb(127,29,99)",'096,Brunei
+BWA,2013,"rgb(83,27,145)",'072,Botswana
+CAF,2013,"rgb(116,57,82)",'140,Central African Republic
+CAN,2013,"rgb(27,7,221)",'124,Canada
+CHE,2013,"rgb(45,141,69)",'756,Switzerland
+CHL,2013,"rgb(137,17,102)",'152,Chile
+CIV,2013,"rgb(104,70,81)",'384,C?te d'Ivoire
+CMR,2013,"rgb(161,42,52)",'120,Cameroon
+COG,2013,"rgb(218,4,33)",'178,Republic of the Congo
+COL,2013,"rgb(74,14,167)",'170,Colombia
+COM,2013,"rgb(198,47,10)",'174,The Comoros
+CPV,2013,"rgb(110,85,60)",'132,Cape Verde
+CRI,2013,"rgb(34,7,214)",'188,Costa Rica
+CYM,2013,"rgb(3,14,238)",'136,Cayman Islands
+CYP,2013,"rgb(84,126,45)",'196,Cyprus
+CZE,2013,"rgb(40,200,15)",'203,Czech Republic
+DNK,2013,"rgb(45,176,34)",'208,Denmark
+DOM,2013,"rgb(40,8,207)",'214,Dominican Republic
+DZA,2013,"rgb(117,37,100)",'012,Algeria
+ECU,2013,"rgb(54,11,190)",'218,Ecuador
+EGY,2013,"rgb(97,76,82)",'818,Egypt
+ESP,2013,"rgb(59,143,53)",'724,Spain
+EST,2013,"rgb(77,130,48)",'233,Estonia
+ETH,2013,"rgb(194,21,40)",'231,Ethiopia
+FIN,2013,"rgb(68,131,56)",'246,Finland
+FJI,2013,"rgb(132,5,117)",'242,Fiji
+FRA,2013,"rgb(52,147,56)",'250,France
+FSM,2013,"rgb(17,1,237)",'583,Federated States of Micronesia
+GBR,2013,"rgb(59,106,91)",'826,Great Britain (United Kingdom; England)
+GEO,2013,"rgb(106,85,64)",'268,Georgia
+GHA,2013,"rgb(142,31,82)",'288,Ghana
+GIN,2013,"rgb(147,41,67)",'324,Guinea
+GMB,2013,"rgb(147,55,53)",'270,Gambia
+GRC,2013,"rgb(65,154,36)",'300,Greece
+GRL,2013,"rgb(122,101,32)",'304,Greenland
+GTM,2013,"rgb(33,8,214)",'320,Guatemala
+GUY,2013,"rgb(46,7,203)",'328,Guyana
+HKG,2013,"rgb(219,6,30)",'344,Hong Kong
+HRV,2013,"rgb(36,195,24)",'191,Croatia
+HUN,2013,"rgb(29,205,21)",'348,Hungary
+IDN,2013,"rgb(158,22,75)",'360,Indonesia
+IND,2013,"rgb(113,35,107)",'356,India
+IRL,2013,"rgb(26,66,162)",'372,Ireland
+IRN,2013,"rgb(220,34,2)",'364,Iran
+ISL,2013,"rgb(53,118,84)",'352,Iceland
+ISR,2013,"rgb(54,40,161)",'376,Israel
+ITA,2013,"rgb(48,150,57)",'380,Italy
+JAM,2013,"rgb(27,6,222)",'388,Jamaica
+JOR,2013,"rgb(104,36,114)",'400,Jordan
+JPN,2013,"rgb(141,19,94)",'392,Japan
+KAZ,2013,"rgb(206,26,23)",'398,Kazakhstan
+KEN,2013,"rgb(149,36,70)",'404,Kenya
+KGZ,2013,"rgb(193,32,30)",'417,Kyrgyzstan
+KHM,2013,"rgb(135,26,94)",'116,Cambodia
+KIR,2013,"rgb(112,10,134)",'296,Kiribati
+KNA,2013,"rgb(7,2,246)",'659,St. Kitts & Nevis
+KOR,2013,"rgb(162,19,74)",'410,South Korea
+KWT,2013,"rgb(126,50,79)",'414,Kuwait
+LAO,2013,"rgb(220,23,12)",'418,Laos
+LBN,2013,"rgb(114,64,77)",'422,Lebanon
+LCA,2013,"rgb(5,3,247)",'662,St. Lucia
+LKA,2013,"rgb(116,32,107)",'144,Sri Lanka
+LSO,2013,"rgb(133,8,115)",'426,Lesotho
+LTU,2013,"rgb(27,187,41)",'440,Lithuania
+LUX,2013,"rgb(14,193,48)",'442,Luxembourg
+LVA,2013,"rgb(38,199,18)",'428,Latvia
+MAR,2013,"rgb(84,67,104)",'504,Morocco
+MDA,2013,"rgb(113,119,23)",'498,Moldova
+MDG,2013,"rgb(148,43,64)",'450,Madagascar
+MDV,2013,"rgb(131,64,60)",'462,Maldives
+MEX,2013,"rgb(30,8,217)",'484,Mexico
+MKD,2013,"rgb(43,197,15)",'807,Republic of Macedonia (FYROM)
+MLT,2013,"rgb(38,141,75)",'470,Malta
+MMR,2013,"rgb(248,2,5)",'104,Myanmar (Burma)
+MNE,2013,"rgb(130,111,14)",'499,Montenegro
+MNG,2013,"rgb(223,11,21)",'496,Mongolia
+MOZ,2013,"rgb(158,23,74)",'508,Mozambique
+MRT,2013,"rgb(188,33,34)",'478,Mauritania
+MSR,2013,"rgb(1,1,253)",'500,Montserrat
+MUS,2013,"rgb(159,33,62)",'480,Mauritius
+MWI,2013,"rgb(136,57,62)",'454,Malawi
+MYS,2013,"rgb(147,29,79)",'458,Malaysia
+NAM,2013,"rgb(105,51,99)",'516,Namibia
+NCL,2013,"rgb(139,43,73)",'540,New Caledonia
+NER,2013,"rgb(168,10,77)",'562,Niger
+NGA,2013,"rgb(106,35,114)",'566,Nigeria
+NIC,2013,"rgb(44,7,203)",'558,Nicaragua
+NLD,2013,"rgb(40,171,44)",'528,Netherlands
+NOR,2013,"rgb(46,159,49)",'578,Norway
+NPL,2013,"rgb(194,23,39)",'524,Nepal
+NZL,2013,"rgb(156,25,74)",'554,New Zealand
+OMN,2013,"rgb(115,46,94)",'512,Oman
+PAK,2013,"rgb(137,37,80)",'586,Pakistan
+PAN,2013,"rgb(112,6,138)",'591,Panama
+PER,2013,"rgb(115,19,121)",'604,Peru
+PHL,2013,"rgb(110,34,111)",'608,The Philippines
+PLW,2013,"rgb(23,0,231)",'585,Palau
+POL,2013,"rgb(43,191,21)",'616,Poland
+PRT,2013,"rgb(31,181,43)",'620,Portugal
+PRY,2013,"rgb(169,28,58)",'600,Paraguay
+PSE,2013,"rgb(145,77,32)",'275,Palestinian territories
+PYF,2013,"rgb(106,35,115)",'258,French polynesia
+QAT,2013,"rgb(167,30,58)",'634,Qatar
+ROU,2013,"rgb(27,212,16)",'642,Romania
+RUS,2013,"rgb(128,87,40)",'643,Russian Federation
+RWA,2013,"rgb(182,40,33)",'646,Rwanda
+SAU,2013,"rgb(114,49,93)",'682,Saudi Arabia
+SEN,2013,"rgb(151,49,55)",'686,Senegal
+SGP,2013,"rgb(138,25,92)",'702,Singapore
+SLB,2013,"rgb(236,1,18)",'090,Solomon Islands
+SLV,2013,"rgb(40,8,208)",'222,El Salvador
+SRB,2013,"rgb(61,161,32)",'688,Serbia
+STP,2013,"rgb(99,23,133)",'678,Sao Tome & Principe
+SUR,2013,"rgb(38,5,211)",'740,Suriname
+SVK,2013,"rgb(51,190,14)",'703,Slovakia
+SVN,2013,"rgb(30,201,24)",'705,Slovenia
+SWE,2013,"rgb(46,159,51)",'752,Sweden
+SWZ,2013,"rgb(142,33,80)",'748,Swaziland
+SYC,2013,"rgb(96,81,79)",'690,Seychelles
+TGO,2013,"rgb(167,25,63)",'768,Togo
+THA,2013,"rgb(147,23,85)",'764,Thailand
+TLS,2013,"rgb(165,41,49)",'626,Timor-Leste (East Timor)
+TON,2013,"rgb(74,17,165)",'776,Tonga
+TTO,2013,"rgb(14,7,234)",'780,Trinidad & Tobago
+TUN,2013,"rgb(66,138,50)",'788,Tunisia
+TUR,2013,"rgb(85,114,55)",'792,Turkey
+TZA,2013,"rgb(191,34,30)",'834,Tanzania
+UGA,2013,"rgb(166,49,40)",'800,Uganda
+UKR,2013,"rgb(120,94,41)",'804,Ukraine
+URY,2013,"rgb(159,30,67)",'858,Uruguay
+VCT,2013,"rgb(26,4,225)",'670,St. Vincent & the Grenadines
+VEN,2013,"rgb(99,17,139)",'862,Venezuela
+VNM,2013,"rgb(147,23,85)",'704,Vietnam
+WSM,2013,"rgb(99,1,155)",'882,Samoa
+YEM,2013,"rgb(206,11,38)",'887,Yemen
+ZAF,2013,"rgb(128,66,61)",'710,South Africa
+ZMB,2013,"rgb(218,19,18)",'894,Zambia
+ZWE,2013,"rgb(165,25,65)",'716,Zimbabwe
+TWN,2013,"rgb(161,18,76)",'158,Taiwan
+ABW,2014,"rgb(10,0,245)",'533,Aruba
+AFG,2014,"rgb(239,16,0)",'004,Afghanistan
+AGO,2014,"rgb(218,3,34)",'024,Angola
+ALB,2014,"rgb(120,98,36)",'008,Albania
+AND,2014,"rgb(131,124,0)",'020,Andorra
+ARE,2014,"rgb(108,54,93)",'784,United Arab Emirates
+ARG,2014,"rgb(116,39,100)",'032,Argentina
+ARM,2014,"rgb(133,76,46)",'051,Armenia
+ATG,2014,"rgb(41,2,212)",'028,Antigua & Barbuda
+AUS,2014,"rgb(188,17,50)",'036,Australia
+AUT,2014,"rgb(25,202,28)",'040,Austria
+AZE,2014,"rgb(41,143,71)",'031,Azerbaijan
+BDI,2014,"rgb(177,53,25)",'108,Burundi
+BEL,2014,"rgb(32,157,66)",'056,Belgium
+BEN,2014,"rgb(143,19,93)",'204,Benin
+BFA,2014,"rgb(175,36,44)",'854,Burkina
+BGR,2014,"rgb(45,190,19)",'100,Bulgaria
+BHR,2014,"rgb(131,30,93)",'048,Bahrain
+BHS,2014,"rgb(2,1,252)",'044,The Bahamas
+BIH,2014,"rgb(69,160,26)",'070,Bosnia & Herzegovina
+BLR,2014,"rgb(69,177,9)",'112,Belarus
+BLZ,2014,"rgb(51,2,201)",'084,Belize
+BMU,2014,"rgb(6,3,247)",'060,Bermuda
+BOL,2014,"rgb(101,12,142)",'068,Bolivia
+BRA,2014,"rgb(124,32,99)",'076,Brazil
+BRB,2014,"rgb(32,9,214)",'052,Barbados
+BRN,2014,"rgb(121,42,92)",'096,Brunei
+BWA,2014,"rgb(68,34,152)",'072,Botswana
+CAF,2014,"rgb(107,38,110)",'140,Central African Republic
+CAN,2014,"rgb(26,6,223)",'124,Canada
+CHE,2014,"rgb(42,142,70)",'756,Switzerland
+CHL,2014,"rgb(141,15,99)",'152,Chile
+CIV,2014,"rgb(82,66,108)",'384,C?te d'Ivoire
+CMR,2014,"rgb(191,25,39)",'120,Cameroon
+COG,2014,"rgb(198,11,45)",'178,Republic of the Congo
+COL,2014,"rgb(84,15,156)",'170,Colombia
+COM,2014,"rgb(198,38,19)",'174,The Comoros
+CPV,2014,"rgb(135,60,60)",'132,Cape Verde
+CRI,2014,"rgb(36,8,210)",'188,Costa Rica
+CYP,2014,"rgb(128,103,24)",'196,Cyprus
+CZE,2014,"rgb(40,199,16)",'203,Czech Republic
+DNK,2014,"rgb(46,174,35)",'208,Denmark
+DOM,2014,"rgb(38,7,210)",'214,Dominican Republic
+DZA,2014,"rgb(116,49,89)",'012,Algeria
+ECU,2014,"rgb(52,12,191)",'218,Ecuador
+EGY,2014,"rgb(102,76,77)",'818,Egypt
+ESP,2014,"rgb(60,143,52)",'724,Spain
+EST,2014,"rgb(76,125,54)",'233,Estonia
+ETH,2014,"rgb(205,20,30)",'231,Ethiopia
+FIN,2014,"rgb(61,138,57)",'246,Finland
+FJI,2014,"rgb(160,6,89)",'242,Fiji
+FRA,2014,"rgb(55,145,55)",'250,France
+GBR,2014,"rgb(63,106,86)",'826,Great Britain (United Kingdom; England)
+GEO,2014,"rgb(113,74,68)",'268,Georgia
+GHA,2014,"rgb(148,33,74)",'288,Ghana
+GIN,2014,"rgb(147,49,60)",'324,Guinea
+GMB,2014,"rgb(190,36,29)",'270,Gambia
+GRC,2014,"rgb(67,156,32)",'300,Greece
+GRL,2014,"rgb(117,100,38)",'304,Greenland
+GTM,2014,"rgb(35,7,213)",'320,Guatemala
+GUY,2014,"rgb(44,5,206)",'328,Guyana
+HKG,2014,"rgb(218,7,30)",'344,Hong Kong
+HND,2014,"rgb(38,17,200)",'340,Honduras
+HRV,2014,"rgb(27,207,20)",'191,Croatia
+HUN,2014,"rgb(26,207,22)",'348,Hungary
+IDN,2014,"rgb(154,22,79)",'360,Indonesia
+IND,2014,"rgb(118,34,104)",'356,India
+IRL,2014,"rgb(28,60,168)",'372,Ireland
+IRN,2014,"rgb(225,29,1)",'364,Iran
+IRQ,2014,"rgb(201,8,46)",'368,Iraq
+ISL,2014,"rgb(57,94,104)",'352,Iceland
+ISR,2014,"rgb(53,38,164)",'376,Israel
+ITA,2014,"rgb(50,146,59)",'380,Italy
+JAM,2014,"rgb(33,6,216)",'388,Jamaica
+JOR,2014,"rgb(107,39,109)",'400,Jordan
+JPN,2014,"rgb(141,20,94)",'392,Japan
+KAZ,2014,"rgb(196,32,27)",'398,Kazakhstan
+KGZ,2014,"rgb(184,36,35)",'417,Kyrgyzstan
+KHM,2014,"rgb(148,24,82)",'116,Cambodia
+KIR,2014,"rgb(162,1,93)",'296,Kiribati
+KNA,2014,"rgb(9,2,244)",'659,St. Kitts & Nevis
+KOR,2014,"rgb(158,19,78)",'410,South Korea
+KWT,2014,"rgb(129,50,76)",'414,Kuwait
+LAO,2014,"rgb(230,16,8)",'418,Laos
+LBN,2014,"rgb(125,66,64)",'422,Lebanon
+LCA,2014,"rgb(8,7,241)",'662,St. Lucia
+LKA,2014,"rgb(120,28,107)",'144,Sri Lanka
+LSO,2014,"rgb(34,2,220)",'426,Lesotho
+LTU,2014,"rgb(29,179,47)",'440,Lithuania
+LUX,2014,"rgb(16,197,42)",'442,Luxembourg
+LVA,2014,"rgb(42,196,17)",'428,Latvia
+MAC,2014,"rgb(197,19,40)",'446,Macao
+MAR,2014,"rgb(88,72,95)",'504,Morocco
+MDA,2014,"rgb(107,124,24)",'498,Moldova
+MDG,2014,"rgb(143,45,67)",'450,Madagascar
+MDV,2014,"rgb(137,57,61)",'462,Maldives
+MEX,2014,"rgb(30,7,217)",'484,Mexico
+MKD,2014,"rgb(37,203,14)",'807,Republic of Macedonia (FYROM)
+MLT,2014,"rgb(28,102,126)",'470,Malta
+MMR,2014,"rgb(237,4,14)",'104,Myanmar (Burma)
+MNE,2014,"rgb(127,113,15)",'499,Montenegro
+MNG,2014,"rgb(241,6,8)",'496,Mongolia
+MOZ,2014,"rgb(177,36,42)",'508,Mozambique
+MRT,2014,"rgb(121,21,113)",'478,Mauritania
+MSR,2014,"rgb(2,0,253)",'500,Montserrat
+MUS,2014,"rgb(162,29,64)",'480,Mauritius
+MWI,2014,"rgb(151,38,66)",'454,Malawi
+MYS,2014,"rgb(145,29,81)",'458,Malaysia
+NAM,2014,"rgb(105,62,87)",'516,Namibia
+NCL,2014,"rgb(158,33,65)",'540,New Caledonia
+NER,2014,"rgb(170,25,60)",'562,Niger
+NGA,2014,"rgb(125,37,93)",'566,Nigeria
+NIC,2014,"rgb(52,8,196)",'558,Nicaragua
+NLD,2014,"rgb(43,166,46)",'528,Netherlands
+NOR,2014,"rgb(52,155,48)",'578,Norway
+NPL,2014,"rgb(205,19,32)",'524,Nepal
+NZL,2014,"rgb(147,25,84)",'554,New Zealand
+OMN,2014,"rgb(124,36,95)",'512,Oman
+PAK,2014,"rgb(154,30,71)",'586,Pakistan
+PAN,2014,"rgb(127,6,122)",'591,Panama
+PER,2014,"rgb(121,20,114)",'604,Peru
+PHL,2014,"rgb(121,36,98)",'608,The Philippines
+PLW,2014,"rgb(30,0,225)",'585,Palau
+POL,2014,"rgb(47,189,19)",'616,Poland
+PRT,2014,"rgb(34,179,42)",'620,Portugal
+PRY,2014,"rgb(164,20,71)",'600,Paraguay
+PSE,2014,"rgb(148,74,33)",'275,Palestinian territories
+PYF,2014,"rgb(106,30,119)",'258,French polynesia
+QAT,2014,"rgb(172,31,52)",'634,Qatar
+ROU,2014,"rgb(29,210,16)",'642,Romania
+RUS,2014,"rgb(129,85,41)",'643,Russian Federation
+RWA,2014,"rgb(190,33,32)",'646,Rwanda
+SAU,2014,"rgb(118,49,88)",'682,Saudi Arabia
+SDN,2014,"rgb(237,13,5)",'729,Sudan
+SEN,2014,"rgb(145,60,50)",'686,Senegal
+SGP,2014,"rgb(143,23,89)",'702,Singapore
+SLB,2014,"rgb(240,1,14)",'090,Solomon Islands
+SLE,2014,"rgb(224,6,25)",'694,Sierra Leone
+SLV,2014,"rgb(42,7,206)",'222,El Salvador
+SRB,2014,"rgb(63,168,24)",'688,Serbia
+STP,2014,"rgb(113,30,112)",'678,Sao Tome & Principe
+SUR,2014,"rgb(35,6,215)",'740,Suriname
+SVK,2014,"rgb(51,189,15)",'703,Slovakia
+SVN,2014,"rgb(34,199,22)",'705,Slovenia
+SWE,2014,"rgb(46,157,51)",'752,Sweden
+SWZ,2014,"rgb(131,16,109)",'748,Swaziland
+SYC,2014,"rgb(160,46,49)",'690,Seychelles
+TGO,2014,"rgb(182,37,35)",'768,Togo
+THA,2014,"rgb(144,24,87)",'764,Thailand
+TON,2014,"rgb(98,1,156)",'776,Tonga
+TTO,2014,"rgb(18,7,230)",'780,Trinidad & Tobago
+TUN,2014,"rgb(75,141,39)",'788,Tunisia
+TUR,2014,"rgb(84,113,58)",'792,Turkey
+TZA,2014,"rgb(188,32,35)",'834,Tanzania
+UGA,2014,"rgb(182,44,29)",'800,Uganda
+UKR,2014,"rgb(117,101,38)",'804,Ukraine
+URY,2014,"rgb(152,35,68)",'858,Uruguay
+VCT,2014,"rgb(36,6,213)",'670,St. Vincent & the Grenadines
+VNM,2014,"rgb(147,20,88)",'704,Vietnam
+WSM,2014,"rgb(135,2,118)",'882,Samoa
+YEM,2014,"rgb(174,27,53)",'887,Yemen
+ZAF,2014,"rgb(120,71,65)",'710,South Africa
+ZMB,2014,"rgb(226,13,16)",'894,Zambia
+ZWE,2014,"rgb(189,31,36)",'716,Zimbabwe
+TWN,2014,"rgb(159,19,77)",'158,Taiwan
+ABW,2015,"rgb(10,0,245)",'533,Aruba
+AFG,2015,"rgb(200,7,48)",'004,Afghanistan
+AGO,2015,"rgb(215,4,36)",'024,Angola
+ALB,2015,"rgb(126,104,26)",'008,Albania
+AND,2015,"rgb(140,115,0)",'020,Andorra
+ARE,2015,"rgb(108,54,93)",'784,United Arab Emirates
+ARG,2015,"rgb(132,35,88)",'032,Argentina
+ARM,2015,"rgb(127,86,42)",'051,Armenia
+ATG,2015,"rgb(23,4,228)",'028,Antigua & Barbuda
+AUS,2015,"rgb(182,18,55)",'036,Australia
+AUT,2015,"rgb(25,198,32)",'040,Austria
+AZE,2015,"rgb(39,133,83)",'031,Azerbaijan
+BDI,2015,"rgb(202,27,26)",'108,Burundi
+BEL,2015,"rgb(31,150,74)",'056,Belgium
+BEN,2015,"rgb(181,22,52)",'204,Benin
+BFA,2015,"rgb(148,35,73)",'854,Burkina
+BGD,2015,"rgb(119,60,77)",'050,Bangladesh
+BGR,2015,"rgb(46,190,19)",'100,Bulgaria
+BHR,2015,"rgb(103,36,116)",'048,Bahrain
+BHS,2015,"rgb(2,1,252)",'044,The Bahamas
+BIH,2015,"rgb(58,172,25)",'070,Bosnia & Herzegovina
+BLR,2015,"rgb(130,103,22)",'112,Belarus
+BLZ,2015,"rgb(46,6,203)",'084,Belize
+BMU,2015,"rgb(10,2,243)",'060,Bermuda
+BOL,2015,"rgb(122,16,117)",'068,Bolivia
+BRA,2015,"rgb(127,30,98)",'076,Brazil
+BRB,2015,"rgb(29,8,219)",'052,Barbados
+BRN,2015,"rgb(111,45,99)",'096,Brunei
+BWA,2015,"rgb(78,48,129)",'072,Botswana
+CAF,2015,"rgb(94,20,142)",'140,Central African Republic
+CAN,2015,"rgb(28,7,221)",'124,Canada
+CHE,2015,"rgb(48,134,73)",'756,Switzerland
+CHL,2015,"rgb(146,15,94)",'152,Chile
+CIV,2015,"rgb(92,69,94)",'384,C?te d'Ivoire
+CMR,2015,"rgb(191,29,35)",'120,Cameroon
+COG,2015,"rgb(168,16,70)",'178,Republic of the Congo
+COL,2015,"rgb(77,17,161)",'170,Colombia
+COM,2015,"rgb(201,45,9)",'174,The Comoros
+CPV,2015,"rgb(149,45,60)",'132,Cape Verde
+CRI,2015,"rgb(41,11,203)",'188,Costa Rica
+CYM,2015,"rgb(1,2,253)",'136,Cayman Islands
+CYP,2015,"rgb(98,133,23)",'196,Cyprus
+CZE,2015,"rgb(46,193,15)",'203,Czech Republic
+DNK,2015,"rgb(49,168,39)",'208,Denmark
+DOM,2015,"rgb(43,7,205)",'214,Dominican Republic
+DZA,2015,"rgb(130,52,73)",'012,Algeria
+ECU,2015,"rgb(67,15,172)",'218,Ecuador
+EGY,2015,"rgb(118,73,65)",'818,Egypt
+ESP,2015,"rgb(62,139,54)",'724,Spain
+EST,2015,"rgb(79,121,55)",'233,Estonia
+ETH,2015,"rgb(204,15,36)",'231,Ethiopia
+FIN,2015,"rgb(60,144,51)",'246,Finland
+FJI,2015,"rgb(157,5,92)",'242,Fiji
+FRA,2015,"rgb(57,139,59)",'250,France
+GBR,2015,"rgb(64,100,91)",'826,Great Britain (United Kingdom; England)
+GEO,2015,"rgb(115,82,58)",'268,Georgia
+GHA,2015,"rgb(164,21,69)",'288,Ghana
+GIN,2015,"rgb(139,60,56)",'324,Guinea
+GMB,2015,"rgb(127,49,79)",'270,Gambia
+GRC,2015,"rgb(64,148,43)",'300,Greece
+GRL,2015,"rgb(119,90,45)",'304,Greenland
+GTM,2015,"rgb(42,7,206)",'320,Guatemala
+GUY,2015,"rgb(40,6,209)",'328,Guyana
+HKG,2015,"rgb(219,6,30)",'344,Hong Kong
+HND,2015,"rgb(51,18,186)",'340,Honduras
+HRV,2015,"rgb(29,205,21)",'191,Croatia
+HUN,2015,"rgb(27,206,22)",'348,Hungary
+IDN,2015,"rgb(152,21,82)",'360,Indonesia
+IND,2015,"rgb(120,32,103)",'356,India
+IRL,2015,"rgb(27,60,169)",'372,Ireland
+IRN,2015,"rgb(226,27,2)",'364,Iran
+ISL,2015,"rgb(63,104,88)",'352,Iceland
+ISR,2015,"rgb(57,33,165)",'376,Israel
+ITA,2015,"rgb(50,140,65)",'380,Italy
+JAM,2015,"rgb(39,8,208)",'388,Jamaica
+JOR,2015,"rgb(112,37,106)",'400,Jordan
+JPN,2015,"rgb(137,19,99)",'392,Japan
+KAZ,2015,"rgb(182,40,33)",'398,Kazakhstan
+KEN,2015,"rgb(151,27,77)",'404,Kenya
+KGZ,2015,"rgb(211,20,24)",'417,Kyrgyzstan
+KHM,2015,"rgb(146,29,80)",'116,Cambodia
+KIR,2015,"rgb(189,11,55)",'296,Kiribati
+KNA,2015,"rgb(9,1,245)",'659,St. Kitts & Nevis
+KOR,2015,"rgb(157,19,79)",'410,South Korea
+KWT,2015,"rgb(140,42,73)",'414,Kuwait
+LAO,2015,"rgb(239,10,6)",'418,Laos
+LBN,2015,"rgb(113,69,73)",'422,Lebanon
+LCA,2015,"rgb(9,3,243)",'662,St. Lucia
+LKA,2015,"rgb(126,26,103)",'144,Sri Lanka
+LSO,2015,"rgb(72,5,178)",'426,Lesotho
+LTU,2015,"rgb(31,174,50)",'440,Lithuania
+LUX,2015,"rgb(16,188,51)",'442,Luxembourg
+LVA,2015,"rgb(47,186,22)",'428,Latvia
+MAC,2015,"rgb(236,4,14)",'446,Macao
+MAR,2015,"rgb(92,76,87)",'504,Morocco
+MDA,2015,"rgb(108,126,21)",'498,Moldova
+MDG,2015,"rgb(139,42,74)",'450,Madagascar
+MDV,2015,"rgb(153,48,54)",'462,Maldives
+MEX,2015,"rgb(32,8,215)",'484,Mexico
+MKD,2015,"rgb(40,205,10)",'807,Republic of Macedonia (FYROM)
+MLT,2015,"rgb(47,130,78)",'470,Malta
+MMR,2015,"rgb(247,4,4)",'104,Myanmar (Burma)
+MNE,2015,"rgb(145,96,14)",'499,Montenegro
+MNG,2015,"rgb(243,6,6)",'496,Mongolia
+MRT,2015,"rgb(112,18,126)",'478,Mauritania
+MUS,2015,"rgb(163,26,66)",'480,Mauritius
+MWI,2015,"rgb(170,37,48)",'454,Malawi
+MYS,2015,"rgb(146,27,82)",'458,Malaysia
+NAM,2015,"rgb(167,46,42)",'516,Namibia
+NCL,2015,"rgb(204,7,44)",'540,New Caledonia
+NER,2015,"rgb(164,13,78)",'562,Niger
+NGA,2015,"rgb(144,33,78)",'566,Nigeria
+NIC,2015,"rgb(49,7,200)",'558,Nicaragua
+NLD,2015,"rgb(41,165,48)",'528,Netherlands
+NOR,2015,"rgb(59,145,51)",'578,Norway
+NPL,2015,"rgb(196,24,35)",'524,Nepal
+NZL,2015,"rgb(142,24,90)",'554,New Zealand
+OMN,2015,"rgb(142,36,77)",'512,Oman
+PAK,2015,"rgb(160,26,69)",'586,Pakistan
+PAN,2015,"rgb(126,6,123)",'591,Panama
+PER,2015,"rgb(132,17,106)",'604,Peru
+PHL,2015,"rgb(115,34,106)",'608,The Philippines
+PLW,2015,"rgb(31,1,223)",'585,Palau
+POL,2015,"rgb(48,188,19)",'616,Poland
+PRT,2015,"rgb(34,176,46)",'620,Portugal
+PRY,2015,"rgb(154,33,69)",'600,Paraguay
+PSE,2015,"rgb(161,65,29)",'275,Palestinian territories
+PYF,2015,"rgb(119,30,106)",'258,French polynesia
+QAT,2015,"rgb(143,41,71)",'634,Qatar
+ROU,2015,"rgb(31,209,16)",'642,Romania
+RUS,2015,"rgb(137,75,43)",'643,Russian Federation
+RWA,2015,"rgb(190,32,33)",'646,Rwanda
+SAU,2015,"rgb(113,47,96)",'682,Saudi Arabia
+SDN,2015,"rgb(244,8,3)",'729,Sudan
+SEN,2015,"rgb(161,44,49)",'686,Senegal
+SGP,2015,"rgb(145,22,88)",'702,Singapore
+SLB,2015,"rgb(248,1,6)",'090,Solomon Islands
+SLE,2015,"rgb(197,13,45)",'694,Sierra Leone
+SLV,2015,"rgb(48,8,200)",'222,El Salvador
+SRB,2015,"rgb(66,166,23)",'688,Serbia
+STP,2015,"rgb(151,31,73)",'678,Sao Tome & Principe
+SUR,2015,"rgb(54,5,196)",'740,Suriname
+SVK,2015,"rgb(51,188,16)",'703,Slovakia
+SVN,2015,"rgb(36,195,24)",'705,Slovenia
+SWE,2015,"rgb(48,152,55)",'752,Sweden
+SWZ,2015,"rgb(128,29,98)",'748,Swaziland
+SYC,2015,"rgb(131,58,66)",'690,Seychelles
+TGO,2015,"rgb(193,34,28)",'768,Togo
+THA,2015,"rgb(147,22,86)",'764,Thailand
+TTO,2015,"rgb(23,8,224)",'780,Trinidad & Tobago
+TUN,2015,"rgb(78,133,44)",'788,Tunisia
+TUR,2015,"rgb(87,111,56)",'792,Turkey
+TZA,2015,"rgb(194,31,30)",'834,Tanzania
+UGA,2015,"rgb(192,38,25)",'800,Uganda
+UKR,2015,"rgb(117,101,37)",'804,Ukraine
+URY,2015,"rgb(148,35,72)",'858,Uruguay
+VCT,2015,"rgb(31,7,217)",'670,St. Vincent & the Grenadines
+VNM,2015,"rgb(145,20,91)",'704,Vietnam
+WSM,2015,"rgb(146,2,106)",'882,Samoa
+YEM,2015,"rgb(163,40,52)",'887,Yemen
+ZAF,2015,"rgb(118,75,62)",'710,South Africa
+ZMB,2015,"rgb(224,13,19)",'894,Zambia
+ZWE,2015,"rgb(206,17,32)",'716,Zimbabwe
+TWN,2015,"rgb(154,19,81)",'158,Taiwan
+ABW,2016,"rgb(9,0,246)",'533,Aruba
+AFG,2016,"rgb(232,7,16)",'004,Afghanistan
+AGO,2016,"rgb(208,4,43)",'024,Angola
+ALB,2016,"rgb(111,120,24)",'008,Albania
+AND,2016,"rgb(137,118,0)",'020,Andorra
+ARE,2016,"rgb(105,54,97)",'784,United Arab Emirates
+ARG,2016,"rgb(124,36,95)",'032,Argentina
+ARM,2016,"rgb(135,86,34)",'051,Armenia
+ATG,2016,"rgb(21,2,232)",'028,Antigua & Barbuda
+AUS,2016,"rgb(182,20,53)",'036,Australia
+AUT,2016,"rgb(25,200,30)",'040,Austria
+AZE,2016,"rgb(105,97,53)",'031,Azerbaijan
+BDI,2016,"rgb(196,37,22)",'108,Burundi
+BEL,2016,"rgb(31,154,70)",'056,Belgium
+BEN,2016,"rgb(173,37,46)",'204,Benin
+BFA,2016,"rgb(148,31,76)",'854,Burkina
+BGR,2016,"rgb(44,194,16)",'100,Bulgaria
+BHR,2016,"rgb(92,30,133)",'048,Bahrain
+BHS,2016,"rgb(2,2,251)",'044,The Bahamas
+BIH,2016,"rgb(57,178,19)",'070,Bosnia & Herzegovina
+BLR,2016,"rgb(121,109,25)",'112,Belarus
+BLZ,2016,"rgb(51,4,200)",'084,Belize
+BMU,2016,"rgb(8,3,244)",'060,Bermuda
+BOL,2016,"rgb(79,10,166)",'068,Bolivia
+BRA,2016,"rgb(124,30,101)",'076,Brazil
+BRB,2016,"rgb(36,9,210)",'052,Barbados
+BRN,2016,"rgb(151,21,83)",'096,Brunei
+BWA,2016,"rgb(78,51,126)",'072,Botswana
+CAF,2016,"rgb(122,23,110)",'140,Central African Republic
+CAN,2016,"rgb(28,7,220)",'124,Canada
+CHE,2016,"rgb(52,124,79)",'756,Switzerland
+CHL,2016,"rgb(151,14,90)",'152,Chile
+CIV,2016,"rgb(109,57,89)",'384,C?te d'Ivoire
+CMR,2016,"rgb(179,36,41)",'120,Cameroon
+COG,2016,"rgb(146,17,92)",'178,Republic of the Congo
+COL,2016,"rgb(73,16,166)",'170,Colombia
+COM,2016,"rgb(207,34,14)",'174,The Comoros
+CPV,2016,"rgb(152,47,56)",'132,Cape Verde
+CRI,2016,"rgb(44,11,201)",'188,Costa Rica
+CYP,2016,"rgb(74,155,26)",'196,Cyprus
+CZE,2016,"rgb(43,197,15)",'203,Czech Republic
+DNK,2016,"rgb(51,167,37)",'208,Denmark
+DOM,2016,"rgb(42,7,206)",'214,Dominican Republic
+DZA,2016,"rgb(124,44,88)",'012,Algeria
+ECU,2016,"rgb(69,18,169)",'218,Ecuador
+EGY,2016,"rgb(115,80,60)",'818,Egypt
+ESP,2016,"rgb(62,141,52)",'724,Spain
+EST,2016,"rgb(81,132,42)",'233,Estonia
+ETH,2016,"rgb(180,16,58)",'231,Ethiopia
+FIN,2016,"rgb(63,138,54)",'246,Finland
+FJI,2016,"rgb(159,5,92)",'242,Fiji
+FRA,2016,"rgb(55,139,61)",'250,France
+GBR,2016,"rgb(60,102,92)",'826,Great Britain (United Kingdom; England)
+GEO,2016,"rgb(122,86,48)",'268,Georgia
+GHA,2016,"rgb(162,33,60)",'288,Ghana
+GIN,2016,"rgb(183,40,32)",'324,Guinea
+GMB,2016,"rgb(147,56,53)",'270,Gambia
+GRC,2016,"rgb(71,146,39)",'300,Greece
+GRL,2016,"rgb(116,98,41)",'304,Greenland
+GTM,2016,"rgb(39,9,207)",'320,Guatemala
+GUY,2016,"rgb(38,11,207)",'328,Guyana
+HKG,2016,"rgb(220,6,29)",'344,Hong Kong
+HND,2016,"rgb(48,18,189)",'340,Honduras
+HRV,2016,"rgb(28,199,28)",'191,Croatia
+HUN,2016,"rgb(28,206,21)",'348,Hungary
+IDN,2016,"rgb(158,19,78)",'360,Indonesia
+IND,2016,"rgb(118,32,106)",'356,India
+IRL,2016,"rgb(27,56,172)",'372,Ireland
+IRN,2016,"rgb(218,33,4)",'364,Iran
+IRQ,2016,"rgb(0,255,0)",'368,Iraq
+ISL,2016,"rgb(56,97,101)",'352,Iceland
+ISR,2016,"rgb(58,35,162)",'376,Israel
+ITA,2016,"rgb(49,142,64)",'380,Italy
+JAM,2016,"rgb(31,11,214)",'388,Jamaica
+JOR,2016,"rgb(109,35,112)",'400,Jordan
+JPN,2016,"rgb(135,20,100)",'392,Japan
+KAZ,2016,"rgb(175,38,42)",'398,Kazakhstan
+KEN,2016,"rgb(179,28,47)",'404,Kenya
+KGZ,2016,"rgb(223,10,22)",'417,Kyrgyzstan
+KHM,2016,"rgb(154,32,69)",'116,Cambodia
+KIR,2016,"rgb(163,1,92)",'296,Kiribati
+KNA,2016,"rgb(5,4,247)",'659,St. Kitts & Nevis
+KOR,2016,"rgb(155,19,81)",'410,South Korea
+KWT,2016,"rgb(129,49,77)",'414,Kuwait
+LAO,2016,"rgb(241,9,5)",'418,Laos
+LBN,2016,"rgb(117,68,69)",'422,Lebanon
+LBY,2016,"rgb(169,32,55)",'434,Libya
+LCA,2016,"rgb(9,3,242)",'662,St. Lucia
+LKA,2016,"rgb(130,27,97)",'144,Sri Lanka
+LSO,2016,"rgb(50,3,202)",'426,Lesotho
+LTU,2016,"rgb(30,172,53)",'440,Lithuania
+LUX,2016,"rgb(17,197,41)",'442,Luxembourg
+LVA,2016,"rgb(45,188,22)",'428,Latvia
+MAC,2016,"rgb(213,13,29)",'446,Macao
+MAR,2016,"rgb(97,74,83)",'504,Morocco
+MDA,2016,"rgb(113,123,19)",'498,Moldova
+MDG,2016,"rgb(138,46,71)",'450,Madagascar
+MDV,2016,"rgb(180,40,34)",'462,Maldives
+MEX,2016,"rgb(33,8,214)",'484,Mexico
+MKD,2016,"rgb(32,209,14)",'807,Republic of Macedonia (FYROM)
+MLI,2016,"rgb(176,49,30)",'466,Mali
+MLT,2016,"rgb(31,95,129)",'470,Malta
+MMR,2016,"rgb(240,6,9)",'104,Myanmar (Burma)
+MNE,2016,"rgb(113,128,14)",'499,Montenegro
+MNG,2016,"rgb(240,8,7)",'496,Mongolia
+MOZ,2016,"rgb(153,42,60)",'508,Mozambique
+MRT,2016,"rgb(170,22,63)",'478,Mauritania
+MUS,2016,"rgb(159,33,63)",'480,Mauritius
+MWI,2016,"rgb(159,44,52)",'454,Malawi
+MYS,2016,"rgb(145,28,82)",'458,Malaysia
+NAM,2016,"rgb(119,53,83)",'516,Namibia
+NER,2016,"rgb(153,23,79)",'562,Niger
+NGA,2016,"rgb(119,27,109)",'566,Nigeria
+NIC,2016,"rgb(54,8,193)",'558,Nicaragua
+NLD,2016,"rgb(42,165,48)",'528,Netherlands
+NOR,2016,"rgb(66,136,53)",'578,Norway
+NPL,2016,"rgb(212,12,31)",'524,Nepal
+NZL,2016,"rgb(148,24,83)",'554,New Zealand
+OMN,2016,"rgb(139,39,77)",'512,Oman
+PAK,2016,"rgb(170,24,61)",'586,Pakistan
+PAN,2016,"rgb(119,7,129)",'591,Panama
+PER,2016,"rgb(133,16,106)",'604,Peru
+PHL,2016,"rgb(132,26,98)",'608,The Philippines
+PLW,2016,"rgb(28,1,226)",'585,Palau
+POL,2016,"rgb(49,186,20)",'616,Poland
+PRT,2016,"rgb(32,180,43)",'620,Portugal
+PRY,2016,"rgb(169,27,60)",'600,Paraguay
+PSE,2016,"rgb(153,75,27)",'275,Palestinian territories
+QAT,2016,"rgb(122,51,83)",'634,Qatar
+ROU,2016,"rgb(33,210,13)",'642,Romania
+RUS,2016,"rgb(136,79,40)",'643,Russian Federation
+RWA,2016,"rgb(186,37,32)",'646,Rwanda
+SAU,2016,"rgb(117,44,94)",'682,Saudi Arabia
+SDN,2016,"rgb(227,20,8)",'729,Sudan
+SEN,2016,"rgb(174,34,47)",'686,Senegal
+SGP,2016,"rgb(141,24,90)",'702,Singapore
+SLB,2016,"rgb(248,1,6)",'090,Solomon Islands
+SLE,2016,"rgb(96,11,148)",'694,Sierra Leone
+SLV,2016,"rgb(49,7,199)",'222,El Salvador
+SRB,2016,"rgb(63,170,22)",'688,Serbia
+STP,2016,"rgb(172,25,57)",'678,Sao Tome & Principe
+SUR,2016,"rgb(55,10,190)",'740,Suriname
+SVK,2016,"rgb(49,189,17)",'703,Slovakia
+SVN,2016,"rgb(38,194,23)",'705,Slovenia
+SWE,2016,"rgb(46,157,52)",'752,Sweden
+SWZ,2016,"rgb(130,52,73)",'748,Swaziland
+SYC,2016,"rgb(97,113,45)",'690,Seychelles
+TGO,2016,"rgb(216,21,18)",'768,Togo
+THA,2016,"rgb(149,23,83)",'764,Thailand
+TUN,2016,"rgb(82,131,42)",'788,Tunisia
+TUR,2016,"rgb(88,112,55)",'792,Turkey
+TZA,2016,"rgb(195,30,30)",'834,Tanzania
+UGA,2016,"rgb(192,38,25)",'800,Uganda
+UKR,2016,"rgb(116,102,38)",'804,Ukraine
+URY,2016,"rgb(153,38,64)",'858,Uruguay
+VCT,2016,"rgb(30,5,220)",'670,St. Vincent & the Grenadines
+VNM,2016,"rgb(143,18,94)",'704,Vietnam
+WSM,2016,"rgb(137,6,112)",'882,Samoa
+ZAF,2016,"rgb(116,80,59)",'710,South Africa
+ZMB,2016,"rgb(229,12,15)",'894,Zambia
+ZWE,2016,"rgb(199,20,37)",'716,Zimbabwe
+TWN,2016,"rgb(154,19,82)",'158,Taiwan
+ABW,2017,"rgb(9,0,246)",'533,Aruba
+AGO,2017,"rgb(229,4,23)",'024,Angola
+ALB,2017,"rgb(112,119,24)",'008,Albania
+AND,2017,"rgb(131,124,0)",'020,Andorra
+ARE,2017,"rgb(139,35,81)",'784,United Arab Emirates
+ARG,2017,"rgb(128,34,93)",'032,Argentina
+ARM,2017,"rgb(142,71,42)",'051,Armenia
+ATG,2017,"rgb(22,4,229)",'028,Antigua & Barbuda
+AUS,2017,"rgb(188,18,49)",'036,Australia
+AUT,2017,"rgb(25,199,31)",'040,Austria
+AZE,2017,"rgb(111,77,67)",'031,Azerbaijan
+BDI,2017,"rgb(181,38,36)",'108,Burundi
+BEL,2017,"rgb(33,160,62)",'056,Belgium
+BEN,2017,"rgb(173,17,65)",'204,Benin
+BFA,2017,"rgb(144,40,71)",'854,Burkina
+BGR,2017,"rgb(47,191,17)",'100,Bulgaria
+BHR,2017,"rgb(112,35,108)",'048,Bahrain
+BHS,2017,"rgb(3,2,251)",'044,The Bahamas
+BIH,2017,"rgb(56,169,30)",'070,Bosnia & Herzegovina
+BLR,2017,"rgb(121,111,24)",'112,Belarus
+BLZ,2017,"rgb(52,3,199)",'084,Belize
+BMU,2017,"rgb(9,4,242)",'060,Bermuda
+BOL,2017,"rgb(152,17,85)",'068,Bolivia
+BRA,2017,"rgb(135,26,94)",'076,Brazil
+BRB,2017,"rgb(28,7,220)",'052,Barbados
+BRN,2017,"rgb(165,32,58)",'096,Brunei
+BWA,2017,"rgb(62,40,153)",'072,Botswana
+CAF,2017,"rgb(154,49,53)",'140,Central African Republic
+CAN,2017,"rgb(29,7,219)",'124,Canada
+CHE,2017,"rgb(49,131,75)",'756,Switzerland
+CHL,2017,"rgb(146,16,93)",'152,Chile
+CIV,2017,"rgb(92,60,103)",'384,C?te d'Ivoire
+CMR,2017,"rgb(185,34,36)",'120,Cameroon
+COG,2017,"rgb(225,3,28)",'178,Republic of the Congo
+COL,2017,"rgb(76,17,163)",'170,Colombia
+COM,2017,"rgb(190,36,28)",'174,The Comoros
+CPV,2017,"rgb(181,27,47)",'132,Cape Verde
+CRI,2017,"rgb(42,10,203)",'188,Costa Rica
+CYP,2017,"rgb(113,120,22)",'196,Cyprus
+CZE,2017,"rgb(44,196,15)",'203,Czech Republic
+DNK,2017,"rgb(50,171,34)",'208,Denmark
+DOM,2017,"rgb(41,6,207)",'214,Dominican Republic
+DZA,2017,"rgb(131,47,77)",'012,Algeria
+ECU,2017,"rgb(74,17,164)",'218,Ecuador
+EGY,2017,"rgb(117,68,70)",'818,Egypt
+ESP,2017,"rgb(64,139,52)",'724,Spain
+EST,2017,"rgb(82,135,38)",'233,Estonia
+ETH,2017,"rgb(189,14,52)",'231,Ethiopia
+FIN,2017,"rgb(64,144,47)",'246,Finland
+FJI,2017,"rgb(158,4,94)",'242,Fiji
+FRA,2017,"rgb(59,135,60)",'250,France
+GBR,2017,"rgb(62,104,90)",'826,Great Britain (United Kingdom; England)
+GEO,2017,"rgb(132,68,55)",'268,Georgia
+GHA,2017,"rgb(172,22,61)",'288,Ghana
+GMB,2017,"rgb(174,38,43)",'270,Gambia
+GRC,2017,"rgb(67,148,40)",'300,Greece
+GRL,2017,"rgb(94,93,68)",'304,Greenland
+GTM,2017,"rgb(38,8,209)",'320,Guatemala
+GUY,2017,"rgb(46,18,191)",'328,Guyana
+HKG,2017,"rgb(220,6,29)",'344,Hong Kong
+HND,2017,"rgb(50,20,186)",'340,Honduras
+HRV,2017,"rgb(31,198,26)",'191,Croatia
+HUN,2017,"rgb(28,208,19)",'348,Hungary
+IDN,2017,"rgb(165,17,73)",'360,Indonesia
+IND,2017,"rgb(123,30,102)",'356,India
+IRL,2017,"rgb(30,57,168)",'372,Ireland
+IRN,2017,"rgb(218,34,3)",'364,Iran
+ISL,2017,"rgb(60,114,81)",'352,Iceland
+ISR,2017,"rgb(61,39,155)",'376,Israel
+ITA,2017,"rgb(49,142,64)",'380,Italy
+JAM,2017,"rgb(28,9,218)",'388,Jamaica
+JOR,2017,"rgb(100,32,123)",'400,Jordan
+JPN,2017,"rgb(138,20,97)",'392,Japan
+KAZ,2017,"rgb(191,35,30)",'398,Kazakhstan
+KEN,2017,"rgb(182,25,48)",'404,Kenya
+KGZ,2017,"rgb(223,10,22)",'417,Kyrgyzstan
+KHM,2017,"rgb(158,29,68)",'116,Cambodia
+KNA,2017,"rgb(9,1,245)",'659,St. Kitts & Nevis
+KOR,2017,"rgb(158,19,79)",'410,South Korea
+KWT,2017,"rgb(132,44,79)",'414,Kuwait
+LAO,2017,"rgb(242,8,6)",'418,Laos
+LBN,2017,"rgb(103,69,82)",'422,Lebanon
+LCA,2017,"rgb(12,3,240)",'662,St. Lucia
+LKA,2017,"rgb(127,26,102)",'144,Sri Lanka
+LSO,2017,"rgb(124,3,127)",'426,Lesotho
+LTU,2017,"rgb(32,167,56)",'440,Lithuania
+LUX,2017,"rgb(17,203,35)",'442,Luxembourg
+LVA,2017,"rgb(43,177,35)",'428,Latvia
+MAR,2017,"rgb(94,74,88)",'504,Morocco
+MDA,2017,"rgb(114,121,19)",'498,Moldova
+MDG,2017,"rgb(127,42,86)",'450,Madagascar
+MDV,2017,"rgb(176,44,36)",'462,Maldives
+MEX,2017,"rgb(33,10,213)",'484,Mexico
+MKD,2017,"rgb(30,211,14)",'807,Republic of Macedonia (FYROM)
+MLI,2017,"rgb(174,41,40)",'466,Mali
+MLT,2017,"rgb(31,162,62)",'470,Malta
+MMR,2017,"rgb(225,11,19)",'104,Myanmar (Burma)
+MNE,2017,"rgb(128,116,11)",'499,Montenegro
+MNG,2017,"rgb(242,5,8)",'496,Mongolia
+MOZ,2017,"rgb(193,20,43)",'508,Mozambique
+MRT,2017,"rgb(192,29,34)",'478,Mauritania
+MUS,2017,"rgb(158,33,64)",'480,Mauritius
+MWI,2017,"rgb(174,43,38)",'454,Malawi
+MYS,2017,"rgb(149,27,79)",'458,Malaysia
+NAM,2017,"rgb(152,36,68)",'516,Namibia
+NER,2017,"rgb(107,18,130)",'562,Niger
+NGA,2017,"rgb(101,30,125)",'566,Nigeria
+NIC,2017,"rgb(50,9,196)",'558,Nicaragua
+NLD,2017,"rgb(43,165,46)",'528,Netherlands
+NOR,2017,"rgb(58,139,58)",'578,Norway
+NPL,2017,"rgb(214,13,27)",'524,Nepal
+NZL,2017,"rgb(154,25,76)",'554,New Zealand
+OMN,2017,"rgb(149,28,78)",'512,Oman
+PAK,2017,"rgb(168,24,64)",'586,Pakistan
+PAN,2017,"rgb(101,10,144)",'591,Panama
+PER,2017,"rgb(139,14,102)",'604,Peru
+PHL,2017,"rgb(137,25,93)",'608,The Philippines
+PLW,2017,"rgb(43,0,212)",'585,Palau
+POL,2017,"rgb(49,185,21)",'616,Poland
+PRT,2017,"rgb(33,179,43)",'620,Portugal
+PRY,2017,"rgb(180,22,54)",'600,Paraguay
+PSE,2017,"rgb(152,76,27)",'275,Palestinian territories
+QAT,2017,"rgb(145,31,79)",'634,Qatar
+ROU,2017,"rgb(32,208,15)",'642,Romania
+RUS,2017,"rgb(140,78,37)",'643,Russian Federation
+RWA,2017,"rgb(195,27,33)",'646,Rwanda
+SAU,2017,"rgb(125,38,92)",'682,Saudi Arabia
+SDN,2017,"rgb(216,31,8)",'729,Sudan
+SEN,2017,"rgb(153,56,45)",'686,Senegal
+SGP,2017,"rgb(146,23,86)",'702,Singapore
+SLB,2017,"rgb(247,1,8)",'090,Solomon Islands
+SLE,2017,"rgb(184,21,50)",'694,Sierra Leone
+SLV,2017,"rgb(50,7,198)",'222,El Salvador
+SRB,2017,"rgb(65,171,19)",'688,Serbia
+STP,2017,"rgb(169,23,63)",'678,Sao Tome & Principe
+SUR,2017,"rgb(62,6,187)",'740,Suriname
+SVK,2017,"rgb(45,190,20)",'703,Slovakia
+SVN,2017,"rgb(38,193,23)",'705,Slovenia
+SWE,2017,"rgb(48,158,48)",'752,Sweden
+SWZ,2017,"rgb(176,20,60)",'748,Swaziland
+SYC,2017,"rgb(121,76,58)",'690,Seychelles
+TGO,2017,"rgb(196,29,31)",'768,Togo
+THA,2017,"rgb(149,22,84)",'764,Thailand
+TLS,2017,"rgb(211,14,30)",'626,Timor-Leste (East Timor)
+TUN,2017,"rgb(77,136,42)",'788,Tunisia
+TUR,2017,"rgb(80,111,63)",'792,Turkey
+TZA,2017,"rgb(192,33,31)",'834,Tanzania
+UGA,2017,"rgb(189,37,29)",'800,Uganda
+UKR,2017,"rgb(110,98,47)",'804,Ukraine
+URY,2017,"rgb(163,21,71)",'858,Uruguay
+UZB,2017,"rgb(215,31,8)",'860,Uzbekistan
+VCT,2017,"rgb(33,6,216)",'670,St. Vincent & the Grenadines
+VNM,2017,"rgb(155,16,84)",'704,Vietnam
+WSM,2017,"rgb(110,4,141)",'882,Samoa
+ZAF,2017,"rgb(119,76,60)",'710,South Africa
+ZMB,2017,"rgb(237,8,11)",'894,Zambia
+ZWE,2017,"rgb(222,12,21)",'716,Zimbabwe
+TWN,2017,"rgb(160,18,77)",'158,Taiwan
+ABW,2018,"rgb(10,0,245)",'533,Aruba
+AFG,2018,"rgb(230,14,11)",'004,Afghanistan
+AGO,2018,"rgb(234,2,20)",'024,Angola
+ALB,2018,"rgb(111,117,27)",'008,Albania
+AND,2018,"rgb(130,124,0)",'020,Andorra
+ARE,2018,"rgb(132,40,83)",'784,United Arab Emirates
+ARG,2018,"rgb(127,34,93)",'032,Argentina
+ARM,2018,"rgb(143,70,41)",'051,Armenia
+ATG,2018,"rgb(26,5,224)",'028,Antigua & Barbuda
+AUS,2018,"rgb(192,18,45)",'036,Australia
+AUT,2018,"rgb(26,197,32)",'040,Austria
+AZE,2018,"rgb(92,102,61)",'031,Azerbaijan
+BDI,2018,"rgb(197,37,21)",'108,Burundi
+BEL,2018,"rgb(30,163,63)",'056,Belgium
+BEN,2018,"rgb(175,22,59)",'204,Benin
+BFA,2018,"rgb(147,41,67)",'854,Burkina
+BGR,2018,"rgb(48,188,19)",'100,Bulgaria
+BHR,2018,"rgb(120,33,102)",'048,Bahrain
+BHS,2018,"rgb(4,1,250)",'044,The Bahamas
+BIH,2018,"rgb(57,169,29)",'070,Bosnia & Herzegovina
+BLR,2018,"rgb(119,111,24)",'112,Belarus
+BLZ,2018,"rgb(49,4,203)",'084,Belize
+BMU,2018,"rgb(8,3,244)",'060,Bermuda
+BOL,2018,"rgb(163,18,75)",'068,Bolivia
+BRA,2018,"rgb(146,23,86)",'076,Brazil
+BRB,2018,"rgb(29,6,220)",'052,Barbados
+BRN,2018,"rgb(202,8,45)",'096,Brunei
+BWA,2018,"rgb(62,39,154)",'072,Botswana
+CAF,2018,"rgb(171,41,43)",'140,Central African Republic
+CAN,2018,"rgb(30,7,218)",'124,Canada
+CHE,2018,"rgb(54,126,75)",'756,Switzerland
+CHL,2018,"rgb(153,14,88)",'152,Chile
+CIV,2018,"rgb(107,63,85)",'384,C?te d'Ivoire
+COG,2018,"rgb(243,1,11)",'178,Republic of the Congo
+COL,2018,"rgb(89,16,150)",'170,Colombia
+COM,2018,"rgb(198,49,8)",'174,The Comoros
+CPV,2018,"rgb(172,22,61)",'132,Cape Verde
+CRI,2018,"rgb(45,10,201)",'188,Costa Rica
+CYP,2018,"rgb(93,128,35)",'196,Cyprus
+CZE,2018,"rgb(49,191,15)",'203,Czech Republic
+DNK,2018,"rgb(46,174,34)",'208,Denmark
+DOM,2018,"rgb(45,7,203)",'214,Dominican Republic
+ECU,2018,"rgb(80,15,160)",'218,Ecuador
+EGY,2018,"rgb(130,50,75)",'818,Egypt
+ESP,2018,"rgb(65,139,51)",'724,Spain
+EST,2018,"rgb(74,119,62)",'233,Estonia
+ETH,2018,"rgb(172,15,68)",'231,Ethiopia
+FIN,2018,"rgb(61,147,47)",'246,Finland
+FJI,2018,"rgb(168,3,83)",'242,Fiji
+FRA,2018,"rgb(60,133,62)",'250,France
+GBR,2018,"rgb(65,99,92)",'826,Great Britain (United Kingdom; England)
+GEO,2018,"rgb(129,61,65)",'268,Georgia
+GHA,2018,"rgb(172,21,63)",'288,Ghana
+GMB,2018,"rgb(170,33,52)",'270,Gambia
+GRC,2018,"rgb(81,138,37)",'300,Greece
+GRL,2018,"rgb(103,109,43)",'304,Greenland
+GTM,2018,"rgb(40,7,208)",'320,Guatemala
+GUY,2018,"rgb(50,8,197)",'328,Guyana
+HKG,2018,"rgb(220,6,29)",'344,Hong Kong
+HND,2018,"rgb(54,17,184)",'340,Honduras
+HRV,2018,"rgb(34,202,19)",'191,Croatia
+HUN,2018,"rgb(28,208,18)",'348,Hungary
+IDN,2018,"rgb(172,16,68)",'360,Indonesia
+IND,2018,"rgb(116,29,109)",'356,India
+IRL,2018,"rgb(29,63,163)",'372,Ireland
+IRN,2018,"rgb(222,31,2)",'364,Iran
+ISL,2018,"rgb(73,90,92)",'352,Iceland
+ISR,2018,"rgb(80,34,141)",'376,Israel
+ITA,2018,"rgb(49,142,64)",'380,Italy
+JAM,2018,"rgb(29,7,219)",'388,Jamaica
+JOR,2018,"rgb(100,33,122)",'400,Jordan
+JPN,2018,"rgb(138,20,97)",'392,Japan
+KAZ,2018,"rgb(186,33,36)",'398,Kazakhstan
+KEN,2018,"rgb(180,27,48)",'404,Kenya
+KGZ,2018,"rgb(231,9,15)",'417,Kyrgyzstan
+KHM,2018,"rgb(155,27,73)",'116,Cambodia
+KOR,2018,"rgb(159,18,78)",'410,South Korea
+KWT,2018,"rgb(145,43,67)",'414,Kuwait
+LAO,2018,"rgb(243,8,4)",'418,Laos
+LBN,2018,"rgb(110,65,80)",'422,Lebanon
+LBY,2018,"rgb(199,19,37)",'434,Libya
+LCA,2018,"rgb(23,4,228)",'662,St. Lucia
+LTU,2018,"rgb(31,170,54)",'440,Lithuania
+LUX,2018,"rgb(19,208,28)",'442,Luxembourg
+LVA,2018,"rgb(42,163,50)",'428,Latvia
+MAC,2018,"rgb(217,12,26)",'446,Macao
+MAR,2018,"rgb(95,62,98)",'504,Morocco
+MDA,2018,"rgb(111,126,18)",'498,Moldova
+MDG,2018,"rgb(122,40,93)",'450,Madagascar
+MDV,2018,"rgb(197,32,26)",'462,Maldives
+MEX,2018,"rgb(34,9,212)",'484,Mexico
+MKD,2018,"rgb(29,211,15)",'807,Republic of Macedonia (FYROM)
+MLT,2018,"rgb(46,157,52)",'470,Malta
+MMR,2018,"rgb(226,13,16)",'104,Myanmar (Burma)
+MNE,2018,"rgb(122,111,22)",'499,Montenegro
+MNG,2018,"rgb(244,5,6)",'496,Mongolia
+MOZ,2018,"rgb(184,18,53)",'508,Mozambique
+MRT,2018,"rgb(211,27,17)",'478,Mauritania
+MUS,2018,"rgb(159,34,62)",'480,Mauritius
+MWI,2018,"rgb(185,31,39)",'454,Malawi
+MYS,2018,"rgb(153,27,76)",'458,Malaysia
+NAM,2018,"rgb(205,16,33)",'516,Namibia
+NER,2018,"rgb(174,21,60)",'562,Niger
+NGA,2018,"rgb(127,34,94)",'566,Nigeria
+NIC,2018,"rgb(42,8,205)",'558,Nicaragua
+NLD,2018,"rgb(44,163,49)",'528,Netherlands
+NOR,2018,"rgb(55,140,60)",'578,Norway
+NZL,2018,"rgb(159,24,72)",'554,New Zealand
+OMN,2018,"rgb(132,39,84)",'512,Oman
+PAK,2018,"rgb(162,26,67)",'586,Pakistan
+PER,2018,"rgb(139,13,103)",'604,Peru
+PHL,2018,"rgb(144,24,87)",'608,The Philippines
+PLW,2018,"rgb(36,2,217)",'585,Palau
+POL,2018,"rgb(47,187,21)",'616,Poland
+PRT,2018,"rgb(32,179,44)",'620,Portugal
+PRY,2018,"rgb(181,16,58)",'600,Paraguay
+PSE,2018,"rgb(151,75,29)",'275,Palestinian territories
+QAT,2018,"rgb(151,23,81)",'634,Qatar
+ROU,2018,"rgb(33,208,14)",'642,Romania
+RUS,2018,"rgb(143,79,33)",'643,Russian Federation
+RWA,2018,"rgb(202,27,27)",'646,Rwanda
+SAU,2018,"rgb(137,33,85)",'682,Saudi Arabia
+SDN,2018,"rgb(220,26,9)",'729,Sudan
+SEN,2018,"rgb(170,33,53)",'686,Senegal
+SGP,2018,"rgb(134,22,99)",'702,Singapore
+SLB,2018,"rgb(248,0,7)",'090,Solomon Islands
+SLE,2018,"rgb(191,20,44)",'694,Sierra Leone
+SLV,2018,"rgb(53,6,196)",'222,El Salvador
+SRB,2018,"rgb(66,168,22)",'688,Serbia
+STP,2018,"rgb(179,29,47)",'678,Sao Tome & Principe
+SUR,2018,"rgb(75,8,172)",'740,Suriname
+SVK,2018,"rgb(37,197,21)",'703,Slovakia
+SVN,2018,"rgb(38,192,25)",'705,Slovenia
+SWE,2018,"rgb(50,156,49)",'752,Sweden
+SWZ,2018,"rgb(191,16,48)",'748,Swaziland
+SYC,2018,"rgb(148,51,55)",'690,Seychelles
+TGO,2018,"rgb(180,26,49)",'768,Togo
+THA,2018,"rgb(151,22,82)",'764,Thailand
+TUN,2018,"rgb(82,130,44)",'788,Tunisia
+TUR,2018,"rgb(75,115,65)",'792,Turkey
+TZA,2018,"rgb(190,26,39)",'834,Tanzania
+UGA,2018,"rgb(195,35,26)",'800,Uganda
+UKR,2018,"rgb(113,95,47)",'804,Ukraine
+URY,2018,"rgb(171,21,63)",'858,Uruguay
+UZB,2018,"rgb(216,27,12)",'860,Uzbekistan
+VCT,2018,"rgb(37,6,213)",'670,St. Vincent & the Grenadines
+VNM,2018,"rgb(153,15,86)",'704,Vietnam
+WSM,2018,"rgb(129,4,122)",'882,Samoa
+YEM,2018,"rgb(184,7,65)",'887,Yemen
+ZAF,2018,"rgb(122,76,57)",'710,South Africa
+ZMB,2018,"rgb(226,11,18)",'894,Zambia
+ZWE,2018,"rgb(214,17,24)",'716,Zimbabwe
+TWN,2018,"rgb(158,18,79)",'158,Taiwan
+ABW,2019,"rgb(4,0,251)",'533,Aruba
+ARE,2019,"rgb(144,35,76)",'784,United Arab Emirates
+ARG,2019,"rgb(136,31,88)",'032,Argentina
+ARM,2019,"rgb(166,57,32)",'051,Armenia
+ATG,2019,"rgb(33,4,218)",'028,Antigua & Barbuda
+AUS,2019,"rgb(196,15,44)",'036,Australia
+AUT,2019,"rgb(28,194,34)",'040,Austria
+AZE,2019,"rgb(121,91,44)",'031,Azerbaijan
+BDI,2019,"rgb(192,40,22)",'108,Burundi
+BEL,2019,"rgb(31,156,69)",'056,Belgium
+BEN,2019,"rgb(191,21,43)",'204,Benin
+BFA,2019,"rgb(143,37,75)",'854,Burkina
+BGR,2019,"rgb(51,184,19)",'100,Bulgaria
+BIH,2019,"rgb(61,165,30)",'070,Bosnia & Herzegovina
+BLR,2019,"rgb(136,97,21)",'112,Belarus
+BLZ,2019,"rgb(54,3,198)",'084,Belize
+BMU,2019,"rgb(8,4,244)",'060,Bermuda
+BRA,2019,"rgb(145,22,88)",'076,Brazil
+BRB,2019,"rgb(29,7,218)",'052,Barbados
+BRN,2019,"rgb(157,46,51)",'096,Brunei
+BWA,2019,"rgb(86,34,136)",'072,Botswana
+CAN,2019,"rgb(29,7,219)",'124,Canada
+CHE,2019,"rgb(46,131,78)",'756,Switzerland
+CHL,2019,"rgb(152,14,89)",'152,Chile
+CIV,2019,"rgb(128,51,76)",'384,C?te d'Ivoire
+COG,2019,"rgb(234,2,19)",'178,Republic of the Congo
+COL,2019,"rgb(90,15,149)",'170,Colombia
+COM,2019,"rgb(192,57,6)",'174,The Comoros
+CPV,2019,"rgb(146,57,52)",'132,Cape Verde
+CRI,2019,"rgb(41,10,203)",'188,Costa Rica
+CYP,2019,"rgb(95,118,43)",'196,Cyprus
+CZE,2019,"rgb(53,186,16)",'203,Czech Republic
+DNK,2019,"rgb(50,166,39)",'208,Denmark
+ECU,2019,"rgb(92,11,152)",'218,Ecuador
+EGY,2019,"rgb(129,51,76)",'818,Egypt
+ESP,2019,"rgb(67,133,55)",'724,Spain
+EST,2019,"rgb(72,120,64)",'233,Estonia
+FIN,2019,"rgb(61,143,50)",'246,Finland
+FJI,2019,"rgb(139,4,112)",'242,Fiji
+FRA,2019,"rgb(61,127,67)",'250,France
+GBR,2019,"rgb(66,91,97)",'826,Great Britain (United Kingdom; England)
+GEO,2019,"rgb(113,58,84)",'268,Georgia
+GHA,2019,"rgb(175,17,63)",'288,Ghana
+GMB,2019,"rgb(181,30,44)",'270,Gambia
+GRC,2019,"rgb(81,133,41)",'300,Greece
+GTM,2019,"rgb(44,7,204)",'320,Guatemala
+GUY,2019,"rgb(27,18,210)",'328,Guyana
+HKG,2019,"rgb(222,6,26)",'344,Hong Kong
+HND,2019,"rgb(61,15,179)",'340,Honduras
+HRV,2019,"rgb(29,206,20)",'191,Croatia
+HUN,2019,"rgb(29,207,19)",'348,Hungary
+IDN,2019,"rgb(175,14,65)",'360,Indonesia
+IND,2019,"rgb(112,27,116)",'356,India
+IRL,2019,"rgb(36,56,163)",'372,Ireland
+ISL,2019,"rgb(65,90,100)",'352,Iceland
+ISR,2019,"rgb(75,33,147)",'376,Israel
+ITA,2019,"rgb(49,138,68)",'380,Italy
+JAM,2019,"rgb(33,6,216)",'388,Jamaica
+JOR,2019,"rgb(109,28,118)",'400,Jordan
+JPN,2019,"rgb(136,20,99)",'392,Japan
+KAZ,2019,"rgb(199,25,31)",'398,Kazakhstan
+KEN,2019,"rgb(177,26,52)",'404,Kenya
+KGZ,2019,"rgb(233,10,12)",'417,Kyrgyzstan
+KHM,2019,"rgb(151,21,83)",'116,Cambodia
+KOR,2019,"rgb(152,18,85)",'410,South Korea
+KWT,2019,"rgb(149,38,67)",'414,Kuwait
+LAO,2019,"rgb(239,8,8)",'418,Laos
+LCA,2019,"rgb(26,4,226)",'662,St. Lucia
+LTU,2019,"rgb(35,174,46)",'440,Lithuania
+LUX,2019,"rgb(20,204,31)",'442,Luxembourg
+LVA,2019,"rgb(46,184,25)",'428,Latvia
+MAC,2019,"rgb(210,12,32)",'446,Macao
+MAR,2019,"rgb(100,64,91)",'504,Morocco
+MDA,2019,"rgb(109,129,17)",'498,Moldova
+MDG,2019,"rgb(135,29,90)",'450,Madagascar
+MEX,2019,"rgb(34,9,212)",'484,Mexico
+MKD,2019,"rgb(32,207,16)",'807,Republic of Macedonia (FYROM)
+MLT,2019,"rgb(49,155,52)",'470,Malta
+MMR,2019,"rgb(219,15,21)",'104,Myanmar (Burma)
+MNG,2019,"rgb(241,6,9)",'496,Mongolia
+MRT,2019,"rgb(215,19,21)",'478,Mauritania
+MUS,2019,"rgb(165,35,54)",'480,Mauritius
+MWI,2019,"rgb(203,21,31)",'454,Malawi
+MYS,2019,"rgb(151,25,79)",'458,Malaysia
+NAM,2019,"rgb(202,19,34)",'516,Namibia
+NGA,2019,"rgb(147,28,80)",'566,Nigeria
+NIC,2019,"rgb(37,7,211)",'558,Nicaragua
+NLD,2019,"rgb(46,157,52)",'528,Netherlands
+NOR,2019,"rgb(68,128,59)",'578,Norway
+NZL,2019,"rgb(164,25,66)",'554,New Zealand
+PAK,2019,"rgb(158,25,73)",'586,Pakistan
+PER,2019,"rgb(150,14,92)",'604,Peru
+PHL,2019,"rgb(149,23,82)",'608,The Philippines
+POL,2019,"rgb(50,183,23)",'616,Poland
+PRT,2019,"rgb(35,175,45)",'620,Portugal
+PRY,2019,"rgb(105,15,136)",'600,Paraguay
+QAT,2019,"rgb(150,27,77)",'634,Qatar
+ROU,2019,"rgb(34,208,13)",'642,Romania
+RUS,2019,"rgb(149,71,35)",'643,Russian Federation
+RWA,2019,"rgb(203,31,21)",'646,Rwanda
+SAU,2019,"rgb(151,29,75)",'682,Saudi Arabia
+SEN,2019,"rgb(182,26,47)",'686,Senegal
+SGP,2019,"rgb(132,21,103)",'702,Singapore
+SLV,2019,"rgb(56,6,193)",'222,El Salvador
+SRB,2019,"rgb(75,157,23)",'688,Serbia
+STP,2019,"rgb(194,5,56)",'678,Sao Tome & Principe
+SUR,2019,"rgb(76,5,174)",'740,Suriname
+SVK,2019,"rgb(42,192,21)",'703,Slovakia
+SVN,2019,"rgb(40,192,22)",'705,Slovenia
+SWE,2019,"rgb(52,148,54)",'752,Sweden
+SWZ,2019,"rgb(170,18,67)",'748,Swaziland
+SYC,2019,"rgb(144,55,57)",'690,Seychelles
+TGO,2019,"rgb(177,24,54)",'768,Togo
+THA,2019,"rgb(145,20,90)",'764,Thailand
+TUN,2019,"rgb(83,134,39)",'788,Tunisia
+TUR,2019,"rgb(71,116,68)",'792,Turkey
+URY,2019,"rgb(173,16,67)",'858,Uruguay
+UZB,2019,"rgb(211,28,16)",'860,Uzbekistan
+VCT,2019,"rgb(32,8,215)",'670,St. Vincent & the Grenadines
+VNM,2019,"rgb(147,13,95)",'704,Vietnam
+WSM,2019,"rgb(138,1,116)",'882,Samoa
+YEM,2019,"rgb(191,6,58)",'887,Yemen
+ZAF,2019,"rgb(123,75,57)",'710,South Africa
+ZMB,2019,"rgb(227,11,17)",'894,Zambia
+ZWE,2019,"rgb(214,16,25)",'716,Zimbabwe
+TWN,2019,"rgb(154,16,84)",'158,Taiwan

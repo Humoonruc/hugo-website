@@ -1,0 +1,250 @@
+﻿code,id,name,chinese_name
+ABW,533,Aruba,阿鲁巴岛
+AFG,4,Afghanistan,阿富汗
+AGO,24,Angola,安哥拉
+AIA,660,Anguilla,安圭拉岛
+ALA,248,?land Islands,奥兰群岛
+ALB,8,Albania,阿尔巴尼亚
+AND,20,Andorra,安道尔
+ARE,784,United Arab Emirates,阿联酋
+ARG,32,Argentina,阿根廷
+ARM,51,Armenia,亚美尼亚
+ASM,16,American Samoa,美属萨摩亚
+ATA,10,Antarctica,南极洲
+ATF,260,French Southern Territories,法属南部领地
+ATG,28,Antigua and Barbuda,安提瓜和巴布达
+AUS,36,Australia,澳大利亚
+AUT,40,Austria,奥地利
+AZE,31,Azerbaijan,阿塞拜疆
+BDI,108,Burundi,布隆迪
+BEL,56,Belgium,比利时
+BEN,204,Benin,贝宁
+BES,535,"Bonaire, Sint Eustatius and Saba",荷兰加勒比区
+BFA,854,Burkina Faso,布基纳法索
+BGD,50,Bangladesh,孟加拉国
+BGR,100,Bulgaria,保加利亚
+BHR,48,Bahrain,巴林
+BHS,44,Bahamas,巴哈马
+BIH,70,Bosnia and Herzegovina,波黑
+BLM,652,Saint Barth茅lemy,圣巴泰勒米岛
+BLR,112,Belarus,白俄罗斯
+BLZ,84,Belize,伯利兹
+BMU,60,Bermuda,百慕大
+BOL,68,Bolivia (Plurinational State of),玻利维亚
+BRA,76,Brazil,巴西
+BRB,52,Barbados,巴巴多斯
+BRN,96,Brunei Darussalam,文莱
+BTN,64,Bhutan,不丹
+BVT,74,Bouvet Island,布韦岛
+BWA,72,Botswana,博茨瓦纳
+CAF,140,Central African Republic,中非
+CAN,124,Canada,加拿大
+CCK,166,Cocos (Keeling) Islands,科科斯群岛
+CHE,756,Switzerland,瑞士
+CHL,152,Chile,智利
+CHN,156,China,中国
+CIV,384,C么te d'Ivoire,科特迪瓦
+CMR,120,Cameroon,喀麦隆
+COD,180,"Congo, Democratic Republic of the",刚果（金）
+COG,178,Congo,刚果（布）
+COK,184,Cook Islands,库克群岛
+COL,170,Colombia,哥伦比亚
+COM,174,Comoros,科摩罗
+CPV,132,Cabo Verde,佛得角
+CRI,188,Costa Rica,哥斯达黎加
+CUB,192,Cuba,古巴
+CUW,531,Cura莽ao,库拉索岛
+CXR,162,Christmas Island,圣诞岛
+CYM,136,Cayman Islands,开曼群岛
+CYP,196,Cyprus,塞浦路斯
+CZE,203,Czechia,捷克
+DEU,276,Germany,德国
+DJI,262,Djibouti,吉布提
+DMA,212,Dominica,多米尼克
+DNK,208,Denmark,丹麦
+DOM,214,Dominican Republic,多米尼加
+DZA,12,Algeria,阿尔及利亚
+ECU,218,Ecuador,厄瓜多尔
+EGY,818,Egypt,埃及
+ERI,232,Eritrea,厄立特里亚
+ESH,732,Western Sahara,西撒哈拉
+ESP,724,Spain,西班牙
+EST,233,Estonia,爱沙尼亚
+ETH,231,Ethiopia,埃塞俄比亚
+FIN,246,Finland,芬兰
+FJI,242,Fiji,斐济群岛
+FLK,238,Falkland Islands (Malvinas),马尔维纳斯群岛（ 福克兰）
+FRA,250,France,法国
+FRO,234,Faroe Islands,法罗群岛
+FSM,583,Micronesia (Federated States of),密克罗尼西亚联邦
+GAB,266,Gabon,加蓬
+GBR,826,United Kingdom of Great Britain and Northern Ireland,英国
+GEO,268,Georgia,格鲁吉亚
+GGY,831,Guernsey,根西岛
+GHA,288,Ghana,加纳
+GIB,292,Gibraltar,直布罗陀
+GIN,324,Guinea,几内亚
+GLP,312,Guadeloupe,瓜德罗普
+GMB,270,Gambia,冈比亚
+GNB,624,Guinea-Bissau,几内亚比绍
+GNQ,226,Equatorial Guinea,赤道几内亚
+GRC,300,Greece,希腊
+GRD,308,Grenada,格林纳达
+GRL,304,Greenland,格陵兰
+GTM,320,Guatemala,危地马拉
+GUF,254,French Guiana,法属圭亚那
+GUM,316,Guam,关岛
+GUY,328,Guyana,圭亚那
+HKG,344,Hong Kong,香港
+HMD,334,Heard Island and McDonald Islands,赫德岛和麦克唐纳群岛
+HND,340,Honduras,洪都拉斯
+HRV,191,Croatia,克罗地亚
+HTI,332,Haiti,海地
+HUN,348,Hungary,匈牙利
+IDN,360,Indonesia,印度尼西亚
+IMN,833,Isle of Man,马恩岛
+IND,356,India,印度
+IOT,86,British Indian Ocean Territory,英属印度洋领地
+IRL,372,Ireland,爱尔兰
+IRN,364,Iran (Islamic Republic of),伊朗
+IRQ,368,Iraq,伊拉克
+ISL,352,Iceland,冰岛
+ISR,376,Israel,以色列
+ITA,380,Italy,意大利
+JAM,388,Jamaica,牙买加
+JEY,832,Jersey,泽西岛
+JOR,400,Jordan,约旦
+JPN,392,Japan,日本
+KAZ,398,Kazakhstan,哈萨克斯坦
+KEN,404,Kenya,肯尼亚
+KGZ,417,Kyrgyzstan,吉尔吉斯斯坦
+KHM,116,Cambodia,柬埔寨
+KIR,296,Kiribati,基里巴斯
+KNA,659,Saint Kitts and Nevis,圣基茨和尼维斯
+KOR,410,"Korea, Republic of",韩国
+KWT,414,Kuwait,科威特
+LAO,418,Lao People's Democratic Republic,老挝
+LBN,422,Lebanon,黎巴嫩
+LBR,430,Liberia,利比里亚
+LBY,434,Libya,利比亚
+LCA,662,Saint Lucia,圣卢西亚
+LIE,438,Liechtenstein,列支敦士登
+LKA,144,Sri Lanka,斯里兰卡
+LSO,426,Lesotho,莱索托
+LTU,440,Lithuania,立陶宛
+LUX,442,Luxembourg,卢森堡
+LVA,428,Latvia,拉脱维亚
+MAC,446,Macao,澳门
+MAF,663,Saint Martin (French part),法属圣马丁
+MAR,504,Morocco,摩洛哥
+MCO,492,Monaco,摩纳哥
+MDA,498,"Moldova, Republic of",摩尔多瓦
+MDG,450,Madagascar,马达加斯加
+MDV,462,Maldives,马尔代夫
+MEX,484,Mexico,墨西哥
+MHL,584,Marshall Islands,马绍尔群岛
+MKD,807,North Macedonia,马其顿
+MLI,466,Mali,马里
+MLT,470,Malta,马耳他
+MMR,104,Myanmar,缅甸
+MNE,499,Montenegro,黑山
+MNG,496,Mongolia,蒙古国
+MNP,580,Northern Mariana Islands,北马里亚纳群岛
+MOZ,508,Mozambique,莫桑比克
+MRT,478,Mauritania,毛里塔尼亚
+MSR,500,Montserrat,蒙塞拉特岛
+MTQ,474,Martinique,马提尼克
+MUS,480,Mauritius,毛里求斯
+MWI,454,Malawi,马拉维
+MYS,458,Malaysia,马来西亚
+MYT,175,Mayotte,马约特
+NAM,516,Namibia,纳米比亚
+NCL,540,New Caledonia,新喀里多尼亚
+NER,562,Niger,尼日尔
+NFK,574,Norfolk Island,诺福克岛
+NGA,566,Nigeria,尼日利亚
+NIC,558,Nicaragua,尼加拉瓜
+NIU,570,Niue,纽埃
+NLD,528,Netherlands,荷兰
+NOR,578,Norway,挪威
+NPL,524,Nepal,尼泊尔
+NRU,520,Nauru,瑙鲁
+NZL,554,New Zealand,新西兰
+OMN,512,Oman,阿曼
+PAK,586,Pakistan,巴基斯坦
+PAN,591,Panama,巴拿马
+PCN,612,Pitcairn,皮特凯恩群岛
+PER,604,Peru,秘鲁
+PHL,608,Philippines,菲律宾
+PLW,585,Palau,帕劳
+PNG,598,Papua New Guinea,巴布亚新几内亚
+POL,616,Poland,波兰
+PRI,630,Puerto Rico,波多黎各
+PRK,408,Korea (Democratic People's Republic of),朝鲜
+PRT,620,Portugal,葡萄牙
+PRY,600,Paraguay,巴拉圭
+PSE,275,"Palestine, State of",巴勒斯坦
+PYF,258,French Polynesia,法属波利尼西亚
+QAT,634,Qatar,卡塔尔
+REU,638,R茅union,留尼汪岛
+ROU,642,Romania,罗马尼亚
+RUS,643,Russian Federation,俄罗斯
+RWA,646,Rwanda,卢旺达
+SAU,682,Saudi Arabia,沙特阿拉伯
+SDN,729,Sudan,苏丹
+SEN,686,Senegal,塞内加尔
+SGP,702,Singapore,新加坡
+SGS,239,South Georgia and the South Sandwich Islands,南乔治亚岛和南桑威奇群岛
+SHN,654,"Saint Helena, Ascension and Tristan da Cunha",圣赫勒拿
+SJM,744,Svalbard and Jan Mayen,斯瓦尔巴群岛和扬马延岛
+SLB,90,Solomon Islands,所罗门群岛
+SLE,694,Sierra Leone,塞拉利昂
+SLV,222,El Salvador,萨尔瓦多
+SMR,674,San Marino,圣马力诺
+SOM,706,Somalia,索马里
+SPM,666,Saint Pierre and Miquelon,圣皮埃尔和密克隆
+SRB,688,Serbia,塞尔维亚
+SSD,728,South Sudan,南苏丹
+STP,678,Sao Tome and Principe,圣多美和普林西比
+SUR,740,Suriname,苏里南
+SVK,703,Slovakia,斯洛伐克
+SVN,705,Slovenia,斯洛文尼亚
+SWE,752,Sweden,瑞典
+SWZ,748,Eswatini,斯威士兰
+SXM,534,Sint Maarten (Dutch part),圣马丁岛
+SYC,690,Seychelles,塞舌尔
+SYR,760,Syrian Arab Republic,叙利亚
+TCA,796,Turks and Caicos Islands,特克斯和凯科斯群岛
+TCD,148,Chad,乍得
+TGO,768,Togo,多哥
+THA,764,Thailand,泰国
+TJK,762,Tajikistan,塔吉克斯坦
+TKL,772,Tokelau,托克劳
+TKM,795,Turkmenistan,土库曼斯坦
+TLS,626,Timor-Leste,东帝汶
+TON,776,Tonga,汤加
+TTO,780,Trinidad and Tobago,特立尼达和多巴哥
+TUN,788,Tunisia,突尼斯
+TUR,792,Turkey,土耳其
+TUV,798,Tuvalu,图瓦卢
+TWN,158,"Taiwan, Province of China",中国台湾省
+TZA,834,"Tanzania, United Republic of",坦桑尼亚
+UGA,800,Uganda,乌干达
+UKR,804,Ukraine,乌克兰
+UMI,581,United States Minor Outlying Islands,美国本土外小岛屿
+URY,858,Uruguay,乌拉圭
+USA,840,United States of America,美国
+UZB,860,Uzbekistan,乌兹别克斯坦
+VAT,336,Holy See,梵蒂冈
+VCT,670,Saint Vincent and the Grenadines,圣文森特和格林纳丁斯
+VEN,862,Venezuela (Bolivarian Republic of),委内瑞拉
+VGB,92,Virgin Islands (British),英属维尔京群岛
+VIR,850,Virgin Islands (U.S.),美属维尔京群岛
+VNM,704,Viet Nam,越南
+VUT,548,Vanuatu,瓦努阿图
+WLF,876,Wallis and Futuna,瓦利斯和富图纳
+WSM,882,Samoa,萨摩亚
+YEM,887,Yemen,也门
+ZAF,710,South Africa,南非
+ZMB,894,Zambia,赞比亚
+ZWE,716,Zimbabwe,津巴布韦

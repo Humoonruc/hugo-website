@@ -1,0 +1,253 @@
+---
+title: "UN Comtrade Data Processing"
+subtitle: ''
+author: "Humoon"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    df_print: paged
+    fig_caption: yes
+    theme: united
+    highlight: haddock
+    number_sections: yes
+    toc: yes
+    toc_depth: 3
+    toc_float:
+      collapsed: true
+      smooth_scroll: FALSE
+  rticles::ctex:
+    df_print: default
+    fig_caption: yes
+    number_sections: yes
+    toc: yes
+    toc_depth: '2'
+  word_document:
+    fig_caption: yes
+    toc: yes
+    toc_depth: 3
+    reference_docx: 
+  pdf_document:
+    toc: yes
+    toc_depth: '2'
+documentclass: ctexart
+classoption: hyperref,
+---
+
+```{r setup, include = FALSE}
+## global options
+knitr::opts_chunk$set(
+  fig.width = 7, fig.asp = 0.618,
+  out.width = "90%", fig.align = "center",
+  fig.path = "Figures/", fig.show = "hold",
+  warn = 1, warning = FALSE, message = FALSE, echo = TRUE,
+  comment = "", collapse = FALSE,
+  cache = TRUE, cache.comments = FALSE, autodep = TRUE
+)
+
+
+## use necessary packages
+library("pacman")
+pacman::p_load(
+  tidyverse, lubridate, data.table, # 数据整理
+  ggthemes, showtext, gridExtra, igraph, ggraph, tidygraph, # 可视化
+  lmtest, plm, orcutt, stats, forecast, zoo, # 统计分析
+  rvest, httr, xml2, # 爬虫
+  sqldf, DT, # I/O
+  jiebaR, wordcloud2, webshot, htmlwidgets, tidytext # 文本分析
+)
+options(sqldf.driver = "SQLite")
+```
+
+
+```{r}
+ISO_id_code <- read_csv("ISO-country-id-code.csv") %>%
+  mutate(id = str_pad(id, 3, side = "left", pad = "0")) %>% # 补成3位字符串
+  select(-chinese_name)
+
+
+data0 <- read_csv("1995-1999.csv") %>%
+  select(
+    Year,
+    `Trade Flow`,
+    `Reporter ISO`,
+    `Partner ISO`,
+    `Trade Value (US$)`
+  ) %>%
+  rename(
+    reporter = `Reporter ISO`,
+    partner = `Partner ISO`,
+    value = `Trade Value (US$)`,
+    flow = `Trade Flow`,
+    year = Year
+  ) %>%
+  filter(!reporter %in% c("CHN", "DEU", "USA")) %>%
+  group_by(year, reporter, partner) %>%
+  summarize(trade = sum(value)) %>%
+  spread(partner, trade) %>%
+  replace_na(list(
+    reporter = "TWN",
+    CHN = 0,
+    DEU = 0,
+    USA = 0
+  )) %>%
+  mutate(total = CHN + DEU + USA) %>%
+  mutate(
+    CHN = CHN / total,
+    DEU = DEU / total,
+    USA = USA / total
+  ) %>%
+  rename(code = reporter) %>%
+  select(year, code, CHN, DEU, USA)
+
+data1 <- read_csv("2000-2004.csv") %>%
+  select(
+    Year,
+    `Trade Flow`,
+    `Reporter ISO`,
+    `Partner ISO`,
+    `Trade Value (US$)`
+  ) %>%
+  rename(
+    reporter = `Reporter ISO`,
+    partner = `Partner ISO`,
+    value = `Trade Value (US$)`,
+    flow = `Trade Flow`,
+    year = Year
+  ) %>%
+  filter(!reporter %in% c("CHN", "DEU", "USA")) %>%
+  group_by(year, reporter, partner) %>%
+  summarize(trade = sum(value)) %>%
+  spread(partner, trade) %>%
+  replace_na(list(
+    reporter = "TWN",
+    CHN = 0,
+    DEU = 0,
+    USA = 0
+  )) %>%
+  mutate(total = CHN + DEU + USA) %>%
+  mutate(
+    CHN = CHN / total,
+    DEU = DEU / total,
+    USA = USA / total
+  ) %>%
+  rename(code = reporter) %>%
+  select(year, code, CHN, DEU, USA)
+
+
+data2 <- read_csv("2005-2009.csv") %>%
+  select(
+    Year,
+    `Trade Flow`,
+    `Reporter ISO`,
+    `Partner ISO`,
+    `Trade Value (US$)`
+  ) %>%
+  rename(
+    reporter = `Reporter ISO`,
+    partner = `Partner ISO`,
+    value = `Trade Value (US$)`,
+    flow = `Trade Flow`,
+    year = Year
+  ) %>%
+  filter(!reporter %in% c("CHN", "DEU", "USA")) %>%
+  group_by(year, reporter, partner) %>%
+  summarize(trade = sum(value)) %>%
+  spread(partner, trade) %>%
+  replace_na(list(
+    reporter = "TWN",
+    CHN = 0,
+    DEU = 0,
+    USA = 0
+  )) %>%
+  mutate(total = CHN + DEU + USA) %>%
+  mutate(
+    CHN = CHN / total,
+    DEU = DEU / total,
+    USA = USA / total
+  ) %>%
+  rename(code = reporter) %>%
+  select(year, code, CHN, DEU, USA)
+
+
+data3 <- read_csv("2010-2014.csv") %>%
+  select(
+    Year,
+    `Trade Flow`,
+    `Reporter ISO`,
+    `Partner ISO`,
+    `Trade Value (US$)`
+  ) %>%
+  rename(
+    reporter = `Reporter ISO`,
+    partner = `Partner ISO`,
+    value = `Trade Value (US$)`,
+    flow = `Trade Flow`,
+    year = Year
+  ) %>%
+  filter(!reporter %in% c("CHN", "DEU", "USA")) %>%
+  group_by(year, reporter, partner) %>%
+  summarize(trade = sum(value)) %>%
+  spread(partner, trade) %>%
+  replace_na(list(
+    reporter = "TWN",
+    CHN = 0,
+    DEU = 0,
+    USA = 0
+  )) %>%
+  mutate(total = CHN + DEU + USA) %>%
+  mutate(
+    CHN = CHN / total,
+    DEU = DEU / total,
+    USA = USA / total
+  ) %>%
+  rename(code = reporter) %>%
+  select(year, code, CHN, DEU, USA)
+
+data4 <- read_csv("2015-2019.csv") %>%
+  select(
+    Year,
+    `Trade Flow`,
+    `Reporter ISO`,
+    `Partner ISO`,
+    `Trade Value (US$)`
+  ) %>%
+  rename(
+    reporter = `Reporter ISO`,
+    partner = `Partner ISO`,
+    value = `Trade Value (US$)`,
+    flow = `Trade Flow`,
+    year = Year
+  ) %>%
+  filter(!reporter %in% c("CHN", "DEU", "USA")) %>%
+  group_by(year, reporter, partner) %>%
+  summarize(trade = sum(value)) %>%
+  spread(partner, trade) %>%
+  replace_na(list(
+    reporter = "TWN",
+    CHN = 0,
+    DEU = 0,
+    USA = 0
+  )) %>%
+  mutate(total = CHN + DEU + USA) %>%
+  mutate(
+    CHN = CHN / total,
+    DEU = DEU / total,
+    USA = USA / total
+  ) %>%
+  rename(code = reporter) %>%
+  select(year, code, CHN, DEU, USA)
+
+# 红色rgb(255,0,0) 黄色(0,255,0) 蓝色(0,0,255)
+tradeData <- bind_rows(data0, data1, data2, data3, data4) %>%
+  mutate(
+    red = round(CHN * 255),
+    green = round(DEU * 255),
+    blue = round(USA * 255)
+  ) %>%
+  mutate(color = str_c("rgb(", red, ",", green, ",", blue, ")")) %>%
+  select(code, year, color) %>%
+  left_join(ISO_id_code, by = "code") %>%
+  # drop_na() %>%
+  mutate(id = str_c("'", id)) %>%
+  write_csv("processedData.csv")
+```
