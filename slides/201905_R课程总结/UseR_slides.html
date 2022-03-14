@@ -1,29 +1,30 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html lang="" xml:lang="">
   <head>
     <title>R：科研与办公整体解决方案</title>
     <meta charset="utf-8" />
     <meta name="author" content="黄 蒙" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
     <link href="libs/remark-css/default.css" rel="stylesheet" />
     <script src="libs/htmlwidgets/htmlwidgets.js"></script>
-    <script src="libs/jquery/jquery.min.js"></script>
     <link href="libs/datatables-css/datatables-crosstalk.css" rel="stylesheet" />
     <script src="libs/datatables-binding/datatables.js"></script>
+    <script src="libs/jquery/jquery-3.6.0.min.js"></script>
     <link href="libs/dt-core/css/jquery.dataTables.min.css" rel="stylesheet" />
     <link href="libs/dt-core/css/jquery.dataTables.extra.css" rel="stylesheet" />
     <script src="libs/dt-core/js/jquery.dataTables.min.js"></script>
-    <link href="libs/crosstalk/css/crosstalk.css" rel="stylesheet" />
+    <link href="libs/crosstalk/css/crosstalk.min.css" rel="stylesheet" />
     <script src="libs/crosstalk/js/crosstalk.min.js"></script>
     <link href="libs/leaflet/leaflet.css" rel="stylesheet" />
     <script src="libs/leaflet/leaflet.js"></script>
     <link href="libs/leafletfix/leafletfix.css" rel="stylesheet" />
-    <script src="libs/Proj4Leaflet/proj4-compressed.js"></script>
+    <script src="libs/proj4/proj4.min.js"></script>
     <script src="libs/Proj4Leaflet/proj4leaflet.js"></script>
     <link href="libs/rstudio_leaflet/rstudio_leaflet.css" rel="stylesheet" />
     <script src="libs/leaflet-binding/leaflet.js"></script>
     <link rel="stylesheet" href="zh-CN.css" type="text/css" />
     <link rel="stylesheet" href="extra.css" type="text/css" />
-    <link rel="stylesheet" href="https:\\cdnjs.cloudflare.com\ajax\libs\animate.css\3.7.0\animate.min.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css" type="text/css" />
   </head>
   <body>
     <textarea id="source">
@@ -32,7 +33,7 @@ class: center, middle, inverse, title-slide
 # R：科研与办公整体解决方案
 ### 黄 蒙
 ### &amp;#9993; <a href="mailto:huangmeng@ucass.edu.cn" class="email">huangmeng@ucass.edu.cn</a>
-### 2020-05-22 @ GSCASS
+### 2022-03-14 @ GSCASS
 
 ---
 
@@ -57,7 +58,7 @@ class: inverse, center, middle, animated, zoomIn
 
 # 结构型数据：与数据库交互
 
-1. 建立个人数据库
+- 建立个人数据库
 
   - 保存数据的专业工具，数据库有利于知识积累和纵向比较
   
@@ -110,8 +111,8 @@ R对Office Access的支持不太好，可以考虑使用MySQL建立个人数据�
             fillContainer = F, caption = 'BDI指数每日行情')
 ```
 
-<div id="htmlwidget-7d64fe6123d80c136d5c" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-7d64fe6123d80c136d5c">{"x":{"filter":"none","caption":"<caption>BDI指数每日行情<\/caption>","fillContainer":false,"data":[["1"],["No results found..."],["No results found..."],["No results found..."],["No results found..."],["No results found..."],["No results found..."]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>日期<\/th>\n      <th>收盘<\/th>\n      <th>开盘<\/th>\n      <th>高<\/th>\n      <th>低<\/th>\n      <th>涨跌幅<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"order":[],"autoWidth":false,"orderClasses":false,"columnDefs":[{"orderable":false,"targets":0}],"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-450a1252b225a33e1480" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-450a1252b225a33e1480">{"x":{"filter":"none","vertical":false,"caption":"<caption>BDI指数每日行情<\/caption>","fillContainer":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20"],["2022年3月11日","2022年3月10日","2022年3月9日","2022年3月8日","2022年3月7日","2022年3月4日","2022年3月3日","2022年3月2日","2022年3月1日","2022年2月28日","2022年2月25日","2022年2月24日","2022年2月23日","2022年2月22日","2022年2月21日","2022年2月18日","2022年2月17日","2022年2月16日","2022年2月15日","2022年2月14日"],["2,718.00","2,704.00","2,558.00","2,352.00","2,235.00","2,148.00","2,104.00","2,137.00","2,069.00","2,040.00","2,076.00","2,187.00","2,244.00","2,148.00","2,045.00","1,964.00","1,886.00","1,896.00","1,968.00","1,984.00"],["2,718.00","2,704.00","2,558.00","2,352.00","2,235.00","2,148.00","2,104.00","2,137.00","2,069.00","2,040.00","2,076.00","2,187.00","2,244.00","2,148.00","2,045.00","1,964.00","1,886.00","1,896.00","1,968.00","1,984.00"],["2,718.00","2,704.00","2,558.00","2,352.00","2,235.00","2,148.00","2,104.00","2,137.00","2,069.00","2,040.00","2,076.00","2,187.00","2,244.00","2,148.00","2,045.00","1,964.00","1,886.00","1,896.00","1,968.00","1,984.00"],["2,718.00","2,704.00","2,558.00","2,352.00","2,235.00","2,148.00","2,104.00","2,137.00","2,069.00","2,040.00","2,076.00","2,187.00","2,244.00","2,148.00","2,045.00","1,964.00","1,886.00","1,896.00","1,968.00","1,984.00"],["0.52%","5.71%","8.76%","5.23%","4.05%","2.09%","-1.54%","3.29%","1.42%","-1.73%","-5.08%","-2.54%","4.47%","5.04%","4.12%","4.14%","-0.53%","-3.66%","-0.81%","0.35%"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>日期<\/th>\n      <th>收盘<\/th>\n      <th>开盘<\/th>\n      <th>高<\/th>\n      <th>低<\/th>\n      <th>涨跌幅<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"columnDefs":[{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
 
 ???
 这个表是可交互的，只有基于网络技术的html格式的幻灯片可以做出可交互图表。
@@ -304,8 +305,8 @@ library(leaflet)
 *leaflet() %&gt;% addTiles() %&gt;% setView(116.426, 39.908, zoom = 17)
 ```
 
-<div id="htmlwidget-bfe8ee3e5221d174bce6" style="width:100%;height:345.6px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-bfe8ee3e5221d174bce6">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]}],"setView":[[39.908,116.426],17,[]]},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-43c25400c657761e6fa5" style="width:100%;height:345.6px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-43c25400c657761e6fa5">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]}],"setView":[[39.908,116.426],17,[]]},"evals":[],"jsHooks":[]}</script>
 
 ---
 exclude: false
@@ -854,6 +855,32 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     deleted = true;
   });
 })();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
 (function(time) {
   var d2 = function(number) {
     return ('0' + number).slice(-2); // left-pad 0 to minutes/seconds
@@ -916,17 +943,6 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   }
   preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
 })(document);</script>
-
-<script>
-(function() {
-  var links = document.getElementsByTagName('a');
-  for (var i = 0; i < links.length; i++) {
-    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
-      links[i].target = '_blank';
-    }
-  }
-})();
-</script>
 
 <script>
 slideshow._releaseMath = function(el) {
