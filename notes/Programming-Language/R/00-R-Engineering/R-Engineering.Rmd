@@ -1,0 +1,289 @@
+---
+title: "R Engineering"
+subtitle: 'System, Modularization, Code Style and IDE'
+author: "Humoon"
+date: "`r Sys.Date()`"
+output:
+  html_document: 
+    code_download: true
+    css: ["../css/style.css"]
+    fig_caption: yes
+    theme: united
+    highlight: haddock
+    number_sections: no
+    toc: yes
+    toc_depth: 4
+    toc_float:
+      collapsed: yes
+      smooth_scroll: yes
+documentclass: ctexart
+classoption: hyperref,
+---
+
+
+```{r setup, include = FALSE}
+source("../Rmarkdown-template/Rmarkdown_config.R")
+
+## global options ===================================
+knitr::opts_chunk$set(
+  width = config$width,
+  fig.width = config$fig.width,
+  fig.asp = config$fig.asp,
+  out.width = config$out.width,
+  fig.align = config$fig.align,
+  fig.path = config$fig.path,
+  fig.show = config$fig.show,
+  warn = config$warn,
+  warning = config$warning,
+  message = config$message,
+  echo = config$echo, 
+  eval = config$eval, 
+  tidy = config$tidy, 
+  comment = config$comment, 
+  collapse = config$collapse, 
+  cache = config$cache,
+  cache.comments = config$cache.comments,
+  autodep = config$autodep
+)
+
+## use necessary packages ==============================
+library(tidyverse)
+library(data.table)
+library(magrittr)
+library(plotly)
+library(htmlwidgets)
+```
+
+[TOC]
+
+## System interaction
+
+### Environment
+
+R 中词法作用域的机理通过环境实现。
+
+函数优先在内部环境搜索用到的变量，搜索不到时，就到上一级环境搜索。
+
+每加载一个扩展包，这个包的环境都会插入搜索路径，并位于全局环境之前。
+
+| 环境交互函数              |                                                              |
+| ------------------------- | ------------------------------------------------------------ |
+| `ls()`/`objects()`        | 列出当前工作空间的所有对象                                   |
+| `ls.str(mode=, pattern=)` | 显示当前环境的结构。mode 参数过滤对象类型，pattern 参数为正则表达式，过滤对象名 |
+| `rm()`                    | 删除一个或更多个对象。                                       |
+| `rm(list=ls(all=TRUE))`   | 删除所有对象                                                 |
+| `getOption()`             | 查看全局选项                                                 |
+| `options()`               | 设定全局选项。如 digits=7, 设定显示数字的位数。warn=0, 可以改为1，在警告产生时立即显示。 |
+
+### Path
+
+| Working  Directory  |                       |
+| ------------------- | --------------------- |
+| `dir.create()`      | 创建一个目录          |
+| `getwd()`/`setwd()` | 查看/设定当前工作目录 |
+
+
+
+### Memory
+
+`tracemem()`查看对象的内存地址
+
+### Time
+
+`sys.time()` 语句运行时间
+
+### Help
+
+| Help                                  |                                |
+| ------------------------------------- | ------------------------------ |
+| `help(functionName)`或`?functionName` | 查看一个函数的用法             |
+| `example(functionName)`               | 运行帮主文件中的例子           |
+| `help.search(keyword)`或`??keyword`   | 在==所有包==的文档中搜索关键词 |
+| `help(package = "")`                  | 查看一个包的帮助               |
+| `help(options)`                       | 显示可用选项的说明             |
+| `options()`                           | 显示或设置当前选项             |
+
+### History
+
+| History                 |                                                 |
+| ----------------------- | ----------------------------------------------- |
+| `history(#)`            | 显示最近使用过的#个命令（默认值为25）           |
+| `savehistory("myfile")` | 保存命令历史到文件myfile中（默认值为.Rhistory） |
+| `loadhistory("myfile")` | 载入一个命令历史文件（默认值为.Rhistory）       |
+
+
+
+## Modularization of R Coding
+
+### R Package
+
+| Package                        |                                                              |
+| ------------------------------ | ------------------------------------------------------------ |
+| `install.packages("package")`  | 安装包                                                       |
+| `installed.packages()`         | 返回一个数据框，内含所有已安装的包的多项信息                 |
+| `library()`                    | 无参数时，显示库中已经安装了哪些包                           |
+| `library(package)`             | 有参数时，载入包                                             |
+| `unloadNamespace(package)`     | 解除载入一个包                                               |
+| `search()`                     | 查看环境中已经加载了哪些包                                   |
+| `getOption('defaultPackages')` | 查看默认加载的 R 包                                          |
+| `update.packages("package")`   | 升级包。若不填入参数，则自动升级所有可以升级的包             |
+| `package::function()`          | 调用相应包的函数（有时**多个包用同一个名字命名不同的函数，会发生冲突，只能这样引用**） |
+| `data()`                       | 查看所有预先提供的数据                                       |
+| `data(package="")`             | 查看某个包所有预先提供的数据                                 |
+| `data(dataset_name, package=)` | 读入包中数据                                                 |
+
+```R
+# 查看 R 包的下载次数
+library(cranlogs)
+
+fashion <- function(package_name) {
+  d <- cran_downloads(
+    package = package_name,
+    from = "2020-01-01",
+    to = "2021-05-31"
+  )
+  sum(d$count)
+}
+
+fashion('ggplot2')
+fashion("tidyverse")
+fashion("data.table")
+fashion("plotly")
+```
+
+### R Script
+
+#### 语法
+
+`source('xxx.R')` 
+
+#### 最佳实践
+
+由于 R 的懒加载特性，模块中的代码不会运行，故 .R 脚本文件作为模块时，不必加载配置常量和包，纯写函数即可，所有的包和配置由主文件加载。
+
+
+
+## Code Style
+
+### 格式化
+
+#### styler 包
+
+[styler - A non-invasive source code formatter for R (lorenzwalthert.github.io)](https://lorenzwalthert.github.io/stylerpost/)
+
+```R
+install.packages("styler")
+```
+
+- `style_text()` styles a string
+- `style_file()` styles R and Rmd files
+- `style_dir()` styles all R and/or Rmd files in a directory.
+- **最常用**
+  - RStudio `Addins` 菜单，styles the active file R or Rmd file, or the highlighted code.
+  - 或在 console 中输入`styler:::style_active_file()`
+  
+
+### Google R Style
+
+#### 一般性规则
+
+- 尽量避免使用`attach()`, `detach()`
+- Error 应该使用`Stop()`来抛出
+- S3 类和 S4 类的函数不要一起使用
+
+#### 命名
+
+对象命名以句号`.`分隔，不用下划线
+
+函数名首字母大写，驼峰式命名法，不用句号分隔
+
+#### 注释
+
+注释行以`#`开头，后加一个空格
+
+代码行内短注释需要在代码后面空两格，然后`#`，再加一个空格
+
+**对变量和函数的说明写在它们的上方（紧邻），VSCode 的 R 插件能够自动识别**
+
+#### 总体布局与顺序
+
+1. 版权声明
+2. 作者信息
+3. 文件说明, 包括程序的目的，输入以及输出
+4. source() 和 library() 说明
+5. 函数定义
+6. 可执行语句, 如果有的话 (例如, print, plot)
+
+单元测试应在另一个独立的的文件中进行
+
+
+
+## IDE
+
+### Rstudio
+
+<a href="../pdf/cheatsheet-rstudio-ide.pdf"><strong>R Studio cheatsheet.pdf</strong></a>，预览：
+
+<object data="../pdf/cheatsheet-rstudio-ide.pdf" type="application/pdf" width="100%" height="100%"></object>
+
+
+| Shortcuts                                                  |                                                              |
+| ---------------------------------------------------------- | ------------------------------------------------------------ |
+| Ctrl + Shift + A                                           | 选中部分行后，格式化代码                                     |
+| Ctrl + Alt + I                                             | Insert chunk                                                 |
+| Alt + -                                                    | 插入 <-                                                      |
+| Ctrl + Shift + M                                           | 插入%>%                                                      |
+| Alt + Shift + K                                            | 显示快捷键                                                   |
+| Ctrl + Shift + N                                           | 新建脚本 .r文件                                              |
+| Ctrl + Enter<br />Ctrl + Shift + Enter<br />Ctrl + Alt + R | 运行一行代码<br />运行代码块<br />运行全部代码               |
+| Shift + Home/End                                           | 选中光标到行首/末之间的部分                                  |
+| Tab / Ctrl+Space                                           | 自动补齐<br />输入完函数名，按tab，自动添加开括号(和闭括号)。 |
+| Ctrl + Shift + C                                           | 注释/取消注释                                                |
+| F1                                                         | 查看帮助                                                     |
+| Ctrl+ ↑                                                    | 在 Console 中输入“xxx”，然后按 Ctrl+ ↑。就可以列出所有输入过的以“xxx”开头的命令。 |
+
+### VSCode
+
+#### 优点
+
+- 鼠标悬停，即可显示函数文档和变量信息
+- 保存（Ctrl+S）时自动格式化
+
+#### 配置步骤
+
+1. 安装 R 包 languageserver
+
+   ```R
+   install.packages("languageserver")
+   ```
+
+2. 在 VSCode 扩展商店中安装 R 插件。
+
+   1. 安装完成后在 VSCode 设置中搜索`r.rterm.option`，删除`--no-save,--no-restore`，添加`--no-site-file`和 R.exe 的路径`--r-binary=C:\Program Files\R\R-4.1.3\bin\R.exe`
+
+3. 安装 Radian：一款现代的 R console，它是用 Python 编写的
+
+   ```powershell
+   pip install radian
+   ```
+
+   1. 安装完成后在 cmd 中输入 `radian` 查看是否安装成功。
+
+   2. 若出现 “cannot determine R HOME”，可能存在多个R路径（如新安装了4.1.2版本），而 Radian 无法识别。解决这个问题的方法仍然是在 VSCode 中设置 R.exe 的路径。除了搜索`r.rterm.option`进行修改，也可以在设置界面的右上角打开 setting.json文件直接修改：
+
+      ````json
+        "r.rterm.option": [
+          "--no-site-file",
+          "--r-binary=C:\\Program Files\\R\\R-4.1.3\\bin\\R.exe"
+        ],
+      ````
+
+4. VSCode 中 Radian 相关设置
+
+   1. 搜索 `r.rterm.windows`，将其设置为 radian.exe 的路径。在 cmd 中（powershell 不行）输入 `where radian` 可以获取其路径。
+   2. 搜索`R: Bracketed Paste`并勾选，否则 Radian 不会启用
+   3. 搜索`r.sessionWatcher`并勾选
+
+
+
+[如何在 VSCODE 中高效使用 R 语言 （图文详解）_Baimoc-CSDN博客](https://blog.csdn.net/u011262253/article/details/113837720)

@@ -1,0 +1,956 @@
+---
+title: "函数和泛函"
+subtitle: 'Function, Closure, Functional and Pipeline'
+author: "Humoon"
+date: "`r Sys.Date()`"
+output:
+  html_document: 
+    code_download: true
+    css: ["../css/style.css"]
+    fig_caption: yes
+    theme: united
+    highlight: haddock
+    number_sections: no
+    toc: yes
+    toc_depth: 4
+    toc_float:
+      collapsed: yes
+      smooth_scroll: yes
+documentclass: ctexart
+classoption: hyperref,
+---
+
+```{r setup, include = FALSE}
+source("../Rmarkdown-template/Rmarkdown_config.R")
+
+## global options ===================================
+knitr::opts_chunk$set(
+  width = config$width,
+  fig.width = config$fig.width,
+  fig.asp = config$fig.asp,
+  out.width = config$out.width,
+  fig.align = config$fig.align,
+  fig.path = config$fig.path,
+  fig.show = config$fig.show,
+  warn = config$warn,
+  warning = config$warning,
+  message = config$message,
+  echo = config$echo,
+  eval = config$eval,
+  tidy = config$tidy,
+  comment = config$comment,
+  collapse = config$collapse,
+  cache = config$cache,
+  cache.comments = config$cache.comments,
+  autodep = config$autodep
+)
+
+## use necessary packages ==============================
+library(tidyverse)
+library(data.table)
+library(magrittr)
+library(plotly)
+library(htmlwidgets)
+```
+
+## 函数
+
+### 函数皆对象
+
+R 中所有的函数都是对象，自定义函数都是一个赋值为对象的过程。
+
+```{r}
+add <- function(a, b) {
+  a + b
+}
+add %>% class()
+
+# 查看函数
+add
+
+# 调用函数
+add(1, 3)
+```
+
+### 操作符皆函数
+
+```{r}
+head(iris)
+`[`(head(iris), 2) # 数据框的本质是list，筛选第二个元素，还是一个list
+`[[`(head(iris), 2) # 提取第二个元素，是一个vector
+
+a <- 2:4
+`[<-`(a, 2, 10) # a[2] <- 10; a
+```
+
+#### 常用操作符
+
+##### 四则运算
+
+加、减、乘(`*`)、除(`/`)、幂`^`, 除法取整（`%/%`）、除法取余（`%%`）
+
+#### 自定义二元运算符
+
+必须用反引号和百分号引起来
+
+```{r}
+`%myop%` <- function(a, b) {
+  2 * a + 3 * b
+}
+1 %myop% 1
+1 %myop% 2
+```
+
+### 参数
+
+```{r}
+add(as.Date("2020-02-02"), 2)
+```
+
+#### 参数无定义
+
+若函数的某个参数没有传递值，`missing(parameter)` 返回 TRUE
+
+```{r}
+myplot <- function(x, y) {
+  if (missing(y)) {
+    y <- x
+    x <- 1:length(y)
+  }
+  plot(x, y)
+}
+
+myplot(c(6, 7, 8))
+```
+
+#### 参数默认值
+
+默认值可以是一个值，也可以是一个表达式，其中包含了其前面定义的其他参数
+
+```{r}
+test3 <- function(x, n = floor(length(m) / 2)) {
+  x[1:n]
+}
+```
+
+#### 动态参数
+
+`...`能捕获任意数量的未匹配参数
+
+在函数内部，可以直接用`str_c()`将`...`合并为字符串（只有一个元素）
+
+但也可以用`list(...)`将其转化为列表（一般是多个元素）再处理
+
+```{r}
+# 嵌套函数，按顺序依次匹配
+f <- function(name, value, color) {
+  print(str_c("name:", name, "; value:", value, "; color:", color))
+}
+g <- function(name, ...) {
+  f(name, ...)
+}
+g(name = "a", value = 3, color = "red")
+g("b", 4, "blue")
+
+
+# 合并为字符串
+rule <- function(..., pad = "=") {
+  print(str_c(..., sep = " "))
+  print(length(str_c(..., sep = " ")))
+  args <- list(...)
+  print(args)
+  print(length(args))
+  print(str_c(args, sep = " "))
+  print(length(str_c(args, sep = " ")))
+
+
+  title <- str_c(..., sep = " ")
+  width <- getOption("width") - nchar(title) - 5
+  cat(title, " ", stringr::str_dup(pad, width), "\n")
+}
+rule("Important", "output")
+
+
+# 读取为list
+multip <- function(x, ...) {
+  args <- list(...) ## 获取所有参数
+  x + args[[1]] - args[[2]]
+}
+multip(3, 2, 3)
+```
+
+#### 惰性求值
+
+在函数调用时，参数的值只有被实际用到时才会被执行。这样可以避免不必要的计算，节省时间。
+
+```{r}
+test0 <- function(x, y) {
+  if (x > 0) {
+    x
+  } else {
+    y
+  }
+}
+
+# 生成大量随机数的耗时
+system.time(rnorm(10000000))
+
+# 惰性求值，第二个参数并未执行
+system.time(test0(1, rnorm(10000000)))
+```
+
+### 返回值
+
+若无`return()`, 默认返回最后一个表达式的值
+
+**R 风格的代码，通常省略 `return()`**
+
+希望返回多个值时，一般用 list 或 dataframe 封装（就像 js 中用对象封装）
+
+### 泛型函数
+
+```{r}
+calc <-
+  function(x, y, type) {
+    if (length(type > 1L)) {
+      stop(" Only a single type is accepted")
+    }
+
+    if (type == "add") {
+      x + y
+    } else if (type == "minus") {
+      x - y
+    } else if (type == "multiply") {
+      x * y
+    } else if (type == "divide") {
+      x / y
+    } else {
+      stop(" Unknown type of operation")
+    }
+  }
+```
+
+## 闭包 Closure
+
+函数工厂的产物就是闭包，它内含一些实例化时接收的工厂参数信息
+
+对象是带有函数的数据
+
+闭包是带有数据的函数
+
+```{r}
+pacman::p_load(pryr)
+
+
+# 函数工厂
+power <- function(exponent) {
+  function(x) x^exponent
+}
+
+square <- power(2) # square 被实例化时保存了2这个参数
+cube <- power(3) # cube 被实例化时保存了3这个参数
+
+# pryr 包可以查看生产出来的函数里面的重要参数
+pryr::unenclose(square)
+pryr::unenclose(cube)
+
+# 使用
+square(4)
+square(5)
+cube(4)
+```
+
+### 例1
+
+```{r}
+## 建立随机数据集=======================================
+set.seed(1014)
+df <-
+  replicate(5, sample(c(1:10, -99), 6, replace = TRUE)) %>% # 5轮抽样形成矩阵. replicate(n, f), 即重复运行f函数20次，它跟 apply 函数是一族
+  data.table() %>% # 建立数据框
+  set_colnames(letters[1:5])
+df # 其中 -99 是无效值
+
+
+## 无效值处理
+# 函数工厂
+missing_fixer <- function(na_value) {
+  (function(x) {
+    x[x == na_value] <- NA
+    return(x)
+  }) %>% return()
+}
+fix_missing_99 <- missing_fixer(-99)
+# 将无效值赋为NA
+df <- df %>% map_dfc(fix_missing_99)
+df
+
+
+## 统计
+summary <- function(x) {
+  results <- c(mean, median, sd, mad) %>%
+    map(function(f) {
+      return(f(x, na.rm = TRUE))
+    })
+  names(results) <- c("mean", "median", "sd", "mad")
+  return(results)
+}
+results_list <- df %>% map(summary)
+results_list
+```
+
+### 例2
+
+```{r}
+# 极大似然估计
+# 传递数据，返回包含待估参数的闭包
+nloglik <- function(x) {
+  n <- length(x)
+  function(mean, sd) {
+    log(2 * pi) * n / 2 + n * log(sd) + sum((x - mean)^2) / (2 * sd^2)
+  }
+}
+data <- rnorm(10000, 1, 2)
+fit <-
+  stats4::mle(
+    nloglik(data),
+    start = list(mean = 0, sd = 1),
+    method = "L-BFGS-B",
+    lower = c(-5, 0.01),
+    upper = c(5, 10)
+  )
+fit@coef
+hist(data, freq = F, ylim = c(0, 0.25))
+```
+
+## 高阶函数
+
+接受函数作为参数的函数也称高阶函数
+
+高阶函数可以代替 `for` 循环，显示循环的少见是高质量代码的标志之一。
+
+新版本的 R 包含了一些原生的 Common Higher-Order Functions
+
++---------------------------------------------------------+-------------------------+-------------------------------------------+
+| `base::`                                                | `purrr::`               | 功能                                      |
++=========================================================+=========================+===========================================+
+| `Filter(f, x)`                                          | `keep()`                | 筛选                                      |
++---------------------------------------------------------+-------------------------+-------------------------------------------+
+| `Map(f, …)`                                             | `map()`                 | 依次作用                                  |
++---------------------------------------------------------+-------------------------+-------------------------------------------+
+| `Find(f, x, right = FALSE, nomatch = NULL)`             | `detect()`              | 给出符合条件的第一个或最后一个元素        |
++---------------------------------------------------------+-------------------------+-------------------------------------------+
+| `Position(f, x, right = FALSE, nomatch = NA_integer_)`  | `detect_index()`        | 给出符合条件的第一个或最后一个元素的index |
++---------------------------------------------------------+-------------------------+-------------------------------------------+
+| `Reduce(f, x, init, right = FALSE, accumulate = FALSE)` | `reduce()`              | 串行操作                                  |
++---------------------------------------------------------+-------------------------+-------------------------------------------+
+|                                                         | 还有更多，见 cheatsheet |                                           |
++---------------------------------------------------------+-------------------------+-------------------------------------------+
+
+<a href="../pdf/cheatsheet-purrr.pdf"><strong>purrr cheatsheet.pdf</strong></a>
+
+<object data="../pdf/cheatsheet-purrr.pdf" type="application/pdf" width="100%" height="100%"></object>
+
+### 并行操作的高阶函数 `keep()`
+
+### 并行操作的高阶函数 `map*()`
+
+**在 R 中，向量化操作函数基于C，运行效率远高于显式循环，所以尽量减少显示循环。**
+
+FP 编程范式允许将函数作为参数。`purrr::map*()`泛函族就是利用了 R 的 这一强大特性。
+
+事实上，本章的核心就是泛函。
+
+#### `map*(data, .f, ...)`
+
+`map*()`使用一个向量或列表（**数据框可以视为所有列排成的一个列表**）作为输入，并对其每个元素应用`.f`，所得结果组合成新向量或列表后返回。
+
+`map*()`使用 `...` 向 `.f` 传递一些附加参数，供其在每次调用时使用。
+
+-   map() 返回列表
+-   map_lgl() 返回逻辑型向量
+-   map_int() 返回整型向量
+-   map_dbl() 返回双精度型向量
+-   map_chr() 返回字符型向量
+-   map_dfr() 对各元素的运算产生若干个行向量，并把它们粘在一起，返回数据框
+-   map_dfc() 对各元素的运算产生若干个列向量，并把它们粘在一起，返回数据框
+
+```{r}
+# 求每列平均值
+df %>% map_dbl(mean)
+
+map_dbl(df, mean, trim = 0.5)
+```
+
+#### `map_*()`的参数形式
+
+##### 匿名函数
+
+可以直接在 `map()` 参数中写一个匿名函数。
+
+```{r}
+models <- mtcars %>% 
+  split(.$cyl) %>% 
+  map(function(df) lm(mpg ~ wt, data = df))
+```
+
+如果还用到了其他变量，这种写法比用`...`给f传参数要清晰得多
+
+匿名函数可以简写：
+
+```{r}
+models <- mtcars %>% 
+  split(.$cyl) %>% 
+  map(~lm(mpg ~ wt, data = .)) # ~表明这是一个匿名函数, .(或.x)是代词，指传入的参数
+
+class(models)
+
+models
+
+# 提取三个模型的 R^2
+models %>% 
+  map(summary.lm) %>%  
+  map_dbl(~.$r.squared) # ~表明这是一个函数，.代指参数，故返回: 参数$r.squared
+```
+
+**批量建模及查看结果**
+
+```{r}
+mtcars %>%
+  group_by(cyl) %>%
+  nest() %>%
+  mutate(model = map(data, ~ lm(mpg ~ wt, data = .))) %>%
+  mutate(result = map(model, ~ broom::tidy(.))) %>%
+  unnest(result)
+```
+
+##### 字符串和整数
+
+`map_*()`的参数还可以是字符串，表示提取对应的以之命名的成分；可以是整数，作为索引，**提取对应位置的成分**(不是切片，而是提取！)。
+
+```{r}
+models %>% 
+  map(summary.lm) %>% 
+  map_dbl("r.squared")
+
+x <- list(list(1, 2, 3), list(4, 5, 6), list(7, 8, 9))
+x %>% map_dbl(2)
+```
+
+#### 二元函数的并行操作
+
+想获得均值分别为 5, 10, -3 的几个正态分布
+
+`rnorm(n, mean=0, sd=1)`可以产生正态分布
+
+```{r}
+mu <- c(5, 10, -3)
+mu %>% 
+  map(rnorm, n = 5) %>% 
+  str()
+
+# n=5已经给了rnorm，所以 mu 的元素传给 rnorm 只能从第二个参数开始排，也就是 mean
+```
+
+若想获得均值、方差都不同的几个正态分布，要用`map2()`。
+
+`map2()`可以使函数（第三个参数）对前两个可迭代参数进行操作。
+
+```{r}
+sigma <- list(1, 5, 10)
+map2(mu, sigma, rnorm, n = 5) %>% str()
+```
+
+#### 多元函数的并行操作
+
+`pmap()`可以将一个可迭代对象的列表作为第一个参数，每个可迭代对象的 index 相同的元素作为一组，传递给`pmap()`的第二个参数（函数）。
+
+生成均值、标准差和样本数量都不相同的正态分布：
+
+```{r}
+n <- list(5, 10, 100)
+args1 <- list(n, mu, sigma)
+pmap(args1, rnorm) %>% str()
+```
+
+![pmap示意图](http://humoon-image-hosting-service.oss-cn-beijing.aliyuncs.com/img/typora/JavaScript/pmap%E7%A4%BA%E6%84%8F%E5%9B%BE.png)
+
+为了让代码更易读，应该**为列表中的几个可迭代对象命名，名称分别为rnorm()的参数的名称。这样即使list中各向量的顺序不对，rnorm()也能正确识别**。
+
+```{r}
+args2 <- list(mean = mu, sd = sigma, n = n)
+args2 %>% pmap(rnorm) %>% str()
+```
+
+也可以将参数保存在数据框中
+
+```{r}
+params <- tribble(
+  ~mean, ~sd, ~n,
+  5, 1, 1,
+  10, 5, 3,
+  -3, 10, 5
+)
+params %>% 
+  pmap(rnorm)
+```
+
+#### 多个函数的并行操作
+
+```{r}
+f <- c("runif", "rnorm", "rpois")
+param <- list(
+  list(min = -1, max = 1),
+  list(sd = 5),
+  list(lambda = 10)
+)
+invoke_map(f, param, n = 5) %>% str()
+```
+
+![多参多函示意图](http://humoon-image-hosting-service.oss-cn-beijing.aliyuncs.com/img/typora/JavaScript/%E5%A4%9A%E5%8F%82%E5%A4%9A%E5%87%BD%E7%A4%BA%E6%84%8F%E5%9B%BE.png)
+
+```{r}
+sim <- tribble(
+  ~f, ~params,
+  "runif", list(min = -1, max = 1),
+  "rnorm", list(sd = 5),
+  "rpois", list(lambda = 10)
+)
+sim %>% mutate(sim = invoke_map(f, params, n = 10))
+```
+
+#### 返回值不变的并行操作
+
+调用函数不在乎其返回值，只是为了函数内部某些指令的操作过程（如保存、打印），就应该使用游走函数族，包括 `walk()`, `walk2()` 和 `pwalk()`（就像JS中的`.forEach()`）
+
+```{r}
+x <- list(1, "a", 3)
+x %>% walk(print)
+
+plots <- mtcars %>% 
+  split(.$cyl) %>% 
+  map(~ggplot(., aes(mpg, wt)) + geom_point())
+fileNames <- str_c(names(plots), ".pdf")
+pwalk(list(fileNames, plots), ggsave, path = getwd() %>% str_c('/Figures/'))
+# ggsave()的第一个参数是要保存的文件名，第二个参数是图形对象，path参数是文件夹路径
+```
+
+`walk()`、`walk2()` 和 `pwalk()` 都会隐式地返回第一个参数，这使得它们非常适用于管道操作，就像不会打断管道的`%T>%`一样。
+
+### 并行操作的高阶函数 `*apply()`
+
+![applyFamily](http://humoon-image-hosting-service.oss-cn-beijing.aliyuncs.com/img/typora/JavaScript/applyFamily.png)
+
+**apply()函数有一个功能`map_*()`无法取代，那就是apply(matrix, 1, f)允许将行作为元素传递给f()，而`map_*()`在处理数据框时永远将列作为元素传递给f。**
+
+更多内容详见<http://blog.fens.me/r-apply/>
+
+#### apply
+
+`apply(A, MARGIN, function, ...)`
+
+参数为**矩阵或数组**。要求所有的元素都是同一种数据类型。如果误用于其它类型，如数据框，则会首先把数据转换为矩阵或数组形式，再处理。 MARGIN 表示函数的作用维度，1为对行运算，2为对列运算。
+
+`apply(A,2,sum)`
+
+对A矩阵的列求和。同样可以将sum换为mean,var,sd...
+
+#### lapply
+
+`lapply(list,function,...)`
+
+对列表、dataframe的每个对象/列分别进行操作，**返回一个新列表**
+
+#### sapply
+
+`sapply(list,function,…,simplify=T)`
+
+sapply相比lapply的主要优点在于使返回值看起来更友好
+
+-   simplify=F：返回值的类型是list，此时与lapply完全相同。
+
+-   simplify=T：返回值的类型由计算结果定，如果函数返回值长度为1，则sapply将list简化为vector；如果返回的列表中每个元素的长度都大于1且长度相同，那么sapply将其简化位一个矩阵
+
+```{r}
+sapply(iris,"[[", 1)
+
+# 本例中，"[["是提取分量的函数，意为提取数据框每一列的第一个元素，返回一个由这些元素组成的向量。
+# "[["函数的用法为："["(object, 元素位置)"	
+```
+
+```{r}
+# 定义判断质数的函数
+is_prime <- function(x) {
+  divisor <- seq(3, floor(sqrt(x)), by = 2)
+  notprime <- any(x %% divisor == 0)
+  # divisor是一个向量，所以x %% divisor == 0也变成了一个bool向量
+  return(!notprime)
+}
+
+prime_sapply <- function(n) {
+  xx <- seq(9, n, by = 2)
+  a <- c(2, 3, 5, 7, xx[sapply(xx, is_prime)])
+  print(a)
+}
+print("检索100以内的质数:")
+prime_sapply(100)
+```
+
+#### vapply
+
+`vapply(x, function, fun.value, ..., USE.NAMES = TRUE)`
+
+相比sapply可以在参数中通过fun.value设置行名，节省一行代码。
+
+vapply是sapply的安全升级版，如果不能按照既定模板进行输出，函数就会终止，并产生错误信息。
+
+#### mapply 多元函数版
+
+`mapply(function, object1, object2, ...)`，多参数计算
+
+对多个object按顺序执行f运算，f的参数是每个object的相应元素。即 `fuction(x[1],y[1],z[1]), fuction(x[2],y[2],z[2]), ...`
+
+```{r}
+set.seed(1)
+x <- 1:10
+y <- 5:-4
+z <- round(runif(10, -5, 5)); z
+mapply(max, x, y, z)
+```
+
+```{r}
+firstlist <- list(A = matrix(1:16, 4), B = matrix(1:16, 2))
+secondlist <- list(A = matrix(1:16, 4), B = matrix(1:16, 8))
+mapply(identical, firstlist, secondlist) # identical()意为是否严格相等
+```
+
+#### tapply 分组计算
+
+`tapply(X, INDEX, function, ..., simplify = TRUE)`
+
+INDEX为用于分组的索引，对X按INDEX分组操作
+
+```{r}
+d <- data.frame(list(gender = c("M", "M", "F", "M", "F", "F"), 
+                     age = c(47, 59, 21, 32, 33, 24) , 
+                     income = c(55000, 88000, 32450, 76500, 123000, 45650)))
+tapply(d$income, d$gender, mean) # income先对gender分组，再求平均值
+```
+
+```{r}
+x <- 1:10
+t <- round(runif(10, 1, 100) %% 2); t
+tapply(x, t, sum)
+```
+
+#### rapply 递归遍历
+
+`rapply(object, function, classes = "ANY", deflt = NULL, how = c("unlist", "replace", "list"),...)`
+
+深度递归版，只接受list，如果list有子list，则继续遍历运用f处理
+
+#### eapply
+
+环境空间遍历
+
+### 串行操作的高阶函数
+
+一个可迭代对象(iteratable object)，元素依次两两运算，每次运算得到一个结果，再与下一个元素运算。
+
+递归函数`purrr::reduce(iteratable, f)`直接得到最后的结果
+
+累计函数`purrr::accumulate(iteratable, f)`同时显示中间的步骤[^1] 。
+
+[^1]: 例如，一个list中储存着格式一致的数据框，用rbind()将他们合并在一起，reduce()返回合并的最终结果，而accumulate()返回一个list，每个元素是合并的某一步的结果，即前k个数据框的合并。
+
+```{r}
+# 求交集
+vs <- list(
+c(1, 3, 5, 6, 10),
+c(1, 2, 3, 7, 8, 10),
+c(1, 2, 3, 4, 8, 9, 10)
+)
+vs %>% reduce(intersect)
+
+# 求连乘积
+1:10 %>% accumulate(`*`)
+```
+
+```{r}
+## config ===============================================
+x <- seq(0, 100, 5)
+y <- seq(100, 200, 5)
+params <- 1:5 * 10
+
+
+## plotting ===============================================
+library(plotly)
+
+# 图的框架
+p0 <- plot_ly(type = "surface", showscale = F)
+
+p <- params %>%
+  # 1. 参数由函数工厂加工成函数list
+  map(~ function(a, b) 0.02 * a + 0.015 * b - 0.0008 * a * b + 0.0007 * a^2 - 0.0002 * b^2 + .) %>%
+  # 2. 函数list作用于x, y, 得到 matrix list
+  map(~ outer(x, y, .)) %>%
+  # 3. 所有的 matrix 依次作为截面，叠加到 p0上
+  reduce(
+    .f = function(p, m) p %>% add_surface(x = x, y = y, z = ~m),
+    .init = p0
+  )
+p
+```
+
+### 其他高阶函数
+
+#### `aggregate()`分组计算
+
+`aggregate(formula, data, FUN, ...,subset, na.action = na.omit)`
+
+```{r}
+# 按cut和color分组，将price作为参数传给mean()，数据来源为diamonds	
+aggregate(price ~ cut + color, diamonds, mean)
+```
+
+```{r}
+# plyr包的each函数，可以使aggregate使用多个函数对数据进行计算
+aggregate(price~cut,diamonds,plyr::each(mean,median))
+```
+
+#### `replicate(n, f)`
+
+多次执行并横向拼接位一个矩阵
+
+常用于随机数据的生成
+
+```{r}
+set.seed(1014)
+df <-
+  replicate(5, sample(c(1:10, -99), 6, replace = TRUE)) %>% # 5轮抽样形成矩阵. replicate(n, f), 即重复运行f函数n次
+  data.table() # 建立数据框
+```
+
+## Pipeline
+
+### 管道操作符
+
+传递数据流，保障数据安全，省去不必要中间变量，使代码更加清晰易读。
+
+#### `%>%` 右向管道操作符
+
+传递结果给右边的函数或表达式。右边的写法可以这个参数，或用`.`代替。如果是一元函数，甚至可以连`()`也省掉，只保留函数名。
+
+![管道操作符](http://humoon-image-hosting-service.oss-cn-beijing.aliyuncs.com/img/typora/JavaScript/%E7%AE%A1%E9%81%93%E6%93%8D%E4%BD%9C%E7%AC%A6.png)
+
+```{r}
+set.seed(123)
+a <- rnorm(10)
+a
+
+# 由此可见：`*`和`+`其实是两个函数！接收传来的数据流作为自己的第一个参数
+a %>%
+  `*`(5) %>%
+  `+`(5)
+```
+
+#### `%T>%` 左向管道操作符
+
+必须与`%>%`配合使用。
+
+![T管道操作符](http://humoon-image-hosting-service.oss-cn-beijing.aliyuncs.com/img/typora/JavaScript/T%E7%AE%A1%E9%81%93%E6%93%8D%E4%BD%9C%E7%AC%A6.png)
+
+例1：在数据处理的中间过程，需要打印输出或图片输出（如观察代码是否达到了预设的目的），这时整个过程就会被中断，用向左操作符就可以解决这样的问题。
+
+```{r}
+# 为了提高可读性，%T>% 不换行
+rnorm(100) %>%
+  matrix(ncol = 2) %T>% plot %>%
+  str()
+```
+
+#### `%$%` 爆炸操作符
+
+一些基础函数只接受向量作为参数，而不接受数据框，爆炸操作符可以绑定数据框，让右侧的函数可以直接使用列名
+
+```{r}
+mtcars %$% cor(disp, mpg)
+```
+
+相当于
+
+```{r}
+cor(mtcars$disp, mtcars$mpg)
+```
+
+#### `%<>%` 复合赋值操作符
+
+功能与`%>%`基本一样，多了一项额外的操作，就是把结果写回左侧对象。所以其功能就是运算且更新。
+
+比如，我们需要对一个数据集进行排序，同时需要获得排序的结果，用`%<>%`就是非常方便的。
+
+现实原理如下图所示，使用`%<>%`把左侧的数据集A传递右侧的B函数，B函数的结果数据集再向右侧传递给C函数，C函数结果的数据集再重新赋值给A，完成整个过程。
+
+![复合赋值操作符](http://humoon-image-hosting-service.oss-cn-beijing.aliyuncs.com/img/typora/JavaScript/%E5%A4%8D%E5%90%88%E8%B5%8B%E5%80%BC%E6%93%8D%E4%BD%9C%E7%AC%A6.png)
+
+例：定义符合正态分布的100个随机数，计算绝对值，并按从小到大的顺序排序，获得并取前10个数字赋值给x。
+
+```{r}
+set.seed(1)
+x <- rnorm(100)
+a <- x %>%
+  abs() %>%
+  sort() %>%
+  head(10)
+a
+
+x %<>% abs %>%
+  sort() %>%
+  head(10)
+x
+```
+
+`%<>%`的主要作用是省略一步`<-`，但会造成变量的改变，程序的稳健性会因此削弱，最好不要用。
+
+### 流式操作的使用场景
+
+#### 在函数间传递数据
+
+略
+
+#### 用函数代替运算符操作数据
+
+泛函式编程的一大痛点在于，很容易写成一大堆函数的嵌套，造成可读性下降
+
+管道操作在很大程度上能够解决这个痛点
+
+用函数替代运算符与管道联用，是非常流畅的
+
+难得这些函数都支持向量化操作
+
+一般地，
+
+``` r
+fun(sym) <- value
+`fun<-`(sym, value) # 上一行是这一行的语法糖
+```
+
+| 新函数                                                                  | 原操作符[^2]                     |
+|-------------------------------------------------------------------------|----------------------------------|
+| `extract(x, index or 'col_name')`                                       | `[`，即`[`(x, index/'col_name')  |
+| `extract2(x, index or 'col_name')`                                      | `[[`，即`[[`(x, index'col_name') |
+| `inset()`                                                               | `[<-`                            |
+| `inset2()`                                                              | `[[<-`                           |
+| `set_colnames()`                                                        | `colnames()<-`                   |
+| `set_rownames()`                                                        | `rownames()<-`                   |
+| `magrittr::use_series()`（可用于list）, `dplyr::pull()`（不适用于list） | `$`                              |
+| add                                                                     | `+`                              |
+| subtract                                                                | `-`                              |
+| multiply_by                                                             | `*`                              |
+| raise_to_power                                                          | `^`                              |
+| multiply_by_matrix                                                      | `%*%`                            |
+| divide_by                                                               | `/`                              |
+| divide_by_int                                                           | `%/%`                            |
+| mod                                                                     | `%%`                             |
+| `is_in()`                                                               | `%in%`                           |
+| and                                                                     | `&`                              |
+| or                                                                      | `|`                              |
+| equals                                                                  | `==`                             |
+| is_greater_than                                                         | `>`                              |
+| is_weakly_greater_than                                                  | `>=`                             |
+| is_less_than                                                            | `<`                              |
+| is_weakly_less_than                                                     | `<=`                             |
+| not                                                                     | `!`                              |
+| `set_names()`                                                           | `names()<-`                      |
+
+[^2]: R 中的操作符其实都是函数，只不过是写法上特殊一点的无括号函数。因此上述替代大都不是绝对必要的，管道也可以和操作符函数配合，只不过都要用反引号将操作符括起来，显式指明这是一个函数。
+
+```{r}
+set.seed(1)
+x <- rnorm(10)
+x
+
+
+x %>%
+  multiply_by(5) %>%
+  add(5)
+x %>%
+  `*`(5) %>%
+  `+`(5)
+
+
+x <- 1:10
+x %<>% set_names(letters[1:10]) 
+# 作为参数传入函数时，会自动生成副本，x不会被修改，所以必须加赋值命令
+x
+
+x <- 1:10
+x %<>% `names<-`(letters[1:10]) # names()<- 在R中执行的真正形式
+x
+
+
+y <- list(c(1, 2), c("a", "b"))
+y %>% `[`(2) # 不能直接用extract()，已被其他包同名函数覆盖
+y %>% magrittr::extract(2)
+
+y %>% extract2(2)
+y %>%
+  extract2(2) %>%
+  class()
+y %>%
+  extract2(2) %>%
+  extract2(2)
+y %>%
+  map(extract2, 2) %>%
+  unlist()
+# unlist()拆分成vector，必须是同样的数据类型，那只能是数字退化为字符串
+
+df <- tibble(v1 = 1:26, v2 = letters)
+# 完成了列名赋值工作
+df %<>% set_colnames(c("id", "name")) %>%
+  filter(id %>% is_in(1:10)) # 替代 %in%
+df
+```
+
+#### 传递数据给代码块
+
+例：对一个包括10个随机数的向量的先\*5再+5，求出向量的均值和标准差，并从小到大排序后返回前5条。
+
+```{r}
+set.seed(1)
+a <- rnorm(10)
+a %>%
+  multiply_by(5) %>%
+  add(5) %>%
+  {
+    cat("Mean:", mean(.), "\nVar:", var(.), "\n")
+    sort(.) %>% head(5)
+  }
+
+# 等价于定义一个函数。还是应该定义函数，增强可读性
+display <- function(d) {
+  cat("Mean:", mean(d), "\nVar:", var(d), "\n")
+  sort(d) %>%
+    head(5) %>%
+    print()
+}
+a %>%
+  multiply_by(5) %>%
+  add(5) %>%
+  display()
+```
+
+#### 传递数据给匿名函数
+
+匿名函数`function(parameter){...}`外面要用括号`()`括起来
+
+```{r}
+iris %>%
+  (function(x) {
+    if (nrow(x) > 2) {
+      bind_rows(head(x, 1), tail(x, 1)) %>% return()
+    } else {
+      return(x)
+    }
+  }) 
+```

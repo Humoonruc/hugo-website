@@ -1,0 +1,744 @@
+---
+title: "组合型数据结构"
+subtitle: 'Vector, Matrix, List and Dataframe'
+author: "Humoon"
+date: "`r Sys.Date()`"
+output:
+  html_document: 
+    code_download: true
+    css: ["../css/style.css"]
+    fig_caption: yes
+    theme: united
+    highlight: haddock
+    number_sections: no
+    toc: yes
+    toc_depth: 4
+    toc_float:
+      collapsed: yes
+      smooth_scroll: yes
+documentclass: ctexart
+classoption: hyperref,
+---
+
+```{r setup, include = FALSE}
+source("../Rmarkdown-template/Rmarkdown_config.R")
+
+## global options ===================================
+knitr::opts_chunk$set(
+  width = config$width,
+  fig.width = config$fig.width,
+  fig.asp = config$fig.asp,
+  out.width = config$out.width,
+  fig.align = config$fig.align,
+  fig.path = config$fig.path,
+  fig.show = config$fig.show,
+  warn = config$warn,
+  warning = config$warning,
+  message = config$message,
+  echo = config$echo,
+  eval = config$eval,
+  tidy = config$tidy,
+  comment = config$comment,
+  collapse = config$collapse,
+  cache = config$cache,
+  cache.comments = config$cache.comments,
+  autodep = config$autodep
+)
+
+## use necessary packages ==============================
+library(tidyverse)
+library(data.table)
+library(magrittr)
+library(plotly)
+library(htmlwidgets)
+```
+
+
+
+## 组合型数据结构的分类
+
+1. 向量、矩阵、数组都要求单一数据类型 (homogeneous data types)。根基是 `c()` 向量
+2. 列表、数据框可以装载不同数据类型 (heterogeneous data types)。根基是` list()` 列表
+   1. 列表提高了存储的灵活性，但降低了存储效率和运行效率。
+   2. 数据框是一种特殊的列表。
+3. 不同类型的数据结合成一个向量时，会被强制转换为兼容的、更灵活的数据类型
+   1. 一般顺序为：logical<integer<numeric<complex<character<list
+4. 这两类的 common 属性：
+   1. 类型，typeof()
+   2. 长度，length()
+   3. 属性，attributes()，附加的任意 metadata
+
+
+
+## Vector
+
+**注意**
+
+1.  R中无标量，标量被默认为长度为1的向量，所以在控制台显示一个数时，前面仍会有表示向量维度的 `[1]`
+2.  R中的基础运算都是向量化的运算
+3.  R中的向量默认为列向量，不存在行向量。对列向量转置，得到的是一个$1\times n$的矩阵
+
+### 数据类型
+
+由于向量是 R 中最基本的数据类型（无标量），因此向量根据元素的数据类型被分为几种：
+
+#### logical
+
+#### numeric
+
+统称数值型
+
+- 整数，integer
+- 双精度浮点数，double
+
+三种特殊情况：
+
+```{r}
+exp(1000) # Inf 正无穷
+-10 / 0 # -Inf 负无穷
+exp(1000) / exp(990) # NaN, not a number
+```
+
+1. R 中数字的上限为 1.8*10^38，超过这个规模就会出现 Inf 
+2. 只要表达式中有正负无穷的子项出现，结果就很可能为 Inf, -Inf, NaN
+
+#### charactor
+
+
+#### `NULL`和`NA`
+
+NA，长度为1的逻辑向量，表示数据的缺失值
+
+NULL，零长向量，一般表示参数未被赋值，以及函数没有明确返回值时的返回
+
+### Create
+
+#### `c(2, 4, 6)`
+
+创建和拼接向量，其他语言一般用`[]`
+
+向量定义时即使嵌套，也会被自动展开
+
+#### `m:n`
+
+连续整数向量
+
+#### `seq_len(n)`
+
+等价于`1:n`，区别在于 n 必须是正数，若为 0 则返回长度为 0 的空向量。1:0 则会返回递减的长度为2的序列。
+
+因此`seq_len(n)`通常更符合代码编写者的意图。
+
+#### `seq(from, to, by=1, length)`
+
+等差数列。四个参数有三个即可。by为步长，length为向量size
+
+#### `rep(x, times, each)`
+
+元素复用，重复对象x times次。
+
+若x与times都是向量且长度一致，则为对应元素重复对应次数。
+
+#### `numeric(N)`, `logical(N)`
+
+生成长度为 N, 每项为 0 的特定类型向量
+
+#### `vector('double', N)`
+
+生成长度为N的特定类型向量
+
+```{r}
+rep(1:3, 2)
+rep(1:3, each = 2)
+rep(1:3, rep(2, 1)) # 即rep(1:3, 2)
+rep(1:3, rep(2, 3)) # 即rep(1:3, c(2, 2, 2))
+rep(1:3, c(2, 4, 1))
+
+y <- numeric(6)
+y
+z <- logical(7)
+z
+w <- character(2)
+w
+w <- c(w, "a")
+w
+```
+
+### Type
+
+-   `class()` 查看类型
+-   `is.*()` 判断类型
+-   `as.*()` 转换类型
+
+```{r}
+class(1:5)
+
+class(c(T, F, T))
+
+is.character(c("h", "e", "l", "l", "o"))
+
+as.character(1:5)
+```
+
+### Size
+
+`length()`
+
+`seq_along()`
+
+```{r}
+length(w)
+```
+
+### Label
+
+-   `names(x)`，返回标签组成的向量
+-   `names(x) <- c(...)`，标签赋值
+
+### Subset
+
+#### 选择器`[]`和提取器`[[]]`
+
+`[]`为子集选择器，返回的是原数据的一个切片，不改变数据结构，==就像 JS 中的 `.filter()`==，即 R 中需要按照一定条件筛选数列时，用`[condition]`即可
+
+`[[]]`为元素提取器，返回的是原数据一个**长度为1的切片**中装载的内容，就像 JS 中的 `.filter()[]`
+
+对向量操作，`[]`和`[[]]`没有差别，都返回一维的向量。但对更复杂的数据类型，二者的差别就很明显：
+
+```{r}
+str(iris) # 数据框
+
+str(iris[1]) # 只含一个变量的数据框
+
+str(iris[[1]]) # 向量
+```
+
+#### `[]`选取的三种方式
+
+-   index `x[4]; x[-2:4]; x[c(1, 3)]`
+-   condition `x[x == 10]; x[x %in% c(1, 2, 5)]`
+-   标签 `x["apple"]`
+
+```{r}
+x <- c(1, 2, 3, 4, 5, 7)
+x[3:5] # x向量中的第3-5个元素
+x[-2] # 除了第二个以外的元素
+
+x[c(1, 4)] <- c(9, 11)
+x # a中第1个和第4个元素
+
+x[x %in% c(1, 2, 5)]
+```
+
+### Index
+
+#### `which*`
+
+-   `which(逻辑表达式)`
+-   `which.min()`
+-   `which.max()`
+
+```{r}
+x
+which.max(x)
+which.min(x)
+which(x == 2)
+which(x > 4)
+```
+
+#### `*match`
+
+-   `match(vector1, vector2)`返回第一个向量中各元素在第二个向量中的位置序列，每一个都从头开始匹配，只要匹配到就结束。
+
+-   `pmatch(vector1, vector2)`，若第一个向量中某元素在第二个向量中匹配上了，则认为第二个向量中相应元素已被占用，再匹配第一个向量中的下一个元素时，跳过第二个向量中曾被匹配过的元素。
+
+```{r}
+match(rep(1, 3), rep(1, 5))
+pmatch(rep(1, 3), rep(1, 5))
+```
+
+### Operation
+
+R 对向量的操作都要在原向量的拷贝上进行，不改变原向量（只有直接赋值能改变原向量）。好处是安全，坏处是慢。
+
+#### 增删改
+
+-   `append()` 返回插入元素后的拷贝
+-   `[-index]` 排除选集整体赋值
+-   `replace()` 批量替换
+
+```{r}
+x <- c(1, 2, 3, 4, 5, 7)
+x <- replace(x, c(3, 4), c(5, 5)) # 替换：将x向量中第3个和第4个元素替换为5
+x
+
+append(x, 100, after = 2)
+x
+
+a <- c(0, 0, 1, 2, 0, 3) # 删除0项
+b <- which(a == 0)
+b
+a <- a[-b]
+a
+```
+
+#### Sort
+
+-   `rank()`返回向量中各元素相对大小的排序（默认升序）
+-   `sort()`返回排序后的向量
+-   `rev()`逆序排列
+
+```{r}
+x
+rank(x)
+
+sort(x, decreasing = F) # 默认升序排序
+x
+
+rev(x) # 逆序
+x
+```
+
+#### 去重、偏移、差分
+
+-   `unique()` 去重
+-   `lead(x, n=1)`, `lag(x, n=1)` 偏移，返回一个序列的领先序列和滞后序列
+-   `diff(x, lag=1)` 差分，lag 用以指定滞后几项。默认的 lag 值为 1
+
+```{r}
+unique(x)
+x
+
+lead(x, 2)
+x
+
+diff(x)
+x
+```
+
+### Vectorization
+
+**R 中的运算符和函数天然支持向量化运算，这是 R 的一大特色。**
+
+向量化运算，即对应元素同时并行运算。如果长度不一，表达式中短的向量将会被循环使用，表达式的值将是一个和最长的向量等长的向量。
+
+#### 算数运算
+
+四则运算(+-\*/)、幂(\^)、取整(%/%)、取余(%%)
+
+```{r}
+5 %% c(1, 2, 3, 4, 5)
+
+x <- 1:5
+y <- 2:6
+x * y
+
+# 向量内积（以下写法等价）
+1 * 2 + 2 * 3 + 3 * 4 + 4 * 5 + 5 * 6
+crossprod(x, y)
+t(x) %*% y # R 中向量默认为列向量
+
+# 向量外积（以下写法等价）
+x %o% y
+outer(x, y)
+tcrossprod(x, y)
+x %*% t(y)
+```
+
+#### 逻辑运算
+
+```{r}
+x <- 1:6
+x < 4
+all(x > 5) # 一个向量的所有元素是否满足某条件
+any(x > 5) # 一个向量的部分元素是否满足某条件
+
+matrix(x, 2, byrow = T) < 4
+```
+
+#### 集合运算
+
+```{r}
+intersect(c(1, 2, 3, 3, 12, 4, 123, 12), c(1, 2, 3)) # 交
+
+union(c("狗熊会", "聚数据英才"), c("狗熊会", "助产业振兴")) # 并
+
+setdiff(10:2, 5:3) # 差
+```
+
+## Matrix
+
+### Create
+
+#### 向量转化为矩阵
+
+1.  `matrix(vector, nrow, ncol, byrow = FALSE, dimnames = list(行名向量,列名向量))`
+
+默认 byrow = FALSE，优先按列填充矩阵。可以设为 T 按行
+
+2.  `dim(vector)=c(nrow,ncol)`
+
+#### 产生对角矩阵
+
+`diag(vector)`
+
+`diag(n)` 生成 n 阶单位阵
+
+#### 矩阵转化为向量
+
+`as.vector()` 按照一列一列地顺序将矩阵展开为向量
+
+### Size
+
+`nrow(A)`;`ncol(A)`
+
+### Label
+
+`rownames() [<-]`
+
+`colnames() [<-]`
+
+### Subset
+
+`[行选择器, 列选择器]` 每个选择器都可以是index、condition 和 name
+
+矩阵的`[]`选择器会返回维度尽可能低的结果，因此`A[2, ]`返回的是向量而非$1\times n$的矩阵
+
+```{r}
+A <- matrix(1:16, 4)
+
+A[2, ] # A的第2行
+
+A[, -2] # A排除第2列
+
+A[3, 2] # A的第3行第2列
+
+A[3, c(2, 4)] # A的第3行第2列和第4列
+```
+
+矩阵本质上是一个向量，所以适用向量的一维选择器
+
+```{r}
+A <- matrix(1:9, 3)
+A[A > 3]
+```
+
+### Index
+
+`row(A)`, `col(A)` 返回两个矩阵，元素分别为行列下标。
+
+```{r}
+# 提取下三角矩阵算法
+A <- matrix(1:16, 4)
+A
+
+A[row(A) < col(A)] <- 0
+A
+```
+
+### Operation
+
+#### 转置
+
+`t(A)`
+
+注：向量没有维度概念，向量不是 `1*n` 矩阵。要用`t(x)`和`t(t(x))`才能把向量转化为 `1*n` 和 `n*1` 的矩阵。
+
+```{r}
+x <- 1:6
+t(x)
+t(t(x))
+```
+
+#### 矩阵乘法
+
+-   `A%*%B`
+    -   一个例外：若 A 和 B 均为列向量，则运算时自动对 A 转置[^转置]，执行 `t(A)%*%B`. 事实上，`t(A)%*%B`也叫向量 A 与向量 B 的内积。
+    -   `A%o%B` 等价于 `A%*%t(B)`，也叫向量 A 与向量 B 的外积。
+-   `crossprod(A,B)`, `t(A)%*%B`的简化写法
+-   `tcrossprod(A,B)`, `A%*%t(B)`的简化写法
+
+```{r}
+# 矩阵乘法
+m1 <- matrix(1:9, 3)
+m1 %*% m1
+```
+
+[^转置]：若不转置，这个运算根本无法进行。
+
+#### 对角元素
+
+`diag(A)` 返回对角元素组成的向量
+
+#### 求矩阵方程的解；求逆
+
+-   `solve(A,B)`, 返回`A%*%X=B`的解。
+-   `solve(A)`, 返回矩阵A的逆，即`Solve(A,I)`
+
+#### 特征值和特征向量
+
+`A.eigen <- eigen(A, symmetric=T)`
+
+#### 行列式
+
+`det(A)`
+
+#### 提取上、下三角矩阵
+
+`lower.tri(A,diag=T/F)`和`upper.tri(A,diag=T/F)`，这两个函数返回逻辑矩阵
+
+```{r}
+A <- matrix(1:16, 4)
+A
+A[lower.tri(A)] <- 0
+A
+```
+
+#### 正定矩阵的Choleskey分解
+
+`chol(A)`
+
+即返回满足$A=P{^T}P$的P，其中P为上三角矩阵
+
+#### 矩阵合并
+
+```{r, eval=FALSE}
+rbind(A, B)
+cbind(A, B)
+dplyr::bind_rows(A, B)
+dplyr::bind_cols(A, B)
+```
+
+#### 统计行、列
+
+-   `rowSums()`
+-   `rowMeans()`
+-   `colSums()`
+-   `colMeans()`
+
+```{r}
+A <- matrix(1:16, 4)
+rowSums(A)
+```
+
+## Array
+
+张量，或更高维度的向量
+
+### Create
+
+`z<-array(vector, dimensions, dimnames = list(v1, v2, v3, ...))`
+
+### Label
+
+`dimnames() [<-]`
+
+```{r}
+z <- array(1:24, dim = c(2, 3, 4), dimnames = list(c("r1", "r2"), c("c1", "c2", "c3"), c("p1", "p2", "p3", "p4")))
+z
+dimnames(z)
+```
+
+## List
+
+广义向量，相当于 JS 中的对象
+
+### Create
+
+`list(key1 = value1, key2 = value2, ...)`
+
+### Type
+
+-   `is.list()` 判断
+
+-   `as.list()` 转换
+
+-   `unlist()` 将列表强制转换为向量
+
+    -   按分量顺序依次排列，保证不再嵌套
+    -   自动保证同样的数据类型。比如，强制转换混合了数值和文本的列表，会得到字符串向量
+
+### Label
+
+`names(list) [<-]`
+
+### Subset
+
+`[]`, index/condition/name
+
+### Extract
+
+-   `list$key`，是`list[['key']]`的简写
+-   `list[[index]]`
+-   `list[['key']]`
+
+### Operation
+
+直接赋值
+
+赋值为 `NULL` 即为删除
+
+## Data.Frame
+
+data frame 是长度相同的列向量组成的 List（可以按照这个思路去构建 JS 中的数据框），可以像矩阵一样，以二维表方式呈现。
+
+因此，**R 中操作矩阵的一些函数兼容了 data.frame 对象**，即可以像操作矩阵一样操作 data.frame
+
+
+
+数据框是一个各成员均为向量、且长度相等的对象，由于 R 原生支持向量化操作，因此 R 操作数据框有先天优势。
+
+### Create
+
+`data.frame(var1 = col1, var2 = col2, …, row.names = , check.names = T, stringsAsFactors = F)`
+
+1. R 4.0 之前，构建R的原生数据框时，参数 stringsAsFactors 的默认值为 TRUE，字符向量默认被转换成因子（因子的 level 相比字符串节省储存空间），数据类型变为 numeric，无法再用字符串函数处理。4.0 后更改了这一默认值。
+
+2. check.names 默认为 TRUE，建立数据框时默认使用函数 `make.names()` 检查变量名，将 R 不允许出现在变量名中的特殊字符转换为`.`
+   1. 若选 FALSE，会最大限度地保留原本的列名。但访问这些在 R 中本为非法的列时，必须用反引号将列名括起来。
+
+### Type
+
+-   `as.data.frame()` 将矩阵、列表强制转换为数据框
+
+    -   如果矩阵已有行、列名，会在转换过程中保留
+
+### Label
+
+适用于 matrix 的`rownames()`和`colnames()`也适用于数据框。
+
+```{r}
+a <- list(id = 1:5, lower = letters[1:5], upper = LETTERS[1:5])
+class(a)
+
+rownames(a)
+
+colnames(a)
+
+b <- as.data.frame(a)
+class(b)
+
+rownames(b)
+
+colnames(b)
+```
+
+### Subset
+
+既可以用列表风格的`[]`，也可以用矩阵风格的`[rowSelector, columnSelector]`
+
+1.  矩阵风格选择器的好处在于，可以灵活地筛选行
+
+```{r}
+df <- data.frame(
+  id = 1:5,
+  lower = letters[1:5],
+  upper = LETTERS[1:5]
+)
+
+# 矩阵风格的选择器
+df[df$id > 3, c(2, 3)]
+```
+
+2.  用矩阵风格的二维选择器时，跟矩阵一样会尽可能降维。如果纵向只取了一列，则返回值会自动简化为向量，而非数据框。若要避免降维，保留数据框结构，可以结合两种风格的选择器，也可以增加选项`drop = FALSE`（推荐，利于代码风格的统一）。
+
+```{r}
+df[2:3, 2]
+
+df[2:3, 2, drop = FALSE]
+
+# 混合两种选择器
+df[2:3, ][2]
+```
+
+3.  `subset(df, conditions, select)`
+
+**函数而非操作符，便利 Pipeline 的连续操作**
+
+第一个参数为数据集，第二个参数选择符合条件的行，第三个参数select选择列，可以在列名前加'-'删除之
+
+```{r, eval=FALSE}
+subset(leadership, age >= 35 | age < 24, select = c(q1, q2, q3, q4))
+```
+
+### Extract
+
+-   `df$key`
+-   `df[[index]]`
+-   `df[[colname]]`
+-   矩阵风格选择器，选择一列
+
+```{r}
+df$lower
+
+df[[2]]
+
+df[["lower"]]
+
+df[, 2]
+```
+
+### Operation
+
+对数据框的操作是 R 最核心的内容，故单独说明。
+
+## tibble
+
+数据框的替代类型。
+
+在R Markdown里两者区别不大，但在console中，区别很明显的：
+
+- 列出了变量的类型
+- 只列出10行
+- 只列出有限的列数（与屏幕适应的）
+- 高亮 `NAs`
+
+### Create
+
+tibble 有一个很突出的优点：创建时，写在后面的变量可以立即使用前面的变量
+
+```{r}
+# 这种写法如果用 data.table，会报错，表示不知道 b 定义式中的 a 是什么
+tibble(
+  a = runif(1000, 0, 5),
+  b = 4 + rnorm(1000, mean = 3.2 * a, sd = 1)
+) %>% head()
+```
+
+Create tibble 时，字符向量不会被自动转换为因子
+
+```{r}
+df <- tibble(id = 1:10, lower = letters[1:10])
+df %>% class()
+```
+
+数据量不大时，可以用`tribble()`创建
+
+```{r}
+df <- tribble(
+  ~x, ~y, ~z,
+  "a", 2, 3.6,
+  "b", 1, 8.5
+)
+```
+
+### Transfer
+
+`as_tibble()`
+
+### Subset
+
+subset 时，即使选取单行或单列，结果也不会降维，仍然是 tibble
+
+### Operation
+
+```{r}
+add_column(df, w = 0:1) # 增加一列
+add_row(df, x = "c", y = 9, z = 2.1) # 增加一行
+add_row(df, x = "c", y = 9, z = 2.1, .before = 2) # 在第二行，增加一行
+```
+
+1. `print(tibble, n = 10, width = Inf)`可以自定义打印的长度和宽度。默认只显示10行，避免输出太长.
+   1. 也可以用`options(tibble.print_max=n, tibble.print_min=m)`进行全局性设置：如果多于m行，则最多打印出n行。
+2. 对于很大的数据表，也可以用`%>% View()`或`%T>% View()`查看
+3. tibble 不支持行名。`tibble::rownames_to_column(df, var = "rowname")`可以将行名转化为一列，`tibble::rowid_to_column(df, var = "rowid")`将行 index 转化为一列。

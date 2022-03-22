@@ -383,7 +383,7 @@ sin(pi/2)
 表格尽量使用代码块，便于统一编号
 ```{r}
 table <- tibble::tibble(ID = 1:5, name = letters[1:5])
-knitr::kable(table, caption = 'order of letters')
+knitr::kable(table, caption = 'order of letters') # 用三线表格显示数据
 ```
 
 更优美的表格：https://haozhu233.github.io/kableExtra/

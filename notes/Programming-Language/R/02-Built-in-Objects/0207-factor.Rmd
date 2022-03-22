@@ -1,0 +1,286 @@
+---
+title: "Factor"
+subtitle: ''
+author: "Humoon"
+date: "`r Sys.Date()`"
+output:
+  html_document: 
+    code_download: true
+    css: ["../css/style.css"]
+    fig_caption: yes
+    theme: united
+    highlight: haddock
+    number_sections: no
+    toc: yes
+    toc_depth: 4
+    toc_float:
+      collapsed: yes
+      smooth_scroll: yes
+documentclass: ctexart
+classoption: hyperref,
+---
+
+```{r setup, include = FALSE}
+source("../Rmarkdown-template/Rmarkdown_config.R")
+
+## global options ===================================
+knitr::opts_chunk$set(
+  width = config$width,
+  fig.width = config$fig.width,
+  fig.asp = config$fig.asp,
+  out.width = config$out.width,
+  fig.align = config$fig.align,
+  fig.path = config$fig.path,
+  fig.show = config$fig.show,
+  warn = config$warn,
+  warning = config$warning,
+  message = config$message,
+  echo = config$echo,
+  eval = config$eval,
+  tidy = config$tidy,
+  comment = config$comment,
+  collapse = config$collapse,
+  cache = config$cache,
+  cache.comments = config$cache.comments,
+  autodep = config$autodep
+)
+
+## use necessary packages ==============================
+library(tidyverse)
+library(data.table)
+library(magrittr)
+library(plotly)
+library(htmlwidgets)
+```
+
+
+
+## 原生 R 环境处理 factor
+
+### R 中储存 factor 的步骤
+
+1. 建立 levels 与整数的映射关系
+2. 按照映射关系，将 factor 转换为整数向量存储
+
+### levels 的排序
+
+1. 默认按字母顺序排序
+```{r}
+class <- factor(c("Poor", "Improved", "Excellent"), ordered = T)
+class
+```
+
+2. 通过 levels 参数人工设定因子型数据各水平的顺序
+```{r}
+class <- factor(
+  c("Poor", "Improved", "Excellent"),
+  levels = c("Poor", "Improved", "Excellent"),
+  ordered = T
+)
+class
+```
+
+3. 与 levels 出现的顺序保持一致
+
+在创建因子时，将水平设置为`unique(x)`；或者在创建因子后再对其使用`fct_inorder()`函数，需要forcats包（包含在tidyverse全家桶中）。
+
+```{r}
+x <- c("A", "T", "T", "A", "C", "K")
+y <- factor(x, levels = unique(x))
+y
+
+x %>%
+  factor() %>%
+  fct_inorder()
+```
+
+
+## 使用forcats处理factor
+
+想要**以非字母表顺序显示字符串向量时（如一个轴为离散变量的绘图），就需要用到因子**。forcats 包中含有大量处理因子的函数。
+
+当字符串向量中有很多重复元素时，用 factor （本质是整数）储存比用字符串节省空间。因此，R 基础包中的很多函数都自动将字符串转换为因子。这意味着因子经常出现在并不真正适合它们的地方。好在不用担心 tidyverse 中会出现这种问题。
+
+```{r}
+library(forcats)
+```
+
+### 创建因子
+
+要想创建一个因子，必须先创建 levels 向量：
+
+```{r}
+month_levels <- c(
+  "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+)
+```
+
+
+### 因子的排序
+
+#### 生成因子时的顺序
+
+```{r}
+## 非因子的排序遵循字母表排序
+x1 <- c("Dec", "Apr", "Jan", "Mar", "Mar", "Apr")
+x1
+sort(x1)
+
+## 因子：按预先声明的因子顺序排序
+y1 <- factor(x1, levels = month_levels)
+sort(y1)
+
+## 因子：字母表排序
+y2 <- factor(x1) # 如果省略了定义水平的这个步骤直接创建因子
+sort(y2) # 会按字母顺序排序
+
+## 因子：以初始数据的出现顺序作为默认排序
+# 令levels参数为unique(x)，或在创建因子后使用fct_inorder()函数
+y3 <- factor(x1, levels = unique(x1))
+sort(y3)
+
+y4 <- factor(x1) %>% fct_inorder()
+sort(y4)
+```
+
+#### `fct_relevel()`
+
+随时重新手动设定顺序
+
+```{r}
+income <- c("low", "high", "medium", "medium", "low", "high", "high")
+x <- factor(income)
+x %>% fct_relevel(levels = c("high", "medium", "low"))
+x %>% fct_relevel(levels = c("medium"))
+x %>% fct_relevel("medium", after = Inf)
+```
+
+#### `fct_rev()`
+
+对因子逆序
+
+```{r}
+d <- tibble(
+  x = c("a", "a", "b", "b", "c", "c"),
+  y = c(2, 2, 1, 5, 0, 3)
+)
+
+d %>%
+  mutate(x = fct_rev(x)) %>%
+  ggplot(aes(x = x, y = y)) +
+  geom_point()
+```
+
+#### `fct_reorder()`
+
+`fct_reorder(x, y, .fun = , .desc = FALSE)`
+
+按 x 分类，根据每个分类变量对应 y 值的向量经过 .fun 运算后的结果来对 x 排序
+
+```{r}
+d %>%
+  # x轴因子的顺序为字母顺序
+  ggplot(aes(x = x, y = y)) +
+  geom_point()
+
+d %>%
+  # x因子的顺序变为按照每组成员的y值的中位数的降序来排序
+  mutate(x = fct_reorder(x, y, .fun = median, .desc = TRUE)) %>%
+  ggplot(aes(x = x, y = y)) +
+  geom_point()
+
+d %>%
+  # x因子的顺序变为按照每组成员的y值的最小值的降序来排序
+  mutate(x = fct_reorder(x, y, .fun = median, .desc = TRUE)) %>%
+  ggplot(aes(x = x, y = y)) +
+  geom_point()
+```
+
+### 排查输入错误
+
+```{r}
+x2 <- c("Dec", "Apr", "Jam", "Mar")
+y5 <- factor(x2, levels = month_levels)
+y5 # 不再水平范围内的值自动转换为NA
+```
+
+### 查看水平：levels()
+```{r}
+levels(y1)
+levels(y2)
+levels(y3)
+```
+
+### 例：综合社会调查
+
+```{r}
+forcats::gss_cat %>% head(n = 5) # 发现一些字段是factor
+
+## 查看因子水平
+gss_cat %>% count(race) # count()函数
+ggplot(gss_cat, aes(race)) +
+  geom_bar() # 条形图，不显示记数为0的水平
+ggplot(gss_cat, aes(race)) +
+  geom_bar() +
+  scale_x_discrete(drop = FALSE) # 显示记数为0的水平
+```
+
+### 修改因子的水平
+
+修改水平不仅可以使得图形标签更美观清晰，以满足出版发行的要求，还可以将水平汇集成更高层次的显示。
+
+修改水平最常用、最强大的工具是 `fct_recode()` 函数，它可以对每个水平进行修改或重新编码，让没有明确提及的水平保持原样，如果不小心修改了一个不存在的水平，它也会给出警告。
+
+```{r}
+gss_cat %>% count(partyid)
+
+gss_cat %>%
+  mutate(
+    partyid = fct_recode(
+      partyid,
+      "Republican, strong" = "Strong republican",
+      "Republican, weak" = "Not str republican",
+      "Independent, near rep" = "Ind,near rep",
+      "Independent, near dem" = "Ind,near dem",
+      "Democrat, weak" = "Not str democrat",
+      "Democrat, strong" = "Strong democrat"
+    )
+  ) %>%
+  count(partyid)
+```
+
+可以将多个原水平赋给同一个新水平，这样就可以合并原来的分类：
+
+```{r}
+gss_cat %>%
+  mutate(
+    partyid = fct_recode(
+      partyid,
+      "Republican, strong" = "Strong republican",
+      "Republican, weak" = "Not str republican",
+      "Independent, near rep" = "Ind,near rep",
+      "Independent, near dem" = "Ind,near dem",
+      "Democrat, weak" = "Not str democrat",
+      "Democrat, strong" = "Strong democrat",
+      "Other" = "No answer",
+      "Other" = "Don't know",
+      "Other" = "Other party"
+    )
+  ) %>%
+  count(partyid)
+```
+
+也可以使用 fct_recode() 函数的变体 fct_collapse() 函数。对于每个新水平，你都可以提供一个包含原水平的向量：
+
+```{r}
+gss_cat %>%
+  mutate(partyid = fct_collapse(
+    partyid,
+    other = c("No answer", "Don't know", "Other party"),
+    rep = c("Strong republican", "Not str republican"),
+    ind = c("Ind,near rep", "Independent", "Ind,near dem"),
+    dem = c("Not str democrat", "Strong democrat")
+  )) %>%
+  count(partyid)
+```

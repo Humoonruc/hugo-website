@@ -1,0 +1,302 @@
+---
+title: "IO及解析文本"
+subtitle: ''
+author: "Humoon"
+date: "`r Sys.Date()`"
+output:
+  html_document: 
+    code_download: true
+    css: ["../css/style.css"]
+    fig_caption: yes
+    theme: united
+    highlight: haddock
+    number_sections: no
+    toc: yes
+    toc_depth: 4
+    toc_float:
+      collapsed: yes
+      smooth_scroll: yes
+documentclass: ctexart
+classoption: hyperref,
+---
+
+```{r setup, include = FALSE}
+source("../Rmarkdown-template/Rmarkdown_config.R")
+
+## global options ===================================
+knitr::opts_chunk$set(
+  width = config$width,
+  fig.width = config$fig.width,
+  fig.asp = config$fig.asp,
+  out.width = config$out.width,
+  fig.align = config$fig.align,
+  fig.path = config$fig.path,
+  fig.show = config$fig.show,
+  warn = config$warn,
+  warning = config$warning,
+  message = config$message,
+  echo = config$echo, 
+  eval = config$eval, 
+  tidy = config$tidy, 
+  comment = config$comment, 
+  collapse = config$collapse, 
+  cache = config$cache,
+  cache.comments = config$cache.comments,
+  autodep = config$autodep
+)
+
+
+## use necessary packages ==============================
+library(tidyverse)
+library(data.table)
+library(magrittr)
+library(plotly)
+library(htmlwidgets)
+```
+
+## UI 交互
+
+- `View(data)`, 显示表格化的数据
+- `fix(data)`, 显示表格化的数据，且可以编辑数值
+
+## Input
+
+<a href="../pdf/cheatsheet-data-import.pdf"><strong>import data as  tidy-style cheatsheet.pdf</strong></a>，内含三个包: readr, readxl, googlesheets4
+
+<object data="../pdf/cheatsheet-data-import.pdf" type="application/pdf" width="100%" height="100%"></object>
+
+
+### from Console
+
+#### `<-c()`
+
+直接输入一个向量
+
+```{r}
+y <- c("a","b","c"); y
+```
+
+#### `scan()` 控制台输入一个向量
+
+以**单次回车或空格**间隔元素，以两次回车结束输入。
+```{r, eval=FALSE}
+x <- scan()
+```
+
+### from Package
+
+* 查看所有预先提供的数据集 `data()`
+* 查看某个包所有预先提供的数据集 `data(package=" ")`
+* 读入某个包的数据 `data(dataname, package=" ")`
+
+```{r}
+library(SemiPar)
+data(package = "SemiPar")
+data(copper,package = "SemiPar")
+head(copper)
+```
+
+### from TXT
+
+`readLines()` return a character vector, every element means a line in the file
+
+`readr::read_table()` 读空格分割的文件
+
+### from CSV
+
+#### `data.table::fread()`
+
+
+**<span style="color:red;">对 csv 文件优先使用，读为 data.table</span>**
+
+
+注意两点：
+
+1. 一个是<span style="color:red;">不要将 csv 中的数值型字符串读为 integer 等数值型变量</span>（如将 "004" 读为 4），用 `colClasses=` 规定
+2. 注意文件编码
+
+```{r}
+ISO3166 <- fread("./data/ISO-3166.csv", colClasses = list(character = c(4,9,10,11)), encoding = "UTF-8")
+str(ISO3166)
+```
+
+```{r}
+ISO3166 <- fread("./data/ISO-3166.csv", select = list(character = c(1, 3, 4)), encoding = "UTF-8")
+str(ISO3166)
+```
+
+#### `readr::read_csv()`
+
+- `read_csv()`将文件读为tibble    
+- 不指定列的数据类型时，`read_csv()`会打印一份数据列说明，给出每个列的名称和它**自动解析的列的类型**。这是readr包的一项重要功能。但强烈建议编程者提供`col_types`参数
+- 首行：
+  - `col_names = T`, 不使用首行作为列名称
+  - `col_names = F`, 不使用首行作为列名，函数自动将列标记为X1, X2, ...
+  - `col_names = 字符串向量`，直接赋列名称
+- `skip = n`, 忽略前n行（通常为MetaData）
+- `comment = '#'`, 忽略所有以`#`开头的行
+- `na = `, 设定缺失值，默认各种 white space[^whiteSpace] 和`NA`都是缺失值
+
+[^whiteSpace]: 如`\n`、`\t`等特殊字符。
+
+### from JSON
+
+`jsonlite::fromJSON(path)`
+
+### from .Rdata
+
+`load('xxx.RData')`
+
+
+
+### `parse_*()`
+
+#### readr 解析文本文件的原理
+
+解析依靠函数族`parse_*()`。这些函数接受一个字符向量，并返回一个特定向量，如逻辑、整数或日期向量。具体来说，重要的解析函数有 8 种。
+
+* parse_logical()和parse_integer()分别解析逻辑值和整数。这两个解析函数基本不会出现问题
+* parse_double()是严格的数值型解析函数，parse_number()则是灵活的数值型解析函数。这两个函数要比你预想的更复杂，因为世界各地书写数值的方式不尽相同  
+* parse_character()似乎太过简单，甚至没必要存在。但一个棘手的问题使得这个函数变得非常重要：字符编码
+* parse_factor()函数可以创建因子，R使用这种数据结构来表示分类变量   
+* parse_datetime()、parse_date()和parse_time()函数可以解析不同类型的日期和时间。它们是最复杂的，因为有太多不同的日期书写形式
+
+**所以读取 csv 远比你想象的复杂，自己造轮子会累死。**
+
+#### 解析数值
+
+1. `parse_double()`的`locale(decimal_mark=)`参数定义当地的小数点书写形式。
+```{r}
+parse_double("3121,23", locale = locale(decimal_mark = ","))
+```
+
+
+2. `parse_number()`可以忽略数值前后的非数值型字符。这个函数特别适合处理货币和百分比，也可以提取嵌在文本中的数值。
+```{r}
+parse_number("It cost $123.45.")
+parse_number("I want 45% of it.")
+```
+
+3. `parse_number()`和`locale(grouping_mark=)`参数可以忽略位数间隔符(grouping mark)
+```{r}
+parse_number("123.456.789", locale = locale(grouping_mark = "."))
+```
+
+#### 解析字符串
+
+非英文字符的编码方式有许多种，对其解码需要用`locale(encoding=)`参数设置编码方式，
+```{r}
+x2 <- "\x82\xb1\x82\xf1\x82\xc9\x82\xbf\x82\xcd"
+parse_character(x2, locale = locale(encoding = "Shift-JIS"))
+```
+
+#### 解析因子
+```{r}
+fruit <- c("apple", "banana")
+parse_factor(c("apple", "banana", "bananana"), levels = fruit)
+```
+
+####  解析日期与时间
+
+* parse_datetime() 接受符合 ISO 8601 标准的日期时间。
+
+```{r}
+parse_datetime("2010-10-01T2010")
+
+# 如果时间被省略了，那么它就会被设置为午夜0点0分
+parse_datetime("20101010")
+```
+
+* parse_date() 接受是四位数的年份+`-`或`/`+月+`-`或`/`+日
+```{r}
+parse_date("2010-10-01")
+```
+
+* parse_time() 接受小时+`:`+分钟+[`:`+秒]+[am/pm]
+```{r}
+library(hms)
+parse_time("01:10 am")
+parse_time("20:10:01")
+```
+
+* 自己设定时间格式
+
+符号|含义    
+----|----
+%Y|4位数年份
+%y|2位数年份(00-69 → 2000-2069, 70-99 → 1970-1999)
+%m|2位数月份
+%b|简写月份
+%B|月份全称
+%d|日期，一位数或两位数
+%e|两位数日期
+%H|0-23小时
+%I%p|0-12小时，%p表示am/pm
+%M|分钟
+%S|整数秒
+%OS|实数秒
+%Z|时区
+%z|与国际标准时间的时差
+%.|忽略一个非数值字符
+%*|忽略所有非数值字符
+
+注意，若对非英语月份名称使用 %b 或 %B，需要在locale()函数中设置语言参数。
+```{r}
+parse_date("1 janvier 2015", "%d %B %Y", locale = locale("fr"))
+```
+
+
+## Output
+
+### to Console
+
+`cat()`
+
+`print()`
+
+```R
+r$> cat("Hello")
+Hello
+r$> print('Hello')
+[1] "Hello"
+```
+
+print() 输出字符串向量，cat() 输出字符串的内容，就像显示在网页或打印结果上
+
+### to TXT
+
+`writeLines()`
+
+`readr::write_lines()`
+
+### to CSV
+
+#### `data.table::fwirte()`
+
+#### `readr::write_csv()`
+
+这个函数输出的文件能够顺利读取的概率更高，因为：  
+
+* 它们总是使用UTF-8 对字符串进行编码   
+* 它们使用ISO 8601格式来保存日期和日期时间数据，以便这些数据不论在何种环境下都更容易解析
+
+注意，当保存为CSV文件时，列的数据类型信息就丢失了：这使得CSV文件在暂存临时结果时有些不可靠——每次加载时都要重建列类型。
+
+### to JSON
+
+1. `jsonlite::toJSON()`保存为 JSON 字符串
+2. `readr::write_lines(data, path)` 保存为 json 文件
+
+```{r}
+dir.create('./data')
+
+iris %>% head() %>% 
+  jsonlite::toJSON() %>% 
+  readr::write_lines('./data/iris.json')
+```
+
+### to .Rdata
+
+`save(obj, file = 'xxx.Rdata')` 保存一些变量。第一个参数省略时保存所有对象。
+
+`save.image('xxx.Rdata')` 保存整个工作空间中的所有变量。对于长期连续编程，这非常有用。

@@ -1,0 +1,348 @@
+---
+title: "数据清洗和重整"
+subtitle: ''
+author: "Humoon"
+date: "`r Sys.Date()`"
+output:
+  html_document: 
+    code_download: true
+    css: ["../css/style.css"]
+    fig_caption: yes
+    theme: united
+    highlight: haddock
+    number_sections: no
+    toc: yes
+    toc_depth: 4
+    toc_float:
+      collapsed: yes
+      smooth_scroll: yes
+documentclass: ctexart
+classoption: hyperref,
+---
+
+```{r setup, include = FALSE}
+source("../Rmarkdown-template/Rmarkdown_config.R")
+
+## global options ===================================
+knitr::opts_chunk$set(
+  width = config$width,
+  fig.width = config$fig.width,
+  fig.asp = config$fig.asp,
+  out.width = config$out.width,
+  fig.align = config$fig.align,
+  fig.path = config$fig.path,
+  fig.show = config$fig.show,
+  warn = config$warn,
+  warning = config$warning,
+  message = config$message,
+  echo = config$echo, 
+  eval = config$eval, 
+  tidy = config$tidy, 
+  comment = config$comment, 
+  collapse = config$collapse, 
+  cache = config$cache,
+  cache.comments = config$cache.comments,
+  autodep = config$autodep
+)
+
+## use necessary packages ==============================
+library(tidyverse)
+library(data.table)
+library(magrittr)
+library(plotly)
+library(htmlwidgets)
+```
+
+tidyverse 体系下的整合与重构：<a href="../pdf/cheatsheet-tidyr.pdf">*R base cheatsheet.pdf*</a>
+
+<object data="../pdf/cheatsheet-tidyr.pdf" type="application/pdf" width="100%" height="100%"></object>
+
+
+## 处理缺失值
+
+### 删除含缺失值的行 `drop_na()`
+
+`tidyr::drop_na()` 可以对数据框指定一到多个变量，删去指定的变量有缺失值的行。**不指定变量时有任何变量缺失的行都会被删去**，此时功能同 `na.omit()`。
+
+### 填充缺失值
+
+- `tidyr::fill(data, ..., direction=c("down", "up"))`，填充缺失值，填充值根据参数是缺失值附近的数值
+
+- `tidyr::replace_na(data, replace=list(), ...)`，将数据中的缺失值替换为别的值
+
+
+## 拆分、合并数据列 
+
+### 拆分列
+
+`tidyr::separate()`，有时应该放在不同列的数据用分隔符分隔后放在同一列中了，应拆开。一般可用于日志数据或日期时间型数据的拆分。
+
+```r
+separate(data, col, into, sep = "[^[:alnum:]]+", remove = TRUE, convert = FALSE, extra = "warn", fill = "warn", ...)
+```
+
+- col：需要被拆分的列，列名或位置索引均可
+- into：拆分后新建的列名，为字符串向量
+- sep：被拆分列的分隔符
+- remove：是否删除被分割的列 
+- convert=TRUE 要求自动将分割后的值转换为适当的类型
+
+```{r}
+d.sep <- read_csv("testid, succ/total
+1, 1/10
+2, 3/5
+3, 2/8
+")
+d.sep
+
+d.sep %>%
+  separate(
+    `succ/total`,
+    into = c("succ", "total"),
+    sep = "/",
+    convert = TRUE
+  )
+```
+
+### 拆分行
+
+`tidyr::separate_rows(data, ..., sep)`，将某列数据中的每个值拆分为同一列的两行
+
+- data 原始数据
+- ... 待分数据所在的列(字段、变量)
+- sep 分割数据时使用的风格符
+
+
+### 合并列
+
+`tidyr::unite()` 函数可以将同一行的两列或多列的内容合并成一列。是 `separate()` 的反向操作
+
+```r
+unite(data, col, …, sep = “_”, remove = TRUE)
+```
+
+- col：合并的新列名称
+- …：指定哪些列需要被组合
+- sep：组合列之间的连接符，默认为下划线
+- remove：是否删除被组合的各列
+
+```{r}
+d.sep %>%
+  separate(`succ/total`, into = c("succ", "total"), 
+           sep = "/", convert = TRUE) %>%
+  unite(ratio, succ, total, sep = ":")
+
+## 另外一个例子
+# 先虚构一数据框
+set.seed(1)
+date <- as.Date('2016-11-01') + 0:14
+hour <- sample(1:24, 15)
+min <- sample(1:60, 15)
+second <- sample(1:60, 15)
+event <- sample(letters, 15)
+data <- data.table(date, hour, min, second, event)
+
+# 把date，hour，min和second列合并为新列datetime
+# R中的日期时间格式为"Year-Month-Day Hour:Min:Second"
+dataNew <- data %>% unite(datehour, date, hour, sep = ' ') %>% unite(datetime, datehour, min, second, sep = ':')
+dataNew
+```
+
+
+
+## 数据表变形：长宽数据转换
+
+### 基础包
+
+```{r data}
+# input data
+mydata <- read.table(header = TRUE, sep = " ", text = "
+ID Time X1 X2
+1 1 5 6
+1 2 3 5
+2 1 6 1
+2 2 2 4
+")
+mydata
+```
+
+#### 宽转长 `melt()`
+
+将宽数据转换长数据，id 参数接受一个列名向量，其中的列会保留。其余列的列名会变为新variable列的值，值会变成新value列的值。
+
+```{r melt, dependson='data'}
+# id参数中的变量维持属性地位，其他变量的值都成为value，因此其他变量被合并成一列variable
+md <- melt(mydata, id = c("ID", "Time")) #or md <- melt(mydata, id=1:2)
+md
+```
+
+#### 长转宽 `*cast()`
+
+`dcast()`返回一个数据框，`acast()`返回一个向量/矩阵/数组
+
+![熔化与重铸](http://humoon-image-hosting-service.oss-cn-beijing.aliyuncs.com/img/typora/2022/熔化与重铸.png)
+
+```{r cast, dependson='melt'}
+# dcast(md, formula, fun.aggregate)
+# formula参数中，~左边的变量保持不变，右边的变量作为一个因子，各取值水平分别成为一个变量名。
+dcast(md, ID+Time~variable)
+dcast(md, ID+variable~Time)
+dcast(md, ID~variable+Time)
+dcast(md, ID~Time+variable)
+# formula中没有涉及的变量将从数据中消失，由fun.aggregate参数执行整合功能。
+dcast(md, ID~Time,mean)
+dcast(md, ID~variable,mean)
+```
+
+### tidyr 包
+
+#### 新函数
+
+- `tidyr::pivot_longer(cols, names_to, values_to)`，宽转长
+- `tidyr::pivot_wider(names_from, values_from)`，长转宽
+
+```{r}
+library(tidyverse)
+
+plant_height <- data.frame(
+  Day = 1:5,
+  A = c(0.7, 1.0, 1.5, 1.8, 2.2),
+  B = c(0.5, 0.7, 0.9, 1.3, 1.8),
+  C = c(0.3, 0.6, 1.0, 1.2, 2.2),
+  D = c(0.4, 0.7, 1.2, 1.5, 3.2)
+)
+plant_height
+
+long <- plant_height %>%
+  pivot_longer(
+    cols = A:D,
+    names_to = "plant",
+    values_to = "height"
+  )
+long
+
+long %>%
+  ggplot(aes(x = Day, y = height, color = plant)) +
+  geom_line()
+
+wide <- long %>%
+  pivot_wider(
+    names_from = "plant",
+    values_from = "height"
+  )
+wide
+```
+
+#### 高级应用
+
+```{r}
+plant_record <- data.frame(
+  day = c(1L, 2L, 3L, 4L, 5L),
+  A_height = c(1.1, 1.2, 1.3, 1.4, 1.5),
+  A_width = c(2.1, 2.2, 2.3, 2.4, 2.5),
+  A_depth = c(3.1, 3.2, 3.3, 3.4, 3.5),
+  B_height = c(4.1, 4.2, 4.3, 4.4, 4.5),
+  B_width = c(5.1, 5.2, 5.3, 5.4, 5.5),
+  B_depth = c(6.1, 6.2, 6.3, 6.4, 6.5),
+  C_height = c(7.1, 7.2, 7.3, 7.4, 7.5),
+  C_width = c(8.1, 8.2, 8.3, 8.4, 8.5),
+  C_depth = c(9.1, 9.2, 9.3, 9.4, 9.5)
+)
+plant_record
+
+plant_record %>%
+  tidyr::pivot_longer(
+    cols = !day,
+    names_to = c("species", "parameter"),
+    names_pattern = "(.*)_(.*)",
+    values_to = "value"
+  )
+
+plant_record_longer <- plant_record %>%
+  tidyr::pivot_longer(
+    cols = !day,
+    # 注意时 .value, 不是一个列
+    names_to = c("species", ".value"),
+    names_pattern = "(.*)_(.*)"
+  )
+plant_record_longer
+
+
+us_rent_income %>%
+  pivot_wider(
+    names_from = variable,
+    names_glue = "{variable}_{.value}",
+    values_from = c(estimate, moe)
+  )
+
+plant_record_longer %>%
+  tidyr::pivot_wider(
+    names_from = species,
+    values_from = c(height, width, depth),
+    names_glue = "{species}_{.value}"
+  )
+```
+
+
+#### 宽转长 `tidyr::gather()`
+
+`gather(data, key, value, …, na.rm = FALSE, convert = FALSE)`
+
+- key：将不打算保留的列的列名赋给一个新变量key
+- value：将不打算保留的列的值赋给一个新变量value
+- …：选中要gather的列（不打算保留的列），若此参数不赋值则gather所有列。
+- na.rm：是否删除缺失值
+
+```{r}
+mtcars <- head(datasets::mtcars)
+
+# 为方便处理，在数据集中增加一列car
+mtcars$car <- rownames(mtcars)    
+#将添加的一列从最后一列移到最前列
+mtcars <- mtcars[, c(12, 1:11)]   
+head(mtcars)
+
+# 除了car列外，其余列gather成两列，分别命名为attribute和value
+mtcarsNew <- mtcars %>% 
+  gather(key = attribute, value = value, -car)
+head(mtcarsNew)
+
+# gather在map和gear之间的所有列，从而保持carb和car列不变
+mtcarsNew <- mtcars %>% gather(attribute, value, mpg:gear)
+head(mtcarsNew)
+
+# 只gather() `gear`和`carb`两列
+mtcarsNew <- mtcars %>% 
+  gather(key = attribute, value = value, gear, carb)
+head(mtcarsNew)
+unique(mtcarsNew$attribute)
+
+
+## 或用上一节的例子
+md <- mydata %>% gather(variable, value, X1, X2)
+md
+```
+
+#### 长转宽 `tidyr::spread()`
+
+`spread(data, key, value, fill = NA, convert = FALSE, drop = TRUE)`
+
+- key：需要将变量值拓展为字段的变量名
+- value：需要分散的值的变量名
+- fill：对于缺失值，可将fill的值赋值给被转型后的缺失值
+
+```{r}
+mtcarsSpread <- mtcarsNew %>% 
+  spread(key = attribute, value = value)
+head(mtcarsSpread)
+
+## 或用上一节的例子
+md %>% spread(variable, value)
+```
+
+
+## 数据表的简单合并
+
+- `bind_cols(table1, table2)` 纵向合并
+- `bind_rows(table1, table2)` 横向合并
+  - `bind_rows("tableName1" = table1, "tableName2" = table2, .id = NULL)` ，可选参数 `.id` 不为NULL而接收一个字符串时，可以添加一列，列名为 `.id` 的参数，用以标识各行数据的来源。新添加的这一列的各行值为 `tableName1` 和 `tableName2`

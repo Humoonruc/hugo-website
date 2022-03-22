@@ -1,0 +1,167 @@
+---
+title: ""
+subtitle: ''
+author: "Humoon"
+date: "`r Sys.Date()`"
+output:
+  html_document: 
+    code_download: true
+    css: ["../css/style.css"]
+    fig_caption: yes
+    theme: united
+    highlight: haddock
+    number_sections: no
+    toc: yes
+    toc_depth: 4
+    toc_float:
+      collapsed: yes
+      smooth_scroll: yes
+documentclass: ctexart
+classoption: hyperref,
+---
+
+```{r setup, include = FALSE}
+source("../Rmarkdown-template/Rmarkdown_config.R")
+# source("./plotly.R")
+
+## global options ===================================
+knitr::opts_chunk$set(
+  width = config$width,
+  fig.width = config$fig.width,
+  fig.asp = config$fig.asp,
+  out.width = config$out.width,
+  fig.align = config$fig.align,
+  fig.path = config$fig.path,
+  fig.show = config$fig.show,
+  warn = config$warn,
+  warning = config$warning,
+  message = config$message,
+  echo = config$echo, 
+  eval = config$eval, 
+  tidy = config$tidy, 
+  comment = config$comment, 
+  collapse = config$collapse, 
+  cache = config$cache,
+  cache.comments = config$cache.comments,
+  autodep = config$autodep
+)
+
+
+## use necessary packages ==============================
+library(tidyverse)
+library(data.table)
+library(magrittr)
+library(plotly)
+library(htmlwidgets)
+
+pacman::p_load(
+  jsonlite, ggthemes, showtext
+)
+
+## plotting =============================================
+
+# 包含图的代码块需要fig.showtext = TRUE选项
+showtext_auto(enable = TRUE)
+```
+
+
+```{r echo=FALSE}
+# 允许用户从页面下载文件
+xfun::embed_file('./data/data.txt', text = "Download the data used in this project.")
+```
+
+
+# 前端脚本 {.tabset }
+
+## HTML 代码块
+
+这段代码纯粹起演示作用
+
+```{html}
+<p>
+  <button onclick="myMove()">点我</button>
+</p>
+
+<div id="myContainer">
+  <div id="myAnimation"></div>
+</div>
+```
+
+## CSS 代码块
+
+```{css}
+#myContainer {
+    width: 400px;
+    height: 400px;
+    position: relative;
+    background: yellow;
+}
+
+#myAnimation {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    background-color: red;
+}
+```
+
+## JS 代码块 {.active}
+
+```{js}
+function myMove() {
+    const elem = document.getElementById("myAnimation");
+    let pos = 0;
+    const id = setInterval(frame, 10); // 每0.01秒更新一次
+
+    function frame() {
+        if (pos == 350) {
+            clearInterval(id);
+        } else {
+            pos++;
+            elem.style.top = pos + 'px';
+            elem.style.left = pos + 'px';
+        }
+    }
+}
+```
+
+
+# 浏览器渲染 HTML
+
+HTML 代码要生效，必须直接写在 Rmd 文件中：下面的按钮和图形都是 DOM 元素被浏览器渲染的结果。
+
+<p>
+  <button onclick="myMove()">点我</button>
+</p>
+
+<div id="myContainer">
+  <div id="myAnimation"></div>
+</div>
+
+
+```{r}
+1:100
+```
+
+
+```{js, echo=FALSE, eval = FALSE}
+// 选中所有源代码运行结果的展示代码块 pre>code
+// 将其放入一个 details 元素中，且其兄元素为 summary
+// 从而起到折叠效果
+(function() {
+  const codes = document.querySelectorAll('pre:not([class])');
+  var code, i, d, s, p;
+  for (i = 0; i < codes.length; i++) {
+    code = codes[i];
+    p = code.parentNode;
+    d = document.createElement('details');
+    s = document.createElement('summary');
+    s.innerText = 'Details';
+    // <details><summary>Details</summary></details>
+    d.appendChild(s);
+    // move the code into <details>
+    p.replaceChild(d, code);
+    d.appendChild(code);
+  }
+})();
+```

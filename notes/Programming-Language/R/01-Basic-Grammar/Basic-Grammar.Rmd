@@ -1,0 +1,352 @@
+---
+title: "R Basic Grammar"
+author: "Humoon"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    code_download: yes
+    css: ../css/style.css
+    fig_caption: yes
+    theme: united
+    highlight: haddock
+    number_sections: no
+    toc: yes
+    toc_depth: 4
+    toc_float:
+      collapsed: yes
+      smooth_scroll: yes
+subtitle: Variable, Condition and Loop
+documentclass: ctexart
+classoption: hyperref,
+---
+
+```{r setup, include = FALSE}
+source("../Rmarkdown-template/Rmarkdown_config.R")
+
+## global options ===================================
+knitr::opts_chunk$set(
+  width = config$width,
+  fig.width = config$fig.width,
+  fig.asp = config$fig.asp,
+  out.width = config$out.width,
+  fig.align = config$fig.align,
+  fig.path = config$fig.path,
+  fig.show = config$fig.show,
+  warn = config$warn,
+  warning = config$warning,
+  message = config$message,
+  echo = config$echo, 
+  eval = config$eval, 
+  tidy = config$tidy, 
+  comment = config$comment, 
+  collapse = config$collapse, 
+  cache = config$cache,
+  cache.comments = config$cache.comments,
+  autodep = config$autodep
+)
+
+## use necessary packages ==============================
+library(tidyverse)
+library(data.table)
+library(magrittr)
+library(plotly)
+library(htmlwidgets)
+```
+
+```{r, echo=TRUE}
+library(lobstr)
+```
+
+
+<a href="../pdf/cheatsheet-base-r.pdf">*R base cheatsheet.pdf*</a>
+
+<object data="../pdf/cheatsheet-base-r.pdf" type="application/pdf" width="100%" height="100%"></object>
+
+
+## R 变量
+
+### 查看变量属性
+
+| 函数                | 说明                                                         |
+| ------------------- | ------------------------------------------------------------ |
+| `object.size(x)`    | 对象所占内存空间的大小 (bytes)                               |
+| `length(x)`         | 对象的 size                                                  |
+| `is.*(x)`           | 判断数据类型。判断向量最好用 `is.atomic()` 而非 `is.vector()` |
+| `as.*(x)`           | 强制转换数据类型                                             |
+| `typeof(x)/mode(x)` | 查看对象的数据类型。<br>若对象为homogeneous data types，则返回元素的数据类型，如 integer,  double, character, logical；若为异质性的列表或数据框，则返回 list |
+| `class(x)`          | 查看对象所属的类                                             |
+| `str(x)`            | 对象的class、结构和概要信息                                  |
+| `tibble::glimpse()` | tibble 版`str()`，不显示class，只显示数据                    |
+| `dim(x)`            | 返回对象的维度，只适用于矩阵和数据框                         |
+| `summary(x)`        | 按列汇总对象的基本信息。对于因子，汇总取每一个水平的行数；对于数值向量，返回重要的分位数；对于其他类型的列，则显示列的长度、类型和模式。 |
+| `head(x, n)`        | 列出对象的前n个元素，默认n为6                                |
+| `tail(x, n)`        | 列出对象的后n个元素                                          |
+
+
+
+```{r}
+df = data.table(id = 1:10, lower = letters[1:10])
+
+typeof(df)
+class(df)
+str(df)
+glimpse(df)
+
+df %>% summary()
+```
+
+### 变量名
+
+#### 指针
+
+对象的变量名是一个常量指针，指向一个对象所在的地址。
+
+```{r}
+x <- c(1, 2, 3)
+y <- x
+# x, y 为指向同一个向量的指针
+obj_addr(x)
+obj_addr(y)
+```
+
+#### 不规则变量名
+
+要用反引号括起来
+
+```{r}
+c %>% class() # c是一个内置函数，所以一般变量不能以'c命名
+c 
+
+`x+1` <- function(n) n + 1
+`x+1`
+`x+1`(3)
+```
+
+### 修改时复制 copy-on-modify
+
+R 中的对象一般不许被修改（就像 JS 中的`const`常量），这对数据安全有好处。
+
+赋值时 R 大量使用了拷贝机制，这是 R 速度慢的一个主要原因。如显示循环，每次迭代都会复制对象。
+
+#### 会复制对象的情形
+
+##### 数字向量
+
+1.  有多个指针指向同一个对象，且通过其中一个指针修改该对象时，会生成该对象的一个副本（一个新对象）。修改作用在这个副本上，然后使被修改的指针指向这个副本。
+
+    ```{r}
+    x <- c(1, 2, 3)
+    # tracemen()跟踪x指针指向的对象，每当这个对象被复制，tracemem()都会打印一条说明
+    cat(tracemem(x), "\n")
+    y <- x
+    y[3] <- 4L # 发生拷贝
+    obj_addr(x)
+    obj_addr(y)
+    untracemem(x) # 关闭跟踪
+    ```
+
+2.  对象作为参数传递给函数，并在函数内部修改对象时，也会创建对象的副本
+
+    1.  函数外部的变量名仍指向未被修改的原对象
+    2.  但**如果使用运算符 `<<-`，就可以修改函数外部的变量（如一些随着迭代一轮轮更新的统计变量）**。某些情况下，这个功能非常重要，可以**通过函数修改外部变量**。
+
+    ```{r}
+    modify_first <- function(x) {
+      x[1] <- 0
+      x
+    }
+    v1 <- c(1, 2, 3)
+    cat(tracemem(v1), "\n")
+    modify_first(v1)
+    v1 # 外部的 v1 未被修改
+    
+    x <- 0
+    cat(tracemem(x), "\n")
+    modify_x <- function(value) {
+      x <<- value
+    }
+    modify_x(3)
+    x # 外部的 x 被修改了
+    ```
+
+##### 列表
+
+为了节省空间，列表储存的不是对象，而是指针。修改列表时，只有变化的元素会复制。
+
+```{r}
+a <- 1:10
+b <- list(a, a)
+c <- list(b, a, 1:10)
+ref(a, b, c)
+
+l1 <- list(1, 2, 3)
+l2 <- l1
+# 拷贝机制启动，但拷贝的是指针，而不是 value，这是浅拷贝
+l2[[3]] <- 4 
+lobstr::ref(l1, l2)
+```
+
+<img src="http://humoon-image-hosting-service.oss-cn-beijing.aliyuncs.com/img/typora/JavaScript/l-modify-1.png" alt="img" style="zoom:50%;"/>
+
+<img src="http://humoon-image-hosting-service.oss-cn-beijing.aliyuncs.com/img/typora/JavaScript/l-modify-2.png" alt="img" style="zoom:50%;"/>
+
+##### 数据框
+
+数据框本质上是一个列表，储存的都是指向列向量的指针。
+
+![img](http://humoon-image-hosting-service.oss-cn-beijing.aliyuncs.com/img/typora/JavaScript/v2-2011de6f14aeeb477c91516ef289b32c_720w.jpg)
+
+```{r}
+d1 <- data.frame(x = c(1, 5, 6), y = c(2, 4, 3))
+d2 <- d1
+d3 <- d1
+ref(d1, d2)
+ref(d1, d3)
+
+# 修改列，该列复制；其他列扔指向原对象
+d2[, 2] <- d2[, 2] * 2
+ref(d1, d2)
+
+# 修改行，必须复制每一列
+d3[1, ] <- d3[1, ] * 3
+ref(d1, d3)
+```
+
+![img](http://humoon-image-hosting-service.oss-cn-beijing.aliyuncs.com/img/typora/JavaScript/v2-215964869b3a1831e898cdf97795b94e_720w.jpg)
+
+![img](http://humoon-image-hosting-service.oss-cn-beijing.aliyuncs.com/img/typora/JavaScript/v2-eea06589af18217eecda405f7ef0e781_r.jpg)
+
+##### 字符向量
+
+也是指针的向量。每个指针指向一个字符串，这个字符串位于全局字符串池中。
+
+```{r}
+x <- c("a", "a", "abc", "d")
+ref(x, character = TRUE)
+```
+
+![img](http://humoon-image-hosting-service.oss-cn-beijing.aliyuncs.com/img/typora/JavaScript/v2-be504b8fb9460aecea72cd2cb21c811e_720w.jpg)
+
+#### 不会复制对象的情形
+
+##### 唯一指针
+
+只有一个指针指向对象时，修改对象不会发生复制。
+
+(Rstudio 中与 Console 中不同，Rstudio 中仍要复制)
+
+```{r}
+z <- c(1, 2, 3, 4, 5)
+cat(tracemem(z), "\n")
+z[3] <- 4L
+z
+obj_addr(z)
+untracemem(z) # 关闭跟踪
+```
+
+但是，R 对指针数量的判断不够智能。如两个指针指向一个对象，其中一个被删除后，R 却不知道，仍然以为有两个指针。因此会产生很多不必要的对象拷贝。
+
+```{r}
+x <- data.frame(matrix(runif(5 * 1e4), ncol = 5))
+cat(tracemem(x), "\n")
+medians <- vapply(x, median, numeric(1))
+
+for (i in 1:5) {
+  x[[i]] <- x[[i]] - medians[[i]]
+}
+```
+
+##### 环境对象总是被就地修改
+
+
+## 条件语句
+
+### `if...else if...else...`
+
+``` r
+if (condition1) {
+  
+} else if (condition2) { 
+  # else if中间有空格，跟 JavaScript 一样
+} else {
+  
+}
+```
+
+### `ifelse()`
+
+`if...else` 的 condition 不能是向量，将自动忽略条件向量中第一个以后的元素。有时，要用`any(bool vector)`和`all(bool vector)`将布尔向量转换为一个bool值，再配合`if`使用。
+
+而三元选择符`ifelse(cond, statement1, statement2)`可以接收三个向量，按各自分量执行向量化操作
+
+> 对应 JS 中的 `condition? Statement1: statement2;`
+
+### `switch(statement, list)`
+
+list 是一组键值对，statement 是一个键，返回 list 中与该键对应的值。
+
+``` r
+result1 = switch('fruit',
+                 meat = "chicken",
+                 fruit = "apple",
+                 vegetable = "cucumber",
+                 'soup')
+result1
+# [1] "apple"
+
+result2 = switch('final',
+                 meat = "chicken",
+                 fruit = "apple",
+                 vegetable = "cucumber",
+                 'soup')
+result2 # 都不匹配时，返回无key的值
+# [1] "soup"
+```
+
+## 循环语句
+
+### `repeat{}`
+
+必须手动指定 break 条件，否则无限循环。这在创建交互式 app 时很有用。
+
+### `while (condition) {}`
+
+### `for( iterator in sequence) {}`
+
+#### 预先分配空间：提高传统 for 循环的效率
+
+R 中如果对对象的 size 做了改动（如添加一个元素），要把整个数据结构都重新拷贝一份，这非常慢。如果在每次循环中都有这种语句，时间复杂度会是$\mathrm{O}\left(\mathrm{n}^{2}\right)$级的。
+
+所以最好在开始循环前，预先声明一个向量，为输出结果分配足够的空间，这对循环效率非常重要。预先分配的空间往往是一个list，在循环结束后需要打散并重组为我们需要的对象：对于向量用`unlist()`，数据框用`dplyr::bind_rows()`
+
+这其实有点像 JS 里面的:
+
+```{js}
+const arr = [];
+for (let i = 0; i < 6; i++) {
+  arr.push(i ^ 2 % 11);
+}
+console.log(arr);
+```
+
+例：
+
+```{r}
+df <- tibble(
+  a = rnorm(10),
+  b = rnorm(10),
+  c = rnorm(10),
+  d = rnorm(10)
+)
+
+# 要求df各列的中位数，先为输出分配空间，长度为ncol(df)的向量
+output <-  double(ncol(df))
+for (i in 1:ncol(df)) { 
+  output[[i]] <- median(df[[i]])
+}
+output
+```
+
+### `break` 关键字
+
+### `next` 关键字
