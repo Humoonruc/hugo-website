@@ -1,5 +1,6 @@
 ---
 title: "R Basic Grammar"
+subtitle: Variable, Condition, Loop and Debug
 author: "Humoon"
 date: "`r Sys.Date()`"
 output:
@@ -15,7 +16,6 @@ output:
     toc_float:
       collapsed: yes
       smooth_scroll: yes
-subtitle: Variable, Condition and Loop
 documentclass: ctexart
 classoption: hyperref,
 ---
@@ -350,3 +350,7 @@ output
 ### `break` 关键字
 
 ### `next` 关键字
+
+## Debug
+
+`stop(string)`	终止程序并报错："Error: string"

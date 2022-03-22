@@ -245,14 +245,28 @@ parse_time("20:10:01")
 parse_date("1 janvier 2015", "%d %B %Y", locale = locale("fr"))
 ```
 
+### from RDS
+
+`readRDS()`
 
 ## Output
 
 ### to Console
 
-`cat()`
+`cat(... , file = "", sep = " ", fill = FALSE, labels = NULL,  append = FALSE)`	
+
+file:一个文件链接或者文件名，如果不写此参数，表示输出到控制台。
+
+sep:分隔符
+
+append:是否追加，当且仅当参数file是文件名而非链接时，此参数才有效。	
+
+注意：cat()默认用空格分开各部分，不会以换行作为输出的结尾
+
 
 `print()`
+
+区别：print() 输出字符串向量，cat() 输出字符串的内容，就像显示在网页或打印结果上
 
 ```R
 r$> cat("Hello")
@@ -261,13 +275,16 @@ r$> print('Hello')
 [1] "Hello"
 ```
 
-print() 输出字符串向量，cat() 输出字符串的内容，就像显示在网页或打印结果上
-
 ### to TXT
 
 `writeLines()`
 
 `readr::write_lines()`
+
+`sink("filename", append=TRUE, split=TRUE)` 文本输出，是否追加，是否同时输出在屏幕上	
+
+`sink()` 取消文本输出到文件
+
 
 ### to CSV
 
@@ -300,3 +317,9 @@ iris %>% head() %>%
 `save(obj, file = 'xxx.Rdata')` 保存一些变量。第一个参数省略时保存所有对象。
 
 `save.image('xxx.Rdata')` 保存整个工作空间中的所有变量。对于长期连续编程，这非常有用。
+
+### to .RDS
+
+`saveRDS()`	保存单个对象到一个RDS文件
+
+
