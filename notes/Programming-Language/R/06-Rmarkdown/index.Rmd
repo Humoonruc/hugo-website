@@ -12,43 +12,45 @@ biblio-style: apalike
 csl: china-journal-of-economic-research.csl
 link-citations: yes
 output: 
-  bookdown::gitbook:
-    includes:
-      in_header: _header.html
-    config:
-      download: ["pdf",'epub']
-      edit: null
-      fontsettings:
-        family: sans
-        size: 2
-        theme: sepia
-      search: no
-      toc:
-        after: '黄蒙'
-        before: 'Rmarkdown 文本文件的语法'
-    split_by: chapter
-  bookdown::epub_book: default
-  bookdown::word_document2:
-    reference_docx: template.docx
-    toc: yes
   bookdown::html_document2:
-    code_folding: show
-    df_print: paged
+    code_download: yes
+    css: ./css/style.css
     fig_caption: yes
+    theme: united
     highlight: haddock
     number_sections: yes
-    theme: united
+    code_folding: show
+    df_print: paged
     toc: yes
-    toc_depth: 3
+    toc_depth: 4
     toc_float:
       collapsed: yes
-      smooth_scroll: no
+      smooth_scroll: yes
   bookdown::pdf_book:
     includes:
       in_header: preamble.tex
     latex_engine: xelatex
     citation_package: natbib
     keep_tex: yes
+  bookdown::word_document2:
+    reference_docx: template.docx
+    toc: yes
+  bookdown::epub_book: default
+  bookdown::gitbook:
+    includes:
+      in_header: _header.html
+    config:
+      # download: ["pdf",'epub']
+      edit: null
+      fontsettings:
+        family: sans
+        size: 2
+        theme: white
+      search: yes
+      toc:
+        after: '黄蒙'
+        before: 'Rmarkdown 文本文件的语法'
+    split_by: chapter
 language:
   label:
     thm: '定理'
@@ -63,41 +65,47 @@ language:
 delete_merged_file: true
 ---
 
-```{r global_options, include=FALSE}
-knitr::opts_chunk$set(
-  fig.width = 6, fig.asp = 0.618,
-  out.width = "80%",fig.align = "center",
-  fig.path = 'Figs/',fig.show = "hold", fig.showtext = TRUE,
-  warning = FALSE, message = FALSE, echo = TRUE, 
-  comment = '', collapse = F, 
-  cache = T, cache.comments = F, autodep = TRUE,
-  options(digits = 4, scipen = 4, signif = 4)
-  )
-```
-
 ```{r setup, include=FALSE}
+source("../Rmarkdown-template/Rmarkdown_config.R")
+
+## global options ===================================
+knitr::opts_chunk$set(
+  width = config$width,
+  fig.width = config$fig.width,
+  fig.asp = config$fig.asp,
+  out.width = config$out.width,
+  fig.align = config$fig.align,
+  fig.path = config$fig.path,
+  fig.show = config$fig.show,
+  warn = config$warn,
+  warning = config$warning,
+  message = config$message,
+  echo = config$echo, 
+  eval = config$eval, 
+  tidy = config$tidy, 
+  comment = config$comment, 
+  collapse = config$collapse, 
+  cache = config$cache,
+  cache.comments = config$cache.comments,
+  autodep = config$autodep
+)
+
+## use necessary packages ==============================
+library(tidyverse)
+library(data.table)
+library(magrittr)
+library(plotly)
+library(htmlwidgets)
+
 # use necessary packages
 library('pacman')
-p_load(tidyverse, lubridate, reshape2, # 数据整理
-       ggthemes, showtext, gridExtra, RColorBrewer, # 可视化
-       lmtest, plm, orcutt, stats, forecast, # 统计分析  
-       rvest, rlist, # 爬虫
-       readxl, RMySQL, DT # I/O
-       )
+p_load(lubridate, reshape2, # 数据整理
+       ggthemes, showtext, gridExtra)
 
 # pdf中图形中文设置
 windowsFonts(H = windowsFont("微软雅黑"))
 pdf.options(family = "GB1") 
 # 代码块需要fig.showtext=TRUE选项，且ggplot2图形需要明确定义字体，才能正常显示图中的中文。
-
-# 自定义主题
-mytheme <- theme_economist_white() +
-  theme(text = element_text(family = 'Microsoft YaHei'), # 所有的文本字体
-        plot.title = element_text(face = 'bold'), 
-        plot.caption = element_text(face = 'italic', hjust = 0),
-        legend.title = element_text(size = 12, face = 'bold'),
-        legend.text = element_text(size = 10),
-        legend.position = 'right')
 ```
 
 
@@ -127,9 +135,9 @@ html 语法大都可以在Rmarkdown中使用
 
 ## 文字颜色
 
-代码：`<p style='color: blue'> 蓝色文字。</p>`
+代码：`<span style='color: blue'> 蓝色文字。</span>`
 
-效果：<p style='color: blue'> 蓝色文字。</p>
+效果：<span  style='color: blue'>蓝色文字。</span>
 
 ## 字号
 
@@ -177,6 +185,10 @@ html 语法大都可以在Rmarkdown中使用
 
 用`<!--  -->`括住的内容会被注释掉，不显示在最终输出中。
 
+<!--
+括住的内容会被注释掉，不显示在最终输出中。
+-->
+
 ## 脚注
 
 markdown 脚注的标准格式为：
@@ -214,7 +226,7 @@ Reference
 <a name="ref2">[102] 文献引用2</font></a>
 
 
-## 块引用
+## 引用
 
 在引用中可以使用其他 Markdown 语法
 
@@ -343,14 +355,89 @@ col 3 is| right-aligned | $1600
 3. 管道表不允许输入单元格换行，单元格内容太宽时转换结果可能自动换行。
 4. `Table: (\#tab:label) text`，为markdown简易表自动加表编号和表名(text)，写在简易表的前后均可。
 
+
+
+## 代码
+
+markdown 中的代码，只是显示，不可执行。
+
+### 行内代码
+
+写在两个反引号之间，例：
+
+在命令行中用`cd`命令切换目录
+
+### 代码块
+
+`Tab`或四个空格`    `开头
+
+    pipenv shell
+
+或使用成对的三个反引号包裹，并可以显示声明语言，这是 GFM 扩展语法
+
+```python
+def print_name():
+    print("Markdown")
+```
+
+## 转义
+
+`\` + 符号
+
+转义时要使用 \\ 这个符号，比如美元符号 \$，否则，\$ 会表示嵌入行内的公式。
+
+## 删除线
+
+成对的双波浪线`~~`之间：
+
+他是个~~天才~~疯子。
+
+## 公式
+
+### 行内公式
+
+将公式包在`$ $`之间，如：$\sin\pi/2=1$   
+
+### 独立成行的公式
+
+将公式包含在`$$ $$`之间，如：
+
+$$
+f(x)=\frac{1}{2} \sum_{j=1}^{\infty} \int_{0}^{1} \sin ^{2}(j t x) d t
+$$
+
+为了产生对齐的公式，在独立公式中可使用 aligned 环境。
+
+公式中的环境以`\begin{环境名}`开始，以`\end{环境名}`结束，用`\\`表示换行，用`&`表示一个上下对齐位置。如：
+$$
+\begin{aligned}
+  f(x) =& \sum_{k=0}^\infty \frac{1}{k!} x^k \\
+  =& e^x
+\end{aligned}
+$$
+
+## 锚点
+
+`[锚点描述](#锚点名)`，锚点名仅限完整的各级标题
+
+[跳转到引用](#单层和嵌套引用)
+
+## 排版风格建议
+
+1. 中文字符和英文字符（不包括标点符号）之间加空格，
+2. 使用半角符号时，无论是中文还是英文，都要在两边加空格。
+3. “/”表示路径时，前后都不加空格。
+4. 负号后面接数字不加空格。
+
+
+
 # R Markdown语法{#Rmarkdown}
 
 ## 基本语法
 
-* 删除线 `a~~b~~` 他是个~~天才~~疯子。
 * 上标 `text^supscript^` a^2^
 * 下标 `text~subscript~` k~1~
-* 添加脚注 `text^[footnote] ` 某观点^[文献题录。] 
+* 脚注 `text^[footnote] ` 某观点^[文献题录。] 
 
 ```{right, type="flushright", html.tag="p"}
 代码块设置，使块中文字右对齐，仅适用于 pdf
@@ -378,16 +465,17 @@ classoptions: "hyperref, 12pt, a4paper"
 ---
 ```
 
-## R代码块
+## R 代码（可执行）
 
-行内代码如：`r Sys.Date()`  
+行内代码：`r Sys.Date()`  
+
+代码块
 
 ```{python}
 def print_name():
     print("Markdown")
 ```
 
-代码块
 ```{r}
 sin(pi/2)
 ```
@@ -411,25 +499,9 @@ knitr::kable(table, caption = 'order of letters') # 用三线表格显示数据
 
 ## 公式
 
-* 行内公式：将公式包在`$ $`之间，如：$\sin\pi/2=$ `r sin(pi/2)`  
-* 独立公式：将公式包含在`$$ $$`之间，如：
-
+为公式手动编号
 $$
-  f(x)=\frac{1}{2} \sum_{j=1}^{\infty} \int_{0}^{1} \sin ^{2}(j t x) d t
-$$
-
-* 为了产生对齐的公式，在独立公式中使用aligned环境。公式中的环境以`\begin{环境名}`开始，以`\end{环境名}`结束，用`\\`表示换行，用`&`表示一个上下对齐位置。如：
-
-$$
-\begin{aligned}
-  f(x) =& \sum_{k=0}^\infty \frac{1}{k!} x^k \\
-  =& e^x
-\end{aligned}
-$$
-
-* 为公式手动编号
-$$
-  y = f(x) \tag{label}
+y = f(x) \tag{label}
 $$
 
 显然，手动编号不是一个好主意。
@@ -447,9 +519,10 @@ $$
 (tab content)
 
 
+
 # bookdown语法{#bookdown}
 
-bookdown比Rmarkdown的主要升级之处在于自动编号和交叉引用。
+bookdown 比 Rmarkdown 的主要升级之处在于自动编号和交叉引用。
 
 ## 章节编号和引用
 
@@ -544,6 +617,7 @@ nocite:|
 
 只编译一章：    
 `bookdown::render_book('chapter1.rmd', 'bookdown::gitbook', preview = T)`
+
 
 
 # Xaringan 语法{#Xaringan}

@@ -24,7 +24,7 @@
 <meta name="author" content="黄蒙 ✉huangmeng@ucass.edu.cn" />
 
 
-<meta name="date" content="2022-03-22" />
+<meta name="date" content="2022-03-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -45,6 +45,7 @@ div.abstract{
 </style>
 <script src="libs/header-attrs-2.13/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -193,7 +194,7 @@ Rmarkdown 文本文件的语法
 <li class="chapter" data-level="2.3" data-path="markdown.html"><a href="markdown.html#注释"><i class="fa fa-check"></i><b>2.3</b> 注释<span></span></a></li>
 <li class="chapter" data-level="2.4" data-path="markdown.html"><a href="markdown.html#脚注"><i class="fa fa-check"></i><b>2.4</b> 脚注<span></span></a></li>
 <li class="chapter" data-level="2.5" data-path="markdown.html"><a href="markdown.html#参考文献-1"><i class="fa fa-check"></i><b>2.5</b> 参考文献<span></span></a></li>
-<li class="chapter" data-level="2.6" data-path="markdown.html"><a href="markdown.html#块引用"><i class="fa fa-check"></i><b>2.6</b> 块引用<span></span></a>
+<li class="chapter" data-level="2.6" data-path="markdown.html"><a href="markdown.html#引用"><i class="fa fa-check"></i><b>2.6</b> 引用<span></span></a>
 <ul>
 <li class="chapter" data-level="2.6.1" data-path="markdown.html"><a href="markdown.html#单层和嵌套引用"><i class="fa fa-check"></i><b>2.6.1</b> 单层和嵌套引用<span></span></a></li>
 <li class="chapter" data-level="2.6.2" data-path="markdown.html"><a href="markdown.html#多行引用"><i class="fa fa-check"></i><b>2.6.2</b> 多行引用<span></span></a></li>
@@ -214,15 +215,29 @@ Rmarkdown 文本文件的语法
 </ul></li>
 <li class="chapter" data-level="2.11" data-path="markdown.html"><a href="markdown.html#任务列表"><i class="fa fa-check"></i><b>2.11</b> 任务列表<span></span></a></li>
 <li class="chapter" data-level="2.12" data-path="markdown.html"><a href="markdown.html#管道表"><i class="fa fa-check"></i><b>2.12</b> 管道表<span></span></a></li>
+<li class="chapter" data-level="2.13" data-path="markdown.html"><a href="markdown.html#代码"><i class="fa fa-check"></i><b>2.13</b> 代码<span></span></a>
+<ul>
+<li class="chapter" data-level="2.13.1" data-path="markdown.html"><a href="markdown.html#行内代码"><i class="fa fa-check"></i><b>2.13.1</b> 行内代码<span></span></a></li>
+<li class="chapter" data-level="2.13.2" data-path="markdown.html"><a href="markdown.html#代码块"><i class="fa fa-check"></i><b>2.13.2</b> 代码块<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="2.14" data-path="markdown.html"><a href="markdown.html#转义"><i class="fa fa-check"></i><b>2.14</b> 转义<span></span></a></li>
+<li class="chapter" data-level="2.15" data-path="markdown.html"><a href="markdown.html#删除线"><i class="fa fa-check"></i><b>2.15</b> 删除线<span></span></a></li>
+<li class="chapter" data-level="2.16" data-path="markdown.html"><a href="markdown.html#公式"><i class="fa fa-check"></i><b>2.16</b> 公式<span></span></a>
+<ul>
+<li class="chapter" data-level="2.16.1" data-path="markdown.html"><a href="markdown.html#行内公式"><i class="fa fa-check"></i><b>2.16.1</b> 行内公式<span></span></a></li>
+<li class="chapter" data-level="2.16.2" data-path="markdown.html"><a href="markdown.html#独立成行的公式"><i class="fa fa-check"></i><b>2.16.2</b> 独立成行的公式<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="2.17" data-path="markdown.html"><a href="markdown.html#锚点"><i class="fa fa-check"></i><b>2.17</b> 锚点<span></span></a></li>
+<li class="chapter" data-level="2.18" data-path="markdown.html"><a href="markdown.html#排版风格建议"><i class="fa fa-check"></i><b>2.18</b> 排版风格建议<span></span></a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="Rmarkdown.html"><a href="Rmarkdown.html"><i class="fa fa-check"></i><b>3</b> R Markdown语法<span></span></a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="Rmarkdown.html"><a href="Rmarkdown.html#基本语法"><i class="fa fa-check"></i><b>3.1</b> 基本语法<span></span></a></li>
 <li class="chapter" data-level="3.2" data-path="Rmarkdown.html"><a href="Rmarkdown.html#编译pdf"><i class="fa fa-check"></i><b>3.2</b> 编译PDF<span></span></a></li>
-<li class="chapter" data-level="3.3" data-path="Rmarkdown.html"><a href="Rmarkdown.html#r代码块"><i class="fa fa-check"></i><b>3.3</b> R代码块<span></span></a></li>
+<li class="chapter" data-level="3.3" data-path="Rmarkdown.html"><a href="Rmarkdown.html#r-代码可执行"><i class="fa fa-check"></i><b>3.3</b> R 代码（可执行）<span></span></a></li>
 <li class="chapter" data-level="3.4" data-path="Rmarkdown.html"><a href="Rmarkdown.html#r表格"><i class="fa fa-check"></i><b>3.4</b> R表格<span></span></a></li>
 <li class="chapter" data-level="3.5" data-path="Rmarkdown.html"><a href="Rmarkdown.html#r图"><i class="fa fa-check"></i><b>3.5</b> R图<span></span></a></li>
-<li class="chapter" data-level="3.6" data-path="Rmarkdown.html"><a href="Rmarkdown.html#公式"><i class="fa fa-check"></i><b>3.6</b> 公式<span></span></a></li>
+<li class="chapter" data-level="3.6" data-path="Rmarkdown.html"><a href="Rmarkdown.html#公式-1"><i class="fa fa-check"></i><b>3.6</b> 公式<span></span></a></li>
 <li class="chapter" data-level="3.7" data-path="Rmarkdown.html"><a href="Rmarkdown.html#制表式截面"><i class="fa fa-check"></i><b>3.7</b> 制表式截面<span></span></a>
 <ul>
 <li class="chapter" data-level="3.7.1" data-path="Rmarkdown.html"><a href="Rmarkdown.html#by-product"><i class="fa fa-check"></i><b>3.7.1</b> By Product<span></span></a></li>
@@ -234,7 +249,7 @@ Rmarkdown 文本文件的语法
 <li class="chapter" data-level="4.1" data-path="bookdown.html"><a href="bookdown.html#章节编号和引用"><i class="fa fa-check"></i><b>4.1</b> 章节编号和引用<span></span></a>
 <ul>
 <li class="chapter" data-level="4.1.1" data-path="bookdown.html"><a href="bookdown.html#编号"><i class="fa fa-check"></i><b>4.1.1</b> 编号<span></span></a></li>
-<li class="chapter" data-level="4.1.2" data-path="bookdown.html"><a href="bookdown.html#引用"><i class="fa fa-check"></i><b>4.1.2</b> 引用<span></span></a></li>
+<li class="chapter" data-level="4.1.2" data-path="bookdown.html"><a href="bookdown.html#引用-1"><i class="fa fa-check"></i><b>4.1.2</b> 引用<span></span></a></li>
 </ul></li>
 <li class="chapter" data-level="4.2" data-path="bookdown.html"><a href="bookdown.html#usage-writing-fig"><i class="fa fa-check"></i><b>4.2</b> 图形自动编号<span></span></a></li>
 <li class="chapter" data-level="4.3" data-path="bookdown.html"><a href="bookdown.html#usage-writing-tab"><i class="fa fa-check"></i><b>4.3</b> 表格自动编号<span></span></a></li>
@@ -278,7 +293,7 @@ Rmarkdown 文本文件的语法
 <div id="header">
 <h1 class="title">Rmarkdown 文本文件的语法</h1>
 <p class="author"><em>黄蒙 ✉<a href="mailto:huangmeng@ucass.edu.cn" class="email">huangmeng@ucass.edu.cn</a></em></p>
-<p class="date"><em>2022-03-22</em></p>
+<p class="date"><em>2022-03-23</em></p>
 <div class="abstract">
 <p class="abstract">Abstract</p>
 <p>随着近年来R语言相关环境的功能越来越丰富，编写包含R代码的文本文件，再通过统一的R环境运算、编译和导出，成为了一种管理文件的新方法。这种方法的好处有：（1）节省了硬盘资源，使多种多样的文件都能以文本的方式保存；（2）使针对原始数据所做的一切整理和分析工作变得可复制，实践了“可重复性研究”的理念；（3）能让作者专注于文件内容和参数调整本身，而把调节格式、修改结果的工作全部交给R并实现自动化。本文通过对markdown, Rmarkdown, bookdown, Xaringan 语法的整理，便利了R文本文件的编写。</p>
@@ -329,7 +344,7 @@ gitbook.start({
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
-"theme": "sepia",
+"theme": "white",
 "family": "sans",
 "size": 2
 },
@@ -342,8 +357,11 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["_main.pdf", "_main.epub"],
-"search": false,
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "subsection"
 }

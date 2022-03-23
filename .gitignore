@@ -44,6 +44,8 @@ vignettes/*.pdf
 # Binary file
 *.pdf
 *.png
+*.gif
+*.webp
 *.docx
 *.xlsx
 *.pptx

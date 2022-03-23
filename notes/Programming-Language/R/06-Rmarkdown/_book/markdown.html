@@ -24,7 +24,7 @@
 <meta name="author" content="黄蒙 ✉huangmeng@ucass.edu.cn" />
 
 
-<meta name="date" content="2022-03-22" />
+<meta name="date" content="2022-03-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -45,6 +45,7 @@ div.abstract{
 </style>
 <script src="libs/header-attrs-2.13/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -193,7 +194,7 @@ Rmarkdown 文本文件的语法
 <li class="chapter" data-level="2.3" data-path="markdown.html"><a href="markdown.html#注释"><i class="fa fa-check"></i><b>2.3</b> 注释<span></span></a></li>
 <li class="chapter" data-level="2.4" data-path="markdown.html"><a href="markdown.html#脚注"><i class="fa fa-check"></i><b>2.4</b> 脚注<span></span></a></li>
 <li class="chapter" data-level="2.5" data-path="markdown.html"><a href="markdown.html#参考文献-1"><i class="fa fa-check"></i><b>2.5</b> 参考文献<span></span></a></li>
-<li class="chapter" data-level="2.6" data-path="markdown.html"><a href="markdown.html#块引用"><i class="fa fa-check"></i><b>2.6</b> 块引用<span></span></a>
+<li class="chapter" data-level="2.6" data-path="markdown.html"><a href="markdown.html#引用"><i class="fa fa-check"></i><b>2.6</b> 引用<span></span></a>
 <ul>
 <li class="chapter" data-level="2.6.1" data-path="markdown.html"><a href="markdown.html#单层和嵌套引用"><i class="fa fa-check"></i><b>2.6.1</b> 单层和嵌套引用<span></span></a></li>
 <li class="chapter" data-level="2.6.2" data-path="markdown.html"><a href="markdown.html#多行引用"><i class="fa fa-check"></i><b>2.6.2</b> 多行引用<span></span></a></li>
@@ -214,15 +215,29 @@ Rmarkdown 文本文件的语法
 </ul></li>
 <li class="chapter" data-level="2.11" data-path="markdown.html"><a href="markdown.html#任务列表"><i class="fa fa-check"></i><b>2.11</b> 任务列表<span></span></a></li>
 <li class="chapter" data-level="2.12" data-path="markdown.html"><a href="markdown.html#管道表"><i class="fa fa-check"></i><b>2.12</b> 管道表<span></span></a></li>
+<li class="chapter" data-level="2.13" data-path="markdown.html"><a href="markdown.html#代码"><i class="fa fa-check"></i><b>2.13</b> 代码<span></span></a>
+<ul>
+<li class="chapter" data-level="2.13.1" data-path="markdown.html"><a href="markdown.html#行内代码"><i class="fa fa-check"></i><b>2.13.1</b> 行内代码<span></span></a></li>
+<li class="chapter" data-level="2.13.2" data-path="markdown.html"><a href="markdown.html#代码块"><i class="fa fa-check"></i><b>2.13.2</b> 代码块<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="2.14" data-path="markdown.html"><a href="markdown.html#转义"><i class="fa fa-check"></i><b>2.14</b> 转义<span></span></a></li>
+<li class="chapter" data-level="2.15" data-path="markdown.html"><a href="markdown.html#删除线"><i class="fa fa-check"></i><b>2.15</b> 删除线<span></span></a></li>
+<li class="chapter" data-level="2.16" data-path="markdown.html"><a href="markdown.html#公式"><i class="fa fa-check"></i><b>2.16</b> 公式<span></span></a>
+<ul>
+<li class="chapter" data-level="2.16.1" data-path="markdown.html"><a href="markdown.html#行内公式"><i class="fa fa-check"></i><b>2.16.1</b> 行内公式<span></span></a></li>
+<li class="chapter" data-level="2.16.2" data-path="markdown.html"><a href="markdown.html#独立成行的公式"><i class="fa fa-check"></i><b>2.16.2</b> 独立成行的公式<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="2.17" data-path="markdown.html"><a href="markdown.html#锚点"><i class="fa fa-check"></i><b>2.17</b> 锚点<span></span></a></li>
+<li class="chapter" data-level="2.18" data-path="markdown.html"><a href="markdown.html#排版风格建议"><i class="fa fa-check"></i><b>2.18</b> 排版风格建议<span></span></a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="Rmarkdown.html"><a href="Rmarkdown.html"><i class="fa fa-check"></i><b>3</b> R Markdown语法<span></span></a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="Rmarkdown.html"><a href="Rmarkdown.html#基本语法"><i class="fa fa-check"></i><b>3.1</b> 基本语法<span></span></a></li>
 <li class="chapter" data-level="3.2" data-path="Rmarkdown.html"><a href="Rmarkdown.html#编译pdf"><i class="fa fa-check"></i><b>3.2</b> 编译PDF<span></span></a></li>
-<li class="chapter" data-level="3.3" data-path="Rmarkdown.html"><a href="Rmarkdown.html#r代码块"><i class="fa fa-check"></i><b>3.3</b> R代码块<span></span></a></li>
+<li class="chapter" data-level="3.3" data-path="Rmarkdown.html"><a href="Rmarkdown.html#r-代码可执行"><i class="fa fa-check"></i><b>3.3</b> R 代码（可执行）<span></span></a></li>
 <li class="chapter" data-level="3.4" data-path="Rmarkdown.html"><a href="Rmarkdown.html#r表格"><i class="fa fa-check"></i><b>3.4</b> R表格<span></span></a></li>
 <li class="chapter" data-level="3.5" data-path="Rmarkdown.html"><a href="Rmarkdown.html#r图"><i class="fa fa-check"></i><b>3.5</b> R图<span></span></a></li>
-<li class="chapter" data-level="3.6" data-path="Rmarkdown.html"><a href="Rmarkdown.html#公式"><i class="fa fa-check"></i><b>3.6</b> 公式<span></span></a></li>
+<li class="chapter" data-level="3.6" data-path="Rmarkdown.html"><a href="Rmarkdown.html#公式-1"><i class="fa fa-check"></i><b>3.6</b> 公式<span></span></a></li>
 <li class="chapter" data-level="3.7" data-path="Rmarkdown.html"><a href="Rmarkdown.html#制表式截面"><i class="fa fa-check"></i><b>3.7</b> 制表式截面<span></span></a>
 <ul>
 <li class="chapter" data-level="3.7.1" data-path="Rmarkdown.html"><a href="Rmarkdown.html#by-product"><i class="fa fa-check"></i><b>3.7.1</b> By Product<span></span></a></li>
@@ -234,7 +249,7 @@ Rmarkdown 文本文件的语法
 <li class="chapter" data-level="4.1" data-path="bookdown.html"><a href="bookdown.html#章节编号和引用"><i class="fa fa-check"></i><b>4.1</b> 章节编号和引用<span></span></a>
 <ul>
 <li class="chapter" data-level="4.1.1" data-path="bookdown.html"><a href="bookdown.html#编号"><i class="fa fa-check"></i><b>4.1.1</b> 编号<span></span></a></li>
-<li class="chapter" data-level="4.1.2" data-path="bookdown.html"><a href="bookdown.html#引用"><i class="fa fa-check"></i><b>4.1.2</b> 引用<span></span></a></li>
+<li class="chapter" data-level="4.1.2" data-path="bookdown.html"><a href="bookdown.html#引用-1"><i class="fa fa-check"></i><b>4.1.2</b> 引用<span></span></a></li>
 </ul></li>
 <li class="chapter" data-level="4.2" data-path="bookdown.html"><a href="bookdown.html#usage-writing-fig"><i class="fa fa-check"></i><b>4.2</b> 图形自动编号<span></span></a></li>
 <li class="chapter" data-level="4.3" data-path="bookdown.html"><a href="bookdown.html#usage-writing-tab"><i class="fa fa-check"></i><b>4.3</b> 表格自动编号<span></span></a></li>
@@ -296,6 +311,9 @@ Rmarkdown 文本文件的语法
 <div id="注释" class="section level2 hasAnchor" number="2.3">
 <h2><span class="header-section-number">2.3</span> 注释<a href="markdown.html#注释" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>用<code>&lt;!--  --&gt;</code>括住的内容会被注释掉，不显示在最终输出中。</p>
+<!--
+括住的内容会被注释掉，不显示在最终输出中。
+-->
 </div>
 <div id="脚注" class="section level2 hasAnchor" number="2.4">
 <h2><span class="header-section-number">2.4</span> 脚注<a href="markdown.html#脚注" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -321,8 +339,8 @@ Rmarkdown 文本文件的语法
 <p><a name="ref1">[101] 文献引用1</font></a></p>
 <p><a name="ref2">[102] 文献引用2</font></a></p>
 </div>
-<div id="块引用" class="section level2 hasAnchor" number="2.6">
-<h2><span class="header-section-number">2.6</span> 块引用<a href="markdown.html#块引用" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="引用" class="section level2 hasAnchor" number="2.6">
+<h2><span class="header-section-number">2.6</span> 引用<a href="markdown.html#引用" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>在引用中可以使用其他 Markdown 语法</p>
 <div id="单层和嵌套引用" class="section level3 hasAnchor" number="2.6.1">
 <h3><span class="header-section-number">2.6.1</span> 单层和嵌套引用<a href="markdown.html#单层和嵌套引用" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -484,6 +502,69 @@ Rmarkdown 文本文件的语法
 <li><code>Table: (\#tab:label) text</code>，为markdown简易表自动加表编号和表名(text)，写在简易表的前后均可。</li>
 </ol>
 </div>
+<div id="代码" class="section level2 hasAnchor" number="2.13">
+<h2><span class="header-section-number">2.13</span> 代码<a href="markdown.html#代码" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>markdown 中的代码，只是显示，不可执行。</p>
+<div id="行内代码" class="section level3 hasAnchor" number="2.13.1">
+<h3><span class="header-section-number">2.13.1</span> 行内代码<a href="markdown.html#行内代码" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>写在两个反引号之间，例：</p>
+<p>在命令行中用<code>cd</code>命令切换目录</p>
+</div>
+<div id="代码块" class="section level3 hasAnchor" number="2.13.2">
+<h3><span class="header-section-number">2.13.2</span> 代码块<a href="markdown.html#代码块" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><code>Tab</code>或四个空格<code></code>开头</p>
+<pre><code>pipenv shell</code></pre>
+<p>或使用成对的三个反引号包裹，并可以显示声明语言，这是 GFM 扩展语法</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="markdown.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> print_name():</span>
+<span id="cb4-2"><a href="markdown.html#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;Markdown&quot;</span>)</span></code></pre></div>
+</div>
+</div>
+<div id="转义" class="section level2 hasAnchor" number="2.14">
+<h2><span class="header-section-number">2.14</span> 转义<a href="markdown.html#转义" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><code>\</code> + 符号</p>
+<p>转义时要使用 \ 这个符号，比如美元符号 $，否则，$ 会表示嵌入行内的公式。</p>
+</div>
+<div id="删除线" class="section level2 hasAnchor" number="2.15">
+<h2><span class="header-section-number">2.15</span> 删除线<a href="markdown.html#删除线" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>成对的双波浪线<code>~~</code>之间：</p>
+<p>他是个<del>天才</del>疯子。</p>
+</div>
+<div id="公式" class="section level2 hasAnchor" number="2.16">
+<h2><span class="header-section-number">2.16</span> 公式<a href="markdown.html#公式" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="行内公式" class="section level3 hasAnchor" number="2.16.1">
+<h3><span class="header-section-number">2.16.1</span> 行内公式<a href="markdown.html#行内公式" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>将公式包在<code>$ $</code>之间，如：<span class="math inline">\(\sin\pi/2=1\)</span></p>
+</div>
+<div id="独立成行的公式" class="section level3 hasAnchor" number="2.16.2">
+<h3><span class="header-section-number">2.16.2</span> 独立成行的公式<a href="markdown.html#独立成行的公式" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>将公式包含在<code>$$ $$</code>之间，如：</p>
+<p><span class="math display">\[
+f(x)=\frac{1}{2} \sum_{j=1}^{\infty} \int_{0}^{1} \sin ^{2}(j t x) d t
+\]</span></p>
+<p>为了产生对齐的公式，在独立公式中可使用 aligned 环境。</p>
+<p>公式中的环境以<code>\begin{环境名}</code>开始，以<code>\end{环境名}</code>结束，用<code>\\</code>表示换行，用<code>&amp;</code>表示一个上下对齐位置。如：
+<span class="math display">\[
+\begin{aligned}
+  f(x) =&amp; \sum_{k=0}^\infty \frac{1}{k!} x^k \\
+  =&amp; e^x
+\end{aligned}
+\]</span></p>
+</div>
+</div>
+<div id="锚点" class="section level2 hasAnchor" number="2.17">
+<h2><span class="header-section-number">2.17</span> 锚点<a href="markdown.html#锚点" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><code>[锚点描述](#锚点名)</code>，锚点名仅限完整的各级标题</p>
+<p><a href="markdown.html#单层和嵌套引用">跳转到引用</a></p>
+</div>
+<div id="排版风格建议" class="section level2 hasAnchor" number="2.18">
+<h2><span class="header-section-number">2.18</span> 排版风格建议<a href="markdown.html#排版风格建议" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ol style="list-style-type: decimal">
+<li>中文字符和英文字符（不包括标点符号）之间加空格，</li>
+<li>使用半角符号时，无论是中文还是英文，都要在两边加空格。</li>
+<li>“/”表示路径时，前后都不加空格。</li>
+<li>负号后面接数字不加空格。</li>
+</ol>
+</div>
 </div>
             </section>
 
@@ -517,7 +598,7 @@ gitbook.start({
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
-"theme": "sepia",
+"theme": "white",
 "family": "sans",
 "size": 2
 },
@@ -530,8 +611,11 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["_main.pdf", "_main.epub"],
-"search": false,
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "subsection"
 }

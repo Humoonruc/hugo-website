@@ -24,7 +24,7 @@
 <meta name="author" content="黄蒙 ✉huangmeng@ucass.edu.cn" />
 
 
-<meta name="date" content="2022-03-22" />
+<meta name="date" content="2022-03-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -45,6 +45,7 @@ div.abstract{
 </style>
 <script src="libs/header-attrs-2.13/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -193,7 +194,7 @@ Rmarkdown 文本文件的语法
 <li class="chapter" data-level="2.3" data-path="markdown.html"><a href="markdown.html#注释"><i class="fa fa-check"></i><b>2.3</b> 注释<span></span></a></li>
 <li class="chapter" data-level="2.4" data-path="markdown.html"><a href="markdown.html#脚注"><i class="fa fa-check"></i><b>2.4</b> 脚注<span></span></a></li>
 <li class="chapter" data-level="2.5" data-path="markdown.html"><a href="markdown.html#参考文献-1"><i class="fa fa-check"></i><b>2.5</b> 参考文献<span></span></a></li>
-<li class="chapter" data-level="2.6" data-path="markdown.html"><a href="markdown.html#块引用"><i class="fa fa-check"></i><b>2.6</b> 块引用<span></span></a>
+<li class="chapter" data-level="2.6" data-path="markdown.html"><a href="markdown.html#引用"><i class="fa fa-check"></i><b>2.6</b> 引用<span></span></a>
 <ul>
 <li class="chapter" data-level="2.6.1" data-path="markdown.html"><a href="markdown.html#单层和嵌套引用"><i class="fa fa-check"></i><b>2.6.1</b> 单层和嵌套引用<span></span></a></li>
 <li class="chapter" data-level="2.6.2" data-path="markdown.html"><a href="markdown.html#多行引用"><i class="fa fa-check"></i><b>2.6.2</b> 多行引用<span></span></a></li>
@@ -214,15 +215,29 @@ Rmarkdown 文本文件的语法
 </ul></li>
 <li class="chapter" data-level="2.11" data-path="markdown.html"><a href="markdown.html#任务列表"><i class="fa fa-check"></i><b>2.11</b> 任务列表<span></span></a></li>
 <li class="chapter" data-level="2.12" data-path="markdown.html"><a href="markdown.html#管道表"><i class="fa fa-check"></i><b>2.12</b> 管道表<span></span></a></li>
+<li class="chapter" data-level="2.13" data-path="markdown.html"><a href="markdown.html#代码"><i class="fa fa-check"></i><b>2.13</b> 代码<span></span></a>
+<ul>
+<li class="chapter" data-level="2.13.1" data-path="markdown.html"><a href="markdown.html#行内代码"><i class="fa fa-check"></i><b>2.13.1</b> 行内代码<span></span></a></li>
+<li class="chapter" data-level="2.13.2" data-path="markdown.html"><a href="markdown.html#代码块"><i class="fa fa-check"></i><b>2.13.2</b> 代码块<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="2.14" data-path="markdown.html"><a href="markdown.html#转义"><i class="fa fa-check"></i><b>2.14</b> 转义<span></span></a></li>
+<li class="chapter" data-level="2.15" data-path="markdown.html"><a href="markdown.html#删除线"><i class="fa fa-check"></i><b>2.15</b> 删除线<span></span></a></li>
+<li class="chapter" data-level="2.16" data-path="markdown.html"><a href="markdown.html#公式"><i class="fa fa-check"></i><b>2.16</b> 公式<span></span></a>
+<ul>
+<li class="chapter" data-level="2.16.1" data-path="markdown.html"><a href="markdown.html#行内公式"><i class="fa fa-check"></i><b>2.16.1</b> 行内公式<span></span></a></li>
+<li class="chapter" data-level="2.16.2" data-path="markdown.html"><a href="markdown.html#独立成行的公式"><i class="fa fa-check"></i><b>2.16.2</b> 独立成行的公式<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="2.17" data-path="markdown.html"><a href="markdown.html#锚点"><i class="fa fa-check"></i><b>2.17</b> 锚点<span></span></a></li>
+<li class="chapter" data-level="2.18" data-path="markdown.html"><a href="markdown.html#排版风格建议"><i class="fa fa-check"></i><b>2.18</b> 排版风格建议<span></span></a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="Rmarkdown.html"><a href="Rmarkdown.html"><i class="fa fa-check"></i><b>3</b> R Markdown语法<span></span></a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="Rmarkdown.html"><a href="Rmarkdown.html#基本语法"><i class="fa fa-check"></i><b>3.1</b> 基本语法<span></span></a></li>
 <li class="chapter" data-level="3.2" data-path="Rmarkdown.html"><a href="Rmarkdown.html#编译pdf"><i class="fa fa-check"></i><b>3.2</b> 编译PDF<span></span></a></li>
-<li class="chapter" data-level="3.3" data-path="Rmarkdown.html"><a href="Rmarkdown.html#r代码块"><i class="fa fa-check"></i><b>3.3</b> R代码块<span></span></a></li>
+<li class="chapter" data-level="3.3" data-path="Rmarkdown.html"><a href="Rmarkdown.html#r-代码可执行"><i class="fa fa-check"></i><b>3.3</b> R 代码（可执行）<span></span></a></li>
 <li class="chapter" data-level="3.4" data-path="Rmarkdown.html"><a href="Rmarkdown.html#r表格"><i class="fa fa-check"></i><b>3.4</b> R表格<span></span></a></li>
 <li class="chapter" data-level="3.5" data-path="Rmarkdown.html"><a href="Rmarkdown.html#r图"><i class="fa fa-check"></i><b>3.5</b> R图<span></span></a></li>
-<li class="chapter" data-level="3.6" data-path="Rmarkdown.html"><a href="Rmarkdown.html#公式"><i class="fa fa-check"></i><b>3.6</b> 公式<span></span></a></li>
+<li class="chapter" data-level="3.6" data-path="Rmarkdown.html"><a href="Rmarkdown.html#公式-1"><i class="fa fa-check"></i><b>3.6</b> 公式<span></span></a></li>
 <li class="chapter" data-level="3.7" data-path="Rmarkdown.html"><a href="Rmarkdown.html#制表式截面"><i class="fa fa-check"></i><b>3.7</b> 制表式截面<span></span></a>
 <ul>
 <li class="chapter" data-level="3.7.1" data-path="Rmarkdown.html"><a href="Rmarkdown.html#by-product"><i class="fa fa-check"></i><b>3.7.1</b> By Product<span></span></a></li>
@@ -234,7 +249,7 @@ Rmarkdown 文本文件的语法
 <li class="chapter" data-level="4.1" data-path="bookdown.html"><a href="bookdown.html#章节编号和引用"><i class="fa fa-check"></i><b>4.1</b> 章节编号和引用<span></span></a>
 <ul>
 <li class="chapter" data-level="4.1.1" data-path="bookdown.html"><a href="bookdown.html#编号"><i class="fa fa-check"></i><b>4.1.1</b> 编号<span></span></a></li>
-<li class="chapter" data-level="4.1.2" data-path="bookdown.html"><a href="bookdown.html#引用"><i class="fa fa-check"></i><b>4.1.2</b> 引用<span></span></a></li>
+<li class="chapter" data-level="4.1.2" data-path="bookdown.html"><a href="bookdown.html#引用-1"><i class="fa fa-check"></i><b>4.1.2</b> 引用<span></span></a></li>
 </ul></li>
 <li class="chapter" data-level="4.2" data-path="bookdown.html"><a href="bookdown.html#usage-writing-fig"><i class="fa fa-check"></i><b>4.2</b> 图形自动编号<span></span></a></li>
 <li class="chapter" data-level="4.3" data-path="bookdown.html"><a href="bookdown.html#usage-writing-tab"><i class="fa fa-check"></i><b>4.3</b> 表格自动编号<span></span></a></li>
@@ -280,44 +295,43 @@ Rmarkdown 文本文件的语法
 <div id="基本语法" class="section level2 hasAnchor" number="3.1">
 <h2><span class="header-section-number">3.1</span> 基本语法<a href="Rmarkdown.html#基本语法" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
-<li>删除线 <code>a~~b~~</code> 他是个<del>天才</del>疯子。</li>
 <li>上标 <code>text^supscript^</code> a<sup>2</sup></li>
 <li>下标 <code>text~subscript~</code> k<sub>1</sub></li>
-<li>添加脚注 <code>text^[footnote]</code> 某观点<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></li>
+<li>脚注 <code>text^[footnote]</code> 某观点<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></li>
 </ul>
 <pre class="right"><code>代码块设置，使块中文字右对齐，仅适用于 pdf</code></pre>
 </div>
 <div id="编译pdf" class="section level2 hasAnchor" number="3.2">
 <h2><span class="header-section-number">3.2</span> 编译PDF<a href="Rmarkdown.html#编译pdf" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="Rmarkdown.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;tinytex&quot;</span>)</span>
-<span id="cb4-2"><a href="Rmarkdown.html#cb4-2" aria-hidden="true" tabindex="-1"></a>tinytex<span class="sc">::</span><span class="fu">install_tinytex</span>(<span class="at">dir =</span> <span class="st">&quot;D:</span><span class="sc">\\</span><span class="st">Tinytex&quot;</span>, <span class="at">force =</span> T)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="Rmarkdown.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;tinytex&quot;</span>)</span>
+<span id="cb6-2"><a href="Rmarkdown.html#cb6-2" aria-hidden="true" tabindex="-1"></a>tinytex<span class="sc">::</span><span class="fu">install_tinytex</span>(<span class="at">dir =</span> <span class="st">&quot;D:</span><span class="sc">\\</span><span class="st">Tinytex&quot;</span>, <span class="at">force =</span> T)</span></code></pre></div>
 <p>Rmd 文件的 metadata：</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb5-1"><a href="Rmarkdown.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb5-2"><a href="Rmarkdown.html#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="an">output:</span></span>
-<span id="cb5-3"><a href="Rmarkdown.html#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">  pdf_document: </span></span>
-<span id="cb5-4"><a href="Rmarkdown.html#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">    latex_engine: xelatex</span></span>
-<span id="cb5-5"><a href="Rmarkdown.html#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">    extra_dependencies:</span></span>
-<span id="cb5-6"><a href="Rmarkdown.html#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">      ctex: UTF8</span></span>
-<span id="cb5-7"><a href="Rmarkdown.html#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">    number_sections: yes</span></span>
-<span id="cb5-8"><a href="Rmarkdown.html#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co">    df_print: kable</span></span>
-<span id="cb5-9"><a href="Rmarkdown.html#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co">    toc: yes</span></span>
-<span id="cb5-10"><a href="Rmarkdown.html#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="an">classoptions:</span><span class="co"> &quot;hyperref, 12pt, a4paper&quot;</span></span>
-<span id="cb5-11"><a href="Rmarkdown.html#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb7-1"><a href="Rmarkdown.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb7-2"><a href="Rmarkdown.html#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="an">output:</span></span>
+<span id="cb7-3"><a href="Rmarkdown.html#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">  pdf_document: </span></span>
+<span id="cb7-4"><a href="Rmarkdown.html#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co">    latex_engine: xelatex</span></span>
+<span id="cb7-5"><a href="Rmarkdown.html#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co">    extra_dependencies:</span></span>
+<span id="cb7-6"><a href="Rmarkdown.html#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co">      ctex: UTF8</span></span>
+<span id="cb7-7"><a href="Rmarkdown.html#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co">    number_sections: yes</span></span>
+<span id="cb7-8"><a href="Rmarkdown.html#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co">    df_print: kable</span></span>
+<span id="cb7-9"><a href="Rmarkdown.html#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co">    toc: yes</span></span>
+<span id="cb7-10"><a href="Rmarkdown.html#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="an">classoptions:</span><span class="co"> &quot;hyperref, 12pt, a4paper&quot;</span></span>
+<span id="cb7-11"><a href="Rmarkdown.html#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span></code></pre></div>
 </div>
-<div id="r代码块" class="section level2 hasAnchor" number="3.3">
-<h2><span class="header-section-number">3.3</span> R代码块<a href="Rmarkdown.html#r代码块" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>行内代码如：2022-03-22</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="Rmarkdown.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> print_name():</span>
-<span id="cb6-2"><a href="Rmarkdown.html#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;Markdown&quot;</span>)</span></code></pre></div>
+<div id="r-代码可执行" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> R 代码（可执行）<a href="Rmarkdown.html#r-代码可执行" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>行内代码：2022-03-23</p>
 <p>代码块</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="Rmarkdown.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sin</span>(pi<span class="sc">/</span><span class="dv">2</span>)</span></code></pre></div>
-<pre><code>[1] 1</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="Rmarkdown.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> print_name():</span>
+<span id="cb8-2"><a href="Rmarkdown.html#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;Markdown&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="Rmarkdown.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sin</span>(pi<span class="sc">/</span><span class="dv">2</span>)</span>
+<span id="cb9-2"><a href="Rmarkdown.html#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 1</span></span></code></pre></div>
 </div>
 <div id="r表格" class="section level2 hasAnchor" number="3.4">
 <h2><span class="header-section-number">3.4</span> R表格<a href="Rmarkdown.html#r表格" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>表格尽量使用代码块，便于统一编号</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="Rmarkdown.html#cb9-1" aria-hidden="true" tabindex="-1"></a>table <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tibble</span>(<span class="at">ID =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">name =</span> letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>])</span>
-<span id="cb9-2"><a href="Rmarkdown.html#cb9-2" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(table, <span class="at">caption =</span> <span class="st">&#39;order of letters&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="Rmarkdown.html#cb10-1" aria-hidden="true" tabindex="-1"></a>table <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tibble</span>(<span class="at">ID =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">name =</span> letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>])</span>
+<span id="cb10-2"><a href="Rmarkdown.html#cb10-2" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(table, <span class="at">caption =</span> <span class="st">&#39;order of letters&#39;</span>) <span class="co"># 用三线表格显示数据</span></span></code></pre></div>
 <table>
 <caption><span id="tab:unnamed-chunk-7">Table 3.1: </span>order of letters</caption>
 <thead>
@@ -354,33 +368,14 @@ Rmarkdown 文本文件的语法
 <div id="r图" class="section level2 hasAnchor" number="3.5">
 <h2><span class="header-section-number">3.5</span> R图<a href="Rmarkdown.html#r图" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>插图不用 markdown 语法，而使用 R 代码块，便于统一编号</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="Rmarkdown.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># knitr::include_graphics(&quot;figs/myfig01.png&quot;)</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="Rmarkdown.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># knitr::include_graphics(&quot;figs/myfig01.png&quot;)</span></span></code></pre></div>
 </div>
-<div id="公式" class="section level2 hasAnchor" number="3.6">
-<h2><span class="header-section-number">3.6</span> 公式<a href="Rmarkdown.html#公式" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<ul>
-<li>行内公式：将公式包在<code>$ $</code>之间，如：<span class="math inline">\(\sin\pi/2=\)</span> 1<br />
-</li>
-<li>独立公式：将公式包含在<code>$$ $$</code>之间，如：</li>
-</ul>
-<p><span class="math display">\[
-  f(x)=\frac{1}{2} \sum_{j=1}^{\infty} \int_{0}^{1} \sin ^{2}(j t x) d t
-\]</span></p>
-<ul>
-<li>为了产生对齐的公式，在独立公式中使用aligned环境。公式中的环境以<code>\begin{环境名}</code>开始，以<code>\end{环境名}</code>结束，用<code>\\</code>表示换行，用<code>&amp;</code>表示一个上下对齐位置。如：</li>
-</ul>
-<p><span class="math display">\[
-\begin{aligned}
-  f(x) =&amp; \sum_{k=0}^\infty \frac{1}{k!} x^k \\
-  =&amp; e^x
-\end{aligned}
-\]</span></p>
-<ul>
-<li>为公式手动编号
+<div id="公式-1" class="section level2 hasAnchor" number="3.6">
+<h2><span class="header-section-number">3.6</span> 公式<a href="Rmarkdown.html#公式-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>为公式手动编号
 <span class="math display">\[
 y = f(x) \tag{label}
-\]</span></li>
-</ul>
+\]</span></p>
 <p>显然，手动编号不是一个好主意。</p>
 </div>
 <div id="制表式截面" class="section level2 tabset hasAnchor" number="3.7">
@@ -434,7 +429,7 @@ gitbook.start({
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
-"theme": "sepia",
+"theme": "white",
 "family": "sans",
 "size": 2
 },
@@ -447,8 +442,11 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["_main.pdf", "_main.epub"],
-"search": false,
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "subsection"
 }

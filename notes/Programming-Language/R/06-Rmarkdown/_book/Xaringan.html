@@ -24,7 +24,7 @@
 <meta name="author" content="黄蒙 ✉huangmeng@ucass.edu.cn" />
 
 
-<meta name="date" content="2022-03-22" />
+<meta name="date" content="2022-03-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -45,6 +45,7 @@ div.abstract{
 </style>
 <script src="libs/header-attrs-2.13/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -193,7 +194,7 @@ Rmarkdown 文本文件的语法
 <li class="chapter" data-level="2.3" data-path="markdown.html"><a href="markdown.html#注释"><i class="fa fa-check"></i><b>2.3</b> 注释<span></span></a></li>
 <li class="chapter" data-level="2.4" data-path="markdown.html"><a href="markdown.html#脚注"><i class="fa fa-check"></i><b>2.4</b> 脚注<span></span></a></li>
 <li class="chapter" data-level="2.5" data-path="markdown.html"><a href="markdown.html#参考文献-1"><i class="fa fa-check"></i><b>2.5</b> 参考文献<span></span></a></li>
-<li class="chapter" data-level="2.6" data-path="markdown.html"><a href="markdown.html#块引用"><i class="fa fa-check"></i><b>2.6</b> 块引用<span></span></a>
+<li class="chapter" data-level="2.6" data-path="markdown.html"><a href="markdown.html#引用"><i class="fa fa-check"></i><b>2.6</b> 引用<span></span></a>
 <ul>
 <li class="chapter" data-level="2.6.1" data-path="markdown.html"><a href="markdown.html#单层和嵌套引用"><i class="fa fa-check"></i><b>2.6.1</b> 单层和嵌套引用<span></span></a></li>
 <li class="chapter" data-level="2.6.2" data-path="markdown.html"><a href="markdown.html#多行引用"><i class="fa fa-check"></i><b>2.6.2</b> 多行引用<span></span></a></li>
@@ -214,15 +215,29 @@ Rmarkdown 文本文件的语法
 </ul></li>
 <li class="chapter" data-level="2.11" data-path="markdown.html"><a href="markdown.html#任务列表"><i class="fa fa-check"></i><b>2.11</b> 任务列表<span></span></a></li>
 <li class="chapter" data-level="2.12" data-path="markdown.html"><a href="markdown.html#管道表"><i class="fa fa-check"></i><b>2.12</b> 管道表<span></span></a></li>
+<li class="chapter" data-level="2.13" data-path="markdown.html"><a href="markdown.html#代码"><i class="fa fa-check"></i><b>2.13</b> 代码<span></span></a>
+<ul>
+<li class="chapter" data-level="2.13.1" data-path="markdown.html"><a href="markdown.html#行内代码"><i class="fa fa-check"></i><b>2.13.1</b> 行内代码<span></span></a></li>
+<li class="chapter" data-level="2.13.2" data-path="markdown.html"><a href="markdown.html#代码块"><i class="fa fa-check"></i><b>2.13.2</b> 代码块<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="2.14" data-path="markdown.html"><a href="markdown.html#转义"><i class="fa fa-check"></i><b>2.14</b> 转义<span></span></a></li>
+<li class="chapter" data-level="2.15" data-path="markdown.html"><a href="markdown.html#删除线"><i class="fa fa-check"></i><b>2.15</b> 删除线<span></span></a></li>
+<li class="chapter" data-level="2.16" data-path="markdown.html"><a href="markdown.html#公式"><i class="fa fa-check"></i><b>2.16</b> 公式<span></span></a>
+<ul>
+<li class="chapter" data-level="2.16.1" data-path="markdown.html"><a href="markdown.html#行内公式"><i class="fa fa-check"></i><b>2.16.1</b> 行内公式<span></span></a></li>
+<li class="chapter" data-level="2.16.2" data-path="markdown.html"><a href="markdown.html#独立成行的公式"><i class="fa fa-check"></i><b>2.16.2</b> 独立成行的公式<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="2.17" data-path="markdown.html"><a href="markdown.html#锚点"><i class="fa fa-check"></i><b>2.17</b> 锚点<span></span></a></li>
+<li class="chapter" data-level="2.18" data-path="markdown.html"><a href="markdown.html#排版风格建议"><i class="fa fa-check"></i><b>2.18</b> 排版风格建议<span></span></a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="Rmarkdown.html"><a href="Rmarkdown.html"><i class="fa fa-check"></i><b>3</b> R Markdown语法<span></span></a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="Rmarkdown.html"><a href="Rmarkdown.html#基本语法"><i class="fa fa-check"></i><b>3.1</b> 基本语法<span></span></a></li>
 <li class="chapter" data-level="3.2" data-path="Rmarkdown.html"><a href="Rmarkdown.html#编译pdf"><i class="fa fa-check"></i><b>3.2</b> 编译PDF<span></span></a></li>
-<li class="chapter" data-level="3.3" data-path="Rmarkdown.html"><a href="Rmarkdown.html#r代码块"><i class="fa fa-check"></i><b>3.3</b> R代码块<span></span></a></li>
+<li class="chapter" data-level="3.3" data-path="Rmarkdown.html"><a href="Rmarkdown.html#r-代码可执行"><i class="fa fa-check"></i><b>3.3</b> R 代码（可执行）<span></span></a></li>
 <li class="chapter" data-level="3.4" data-path="Rmarkdown.html"><a href="Rmarkdown.html#r表格"><i class="fa fa-check"></i><b>3.4</b> R表格<span></span></a></li>
 <li class="chapter" data-level="3.5" data-path="Rmarkdown.html"><a href="Rmarkdown.html#r图"><i class="fa fa-check"></i><b>3.5</b> R图<span></span></a></li>
-<li class="chapter" data-level="3.6" data-path="Rmarkdown.html"><a href="Rmarkdown.html#公式"><i class="fa fa-check"></i><b>3.6</b> 公式<span></span></a></li>
+<li class="chapter" data-level="3.6" data-path="Rmarkdown.html"><a href="Rmarkdown.html#公式-1"><i class="fa fa-check"></i><b>3.6</b> 公式<span></span></a></li>
 <li class="chapter" data-level="3.7" data-path="Rmarkdown.html"><a href="Rmarkdown.html#制表式截面"><i class="fa fa-check"></i><b>3.7</b> 制表式截面<span></span></a>
 <ul>
 <li class="chapter" data-level="3.7.1" data-path="Rmarkdown.html"><a href="Rmarkdown.html#by-product"><i class="fa fa-check"></i><b>3.7.1</b> By Product<span></span></a></li>
@@ -234,7 +249,7 @@ Rmarkdown 文本文件的语法
 <li class="chapter" data-level="4.1" data-path="bookdown.html"><a href="bookdown.html#章节编号和引用"><i class="fa fa-check"></i><b>4.1</b> 章节编号和引用<span></span></a>
 <ul>
 <li class="chapter" data-level="4.1.1" data-path="bookdown.html"><a href="bookdown.html#编号"><i class="fa fa-check"></i><b>4.1.1</b> 编号<span></span></a></li>
-<li class="chapter" data-level="4.1.2" data-path="bookdown.html"><a href="bookdown.html#引用"><i class="fa fa-check"></i><b>4.1.2</b> 引用<span></span></a></li>
+<li class="chapter" data-level="4.1.2" data-path="bookdown.html"><a href="bookdown.html#引用-1"><i class="fa fa-check"></i><b>4.1.2</b> 引用<span></span></a></li>
 </ul></li>
 <li class="chapter" data-level="4.2" data-path="bookdown.html"><a href="bookdown.html#usage-writing-fig"><i class="fa fa-check"></i><b>4.2</b> 图形自动编号<span></span></a></li>
 <li class="chapter" data-level="4.3" data-path="bookdown.html"><a href="bookdown.html#usage-writing-tab"><i class="fa fa-check"></i><b>4.3</b> 表格自动编号<span></span></a></li>
@@ -346,34 +361,34 @@ Rmarkdown 文本文件的语法
 </div>
 <div id="yaml" class="section level3 hasAnchor" number="5.3.2">
 <h3><span class="header-section-number">5.3.2</span> YAML<a href="Xaringan.html#yaml" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb14"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb14-1"><a href="Xaringan.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;幻灯忍者&quot;</span></span>
-<span id="cb14-2"><a href="Xaringan.html#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">subtitle</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;写轮眼&quot;</span></span>
-<span id="cb14-3"><a href="Xaringan.html#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">author</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;黄蒙 &amp;#9993;huangmeng@ucass.edu.cn&quot;</span></span>
-<span id="cb14-4"><a href="Xaringan.html#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="fu">institute</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;RStudio, PBC&quot;</span></span>
-<span id="cb14-5"><a href="Xaringan.html#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">date</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;2016/12/12&quot;</span></span>
-<span id="cb14-6"><a href="Xaringan.html#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span></span>
-<span id="cb14-7"><a href="Xaringan.html#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="at">  xaringan:</span><span class="fu">:moon_reader</span><span class="kw">:</span></span>
-<span id="cb14-8"><a href="Xaringan.html#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">css</span><span class="kw">:</span></span>
-<span id="cb14-9"><a href="Xaringan.html#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> default</span><span class="co"> # 提供了几个默认类，所以这行必须有，哪怕用了别的主题</span></span>
-<span id="cb14-10"><a href="Xaringan.html#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> default-fonts</span></span>
-<span id="cb14-11"><a href="Xaringan.html#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> fc</span></span>
-<span id="cb14-12"><a href="Xaringan.html#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> fc-fonts</span></span>
-<span id="cb14-13"><a href="Xaringan.html#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> zh-CN.css</span></span>
-<span id="cb14-14"><a href="Xaringan.html#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css&quot;</span><span class="co">  # animation in transition, https://github.com/yihui/xaringan/issues/184</span></span>
-<span id="cb14-15"><a href="Xaringan.html#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">self_contained</span><span class="kw">:</span><span class="at"> </span><span class="ch">no</span><span class="co"> # Whether to produce a self-contained HTML file by embedding all external resources into the HTML file.（可能需要科学上网，才能将Xaringan所依赖的js脚本、谷歌字体等文件嵌入本地 html）</span></span>
-<span id="cb14-16"><a href="Xaringan.html#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">lib_dir</span><span class="kw">:</span><span class="at"> libs</span></span>
-<span id="cb14-17"><a href="Xaringan.html#cb14-17" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">seal</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span><span class="co"> # 是否根据 YAML 信息自动生成首页</span></span>
-<span id="cb14-18"><a href="Xaringan.html#cb14-18" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">nature</span><span class="kw">:</span></span>
-<span id="cb14-19"><a href="Xaringan.html#cb14-19" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">ratio</span><span class="kw">:</span><span class="at"> </span><span class="st">&#39;16:9&#39;</span><span class="co"> # 默认4:3</span></span>
-<span id="cb14-20"><a href="Xaringan.html#cb14-20" aria-hidden="true" tabindex="-1"></a><span class="co">      # titleSlideClass: [&quot;center&quot;, &#39;inverse&#39;,&quot;middle&quot;] # 默认首页的样式</span></span>
-<span id="cb14-21"><a href="Xaringan.html#cb14-21" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">highlightStyle</span><span class="kw">:</span><span class="at"> github</span></span>
-<span id="cb14-22"><a href="Xaringan.html#cb14-22" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">highlightLines</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span><span class="co"> # 当一行 R 代码被 {{ }} 包裹时，允许其高亮</span></span>
-<span id="cb14-23"><a href="Xaringan.html#cb14-23" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">countIncrementalSlides</span><span class="kw">:</span><span class="at"> </span><span class="ch">yes</span></span>
-<span id="cb14-24"><a href="Xaringan.html#cb14-24" aria-hidden="true" tabindex="-1"></a><span class="co">      # beforeInit: &quot;macro/macro.js&quot; # 在 remark.js 渲染前插入js脚本，例如该脚本可以快捷定义图片的size</span></span>
-<span id="cb14-25"><a href="Xaringan.html#cb14-25" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">autoplay</span><span class="kw">:</span><span class="at"> </span></span>
-<span id="cb14-26"><a href="Xaringan.html#cb14-26" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">interval</span><span class="kw">:</span><span class="at"> </span><span class="dv">60000</span><span class="co"> # 自动播放一页时间间隔（单位：毫秒）</span></span>
-<span id="cb14-27"><a href="Xaringan.html#cb14-27" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">loop</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span><span class="co"> # 是否循环</span></span>
-<span id="cb14-28"><a href="Xaringan.html#cb14-28" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">countdown</span><span class="kw">:</span><span class="at"> </span><span class="dv">60000</span><span class="co"> # 每页的倒计时</span></span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb15-1"><a href="Xaringan.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;幻灯忍者&quot;</span></span>
+<span id="cb15-2"><a href="Xaringan.html#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">subtitle</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;写轮眼&quot;</span></span>
+<span id="cb15-3"><a href="Xaringan.html#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">author</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;黄蒙 &amp;#9993;huangmeng@ucass.edu.cn&quot;</span></span>
+<span id="cb15-4"><a href="Xaringan.html#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="fu">institute</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;RStudio, PBC&quot;</span></span>
+<span id="cb15-5"><a href="Xaringan.html#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="fu">date</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;2016/12/12&quot;</span></span>
+<span id="cb15-6"><a href="Xaringan.html#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span></span>
+<span id="cb15-7"><a href="Xaringan.html#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="at">  xaringan:</span><span class="fu">:moon_reader</span><span class="kw">:</span></span>
+<span id="cb15-8"><a href="Xaringan.html#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">css</span><span class="kw">:</span></span>
+<span id="cb15-9"><a href="Xaringan.html#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> default</span><span class="co"> # 提供了几个默认类，所以这行必须有，哪怕用了别的主题</span></span>
+<span id="cb15-10"><a href="Xaringan.html#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> default-fonts</span></span>
+<span id="cb15-11"><a href="Xaringan.html#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> fc</span></span>
+<span id="cb15-12"><a href="Xaringan.html#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> fc-fonts</span></span>
+<span id="cb15-13"><a href="Xaringan.html#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> zh-CN.css</span></span>
+<span id="cb15-14"><a href="Xaringan.html#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css&quot;</span><span class="co">  # animation in transition, https://github.com/yihui/xaringan/issues/184</span></span>
+<span id="cb15-15"><a href="Xaringan.html#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">self_contained</span><span class="kw">:</span><span class="at"> </span><span class="ch">no</span><span class="co"> # Whether to produce a self-contained HTML file by embedding all external resources into the HTML file.（可能需要科学上网，才能将Xaringan所依赖的js脚本、谷歌字体等文件嵌入本地 html）</span></span>
+<span id="cb15-16"><a href="Xaringan.html#cb15-16" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">lib_dir</span><span class="kw">:</span><span class="at"> libs</span></span>
+<span id="cb15-17"><a href="Xaringan.html#cb15-17" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">seal</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span><span class="co"> # 是否根据 YAML 信息自动生成首页</span></span>
+<span id="cb15-18"><a href="Xaringan.html#cb15-18" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">nature</span><span class="kw">:</span></span>
+<span id="cb15-19"><a href="Xaringan.html#cb15-19" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">ratio</span><span class="kw">:</span><span class="at"> </span><span class="st">&#39;16:9&#39;</span><span class="co"> # 默认4:3</span></span>
+<span id="cb15-20"><a href="Xaringan.html#cb15-20" aria-hidden="true" tabindex="-1"></a><span class="co">      # titleSlideClass: [&quot;center&quot;, &#39;inverse&#39;,&quot;middle&quot;] # 默认首页的样式</span></span>
+<span id="cb15-21"><a href="Xaringan.html#cb15-21" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">highlightStyle</span><span class="kw">:</span><span class="at"> github</span></span>
+<span id="cb15-22"><a href="Xaringan.html#cb15-22" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">highlightLines</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span><span class="co"> # 当一行 R 代码被 {{ }} 包裹时，允许其高亮</span></span>
+<span id="cb15-23"><a href="Xaringan.html#cb15-23" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">countIncrementalSlides</span><span class="kw">:</span><span class="at"> </span><span class="ch">yes</span></span>
+<span id="cb15-24"><a href="Xaringan.html#cb15-24" aria-hidden="true" tabindex="-1"></a><span class="co">      # beforeInit: &quot;macro/macro.js&quot; # 在 remark.js 渲染前插入js脚本，例如该脚本可以快捷定义图片的size</span></span>
+<span id="cb15-25"><a href="Xaringan.html#cb15-25" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">autoplay</span><span class="kw">:</span><span class="at"> </span></span>
+<span id="cb15-26"><a href="Xaringan.html#cb15-26" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">interval</span><span class="kw">:</span><span class="at"> </span><span class="dv">60000</span><span class="co"> # 自动播放一页时间间隔（单位：毫秒）</span></span>
+<span id="cb15-27"><a href="Xaringan.html#cb15-27" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">loop</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span><span class="co"> # 是否循环</span></span>
+<span id="cb15-28"><a href="Xaringan.html#cb15-28" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">countdown</span><span class="kw">:</span><span class="at"> </span><span class="dv">60000</span><span class="co"> # 每页的倒计时</span></span></code></pre></div>
 </div>
 <div id="content-classes" class="section level3 hasAnchor" number="5.3.3">
 <h3><span class="header-section-number">5.3.3</span> Content Classes<a href="Xaringan.html#content-classes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -425,7 +440,7 @@ gitbook.start({
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
-"theme": "sepia",
+"theme": "white",
 "family": "sans",
 "size": 2
 },
@@ -438,8 +453,11 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["_main.pdf", "_main.epub"],
-"search": false,
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "subsection"
 }
