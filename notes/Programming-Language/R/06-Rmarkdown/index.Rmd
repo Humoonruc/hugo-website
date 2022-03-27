@@ -13,13 +13,15 @@ csl: china-journal-of-economic-research.csl
 link-citations: yes
 output: 
   bookdown::html_document2:
+    self_contained: false
+    lib_dir: libs
     code_download: yes
+    code_folding: show
     css: ./css/style.css
     fig_caption: yes
     theme: united
     highlight: haddock
     number_sections: yes
-    code_folding: show
     df_print: paged
     toc: yes
     toc_depth: 4
@@ -96,6 +98,8 @@ library(data.table)
 library(magrittr)
 library(plotly)
 library(htmlwidgets)
+library(xfun)
+library(downloadthis)
 
 # use necessary packages
 library('pacman')
@@ -429,8 +433,6 @@ $$
 3. “/”表示路径时，前后都不加空格。
 4. 负号后面接数字不加空格。
 
-
-
 # R Markdown语法{#Rmarkdown}
 
 ## 基本语法
@@ -518,6 +520,85 @@ $$
 
 (tab content)
 
+## 下载资源文件/文件夹
+
+### `xfun` package
+
+在页面中显示一个下载链接。
+
+该包理论上有三个函数，`xfun::embed_file()`, `xfun::embed_files()`和`xfun::embed_dir()`，但只有第一个能用，后两个似乎有bug.
+
+`xfun::embed_file(path, name = basename(path), text = paste("Download", name), ...)`，后两个参数均可省略。
+
+```{r}
+# a single file
+xfun::embed_file(
+  path = "./figure/resource.png",
+  name = "scatter",
+  text = "Download resource files"
+)
+```
+
+### `downloadthis` package
+
+#### Data frames, lists, or any R object
+
+```{r}
+mtcars %>%
+  downloadthis::download_this(
+    output_name = "mtcars data set",
+    output_extension = ".csv",
+    button_label = "Download data: mtcars",
+    button_type = "success"
+  )
+```
+
+```{r}
+vector_example <- 1:10
+linear_model <- lm(mpg ~ gear, data = mtcars)
+
+list(mtcars, iris, vector_example, linear_model) %>%
+  downloadthis::download_this(
+    output_name = "datasets, vector, and linear model",
+    output_extension = ".rds",
+    button_label = "Download data as rds",
+    button_type = "success"
+  )
+```
+
+#### Web address
+
+```{r}
+downloadthis::download_link(
+  link = "https://github.com/fmmattioni/downloadthis/raw/master/inst/example/file_1.pdf",
+  button_label = "Download online pdf",
+  button_type = "warning",
+  self_contained = FALSE
+)
+```
+
+
+#### Local files and directory
+
+```{r}
+downloadthis::download_file(
+  path = c("./figure/resource.png", "./figure/resource.pdf"),
+  output_name = "scatter",
+  button_label = "Download local files",
+  button_type = "danger",
+  self_contained = FALSE
+)
+```
+
+```{r}
+downloadthis::download_dir(
+  path = "./figure",
+  output_name = "figures",
+  button_label = "Download figure dir",
+  button_type = "danger",
+  self_contained = FALSE
+)
+```
 
 
 # bookdown语法{#bookdown}

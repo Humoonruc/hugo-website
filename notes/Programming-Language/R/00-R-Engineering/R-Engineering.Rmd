@@ -3,19 +3,7 @@ title: "R Engineering"
 subtitle: 'System, Modularization, Code Style and IDE'
 author: "Humoon"
 date: "`r Sys.Date()`"
-output:
-  html_document: 
-    code_download: true
-    css: ["../css/style.css"]
-    fig_caption: yes
-    theme: united
-    highlight: haddock
-    number_sections: no
-    toc: yes
-    toc_depth: 4
-    toc_float:
-      collapsed: yes
-      smooth_scroll: yes
+output: html_document
 documentclass: ctexart
 classoption: hyperref,
 ---
@@ -45,16 +33,7 @@ knitr::opts_chunk$set(
   cache.comments = config$cache.comments,
   autodep = config$autodep
 )
-
-## use necessary packages ==============================
-library(tidyverse)
-library(data.table)
-library(magrittr)
-library(plotly)
-library(htmlwidgets)
 ```
-
-[TOC]
 
 ## System interaction
 
@@ -222,9 +201,19 @@ install.packages("styler")
 
 ### Rstudio
 
-<a href="../pdf/cheatsheet-rstudio-ide.pdf"><strong>R Studio cheatsheet.pdf</strong></a>，预览：
+[R Studio cheatsheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/rstudio-ide.pdf) 预览：
 
 <object data="../pdf/cheatsheet-rstudio-ide.pdf" type="application/pdf" width="100%" height="100%"></object>
+
+```{r, echo=FALSE}
+downloadthis::download_file(
+  path = "../pdf/cheatsheet-rstudio-ide.pdf",
+  output_name = "cheatsheet-rstudio-ide",
+  button_label = "Download cheatsheet",
+  button_type = "success",
+  self_contained = FALSE
+)
+```
 
 
 | Shortcuts                                                  |                                                              |

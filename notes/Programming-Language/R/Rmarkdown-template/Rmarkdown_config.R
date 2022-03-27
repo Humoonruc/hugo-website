@@ -1,4 +1,14 @@
-# Rmarkdown 文件配置参数
+# import modules
+library(tidyverse)
+library(data.table)
+library(magrittr)
+library(plotly)
+library(htmlwidgets)
+library(xfun)
+library(downloadthis)
+
+
+# .Rmd 配置参数
 config <- list(
   width = 80,
   fig.width = 6,
@@ -22,7 +32,6 @@ config <- list(
 
 
 # 自定义 ggplot2 主题
-library(tidyverse)
 library(ggthemes)
 my_theme <- theme_economist_white() +
   theme(

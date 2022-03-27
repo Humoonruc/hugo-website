@@ -24,7 +24,7 @@
 <meta name="author" content="黄蒙 ✉huangmeng@ucass.edu.cn" />
 
 
-<meta name="date" content="2022-03-23" />
+<meta name="date" content="2022-03-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -64,6 +64,7 @@ div.abstract{
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/font-awesome-5.13.0/js/script.js"></script>
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   jax: ["input/TeX","output/SVG"],
@@ -243,6 +244,11 @@ Rmarkdown 文本文件的语法
 <li class="chapter" data-level="3.7.1" data-path="Rmarkdown.html"><a href="Rmarkdown.html#by-product"><i class="fa fa-check"></i><b>3.7.1</b> By Product<span></span></a></li>
 <li class="chapter" data-level="3.7.2" data-path="Rmarkdown.html"><a href="Rmarkdown.html#by-region"><i class="fa fa-check"></i><b>3.7.2</b> By Region<span></span></a></li>
 </ul></li>
+<li class="chapter" data-level="3.8" data-path="Rmarkdown.html"><a href="Rmarkdown.html#下载资源文件文件夹"><i class="fa fa-check"></i><b>3.8</b> 下载资源文件/文件夹<span></span></a>
+<ul>
+<li class="chapter" data-level="3.8.1" data-path="Rmarkdown.html"><a href="Rmarkdown.html#xfun-package"><i class="fa fa-check"></i><b>3.8.1</b> <code>xfun</code> package<span></span></a></li>
+<li class="chapter" data-level="3.8.2" data-path="Rmarkdown.html"><a href="Rmarkdown.html#downloadthis-package"><i class="fa fa-check"></i><b>3.8.2</b> <code>downloadthis</code> package<span></span></a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="bookdown.html"><a href="bookdown.html"><i class="fa fa-check"></i><b>4</b> bookdown语法<span></span></a>
 <ul>
@@ -314,7 +320,7 @@ Rmarkdown 文本文件的语法
 <div id="usage-writing-fig" class="section level2 hasAnchor" number="4.2">
 <h2><span class="header-section-number">4.2</span> 图形自动编号<a href="bookdown.html#usage-writing-fig" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>用R代码块生成的图形，只要具有代码块标签label，且提供代码段选项<code>fig.cap="图题"</code>，就可对图形自动编号，并且可以用如<code>\@ref(fig:label)</code>的格式引用图形。如：</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="bookdown.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="bookdown.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:u-w-f-ex01"></span>
 <img src="figure/u-w-f-ex01-1.png" alt="测试图" width="70%" />
 <p class="caption">
@@ -326,8 +332,8 @@ Figure 4.1: 测试图
 <div id="usage-writing-tab" class="section level2 hasAnchor" number="4.3">
 <h2><span class="header-section-number">4.3</span> 表格自动编号<a href="bookdown.html#usage-writing-tab" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>用R代码<code>knitr::kable()</code>生成的表格，只要具有代码块标签，并且在<code>knitr::kable()</code>调用时加选项<code>caption="表题"</code>，就可以对表格自动编号，并且可以用如<code>\@ref(tab:label)</code>的格式引用表格。如：</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="bookdown.html#cb13-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="st">&quot;自变量&quot;</span> <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="st">&quot;因变量&quot;</span> <span class="ot">=</span> (<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb13-2"><a href="bookdown.html#cb13-2" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(d, <span class="at">caption =</span> <span class="st">&quot;1到10的平方&quot;</span>, <span class="at">longtable =</span> <span class="cn">TRUE</span> )</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="bookdown.html#cb19-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="st">&quot;自变量&quot;</span> <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="st">&quot;因变量&quot;</span> <span class="ot">=</span> (<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb19-2"><a href="bookdown.html#cb19-2" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(d, <span class="at">caption =</span> <span class="st">&quot;1到10的平方&quot;</span>, <span class="at">longtable =</span> <span class="cn">TRUE</span> )</span></code></pre></div>
 <table>
 <caption><span id="tab:u-w-tab-ex01">Table 4.1: </span>1到10的平方</caption>
 <thead>

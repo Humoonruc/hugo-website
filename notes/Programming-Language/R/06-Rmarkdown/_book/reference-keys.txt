@@ -68,3 +68,9 @@ slides-and-properties
 yaml
 content-classes
 css-and-themes
+下载资源文件文件夹
+xfun-package
+downloadthis-package
+data-frames-lists-or-any-r-object
+web-address
+local-files-and-directory

@@ -1,0 +1,120 @@
+---
+title: "Download Resources from .html"
+subtitle: ''
+author: "Humoon"
+date: "`r Sys.Date()`"
+output: html_document
+documentclass: ctexart
+classoption: hyperref,
+---
+
+```{r setup, include = FALSE}
+source("../lib/Rmarkdown_config.R")
+
+## global options ===================================
+knitr::opts_chunk$set(
+  width = config$width,
+  fig.width = config$fig.width,
+  fig.asp = config$fig.asp,
+  out.width = config$out.width,
+  fig.align = config$fig.align,
+  fig.path = config$fig.path,
+  fig.show = config$fig.show,
+  warn = config$warn,
+  warning = config$warning,
+  message = config$message,
+  echo = config$echo,
+  eval = config$eval,
+  tidy = config$tidy,
+  comment = config$comment,
+  collapse = config$collapse,
+  cache = config$cache,
+  cache.comments = config$cache.comments,
+  autodep = config$autodep
+)
+```
+
+
+```{r}
+# modules
+library(xfun)
+library(downloadthis)
+```
+
+## `xfun` package
+
+在页面中显示一个下载链接。
+
+该包理论上有三个函数，`xfun::embed_file()`, `xfun::embed_files()`和`xfun::embed_dir()`，但只有第一个能用，后两个似乎有bug.
+
+`xfun::embed_file(path, name = basename(path), text = paste("Download", name), ...)`，后两个参数均可省略。
+
+```{r}
+# a single file
+xfun::embed_file(
+  path = "../figure/animation.html",
+  name = "plotly-animation",
+  text = "Download animation.html which contain an animation."
+)
+```
+
+## `downloadthis` package
+
+### Data frames, lists, or any R object
+
+```{r}
+mtcars %>%
+  downloadthis::download_this(
+    output_name = "mtcars data set",
+    output_extension = ".csv",
+    button_label = "Download data: mtcars",
+    button_type = "success"
+  )
+```
+
+```{r}
+vector_example <- 1:10
+linear_model <- lm(mpg ~ gear, data = mtcars)
+
+list(mtcars, iris, vector_example, linear_model) %>%
+  downloadthis::download_this(
+    output_name = "datasets, vector, and linear model",
+    output_extension = ".rds",
+    button_label = "Download data as rds",
+    button_type = "success"
+  )
+```
+
+### Web address
+
+```{r}
+downloadthis::download_link(
+  link = "https://github.com/fmmattioni/downloadthis/raw/master/inst/example/file_1.pdf",
+  button_label = "Download online pdf",
+  button_type = "warning",
+  self_contained = FALSE
+)
+```
+
+
+### Local files and directory
+
+```{r}
+downloadthis::download_file(
+  path = c("../figure/animation.html", "../figure/动态气泡图.html"),
+  output_name = "animation",
+  button_label = "Download local files",
+  button_type = "danger",
+  self_contained = FALSE
+)
+```
+
+```{r}
+downloadthis::download_dir(
+  path = "../figure/lib",
+  output_name = "animation-dir",
+  button_label = "Download local dependencies",
+  button_type = "danger",
+  self_contained = FALSE
+)
+```

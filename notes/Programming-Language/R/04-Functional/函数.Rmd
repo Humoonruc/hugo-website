@@ -1,0 +1,283 @@
+---
+title: "函数"
+subtitle: ''
+author: "Humoon"
+date: "`r Sys.Date()`"
+output:
+  html_document: 
+    code_download: true
+    css: ["../css/style.css"]
+    fig_caption: yes
+    theme: united
+    highlight: haddock
+    number_sections: no
+    toc: yes
+    toc_depth: 4
+    toc_float:
+      collapsed: yes
+      smooth_scroll: yes
+documentclass: ctexart
+classoption: hyperref,
+---
+
+```{r setup, include = FALSE}
+source("../Rmarkdown-template/Rmarkdown_config.R")
+
+## global options ===================================
+knitr::opts_chunk$set(
+  width = config$width,
+  fig.width = config$fig.width,
+  fig.asp = config$fig.asp,
+  out.width = config$out.width,
+  fig.align = config$fig.align,
+  fig.path = config$fig.path,
+  fig.show = config$fig.show,
+  warn = config$warn,
+  warning = config$warning,
+  message = config$message,
+  echo = config$echo,
+  eval = config$eval,
+  tidy = config$tidy,
+  comment = config$comment,
+  collapse = config$collapse,
+  cache = config$cache,
+  cache.comments = config$cache.comments,
+  autodep = config$autodep
+)
+
+## use necessary packages ==============================
+library(tidyverse)
+library(data.table)
+library(magrittr)
+library(plotly)
+library(htmlwidgets)
+```
+
+## Function
+
+### 函数皆对象
+
+R 中所有的函数都是对象，自定义函数都是一个赋值为对象的过程。
+
+```{r}
+add <- function(a, b) {
+  a + b
+}
+add %>% class()
+
+# 查看函数
+add
+
+# 调用函数
+add(1, 3)
+```
+
+### 操作符皆函数
+
+```{r}
+head(iris)
+`[`(head(iris), 2) # 数据框的本质是list，筛选第二个元素，还是一个list
+`[[`(head(iris), 2) # 提取第二个元素，是一个vector
+
+a <- 2:4
+`[<-`(a, 2, 10) # a[2] <- 10; a
+```
+
+#### 常用操作符
+
+##### 四则运算
+
+加、减、乘(`*`)、除(`/`)、幂`^`, 除法取整（`%/%`）、除法取余（`%%`）
+
+#### 自定义二元运算符
+
+必须用反引号和百分号引起来
+
+```{r}
+`%myop%` <- function(a, b) {
+  2 * a + 3 * b
+}
+1 %myop% 1
+1 %myop% 2
+```
+
+### 匿名函数
+
+为了节省变量名，很多时候可以使用匿名函数。
+
+匿名函数有几种写法，以 `purrr::map2()` 中为例：
+
+```{r}
+# 写法1，关键字 function 不缺，只省略了函数名的定义
+map2_dbl(1:10, 11:20, function(x, y) y - x)
+
+# 写法2，将关键字 function 简写为\
+map2_dbl(1:10, 11:20, \(x, y) y - x)
+
+# 写法3，用~代表匿名函数，.x(或.), .y代表自变量
+map2_dbl(1:10, 11:20, ~ .y - .x)
+map2_dbl(1:10, 11:20, ~ .y - .)
+```
+
+**不建议使用 `~ .x` 的写法**，因为这种写法有两个缺陷：
+
+1. 匿名函数最多有两个自变量，`.z`是不被认可的
+2. 配合动态参数`...`一起使用时，**存在bug**，`...`会连写明的`.x`一起捕获
+
+
+### 参数
+
+```{r}
+add(as.Date("2020-02-02"), 2)
+```
+
+#### 参数无定义
+
+若函数的某个参数没有传递值，`missing(parameter)` 返回 TRUE
+
+```{r}
+myplot <- function(x, y) {
+  if (missing(y)) {
+    y <- x
+    x <- 1:length(y)
+  }
+  plot(x, y)
+}
+
+myplot(c(6, 7, 8))
+```
+
+#### 参数默认值
+
+默认值可以是一个值，也可以是一个表达式，其中包含了其前面定义的其他参数
+
+```{r}
+m <- 1:5
+test3 <- function(x, n = floor(length(m) / 2)) {
+  x[1:n]
+}
+test3(letters)
+```
+
+#### 动态参数
+
+`...`能捕获任意数量的未匹配参数
+
+##### 用法一：由一般函数特化而来的特殊函数
+
+```{r}
+# 最具一般性的函数，参数最完整，包含大量默认值
+f <- function(x, t, u = 0, v = 0) {
+  if (t == 1) {
+    return(x + u + v)
+  }
+  if (t == 2) {
+    return(x^2 + u + v)
+  }
+}
+
+f(5, 1, 3, 2)
+f(5, 2, 3, 2)
+f(5, 1)
+f(5, 2)
+
+# 通过对一部分参数（t）的特化，实现一般基础上的特殊函数
+# 为了简便，可以省略大量已有默认值的参数
+g <- function(x, ...) {
+  f(x, 1, ...)
+}
+
+h <- function(x, ...) {
+  f(x, 2, ...)
+}
+
+g(5, 3, 2)
+h(5, 3, 2)
+g(5)
+h(5)
+```
+
+
+##### 用法二：捕获未知个数的参数
+
+在函数内部，可以直接用`str_c()`将`...`合并为字符串（长度为1）
+
+但也可以用`list(...)`将其转化为列表（长度一般大于1）再处理
+
+```{r}
+# 合并为字符串
+rule <- function(..., pad = "=") {
+  print(str_c(..., sep = " "))
+  print(length(str_c(..., sep = " ")))
+  args <- list(...)
+  print(args)
+  print(length(args))
+  print(str_c(args, sep = " "))
+  print(length(str_c(args, sep = " ")))
+
+
+  title <- str_c(..., sep = " ")
+  width <- getOption("width") - nchar(title) - 5
+  cat(title, " ", stringr::str_dup(pad, width), "\n")
+}
+rule("Important", "output")
+
+
+# 读取为list
+multip <- function(x, ...) {
+  args <- list(...) ## 获取所有参数
+  x + args[[1]] - args[[2]]
+}
+multip(3, 2, 3)
+```
+
+#### 惰性求值
+
+在函数调用时，参数的值只有被实际用到时才会被执行。这样可以避免不必要的计算，节省时间。
+
+```{r}
+test0 <- function(x, y) {
+  if (x > 0) {
+    x
+  } else {
+    y
+  }
+}
+
+# 生成大量随机数的耗时
+system.time(rnorm(10000000))
+
+# 惰性求值，第二个参数并未执行
+system.time(test0(1, rnorm(10000000)))
+```
+
+### 返回值
+
+若无`return()`, 默认返回最后一个表达式的值
+
+**R 风格的代码，通常省略 `return()`**
+
+希望返回多个值时，一般用 list 或 dataframe 封装（就像 js 中用对象封装）
+
+### 泛型函数
+
+```{r}
+calc <-
+  function(x, y, type) {
+    if (length(type > 1L)) {
+      stop(" Only a single type is accepted")
+    }
+
+    if (type == "add") {
+      x + y
+    } else if (type == "minus") {
+      x - y
+    } else if (type == "multiply") {
+      x * y
+    } else if (type == "divide") {
+      x / y
+    } else {
+      stop(" Unknown type of operation")
+    }
+  }
+```

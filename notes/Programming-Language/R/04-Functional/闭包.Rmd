@@ -1,0 +1,148 @@
+---
+title: "闭包"
+subtitle: ''
+author: "Humoon"
+date: "`r Sys.Date()`"
+output:
+  html_document: 
+    code_download: true
+    css: ["../css/style.css"]
+    fig_caption: yes
+    theme: united
+    highlight: haddock
+    number_sections: no
+    toc: yes
+    toc_depth: 4
+    toc_float:
+      collapsed: yes
+      smooth_scroll: yes
+documentclass: ctexart
+classoption: hyperref,
+---
+
+```{r setup, include = FALSE}
+source("../Rmarkdown-template/Rmarkdown_config.R")
+
+## global options ===================================
+knitr::opts_chunk$set(
+  width = config$width,
+  fig.width = config$fig.width,
+  fig.asp = config$fig.asp,
+  out.width = config$out.width,
+  fig.align = config$fig.align,
+  fig.path = config$fig.path,
+  fig.show = config$fig.show,
+  warn = config$warn,
+  warning = config$warning,
+  message = config$message,
+  echo = config$echo,
+  eval = config$eval,
+  tidy = config$tidy,
+  comment = config$comment,
+  collapse = config$collapse,
+  cache = config$cache,
+  cache.comments = config$cache.comments,
+  autodep = config$autodep
+)
+
+## use necessary packages ==============================
+library(tidyverse)
+library(data.table)
+library(magrittr)
+library(plotly)
+library(htmlwidgets)
+```
+
+## Closure
+
+函数工厂的产物就是闭包，它内含一些实例化时接收的工厂参数信息
+
+对象是带有函数的数据
+
+闭包是带有数据的函数
+
+```{r}
+pacman::p_load(pryr)
+
+
+# 函数工厂
+power <- function(exponent) {
+  function(x) x^exponent
+}
+
+square <- power(2) # square 被实例化时保存了2这个参数
+cube <- power(3) # cube 被实例化时保存了3这个参数
+
+# pryr 包可以查看生产出来的函数里面的重要参数
+pryr::unenclose(square)
+pryr::unenclose(cube)
+
+# 使用
+square(4)
+square(5)
+cube(4)
+```
+
+### 例1
+
+```{r}
+## 建立随机数据集=======================================
+set.seed(1014)
+df <-
+  replicate(5, sample(c(1:10, -99), 6, replace = TRUE)) %>% # 5轮抽样形成矩阵. replicate(n, f), 即重复运行f函数20次，它跟 apply 函数是一族
+  data.table() %>% # 建立数据框
+  set_colnames(letters[1:5])
+df # 其中 -99 是无效值
+
+
+## 无效值处理
+# 函数工厂
+missing_fixer <- function(na_value) {
+  (function(x) {
+    x[x == na_value] <- NA
+    return(x)
+  }) %>% return()
+}
+fix_missing_99 <- missing_fixer(-99)
+# 将无效值赋为NA
+df <- df %>% map_dfc(fix_missing_99)
+df
+
+
+## 统计
+summary <- function(x) {
+  results <- c(mean, median, sd, mad) %>%
+    map(function(f) {
+      return(f(x, na.rm = TRUE))
+    })
+  names(results) <- c("mean", "median", "sd", "mad")
+  return(results)
+}
+results_list <- df %>% map(summary)
+results_list
+```
+
+### 例2
+
+```{r}
+# 极大似然估计
+# 传递数据，返回包含待估参数的闭包
+nloglik <- function(x) {
+  n <- length(x)
+  function(mean, sd) {
+    log(2 * pi) * n / 2 + n * log(sd) + sum((x - mean)^2) / (2 * sd^2)
+  }
+}
+data <- rnorm(10000, 1, 2)
+fit <-
+  stats4::mle(
+    nloglik(data),
+    start = list(mean = 0, sd = 1),
+    method = "L-BFGS-B",
+    lower = c(-5, 0.01),
+    upper = c(5, 10)
+  )
+fit@coef
+hist(data, freq = F, ylim = c(0, 0.25))
+```
+

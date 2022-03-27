@@ -1,0 +1,15 @@
+html_document:
+  self_contained: false
+  lib_dir: libs
+  code_download: yes
+  code_folding: show
+  css: ../css/style.css
+  fig_caption: yes
+  theme: united
+  highlight: haddock
+  number_sections: no
+  toc: yes
+  toc_depth: 4
+  toc_float:
+    collapsed: yes
+    smooth_scroll: yes

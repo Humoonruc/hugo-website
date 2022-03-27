@@ -1,0 +1,287 @@
+---
+title: "管道"
+subtitle: ''
+author: "Humoon"
+date: "`r Sys.Date()`"
+output:
+  html_document: 
+    code_download: true
+    css: ["../css/style.css"]
+    fig_caption: yes
+    theme: united
+    highlight: haddock
+    number_sections: no
+    toc: yes
+    toc_depth: 4
+    toc_float:
+      collapsed: yes
+      smooth_scroll: yes
+documentclass: ctexart
+classoption: hyperref,
+---
+
+```{r setup, include = FALSE}
+source("../Rmarkdown-template/Rmarkdown_config.R")
+
+## global options ===================================
+knitr::opts_chunk$set(
+  width = config$width,
+  fig.width = config$fig.width,
+  fig.asp = config$fig.asp,
+  out.width = config$out.width,
+  fig.align = config$fig.align,
+  fig.path = config$fig.path,
+  fig.show = config$fig.show,
+  warn = config$warn,
+  warning = config$warning,
+  message = config$message,
+  echo = config$echo,
+  eval = config$eval,
+  tidy = config$tidy,
+  comment = config$comment,
+  collapse = config$collapse,
+  cache = config$cache,
+  cache.comments = config$cache.comments,
+  autodep = config$autodep
+)
+
+## use necessary packages ==============================
+library(tidyverse)
+library(data.table)
+library(magrittr)
+library(plotly)
+library(htmlwidgets)
+```
+
+
+## Pipeline
+
+### 管道操作符
+
+传递数据流，保障数据安全，省去不必要中间变量，使代码更加清晰易读。
+
+#### `|>`
+
+这是 4.1.0 版本新发布的 base R 管道操作符。
+
+但它无法配合 placeholder `.`，只能把对象传给后面函数的第一个参数，因此远不如 magrittr 包的 `%>%` 系列灵活。
+
+可以忽略该语法糖。
+
+#### `%>%` 右向管道操作符
+
+传递对象给右边的函数或表达式。当对象在右边函数的第一个参数时，可以省略这个参数；不是第一个参数时，则可以用`.`代替。如果是一元函数，甚至可以连`()`也省掉，只保留函数名。
+
+![管道操作符](http://humoon-image-hosting-service.oss-cn-beijing.aliyuncs.com/img/typora/JavaScript/%E7%AE%A1%E9%81%93%E6%93%8D%E4%BD%9C%E7%AC%A6.png)
+
+```{r}
+set.seed(123)
+a <- rnorm(10)
+a
+
+# 由此可见：`*`和`+`其实是两个函数！接收传来的数据流作为自己的第一个参数
+a %>%
+  `*`(5) %>%
+  `+`(5)
+```
+
+#### `%T>%` 左向管道操作符
+
+必须与`%>%`配合使用。
+
+![T管道操作符](http://humoon-image-hosting-service.oss-cn-beijing.aliyuncs.com/img/typora/JavaScript/T%E7%AE%A1%E9%81%93%E6%93%8D%E4%BD%9C%E7%AC%A6.png)
+
+例1：在数据处理的中间过程，需要打印输出或图片输出（如观察代码是否达到了预设的目的），这时整个过程就会被中断，用向左操作符就可以解决这样的问题。
+
+```{r}
+# 为了提高可读性，%T>% 不换行
+rnorm(100) %>%
+  matrix(ncol = 2) %T>% plot %>%
+  str()
+```
+
+#### `%$%` 爆炸操作符
+
+一些基础函数只接受向量作为参数，而不接受数据框，爆炸操作符可以绑定数据框，让右侧的函数可以直接使用列名
+
+```{r}
+mtcars %$% cor(disp, mpg)
+```
+
+相当于
+
+```{r}
+cor(mtcars$disp, mtcars$mpg)
+```
+
+#### `%<>%` 复合赋值操作符
+
+功能与`%>%`基本一样，多了一项额外的操作，就是把结果写回左侧对象。所以其功能就是运算且更新。
+
+比如，我们需要对一个数据集进行排序，同时需要获得排序的结果，用`%<>%`就是非常方便的。
+
+现实原理如下图所示，使用`%<>%`把左侧的数据集A传递右侧的B函数，B函数的结果数据集再向右侧传递给C函数，C函数结果的数据集再重新赋值给A，完成整个过程。
+
+![复合赋值操作符](http://humoon-image-hosting-service.oss-cn-beijing.aliyuncs.com/img/typora/JavaScript/%E5%A4%8D%E5%90%88%E8%B5%8B%E5%80%BC%E6%93%8D%E4%BD%9C%E7%AC%A6.png)
+
+例：定义符合正态分布的100个随机数，计算绝对值，并按从小到大的顺序排序，获得并取前10个数字赋值给x。
+
+```{r}
+set.seed(1)
+x <- rnorm(100)
+a <- x %>%
+  abs() %>%
+  sort() %>%
+  head(10)
+a
+
+x %<>% abs %>%
+  sort() %>%
+  head(10)
+x
+```
+
+`%<>%`的主要作用是省略一步`<-`，但会造成变量的改变，程序的稳健性会因此削弱，最好不要用。
+
+### 流式操作的使用场景
+
+#### 在函数间传递数据
+
+略
+
+#### 用函数代替运算符操作数据
+
+泛函式编程的一大痛点在于，很容易写成一大堆函数的嵌套，造成可读性下降
+
+管道操作在很大程度上能够解决这个痛点
+
+用函数替代运算符与管道联用，是非常流畅的
+
+难得这些函数都支持向量化操作
+
+一般地，
+
+``` r
+fun(sym) <- value
+`fun<-`(sym, value) # 上一行是这一行的语法糖
+```
+
+| 新函数                                                                  | 原操作符[^2]                     |
+|-------------------------------------------------------------------------|----------------------------------|
+| `extract(x, index or 'col_name')`                                       | `[`，即`[`(x, index/'col_name')  |
+| `extract2(x, index or 'col_name')`                                      | `[[`，即`[[`(x, index'col_name') |
+| `inset()`                                                               | `[<-`                            |
+| `inset2()`                                                              | `[[<-`                           |
+| `set_colnames()`                                                        | `colnames()<-`                   |
+| `set_rownames()`                                                        | `rownames()<-`                   |
+| `magrittr::use_series()`（可用于list）, `dplyr::pull()`（不适用于list） | `$`                              |
+| add                                                                     | `+`                              |
+| subtract                                                                | `-`                              |
+| multiply_by                                                             | `*`                              |
+| raise_to_power                                                          | `^`                              |
+| multiply_by_matrix                                                      | `%*%`                            |
+| divide_by                                                               | `/`                              |
+| divide_by_int                                                           | `%/%`                            |
+| mod                                                                     | `%%`                             |
+| `is_in()`                                                               | `%in%`                           |
+| and                                                                     | `&`                              |
+| or                                                                      | `|`                              |
+| equals                                                                  | `==`                             |
+| is_greater_than                                                         | `>`                              |
+| is_weakly_greater_than                                                  | `>=`                             |
+| is_less_than                                                            | `<`                              |
+| is_weakly_less_than                                                     | `<=`                             |
+| not                                                                     | `!`                              |
+| `set_names()`                                                           | `names()<-`                      |
+
+[^2]: R 中的操作符其实都是函数，只不过是写法上特殊一点的无括号函数。因此上述替代大都不是绝对必要的，管道也可以和操作符函数配合，只不过都要用反引号将操作符括起来，显式指明这是一个函数。
+
+```{r}
+set.seed(1)
+x <- rnorm(10)
+x
+
+
+x %>%
+  multiply_by(5) %>%
+  add(5)
+x %>%
+  `*`(5) %>%
+  `+`(5)
+
+
+x <- 1:10
+x %<>% set_names(letters[1:10])
+# 作为参数传入函数时，会自动生成副本，x不会被修改，所以必须加赋值命令
+x
+
+x <- 1:10
+x %<>% `names<-`(letters[1:10]) # names()<- 在R中执行的真正形式
+x
+
+
+y <- list(c(1, 2), c("a", "b"))
+y %>% `[`(2) # 不能直接用extract()，已被其他包同名函数覆盖
+y %>% magrittr::extract(2)
+
+y %>% extract2(2)
+y %>%
+  extract2(2) %>%
+  class()
+y %>%
+  extract2(2) %>%
+  extract2(2)
+y %>%
+  map(extract2, 2) %>%
+  unlist()
+# unlist()拆分成vector，必须是同样的数据类型，那只能是数字退化为字符串
+
+df <- tibble(v1 = 1:26, v2 = letters)
+# 完成了列名赋值工作
+df %<>% set_colnames(c("id", "name")) %>%
+  filter(id %>% is_in(1:10)) # 替代 %in%
+df
+```
+
+#### 传递数据给代码块
+
+例：对一个包括10个随机数的向量的先\*5再+5，求出向量的均值和标准差，并从小到大排序后返回前5条。
+
+```{r}
+set.seed(1)
+a <- rnorm(10)
+a %>%
+  multiply_by(5) %>%
+  add(5) %>%
+  {
+    cat("Mean:", mean(.), "\nVar:", var(.), "\n")
+    sort(.) %>% head(5)
+  }
+
+# 等价于定义一个函数。还是应该定义函数，增强可读性
+display <- function(d) {
+  cat("Mean:", mean(d), "\nVar:", var(d), "\n")
+  sort(d) %>%
+    head(5) %>%
+    print()
+}
+a %>%
+  multiply_by(5) %>%
+  add(5) %>%
+  display()
+```
+
+#### 传递数据给匿名函数
+
+匿名函数`function(parameter){...}`外面要用括号`()`括起来
+
+```{r}
+iris %>%
+  (function(x) {
+    if (nrow(x) > 2) {
+      bind_rows(head(x, 1), tail(x, 1)) %>% return()
+    } else {
+      return(x)
+    }
+  })
+```
