@@ -124,16 +124,20 @@ show_col(seq(0, 1, length.out = 16) %>% gray())
 # 通过下列代码观察预先设定的颜色集
 library(RColorBrewer)
 display.brewer.all()
+display.brewer.all(type = 'seq')
+display.brewer.all(type = 'div')
+brewer.pal.info
+brewer.pal(n = 9, name = "YlGn") %>% # 选择一个调色板，n不能超过maxcolors
+  scales::show_col()
 
-# scales::brewer_pal()的palette参数规定一个颜色集，返回一个调色板
-scales::brewer_pal(palette = "RdBu")(9) %>% show_col()
+
+# 同样的功能还可用 scales::brewer_pal()
+scales::brewer_pal(palette = "YlGn")(9) %>% scales::show_col()
 ```
 
 ## 创建颜色比例尺
 
 上述调色板返回的颜色向量都是均匀变化的，但很多时候数据的变化是不均匀的，要求颜色也要不均匀的变化，这就需要一个真正的颜色比例尺。
-
-
 
 ```{r}
 library(scales)
@@ -168,4 +172,3 @@ c(num_domain, n) %>%
   `[`(length(num_domain) + 1) %>%
   show_col()
 ```
-

@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>2 markdown基本语法 | Rmarkdown 文本文件的语法</title>
   <meta name="description" content="2 markdown基本语法 | Rmarkdown 文本文件的语法" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.25 and GitBook 2.6.7" />
 
   <meta property="og:title" content="2 markdown基本语法 | Rmarkdown 文本文件的语法" />
   <meta property="og:type" content="book" />
-  
   
   
   
@@ -24,7 +23,7 @@
 <meta name="author" content="黄蒙 ✉huangmeng@ucass.edu.cn" />
 
 
-<meta name="date" content="2022-03-26" />
+<meta name="date" content="2022-03-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -43,7 +42,6 @@ div.abstract{
   width: 90%;
 }
 </style>
-<script src="libs/header-attrs-2.13/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -230,6 +228,13 @@ Rmarkdown 文本文件的语法
 </ul></li>
 <li class="chapter" data-level="2.17" data-path="markdown.html"><a href="markdown.html#锚点"><i class="fa fa-check"></i><b>2.17</b> 锚点<span></span></a></li>
 <li class="chapter" data-level="2.18" data-path="markdown.html"><a href="markdown.html#排版风格建议"><i class="fa fa-check"></i><b>2.18</b> 排版风格建议<span></span></a></li>
+<li class="chapter" data-level="2.19" data-path="markdown.html"><a href="markdown.html#mermaid"><i class="fa fa-check"></i><b>2.19</b> Mermaid<span></span></a>
+<ul>
+<li class="chapter" data-level="2.19.1" data-path="markdown.html"><a href="markdown.html#什么是mermaid"><i class="fa fa-check"></i><b>2.19.1</b> 什么是Mermaid？<span></span></a></li>
+<li class="chapter" data-level="2.19.2" data-path="markdown.html"><a href="markdown.html#图类型"><i class="fa fa-check"></i><b>2.19.2</b> 图类型<span></span></a></li>
+<li class="chapter" data-level="2.19.3" data-path="markdown.html"><a href="markdown.html#饼图"><i class="fa fa-check"></i><b>2.19.3</b> 饼图<span></span></a></li>
+<li class="chapter" data-level="2.19.4" data-path="markdown.html"><a href="markdown.html#流程图"><i class="fa fa-check"></i><b>2.19.4</b> 流程图<span></span></a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="Rmarkdown.html"><a href="Rmarkdown.html"><i class="fa fa-check"></i><b>3</b> R Markdown语法<span></span></a>
 <ul>
@@ -570,6 +575,197 @@ f(x)=\frac{1}{2} \sum_{j=1}^{\infty} \int_{0}^{1} \sin ^{2}(j t x) d t
 <li>“/”表示路径时，前后都不加空格。</li>
 <li>负号后面接数字不加空格。</li>
 </ol>
+</div>
+<div id="mermaid" class="section level2 hasAnchor" number="2.19">
+<h2><span class="header-section-number">2.19</span> Mermaid<a href="markdown.html#mermaid" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="什么是mermaid" class="section level3 hasAnchor" number="2.19.1">
+<h3><span class="header-section-number">2.19.1</span> 什么是Mermaid？<a href="markdown.html#什么是mermaid" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>Mermaid是一种基于Javascript的绘图工具，使用类似于Markdown的语法，使用户可以方便快捷地通过代码创建图表。</li>
+<li>项目地址：<a href="https://github.com/mermaid-js/mermaid" class="uri">https://github.com/mermaid-js/mermaid</a></li>
+</ul>
+</div>
+<div id="图类型" class="section level3 hasAnchor" number="2.19.2">
+<h3><span class="header-section-number">2.19.2</span> 图类型<a href="markdown.html#图类型" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>饼状图：使用<code>pie</code>关键字，具体用法后文将详细介绍</li>
+<li>流程图：使用<code>graph</code>关键字，具体用法后文将详细介绍</li>
+<li>序列图：使用<code>sequenceDiagram</code>关键字</li>
+<li>甘特图：使用<code>gantt</code>关键字</li>
+<li>类图：使用<code>classDiagram</code>关键字</li>
+<li>状态图：使用<code>stateDiagram</code>关键字</li>
+<li>用户旅程图：使用<code>journey</code>关键字</li>
+</ul>
+</div>
+<div id="饼图" class="section level3 hasAnchor" number="2.19.3">
+<h3><span class="header-section-number">2.19.3</span> 饼图<a href="markdown.html#饼图" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><p>在线渲染器：<a href="https://mermaidjs.github.io/mermaid-live-editor/#/edit/eyJjb2RlIjoicGllXG5cIkRvZ3NcIiA6IDQyLjk2XG5cIkNhdHNcIiA6IDUwLjA1XG5cIlJhdHNcIiA6IDEwLjAxIiwibWVybWFpZCI6eyJ0aGVtZSI6ImRlZmF1bHQifX0">Online FlowChart &amp; Diagrams Editor</a></p></li>
+<li><p>语法</p>
+<ul>
+<li>从<code>pie</code>关键字开始图表</li>
+<li>然后使用<code>title</code>关键字及其在字符串中的值，为饼图赋予标题。（这是<strong>可选的</strong>）</li>
+<li>数据部分
+<ul>
+<li>在<code>" "</code>内写上分区名。</li>
+<li>分区名后使用<code>:</code>作为分隔符</li>
+<li>分隔符后写上数值，最多支持2位小数——数据会以百分比的形式展示</li>
+</ul></li>
+</ul></li>
+<li><p>实例</p></li>
+</ul>
+<pre class="mermaid"><code>pie
+    title 为什么总是宅在家里？
+    &quot;喜欢宅&quot; : 15
+    &quot;天气太热或太冷&quot; : 20
+    &quot;穷&quot; : 500</code></pre>
+</div>
+<div id="流程图" class="section level3 hasAnchor" number="2.19.4">
+<h3><span class="header-section-number">2.19.4</span> 流程图<a href="markdown.html#流程图" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>在线渲染器：<a href="https://mermaidjs.github.io/mermaid-live-editor/#/edit/eyJjb2RlIjoiZ3JhcGggVERcbiAgICBBW0hhcmRdIC0tPnxUZXh0fCBCKFJvdW5kKVxuICAgIEIgLS0-IEN7RGVjaXNpb259XG4gICAgQyAtLT58T25lfCBEW1Jlc3VsdCAxXVxuICAgIEMgLS0-fFR3b3wgRVtSZXN1bHQgMl0iLCJtZXJtYWlkIjp7InRoZW1lIjoiZGVmYXVsdCJ9fQ">Online FlowChart &amp; Diagrams Editor</a></li>
+</ul>
+<div id="实例" class="section level4 hasAnchor" number="2.19.4.1">
+<h4><span class="header-section-number">2.19.4.1</span> 实例<a href="markdown.html#实例" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<pre class="mermaid"><code>graph LR
+    A[Start] --&gt; B{Is it?};
+    B -- Yes --&gt; C[OK];
+    C --&gt; D[Rethink];
+    D --&gt; B;
+    B -- No ----&gt; E[End];</code></pre>
+</div>
+<div id="方向" class="section level4 hasAnchor" number="2.19.4.2">
+<h4><span class="header-section-number">2.19.4.2</span> 方向<a href="markdown.html#方向" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>用于开头，声明流程图的方向。</p>
+<ul>
+<li><code>graph</code>或<code>graph TB</code>或<code>graph TD</code>：从上往下</li>
+<li><code>graph BT</code>：从下往上</li>
+<li><code>graph LR</code>：从左往右</li>
+<li><code>graph RL</code>：从右往左</li>
+</ul>
+</div>
+<div id="结点" class="section level4 hasAnchor" number="2.19.4.3">
+<h4><span class="header-section-number">2.19.4.3</span> 结点<a href="markdown.html#结点" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li>无名字的结点：直接写内容，此时结点边框为方形；节点内容不能有空格</li>
+<li>有名字的结点：节点名后书写内容，内容左右有特定符号，结点边框由符号决定；节点内容可以有空格</li>
+</ul>
+<blockquote>
+<p>下面的实例中，没有为graph指定方向，因此默认是从上往下的。但是由于各个结点之前没有箭头，所以他们都处于同一排。</p>
+</blockquote>
+<pre class="mermaid"><code>graph
+    默认方形
+    id1[方形]
+    id2(圆边矩形)
+    id3([体育场形])
+    id4[[子程序形]]
+    id5[(圆柱形)]
+    id6((圆形))</code></pre>
+<pre class="mermaid"><code>graph
+    id1{菱形}
+    id2{{六角形}}
+    id3[/平行四边形/]
+    id4[\反向平行四边形\]
+    id5[/梯形\]
+    id6[\反向梯形/]</code></pre>
+</div>
+<div id="连线样式" class="section level4 hasAnchor" number="2.19.4.4">
+<h4><span class="header-section-number">2.19.4.4</span> 连线样式<a href="markdown.html#连线样式" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li>实线箭头：分为无文本箭头和有文本箭头，有文本箭头有2种书写格式</li>
+</ul>
+<pre class="mermaid"><code>graph LR
+a--&gt;b--文本1--&gt;c--&gt;|文本2|d</code></pre>
+<ul>
+<li>粗实线箭头：分为无文本箭头和有文本箭头</li>
+</ul>
+<pre class="mermaid"><code>graph LR
+a==&gt;b==文本==&gt;c</code></pre>
+<ul>
+<li>虚线箭头：分为无文本箭头和有文本箭头</li>
+</ul>
+<pre class="mermaid"><code>graph LR
+a-.-&gt;b-.文本.-&gt;c</code></pre>
+<ul>
+<li>无箭头线：即以上三种连线去掉箭头后的形式</li>
+</ul>
+<pre class="mermaid"><code>graph LR
+a---b
+b--文本1---c
+c---|文本2|d
+d===e
+e==文本3===f
+f-.-g
+g-.文本.-h</code></pre>
+<ul>
+<li>其他连线：需要将<code>graph</code>关键字改为<code>flowchart</code>，除了新增加的连线形式外，上面三种线的渲染效果也会不同</li>
+</ul>
+<pre class="mermaid"><code>flowchart LR
+    A o--o B
+    B &lt;--&gt; C
+    C x--x D
+    
+    旧连线 --文本--&gt; 也会不同</code></pre>
+<ul>
+<li>延长连线：增加相应字符即可，如下图中的B到E，连线中增加了一个<code>-</code>。字符可多次添加。</li>
+</ul>
+<pre class="mermaid"><code>graph LR
+    A[Start] --&gt; B{Is it?};
+    B --&gt;|Yes| C[OK];
+    C --&gt; D[Rethink];
+    D --&gt; B;
+    B ---&gt;|No| E[End];</code></pre>
+</div>
+<div id="连线形式" class="section level4 hasAnchor" number="2.19.4.5">
+<h4><span class="header-section-number">2.19.4.5</span> 连线形式<a href="markdown.html#连线形式" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li>直链</li>
+</ul>
+<pre class="mermaid"><code>graph LR
+   A -- text --&gt; B -- text2 --&gt; C</code></pre>
+<ul>
+<li>多重链：可以使用<code>&amp;</code>字符，或单个描述</li>
+</ul>
+<pre class="mermaid"><code>graph 
+   a --&gt; b &amp; c--&gt; d
+   
+   A &amp; B--&gt; C &amp; D
+   
+    X --&gt; M
+    X --&gt; N
+    Y --&gt; M
+    Y --&gt; N</code></pre>
+</div>
+<div id="其他" class="section level4 hasAnchor" number="2.19.4.6">
+<h4><span class="header-section-number">2.19.4.6</span> 其他<a href="markdown.html#其他" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li>子图：需要将<code>graph</code>关键字改为<code>flowchart</code>，在代码段的开始加入<code>subgraph</code>，尾部加入<code>end</code></li>
+</ul>
+<pre class="mermaid"><code>flowchart TB
+    c1--&gt;a2
+    subgraph one
+    a1--&gt;a2
+    end
+    subgraph two
+    b1--&gt;b2
+    end
+    subgraph three
+    c1--&gt;c2
+    end
+    one --&gt; two
+    three --&gt; two
+    two --&gt; c2</code></pre>
+<ul>
+<li>注释：在行首加入<code>%%</code>即可。</li>
+</ul>
+<pre class="mermaid"><code>graph LR
+%%这是一条注释，在渲染图中不可见
+    A[Hard edge] --&gt;|Link text| B(Round edge)
+    B --&gt; C{Decision}
+    C --&gt;|One| D[Result one]
+    C --&gt;|Two| E[Result two]</code></pre>
+</div>
+</div>
 </div>
 </div>
             </section>

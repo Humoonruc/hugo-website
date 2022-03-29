@@ -74,3 +74,14 @@ downloadthis-package
 data-frames-lists-or-any-r-object
 web-address
 local-files-and-directory
+mermaid
+什么是mermaid
+图类型
+饼图
+流程图
+实例
+方向
+结点
+连线样式
+连线形式
+其他

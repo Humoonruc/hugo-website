@@ -11,7 +11,7 @@
 
 <meta name="author" content="Humoon" />
 
-<meta name="date" content="2022-03-26" />
+<meta name="date" content="2022-03-27" />
 
 <title>Color Scale</title>
 
@@ -356,7 +356,7 @@ div.tocify {
 
 <h1 class="title toc-ignore">Color Scale</h1>
 <h4 class="author">Humoon</h4>
-<h4 class="date">2022-03-26</h4>
+<h4 class="date">2022-03-27</h4>
 
 </div>
 
@@ -457,47 +457,92 @@ div.tocify {
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RColorBrewer)</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">display.brewer.all</span>()</span></code></pre></div>
 <p><img src="figure/unnamed-chunk-5-1.png" width="70%" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># scales::brewer_pal()的palette参数规定一个颜色集，返回一个调色板</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>scales<span class="sc">::</span><span class="fu">brewer_pal</span>(<span class="at">palette =</span> <span class="st">&quot;RdBu&quot;</span>)(<span class="dv">9</span>) <span class="sc">%&gt;%</span> <span class="fu">show_col</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">display.brewer.all</span>(<span class="at">type =</span> <span class="st">&#39;seq&#39;</span>)</span></code></pre></div>
 <p><img src="figure/unnamed-chunk-5-2.png" width="70%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">display.brewer.all</span>(<span class="at">type =</span> <span class="st">&#39;div&#39;</span>)</span></code></pre></div>
+<p><img src="figure/unnamed-chunk-5-3.png" width="70%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>brewer.pal.info</span></code></pre></div>
+<pre><code>#&gt;          maxcolors category colorblind
+#&gt; BrBG            11      div       TRUE
+#&gt; PiYG            11      div       TRUE
+#&gt; PRGn            11      div       TRUE
+#&gt; PuOr            11      div       TRUE
+#&gt; RdBu            11      div       TRUE
+#&gt; RdGy            11      div      FALSE
+#&gt; RdYlBu          11      div       TRUE
+#&gt; RdYlGn          11      div      FALSE
+#&gt; Spectral        11      div      FALSE
+#&gt; Accent           8     qual      FALSE
+#&gt; Dark2            8     qual       TRUE
+#&gt; Paired          12     qual       TRUE
+#&gt; Pastel1          9     qual      FALSE
+#&gt; Pastel2          8     qual      FALSE
+#&gt; Set1             9     qual      FALSE
+#&gt; Set2             8     qual       TRUE
+#&gt; Set3            12     qual      FALSE
+#&gt; Blues            9      seq       TRUE
+#&gt; BuGn             9      seq       TRUE
+#&gt; BuPu             9      seq       TRUE
+#&gt; GnBu             9      seq       TRUE
+#&gt; Greens           9      seq       TRUE
+#&gt; Greys            9      seq       TRUE
+#&gt; Oranges          9      seq       TRUE
+#&gt; OrRd             9      seq       TRUE
+#&gt; PuBu             9      seq       TRUE
+#&gt; PuBuGn           9      seq       TRUE
+#&gt; PuRd             9      seq       TRUE
+#&gt; Purples          9      seq       TRUE
+#&gt; RdPu             9      seq       TRUE
+#&gt; Reds             9      seq       TRUE
+#&gt; YlGn             9      seq       TRUE
+#&gt; YlGnBu           9      seq       TRUE
+#&gt; YlOrBr           9      seq       TRUE
+#&gt; YlOrRd           9      seq       TRUE</code></pre>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">brewer.pal</span>(<span class="at">n =</span> <span class="dv">9</span>, <span class="at">name =</span> <span class="st">&quot;YlGn&quot;</span>) <span class="sc">%&gt;%</span> <span class="co"># 选择一个调色板，n不能超过maxcolors</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  scales<span class="sc">::</span><span class="fu">show_col</span>()</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 同样的功能还可用 scales::brewer_pal()</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>scales<span class="sc">::</span><span class="fu">brewer_pal</span>(<span class="at">palette =</span> <span class="st">&quot;YlGn&quot;</span>)(<span class="dv">9</span>) <span class="sc">%&gt;%</span> scales<span class="sc">::</span><span class="fu">show_col</span>()</span></code></pre></div>
+<p><img src="figure/unnamed-chunk-5-4.png" width="70%" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="创建颜色比例尺" class="section level2">
 <h2>创建颜色比例尺</h2>
 <p>上述调色板返回的颜色向量都是均匀变化的，但很多时候数据的变化是不均匀的，要求颜色也要不均匀的变化，这就需要一个真正的颜色比例尺。</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 定义颜色比例尺，接收任意数字向量，返回相应的颜色向量</span></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 如果数字向量是不均匀的，那么这个颜色向量也是不均匀的</span></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>num_to_color <span class="ot">&lt;-</span> <span class="cf">function</span>(num_domain, color_range) {</span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># colour_ramp()是一个函数工厂，接收一个颜色向量</span></span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 返回一个从[0,1]到这个颜色两端的比例尺函数</span></span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>  color_scale <span class="ot">&lt;-</span> <span class="fu">colour_ramp</span>(color_range)</span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># color_scale() 接收一个从0到1的向量，按照比例尺返回相应项数的颜色向量</span></span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>  num_domain <span class="sc">%&gt;%</span></span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rescale</span>() <span class="sc">%&gt;%</span> <span class="co"># rescale()将数字向量映射到[0,1]上</span></span>
-<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">color_scale</span>()</span>
-<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>num_domain <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">13</span>, <span class="dv">14</span>, <span class="dv">45</span>, <span class="dv">46</span>, <span class="dv">57</span>, <span class="dv">99</span>, <span class="dv">100</span>) <span class="co"># 假设这是一个变量的所有数据</span></span>
-<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>color_range <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;green&quot;</span>, <span class="st">&quot;blue&quot;</span>) <span class="co"># 把0到1映射到红-绿-蓝上</span></span>
-<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>colors <span class="ot">&lt;-</span> <span class="fu">num_to_color</span>(num_domain, color_range)</span>
-<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a><span class="fu">show_col</span>(colors) <span class="co"># 由于数据是不均匀的，颜色向量也是不均匀的</span></span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 定义颜色比例尺，接收任意数字向量，返回相应的颜色向量</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 如果数字向量是不均匀的，那么这个颜色向量也是不均匀的</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>num_to_color <span class="ot">&lt;-</span> <span class="cf">function</span>(num_domain, color_range) {</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># colour_ramp()是一个函数工厂，接收一个颜色向量</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 返回一个从[0,1]到这个颜色两端的比例尺函数</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>  color_scale <span class="ot">&lt;-</span> <span class="fu">colour_ramp</span>(color_range)</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># color_scale() 接收一个从0到1的向量，按照比例尺返回相应项数的颜色向量</span></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>  num_domain <span class="sc">%&gt;%</span></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rescale</span>() <span class="sc">%&gt;%</span> <span class="co"># rescale()将数字向量映射到[0,1]上</span></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">color_scale</span>()</span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>num_domain <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">13</span>, <span class="dv">14</span>, <span class="dv">45</span>, <span class="dv">46</span>, <span class="dv">57</span>, <span class="dv">99</span>, <span class="dv">100</span>) <span class="co"># 假设这是一个变量的所有数据</span></span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>color_range <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;green&quot;</span>, <span class="st">&quot;blue&quot;</span>) <span class="co"># 把0到1映射到红-绿-蓝上</span></span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>colors <span class="ot">&lt;-</span> <span class="fu">num_to_color</span>(num_domain, color_range)</span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a><span class="fu">show_col</span>(colors) <span class="co"># 由于数据是不均匀的，颜色向量也是不均匀的</span></span></code></pre></div>
 <p><img src="figure/unnamed-chunk-6-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <p>虽然根据数据生成的颜色比例尺是数量有限的，但按照这个方法，可以通过插值获取新颜色，理论上可以表现的颜色是无穷多的。</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">80</span> <span class="co"># 一个新数，对应什么颜色呢？</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 一个典型的比例尺运算</span></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(num_domain, n) <span class="sc">%&gt;%</span></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">num_to_color</span>(color_range) <span class="sc">%&gt;%</span></span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">[</span><span class="st">`</span>(<span class="fu">length</span>(num_domain) <span class="sc">+</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">show_col</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">80</span> <span class="co"># 一个新数，对应什么颜色呢？</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 一个典型的比例尺运算</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(num_domain, n) <span class="sc">%&gt;%</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">num_to_color</span>(color_range) <span class="sc">%&gt;%</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">[</span><span class="st">`</span>(<span class="fu">length</span>(num_domain) <span class="sc">+</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">show_col</span>()</span></code></pre></div>
 <p><img src="figure/unnamed-chunk-7-1.png" width="70%" style="display: block; margin: auto;" /></p>
 </div>
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIkNvbG9yIFNjYWxlIg0Kc3VidGl0bGU6ICIiDQphdXRob3I6ICJIdW1vb24iDQpkYXRlOiAiYHIgU3lzLkRhdGUoKWAiDQpvdXRwdXQ6IGh0bWxfZG9jdW1lbnQNCmRvY3VtZW50Y2xhc3M6IGN0ZXhhcnQNCmNsYXNzb3B0aW9uOiBoeXBlcnJlZiwNCi0tLQ0KDQpgYGB7ciBzZXR1cCwgaW5jbHVkZSA9IEZBTFNFfQ0Kc291cmNlKCIuLi9SbWFya2Rvd24tdGVtcGxhdGUvUm1hcmtkb3duX2NvbmZpZy5SIikNCg0KIyMgZ2xvYmFsIG9wdGlvbnMgPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0NCmtuaXRyOjpvcHRzX2NodW5rJHNldCgNCiAgd2lkdGggPSBjb25maWckd2lkdGgsDQogIGZpZy53aWR0aCA9IGNvbmZpZyRmaWcud2lkdGgsDQogIGZpZy5hc3AgPSBjb25maWckZmlnLmFzcCwNCiAgb3V0LndpZHRoID0gY29uZmlnJG91dC53aWR0aCwNCiAgZmlnLmFsaWduID0gY29uZmlnJGZpZy5hbGlnbiwNCiAgZmlnLnBhdGggPSBjb25maWckZmlnLnBhdGgsDQogIGZpZy5zaG93ID0gY29uZmlnJGZpZy5zaG93LA0KICB3YXJuID0gY29uZmlnJHdhcm4sDQogIHdhcm5pbmcgPSBjb25maWckd2FybmluZywNCiAgbWVzc2FnZSA9IGNvbmZpZyRtZXNzYWdlLA0KICBlY2hvID0gY29uZmlnJGVjaG8sDQogIGV2YWwgPSBjb25maWckZXZhbCwNCiAgdGlkeSA9IGNvbmZpZyR0aWR5LA0KICBjb21tZW50ID0gY29uZmlnJGNvbW1lbnQsDQogIGNvbGxhcHNlID0gRiwNCiAgY2FjaGUgPSBjb25maWckY2FjaGUsDQogIGNhY2hlLmNvbW1lbnRzID0gY29uZmlnJGNhY2hlLmNvbW1lbnRzLA0KICBhdXRvZGVwID0gY29uZmlnJGF1dG9kZXANCikNCmBgYA0KDQpgYGB7ciwgZWNobz1GQUxTRX0NCmRvd25sb2FkdGhpczo6ZG93bmxvYWRfZGlyKA0KICBwYXRoID0gIi4uL1JtYXJrZG93bi10ZW1wbGF0ZSIsDQogIG91dHB1dF9uYW1lID0gIlJzY3JpcHQiLA0KICBidXR0b25fbGFiZWwgPSAiRG93bmxvYWQgUiBzY3JpcHRzIiwNCiAgYnV0dG9uX3R5cGUgPSAiZGFuZ2VyIiwNCiAgc2VsZl9jb250YWluZWQgPSBGQUxTRQ0KKQ0KZG93bmxvYWR0aGlzOjpkb3dubG9hZF9kaXIoDQogIHBhdGggPSAiLi4vY3NzIiwNCiAgb3V0cHV0X25hbWUgPSAiY3NzIiwNCiAgYnV0dG9uX2xhYmVsID0gIkRvd25sb2FkIGNzcyIsDQogIGJ1dHRvbl90eXBlID0gInN1Y2Nlc3MiLA0KICBzZWxmX2NvbnRhaW5lZCA9IEZBTFNFDQopDQpkb3dubG9hZHRoaXM6OmRvd25sb2FkX2ZpbGUoDQogIHBhdGggPSAiX291dHB1dC55bWwiLA0KICBvdXRwdXRfbmFtZSA9ICJfb3V0cHV0IiwNCiAgYnV0dG9uX2xhYmVsID0gIkRvd25sb2FkIGNvbmZpZyIsDQogIGJ1dHRvbl90eXBlID0gImRlZmF1bHQiLA0KICBzZWxmX2NvbnRhaW5lZCA9IEZBTFNFDQopDQpgYGANCg0KDQpgYGB7cn0NCmxpYnJhcnkoc2NhbGVzKQ0KYGBgDQoNCiMjIOS4juiJsuW9qeebuOWFs+eahOWHveaVsA0KDQp8IOWHveaVsCAgICAgICAgICAgICAgICAgICAgIHwg5Yqf6IO9ICAgICAgICAgICAgICAgICAgICAgIHwNCnwtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLXwtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS18DQp8IHBhbGV0dGUoKSAgICAgICAgICAgICAgICB8IOiwg+iJsuadvyAgICAgICAgICAgICAgICAgICAgfA0KfCBjb2xvcnMoKSAgICAgICAgICAgICAgICAgfCBS5Lit5pyJ5a2X56ym5Liy5ZCN56ew55qE6aKc6ImyICAgICAgICAgICAgICAgfA0KfCByZ2IoKSAgICAgICAgICAgICAgICAgICAgfCDnlLHnuqLnu7/ok53liIbph4/nlJ/miJDpopzoibLlgLzvvIjlkJHph4/vvIkgICAgICAgICAgICAgIHwNCnwgY29sMnJnYigpICAgICAgICAgICAgICAgIHwg5bCG5a2X56ym5Liy6aKc6Imy6L2s5Li6cmdi6Imy5YC844CCIHwNCnwgcmdiMmhzdihjb2wycmdiKCJibHVlIikpIHwg55Sxcmdi6L2s5o2i5Li6aHN26Imy5YC8ICAgICAgICAgICAgIHwNCg0KDQpgYGB7cn0NCnBhbGV0dGUoKSAlPiUgc2hvd19jb2woKQ0KDQojIGNvbG9ycygp5Li6UuS4reaJgOacieacieWQjeWtl+eahOminOiJsg0KY29sb3JzKCkgJT4lIGxlbmd0aCgpDQpjb2xvcnMoKVsyMTozNl0gJT4lIHNob3dfY29sKCkNCg0KIyByZ2IoKeWJjeS4ieS4quWPguaVsOS4uue6ouOAgee7v+OAgeiTnee7j+i/h21heENvbG9yVmFsdWXmoIflh4bljJbnmoTliIbph48NCnJlZCA8LSAoMTo5ICU+JSByZXNjYWxlKCkpIC8gMg0KZ3JlZW4gPC0gKDE6OSAlPiUgcmVzY2FsZSgpKSAvIDIgKyAwLjUNCmJsdWUgPC0gMTo5ICU+JSByZXNjYWxlKCkNCnJnYihyZWQsIGdyZWVuLCBibHVlLCBtYXhDb2xvclZhbHVlID0gMSkgJT4lIHNob3dfY29sKCkNCg0KY29sMnJnYigicmVkIikNCg0KcmdiMmhzdihjb2wycmdiKCJibHVlIikpDQpgYGANCiMjIOWIm+W7uuiwg+iJsuadvw0KDQrosIPoibLmnb/ljbPpopzoibLmr5TkvovlsLrlh73mlbDvvIzmjqXmlLbmlbTmlbDvvIzovpPlh7rnm7jlupTkuKrmlbDnmoTjgIEqKuWdh+WMgOWPmOWMlueahCoq6aKc6Imy5YiX6KGoDQoNCiMjIyBS6Ieq5bim55qE5YWt5Liq6LCD6Imy5p2/DQoNCmByYWluYm93KClg77yM5LiD5b2p6ImyDQoNCmBoZWF0LmNvbG9ycygpYO+8jOe6oi3pu4Qt55m9DQoNCmB0ZXJyYWluLmNvbG9ycygpYO+8jOe7vy3pu4Qt55m9DQoNCmB0b3BvLmNvbG9ycygpYO+8jOiTnS3nu78t6buEDQoNCmBjbS5jb2xvcnMoKWDvvIzpnZIt57KJDQoNCmBncmF5KClg77yM6buRLeeZve+8jOWPguaVsOW/hemhu+WcqFswLDFd5LmL6Ze0DQoNCmBgYHtyfQ0Kc2hvd19jb2wocmFpbmJvdygxNikpDQpzaG93X2NvbChoZWF0LmNvbG9ycygxNikpDQpzaG93X2NvbCh0ZXJyYWluLmNvbG9ycygxNikpDQpzaG93X2NvbCh0b3BvLmNvbG9ycygxNikpDQpzaG93X2NvbChjbS5jb2xvcnMoMTYpKQ0Kc2hvd19jb2woc2VxKDAsIDEsIGxlbmd0aC5vdXQgPSAxNikgJT4lIGdyYXkoKSkNCmBgYA0KDQojIyMgUkNvbG9yQnJld2Vy5YyF5Lit55qE6LCD6Imy5p2/DQoNCmBgYHtyLCBmaWcud2lkdGg9MTAsIGZpZy5oZWlnaHQ9MTB9DQojIOmAmui/h+S4i+WIl+S7o+eggeinguWvn+mihOWFiOiuvuWumueahOminOiJsumbhg0KbGlicmFyeShSQ29sb3JCcmV3ZXIpDQpkaXNwbGF5LmJyZXdlci5hbGwoKQ0KDQojIHNjYWxlczo6YnJld2VyX3BhbCgp55qEcGFsZXR0ZeWPguaVsOinhOWumuS4gOS4quminOiJsumbhu+8jOi/lOWbnuS4gOS4quiwg+iJsuadvw0Kc2NhbGVzOjpicmV3ZXJfcGFsKHBhbGV0dGUgPSAiUmRCdSIpKDkpICU+JSBzaG93X2NvbCgpDQpgYGANCg0KIyMg5Yib5bu66aKc6Imy5q+U5L6L5bC6DQoNCuS4iui/sOiwg+iJsuadv+i/lOWbnueahOminOiJsuWQkemHj+mDveaYr+Wdh+WMgOWPmOWMlueahO+8jOS9huW+iOWkmuaXtuWAmeaVsOaNrueahOWPmOWMluaYr+S4jeWdh+WMgOeahO+8jOimgeaxguminOiJsuS5n+imgeS4jeWdh+WMgOeahOWPmOWMlu+8jOi/meWwsemcgOimgeS4gOS4quecn+ato+eahOminOiJsuavlOS+i+WwuuOAgg0KDQoNCg0KYGBge3J9DQpsaWJyYXJ5KHNjYWxlcykNCg0KIyDlrprkuYnpopzoibLmr5TkvovlsLrvvIzmjqXmlLbku7vmhI/mlbDlrZflkJHph4/vvIzov5Tlm57nm7jlupTnmoTpopzoibLlkJHph48NCiMg5aaC5p6c5pWw5a2X5ZCR6YeP5piv5LiN5Z2H5YyA55qE77yM6YKj5LmI6L+Z5Liq6aKc6Imy5ZCR6YeP5Lmf5piv5LiN5Z2H5YyA55qEDQpudW1fdG9fY29sb3IgPC0gZnVuY3Rpb24obnVtX2RvbWFpbiwgY29sb3JfcmFuZ2UpIHsNCiAgIyBjb2xvdXJfcmFtcCgp5piv5LiA5Liq5Ye95pWw5bel5Y6C77yM5o6l5pS25LiA5Liq6aKc6Imy5ZCR6YePDQogICMg6L+U5Zue5LiA5Liq5LuOWzAsMV3liLDov5nkuKrpopzoibLkuKTnq6/nmoTmr5TkvovlsLrlh73mlbANCiAgY29sb3Jfc2NhbGUgPC0gY29sb3VyX3JhbXAoY29sb3JfcmFuZ2UpDQogICMgY29sb3Jfc2NhbGUoKSDmjqXmlLbkuIDkuKrku44w5YiwMeeahOWQkemHj++8jOaMieeFp+avlOS+i+Wwuui/lOWbnuebuOW6lOmhueaVsOeahOminOiJsuWQkemHjw0KDQogIG51bV9kb21haW4gJT4lDQogICAgcmVzY2FsZSgpICU+JSAjIHJlc2NhbGUoKeWwhuaVsOWtl+WQkemHj+aYoOWwhOWIsFswLDFd5LiKDQogICAgY29sb3Jfc2NhbGUoKQ0KfQ0KDQpudW1fZG9tYWluIDwtIGMoMSwgMiwgMTMsIDE0LCA0NSwgNDYsIDU3LCA5OSwgMTAwKSAjIOWBh+iuvui/meaYr+S4gOS4quWPmOmHj+eahOaJgOacieaVsOaNrg0KY29sb3JfcmFuZ2UgPC0gYygicmVkIiwgImdyZWVuIiwgImJsdWUiKSAjIOaKijDliLAx5pig5bCE5Yiw57qiLee7vy3ok53kuIoNCg0KY29sb3JzIDwtIG51bV90b19jb2xvcihudW1fZG9tYWluLCBjb2xvcl9yYW5nZSkNCnNob3dfY29sKGNvbG9ycykgIyDnlLHkuo7mlbDmja7mmK/kuI3lnYfljIDnmoTvvIzpopzoibLlkJHph4/kuZ/mmK/kuI3lnYfljIDnmoQNCmBgYA0KDQromb3nhLbmoLnmja7mlbDmja7nlJ/miJDnmoTpopzoibLmr5TkvovlsLrmmK/mlbDph4/mnInpmZDnmoTvvIzkvYbmjInnhafov5nkuKrmlrnms5XvvIzlj6/ku6XpgJrov4fmj5LlgLzojrflj5bmlrDpopzoibLvvIznkIborrrkuIrlj6/ku6XooajnjrDnmoTpopzoibLmmK/ml6DnqbflpJrnmoTjgIINCmBgYHtyfQ0KbiA8LSA4MCAjIOS4gOS4quaWsOaVsO+8jOWvueW6lOS7gOS5iOminOiJsuWRou+8nw0KDQojIOS4gOS4quWFuOWei+eahOavlOS+i+Wwuui/kOeulw0KYyhudW1fZG9tYWluLCBuKSAlPiUNCiAgbnVtX3RvX2NvbG9yKGNvbG9yX3JhbmdlKSAlPiUNCiAgYFtgKGxlbmd0aChudW1fZG9tYWluKSArIDEpICU+JQ0KICBzaG93X2NvbCgpDQpgYGANCg0K</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIkNvbG9yIFNjYWxlIg0Kc3VidGl0bGU6ICIiDQphdXRob3I6ICJIdW1vb24iDQpkYXRlOiAiYHIgU3lzLkRhdGUoKWAiDQpvdXRwdXQ6IGh0bWxfZG9jdW1lbnQNCmRvY3VtZW50Y2xhc3M6IGN0ZXhhcnQNCmNsYXNzb3B0aW9uOiBoeXBlcnJlZiwNCi0tLQ0KDQpgYGB7ciBzZXR1cCwgaW5jbHVkZSA9IEZBTFNFfQ0Kc291cmNlKCIuLi9SbWFya2Rvd24tdGVtcGxhdGUvUm1hcmtkb3duX2NvbmZpZy5SIikNCg0KIyMgZ2xvYmFsIG9wdGlvbnMgPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0NCmtuaXRyOjpvcHRzX2NodW5rJHNldCgNCiAgd2lkdGggPSBjb25maWckd2lkdGgsDQogIGZpZy53aWR0aCA9IGNvbmZpZyRmaWcud2lkdGgsDQogIGZpZy5hc3AgPSBjb25maWckZmlnLmFzcCwNCiAgb3V0LndpZHRoID0gY29uZmlnJG91dC53aWR0aCwNCiAgZmlnLmFsaWduID0gY29uZmlnJGZpZy5hbGlnbiwNCiAgZmlnLnBhdGggPSBjb25maWckZmlnLnBhdGgsDQogIGZpZy5zaG93ID0gY29uZmlnJGZpZy5zaG93LA0KICB3YXJuID0gY29uZmlnJHdhcm4sDQogIHdhcm5pbmcgPSBjb25maWckd2FybmluZywNCiAgbWVzc2FnZSA9IGNvbmZpZyRtZXNzYWdlLA0KICBlY2hvID0gY29uZmlnJGVjaG8sDQogIGV2YWwgPSBjb25maWckZXZhbCwNCiAgdGlkeSA9IGNvbmZpZyR0aWR5LA0KICBjb21tZW50ID0gY29uZmlnJGNvbW1lbnQsDQogIGNvbGxhcHNlID0gRiwNCiAgY2FjaGUgPSBjb25maWckY2FjaGUsDQogIGNhY2hlLmNvbW1lbnRzID0gY29uZmlnJGNhY2hlLmNvbW1lbnRzLA0KICBhdXRvZGVwID0gY29uZmlnJGF1dG9kZXANCikNCmBgYA0KDQpgYGB7ciwgZWNobz1GQUxTRX0NCmRvd25sb2FkdGhpczo6ZG93bmxvYWRfZGlyKA0KICBwYXRoID0gIi4uL1JtYXJrZG93bi10ZW1wbGF0ZSIsDQogIG91dHB1dF9uYW1lID0gIlJzY3JpcHQiLA0KICBidXR0b25fbGFiZWwgPSAiRG93bmxvYWQgUiBzY3JpcHRzIiwNCiAgYnV0dG9uX3R5cGUgPSAiZGFuZ2VyIiwNCiAgc2VsZl9jb250YWluZWQgPSBGQUxTRQ0KKQ0KZG93bmxvYWR0aGlzOjpkb3dubG9hZF9kaXIoDQogIHBhdGggPSAiLi4vY3NzIiwNCiAgb3V0cHV0X25hbWUgPSAiY3NzIiwNCiAgYnV0dG9uX2xhYmVsID0gIkRvd25sb2FkIGNzcyIsDQogIGJ1dHRvbl90eXBlID0gInN1Y2Nlc3MiLA0KICBzZWxmX2NvbnRhaW5lZCA9IEZBTFNFDQopDQpkb3dubG9hZHRoaXM6OmRvd25sb2FkX2ZpbGUoDQogIHBhdGggPSAiX291dHB1dC55bWwiLA0KICBvdXRwdXRfbmFtZSA9ICJfb3V0cHV0IiwNCiAgYnV0dG9uX2xhYmVsID0gIkRvd25sb2FkIGNvbmZpZyIsDQogIGJ1dHRvbl90eXBlID0gImRlZmF1bHQiLA0KICBzZWxmX2NvbnRhaW5lZCA9IEZBTFNFDQopDQpgYGANCg0KDQpgYGB7cn0NCmxpYnJhcnkoc2NhbGVzKQ0KYGBgDQoNCiMjIOS4juiJsuW9qeebuOWFs+eahOWHveaVsA0KDQp8IOWHveaVsCAgICAgICAgICAgICAgICAgICAgIHwg5Yqf6IO9ICAgICAgICAgICAgICAgICAgICAgIHwNCnwtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLXwtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS18DQp8IHBhbGV0dGUoKSAgICAgICAgICAgICAgICB8IOiwg+iJsuadvyAgICAgICAgICAgICAgICAgICAgfA0KfCBjb2xvcnMoKSAgICAgICAgICAgICAgICAgfCBS5Lit5pyJ5a2X56ym5Liy5ZCN56ew55qE6aKc6ImyICAgICAgICAgICAgICAgfA0KfCByZ2IoKSAgICAgICAgICAgICAgICAgICAgfCDnlLHnuqLnu7/ok53liIbph4/nlJ/miJDpopzoibLlgLzvvIjlkJHph4/vvIkgICAgICAgICAgICAgIHwNCnwgY29sMnJnYigpICAgICAgICAgICAgICAgIHwg5bCG5a2X56ym5Liy6aKc6Imy6L2s5Li6cmdi6Imy5YC844CCIHwNCnwgcmdiMmhzdihjb2wycmdiKCJibHVlIikpIHwg55Sxcmdi6L2s5o2i5Li6aHN26Imy5YC8ICAgICAgICAgICAgIHwNCg0KDQpgYGB7cn0NCnBhbGV0dGUoKSAlPiUgc2hvd19jb2woKQ0KDQojIGNvbG9ycygp5Li6UuS4reaJgOacieacieWQjeWtl+eahOminOiJsg0KY29sb3JzKCkgJT4lIGxlbmd0aCgpDQpjb2xvcnMoKVsyMTozNl0gJT4lIHNob3dfY29sKCkNCg0KIyByZ2IoKeWJjeS4ieS4quWPguaVsOS4uue6ouOAgee7v+OAgeiTnee7j+i/h21heENvbG9yVmFsdWXmoIflh4bljJbnmoTliIbph48NCnJlZCA8LSAoMTo5ICU+JSByZXNjYWxlKCkpIC8gMg0KZ3JlZW4gPC0gKDE6OSAlPiUgcmVzY2FsZSgpKSAvIDIgKyAwLjUNCmJsdWUgPC0gMTo5ICU+JSByZXNjYWxlKCkNCnJnYihyZWQsIGdyZWVuLCBibHVlLCBtYXhDb2xvclZhbHVlID0gMSkgJT4lIHNob3dfY29sKCkNCg0KY29sMnJnYigicmVkIikNCg0KcmdiMmhzdihjb2wycmdiKCJibHVlIikpDQpgYGANCiMjIOWIm+W7uuiwg+iJsuadvw0KDQrosIPoibLmnb/ljbPpopzoibLmr5TkvovlsLrlh73mlbDvvIzmjqXmlLbmlbTmlbDvvIzovpPlh7rnm7jlupTkuKrmlbDnmoTjgIEqKuWdh+WMgOWPmOWMlueahCoq6aKc6Imy5YiX6KGoDQoNCiMjIyBS6Ieq5bim55qE5YWt5Liq6LCD6Imy5p2/DQoNCmByYWluYm93KClg77yM5LiD5b2p6ImyDQoNCmBoZWF0LmNvbG9ycygpYO+8jOe6oi3pu4Qt55m9DQoNCmB0ZXJyYWluLmNvbG9ycygpYO+8jOe7vy3pu4Qt55m9DQoNCmB0b3BvLmNvbG9ycygpYO+8jOiTnS3nu78t6buEDQoNCmBjbS5jb2xvcnMoKWDvvIzpnZIt57KJDQoNCmBncmF5KClg77yM6buRLeeZve+8jOWPguaVsOW/hemhu+WcqFswLDFd5LmL6Ze0DQoNCmBgYHtyfQ0Kc2hvd19jb2wocmFpbmJvdygxNikpDQpzaG93X2NvbChoZWF0LmNvbG9ycygxNikpDQpzaG93X2NvbCh0ZXJyYWluLmNvbG9ycygxNikpDQpzaG93X2NvbCh0b3BvLmNvbG9ycygxNikpDQpzaG93X2NvbChjbS5jb2xvcnMoMTYpKQ0Kc2hvd19jb2woc2VxKDAsIDEsIGxlbmd0aC5vdXQgPSAxNikgJT4lIGdyYXkoKSkNCmBgYA0KDQojIyMgUkNvbG9yQnJld2Vy5YyF5Lit55qE6LCD6Imy5p2/DQoNCmBgYHtyLCBmaWcud2lkdGg9MTAsIGZpZy5oZWlnaHQ9MTB9DQojIOmAmui/h+S4i+WIl+S7o+eggeinguWvn+mihOWFiOiuvuWumueahOminOiJsumbhg0KbGlicmFyeShSQ29sb3JCcmV3ZXIpDQpkaXNwbGF5LmJyZXdlci5hbGwoKQ0KZGlzcGxheS5icmV3ZXIuYWxsKHR5cGUgPSAnc2VxJykNCmRpc3BsYXkuYnJld2VyLmFsbCh0eXBlID0gJ2RpdicpDQpicmV3ZXIucGFsLmluZm8NCmJyZXdlci5wYWwobiA9IDksIG5hbWUgPSAiWWxHbiIpICU+JSAjIOmAieaLqeS4gOS4quiwg+iJsuadv++8jG7kuI3og73otoXov4dtYXhjb2xvcnMNCiAgc2NhbGVzOjpzaG93X2NvbCgpDQoNCg0KIyDlkIzmoLfnmoTlip/og73ov5jlj6/nlKggc2NhbGVzOjpicmV3ZXJfcGFsKCkNCnNjYWxlczo6YnJld2VyX3BhbChwYWxldHRlID0gIllsR24iKSg5KSAlPiUgc2NhbGVzOjpzaG93X2NvbCgpDQpgYGANCg0KIyMg5Yib5bu66aKc6Imy5q+U5L6L5bC6DQoNCuS4iui/sOiwg+iJsuadv+i/lOWbnueahOminOiJsuWQkemHj+mDveaYr+Wdh+WMgOWPmOWMlueahO+8jOS9huW+iOWkmuaXtuWAmeaVsOaNrueahOWPmOWMluaYr+S4jeWdh+WMgOeahO+8jOimgeaxguminOiJsuS5n+imgeS4jeWdh+WMgOeahOWPmOWMlu+8jOi/meWwsemcgOimgeS4gOS4quecn+ato+eahOminOiJsuavlOS+i+WwuuOAgg0KDQoNCg0KYGBge3J9DQpsaWJyYXJ5KHNjYWxlcykNCg0KIyDlrprkuYnpopzoibLmr5TkvovlsLrvvIzmjqXmlLbku7vmhI/mlbDlrZflkJHph4/vvIzov5Tlm57nm7jlupTnmoTpopzoibLlkJHph48NCiMg5aaC5p6c5pWw5a2X5ZCR6YeP5piv5LiN5Z2H5YyA55qE77yM6YKj5LmI6L+Z5Liq6aKc6Imy5ZCR6YeP5Lmf5piv5LiN5Z2H5YyA55qEDQpudW1fdG9fY29sb3IgPC0gZnVuY3Rpb24obnVtX2RvbWFpbiwgY29sb3JfcmFuZ2UpIHsNCiAgIyBjb2xvdXJfcmFtcCgp5piv5LiA5Liq5Ye95pWw5bel5Y6C77yM5o6l5pS25LiA5Liq6aKc6Imy5ZCR6YePDQogICMg6L+U5Zue5LiA5Liq5LuOWzAsMV3liLDov5nkuKrpopzoibLkuKTnq6/nmoTmr5TkvovlsLrlh73mlbANCiAgY29sb3Jfc2NhbGUgPC0gY29sb3VyX3JhbXAoY29sb3JfcmFuZ2UpDQogICMgY29sb3Jfc2NhbGUoKSDmjqXmlLbkuIDkuKrku44w5YiwMeeahOWQkemHj++8jOaMieeFp+avlOS+i+Wwuui/lOWbnuebuOW6lOmhueaVsOeahOminOiJsuWQkemHjw0KDQogIG51bV9kb21haW4gJT4lDQogICAgcmVzY2FsZSgpICU+JSAjIHJlc2NhbGUoKeWwhuaVsOWtl+WQkemHj+aYoOWwhOWIsFswLDFd5LiKDQogICAgY29sb3Jfc2NhbGUoKQ0KfQ0KDQpudW1fZG9tYWluIDwtIGMoMSwgMiwgMTMsIDE0LCA0NSwgNDYsIDU3LCA5OSwgMTAwKSAjIOWBh+iuvui/meaYr+S4gOS4quWPmOmHj+eahOaJgOacieaVsOaNrg0KY29sb3JfcmFuZ2UgPC0gYygicmVkIiwgImdyZWVuIiwgImJsdWUiKSAjIOaKijDliLAx5pig5bCE5Yiw57qiLee7vy3ok53kuIoNCg0KY29sb3JzIDwtIG51bV90b19jb2xvcihudW1fZG9tYWluLCBjb2xvcl9yYW5nZSkNCnNob3dfY29sKGNvbG9ycykgIyDnlLHkuo7mlbDmja7mmK/kuI3lnYfljIDnmoTvvIzpopzoibLlkJHph4/kuZ/mmK/kuI3lnYfljIDnmoQNCmBgYA0KDQromb3nhLbmoLnmja7mlbDmja7nlJ/miJDnmoTpopzoibLmr5TkvovlsLrmmK/mlbDph4/mnInpmZDnmoTvvIzkvYbmjInnhafov5nkuKrmlrnms5XvvIzlj6/ku6XpgJrov4fmj5LlgLzojrflj5bmlrDpopzoibLvvIznkIborrrkuIrlj6/ku6XooajnjrDnmoTpopzoibLmmK/ml6DnqbflpJrnmoTjgIINCmBgYHtyfQ0KbiA8LSA4MCAjIOS4gOS4quaWsOaVsO+8jOWvueW6lOS7gOS5iOminOiJsuWRou+8nw0KDQojIOS4gOS4quWFuOWei+eahOavlOS+i+Wwuui/kOeulw0KYyhudW1fZG9tYWluLCBuKSAlPiUNCiAgbnVtX3RvX2NvbG9yKGNvbG9yX3JhbmdlKSAlPiUNCiAgYFtgKGxlbmd0aChudW1fZG9tYWluKSArIDEpICU+JQ0KICBzaG93X2NvbCgpDQpgYGANCg==</div>
 
 
 </div>

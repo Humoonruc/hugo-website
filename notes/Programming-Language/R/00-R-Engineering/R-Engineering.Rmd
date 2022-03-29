@@ -24,11 +24,11 @@ knitr::opts_chunk$set(
   warn = config$warn,
   warning = config$warning,
   message = config$message,
-  echo = config$echo, 
-  eval = config$eval, 
-  tidy = config$tidy, 
-  comment = config$comment, 
-  collapse = config$collapse, 
+  echo = config$echo,
+  eval = config$eval,
+  tidy = config$tidy,
+  comment = config$comment,
+  collapse = config$collapse,
   cache = config$cache,
   cache.comments = config$cache.comments,
   autodep = config$autodep
@@ -69,7 +69,17 @@ R 中词法作用域的机理通过环境实现。
 
 ### Time
 
-`sys.time()` 语句运行时间
+`Sys.sleep()` 使程序暂停若干秒，一般用于某些循环（爬虫、动画等），故意降低运行频率
+
+`sys.time()` 读取系统时间
+
+```{r, eval=FALSE}
+t1 <- Sys.time()
+...
+t2 <- Sys.time()
+print(t2 - t1) # 中间代码的运行时间
+```
+
 
 ### Help
 
@@ -235,7 +245,7 @@ downloadthis::download_file(
 
 #### 优点
 
-- 鼠标悬停，即可显示函数文档和变量信息
+- 鼠标悬停，即可显示变量的定义信息和函数的帮助文档（仅限 R 包中函数的官方文档和本文件中自定义函数的定义，无法显示引入模块中的自定义函数的定义），省去了查阅文档的大量时间
 - 保存（Ctrl+S）时自动格式化
 
 #### 配置步骤
