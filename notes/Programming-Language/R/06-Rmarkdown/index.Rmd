@@ -139,23 +139,26 @@ html 语法大都可以在Rmarkdown中使用
 
 ## 文字颜色
 
-代码：`<span style='color: blue'> 蓝色文字。</span>`
+```html
+<span style='color: blue'> 蓝色文字。</span>
+```
 
-效果：<span  style='color: blue'>蓝色文字。</span>
+<span  style='color: blue'>蓝色文字。</span>
 
 ## 字号
 
-代码：`<font size = 4> 4号字。</font> <font size = 6> 6号字。</font>`
+```html
+<font size = 4> 4 号字。</font> <font size = 6> 6 号字。</font>
+```
 
-效果：<font size = 4> 4 号字。</font> <font size = 6> 6 号字。</font>
+<font size = 4> 4 号字。</font> <font size = 6> 6 号字。</font>
 
 ## 图片
 
-代码：`<center><img src="地址" width = "50%" height = '100'... /><center/>`
-
-代码：`<div align = center> <img src="地址" ... /> </div>`
-
-效果：
+```html
+<center><img src="地址" width = "50%" height = '100'... /><center/>
+<div align = center> <img src="地址" ... /> </div>
+```
 
 <center><img src="https://static.runoob.com/images/runoob-logo.png" width = "50%" height = '100'/></center>
 
@@ -170,20 +173,20 @@ html 语法大都可以在Rmarkdown中使用
 我是第一段第一行  
 我是第一段第二行
 
-我是第二段，注意正常的行间距和段间距
+我是第二段，注意行间距和段间距的差异
 
 ## 增加段间距
 
-用`<br/>`，每多一个就多一次换行；或`&nbsp;`，表示一个空段落。
+用`<br>`，每多一个就多一次换行；或`&nbsp;`，表示一个空段落。
 
 正常段间距
 
 正常段间距<br/><br/>
-连续两次换行，虽然看上去行距很大，但仍在一段中
+连续两次换行`<br>`后得到本行，虽然看上去行距很大，但仍在一段中
 
 &nbsp;
 
-中间隔了一个空段落，空段落可以叠加
+中间隔了一个空段落，显然段间距更大。空段落可以叠加
 
 ## 注释
 
@@ -236,13 +239,28 @@ Reference
 
 ### 单层和嵌套引用
 
-> 张三说：李四这样说过
+```markdown
+> 张三说：李四这样说过    
+> 
+>> 不想当将军的木匠不是好厨子。
+```
 
+> 张三说：李四这样说过   
+> 
 >> 不想当将军的木匠不是好厨子。
 
 ### 多行引用
 
 仍然是一段（推荐）：
+
+```markdown
+> 第一行  
+> 第二行  
+
+> 第一行
+> 
+> 第二行
+```
 
 > 第一行  
 > 第二行  
@@ -252,6 +270,12 @@ Reference
 > 第二行
 
 变成了两段（不推荐）：
+
+```markdown
+> 第一段
+
+> 第二段
+```
 
 > 第一段
 
@@ -338,9 +362,16 @@ Reference
 
 **2019年读书计划**
 
+```markdown
 - [x] 《R in Action》
 - [x] 《R for Data Science》 
 - [ ] 《Python 疯狂讲义》
+```
+
+- [x] 《R in Action》
+- [x] 《R for Data Science》 
+- [ ] 《Python 疯狂讲义》
+
 
 ## 管道表
 

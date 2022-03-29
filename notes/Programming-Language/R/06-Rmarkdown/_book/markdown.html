@@ -23,7 +23,7 @@
 <meta name="author" content="黄蒙 ✉huangmeng@ucass.edu.cn" />
 
 
-<meta name="date" content="2022-03-29" />
+<meta name="date" content="2022-03-30" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -308,16 +308,16 @@ Rmarkdown 文本文件的语法
 <p>行末<code>&lt;br/&gt;</code>或两个以上空格 + 回车为段内换行，连续两个回车为新起一段</p>
 <p>我是第一段第一行<br />
 我是第一段第二行</p>
-<p>我是第二段，注意正常的行间距和段间距</p>
+<p>我是第二段，注意行间距和段间距的差异</p>
 </div>
 <div id="增加段间距" class="section level2 hasAnchor" number="2.2">
 <h2><span class="header-section-number">2.2</span> 增加段间距<a href="markdown.html#增加段间距" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>用<code>&lt;br/&gt;</code>，每多一个就多一次换行；或<code>&amp;nbsp;</code>，表示一个空段落。</p>
+<p>用<code>&lt;br&gt;</code>，每多一个就多一次换行；或<code>&amp;nbsp;</code>，表示一个空段落。</p>
 <p>正常段间距</p>
 <p>正常段间距<br/><br/>
-连续两次换行，虽然看上去行距很大，但仍在一段中</p>
+连续两次换行<code>&lt;br&gt;</code>后得到本行，虽然看上去行距很大，但仍在一段中</p>
 <p> </p>
-<p>中间隔了一个空段落，空段落可以叠加</p>
+<p>中间隔了一个空段落，显然段间距更大。空段落可以叠加</p>
 </div>
 <div id="注释" class="section level2 hasAnchor" number="2.3">
 <h2><span class="header-section-number">2.3</span> 注释<a href="markdown.html#注释" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -337,12 +337,12 @@ Rmarkdown 文本文件的语法
 <div id="参考文献-1" class="section level2 hasAnchor" number="2.5">
 <h2><span class="header-section-number">2.5</span> 参考文献<a href="markdown.html#参考文献-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>markdown 其实并无格式化参考文献的语法，但可以利用 html 的脚注语法手动实现——只适合写简易文章的场合。</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb1-1"><a href="markdown.html#cb1-1" aria-hidden="true" tabindex="-1"></a>This is a test sentence.<span class="kw">&lt;sup&gt;&lt;a</span> <span class="er">href</span><span class="ot">=</span><span class="st">&quot;#ref1&quot;</span><span class="kw">&gt;</span>[101]<span class="kw">&lt;/a&gt;&lt;/sup&gt;</span></span>
-<span id="cb1-2"><a href="markdown.html#cb1-2" aria-hidden="true" tabindex="-1"></a>This is a test sentence.<span class="kw">&lt;sup&gt;&lt;a</span> <span class="er">href</span><span class="ot">=</span><span class="st">&quot;#ref2&quot;</span><span class="kw">&gt;</span>[102]<span class="kw">&lt;/a&gt;&lt;/sup&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb4-1"><a href="markdown.html#cb4-1" aria-hidden="true" tabindex="-1"></a>This is a test sentence.<span class="kw">&lt;sup&gt;&lt;a</span> <span class="er">href</span><span class="ot">=</span><span class="st">&quot;#ref1&quot;</span><span class="kw">&gt;</span>[101]<span class="kw">&lt;/a&gt;&lt;/sup&gt;</span></span>
+<span id="cb4-2"><a href="markdown.html#cb4-2" aria-hidden="true" tabindex="-1"></a>This is a test sentence.<span class="kw">&lt;sup&gt;&lt;a</span> <span class="er">href</span><span class="ot">=</span><span class="st">&quot;#ref2&quot;</span><span class="kw">&gt;</span>[102]<span class="kw">&lt;/a&gt;&lt;/sup&gt;</span></span></code></pre></div>
 <p>最后在文章结尾处写：</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb2-1"><a href="markdown.html#cb2-1" aria-hidden="true" tabindex="-1"></a>Reference</span>
-<span id="cb2-2"><a href="markdown.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;a</span> <span class="er">name</span><span class="ot">=</span><span class="st">&quot;ref1&quot;</span><span class="kw">&gt;</span>[101] 文献引用1<span class="kw">&lt;/font&gt;&lt;/a&gt;</span></span>
-<span id="cb2-3"><a href="markdown.html#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;a</span> <span class="er">name</span><span class="ot">=</span><span class="st">&quot;ref2&quot;</span><span class="kw">&gt;</span>[102] 文献引用2<span class="kw">&lt;/font&gt;&lt;/a&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb5-1"><a href="markdown.html#cb5-1" aria-hidden="true" tabindex="-1"></a>Reference</span>
+<span id="cb5-2"><a href="markdown.html#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;a</span> <span class="er">name</span><span class="ot">=</span><span class="st">&quot;ref1&quot;</span><span class="kw">&gt;</span>[101] 文献引用1<span class="kw">&lt;/font&gt;&lt;/a&gt;</span></span>
+<span id="cb5-3"><a href="markdown.html#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;a</span> <span class="er">name</span><span class="ot">=</span><span class="st">&quot;ref2&quot;</span><span class="kw">&gt;</span>[102] 文献引用2<span class="kw">&lt;/font&gt;&lt;/a&gt;</span></span></code></pre></div>
 <p>效果为：</p>
 <p>This is a test sentence.<sup><a href="#ref1">[101]</a></sup></p>
 <p>This is a test sentence.<sup><a href="#ref2">[102]</a></sup></p>
@@ -355,10 +355,11 @@ Rmarkdown 文本文件的语法
 <p>在引用中可以使用其他 Markdown 语法</p>
 <div id="单层和嵌套引用" class="section level3 hasAnchor" number="2.6.1">
 <h3><span class="header-section-number">2.6.1</span> 单层和嵌套引用<a href="markdown.html#单层和嵌套引用" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb6"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb6-1"><a href="markdown.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; 张三说：李四这样说过    </span></span>
+<span id="cb6-2"><a href="markdown.html#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; </span></span>
+<span id="cb6-3"><a href="markdown.html#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="at">&gt;&gt; 不想当将军的木匠不是好厨子。</span></span></code></pre></div>
 <blockquote>
 <p>张三说：李四这样说过</p>
-</blockquote>
-<blockquote>
 <blockquote>
 <p>不想当将军的木匠不是好厨子。</p>
 </blockquote>
@@ -367,6 +368,12 @@ Rmarkdown 文本文件的语法
 <div id="多行引用" class="section level3 hasAnchor" number="2.6.2">
 <h3><span class="header-section-number">2.6.2</span> 多行引用<a href="markdown.html#多行引用" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>仍然是一段（推荐）：</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb7-1"><a href="markdown.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; 第一行</span>  </span>
+<span id="cb7-2"><a href="markdown.html#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; 第二行</span>  </span>
+<span id="cb7-3"><a href="markdown.html#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="markdown.html#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; 第一行</span></span>
+<span id="cb7-5"><a href="markdown.html#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; </span></span>
+<span id="cb7-6"><a href="markdown.html#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; 第二行</span></span></code></pre></div>
 <blockquote>
 <p>第一行<br />
 第二行</p>
@@ -376,6 +383,9 @@ Rmarkdown 文本文件的语法
 <p>第二行</p>
 </blockquote>
 <p>变成了两段（不推荐）：</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb8-1"><a href="markdown.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; 第一段</span></span>
+<span id="cb8-2"><a href="markdown.html#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="markdown.html#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; 第二段</span></span></code></pre></div>
 <blockquote>
 <p>第一段</p>
 </blockquote>
@@ -467,6 +477,9 @@ Rmarkdown 文本文件的语法
 <div id="任务列表" class="section level2 hasAnchor" number="2.11">
 <h2><span class="header-section-number">2.11</span> 任务列表<a href="markdown.html#任务列表" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><strong>2019年读书计划</strong></p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb9-1"><a href="markdown.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[x]</span> 《R in Action》</span>
+<span id="cb9-2"><a href="markdown.html#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[x]</span> 《R for Data Science》 </span>
+<span id="cb9-3"><a href="markdown.html#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> 《Python 疯狂讲义》</span></code></pre></div>
 <ul class="task-list">
 <li><input type="checkbox" disabled="" checked="" />
 《R in Action》</li>
@@ -526,8 +539,8 @@ Rmarkdown 文本文件的语法
 <p><code>Tab</code>或四个空格<code></code>开头</p>
 <pre><code>pipenv shell</code></pre>
 <p>或使用成对的三个反引号包裹，并可以显示声明语言，这是 GFM 扩展语法</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="markdown.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> print_name():</span>
-<span id="cb4-2"><a href="markdown.html#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;Markdown&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="markdown.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> print_name():</span>
+<span id="cb11-2"><a href="markdown.html#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;Markdown&quot;</span>)</span></code></pre></div>
 </div>
 </div>
 <div id="转义" class="section level2 hasAnchor" number="2.14">
