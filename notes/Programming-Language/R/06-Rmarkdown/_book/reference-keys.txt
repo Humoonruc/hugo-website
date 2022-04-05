@@ -85,3 +85,7 @@ mermaid
 连线样式
 连线形式
 其他
+为公式手动编号
+metadata-config
+output
+config

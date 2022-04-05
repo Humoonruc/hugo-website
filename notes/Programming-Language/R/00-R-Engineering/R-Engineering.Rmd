@@ -102,14 +102,14 @@ print(t2 - t1) # 中间代码的运行时间
 
 
 
-## Modularization of R Coding
+## Modularization
 
 ### R Package
 
 | Package                        |                                                              |
 | ------------------------------ | ------------------------------------------------------------ |
 | `install.packages("package")`  | 安装包                                                       |
-| `installed.packages()`         | 返回一个数据框，内含所有已安装的包的多项信息                 |
+| `installed.packages()`         | 返回一个字符串矩阵，内含所有已安装的包的多项信息                 |
 | `library()`                    | 无参数时，显示库中已经安装了哪些包                           |
 | `library(package)`             | 有参数时，载入包                                             |
 | `unloadNamespace(package)`     | 解除载入一个包                                               |
@@ -121,15 +121,37 @@ print(t2 - t1) # 中间代码的运行时间
 | `data(package="")`             | 查看某个包所有预先提供的数据                                 |
 | `data(dataset_name, package=)` | 读入包中数据                                                 |
 
+```{r, eval=FALSE}
+installed.packages() %>% View()
+```
+
+![](http://humoon-image-hosting-service.oss-cn-beijing.aliyuncs.com/img/typora/2022/image-20220404055325099.png)
+
+#### 新装 R 时安装常用包
+
+```{r}
+# 重装 R 前把已安装包的名称（第一列）存为一个 .rds 文件
+installed.packages()[, 1] %>% 
+	saveRDS("./download-packages.rds") 
+```
+
 ```R
+# 重装 R 后读取该文件，并安装这些 packages
+readRDS("./download-packages.rds") %>% 
+	install.packages()
+```
+
+#### 查看包的流行程度
+
+```{r}
 # 查看 R 包的下载次数
 library(cranlogs)
 
 fashion <- function(package_name) {
   d <- cran_downloads(
     package = package_name,
-    from = "2020-01-01",
-    to = "2021-05-31"
+    from = "2022-01-01",
+    to = "2022-03-31"
   )
   sum(d$count)
 }
@@ -225,6 +247,7 @@ downloadthis::download_file(
 )
 ```
 
+#### Shortcuts
 
 | Shortcuts                                                  |                                                              |
 | ---------------------------------------------------------- | ------------------------------------------------------------ |
@@ -241,12 +264,19 @@ downloadthis::download_file(
 | F1                                                         | 查看帮助                                                     |
 | Ctrl+ ↑                                                    | 在 Console 中输入“xxx”，然后按 Ctrl+ ↑。就可以列出所有输入过的以“xxx”开头的命令。 |
 
+#### 代码高亮
+
+GitHub 上可搜索、安装 rscodeio 主题
+
+[anthonynorth/rscodeio: An RStudio theme inspired by Visual Studio Code. (github.com)](https://github.com/anthonynorth/rscodeio)
+
 ### VSCode
 
 #### 优点
 
 - 鼠标悬停，即可显示变量的定义信息和函数的帮助文档（仅限 R 包中函数的官方文档和本文件中自定义函数的定义，无法显示引入模块中的自定义函数的定义），省去了查阅文档的大量时间
-- 保存（Ctrl+S）时自动格式化
+- 保存（`Ctrl+S`）时自动格式化
+- `Ctrl+Enter`自动运行一行，`Ctrl+Shift+Enter`自动运行当前文件
 
 #### 配置步骤
 

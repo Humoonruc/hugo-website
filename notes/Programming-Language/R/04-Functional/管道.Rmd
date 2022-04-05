@@ -3,19 +3,7 @@ title: "管道"
 subtitle: ''
 author: "Humoon"
 date: "`r Sys.Date()`"
-output:
-  html_document: 
-    code_download: true
-    css: ["../css/style.css"]
-    fig_caption: yes
-    theme: united
-    highlight: haddock
-    number_sections: no
-    toc: yes
-    toc_depth: 4
-    toc_float:
-      collapsed: yes
-      smooth_scroll: yes
+output: html_document
 documentclass: ctexart
 classoption: hyperref,
 ---
@@ -72,7 +60,7 @@ library(htmlwidgets)
 
 传递对象给右边的函数或表达式。当对象在右边函数的第一个参数时，可以省略这个参数；不是第一个参数时，则可以用`.`代替。如果是一元函数，甚至可以连`()`也省掉，只保留函数名。
 
-![管道操作符](http://humoon-image-hosting-service.oss-cn-beijing.aliyuncs.com/img/typora/JavaScript/%E7%AE%A1%E9%81%93%E6%93%8D%E4%BD%9C%E7%AC%A6.png)
+![管道操作符](img/pipe.png)
 
 ```{r}
 set.seed(123)
@@ -89,7 +77,7 @@ a %>%
 
 必须与`%>%`配合使用。
 
-![T管道操作符](http://humoon-image-hosting-service.oss-cn-beijing.aliyuncs.com/img/typora/JavaScript/T%E7%AE%A1%E9%81%93%E6%93%8D%E4%BD%9C%E7%AC%A6.png)
+![T管道操作符](img/T-pipe.png)
 
 例1：在数据处理的中间过程，需要打印输出或图片输出（如观察代码是否达到了预设的目的），这时整个过程就会被中断，用向左操作符就可以解决这样的问题。
 
@@ -122,7 +110,7 @@ cor(mtcars$disp, mtcars$mpg)
 
 现实原理如下图所示，使用`%<>%`把左侧的数据集A传递右侧的B函数，B函数的结果数据集再向右侧传递给C函数，C函数结果的数据集再重新赋值给A，完成整个过程。
 
-![复合赋值操作符](http://humoon-image-hosting-service.oss-cn-beijing.aliyuncs.com/img/typora/JavaScript/%E5%A4%8D%E5%90%88%E8%B5%8B%E5%80%BC%E6%93%8D%E4%BD%9C%E7%AC%A6.png)
+![复合赋值操作符](img/composite-pipe.png)
 
 例：定义符合正态分布的100个随机数，计算绝对值，并按从小到大的顺序排序，获得并取前10个数字赋值给x。
 
@@ -153,15 +141,10 @@ x
 
 泛函式编程的一大痛点在于，很容易写成一大堆函数的嵌套，造成可读性下降
 
-管道操作在很大程度上能够解决这个痛点
-
-用函数替代运算符与管道联用，是非常流畅的
-
-难得这些函数都支持向量化操作
-
-一般地，
+管道操作在很大程度上能够解决这个痛点：用函数替代运算符与管道联用，是非常流畅的
 
 ``` r
+# 本质上，R中的运算符都是函数，故以下两行伪代码等价
 fun(sym) <- value
 `fun<-`(sym, value) # 上一行是这一行的语法糖
 ```
@@ -194,7 +177,7 @@ fun(sym) <- value
 | not                                                                     | `!`                              |
 | `set_names()`                                                           | `names()<-`                      |
 
-[^2]: R 中的操作符其实都是函数，只不过是写法上特殊一点的无括号函数。因此上述替代大都不是绝对必要的，管道也可以和操作符函数配合，只不过都要用反引号将操作符括起来，显式指明这是一个函数。
+[^2]: R 中的操作符其实都是函数，只不过是写法上特殊一点的无括号函数。所以在管道操作中，左边函数对右边运算符的替换并不是必须的，因为管道也可以和操作符直接配合，只不过都要用反引号将操作符括起来，显式指明这是一个函数。
 
 ```{r}
 set.seed(1)

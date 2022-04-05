@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>4 bookdown语法 | Rmarkdown 文本文件的语法</title>
-  <meta name="description" content="4 bookdown语法 | Rmarkdown 文本文件的语法" />
+  <title>5 bookdown语法 | Rmarkdown 文本文件的语法</title>
+  <meta name="description" content="5 bookdown语法 | Rmarkdown 文本文件的语法" />
   <meta name="generator" content="bookdown 0.25 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="4 bookdown语法 | Rmarkdown 文本文件的语法" />
+  <meta property="og:title" content="5 bookdown语法 | Rmarkdown 文本文件的语法" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="4 bookdown语法 | Rmarkdown 文本文件的语法" />
+  <meta name="twitter:title" content="5 bookdown语法 | Rmarkdown 文本文件的语法" />
   
   
   
@@ -23,14 +23,14 @@
 <meta name="author" content="黄蒙 ✉huangmeng@ucass.edu.cn" />
 
 
-<meta name="date" content="2022-03-30" />
+<meta name="date" content="2022-04-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="Rmarkdown.html"/>
+<link rel="prev" href="metadata-config.html"/>
 <link rel="next" href="Xaringan.html"/>
 <style type="text/css">
 p.abstract{
@@ -225,6 +225,7 @@ Rmarkdown 文本文件的语法
 <ul>
 <li class="chapter" data-level="2.16.1" data-path="markdown.html"><a href="markdown.html#行内公式"><i class="fa fa-check"></i><b>2.16.1</b> 行内公式<span></span></a></li>
 <li class="chapter" data-level="2.16.2" data-path="markdown.html"><a href="markdown.html#独立成行的公式"><i class="fa fa-check"></i><b>2.16.2</b> 独立成行的公式<span></span></a></li>
+<li class="chapter" data-level="2.16.3" data-path="markdown.html"><a href="markdown.html#为公式手动编号"><i class="fa fa-check"></i><b>2.16.3</b> 为公式手动编号<span></span></a></li>
 </ul></li>
 <li class="chapter" data-level="2.17" data-path="markdown.html"><a href="markdown.html#锚点"><i class="fa fa-check"></i><b>2.17</b> 锚点<span></span></a></li>
 <li class="chapter" data-level="2.18" data-path="markdown.html"><a href="markdown.html#排版风格建议"><i class="fa fa-check"></i><b>2.18</b> 排版风格建议<span></span></a></li>
@@ -236,50 +237,54 @@ Rmarkdown 文本文件的语法
 <li class="chapter" data-level="2.19.4" data-path="markdown.html"><a href="markdown.html#流程图"><i class="fa fa-check"></i><b>2.19.4</b> 流程图<span></span></a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="Rmarkdown.html"><a href="Rmarkdown.html"><i class="fa fa-check"></i><b>3</b> R Markdown语法<span></span></a>
+<li class="chapter" data-level="3" data-path="Rmarkdown.html"><a href="Rmarkdown.html"><i class="fa fa-check"></i><b>3</b> Rmarkdown语法<span></span></a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="Rmarkdown.html"><a href="Rmarkdown.html#基本语法"><i class="fa fa-check"></i><b>3.1</b> 基本语法<span></span></a></li>
 <li class="chapter" data-level="3.2" data-path="Rmarkdown.html"><a href="Rmarkdown.html#编译pdf"><i class="fa fa-check"></i><b>3.2</b> 编译PDF<span></span></a></li>
 <li class="chapter" data-level="3.3" data-path="Rmarkdown.html"><a href="Rmarkdown.html#r-代码可执行"><i class="fa fa-check"></i><b>3.3</b> R 代码（可执行）<span></span></a></li>
 <li class="chapter" data-level="3.4" data-path="Rmarkdown.html"><a href="Rmarkdown.html#r表格"><i class="fa fa-check"></i><b>3.4</b> R表格<span></span></a></li>
 <li class="chapter" data-level="3.5" data-path="Rmarkdown.html"><a href="Rmarkdown.html#r图"><i class="fa fa-check"></i><b>3.5</b> R图<span></span></a></li>
-<li class="chapter" data-level="3.6" data-path="Rmarkdown.html"><a href="Rmarkdown.html#公式-1"><i class="fa fa-check"></i><b>3.6</b> 公式<span></span></a></li>
-<li class="chapter" data-level="3.7" data-path="Rmarkdown.html"><a href="Rmarkdown.html#制表式截面"><i class="fa fa-check"></i><b>3.7</b> 制表式截面<span></span></a>
+<li class="chapter" data-level="3.6" data-path="Rmarkdown.html"><a href="Rmarkdown.html#制表式截面"><i class="fa fa-check"></i><b>3.6</b> 制表式截面<span></span></a>
 <ul>
-<li class="chapter" data-level="3.7.1" data-path="Rmarkdown.html"><a href="Rmarkdown.html#by-product"><i class="fa fa-check"></i><b>3.7.1</b> By Product<span></span></a></li>
-<li class="chapter" data-level="3.7.2" data-path="Rmarkdown.html"><a href="Rmarkdown.html#by-region"><i class="fa fa-check"></i><b>3.7.2</b> By Region<span></span></a></li>
+<li class="chapter" data-level="3.6.1" data-path="Rmarkdown.html"><a href="Rmarkdown.html#by-product"><i class="fa fa-check"></i><b>3.6.1</b> By Product<span></span></a></li>
+<li class="chapter" data-level="3.6.2" data-path="Rmarkdown.html"><a href="Rmarkdown.html#by-region"><i class="fa fa-check"></i><b>3.6.2</b> By Region<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="3.8" data-path="Rmarkdown.html"><a href="Rmarkdown.html#下载资源文件文件夹"><i class="fa fa-check"></i><b>3.8</b> 下载资源文件/文件夹<span></span></a>
+<li class="chapter" data-level="3.7" data-path="Rmarkdown.html"><a href="Rmarkdown.html#下载资源文件文件夹"><i class="fa fa-check"></i><b>3.7</b> 下载资源文件/文件夹<span></span></a>
 <ul>
-<li class="chapter" data-level="3.8.1" data-path="Rmarkdown.html"><a href="Rmarkdown.html#xfun-package"><i class="fa fa-check"></i><b>3.8.1</b> <code>xfun</code> package<span></span></a></li>
-<li class="chapter" data-level="3.8.2" data-path="Rmarkdown.html"><a href="Rmarkdown.html#downloadthis-package"><i class="fa fa-check"></i><b>3.8.2</b> <code>downloadthis</code> package<span></span></a></li>
+<li class="chapter" data-level="3.7.1" data-path="Rmarkdown.html"><a href="Rmarkdown.html#xfun-package"><i class="fa fa-check"></i><b>3.7.1</b> <code>xfun</code> package<span></span></a></li>
+<li class="chapter" data-level="3.7.2" data-path="Rmarkdown.html"><a href="Rmarkdown.html#downloadthis-package"><i class="fa fa-check"></i><b>3.7.2</b> <code>downloadthis</code> package<span></span></a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="bookdown.html"><a href="bookdown.html"><i class="fa fa-check"></i><b>4</b> bookdown语法<span></span></a>
+<li class="chapter" data-level="4" data-path="metadata-config.html"><a href="metadata-config.html"><i class="fa fa-check"></i><b>4</b> Metadata &amp; Config<span></span></a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="bookdown.html"><a href="bookdown.html#章节编号和引用"><i class="fa fa-check"></i><b>4.1</b> 章节编号和引用<span></span></a>
-<ul>
-<li class="chapter" data-level="4.1.1" data-path="bookdown.html"><a href="bookdown.html#编号"><i class="fa fa-check"></i><b>4.1.1</b> 编号<span></span></a></li>
-<li class="chapter" data-level="4.1.2" data-path="bookdown.html"><a href="bookdown.html#引用-1"><i class="fa fa-check"></i><b>4.1.2</b> 引用<span></span></a></li>
+<li class="chapter" data-level="4.1" data-path="metadata-config.html"><a href="metadata-config.html#output"><i class="fa fa-check"></i><b>4.1</b> output<span></span></a></li>
+<li class="chapter" data-level="4.2" data-path="metadata-config.html"><a href="metadata-config.html#config"><i class="fa fa-check"></i><b>4.2</b> config<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="bookdown.html"><a href="bookdown.html#usage-writing-fig"><i class="fa fa-check"></i><b>4.2</b> 图形自动编号<span></span></a></li>
-<li class="chapter" data-level="4.3" data-path="bookdown.html"><a href="bookdown.html#usage-writing-tab"><i class="fa fa-check"></i><b>4.3</b> 表格自动编号<span></span></a></li>
-<li class="chapter" data-level="4.4" data-path="bookdown.html"><a href="bookdown.html#usage-writing-math"><i class="fa fa-check"></i><b>4.4</b> 数学公式编号<span></span></a></li>
-<li class="chapter" data-level="4.5" data-path="bookdown.html"><a href="bookdown.html#文献引用与文献列表"><i class="fa fa-check"></i><b>4.5</b> 文献引用与文献列表<span></span></a></li>
-<li class="chapter" data-level="4.6" data-path="bookdown.html"><a href="bookdown.html#索引"><i class="fa fa-check"></i><b>4.6</b> 索引<span></span></a></li>
-<li class="chapter" data-level="4.7" data-path="bookdown.html"><a href="bookdown.html#编译"><i class="fa fa-check"></i><b>4.7</b> 编译<span></span></a></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path="Xaringan.html"><a href="Xaringan.html"><i class="fa fa-check"></i><b>5</b> Xaringan 语法<span></span></a>
+<li class="chapter" data-level="5" data-path="bookdown.html"><a href="bookdown.html"><i class="fa fa-check"></i><b>5</b> bookdown语法<span></span></a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="Xaringan.html"><a href="Xaringan.html#特点"><i class="fa fa-check"></i><b>5.1</b> 特点<span></span></a></li>
-<li class="chapter" data-level="5.2" data-path="Xaringan.html"><a href="Xaringan.html#快捷键"><i class="fa fa-check"></i><b>5.2</b> 快捷键<span></span></a></li>
-<li class="chapter" data-level="5.3" data-path="Xaringan.html"><a href="Xaringan.html#语法"><i class="fa fa-check"></i><b>5.3</b> 语法<span></span></a>
+<li class="chapter" data-level="5.1" data-path="bookdown.html"><a href="bookdown.html#章节编号和引用"><i class="fa fa-check"></i><b>5.1</b> 章节编号和引用<span></span></a>
 <ul>
-<li class="chapter" data-level="5.3.1" data-path="Xaringan.html"><a href="Xaringan.html#slides-and-properties"><i class="fa fa-check"></i><b>5.3.1</b> Slides and Properties<span></span></a></li>
-<li class="chapter" data-level="5.3.2" data-path="Xaringan.html"><a href="Xaringan.html#yaml"><i class="fa fa-check"></i><b>5.3.2</b> YAML<span></span></a></li>
-<li class="chapter" data-level="5.3.3" data-path="Xaringan.html"><a href="Xaringan.html#content-classes"><i class="fa fa-check"></i><b>5.3.3</b> Content Classes<span></span></a></li>
+<li class="chapter" data-level="5.1.1" data-path="bookdown.html"><a href="bookdown.html#编号"><i class="fa fa-check"></i><b>5.1.1</b> 编号<span></span></a></li>
+<li class="chapter" data-level="5.1.2" data-path="bookdown.html"><a href="bookdown.html#引用-1"><i class="fa fa-check"></i><b>5.1.2</b> 引用<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="5.4" data-path="Xaringan.html"><a href="Xaringan.html#css-and-themes"><i class="fa fa-check"></i><b>5.4</b> CSS and Themes<span></span></a></li>
+<li class="chapter" data-level="5.2" data-path="bookdown.html"><a href="bookdown.html#usage-writing-fig"><i class="fa fa-check"></i><b>5.2</b> 图形自动编号<span></span></a></li>
+<li class="chapter" data-level="5.3" data-path="bookdown.html"><a href="bookdown.html#usage-writing-tab"><i class="fa fa-check"></i><b>5.3</b> 表格自动编号<span></span></a></li>
+<li class="chapter" data-level="5.4" data-path="bookdown.html"><a href="bookdown.html#usage-writing-math"><i class="fa fa-check"></i><b>5.4</b> 数学公式编号<span></span></a></li>
+<li class="chapter" data-level="5.5" data-path="bookdown.html"><a href="bookdown.html#文献引用与文献列表"><i class="fa fa-check"></i><b>5.5</b> 文献引用与文献列表<span></span></a></li>
+<li class="chapter" data-level="5.6" data-path="bookdown.html"><a href="bookdown.html#索引"><i class="fa fa-check"></i><b>5.6</b> 索引<span></span></a></li>
+<li class="chapter" data-level="5.7" data-path="bookdown.html"><a href="bookdown.html#编译"><i class="fa fa-check"></i><b>5.7</b> 编译<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="Xaringan.html"><a href="Xaringan.html"><i class="fa fa-check"></i><b>6</b> Xaringan 语法<span></span></a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="Xaringan.html"><a href="Xaringan.html#特点"><i class="fa fa-check"></i><b>6.1</b> 特点<span></span></a></li>
+<li class="chapter" data-level="6.2" data-path="Xaringan.html"><a href="Xaringan.html#快捷键"><i class="fa fa-check"></i><b>6.2</b> 快捷键<span></span></a></li>
+<li class="chapter" data-level="6.3" data-path="Xaringan.html"><a href="Xaringan.html#语法"><i class="fa fa-check"></i><b>6.3</b> 语法<span></span></a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="Xaringan.html"><a href="Xaringan.html#slides-and-properties"><i class="fa fa-check"></i><b>6.3.1</b> Slides and Properties<span></span></a></li>
+<li class="chapter" data-level="6.3.2" data-path="Xaringan.html"><a href="Xaringan.html#yaml"><i class="fa fa-check"></i><b>6.3.2</b> YAML<span></span></a></li>
+<li class="chapter" data-level="6.3.3" data-path="Xaringan.html"><a href="Xaringan.html#content-classes"><i class="fa fa-check"></i><b>6.3.3</b> Content Classes<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="Xaringan.html"><a href="Xaringan.html#css-and-themes"><i class="fa fa-check"></i><b>6.4</b> CSS and Themes<span></span></a></li>
 </ul></li>
 <li><a href="参考文献-2.html#参考文献-2">参考文献<span></span></a></li>
 <li class="divider"></li>
@@ -301,46 +306,46 @@ Rmarkdown 文本文件的语法
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="bookdown" class="section level1 hasAnchor" number="4">
-<h1><span class="header-section-number">4</span> bookdown语法<a href="bookdown.html#bookdown" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="bookdown" class="section level1 hasAnchor" number="5">
+<h1><span class="header-section-number">5</span> bookdown语法<a href="bookdown.html#bookdown" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>bookdown 比 Rmarkdown 的主要升级之处在于自动编号和交叉引用。</p>
-<div id="章节编号和引用" class="section level2 hasAnchor" number="4.1">
-<h2><span class="header-section-number">4.1</span> 章节编号和引用<a href="bookdown.html#章节编号和引用" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="编号" class="section level3 hasAnchor" number="4.1.1">
-<h3><span class="header-section-number">4.1.1</span> 编号<a href="bookdown.html#编号" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="章节编号和引用" class="section level2 hasAnchor" number="5.1">
+<h2><span class="header-section-number">5.1</span> 章节编号和引用<a href="bookdown.html#章节编号和引用" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="编号" class="section level3 hasAnchor" number="5.1.1">
+<h3><span class="header-section-number">5.1.1</span> 编号<a href="bookdown.html#编号" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><code># (PART) 第一篇 {-}</code> 部分（篇）
 <code># References {-}</code> 参考文献
 <code># (APPENDIX) 附录 {-}</code> 附录</p>
 </div>
-<div id="引用-1" class="section level3 hasAnchor" number="4.1.2">
-<h3><span class="header-section-number">4.1.2</span> 引用<a href="bookdown.html#引用-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="引用-1" class="section level3 hasAnchor" number="5.1.2">
+<h3><span class="header-section-number">5.1.2</span> 引用<a href="bookdown.html#引用-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ol style="list-style-type: decimal">
 <li><code>{#tag}</code>,自动为标题编号，并定义标题的标签，便于引用。标签只能含字母、数字和连字符”-“，图、表标签同</li>
 <li><code>{-}</code>,不为标题编号，也不定义标签</li>
 <li><code>{#tag .unnumbered}</code>,设置标题的标签，但不为标题编号</li>
-<li><code>\@ref(tag)</code>,引用标题编号。如第<a href="bookdown.html#bookdown">4</a>节是关于bookdown的。</li>
+<li><code>\@ref(tag)</code>,引用标题编号。如第<a href="bookdown.html#bookdown">5</a>节是关于bookdown的。</li>
 </ol>
 </div>
 </div>
-<div id="usage-writing-fig" class="section level2 hasAnchor" number="4.2">
-<h2><span class="header-section-number">4.2</span> 图形自动编号<a href="bookdown.html#usage-writing-fig" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="usage-writing-fig" class="section level2 hasAnchor" number="5.2">
+<h2><span class="header-section-number">5.2</span> 图形自动编号<a href="bookdown.html#usage-writing-fig" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>用R代码块生成的图形，只要具有代码块标签label，且提供代码段选项<code>fig.cap="图题"</code>，就可对图形自动编号，并且可以用如<code>\@ref(fig:label)</code>的格式引用图形。如：</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="bookdown.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="bookdown.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:u-w-f-ex01"></span>
 <img src="figure/u-w-f-ex01-1.png" alt="测试图" width="70%" />
 <p class="caption">
-Figure 4.1: 测试图
+Figure 5.1: 测试图
 </p>
 </div>
-<p>引用如：参见图<a href="bookdown.html#fig:u-w-f-ex01">4.1</a>，其中的<code>fig:</code>是必须的。</p>
+<p>引用如：参见图<a href="bookdown.html#fig:u-w-f-ex01">5.1</a>，其中的<code>fig:</code>是必须的。</p>
 </div>
-<div id="usage-writing-tab" class="section level2 hasAnchor" number="4.3">
-<h2><span class="header-section-number">4.3</span> 表格自动编号<a href="bookdown.html#usage-writing-tab" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="usage-writing-tab" class="section level2 hasAnchor" number="5.3">
+<h2><span class="header-section-number">5.3</span> 表格自动编号<a href="bookdown.html#usage-writing-tab" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>用R代码<code>knitr::kable()</code>生成的表格，只要具有代码块标签，并且在<code>knitr::kable()</code>调用时加选项<code>caption="表题"</code>，就可以对表格自动编号，并且可以用如<code>\@ref(tab:label)</code>的格式引用表格。如：</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="bookdown.html#cb40-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="st">&quot;自变量&quot;</span> <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="st">&quot;因变量&quot;</span> <span class="ot">=</span> (<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb40-2"><a href="bookdown.html#cb40-2" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(d, <span class="at">caption =</span> <span class="st">&quot;1到10的平方&quot;</span>, <span class="at">longtable =</span> <span class="cn">TRUE</span> )</span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="bookdown.html#cb45-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="st">&quot;自变量&quot;</span> <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="st">&quot;因变量&quot;</span> <span class="ot">=</span> (<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb45-2"><a href="bookdown.html#cb45-2" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(d, <span class="at">caption =</span> <span class="st">&quot;1到10的平方&quot;</span>, <span class="at">longtable =</span> <span class="cn">TRUE</span> )</span></code></pre></div>
 <table>
-<caption><span id="tab:u-w-tab-ex01">Table 4.1: </span>1到10的平方</caption>
+<caption><span id="tab:u-w-tab-ex01">Table 5.1: </span>1到10的平方</caption>
 <thead>
 <tr class="header">
 <th align="right">自变量</th>
@@ -390,24 +395,24 @@ Figure 4.1: 测试图
 </tr>
 </tbody>
 </table>
-<p>引用如：参见表<a href="bookdown.html#tab:u-w-tab-ex01">4.1</a>，其中的<code>tab:</code>是必须的。</p>
+<p>引用如：参见表<a href="bookdown.html#tab:u-w-tab-ex01">5.1</a>，其中的<code>tab:</code>是必须的。</p>
 </div>
-<div id="usage-writing-math" class="section level2 hasAnchor" number="4.4">
-<h2><span class="header-section-number">4.4</span> 数学公式编号<a href="bookdown.html#usage-writing-math" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="usage-writing-math" class="section level2 hasAnchor" number="5.4">
+<h2><span class="header-section-number">5.4</span> 数学公式编号<a href="bookdown.html#usage-writing-math" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>不需要编号的公式，仍可以按照一般的Rmd文件使用行内的<code>$ $</code>或独立的<code>$$ $$</code>公式块。</p>
 <p>需要编号的公式，写在<code>\begin{align}</code>和<code>\end{align}</code>之间。然后，对不需要编号的<strong>行</strong>在末尾用<code>\nonumber</code>标注；对需要编号的<strong>行</strong>用<code>(\#eq:mylabel)</code>添加自定义标签，在正文的引用中使用与上面相同的格式<code>\@ref(eq:mylable)</code>。如：</p>
 <p><span class="math display" id="eq:efunc-ex" id="eq:efunc-sum">\[\begin{align}
-f(x) =&amp; \sum_{k=0}^\infty \frac{1}{k!} x^k \tag{4.1} \\
-  = e^x \tag{4.2}
+f(x) =&amp; \sum_{k=0}^\infty \frac{1}{k!} x^k \tag{5.1} \\
+  = e^x \tag{5.2}
 \end{align}\]</span></p>
 <p><span class="math display" id="eq:var-mat-def">\[\begin{align}
 \Sigma =&amp;  (\sigma_{ij})_{n\times n} \nonumber \\
-=&amp; E[(\boldsymbol{X} - \boldsymbol{\mu}) (\boldsymbol{X} - \boldsymbol{\mu})^T ] \tag{4.3}
+=&amp; E[(\boldsymbol{X} - \boldsymbol{\mu}) (\boldsymbol{X} - \boldsymbol{\mu})^T ] \tag{5.3}
 \end{align}\]</span></p>
-<p>引用如：协方差定义见式<a href="bookdown.html#eq:var-mat-def">(4.3)</a>。</p>
+<p>引用如：协方差定义见式<a href="bookdown.html#eq:var-mat-def">(5.3)</a>。</p>
 </div>
-<div id="文献引用与文献列表" class="section level2 hasAnchor" number="4.5">
-<h2><span class="header-section-number">4.5</span> 文献引用与文献列表<a href="bookdown.html#文献引用与文献列表" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="文献引用与文献列表" class="section level2 hasAnchor" number="5.5">
+<h2><span class="header-section-number">5.5</span> 文献引用与文献列表<a href="bookdown.html#文献引用与文献列表" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ol style="list-style-type: decimal">
 <li>将所有文献用bib格式保存为一个<code>.bib</code>文献库，如模板中的样例文件<code>mybib.bib</code>。用<code>@item</code>和<code>[@item]</code>引用文献题录，如<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>:</li>
 </ol>
@@ -457,12 +462,12 @@ f(x) =&amp; \sum_{k=0}^\infty \frac{1}{k!} x^k \tag{4.1} \\
 <p>写在YAML文件头中，表示某些文献不直接引用，只在末尾参考文献列表中出现。</p>
 <p>被引用的文献将出现在一章末尾以及全书的末尾，对PDF输出则仅出现在全书末尾。</p>
 </div>
-<div id="索引" class="section level2 hasAnchor" number="4.6">
-<h2><span class="header-section-number">4.6</span> 索引<a href="bookdown.html#索引" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="索引" class="section level2 hasAnchor" number="5.6">
+<h2><span class="header-section-number">5.6</span> 索引<a href="bookdown.html#索引" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><code>\index{索引词汇}</code>，标记为索引，仅适用于pdf格式，输出在文末。</p>
 </div>
-<div id="编译" class="section level2 hasAnchor" number="4.7">
-<h2><span class="header-section-number">4.7</span> 编译<a href="bookdown.html#编译" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="编译" class="section level2 hasAnchor" number="5.7">
+<h2><span class="header-section-number">5.7</span> 编译<a href="bookdown.html#编译" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><code>bookdown::render_book('index.Rmd', 'bookdown::epub_book')</code></p>
 <p><code>bookdown::render_book('index.Rmd', 'bookdown::pdf_book')</code></p>
 <p><code>bookdown::render_book('index.Rmd', 'bookdown::gitbook')</code></p>
@@ -490,7 +495,7 @@ f(x) =&amp; \sum_{k=0}^\infty \frac{1}{k!} x^k \tag{4.1} \\
           </div>
         </div>
       </div>
-<a href="Rmarkdown.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="metadata-config.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="Xaringan.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>

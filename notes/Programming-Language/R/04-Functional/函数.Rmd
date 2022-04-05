@@ -74,9 +74,42 @@ add(1, 3)
 
 ### 操作符皆函数
 
+
+| `magrittr::` 等价函数                                                                  | 操作符[^2]                     |
+|-------------------------------------------------------------------------|----------------------------------|
+| `extract(x, index or 'col_name')`                                       | `[`，即`[`(x, index/'col_name')  |
+| `extract2(x, index or 'col_name')`                                      | `[[`，即`[[`(x, index'col_name') |
+| `inset()`                                                               | `[<-`                            |
+| `inset2()`                                                              | `[[<-`                           |
+| `set_colnames()`                                                        | `colnames()<-`                   |
+| `set_rownames()`                                                        | `rownames()<-`                   |
+| `magrittr::use_series()`（可用于list）, `dplyr::pull()`（不适用于list） | `$`                              |
+| add                                                                     | `+`                              |
+| subtract                                                                | `-`                              |
+| multiply_by                                                             | `*`                              |
+| raise_to_power                                                          | `^`                              |
+| multiply_by_matrix                                                      | `%*%`                            |
+| divide_by                                                               | `/`                              |
+| divide_by_int                                                           | `%/%`                            |
+| mod                                                                     | `%%`                             |
+| `is_in()`                                                               | `%in%`                           |
+| and                                                                     | `&`                              |
+| or                                                                      | `|`                              |
+| equals                                                                  | `==`                             |
+| is_greater_than                                                         | `>`                              |
+| is_weakly_greater_than                                                  | `>=`                             |
+| is_less_than                                                            | `<`                              |
+| is_weakly_less_than                                                     | `<=`                             |
+| not                                                                     | `!`                              |
+| `set_names()`                                                           | `names()<-`                      |
+
+[^2]: R 中的操作符其实都是函数，只不过是写法上特殊一点的无括号函数。所以在管道操作中，左边函数对右边运算符的替换并不是必须的，因为管道也可以和操作符直接配合，只不过都要用反引号将操作符括起来，显式指明这是一个函数。
+
+
+
 ```{r}
 head(iris)
-`[`(head(iris), 2) # 数据框的本质是list，筛选第二个元素，还是一个list
+`[`(head(iris), 2) # 数据框的本质是各列向量组成的list，筛选第二个元素，还是一个list
 `[[`(head(iris), 2) # 提取第二个元素，是一个vector
 
 a <- 2:4

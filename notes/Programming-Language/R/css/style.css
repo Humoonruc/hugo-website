@@ -1,11 +1,12 @@
 /* 全局 */
 
+
 html {
-    font-size: 16px;
+    font-size: 17px;
 }
 
 body {
-    font-size: 16px;
+    font-size: 17px;
     color: #333333;
     font-family: 'Segoe UI', sans-serif, Tahoma, Geneva, Verdana, "Microsoft YaHei";
 }
@@ -42,20 +43,21 @@ h1.title {
 }
 
 h2 {
-    text-align: center;
+    text-align: left;
     font-size: 36px;
     counter-increment: chapter;
     counter-reset: section;
     font-weight: bold;
     font-family: "Italic", STKaiTi;
     color: purple;
+    margin-top: 1.5em;
 }
 
 h3 {
     /* background-color:lightgray; */
     font-weight: bold;
     line-height: 150%;
-    font-size: 28px;
+    font-size: 30px;
     margin-top: 1em;
     margin-bottom: 1em;
     /* counter-increment: section; */
@@ -85,6 +87,7 @@ h4 {
     font-weight: bold;
     /* counter-increment: counter1; */
     /* counter-reset: counter2; */
+    margin-top: 2em;
 }
 
 h4.author,
@@ -237,7 +240,7 @@ li>ol {
 }
 
 ul>li {
-    list-style-type: disc;
+    /* list-style-type: disc; */
     list-style-position: outside;
 }
 

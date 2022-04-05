@@ -3,19 +3,7 @@ title: "Object Oriented Programming in R"
 subtitle: '《R的极客理想——高级开发篇》第四章'
 author: "Humoon"
 date: "`r Sys.Date()`"
-output:
-  html_document: 
-    code_download: true
-    css: ../css/style.css
-    fig_caption: yes
-    theme: united
-    highlight: haddock
-    number_sections: no
-    toc: yes
-    toc_depth: 4
-    toc_float:
-      collapsed: yes
-      smooth_scroll: yes
+output: html_document
 documentclass: ctexart
 classoption: hyperref,
 ---

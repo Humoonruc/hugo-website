@@ -117,6 +117,9 @@ pdf.options(family = "GB1")
 
 # 参考文献 {-}
 
+
+[*R Markdown Cookbook*](https://bookdown.org/yihui/rmarkdown-cookbook/)
+
 [*R Markdown: The Definitive Guide*](https://bookdown.org/yihui/rmarkdown/)
 
 <a href="../pdf/cheatsheet-rmarkdown.pdf">*Rmarkdown Cheatsheet.pdf*</a>
@@ -431,25 +434,60 @@ def print_name():
 
 ### 行内公式
 
-将公式包在`$ $`之间，如：$\sin\pi/2=1$   
+将公式包在`$ $`之间，如 $\sin\pi/2=1$  
+
+```markdown
+$\sin\pi/2=1$ 
+```
 
 ### 独立成行的公式
 
 将公式包含在`$$ $$`之间，如：
 
+```markdown
+$$
+f(x)=\frac{1}{2} \sum_{j=1}^{\infty} \int_{0}^{1} \sin ^{2}(j t x) d t
+$$
+```
+
 $$
 f(x)=\frac{1}{2} \sum_{j=1}^{\infty} \int_{0}^{1} \sin ^{2}(j t x) d t
 $$
 
-为了产生对齐的公式，在独立公式中可使用 aligned 环境。
+
+为了产生对齐的公式，或在某些 markdown 编辑器中成功渲染出独立成行的公式，可使用 aligned 环境。
 
 公式中的环境以`\begin{环境名}`开始，以`\end{环境名}`结束，用`\\`表示换行，用`&`表示一个上下对齐位置。如：
+
+```markdown
 $$
 \begin{aligned}
   f(x) =& \sum_{k=0}^\infty \frac{1}{k!} x^k \\
   =& e^x
 \end{aligned}
 $$
+```
+
+$$
+\begin{aligned}
+  f(x) =& \sum_{k=0}^\infty \frac{1}{k!} x^k \\
+  =& e^x
+\end{aligned}
+$$
+
+### 为公式手动编号
+
+```markdown
+$$
+y = f(x) \tag{label}
+$$
+```
+
+
+$$
+y = f(x) \tag{label}
+$$
+
 
 ## 锚点
 
@@ -671,7 +709,7 @@ graph LR
 ```
 
 
-# R Markdown语法{#Rmarkdown}
+# Rmarkdown语法{#Rmarkdown}
 
 ## 基本语法
 
@@ -736,15 +774,6 @@ knitr::kable(table, caption = 'order of letters') # 用三线表格显示数据
 ```{r img1, fig.cap='xx图'}
 # knitr::include_graphics("figs/myfig01.png")
 ```
-
-## 公式
-
-为公式手动编号
-$$
-y = f(x) \tag{label}
-$$
-
-显然，手动编号不是一个好主意。
 
 ## 制表式截面 {.tabset}
 
@@ -838,6 +867,73 @@ downloadthis::download_dir(
 )
 ```
 
+
+# Metadata & Config
+
+详见：
+
+[*R Markdown Cookbook*](https://bookdown.org/yihui/rmarkdown-cookbook/)
+
+[*R Markdown: The Definitive Guide*](https://bookdown.org/yihui/rmarkdown/)
+
+## output
+
+Rmarkdown 文件的Metadata 采用了 YAML 文件头的形式
+
+输出部分往往单独保存在一个 _output.yml 文件中，放在与 .Rmd 平级的目录下
+
+```{r, echo=FALSE}
+downloadthis::download_file(
+  path = c("./resources/_output.yml"),
+  output_name = "_output",
+  button_label = "output config in YAML header of an Rmarkdown file",
+  button_type = "danger",
+  self_contained = FALSE
+)
+```
+
+## config
+
+可以将大部分的代码块设置、包的引入声明和一些工具函数放在一个 .R 脚本中，在最初的 setup 代码块中由 source() 引入，避免了每个 .Rmd 文件中都要写一遍。
+
+```{r, echo=FALSE}
+downloadthis::download_file(
+  path = c("./resources/Rmarkdown_config.R"),
+  output_name = "Rmarkdown_config",
+  button_label = "packages and options needed",
+  button_type = "danger",
+  self_contained = FALSE
+)
+```
+
+<br>
+setup 代码块的设置形如 `{r setup, include = FALSE}`（在表示代码块起始的三个反引号后加入这个大括号），代码块内部只需要写
+
+```R
+source("../Rmarkdown-template/Rmarkdown_config.R")
+
+## global options ===================================
+knitr::opts_chunk$set(
+  width = config$width,
+  fig.width = config$fig.width,
+  fig.asp = config$fig.asp,
+  out.width = config$out.width,
+  fig.align = config$fig.align,
+  fig.path = config$fig.path,
+  fig.show = config$fig.show,
+  warn = config$warn,
+  warning = config$warning,
+  message = config$message,
+  echo = config$echo,
+  eval = config$eval,
+  tidy = config$tidy,
+  comment = config$comment,
+  collapse = config$collapse,
+  cache = config$cache,
+  cache.comments = config$cache.comments,
+  autodep = config$autodep
+)
+```
 
 # bookdown语法{#bookdown}
 

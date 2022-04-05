@@ -259,6 +259,75 @@ for (i in 1:5) {
 ##### 环境对象总是被就地修改
 
 
+### 解构赋值（Unpacking Assignment）
+
+**zeallot 包提供的 `%<-%` 和 `%>-%` 函数**
+
+```{r}
+library(zeallot)
+
+# unpack vector
+c(lat, lng) %<-% c(38.061944, -122.643889)
+lat
+lng
+
+# unpack list
+coords_list <- function() {
+  list(38.061944, -122.643889)
+}
+c(lat, lng) %<-% coords_list()
+lat
+lng
+
+# unpack regression result
+c(inter, slope) %<-% coef(lm(mpg ~ cyl, data = mtcars))
+inter
+slope
+
+# unpack data.frame
+c(mpg, cyl, disp, hp) %<-% mtcars[, 1:4]
+head(mpg)
+
+# unpack nested values
+c(a, c(b, d), e) %<-% list("begin", list("middle1", "middle2"), "end")
+a
+b
+d
+e
+
+# unpack character string
+c(ch1, ch2, ch3) %<-% "abc"
+ch1
+ch2
+ch3
+
+# unpack Date
+c(y, m, d) %<-% Sys.Date()
+y
+m
+d
+
+# ... rest of
+c(begin, ...middle, end) %<-% list(1, 2, 3, 4, 5)
+begin
+middle
+
+# place holder
+c(min_wt, ., ., mean_wt, ., max_wt) %<-% summary(mtcars$wt)
+min_wt
+mean_wt
+max_wt
+
+# 向右的解构赋值符号 %->%
+mtcars %>%
+  subset(hp > 100) %>%
+  aggregate(. ~ cyl, data = ., FUN = . %>% mean() %>% round(2)) %>%
+  transform(kpl = mpg %>% multiply_by(0.4251)) %->% 
+  c(cyl, mpg, ...rest)
+cyl
+```
+
+
 ## 条件语句
 
 ### `if...else if...else...`

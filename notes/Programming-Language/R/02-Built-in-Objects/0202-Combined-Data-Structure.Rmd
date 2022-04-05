@@ -3,19 +3,7 @@ title: "组合型数据结构"
 subtitle: 'Vector, Matrix, List and Dataframe'
 author: "Humoon"
 date: "`r Sys.Date()`"
-output:
-  html_document: 
-    code_download: true
-    css: ["../css/style.css"]
-    fig_caption: yes
-    theme: united
-    highlight: haddock
-    number_sections: no
-    toc: yes
-    toc_depth: 4
-    toc_float:
-      collapsed: yes
-      smooth_scroll: yes
+output: html_document
 documentclass: ctexart
 classoption: hyperref,
 ---
@@ -263,7 +251,7 @@ R 对向量的操作都要在原向量的拷贝上进行，不改变原向量（
 
 #### 增删改
 
--   `append()` 返回插入元素后的拷贝
+-   `append()` 返回插入元素后的拷贝. <span style='color:red'>**注意，R 中一般不直接修改原对象，所以如果要保留这个操作，一定要记得赋值给原变量。**</span>
 -   `[-index]` 排除选集整体赋值
 -   `replace()` 批量替换
 
@@ -541,11 +529,17 @@ dimnames(z)
 
 ## List
 
-广义向量，相当于 JS 中的对象
+广义向量，大致相当于 JS 中的对象，本质上是一组<span style = 'color: orangered'>**有序</span>键值对**的集合。
+
+遍历list，就是遍历它的键值对。
+
+灵活使用 list 才能成为 R 编程高手。
 
 ### Create
 
 `list(key1 = value1, key2 = value2, ...)`
+
+可以简写为 `list(value1, value2, ...)`，此时使用从 1 开始的自然数列作为缺省的 keys
 
 ### Type
 
@@ -555,7 +549,7 @@ dimnames(z)
 
 -   `unlist()` 将列表强制转换为向量
 
-    -   按分量顺序依次排列，保证不再嵌套
+    -   按分量顺序依次排列，强制不再嵌套！
     -   自动保证同样的数据类型。比如，强制转换混合了数值和文本的列表，会得到字符串向量
 
 ### Label
@@ -564,29 +558,69 @@ dimnames(z)
 
 ### Subset
 
-`[]`, index/condition/name
+第一种语法，用`[]`符号，里面可以是 index/condition/key
+
+第二种语法，用 \`[\`()  或 `magrittr::extract()`函数
+
+```{r}
+l <- list("a", 2, TRUE)
+l[1]
+`[`(l, 1)
+magrittr::extract(l, 1)
+```
 
 ### Extract
 
--   `list$key`，是`list[['key']]`的简写
--   `list[[index]]`
--   `list[['key']]`
+第一种语法，用`[[]]`符号，里面可以是 index/condition/key
+
+第二种语法，用`$`符号+key，`list$key`，是`list[['key']]`的简写
+
+第三种语法，用 \`[[\`()  或 `magrittr::extract2()`函数
+
+```{r}
+l[[1]]
+`[[`(l, 1)
+magrittr::extract2(l, 1)
+```
 
 ### Operation
 
-直接赋值
+#### 添加元素
+
+第一种语法，直接赋值。
+
+第二种语法，`append(list, value, after = length(list))`，默认加到列表的末尾。但若插入的元素本身是一个列表（很多对象本质上都是一个列表），则会**破坏层级结构，将所有的元素依次插入到前一个列表**。所以若要保存列表的层级结构，还是第一种语法更保险。
+
+```{r}
+l[[4]] <- data.table(x = 1, y = 2)
+l$z <- c("one", "two", "three")
+l
+l <- append(l, 6)
+l
+l <- append(l, list(7, 8))
+l
+l[[9]] <- list(9, 10)
+l
+```
+
+添加元素的最佳写法，无需知道 index
+
+```R
+l <- list(...)
+l[[length(l) + 1]] <- new_element
+```
+
+
+
+#### 删除元素
 
 赋值为 `NULL` 即为删除
 
 ## Data.Frame
 
-data frame 是长度相同的列向量组成的 List（可以按照这个思路去构建 JS 中的数据框），可以像矩阵一样，以二维表方式呈现。
+data.frame 是长度相同的列向量组成的 List（可以按照这个思路去构建 JS 中的数据框）。R 原生支持向量化操作，因此 R 操作数据框有先天优势。
 
-因此，**R 中操作矩阵的一些函数兼容了 data.frame 对象**，即可以像操作矩阵一样操作 data.frame
-
-
-
-数据框是一个各成员均为向量、且长度相等的对象，由于 R 原生支持向量化操作，因此 R 操作数据框有先天优势。
+data.frame 可以像矩阵一样，以二维表方式呈现。因此，**R 中操作矩阵的一些函数兼容了 data.frame 对象**，即可以像操作矩阵一样操作 data.frame
 
 ### Create
 
