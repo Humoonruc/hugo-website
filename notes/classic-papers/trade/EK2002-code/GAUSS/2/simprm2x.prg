@@ -18,6 +18,10 @@ new;
 output file = ".\simprm2x.out" reset;
 cls;
 
+
+" ***** ";
+
+
 " s = ratio of sigs2/sigd2 ";
 s = 0;
 

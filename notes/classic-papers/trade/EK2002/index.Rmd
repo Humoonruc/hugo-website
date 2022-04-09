@@ -71,31 +71,32 @@ editor_options:
 ---
 
 ```{r setup, include=FALSE}
-## global options
+source("./config/Rmarkdown_config.R")
+
+## global options ===================================
 knitr::opts_chunk$set(
-  width = 80,
-  fig.width = 6, 
-  fig.asp = 0.618,
-  out.width = "70%", 
-  fig.align = "center",
-  fig.path = 'Figures/', 
-  fig.show = "asis",
-  warn = 1, 
-  warning = FALSE, 
-  message = FALSE, 
-  echo = TRUE, 
-  eval = TRUE,
-  tidy = F, 
-  comment = '#>', 
-  collapse = F, 
-  cache = T, 
-  cache.comments = F, 
-  autodep = T
-  )
+  width = config$width,
+  fig.width = config$fig.width,
+  fig.asp = config$fig.asp,
+  out.width = config$out.width,
+  fig.align = config$fig.align,
+  fig.path = config$fig.path,
+  fig.show = config$fig.show,
+  warn = config$warn,
+  warning = config$warning,
+  message = config$message,
+  echo = config$echo,
+  eval = config$eval,
+  tidy = config$tidy,
+  comment = config$comment,
+  collapse = config$collapse,
+  cache = config$cache,
+  cache.comments = config$cache.comments,
+  autodep = config$autodep
+)
 
 pdf.options(height = 10/2.54, width = 10/2.54) # 注意：此设置要放在最后
 ```
-
 
 # 引言[^1]
 
@@ -284,7 +285,7 @@ $\pi/(\theta \sqrt{6})$；(2) 在 $\theta$ 相同的前提下，$T_i$
 是各国间潜在比较优势的体现。
 
 ```{r extreme-distribution, fig.cap='Fréchet 分布的概率密度图象', echo=FALSE}
-knitr::include_graphics("./Frechet-distribution/Frechet.png")
+knitr::include_graphics("./img/Fréchet-distribution-density-selfcontained.svg")
 ```
 
 如图 \@ref(fig:extreme-distribution)，为 $Z_i$
@@ -520,7 +521,8 @@ ${\left({d_{n i}}/{p_{n}}\right)^{-\theta} X_{n}}$ 视为 $n$ 国对于 $i$
 
 # 贸易、地理和价格初探 {#estimate-partial-equilibrium}
 
-Section 3 这部分的代码和一部分细节说明可参见 [EK2002 Code (R version): Estimation](../../EK2002-code/R/src/estimation.html)，同理还有 Section 5.
+Section 3 这部分的代码和一部分细节说明可参见 [EK2002 Code (R version):
+Estimation](../../EK2002-code/R/src/estimation.html)，同理还有 Section 5.
 
 ## 标准化的进口份额
 
@@ -558,7 +560,7 @@ import share from $i$）。
 0.2，且在不同国家对之间差别很大------超过 4 个数量级，如 Figure 1 所示：
 
 ```{r f1, echo=FALSE, fig.showtext = TRUE}
-knitr::include_graphics("Figures/Figure1.png")
+knitr::include_graphics("img/Figure1.png")
 ```
 
 该图显示，纯粹的地理因素（距离）对贸易的影响相当显著。
@@ -600,7 +602,7 @@ $n$, the price index for a buyer purchasing each goodfrom the cheapest
 source）。
 
 ```{r t2, echo=FALSE, fig.showtext = TRUE}
-knitr::include_graphics("Figures/Table2.png")
+knitr::include_graphics("img/Table2.png")
 ```
 
 一些计算出的 price measure 值，整理在 Table 2 中。
@@ -620,7 +622,7 @@ knitr::include_graphics("Figures/Table2.png")
 Figure 2 所示：
 
 ```{r f2, echo=FALSE, fig.showtext = TRUE}
-knitr::include_graphics("Figures/Figure2.png")
+knitr::include_graphics("img/Figure2.png")
 ```
 
 由于 \@ref(eq:12) 的结构意味着截距为
@@ -971,10 +973,9 @@ $$
 其中 $d_k$ 表征六档离散距离的效应，$b$ 表征共同边界，$l$ 表征共同语言，$e_h$
 表征是否共同存在于一个区域贸易协定，$m_n$
 表征目的地国效应(衡量目的地市场的开放程度)。误差项 $\delta_{n i}$ 又分为两部分
-$\delta_{n i} = \delta_{ni}^2 + \delta_{ni}^1$。前者反映贸易的互惠性，因此不满足 OLS 经典假设，有
-$\delta_{ni}^2=\delta_{in}^2$，方差为
-$\sigma_2^2$；而后者满足 OLS 经典假设，方差为
-$\sigma_1^2$。这一误差结构意味着，$\delta$ 的协方差矩阵满足
+$\delta_{n i} = \delta_{ni}^2 + \delta_{ni}^1$。前者反映贸易的互惠性，因此不满足
+OLS 经典假设，有 $\delta_{ni}^2=\delta_{in}^2$，方差为 $\sigma_2^2$；而后者满足
+OLS 经典假设，方差为 $\sigma_1^2$。这一误差结构意味着，$\delta$ 的协方差矩阵满足
 $E(\delta_{ni}\delta_{ni})=\sigma_1^2+\sigma_2^2$ 和
 $E(\delta_{ni}\delta_{in})=\sigma_2^2$。将\@ref(eq:29)代入\@ref(eq:28)得到
 
@@ -988,7 +989,7 @@ $$
 估计结果表明：
 
 ```{r t3, echo=FALSE, fig.showtext = TRUE}
-knitr::include_graphics("Figures/Table3.png")
+knitr::include_graphics("img/Table3.png")
 ```
 
 1.  对 $S_i$ 的估计表明1990年这19个 OECD
@@ -1015,7 +1016,7 @@ $$
 为经过教育调整的工资，$\tau_i$ 为误差。
 
 ```{r t5, echo=FALSE, fig.showtext = TRUE}
-knitr::include_graphics("Figures/Table5.png")
+knitr::include_graphics("img/Table5.png")
 ```
 
 如 Table 5，IV 估计出的 $\theta$ 为 3.60，比 \@ref(trade-price-estimate)
@@ -1025,7 +1026,8 @@ knitr::include_graphics("Figures/Table5.png")
 
 ## 利用价格数据估计 $\theta$ {#price-estimate}
 
-详见代码笔记 [EK2002 Code (R version): Estimation](../../EK2002-code/R/src/estimation.html)，IV 估计值为 12.86
+详见代码笔记 [EK2002 Code (R version):
+Estimation](../../EK2002-code/R/src/estimation.html)，IV 估计值为 12.86
 
 以下我们优先使用 \@ref(trade-price-estimate)
 节的估计值，因为它处于另外两种估计值之间。
@@ -1038,7 +1040,7 @@ knitr::include_graphics("Figures/Table5.png")
 $S_i$（第1列）中剥离出来，如 Table 6 所示。
 
 ```{r t6, echo=FALSE, fig.showtext = TRUE}
-knitr::include_graphics("Figures/Table6.png")
+knitr::include_graphics("img/Table6.png")
 ```
 
 日本的竞争力虽然比美国强，但技术水平并不如美国，说明日本相对于美国的优势是由较低的工资造成的。另一方面，比利时的竞争力最低，但技术水平并不是最低，表明其竞争力受到了高工资的拖累。
@@ -1053,7 +1055,7 @@ $e$ 为底数指数化后，即为 $d_{ni}$ 中的一个因子。
 1 再乘 100% 后即为 Table 7 后三列的数字。
 
 ```{r t7, echo=FALSE, fig.showtext = TRUE}
-knitr::include_graphics("Figures/Table7.png")
+knitr::include_graphics("img/Table7.png")
 ```
 
 以共同语言为例，$-\theta l$ 的估计值为 0.51. 若 $\theta$ 取 8.28，则 $e^l$ 为
@@ -1077,7 +1079,7 @@ knitr::include_graphics("Figures/Table7.png")
 [^19]: 通过一系列很强的假设。例如，没有考虑制造业内部跨产业部门的地理障碍异质性。
 
 ```{r t8, echo=FALSE, fig.showtext = TRUE, out.width="100%"}
-knitr::include_graphics("Figures/Table8.png")
+knitr::include_graphics("img/Table8.png")
 ```
 
 可以将福利定义为 $W_n = Y_n/{p_n^\alpha}$
@@ -1126,7 +1128,7 @@ $$
 ## 贸易利得
 
 ```{r t9, echo=FALSE, fig.showtext = TRUE, out.width="100%"}
-knitr::include_graphics("Figures/Table9.png")
+knitr::include_graphics("img/Table9.png")
 ```
 
 Table 9
@@ -1163,7 +1165,7 @@ $d_{n i}=1, \forall n \neq i$），结果如 Table 10
 左半边。第三列显示美国制造业的萎缩程度最大，德国和日本的制造业就业有巨大下降而瑞典有大幅增长，似乎表明德国和日本的制造业优势主要得益于其规模，瑞典则主要得益于技术/成本；与此同时，较小的边缘（peripheral）国家都经历了制造业扩张。
 
 ```{r t10, echo=FALSE, fig.showtext = TRUE, out.width="100%"}
-knitr::include_graphics("Figures/Table10.png")
+knitr::include_graphics("img/Table10.png")
 ```
 
 　　我们离一个零贸易障碍的世界非常遥远------在这样的世界里，世界贸易将是其目前水平的五倍左右。Table
@@ -1190,7 +1192,7 @@ $\alpha$[^21] 。这两种极端情况中，制造业就业都与地理障碍无
 3 中德国最明显地说明了这一模式。
 
 ```{r Figure3, echo=FALSE, fig.showtext = TRUE, out.width="100%"}
-knitr::include_graphics("Figures/Figure3.png")
+knitr::include_graphics("img/Figure3.png")
 ```
 
 　　现存的地理障碍处在一种中间状态，地理因素和技术因素共同决定着比较优势和专业化。反事实模拟的结果显示，地理障碍从目前水平下降将使技术因素变得更为重要，从而削弱大国的优势。
@@ -1202,7 +1204,7 @@ knitr::include_graphics("Figures/Figure3.png")
 11 显示了反事实模拟的结果。
 
 ```{r t11, echo=FALSE, fig.showtext = TRUE, out.width="100%"}
-knitr::include_graphics("Figures/Table11.png")
+knitr::include_graphics("img/Table11.png")
 ```
 
 　　当劳动力可跨部门流动时，由\@ref(eq:31)式知福利只与价格有关，因为各国都享受到了价格更低的制造业产品，故各国福利普遍改善。当劳动力不可跨部门流动时，他国福利同时还受到负收入效应的影响（因为制造业工资下降）。若一国不能降低其制造业就业规模，则该国总体福利常常会下降------日本和德国是典型。
@@ -1226,7 +1228,7 @@ baseline，进行三种情境的反事实模拟：
 
 1.  所有国家移除关税。劳动力可以跨部门流动时，所有国家的福利增加，且大于劳动力不可流动的情境。
 
-2.  美国单边移除关税。其他国家都有正的福利效应，而美国福利降低，其中加拿大的福利正效应最大。在劳动力流动情境下，其他所有国家的福利收益等于或大于美国的福利损失。这一结论说明了多边协调自由贸易的重要性（大破囚徒困境）。
+2.  美国单边移除关税。其他国家都有正的福利效应，而美国福利降低，其中加拿大的福利正效应最大。在劳动力流动情境下，其他所有国家的福利收益等于或大于美国的福利损失。这一结论说明了多边协调自由贸易的重要性（打破囚徒困境）。
 
 3.  欧洲共同体（EC）内部互相移除关税。Table 12
     表明，福利分配与劳动力是否可以跨部门流动密切相关。如第二列显示的，在劳动力不可流动时，主要的受害者是距离
@@ -1239,7 +1241,7 @@ baseline，进行三种情境的反事实模拟：
     国家对非 EC 国家的出口通常也扩大了。
 
 ```{r t12, echo=FALSE, fig.showtext = TRUE, out.width="100%"}
-knitr::include_graphics("Figures/Table12.png")
+knitr::include_graphics("img/Table12.png")
 ```
 
 # 结论

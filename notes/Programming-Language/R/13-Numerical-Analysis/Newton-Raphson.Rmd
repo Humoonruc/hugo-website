@@ -1,0 +1,162 @@
+---
+title: "Newton-Raphson Method"
+subtitle: '求解非线性方程/方程组'
+author: "Humoon"
+date: "`r Sys.Date()`"
+output: html_document
+documentclass: ctexart
+classoption: hyperref,
+---
+
+```{r setup, include = FALSE}
+source("../Rmarkdown-template/Rmarkdown_config.R")
+
+## global options ===================================
+knitr::opts_chunk$set(
+  width = config$width,
+  fig.width = config$fig.width,
+  fig.asp = config$fig.asp,
+  out.width = config$out.width,
+  fig.align = config$fig.align,
+  fig.path = config$fig.path,
+  fig.show = config$fig.show,
+  warn = config$warn,
+  warning = config$warning,
+  message = config$message,
+  echo = config$echo,
+  eval = config$eval,
+  tidy = config$tidy,
+  comment = config$comment,
+  collapse = config$collapse,
+  cache = config$cache,
+  cache.comments = config$cache.comments,
+  autodep = config$autodep
+)
+```
+
+## 手写 Newton-Raphson 算法
+
+### 一元方程
+
+```{r}
+Newton_root <- function(f, start, tolerance = 1e-7, max_iter = 50) {
+  root <- start
+  for (i in 1:max_iter) {
+    f_prime <- numDeriv::genD(f, root)$D[1, 1] # $D 是一个矩阵，其中不仅包含一阶导数，还有二阶导数
+    dx <- f(root) / f_prime
+    root <- root - dx
+    print(str_c("root = ", root))
+    if (abs(dx) < tolerance) {
+      return(list(
+        root = root, f.root = f(root),
+        iterator = i, estimate_precise = abs(dx)
+      ))
+    }
+  }
+  print("Maximum number of iterations exceeded.")
+}
+
+f1 <- function(x) {
+  x^3 - sin(x)^2
+}
+
+Newton_root(f = f1, start = 1)
+```
+
+### 多元方程组
+
+```{r}
+Newton_Raphson <- function(model, start, tolerance = 1e-7, max_iter = 50) {
+  dimension <- length(start)
+  root <- start
+  for (i in 1:max_iter) {
+    f <- model(root)
+    Jacobi <- numDeriv::genD(model, root)$D[1:dimension, 1:dimension]
+    dx <- solve(Jacobi, f)
+    root <- root - dx
+    str_c(root, collapse = ", ") %>%
+      str_c("root = [", ., "]") %>%
+      print()
+
+    precise <- sqrt(sum(dx * dx))
+    if (precise < tolerance) {
+      return(list(
+        root = root, f.root = model(root),
+        iterator = i, estimate_precise = precise
+      ))
+    }
+  }
+  print("Maximum number of iterations exceeded.")
+}
+
+model1 <- function(x) {
+  c(
+    f1 = x[1] + x[2] - 2.5,
+    f2 = x[1] * x[2] - 1
+  )
+}
+
+Newton_Raphson(model1, start = c(0, 3))
+```
+
+## rootSolve 包
+
+详细资料见 CRAN 上的 rootSolve.pdf
+
+### 一元方程
+
+```{r}
+fs <- function(s) {
+  s^3 - 4 * s^2 - 10 * s + 4
+}
+
+# 一次性在4个初始位置开始迭代，求出了所有三个数值解
+rootSolve::multiroot(f = fs, start = c(-5, 0, 2.5, 8))
+
+# 求出参数区间内的所有解
+rootSolve::uniroot.all(f = fs, interval = c(-10, 10))
+```
+
+### 二元方程组 without Jacobi
+
+一般来说，不需要显示给出偏导数的 Jacobi 矩阵
+
+```{r}
+model2 <- function(x) {
+  c(
+    f1 = 10 * x[1] + 3 * x[2]^2 - 3,
+    f2 = x[1]^2 - exp(x[2]) - 2
+  )
+}
+rootSolve::multiroot(f = model2, start = c(1, 1))
+```
+
+### 二元方程组 with Jacobi
+
+显示给出偏导数的 Jacobi 矩阵，在某些时候可以加快迭代速度
+
+```{r}
+derivs <- function(x) {
+  c(
+    10, 6 * x[2], # f11, f12
+    2 * x[1], -exp(x[2]) # f21, f22
+  ) %>%
+    matrix(nrow = 2, byrow = T)
+}
+rootSolve::multiroot(f = model2, start = c(0, 0), jacfunc = derivs)
+```
+
+### 方程组中有若干参数
+
+```{r}
+model3 <- function(x, parms) {
+  c(
+    f1 = x[1] + x[2] + x[3]^2 - parms[1],
+    f2 = x[1]^2 - x[2] + x[3] - parms[2],
+    f3 = 2 * x[1] - x[2]^2 + x[3] - 1
+  )
+}
+parms <- c(12, 2)
+rootSolve::multiroot(model3, start = c(1, 1, 1), parms = parms)
+rootSolve::multiroot(model3, c(0, 0, 0), parms = parms * 2)
+```

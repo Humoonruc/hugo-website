@@ -200,7 +200,8 @@ IWEP, CASS
             <section class="normal" id="section-">
 <div id="estimate-partial-equilibrium" class="section level1 hasAnchor" number="3">
 <h1><span class="header-section-number">3</span> 贸易、地理和价格初探<a href="estimate-partial-equilibrium.html#estimate-partial-equilibrium" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>Section 3 这部分的代码和一部分细节说明可参见 <a href="../../EK2002-code/R/src/estimation.html">EK2002 Code (R version): Estimation</a>，同理还有 Section 5.</p>
+<p>Section 3 这部分的代码和一部分细节说明可参见 <a href="../../EK2002-code/R/src/estimation.html">EK2002 Code (R version):
+Estimation</a>，同理还有 Section 5.</p>
 <div id="标准化的进口份额" class="section level2 hasAnchor" number="3.1">
 <h2><span class="header-section-number">3.1</span> 标准化的进口份额<a href="estimate-partial-equilibrium.html#标准化的进口份额" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>在<a href="不完备模型6.html#eq:10">(2.10)</a>中取 <span class="math inline">\(n\)</span> 为 <span class="math inline">\(i\)</span>，然后再相除，得到</p>
@@ -236,7 +237,7 @@ can always buy all her goods in <span class="math inline">\(i\)</span> at a pric
 都相等，从而所有的价格水平 <span class="math inline">\(p\)</span> 都相等，则由 <a href="estimate-partial-equilibrium.html#eq:12">(3.1)</a>
 知标准化的贸易份额将等于 1. 但现实数据显示，该份额从未超过
 0.2，且在不同国家对之间差别很大——超过 4 个数量级，如 Figure 1 所示：</p>
-<p><img src="Figures/Figure1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p><img src="img/Figure1.png" width="90%" style="display: block; margin: auto;" /></p>
 <p>该图显示，纯粹的地理因素（距离）对贸易的影响相当显著。</p>
 </div>
 <div id="计算-price-measure" class="section level3 hasAnchor" number="3.2.2">
@@ -269,7 +270,7 @@ D_{n i} \equiv \max 2_{j}\left\{r_{n i}(j)\right\}-\frac{1}{50}\sum_{j=1}^{50}\l
 purchasing everything from source <span class="math inline">\(i\)</span>, relative to the actual price index in
 <span class="math inline">\(n\)</span>, the price index for a buyer purchasing each goodfrom the cheapest
 source）。</p>
-<p><img src="Figures/Table2.png" width="70%" style="display: block; margin: auto;" /></p>
+<p><img src="img/Table2.png" width="90%" style="display: block; margin: auto;" /></p>
 <p>一些计算出的 price measure 值，整理在 Table 2 中。</p>
 <p>图中法国那一行显示，法国最便宜的货源在德国（第 1
 列），从德国购买所有商品只需多支付 33%；最昂贵的货源是新西兰（第 2
@@ -283,7 +284,7 @@ source）。</p>
 <h3><span class="header-section-number">3.2.3</span> 参数估计<a href="estimate-partial-equilibrium.html#参数估计" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>有了标准化进口份额和 <span class="math inline">\(D_{n i}\)</span>，便可以利用<a href="estimate-partial-equilibrium.html#eq:12">(3.1)</a>估计 <span class="math inline">\(\theta\)</span>，估计结果如
 Figure 2 所示：</p>
-<p><img src="Figures/Figure2.png" width="70%" style="display: block; margin: auto;" /></p>
+<p><img src="img/Figure2.png" width="90%" style="display: block; margin: auto;" /></p>
 <p>由于 <a href="estimate-partial-equilibrium.html#eq:12">(3.1)</a> 的结构意味着截距为
 0，因此可以使用最简单的矩估计法——标准化进口份额的对数取平均值除以 <span class="math inline">\(D_{ni}\)</span>
 的平均值，估计的 <span class="math inline">\(\theta\)</span> 为 8.28（其他的估计方法得到的 <span class="math inline">\(\theta\)</span>
