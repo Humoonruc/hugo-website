@@ -2,7 +2,8 @@
 library(tidyverse)
 library(data.table)
 library(magrittr)
-library(plotly)
+library(kableExtra) # 表格美化
+library(plotly) # 绘图
 library(htmlwidgets)
 library(downloadthis) # 提供资源下载的html部件
 library(zeallot) # 解构赋值
@@ -33,6 +34,23 @@ config <- list(
   autodep = T # 自动获得模块间依赖，cache 用
 )
 
+
+# 自定义表格样式
+prettify <- function(table, ...) {
+  align_vector <- c("l", rep("c", ncol(table) - 1))
+
+  kable(table, "html", align = align_vector, ...) %>%
+    kable_styling(
+      bootstrap_options = c(
+        "striped", # 明暗条纹
+        "hover", # 鼠标划过高亮
+        "condensed", # 紧凑行高
+        "responsive" # 响应屏幕宽度
+      ),
+      # font_size = 14,
+      full_width = F
+    )
+}
 
 # 自定义 plotly 主题
 canvas <- plot_ly(
@@ -91,7 +109,6 @@ academic_layout <- function(p) {
     legend = list(xanchor = "right")
   )
 }
-
 
 # 自定义 ggplot2 主题
 library(ggthemes)

@@ -17,7 +17,7 @@ output:
     lib_dir: libs
     code_download: yes
     code_folding: show
-    css: ./css/style.css
+    css: ../css/style.css
     fig_caption: yes
     theme: united
     highlight: haddock
@@ -28,21 +28,10 @@ output:
     toc_float:
       collapsed: yes
       smooth_scroll: yes
-  bookdown::pdf_book:
-    includes:
-      in_header: preamble.tex
-    latex_engine: xelatex
-    citation_package: natbib
-    keep_tex: yes
-  bookdown::word_document2:
-    reference_docx: template.docx
-    toc: yes
-  bookdown::epub_book: default
   bookdown::gitbook:
     includes:
       in_header: _header.html
     config:
-      # download: ["pdf",'epub']
       edit: null
       fontsettings:
         family: sans
@@ -53,6 +42,16 @@ output:
         after: '黄蒙'
         before: 'Rmarkdown 文本文件的语法'
     split_by: chapter
+  bookdown::word_document2:
+    reference_docx: template.docx
+    toc: yes
+  bookdown::epub_book: default
+  bookdown::pdf_book:
+    includes:
+      in_header: preamble.tex
+    latex_engine: xelatex
+    citation_package: natbib
+    keep_tex: no
 language:
   label:
     thm: '定理'
@@ -82,33 +81,26 @@ knitr::opts_chunk$set(
   warn = config$warn,
   warning = config$warning,
   message = config$message,
-  echo = config$echo, 
-  eval = config$eval, 
-  tidy = config$tidy, 
-  comment = config$comment, 
-  collapse = config$collapse, 
+  echo = config$echo,
+  eval = config$eval,
+  tidy = config$tidy,
+  comment = config$comment,
+  collapse = config$collapse,
   cache = config$cache,
   cache.comments = config$cache.comments,
   autodep = config$autodep
 )
 
 ## use necessary packages ==============================
-library(tidyverse)
-library(data.table)
-library(magrittr)
-library(plotly)
-library(htmlwidgets)
-library(xfun)
-library(downloadthis)
-
-# use necessary packages
-library('pacman')
-p_load(lubridate, reshape2, # 数据整理
-       ggthemes, showtext, gridExtra)
+library("pacman")
+p_load(
+  lubridate, reshape2, # 数据整理
+  ggthemes, showtext, gridExtra
+)
 
 # pdf中图形中文设置
 windowsFonts(H = windowsFont("微软雅黑"))
-pdf.options(family = "GB1") 
+pdf.options(family = "GB1")
 # 代码块需要fig.showtext=TRUE选项，且ggplot2图形需要明确定义字体，才能正常显示图中的中文。
 ```
 
@@ -749,13 +741,15 @@ classoptions: "hyperref, 12pt, a4paper"
 
 代码块
 
+Python
 ```{python}
 def print_name():
     print("Markdown")
 ```
 
+R
 ```{r}
-sin(pi/2)
+sin(pi / 2)
 ```
 
 ## R表格
@@ -763,10 +757,44 @@ sin(pi/2)
 表格尽量使用代码块，便于统一编号
 ```{r}
 table <- tibble::tibble(ID = 1:5, name = letters[1:5])
-knitr::kable(table, caption = 'order of letters') # 用三线表格显示数据
+knitr::kable(table, caption = "order of letters") # 用三线表格显示数据
 ```
 
-更优美的表格：https://haozhu233.github.io/kableExtra/
+#### kableExtra package
+
+更强大、优美的表格。主要包括：
+
+1. 表格整体风格，包括斑马纹、悬浮效果、行高、响应式表格宽度、浮动位置、字体大小
+2. 行、列的样式，参数中可以用 CSS 语法
+3. 格子的样式
+4. 行、列的分组，以及分组下部分行的缩进
+5. 表格的脚注
+6. 表格的保存
+
+文档参见：
+
+https://haozhu233.github.io/kableExtra/
+
+http://haozhu233.github.io/kableExtra/awesome_table_in_html_cn.html
+
+
+```{r}
+# 例
+library(kableExtra)
+
+mtcars[1:5, 1:4] %>%
+  kable("html") %>%
+  kable_styling(
+    bootstrap_options = c(
+      "striped", # 明暗条纹
+      # "hover", # 鼠标划过高亮
+      # "condensed", # 紧凑行高
+      "responsive" # 响应屏幕宽度
+    ),
+    full_width = F
+  ) %>%
+  add_header_above(c(" " = 1, "Group1" = 2, "Group2" = 2))
+```
 
 ## R图
 
@@ -970,7 +998,7 @@ plot(1:10)
 
 ```{r u-w-tab-ex01}
 d <- data.frame("自变量" = 1:10, "因变量" = (1:10)^2)
-knitr::kable(d, caption = "1到10的平方", longtable = TRUE )
+knitr::kable(d, caption = "1到10的平方", longtable = TRUE)
 ```
 
 引用如：参见表\@ref(tab:u-w-tab-ex01)，其中的`tab:`是必须的。

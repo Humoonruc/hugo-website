@@ -89,3 +89,4 @@ mermaid
 metadata-config
 output
 config
+kableextra-package

@@ -11,7 +11,7 @@
 
 <meta name="author" content="Humoon" />
 
-<meta name="date" content="2022-04-09" />
+<meta name="date" content="2022-04-10" />
 
 <title>Newton-Raphson Method</title>
 
@@ -37,6 +37,8 @@
 <script src="libs/navigation-1.1/tabsets.js"></script>
 <script src="libs/navigation-1.1/codefolding.js"></script>
 <script src="libs/navigation-1.1/sourceembed.js"></script>
+<link href="libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="libs/pagedtable-1.1/js/pagedtable.js"></script>
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -356,37 +358,46 @@ div.tocify {
 <h1 class="title toc-ignore">Newton-Raphson Method</h1>
 <h3 class="subtitle">求解非线性方程/方程组</h3>
 <h4 class="author">Humoon</h4>
-<h4 class="date">2022-04-09</h4>
+<h4 class="date">2022-04-10</h4>
 
 </div>
 
 
+<p><br> <br></p>
+<p>非线性方程组可以看作一个非线性变换（<strong>一般不能写成矩阵乘法的形式</strong>），将
+<span class="math inline">\(\boldsymbol{X}\)</span> 向量变换为 <span
+class="math inline">\(f(\boldsymbol{X})\)</span>
+向量。求解方程组，即寻找能够使 <span
+class="math inline">\(f(\boldsymbol{X})=\boldsymbol{0}\)</span> 的 <span
+class="math inline">\(\boldsymbol{X}\)</span>.</p>
 <div id="手写-newton-raphson-算法" class="section level2">
 <h2>手写 Newton-Raphson 算法</h2>
 <div id="一元方程" class="section level3">
 <h3>一元方程</h3>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>Newton_root <span class="ot">&lt;-</span> <span class="cf">function</span>(f, start, <span class="at">tolerance =</span> <span class="fl">1e-7</span>, <span class="at">max_iter =</span> <span class="dv">50</span>) {</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  root <span class="ot">&lt;-</span> start</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>max_iter) {</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    f_prime <span class="ot">&lt;-</span> numDeriv<span class="sc">::</span><span class="fu">genD</span>(f, root)<span class="sc">$</span>D[<span class="dv">1</span>, <span class="dv">1</span>] <span class="co"># $D 是一个矩阵，其中不仅包含一阶导数，还有二阶导数</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    dx <span class="ot">&lt;-</span> <span class="fu">f</span>(root) <span class="sc">/</span> f_prime</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    root <span class="ot">&lt;-</span> root <span class="sc">-</span> dx</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="fu">str_c</span>(<span class="st">&quot;root = &quot;</span>, root))</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">abs</span>(dx) <span class="sc">&lt;</span> tolerance) {</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>      <span class="fu">return</span>(<span class="fu">list</span>(</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">root =</span> root, <span class="at">f.root =</span> <span class="fu">f</span>(root),</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">iterator =</span> i, <span class="at">estimate_precise =</span> <span class="fu">abs</span>(dx)</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>      ))</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;Maximum number of iterations exceeded.&quot;</span>)</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>f1 <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  x<span class="sc">^</span><span class="dv">3</span> <span class="sc">-</span> <span class="fu">sin</span>(x)<span class="sc">^</span><span class="dv">2</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="fu">Newton_root</span>(<span class="at">f =</span> f1, <span class="at">start =</span> <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>Newton_root <span class="ot">&lt;-</span> <span class="cf">function</span>(f, start,</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">tolerance =</span> <span class="fl">1e-7</span>, <span class="at">max_iter =</span> <span class="dv">50</span>) {</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  root <span class="ot">&lt;-</span> start</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>max_iter) {</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    f_prime <span class="ot">&lt;-</span> numDeriv<span class="sc">::</span><span class="fu">genD</span>(f, root)<span class="sc">$</span>D[<span class="dv">1</span>, <span class="dv">1</span>]</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># $D 是一个矩阵，其中不仅包含一阶导数，还有二阶导数</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    dx <span class="ot">&lt;-</span> <span class="fu">f</span>(root) <span class="sc">/</span> f_prime</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    root <span class="ot">&lt;-</span> root <span class="sc">-</span> dx</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="fu">str_c</span>(<span class="st">&quot;root = &quot;</span>, root))</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">abs</span>(dx) <span class="sc">&lt;</span> tolerance) {</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>      <span class="fu">return</span>(<span class="fu">list</span>(</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">root =</span> root, <span class="at">f.root =</span> <span class="fu">f</span>(root),</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>        <span class="at">iterator =</span> i, <span class="at">estimate_precise =</span> <span class="fu">abs</span>(dx)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>      ))</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;Maximum number of iterations exceeded.&quot;</span>)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>transformation0 <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  x<span class="sc">^</span><span class="dv">3</span> <span class="sc">-</span> <span class="fu">sin</span>(x)<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="fu">Newton_root</span>(<span class="at">f =</span> transformation0, <span class="at">start =</span> <span class="dv">1</span>)</span></code></pre></div>
 <pre><code>#&gt; [1] &quot;root = 0.860369147925258&quot;
 #&gt; [1] &quot;root = 0.809891223391771&quot;
 #&gt; [1] &quot;root = 0.802931615098361&quot;
@@ -406,12 +417,12 @@ div.tocify {
 </div>
 <div id="多元方程组" class="section level3">
 <h3>多元方程组</h3>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>Newton_Raphson <span class="ot">&lt;-</span> <span class="cf">function</span>(model, start, <span class="at">tolerance =</span> <span class="fl">1e-7</span>, <span class="at">max_iter =</span> <span class="dv">50</span>) {</span>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>Newton_Raphson <span class="ot">&lt;-</span> <span class="cf">function</span>(transformation, start, <span class="at">tolerance =</span> <span class="fl">1e-7</span>, <span class="at">max_iter =</span> <span class="dv">50</span>) {</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  dimension <span class="ot">&lt;-</span> <span class="fu">length</span>(start)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  root <span class="ot">&lt;-</span> start</span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>max_iter) {</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    f <span class="ot">&lt;-</span> <span class="fu">model</span>(root)</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    Jacobi <span class="ot">&lt;-</span> numDeriv<span class="sc">::</span><span class="fu">genD</span>(model, root)<span class="sc">$</span>D[<span class="dv">1</span><span class="sc">:</span>dimension, <span class="dv">1</span><span class="sc">:</span>dimension]</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    f <span class="ot">&lt;-</span> <span class="fu">transformation</span>(root)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    Jacobi <span class="ot">&lt;-</span> numDeriv<span class="sc">::</span><span class="fu">genD</span>(transformation, root)<span class="sc">$</span>D[<span class="dv">1</span><span class="sc">:</span>dimension, <span class="dv">1</span><span class="sc">:</span>dimension]</span>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    dx <span class="ot">&lt;-</span> <span class="fu">solve</span>(Jacobi, f)</span>
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    root <span class="ot">&lt;-</span> root <span class="sc">-</span> dx</span>
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">str_c</span>(root, <span class="at">collapse =</span> <span class="st">&quot;, &quot;</span>) <span class="sc">%&gt;%</span></span>
@@ -421,7 +432,7 @@ div.tocify {
 <span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    precise <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">sum</span>(dx <span class="sc">*</span> dx))</span>
 <span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (precise <span class="sc">&lt;</span> tolerance) {</span>
 <span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>      <span class="fu">return</span>(<span class="fu">list</span>(</span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>        <span class="at">root =</span> root, <span class="at">f.root =</span> <span class="fu">model</span>(root),</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>        <span class="at">root =</span> root, <span class="at">f.root =</span> <span class="fu">transformation</span>(root),</span>
 <span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>        <span class="at">iterator =</span> i, <span class="at">estimate_precise =</span> precise</span>
 <span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>      ))</span>
 <span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>    }</span>
@@ -429,14 +440,14 @@ div.tocify {
 <span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;Maximum number of iterations exceeded.&quot;</span>)</span>
 <span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>transformation1 <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
 <span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(</span>
 <span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">f1 =</span> x[<span class="dv">1</span>] <span class="sc">+</span> x[<span class="dv">2</span>] <span class="sc">-</span> <span class="fl">2.5</span>,</span>
 <span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">f2 =</span> x[<span class="dv">1</span>] <span class="sc">*</span> x[<span class="dv">2</span>] <span class="sc">-</span> <span class="dv">1</span></span>
 <span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a><span class="fu">Newton_Raphson</span>(model1, <span class="at">start =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">3</span>))</span></code></pre></div>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a><span class="fu">Newton_Raphson</span>(transformation1, <span class="at">start =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">3</span>))</span></code></pre></div>
 <pre><code>#&gt; [1] &quot;root = [0.33333333333384, 2.16666666666507]&quot;
 #&gt; [1] &quot;root = [0.484848484848594, 2.01515151514307]&quot;
 #&gt; [1] &quot;root = [0.499849984998516, 2.00015001500144]&quot;
@@ -461,6 +472,7 @@ div.tocify {
 <p>详细资料见 CRAN 上的 rootSolve.pdf</p>
 <div id="一元方程-1" class="section level3">
 <h3>一元方程</h3>
+<p>寻找 root，使传入的函数作用于 root 时返回的标量为0</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>fs <span class="ot">&lt;-</span> <span class="cf">function</span>(s) {</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  s<span class="sc">^</span><span class="dv">3</span> <span class="sc">-</span> <span class="dv">4</span> <span class="sc">*</span> s<span class="sc">^</span><span class="dv">2</span> <span class="sc">-</span> <span class="dv">10</span> <span class="sc">*</span> s <span class="sc">+</span> <span class="dv">4</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>}</span>
@@ -485,13 +497,13 @@ div.tocify {
 <div id="二元方程组-without-jacobi" class="section level3">
 <h3>二元方程组 without Jacobi</h3>
 <p>一般来说，不需要显示给出偏导数的 Jacobi 矩阵</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>transformation2 <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">f1 =</span> <span class="dv">10</span> <span class="sc">*</span> x[<span class="dv">1</span>] <span class="sc">+</span> <span class="dv">3</span> <span class="sc">*</span> x[<span class="dv">2</span>]<span class="sc">^</span><span class="dv">2</span> <span class="sc">-</span> <span class="dv">3</span>,</span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">f2 =</span> x[<span class="dv">1</span>]<span class="sc">^</span><span class="dv">2</span> <span class="sc">-</span> <span class="fu">exp</span>(x[<span class="dv">2</span>]) <span class="sc">-</span> <span class="dv">2</span></span>
 <span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>rootSolve<span class="sc">::</span><span class="fu">multiroot</span>(<span class="at">f =</span> model2, <span class="at">start =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span></code></pre></div>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>rootSolve<span class="sc">::</span><span class="fu">multiroot</span>(<span class="at">f =</span> transformation2, <span class="at">start =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span></code></pre></div>
 <pre><code>#&gt; $root
 #&gt; [1] -1.445552 -2.412158
 #&gt; 
@@ -515,7 +527,7 @@ div.tocify {
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">matrix</span>(<span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">byrow =</span> T)</span>
 <span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>rootSolve<span class="sc">::</span><span class="fu">multiroot</span>(<span class="at">f =</span> model2, <span class="at">start =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), <span class="at">jacfunc =</span> derivs)</span></code></pre></div>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>rootSolve<span class="sc">::</span><span class="fu">multiroot</span>(<span class="at">f =</span> transformation2, <span class="at">start =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), <span class="at">jacfunc =</span> derivs)</span></code></pre></div>
 <pre><code>#&gt; $root
 #&gt; [1] -1.445552 -2.412158
 #&gt; 
@@ -531,7 +543,7 @@ div.tocify {
 </div>
 <div id="方程组中有若干参数" class="section level3">
 <h3>方程组中有若干参数</h3>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>model3 <span class="ot">&lt;-</span> <span class="cf">function</span>(x, parms) {</span>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>transformation3 <span class="ot">&lt;-</span> <span class="cf">function</span>(x, parms) {</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">f1 =</span> x[<span class="dv">1</span>] <span class="sc">+</span> x[<span class="dv">2</span>] <span class="sc">+</span> x[<span class="dv">3</span>]<span class="sc">^</span><span class="dv">2</span> <span class="sc">-</span> parms[<span class="dv">1</span>],</span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">f2 =</span> x[<span class="dv">1</span>]<span class="sc">^</span><span class="dv">2</span> <span class="sc">-</span> x[<span class="dv">2</span>] <span class="sc">+</span> x[<span class="dv">3</span>] <span class="sc">-</span> parms[<span class="dv">2</span>],</span>
@@ -539,7 +551,7 @@ div.tocify {
 <span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>parms <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">12</span>, <span class="dv">2</span>)</span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>rootSolve<span class="sc">::</span><span class="fu">multiroot</span>(model3, <span class="at">start =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>), <span class="at">parms =</span> parms)</span></code></pre></div>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>rootSolve<span class="sc">::</span><span class="fu">multiroot</span>(transformation3, <span class="at">start =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>), <span class="at">parms =</span> parms)</span></code></pre></div>
 <pre><code>#&gt; $root
 #&gt; [1] 1 2 3
 #&gt; 
@@ -552,7 +564,7 @@ div.tocify {
 #&gt; 
 #&gt; $estim.precis
 #&gt; [1] 4.593792e-09</code></pre>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>rootSolve<span class="sc">::</span><span class="fu">multiroot</span>(model3, <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>), <span class="at">parms =</span> parms <span class="sc">*</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>rootSolve<span class="sc">::</span><span class="fu">multiroot</span>(transformation3, <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>), <span class="at">parms =</span> parms <span class="sc">*</span> <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>#&gt; $root
 #&gt; [1] -0.8103629  1.4861978  4.8295098
 #&gt; 
@@ -566,9 +578,43 @@ div.tocify {
 #&gt; $estim.precis
 #&gt; [1] 1.573704e-12</code></pre>
 </div>
+<div id="矩阵形式的方程组" class="section level3">
+<h3>矩阵形式的方程组</h3>
+<p><code>rootSolve::multiroot()</code>的第一个参数（非线性变换）可以返回一个矩阵。计算出的解将保证这个矩阵为全零矩阵。</p>
+<p>例：求解 25 元非线性方程组</p>
+<p><span class="math display">\[
+\mathbf{X} \cdot \mathbf{X} \cdot \mathbf{X}=\left[\begin{array}{lllll}
+1 &amp; 2 &amp; 3 &amp; 4 &amp; 5 \\
+6 &amp; 7 &amp; 8 &amp; 9 &amp; 10 \\
+11 &amp; 12 &amp; 13 &amp; 14 &amp; 15 \\
+16 &amp; 17 &amp; 18 &amp; 19 &amp; 20 \\
+21 &amp; 22 &amp; 23 &amp; 24 &amp; 25
+\end{array}\right]
+\]</span></p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>transformation4 <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  X <span class="ot">&lt;-</span> <span class="fu">matrix</span>(x, <span class="at">nrow =</span> <span class="dv">5</span>)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  X <span class="sc">%*%</span> X <span class="sc">%*%</span> X <span class="sc">-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>, <span class="at">nrow =</span> <span class="dv">5</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> rootSolve<span class="sc">::</span><span class="fu">multiroot</span>(transformation4, <span class="at">start =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>)<span class="sc">$</span>root</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
+<pre><code>#&gt;  [1] -0.67506260 -0.03483809  0.60668343  1.24815964  1.88640623 -0.34547775
+#&gt;  [7]  0.16864884  0.68350802  1.19974369  1.71457060 -0.01800918  0.37530821
+#&gt; [13]  0.76025826  1.15042418  1.54265669  0.31230570  0.57358465  0.84421247
+#&gt; [19]  1.10046033  1.36971978  0.64043429  0.77971070  0.91597598  1.06007417
+#&gt; [25]  1.19373256</code></pre>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">nrow =</span> <span class="dv">5</span>, x)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>X <span class="sc">%*%</span> X <span class="sc">%*%</span> X</span></code></pre></div>
+<pre><code>#&gt;      [,1] [,2] [,3] [,4] [,5]
+#&gt; [1,]    1    2    3    4    5
+#&gt; [2,]    6    7    8    9   10
+#&gt; [3,]   11   12   13   14   15
+#&gt; [4,]   16   17   18   19   20
+#&gt; [5,]   21   22   23   24   25</code></pre>
+</div>
 </div>
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIk5ld3Rvbi1SYXBoc29uIE1ldGhvZCINCnN1YnRpdGxlOiAn5rGC6Kej6Z2e57q/5oCn5pa556iLL+aWueeoi+e7hCcNCmF1dGhvcjogIkh1bW9vbiINCmRhdGU6ICJgciBTeXMuRGF0ZSgpYCINCm91dHB1dDogaHRtbF9kb2N1bWVudA0KZG9jdW1lbnRjbGFzczogY3RleGFydA0KY2xhc3NvcHRpb246IGh5cGVycmVmLA0KLS0tDQoNCmBgYHtyIHNldHVwLCBpbmNsdWRlID0gRkFMU0V9DQpzb3VyY2UoIi4uL1JtYXJrZG93bi10ZW1wbGF0ZS9SbWFya2Rvd25fY29uZmlnLlIiKQ0KDQojIyBnbG9iYWwgb3B0aW9ucyA9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PQ0Ka25pdHI6Om9wdHNfY2h1bmskc2V0KA0KICB3aWR0aCA9IGNvbmZpZyR3aWR0aCwNCiAgZmlnLndpZHRoID0gY29uZmlnJGZpZy53aWR0aCwNCiAgZmlnLmFzcCA9IGNvbmZpZyRmaWcuYXNwLA0KICBvdXQud2lkdGggPSBjb25maWckb3V0LndpZHRoLA0KICBmaWcuYWxpZ24gPSBjb25maWckZmlnLmFsaWduLA0KICBmaWcucGF0aCA9IGNvbmZpZyRmaWcucGF0aCwNCiAgZmlnLnNob3cgPSBjb25maWckZmlnLnNob3csDQogIHdhcm4gPSBjb25maWckd2FybiwNCiAgd2FybmluZyA9IGNvbmZpZyR3YXJuaW5nLA0KICBtZXNzYWdlID0gY29uZmlnJG1lc3NhZ2UsDQogIGVjaG8gPSBjb25maWckZWNobywNCiAgZXZhbCA9IGNvbmZpZyRldmFsLA0KICB0aWR5ID0gY29uZmlnJHRpZHksDQogIGNvbW1lbnQgPSBjb25maWckY29tbWVudCwNCiAgY29sbGFwc2UgPSBjb25maWckY29sbGFwc2UsDQogIGNhY2hlID0gY29uZmlnJGNhY2hlLA0KICBjYWNoZS5jb21tZW50cyA9IGNvbmZpZyRjYWNoZS5jb21tZW50cywNCiAgYXV0b2RlcCA9IGNvbmZpZyRhdXRvZGVwDQopDQpgYGANCg0KIyMg5omL5YaZIE5ld3Rvbi1SYXBoc29uIOeul+azlQ0KDQojIyMg5LiA5YWD5pa556iLDQoNCmBgYHtyfQ0KTmV3dG9uX3Jvb3QgPC0gZnVuY3Rpb24oZiwgc3RhcnQsIHRvbGVyYW5jZSA9IDFlLTcsIG1heF9pdGVyID0gNTApIHsNCiAgcm9vdCA8LSBzdGFydA0KICBmb3IgKGkgaW4gMTptYXhfaXRlcikgew0KICAgIGZfcHJpbWUgPC0gbnVtRGVyaXY6OmdlbkQoZiwgcm9vdCkkRFsxLCAxXSAjICREIOaYr+S4gOS4quefqemYte+8jOWFtuS4reS4jeS7heWMheWQq+S4gOmYtuWvvOaVsO+8jOi/mOacieS6jOmYtuWvvOaVsA0KICAgIGR4IDwtIGYocm9vdCkgLyBmX3ByaW1lDQogICAgcm9vdCA8LSByb290IC0gZHgNCiAgICBwcmludChzdHJfYygicm9vdCA9ICIsIHJvb3QpKQ0KICAgIGlmIChhYnMoZHgpIDwgdG9sZXJhbmNlKSB7DQogICAgICByZXR1cm4obGlzdCgNCiAgICAgICAgcm9vdCA9IHJvb3QsIGYucm9vdCA9IGYocm9vdCksDQogICAgICAgIGl0ZXJhdG9yID0gaSwgZXN0aW1hdGVfcHJlY2lzZSA9IGFicyhkeCkNCiAgICAgICkpDQogICAgfQ0KICB9DQogIHByaW50KCJNYXhpbXVtIG51bWJlciBvZiBpdGVyYXRpb25zIGV4Y2VlZGVkLiIpDQp9DQoNCmYxIDwtIGZ1bmN0aW9uKHgpIHsNCiAgeF4zIC0gc2luKHgpXjINCn0NCg0KTmV3dG9uX3Jvb3QoZiA9IGYxLCBzdGFydCA9IDEpDQpgYGANCg0KIyMjIOWkmuWFg+aWueeoi+e7hA0KDQpgYGB7cn0NCk5ld3Rvbl9SYXBoc29uIDwtIGZ1bmN0aW9uKG1vZGVsLCBzdGFydCwgdG9sZXJhbmNlID0gMWUtNywgbWF4X2l0ZXIgPSA1MCkgew0KICBkaW1lbnNpb24gPC0gbGVuZ3RoKHN0YXJ0KQ0KICByb290IDwtIHN0YXJ0DQogIGZvciAoaSBpbiAxOm1heF9pdGVyKSB7DQogICAgZiA8LSBtb2RlbChyb290KQ0KICAgIEphY29iaSA8LSBudW1EZXJpdjo6Z2VuRChtb2RlbCwgcm9vdCkkRFsxOmRpbWVuc2lvbiwgMTpkaW1lbnNpb25dDQogICAgZHggPC0gc29sdmUoSmFjb2JpLCBmKQ0KICAgIHJvb3QgPC0gcm9vdCAtIGR4DQogICAgc3RyX2Mocm9vdCwgY29sbGFwc2UgPSAiLCAiKSAlPiUNCiAgICAgIHN0cl9jKCJyb290ID0gWyIsIC4sICJdIikgJT4lDQogICAgICBwcmludCgpDQoNCiAgICBwcmVjaXNlIDwtIHNxcnQoc3VtKGR4ICogZHgpKQ0KICAgIGlmIChwcmVjaXNlIDwgdG9sZXJhbmNlKSB7DQogICAgICByZXR1cm4obGlzdCgNCiAgICAgICAgcm9vdCA9IHJvb3QsIGYucm9vdCA9IG1vZGVsKHJvb3QpLA0KICAgICAgICBpdGVyYXRvciA9IGksIGVzdGltYXRlX3ByZWNpc2UgPSBwcmVjaXNlDQogICAgICApKQ0KICAgIH0NCiAgfQ0KICBwcmludCgiTWF4aW11bSBudW1iZXIgb2YgaXRlcmF0aW9ucyBleGNlZWRlZC4iKQ0KfQ0KDQptb2RlbDEgPC0gZnVuY3Rpb24oeCkgew0KICBjKA0KICAgIGYxID0geFsxXSArIHhbMl0gLSAyLjUsDQogICAgZjIgPSB4WzFdICogeFsyXSAtIDENCiAgKQ0KfQ0KDQpOZXd0b25fUmFwaHNvbihtb2RlbDEsIHN0YXJ0ID0gYygwLCAzKSkNCmBgYA0KDQojIyByb290U29sdmUg5YyFDQoNCuivpue7hui1hOaWmeingSBDUkFOIOS4iueahCByb290U29sdmUucGRmDQoNCiMjIyDkuIDlhYPmlrnnqIsNCg0KYGBge3J9DQpmcyA8LSBmdW5jdGlvbihzKSB7DQogIHNeMyAtIDQgKiBzXjIgLSAxMCAqIHMgKyA0DQp9DQoNCiMg5LiA5qyh5oCn5ZyoNOS4quWIneWni+S9jee9ruW8gOWni+i/reS7o++8jOaxguWHuuS6huaJgOacieS4ieS4quaVsOWAvOinow0Kcm9vdFNvbHZlOjptdWx0aXJvb3QoZiA9IGZzLCBzdGFydCA9IGMoLTUsIDAsIDIuNSwgOCkpDQoNCiMg5rGC5Ye65Y+C5pWw5Yy66Ze05YaF55qE5omA5pyJ6KejDQpyb290U29sdmU6OnVuaXJvb3QuYWxsKGYgPSBmcywgaW50ZXJ2YWwgPSBjKC0xMCwgMTApKQ0KYGBgDQoNCiMjIyDkuozlhYPmlrnnqIvnu4Qgd2l0aG91dCBKYWNvYmkNCg0K5LiA6Iis5p2l6K+077yM5LiN6ZyA6KaB5pi+56S657uZ5Ye65YGP5a+85pWw55qEIEphY29iaSDnn6npmLUNCg0KYGBge3J9DQptb2RlbDIgPC0gZnVuY3Rpb24oeCkgew0KICBjKA0KICAgIGYxID0gMTAgKiB4WzFdICsgMyAqIHhbMl1eMiAtIDMsDQogICAgZjIgPSB4WzFdXjIgLSBleHAoeFsyXSkgLSAyDQogICkNCn0NCnJvb3RTb2x2ZTo6bXVsdGlyb290KGYgPSBtb2RlbDIsIHN0YXJ0ID0gYygxLCAxKSkNCmBgYA0KDQojIyMg5LqM5YWD5pa556iL57uEIHdpdGggSmFjb2JpDQoNCuaYvuekuue7meWHuuWBj+WvvOaVsOeahCBKYWNvYmkg55+p6Zi177yM5Zyo5p+Q5Lqb5pe25YCZ5Y+v5Lul5Yqg5b+r6L+t5Luj6YCf5bqmDQoNCmBgYHtyfQ0KZGVyaXZzIDwtIGZ1bmN0aW9uKHgpIHsNCiAgYygNCiAgICAxMCwgNiAqIHhbMl0sICMgZjExLCBmMTINCiAgICAyICogeFsxXSwgLWV4cCh4WzJdKSAjIGYyMSwgZjIyDQogICkgJT4lDQogICAgbWF0cml4KG5yb3cgPSAyLCBieXJvdyA9IFQpDQp9DQpyb290U29sdmU6Om11bHRpcm9vdChmID0gbW9kZWwyLCBzdGFydCA9IGMoMCwgMCksIGphY2Z1bmMgPSBkZXJpdnMpDQpgYGANCg0KIyMjIOaWueeoi+e7hOS4reacieiLpeW5suWPguaVsA0KDQpgYGB7cn0NCm1vZGVsMyA8LSBmdW5jdGlvbih4LCBwYXJtcykgew0KICBjKA0KICAgIGYxID0geFsxXSArIHhbMl0gKyB4WzNdXjIgLSBwYXJtc1sxXSwNCiAgICBmMiA9IHhbMV1eMiAtIHhbMl0gKyB4WzNdIC0gcGFybXNbMl0sDQogICAgZjMgPSAyICogeFsxXSAtIHhbMl1eMiArIHhbM10gLSAxDQogICkNCn0NCnBhcm1zIDwtIGMoMTIsIDIpDQpyb290U29sdmU6Om11bHRpcm9vdChtb2RlbDMsIHN0YXJ0ID0gYygxLCAxLCAxKSwgcGFybXMgPSBwYXJtcykNCnJvb3RTb2x2ZTo6bXVsdGlyb290KG1vZGVsMywgYygwLCAwLCAwKSwgcGFybXMgPSBwYXJtcyAqIDIpDQpgYGANCg==</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIk5ld3Rvbi1SYXBoc29uIE1ldGhvZCINCnN1YnRpdGxlOiAi5rGC6Kej6Z2e57q/5oCn5pa556iLL+aWueeoi+e7hCINCmF1dGhvcjogIkh1bW9vbiINCmRhdGU6ICJgciBTeXMuRGF0ZSgpYCINCm91dHB1dDogDQogIGh0bWxfZG9jdW1lbnQ6DQogICAgc2VsZl9jb250YWluZWQ6IGZhbHNlDQogICAgbGliX2RpcjogbGlicw0KICAgIGNvZGVfZG93bmxvYWQ6IHllcw0KICAgIGNvZGVfZm9sZGluZzogc2hvdw0KICAgIGNzczogLi4vY3NzL3N0eWxlLmNzcw0KICAgIGZpZ19jYXB0aW9uOiB5ZXMNCiAgICB0aGVtZTogdW5pdGVkDQogICAgaGlnaGxpZ2h0OiBoYWRkb2NrDQogICAgZGZfcHJpbnQ6IHBhZ2VkDQogICAgbnVtYmVyX3NlY3Rpb25zOiBubw0KICAgIHRvYzogeWVzDQogICAgdG9jX2RlcHRoOiA0DQogICAgdG9jX2Zsb2F0Og0KICAgICAgY29sbGFwc2VkOiB5ZXMNCiAgICAgIHNtb290aF9zY3JvbGw6IHllcw0KICBwZGZfZG9jdW1lbnQ6DQogICAgdG9jOiBubw0KICAgIHRvY19kZXB0aDogMw0KICAgIG51bWJlcl9zZWN0aW9uczogeWVzDQpkb2N1bWVudGNsYXNzOiBjdGV4YXJ0DQpjbGFzc29wdGlvbjogaHlwZXJyZWYsDQotLS0NCg0KYGBge3Igc2V0dXAsIGluY2x1ZGUgPSBGQUxTRX0NCnNvdXJjZSgiLi4vUm1hcmtkb3duLXRlbXBsYXRlL1JtYXJrZG93bl9jb25maWcuUiIpDQoNCiMjIGdsb2JhbCBvcHRpb25zID09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09DQprbml0cjo6b3B0c19jaHVuayRzZXQoDQogIHdpZHRoID0gY29uZmlnJHdpZHRoLA0KICBmaWcud2lkdGggPSBjb25maWckZmlnLndpZHRoLA0KICBmaWcuYXNwID0gY29uZmlnJGZpZy5hc3AsDQogIG91dC53aWR0aCA9IGNvbmZpZyRvdXQud2lkdGgsDQogIGZpZy5hbGlnbiA9IGNvbmZpZyRmaWcuYWxpZ24sDQogIGZpZy5wYXRoID0gY29uZmlnJGZpZy5wYXRoLA0KICBmaWcuc2hvdyA9IGNvbmZpZyRmaWcuc2hvdywNCiAgd2FybiA9IGNvbmZpZyR3YXJuLA0KICB3YXJuaW5nID0gY29uZmlnJHdhcm5pbmcsDQogIG1lc3NhZ2UgPSBjb25maWckbWVzc2FnZSwNCiAgZWNobyA9IGNvbmZpZyRlY2hvLA0KICBldmFsID0gY29uZmlnJGV2YWwsDQogIHRpZHkgPSBjb25maWckdGlkeSwNCiAgY29tbWVudCA9IGNvbmZpZyRjb21tZW50LA0KICBjb2xsYXBzZSA9IGNvbmZpZyRjb2xsYXBzZSwNCiAgY2FjaGUgPSBjb25maWckY2FjaGUsDQogIGNhY2hlLmNvbW1lbnRzID0gY29uZmlnJGNhY2hlLmNvbW1lbnRzLA0KICBhdXRvZGVwID0gY29uZmlnJGF1dG9kZXANCikNCmBgYA0KDQo8YnI+DQo8YnI+DQoNCumdnue6v+aAp+aWueeoi+e7hOWPr+S7peeci+S9nOS4gOS4qumdnue6v+aAp+WPmOaNou+8iCoq5LiA6Iis5LiN6IO95YaZ5oiQ55+p6Zi15LmY5rOV55qE5b2i5byPKirvvInvvIzlsIYgJFxib2xkc3ltYm9se1h9JCDlkJHph4/lj5jmjaLkuLogJGYoXGJvbGRzeW1ib2x7WH0pJCDlkJHph4/jgILmsYLop6PmlrnnqIvnu4TvvIzljbPlr7vmib7og73lpJ/kvb8gJGYoXGJvbGRzeW1ib2x7WH0pPVxib2xkc3ltYm9sezB9JCDnmoQgJFxib2xkc3ltYm9se1h9JC4gDQoNCiMjIOaJi+WGmSBOZXd0b24tUmFwaHNvbiDnrpfms5UNCg0KIyMjIOS4gOWFg+aWueeoiw0KDQpgYGB7cn0NCk5ld3Rvbl9yb290IDwtIGZ1bmN0aW9uKGYsIHN0YXJ0LA0KICAgICAgICAgICAgICAgICAgICAgICAgdG9sZXJhbmNlID0gMWUtNywgbWF4X2l0ZXIgPSA1MCkgew0KICByb290IDwtIHN0YXJ0DQogIGZvciAoaSBpbiAxOm1heF9pdGVyKSB7DQogICAgZl9wcmltZSA8LSBudW1EZXJpdjo6Z2VuRChmLCByb290KSREWzEsIDFdDQogICAgIyAkRCDmmK/kuIDkuKrnn6npmLXvvIzlhbbkuK3kuI3ku4XljIXlkKvkuIDpmLblr7zmlbDvvIzov5jmnInkuozpmLblr7zmlbANCiAgICBkeCA8LSBmKHJvb3QpIC8gZl9wcmltZQ0KICAgIHJvb3QgPC0gcm9vdCAtIGR4DQogICAgcHJpbnQoc3RyX2MoInJvb3QgPSAiLCByb290KSkNCiAgICBpZiAoYWJzKGR4KSA8IHRvbGVyYW5jZSkgew0KICAgICAgcmV0dXJuKGxpc3QoDQogICAgICAgIHJvb3QgPSByb290LCBmLnJvb3QgPSBmKHJvb3QpLA0KICAgICAgICBpdGVyYXRvciA9IGksIGVzdGltYXRlX3ByZWNpc2UgPSBhYnMoZHgpDQogICAgICApKQ0KICAgIH0NCiAgfQ0KICBwcmludCgiTWF4aW11bSBudW1iZXIgb2YgaXRlcmF0aW9ucyBleGNlZWRlZC4iKQ0KfQ0KDQp0cmFuc2Zvcm1hdGlvbjAgPC0gZnVuY3Rpb24oeCkgew0KICB4XjMgLSBzaW4oeCleMg0KfQ0KDQpOZXd0b25fcm9vdChmID0gdHJhbnNmb3JtYXRpb24wLCBzdGFydCA9IDEpDQpgYGANCg0KIyMjIOWkmuWFg+aWueeoi+e7hA0KDQpgYGB7cn0NCk5ld3Rvbl9SYXBoc29uIDwtIGZ1bmN0aW9uKHRyYW5zZm9ybWF0aW9uLCBzdGFydCwgdG9sZXJhbmNlID0gMWUtNywgbWF4X2l0ZXIgPSA1MCkgew0KICBkaW1lbnNpb24gPC0gbGVuZ3RoKHN0YXJ0KQ0KICByb290IDwtIHN0YXJ0DQogIGZvciAoaSBpbiAxOm1heF9pdGVyKSB7DQogICAgZiA8LSB0cmFuc2Zvcm1hdGlvbihyb290KQ0KICAgIEphY29iaSA8LSBudW1EZXJpdjo6Z2VuRCh0cmFuc2Zvcm1hdGlvbiwgcm9vdCkkRFsxOmRpbWVuc2lvbiwgMTpkaW1lbnNpb25dDQogICAgZHggPC0gc29sdmUoSmFjb2JpLCBmKQ0KICAgIHJvb3QgPC0gcm9vdCAtIGR4DQogICAgc3RyX2Mocm9vdCwgY29sbGFwc2UgPSAiLCAiKSAlPiUNCiAgICAgIHN0cl9jKCJyb290ID0gWyIsIC4sICJdIikgJT4lDQogICAgICBwcmludCgpDQoNCiAgICBwcmVjaXNlIDwtIHNxcnQoc3VtKGR4ICogZHgpKQ0KICAgIGlmIChwcmVjaXNlIDwgdG9sZXJhbmNlKSB7DQogICAgICByZXR1cm4obGlzdCgNCiAgICAgICAgcm9vdCA9IHJvb3QsIGYucm9vdCA9IHRyYW5zZm9ybWF0aW9uKHJvb3QpLA0KICAgICAgICBpdGVyYXRvciA9IGksIGVzdGltYXRlX3ByZWNpc2UgPSBwcmVjaXNlDQogICAgICApKQ0KICAgIH0NCiAgfQ0KICBwcmludCgiTWF4aW11bSBudW1iZXIgb2YgaXRlcmF0aW9ucyBleGNlZWRlZC4iKQ0KfQ0KDQp0cmFuc2Zvcm1hdGlvbjEgPC0gZnVuY3Rpb24oeCkgew0KICBjKA0KICAgIGYxID0geFsxXSArIHhbMl0gLSAyLjUsDQogICAgZjIgPSB4WzFdICogeFsyXSAtIDENCiAgKQ0KfQ0KDQpOZXd0b25fUmFwaHNvbih0cmFuc2Zvcm1hdGlvbjEsIHN0YXJ0ID0gYygwLCAzKSkNCmBgYA0KDQojIyByb290U29sdmUg5YyFDQoNCuivpue7hui1hOaWmeingSBDUkFOIOS4iueahCByb290U29sdmUucGRmDQoNCiMjIyDkuIDlhYPmlrnnqIsNCg0K5a+75om+IHJvb3TvvIzkvb/kvKDlhaXnmoTlh73mlbDkvZznlKjkuo4gcm9vdCDml7bov5Tlm57nmoTmoIfph4/kuLowDQoNCmBgYHtyfQ0KZnMgPC0gZnVuY3Rpb24ocykgew0KICBzXjMgLSA0ICogc14yIC0gMTAgKiBzICsgNA0KfQ0KDQojIOS4gOasoeaAp+WcqDTkuKrliJ3lp4vkvY3nva7lvIDlp4vov63ku6PvvIzmsYLlh7rkuobmiYDmnInkuInkuKrmlbDlgLzop6MNCnJvb3RTb2x2ZTo6bXVsdGlyb290KGYgPSBmcywgc3RhcnQgPSBjKC01LCAwLCAyLjUsIDgpKQ0KDQojIOaxguWHuuWPguaVsOWMuumXtOWGheeahOaJgOacieinow0Kcm9vdFNvbHZlOjp1bmlyb290LmFsbChmID0gZnMsIGludGVydmFsID0gYygtMTAsIDEwKSkNCmBgYA0KDQojIyMg5LqM5YWD5pa556iL57uEIHdpdGhvdXQgSmFjb2JpDQoNCuS4gOiIrOadpeivtO+8jOS4jemcgOimgeaYvuekuue7meWHuuWBj+WvvOaVsOeahCBKYWNvYmkg55+p6Zi1DQoNCmBgYHtyfQ0KdHJhbnNmb3JtYXRpb24yIDwtIGZ1bmN0aW9uKHgpIHsNCiAgYygNCiAgICBmMSA9IDEwICogeFsxXSArIDMgKiB4WzJdXjIgLSAzLA0KICAgIGYyID0geFsxXV4yIC0gZXhwKHhbMl0pIC0gMg0KICApDQp9DQpyb290U29sdmU6Om11bHRpcm9vdChmID0gdHJhbnNmb3JtYXRpb24yLCBzdGFydCA9IGMoMSwgMSkpDQpgYGANCg0KIyMjIOS6jOWFg+aWueeoi+e7hCB3aXRoIEphY29iaQ0KDQrmmL7npLrnu5nlh7rlgY/lr7zmlbDnmoQgSmFjb2JpIOefqemYte+8jOWcqOafkOS6m+aXtuWAmeWPr+S7peWKoOW/q+i/reS7o+mAn+W6pg0KDQpgYGB7cn0NCmRlcml2cyA8LSBmdW5jdGlvbih4KSB7DQogIGMoDQogICAgMTAsIDYgKiB4WzJdLCAjIGYxMSwgZjEyDQogICAgMiAqIHhbMV0sIC1leHAoeFsyXSkgIyBmMjEsIGYyMg0KICApICU+JQ0KICAgIG1hdHJpeChucm93ID0gMiwgYnlyb3cgPSBUKQ0KfQ0Kcm9vdFNvbHZlOjptdWx0aXJvb3QoZiA9IHRyYW5zZm9ybWF0aW9uMiwgc3RhcnQgPSBjKDAsIDApLCBqYWNmdW5jID0gZGVyaXZzKQ0KYGBgDQoNCiMjIyDmlrnnqIvnu4TkuK3mnInoi6XlubLlj4LmlbANCg0KYGBge3J9DQp0cmFuc2Zvcm1hdGlvbjMgPC0gZnVuY3Rpb24oeCwgcGFybXMpIHsNCiAgYygNCiAgICBmMSA9IHhbMV0gKyB4WzJdICsgeFszXV4yIC0gcGFybXNbMV0sDQogICAgZjIgPSB4WzFdXjIgLSB4WzJdICsgeFszXSAtIHBhcm1zWzJdLA0KICAgIGYzID0gMiAqIHhbMV0gLSB4WzJdXjIgKyB4WzNdIC0gMQ0KICApDQp9DQpwYXJtcyA8LSBjKDEyLCAyKQ0Kcm9vdFNvbHZlOjptdWx0aXJvb3QodHJhbnNmb3JtYXRpb24zLCBzdGFydCA9IGMoMSwgMSwgMSksIHBhcm1zID0gcGFybXMpDQpyb290U29sdmU6Om11bHRpcm9vdCh0cmFuc2Zvcm1hdGlvbjMsIGMoMCwgMCwgMCksIHBhcm1zID0gcGFybXMgKiAyKQ0KYGBgDQoNCiMjIyDnn6npmLXlvaLlvI/nmoTmlrnnqIvnu4QNCg0KYHJvb3RTb2x2ZTo6bXVsdGlyb290KClg55qE56ys5LiA5Liq5Y+C5pWw77yI6Z2e57q/5oCn5Y+Y5o2i77yJ5Y+v5Lul6L+U5Zue5LiA5Liq55+p6Zi144CC6K6h566X5Ye655qE6Kej5bCG5L+d6K+B6L+Z5Liq55+p6Zi15Li65YWo6Zu255+p6Zi144CCDQoNCuS+i++8muaxguinoyAyNSDlhYPpnZ7nur/mgKfmlrnnqIvnu4QNCg0KJCQNClxtYXRoYmZ7WH0gXGNkb3QgXG1hdGhiZntYfSBcY2RvdCBcbWF0aGJme1h9PVxsZWZ0W1xiZWdpbnthcnJheX17bGxsbGx9DQoxICYgMiAmIDMgJiA0ICYgNSBcXA0KNiAmIDcgJiA4ICYgOSAmIDEwIFxcDQoxMSAmIDEyICYgMTMgJiAxNCAmIDE1IFxcDQoxNiAmIDE3ICYgMTggJiAxOSAmIDIwIFxcDQoyMSAmIDIyICYgMjMgJiAyNCAmIDI1DQpcZW5ke2FycmF5fVxyaWdodF0NCiQkDQoNCg0KYGBge3J9DQp0cmFuc2Zvcm1hdGlvbjQgPC0gZnVuY3Rpb24oeCkgew0KICBYIDwtIG1hdHJpeCh4LCBucm93ID0gNSkNCiAgWCAlKiUgWCAlKiUgWCAtIG1hdHJpeCgxOjI1LCBucm93ID0gNSwgYnlyb3cgPSBUUlVFKQ0KfQ0KDQp4IDwtIHJvb3RTb2x2ZTo6bXVsdGlyb290KHRyYW5zZm9ybWF0aW9uNCwgc3RhcnQgPSAxOjI1KSRyb290DQp4DQpYIDwtIG1hdHJpeChucm93ID0gNSwgeCkNClggJSolIFggJSolIFgNCmBgYA0KDQo=</div>
 
 
 </div>

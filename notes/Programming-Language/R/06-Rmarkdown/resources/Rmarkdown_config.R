@@ -4,10 +4,11 @@ library(data.table)
 library(magrittr)
 library(plotly)
 library(htmlwidgets)
-library(downloadthis)
-
-# ivreg包，直接做 2SLS 回归
-library(ivreg)
+library(downloadthis) # 提供资源下载的html部件
+library(zeallot) # 解构赋值
+library(ivreg) # 做 2SLS regression 很方便
+library(numDeriv) # Package for computing f'(x)
+library(rootSolve) # 求解非线性方程（组）和最优化
 
 
 # .Rmd 配置参数
@@ -15,7 +16,7 @@ config <- list(
   width = 80,
   fig.width = 6,
   fig.asp = 0.618,
-  out.width = "70%",
+  out.width = "90%",
   fig.align = "center",
   fig.path = "../img/",
   fig.show = "asis",
@@ -35,9 +36,18 @@ config <- list(
 
 # 自定义 plotly 主题
 canvas <- plot_ly(
-  width = 960,
-  height = 720
-) %>% config(mathjax = "cdn")
+  width = 800,
+  height = 600
+) %>% config(
+  mathjax = "cdn",
+  toImageButtonOptions = list(
+    format = "svg", # one of png, svg, jpeg, webp
+    filename = "download_figure",
+    width = 800,
+    height = 600,
+    scale = 1
+  )
+)
 
 axis_style <- list(
   zeroline = FALSE,
@@ -81,3 +91,28 @@ academic_layout <- function(p) {
     legend = list(xanchor = "right")
   )
 }
+
+
+# 自定义 ggplot2 主题
+library(ggthemes)
+my_theme <- theme_economist_white() +
+  theme(
+    text = element_text(family = "Microsoft YaHei"),
+    plot.title = element_text(face = "bold", size = 16),
+    plot.subtitle = element_text(size = 14),
+    plot.caption = element_text(
+      hjust = 0,
+      size = 12,
+      margin = margin(2, 0, 0, 0, "pt")
+    ),
+    plot.margin = margin(12, 10, 12, 0, "pt"),
+    legend.position = "top",
+    legend.justification = "left",
+    legend.margin = margin(4, 0, 0, 0, "pt"),
+    legend.key.size = unit(1, "lines"),
+    legend.title = element_text(size = 12),
+    legend.text = element_text(size = 10, margin = margin(0, 0, 0, 0, "pt")),
+    axis.title = element_text(face = "bold", size = 12),
+    axis.text = element_text(size = 10, margin = margin(2, 0, 2, 0, "pt")),
+    axis.ticks.length = unit(-4, "pt")
+  )

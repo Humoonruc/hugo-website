@@ -23,7 +23,7 @@
 <meta name="author" content="黄蒙 ✉huangmeng@ucass.edu.cn" />
 
 
-<meta name="date" content="2022-04-04" />
+<meta name="date" content="2022-04-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -62,6 +62,8 @@ div.abstract{
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 <script src="libs/font-awesome-5.13.0/js/script.js"></script>
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -330,9 +332,9 @@ Rmarkdown 文本文件的语法
 <div id="usage-writing-fig" class="section level2 hasAnchor" number="5.2">
 <h2><span class="header-section-number">5.2</span> 图形自动编号<a href="bookdown.html#usage-writing-fig" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>用R代码块生成的图形，只要具有代码块标签label，且提供代码段选项<code>fig.cap="图题"</code>，就可对图形自动编号，并且可以用如<code>\@ref(fig:label)</code>的格式引用图形。如：</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="bookdown.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="bookdown.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:u-w-f-ex01"></span>
-<img src="figure/u-w-f-ex01-1.png" alt="测试图" width="70%" />
+<img src="../img/u-w-f-ex01-1.png" alt="测试图" width="90%" />
 <p class="caption">
 Figure 5.1: 测试图
 </p>
@@ -342,56 +344,102 @@ Figure 5.1: 测试图
 <div id="usage-writing-tab" class="section level2 hasAnchor" number="5.3">
 <h2><span class="header-section-number">5.3</span> 表格自动编号<a href="bookdown.html#usage-writing-tab" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>用R代码<code>knitr::kable()</code>生成的表格，只要具有代码块标签，并且在<code>knitr::kable()</code>调用时加选项<code>caption="表题"</code>，就可以对表格自动编号，并且可以用如<code>\@ref(tab:label)</code>的格式引用表格。如：</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="bookdown.html#cb45-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="st">&quot;自变量&quot;</span> <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="st">&quot;因变量&quot;</span> <span class="ot">=</span> (<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb45-2"><a href="bookdown.html#cb45-2" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(d, <span class="at">caption =</span> <span class="st">&quot;1到10的平方&quot;</span>, <span class="at">longtable =</span> <span class="cn">TRUE</span> )</span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="bookdown.html#cb47-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="st">&quot;自变量&quot;</span> <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="st">&quot;因变量&quot;</span> <span class="ot">=</span> (<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb47-2"><a href="bookdown.html#cb47-2" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(d, <span class="at">caption =</span> <span class="st">&quot;1到10的平方&quot;</span>, <span class="at">longtable =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <table>
-<caption><span id="tab:u-w-tab-ex01">Table 5.1: </span>1到10的平方</caption>
+<caption>
+<span id="tab:u-w-tab-ex01">Table 5.1: </span>1到10的平方
+</caption>
 <thead>
-<tr class="header">
-<th align="right">自变量</th>
-<th align="right">因变量</th>
+<tr>
+<th style="text-align:right;">
+自变量
+</th>
+<th style="text-align:right;">
+因变量
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td align="right">1</td>
-<td align="right">1</td>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
 </tr>
-<tr class="even">
-<td align="right">2</td>
-<td align="right">4</td>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+4
+</td>
 </tr>
-<tr class="odd">
-<td align="right">3</td>
-<td align="right">9</td>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+9
+</td>
 </tr>
-<tr class="even">
-<td align="right">4</td>
-<td align="right">16</td>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+16
+</td>
 </tr>
-<tr class="odd">
-<td align="right">5</td>
-<td align="right">25</td>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+25
+</td>
 </tr>
-<tr class="even">
-<td align="right">6</td>
-<td align="right">36</td>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+36
+</td>
 </tr>
-<tr class="odd">
-<td align="right">7</td>
-<td align="right">49</td>
+<tr>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+49
+</td>
 </tr>
-<tr class="even">
-<td align="right">8</td>
-<td align="right">64</td>
+<tr>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+64
+</td>
 </tr>
-<tr class="odd">
-<td align="right">9</td>
-<td align="right">81</td>
+<tr>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:right;">
+81
+</td>
 </tr>
-<tr class="even">
-<td align="right">10</td>
-<td align="right">100</td>
+<tr>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+100
+</td>
 </tr>
 </tbody>
 </table>
@@ -430,11 +478,11 @@ f(x) =&amp; \sum_{k=0}^\infty \frac{1}{k!} x^k \tag{5.1} \\
 <tbody>
 <tr class="odd">
 <td><code>@MWP06-HighStat</code></td>
-<td><span class="citation"><a href="#ref-MWP06-HighStat" role="doc-biblioref">茆诗松 et al.</a> (<a href="#ref-MWP06-HighStat" role="doc-biblioref">2006</a>)</span></td>
+<td><span class="citation">茆诗松 et al. (<a href="#ref-MWP06-HighStat" role="doc-biblioref">2006</a>)</span></td>
 </tr>
 <tr class="even">
 <td><code>@Lin2018 [page. 33]</code></td>
-<td><span class="citation"><a href="#ref-Lin2018" role="doc-biblioref">林毅夫</a> (<a href="#ref-Lin2018" role="doc-biblioref">2018</a>, page. 33)</span></td>
+<td><span class="citation">林毅夫 (<a href="#ref-Lin2018" role="doc-biblioref">2018</a>, page. 33)</span></td>
 </tr>
 <tr class="odd">
 <td><code>[@Lin2018, page. 33]</code></td>

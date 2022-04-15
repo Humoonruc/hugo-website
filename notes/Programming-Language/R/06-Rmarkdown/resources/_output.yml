@@ -3,15 +3,11 @@ html_document:
   lib_dir: libs
   code_download: yes
   code_folding: show
-  css:
-    # - ../css/vue.css
-    # - ../css/vue.user.css
-    # - ../css/drake_iamh77.css
-    # - ../css/drake_iamh77.user.css
-    - ../css/style.css
+  css: ../css/style.css
   fig_caption: yes
   theme: united
   highlight: haddock
+  df_print: paged
   number_sections: no
   toc: yes
   toc_depth: 4

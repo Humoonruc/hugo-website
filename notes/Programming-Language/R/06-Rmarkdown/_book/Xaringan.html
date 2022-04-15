@@ -23,7 +23,7 @@
 <meta name="author" content="黄蒙 ✉huangmeng@ucass.edu.cn" />
 
 
-<meta name="date" content="2022-04-04" />
+<meta name="date" content="2022-04-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -62,6 +62,8 @@ div.abstract{
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 <script src="libs/font-awesome-5.13.0/js/script.js"></script>
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -355,7 +357,6 @@ Rmarkdown 文本文件的语法
 <li><code>50%, 80%</code>，图片中心在屏幕中的位置，横向左起，纵向上起</li>
 </ul></li>
 <li><code>background-size:</code>，背景图片大小<br />
-
 <ul>
 <li><code>contain</code></li>
 <li><code>cover</code></li>
@@ -377,34 +378,34 @@ Rmarkdown 文本文件的语法
 </div>
 <div id="yaml" class="section level3 hasAnchor" number="6.3.2">
 <h3><span class="header-section-number">6.3.2</span> YAML<a href="Xaringan.html#yaml" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb47"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb47-1"><a href="Xaringan.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;幻灯忍者&quot;</span></span>
-<span id="cb47-2"><a href="Xaringan.html#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="fu">subtitle</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;写轮眼&quot;</span></span>
-<span id="cb47-3"><a href="Xaringan.html#cb47-3" aria-hidden="true" tabindex="-1"></a><span class="fu">author</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;黄蒙 &amp;#9993;huangmeng@ucass.edu.cn&quot;</span></span>
-<span id="cb47-4"><a href="Xaringan.html#cb47-4" aria-hidden="true" tabindex="-1"></a><span class="fu">institute</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;RStudio, PBC&quot;</span></span>
-<span id="cb47-5"><a href="Xaringan.html#cb47-5" aria-hidden="true" tabindex="-1"></a><span class="fu">date</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;2016/12/12&quot;</span></span>
-<span id="cb47-6"><a href="Xaringan.html#cb47-6" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span></span>
-<span id="cb47-7"><a href="Xaringan.html#cb47-7" aria-hidden="true" tabindex="-1"></a><span class="at">  xaringan:</span><span class="fu">:moon_reader</span><span class="kw">:</span></span>
-<span id="cb47-8"><a href="Xaringan.html#cb47-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">css</span><span class="kw">:</span></span>
-<span id="cb47-9"><a href="Xaringan.html#cb47-9" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> default</span><span class="co"> # 提供了几个默认类，所以这行必须有，哪怕用了别的主题</span></span>
-<span id="cb47-10"><a href="Xaringan.html#cb47-10" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> default-fonts</span></span>
-<span id="cb47-11"><a href="Xaringan.html#cb47-11" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> fc</span></span>
-<span id="cb47-12"><a href="Xaringan.html#cb47-12" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> fc-fonts</span></span>
-<span id="cb47-13"><a href="Xaringan.html#cb47-13" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> zh-CN.css</span></span>
-<span id="cb47-14"><a href="Xaringan.html#cb47-14" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css&quot;</span><span class="co">  # animation in transition, https://github.com/yihui/xaringan/issues/184</span></span>
-<span id="cb47-15"><a href="Xaringan.html#cb47-15" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">self_contained</span><span class="kw">:</span><span class="at"> </span><span class="ch">no</span><span class="co"> # Whether to produce a self-contained HTML file by embedding all external resources into the HTML file.（可能需要科学上网，才能将Xaringan所依赖的js脚本、谷歌字体等文件嵌入本地 html）</span></span>
-<span id="cb47-16"><a href="Xaringan.html#cb47-16" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">lib_dir</span><span class="kw">:</span><span class="at"> libs</span></span>
-<span id="cb47-17"><a href="Xaringan.html#cb47-17" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">seal</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span><span class="co"> # 是否根据 YAML 信息自动生成首页</span></span>
-<span id="cb47-18"><a href="Xaringan.html#cb47-18" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">nature</span><span class="kw">:</span></span>
-<span id="cb47-19"><a href="Xaringan.html#cb47-19" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">ratio</span><span class="kw">:</span><span class="at"> </span><span class="st">&#39;16:9&#39;</span><span class="co"> # 默认4:3</span></span>
-<span id="cb47-20"><a href="Xaringan.html#cb47-20" aria-hidden="true" tabindex="-1"></a><span class="co">      # titleSlideClass: [&quot;center&quot;, &#39;inverse&#39;,&quot;middle&quot;] # 默认首页的样式</span></span>
-<span id="cb47-21"><a href="Xaringan.html#cb47-21" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">highlightStyle</span><span class="kw">:</span><span class="at"> github</span></span>
-<span id="cb47-22"><a href="Xaringan.html#cb47-22" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">highlightLines</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span><span class="co"> # 当一行 R 代码被 {{ }} 包裹时，允许其高亮</span></span>
-<span id="cb47-23"><a href="Xaringan.html#cb47-23" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">countIncrementalSlides</span><span class="kw">:</span><span class="at"> </span><span class="ch">yes</span></span>
-<span id="cb47-24"><a href="Xaringan.html#cb47-24" aria-hidden="true" tabindex="-1"></a><span class="co">      # beforeInit: &quot;macro/macro.js&quot; # 在 remark.js 渲染前插入js脚本，例如该脚本可以快捷定义图片的size</span></span>
-<span id="cb47-25"><a href="Xaringan.html#cb47-25" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">autoplay</span><span class="kw">:</span><span class="at"> </span></span>
-<span id="cb47-26"><a href="Xaringan.html#cb47-26" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">interval</span><span class="kw">:</span><span class="at"> </span><span class="dv">60000</span><span class="co"> # 自动播放一页时间间隔（单位：毫秒）</span></span>
-<span id="cb47-27"><a href="Xaringan.html#cb47-27" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">loop</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span><span class="co"> # 是否循环</span></span>
-<span id="cb47-28"><a href="Xaringan.html#cb47-28" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">countdown</span><span class="kw">:</span><span class="at"> </span><span class="dv">60000</span><span class="co"> # 每页的倒计时</span></span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb49-1"><a href="Xaringan.html#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;幻灯忍者&quot;</span></span>
+<span id="cb49-2"><a href="Xaringan.html#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="fu">subtitle</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;写轮眼&quot;</span></span>
+<span id="cb49-3"><a href="Xaringan.html#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="fu">author</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;黄蒙 &amp;#9993;huangmeng@ucass.edu.cn&quot;</span></span>
+<span id="cb49-4"><a href="Xaringan.html#cb49-4" aria-hidden="true" tabindex="-1"></a><span class="fu">institute</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;RStudio, PBC&quot;</span></span>
+<span id="cb49-5"><a href="Xaringan.html#cb49-5" aria-hidden="true" tabindex="-1"></a><span class="fu">date</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;2016/12/12&quot;</span></span>
+<span id="cb49-6"><a href="Xaringan.html#cb49-6" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span></span>
+<span id="cb49-7"><a href="Xaringan.html#cb49-7" aria-hidden="true" tabindex="-1"></a><span class="at">  xaringan:</span><span class="fu">:moon_reader</span><span class="kw">:</span></span>
+<span id="cb49-8"><a href="Xaringan.html#cb49-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">css</span><span class="kw">:</span></span>
+<span id="cb49-9"><a href="Xaringan.html#cb49-9" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> default</span><span class="co"> # 提供了几个默认类，所以这行必须有，哪怕用了别的主题</span></span>
+<span id="cb49-10"><a href="Xaringan.html#cb49-10" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> default-fonts</span></span>
+<span id="cb49-11"><a href="Xaringan.html#cb49-11" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> fc</span></span>
+<span id="cb49-12"><a href="Xaringan.html#cb49-12" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> fc-fonts</span></span>
+<span id="cb49-13"><a href="Xaringan.html#cb49-13" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> zh-CN.css</span></span>
+<span id="cb49-14"><a href="Xaringan.html#cb49-14" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css&quot;</span><span class="co">  # animation in transition, https://github.com/yihui/xaringan/issues/184</span></span>
+<span id="cb49-15"><a href="Xaringan.html#cb49-15" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">self_contained</span><span class="kw">:</span><span class="at"> </span><span class="ch">no</span><span class="co"> # Whether to produce a self-contained HTML file by embedding all external resources into the HTML file.（可能需要科学上网，才能将Xaringan所依赖的js脚本、谷歌字体等文件嵌入本地 html）</span></span>
+<span id="cb49-16"><a href="Xaringan.html#cb49-16" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">lib_dir</span><span class="kw">:</span><span class="at"> libs</span></span>
+<span id="cb49-17"><a href="Xaringan.html#cb49-17" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">seal</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span><span class="co"> # 是否根据 YAML 信息自动生成首页</span></span>
+<span id="cb49-18"><a href="Xaringan.html#cb49-18" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">nature</span><span class="kw">:</span></span>
+<span id="cb49-19"><a href="Xaringan.html#cb49-19" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">ratio</span><span class="kw">:</span><span class="at"> </span><span class="st">&#39;16:9&#39;</span><span class="co"> # 默认4:3</span></span>
+<span id="cb49-20"><a href="Xaringan.html#cb49-20" aria-hidden="true" tabindex="-1"></a><span class="co">      # titleSlideClass: [&quot;center&quot;, &#39;inverse&#39;,&quot;middle&quot;] # 默认首页的样式</span></span>
+<span id="cb49-21"><a href="Xaringan.html#cb49-21" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">highlightStyle</span><span class="kw">:</span><span class="at"> github</span></span>
+<span id="cb49-22"><a href="Xaringan.html#cb49-22" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">highlightLines</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span><span class="co"> # 当一行 R 代码被 {{ }} 包裹时，允许其高亮</span></span>
+<span id="cb49-23"><a href="Xaringan.html#cb49-23" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">countIncrementalSlides</span><span class="kw">:</span><span class="at"> </span><span class="ch">yes</span></span>
+<span id="cb49-24"><a href="Xaringan.html#cb49-24" aria-hidden="true" tabindex="-1"></a><span class="co">      # beforeInit: &quot;macro/macro.js&quot; # 在 remark.js 渲染前插入js脚本，例如该脚本可以快捷定义图片的size</span></span>
+<span id="cb49-25"><a href="Xaringan.html#cb49-25" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">autoplay</span><span class="kw">:</span><span class="at"> </span></span>
+<span id="cb49-26"><a href="Xaringan.html#cb49-26" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">interval</span><span class="kw">:</span><span class="at"> </span><span class="dv">60000</span><span class="co"> # 自动播放一页时间间隔（单位：毫秒）</span></span>
+<span id="cb49-27"><a href="Xaringan.html#cb49-27" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">loop</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span><span class="co"> # 是否循环</span></span>
+<span id="cb49-28"><a href="Xaringan.html#cb49-28" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">countdown</span><span class="kw">:</span><span class="at"> </span><span class="dv">60000</span><span class="co"> # 每页的倒计时</span></span></code></pre></div>
 </div>
 <div id="content-classes" class="section level3 hasAnchor" number="6.3.3">
 <h3><span class="header-section-number">6.3.3</span> Content Classes<a href="Xaringan.html#content-classes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
