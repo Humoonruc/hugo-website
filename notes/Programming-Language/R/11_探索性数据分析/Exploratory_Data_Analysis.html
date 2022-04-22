@@ -1,0 +1,1237 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Humoon" />
+
+<meta name="date" content="2022-04-20" />
+
+<title>Exploratory Data Analysis</title>
+
+<script src="libs/header-attrs-2.13/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="libs/bootstrap-3.3.5/css/united.min.css" rel="stylesheet" />
+<script src="libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="libs/navigation-1.1/tabsets.js"></script>
+<script src="libs/navigation-1.1/codefolding.js"></script>
+<script src="libs/navigation-1.1/sourceembed.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; } /* Alert */
+code span.an { color: #008000; } /* Annotation */
+code span.at { } /* Attribute */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #0000ff; } /* ControlFlow */
+code span.ch { color: #008080; } /* Char */
+code span.cn { } /* Constant */
+code span.co { color: #008000; } /* Comment */
+code span.cv { color: #008000; } /* CommentVar */
+code span.do { color: #008000; } /* Documentation */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.im { } /* Import */
+code span.in { color: #008000; } /* Information */
+code span.kw { color: #0000ff; } /* Keyword */
+code span.op { } /* Operator */
+code span.ot { color: #ff4000; } /* Other */
+code span.pp { color: #ff4000; } /* Preprocessor */
+code span.sc { color: #008080; } /* SpecialChar */
+code span.ss { color: #008080; } /* SpecialString */
+code span.st { color: #008080; } /* String */
+code span.va { } /* Variable */
+code span.vs { color: #008080; } /* VerbatimString */
+code span.wa { color: #008000; font-weight: bold; } /* Warning */
+
+.sourceCode .row {
+  width: 100%;
+}
+.sourceCode {
+  overflow-x: auto;
+}
+.code-folding-btn {
+  margin-right: -30px;
+}
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+<style type="text/css">
+#rmd-source-code {
+  display: none;
+}
+</style>
+
+
+<link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+<li role="separator" class="divider"></li>
+<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Exploratory Data Analysis</h1>
+<h3 class="subtitle">观察数据特征，寻找统计推断的合适方法</h3>
+<h4 class="author">Humoon</h4>
+<h4 class="date">2022-04-20</h4>
+
+</div>
+
+
+<div id="主要分析工具" class="section level1">
+<h1>主要分析工具</h1>
+<ul>
+<li>条形图（barplot）：用于分类数据</li>
+<li>直方图（hist）、点图（dotchart）、茎叶图（stem）：用于观察数值型分布的形状</li>
+<li>箱线图（boxplot）：给出数值型分布的汇总数据，适用于不同分布的比较和长尾、离群点的识别</li>
+<li>正态概率图（qqnorm）：用于观察数据是否近似地服从正态分布</li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 例：考试数据</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>MS <span class="ot">&lt;-</span> <span class="fu">tribble</span>(</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span>ID, <span class="sc">~</span>math, <span class="sc">~</span>stat,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># ————————————————</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="dv">1</span>, <span class="dv">81</span>, <span class="dv">72</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="dv">2</span>, <span class="dv">90</span>, <span class="dv">90</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="dv">3</span>, <span class="dv">91</span>, <span class="dv">96</span>,</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="dv">4</span>, <span class="dv">74</span>, <span class="dv">68</span>,</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="dv">5</span>, <span class="dv">70</span>, <span class="dv">82</span>,</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="dv">6</span>, <span class="dv">73</span>, <span class="dv">78</span>,</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="dv">7</span>, <span class="dv">88</span>, <span class="dv">89</span>,</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="dv">8</span>, <span class="dv">78</span>, <span class="dv">82</span>,</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="dv">9</span>, <span class="dv">95</span>, <span class="dv">96</span>,</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="dv">10</span>, <span class="dv">63</span>, <span class="dv">75</span>,</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="dv">11</span>, <span class="dv">85</span>, <span class="dv">86</span>,</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="dv">12</span>, <span class="dv">60</span>, <span class="dv">71</span>,</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  <span class="dv">13</span>, <span class="dv">83</span>, <span class="dv">78</span>,</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  <span class="dv">14</span>, <span class="dv">81</span>, <span class="dv">94</span>,</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  <span class="dv">15</span>, <span class="dv">77</span>, <span class="dv">73</span>,</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  <span class="dv">16</span>, <span class="dv">60</span>, <span class="dv">66</span>,</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  <span class="dv">17</span>, <span class="dv">66</span>, <span class="dv">58</span>,</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>  <span class="dv">18</span>, <span class="dv">84</span>, <span class="dv">87</span>,</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>  <span class="dv">19</span>, <span class="dv">80</span>, <span class="dv">86</span>,</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>  <span class="dv">20</span>, <span class="dv">85</span>, <span class="dv">84</span>,</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>  <span class="dv">21</span>, <span class="dv">70</span>, <span class="dv">82</span>,</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>  <span class="dv">22</span>, <span class="dv">54</span>, <span class="dv">56</span>,</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>  <span class="dv">23</span>, <span class="dv">93</span>, <span class="dv">98</span>,</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>  <span class="dv">24</span>, <span class="dv">68</span>, <span class="dv">76</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="co"># 用茎叶图观察数学和统计学的成绩分布</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="fu">stem</span>(MS<span class="sc">$</span>math)</span></code></pre></div>
+<pre><code>#&gt; 
+#&gt;   The decimal point is 1 digit(s) to the right of the |
+#&gt; 
+#&gt;   5 | 4
+#&gt;   6 | 00368
+#&gt;   7 | 003478
+#&gt;   8 | 01134558
+#&gt;   9 | 0135</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stem</span>(MS<span class="sc">$</span>stat)</span></code></pre></div>
+<pre><code>#&gt; 
+#&gt;   The decimal point is 1 digit(s) to the right of the |
+#&gt; 
+#&gt;   5 | 68
+#&gt;   6 | 68
+#&gt;   7 | 1235688
+#&gt;   8 | 22246679
+#&gt;   9 | 04668</code></pre>
+<p>茎叶图的第1位是十分位数，比如：数据成绩的茎叶图里，5|4表示有一位学生的数学成绩为54；6|00368表示有5位学生的成绩在[60,70]之间，其中两位是60分，一位63分，一位66分，一位68分，其余的类似。</p>
+<blockquote>
+<p><strong>可以将一些常用的探索性分析的图形函数整合成一个函数，进行一键式全面分析</strong></p>
+</blockquote>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>EDA <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hist</span>(x) <span class="co"># 直方图</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dotchart</span>(x) <span class="co"># 点图</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">boxplot</span>(x, <span class="at">horizontal =</span> T) <span class="co"># 箱式图</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">qqnorm</span>(x)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">qqline</span>(x) <span class="co"># 正态概率图</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="fu">EDA</span>(MS<span class="sc">$</span>math) <span class="co"># 探索分析数学成绩</span></span></code></pre></div>
+<p><img src="../img/unnamed-chunk-2-1.png" width="90%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">EDA</span>(MS<span class="sc">$</span>stat) <span class="co"># 探索分析统计成绩</span></span></code></pre></div>
+<p><img src="../img/unnamed-chunk-2-2.png" width="90%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="单变量数据分析" class="section level1">
+<h1>单变量数据分析</h1>
+<div id="brucer-包中的描述统计" class="section level2">
+<h2>bruceR 包中的描述统计</h2>
+<div id="describe" class="section level3">
+<h3><code>Describe()</code></h3>
+<p>描述统计（输出样本量、平均值、标准差、中位数、偏度、峰度）</p>
+<ul>
+<li><p>主要参数</p></li>
+<li><ul>
+<li><code>data</code>：数据框（默认使用所有变量，请提前筛选出想要分析的变量们）</li>
+<li><code>digits</code>：保留的小数位数，默认是 2 位小数</li>
+<li><code>file</code>：保存的 Word 文档，默认输出到 R 控制台</li>
+<li><code>plot</code>：是否画每个变量的分布图、变量间的相关图？默认是
+<code>FALSE</code></li>
+<li>……（见原始帮助文档）</li>
+</ul></li>
+<li><p>使用示例</p></li>
+</ul>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">Describe</span>(<span class="fu">rnorm</span>(<span class="dv">1000000</span>), <span class="at">plot =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>#&gt; Descriptive Statistics:
+#&gt; ──────────────────────────────────────────────────────────
+#&gt;          N Mean   SD | Median   Min  Max Skewness Kurtosis
+#&gt; ──────────────────────────────────────────────────────────
+#&gt;    1000000 0.00 1.00 |   0.00 -4.88 4.65    -0.00    -0.01
+#&gt; ──────────────────────────────────────────────────────────</code></pre>
+<p><img src="../img/unnamed-chunk-3-1.png" width="90%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Describe</span>(airquality)</span></code></pre></div>
+<pre><code>#&gt; Descriptive Statistics:
+#&gt; ──────────────────────────────────────────────────────────────────────
+#&gt;            N (NA)   Mean    SD | Median   Min    Max Skewness Kurtosis
+#&gt; ──────────────────────────────────────────────────────────────────────
+#&gt; Ozone    116   37  42.13 32.99 |  31.50  1.00 168.00     1.21     1.11
+#&gt; Solar.R  146    7 185.93 90.06 | 205.00  7.00 334.00    -0.42    -1.00
+#&gt; Wind     153        9.96  3.52 |   9.70  1.70  20.70     0.34     0.03
+#&gt; Temp     153       77.88  9.47 |  79.00 56.00  97.00    -0.37    -0.46
+#&gt; Month    153        6.99  1.42 |   7.00  5.00   9.00    -0.00    -1.32
+#&gt; Day      153       15.80  8.86 |  16.00  1.00  31.00     0.00    -1.22
+#&gt; ──────────────────────────────────────────────────────────────────────</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Describe</span>(airquality, <span class="at">plot =</span> <span class="cn">TRUE</span>, <span class="at">upper.triangle =</span> <span class="cn">TRUE</span>, <span class="at">upper.smooth =</span> <span class="st">&quot;lm&quot;</span>)</span></code></pre></div>
+<pre><code>#&gt; Descriptive Statistics:
+#&gt; ──────────────────────────────────────────────────────────────────────
+#&gt;            N (NA)   Mean    SD | Median   Min    Max Skewness Kurtosis
+#&gt; ──────────────────────────────────────────────────────────────────────
+#&gt; Ozone    116   37  42.13 32.99 |  31.50  1.00 168.00     1.21     1.11
+#&gt; Solar.R  146    7 185.93 90.06 | 205.00  7.00 334.00    -0.42    -1.00
+#&gt; Wind     153        9.96  3.52 |   9.70  1.70  20.70     0.34     0.03
+#&gt; Temp     153       77.88  9.47 |  79.00 56.00  97.00    -0.37    -0.46
+#&gt; Month    153        6.99  1.42 |   7.00  5.00   9.00    -0.00    -1.32
+#&gt; Day      153       15.80  8.86 |  16.00  1.00  31.00     0.00    -1.22
+#&gt; ──────────────────────────────────────────────────────────────────────</code></pre>
+<p><img src="../img/unnamed-chunk-3-2.png" width="90%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="freq" class="section level3">
+<h3><code>Freq()</code></h3>
+<p>频数统计（输出频数与频率 %）</p>
+<ul>
+<li><p>主要参数</p></li>
+<li><ul>
+<li><code>var</code>：变量</li>
+<li><code>label</code>：如有需要，可以定义数值标签</li>
+<li><code>sort</code>：排序方法，默认按照变量数值 / 标签排序，可选择
+<code>"-"</code>（按频数从大到小排列）或
+<code>"+"</code>（按频数从小到大排列）</li>
+<li><code>digits</code>：保留的小数位数，默认是 1 位小数</li>
+<li><code>file</code>：保存到 .doc，默认输出到 R 控制台</li>
+</ul></li>
+<li><p>使用示例</p></li>
+</ul>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> psych<span class="sc">::</span>bfi</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">Freq</span>(data<span class="sc">$</span>education)</span></code></pre></div>
+<pre><code>#&gt; Frequency Statistics:
+#&gt; ───────────────
+#&gt;          N    %
+#&gt; ───────────────
+#&gt; 1      224  8.0
+#&gt; 2      292 10.4
+#&gt; 3     1249 44.6
+#&gt; 4      394 14.1
+#&gt; 5      418 14.9
+#&gt; (NA)   223  8.0
+#&gt; ───────────────
+#&gt; Total N = 2,800
+#&gt; Valid N = 2,577</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Freq</span>(data<span class="sc">$</span>gender)</span></code></pre></div>
+<pre><code>#&gt; Frequency Statistics:
+#&gt; ────────────
+#&gt;       N    %
+#&gt; ────────────
+#&gt; 1   919 32.8
+#&gt; 2  1881 67.2
+#&gt; ────────────
+#&gt; Total N = 2,800</code></pre>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Freq</span>(data<span class="sc">$</span>gender, <span class="at">label =</span> <span class="fu">c</span>(<span class="st">&quot;Male&quot;</span>, <span class="st">&quot;Female&quot;</span>))</span></code></pre></div>
+<pre><code>#&gt; Frequency Statistics:
+#&gt; ─────────────────
+#&gt;            N    %
+#&gt; ─────────────────
+#&gt; Male     919 32.8
+#&gt; Female  1881 67.2
+#&gt; ─────────────────
+#&gt; Total N = 2,800</code></pre>
+</div>
+</div>
+<div id="分类型数据" class="section level2">
+<h2>分类型数据</h2>
+<ol style="list-style-type: decimal">
+<li>分类频数表：如果x是分类数据，table(x)可以生成分类频数表</li>
+</ol>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;是&quot;</span>, <span class="st">&quot;否&quot;</span>, <span class="st">&quot;否&quot;</span>, <span class="st">&quot;是&quot;</span>, <span class="st">&quot;是&quot;</span>, <span class="st">&quot;否&quot;</span>, <span class="st">&quot;否&quot;</span>, <span class="st">&quot;是&quot;</span>, <span class="st">&quot;是&quot;</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(x)</span></code></pre></div>
+<pre><code>#&gt; x
+#&gt; 否 是 
+#&gt;  4  5</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>条形图和饼图</li>
+</ol>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>drink <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">1</span>)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(drink) <span class="co"># 未分组的条形图，纵轴不是频数而是水平</span></span></code></pre></div>
+<p><img src="../img/unnamed-chunk-6-1.png" width="90%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">table</span>(drink)) <span class="co"># 分组的条形图，纵轴是频数</span></span></code></pre></div>
+<p><img src="../img/unnamed-chunk-6-2.png" width="90%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">table</span>(drink) <span class="sc">/</span> <span class="fu">length</span>(drink)) <span class="co"># 纵轴是频率</span></span></code></pre></div>
+<p><img src="../img/unnamed-chunk-6-3.png" width="90%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">table</span>(drink), <span class="at">col =</span> <span class="fu">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;yellow&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;white&quot;</span>))</span></code></pre></div>
+<p><img src="../img/unnamed-chunk-6-4.png" width="90%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>drink.count <span class="ot">&lt;-</span> <span class="fu">table</span>(drink) <span class="co"># y数据分组后赋值给drink.count。</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pie</span>(drink.count)</span></code></pre></div>
+<p><img src="../img/unnamed-chunk-6-5.png" width="90%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(drink.count) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;红酒&quot;</span>, <span class="st">&quot;白酒&quot;</span>, <span class="st">&quot;黄酒&quot;</span>, <span class="st">&quot;啤酒&quot;</span>)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pie</span>(drink.count)</span></code></pre></div>
+<p><img src="../img/unnamed-chunk-6-6.png" width="90%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pie</span>(drink.count, <span class="at">col =</span> <span class="fu">c</span>(<span class="st">&quot;purple&quot;</span>, <span class="st">&quot;green&quot;</span>, <span class="st">&quot;cyan&quot;</span>, <span class="st">&quot;white&quot;</span>))</span></code></pre></div>
+<p><img src="../img/unnamed-chunk-6-7.png" width="90%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="数值型数据" class="section level2">
+<h2>数值型数据</h2>
+<div id="集中趋势和离散程度" class="section level3">
+<h3>集中趋势和离散程度</h3>
+<p>mean(),median(),var(),sd(),fivenum(),summary()</p>
+<p>当数据分布非对称、有长尾时，可以利用截尾均值来描述平均水平：在mean函数里对trim参数进行设置</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>salary <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="dv">2000</span>, <span class="dv">2100</span>, <span class="dv">2200</span>, <span class="dv">2300</span>, <span class="dv">2350</span>, <span class="dv">2450</span>, <span class="dv">2500</span>, <span class="dv">2700</span>, <span class="dv">2900</span>,</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="dv">2850</span>, <span class="dv">3500</span>, <span class="dv">3800</span>, <span class="dv">2600</span>, <span class="dv">3000</span>, <span class="dv">3300</span>, <span class="dv">3200</span>, <span class="dv">4000</span>, <span class="dv">3100</span>, <span class="dv">4200</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 对该部门的工资截去两头20％后的均值,trim=可以省略</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(salary, <span class="at">trim =</span> <span class="fl">0.2</span>)</span></code></pre></div>
+<pre><code>#&gt; [1] 2826.923</code></pre>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 对该部门的工资截去两头50％后的均值，实际上这就是中位数</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(salary, <span class="fl">0.5</span>)</span></code></pre></div>
+<pre><code>#&gt; [1] 2850</code></pre>
+<p>方差、标准差对异常值也很敏感，可以用稳健的四分位间距(IQR)和平均差(mad)来描述离散程度</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">IQR</span>(salary)</span></code></pre></div>
+<pre><code>#&gt; [1] 850</code></pre>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mad</span>(salary)</span></code></pre></div>
+<pre><code>#&gt; [1] 667.17</code></pre>
+</div>
+<div id="图形展现" class="section level3">
+<h3>图形展现</h3>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 茎叶图(适用于小样本)</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">stem</span>(salary)</span></code></pre></div>
+<pre><code>#&gt; 
+#&gt;   The decimal point is 3 digit(s) to the right of the |
+#&gt; 
+#&gt;   2 | 01234
+#&gt;   2 | 556799
+#&gt;   3 | 0123
+#&gt;   3 | 58
+#&gt;   4 | 02</code></pre>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>salarym <span class="ot">&lt;-</span> <span class="fu">c</span>(salary, <span class="dv">15000</span>) <span class="co"># 加入经理的工资</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">stem</span>(salarym) <span class="co"># 发现经理的数据是一个离群值</span></span></code></pre></div>
+<pre><code>#&gt; 
+#&gt;   The decimal point is 4 digit(s) to the right of the |
+#&gt; 
+#&gt;   0 | 2222223333333334444
+#&gt;   0 | 
+#&gt;   1 | 
+#&gt;   1 | 5</code></pre>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 用cut()对数值数据进行分组</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>salaryg <span class="ot">&lt;-</span> <span class="fu">cut</span>(salary, <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">2000</span>, <span class="dv">3000</span>, <span class="dv">4000</span>, <span class="fu">max</span>(salary)))</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(salaryg)</span></code></pre></div>
+<pre><code>#&gt; salaryg
+#&gt;   (2e+03,3e+03]   (3e+03,4e+03] (4e+03,4.2e+03] 
+#&gt;              11               6               1</code></pre>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 直方图</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(salary) <span class="co"># 频数</span></span></code></pre></div>
+<p><img src="../img/unnamed-chunk-9-1.png" width="90%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(salary, <span class="at">prob =</span> T) <span class="co"># 频率</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 还可以用rug()命令把各个数据竖线描绘在X轴上</span></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rug</span>(salary)</span></code></pre></div>
+<p><img src="../img/unnamed-chunk-9-2.png" width="90%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 箱线图</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(salary) <span class="co"># 默认竖直</span></span></code></pre></div>
+<p><img src="../img/unnamed-chunk-9-3.png" width="90%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(salary, <span class="at">horizontal =</span> T) <span class="co"># 水平箱线图</span></span></code></pre></div>
+<p><img src="../img/unnamed-chunk-9-4.png" width="90%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 密度函数线density()</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(faithful<span class="sc">$</span>eruptions, <span class="at">prob =</span> T, <span class="at">breaks =</span> <span class="dv">25</span>) <span class="co"># 使用系统自带的faithful数据</span></span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">density</span>(faithful<span class="sc">$</span>eruptions), <span class="at">col =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+<p><img src="../img/unnamed-chunk-9-5.png" width="90%" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="离群值探索" class="section level2">
+<h2>离群值探索</h2>
+<p>离群值（outlier）就是某个或少数几个值明显远离于其他大部分数据。理论上讲，离群值可以出现在各种分布中，但常见的主要出现在具有测量误差（measurement
+error）的数据或者总体是厚尾（heavy-tailed）分布的数据中。离群值的检验主要有：（1）箱线图检验；（2）Grubb检验；（3）Dixon’sQ检验。</p>
+<div id="箱线图检验" class="section level3">
+<h3>箱线图检验</h3>
+<p>如果观测值距底线Q1（第25百分位数）或顶线Q3（第75百分位数）过远，如超出箱体高度（四分位数间距）的1.5倍以上，则可视该观测值为离群值。</p>
+<p>boxplot.stats()可以返回箱线图的有关统计量。其用法是</p>
+<blockquote>
+<p>boxplot.stats(x,coef=1.5,do.conf=TRUE,do.out=TRUE)</p>
+</blockquote>
+<p>其显示内容为：</p>
+<ul>
+<li>stats由5个值组成，分别是下须线、下四分位数、中位数、上四分位数、上须线</li>
+<li>n为样本量</li>
+<li>conf为置信区间，默认置信水平为95%</li>
+<li>out为离群值。</li>
+</ul>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 对前面加了部门经理工资后的部门月工资数据进行离群值探索</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(salarym) <span class="co"># 从图可以看出有一个离群值，就是部门经理的工资，远远高于部门的其他人的工资，因此被认为离群值。</span></span></code></pre></div>
+<p><img src="../img/unnamed-chunk-10-1.png" width="90%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot.stats</span>(salarym)</span></code></pre></div>
+<pre><code>#&gt; $stats
+#&gt; [1] 2000 2400 2875 3400 4200
+#&gt; 
+#&gt; $n
+#&gt; [1] 20
+#&gt; 
+#&gt; $conf
+#&gt; [1] 2521.701 3228.299
+#&gt; 
+#&gt; $out
+#&gt; [1] 15000</code></pre>
+</div>
+<div id="grubb检验" class="section level3">
+<h3>Grubb检验</h3>
+<p>Grubbs检验基于正态总体的假设，也就说在做检验前需要先检验数据的正态性。
+Grubbs检验每次只能检验数据集中是否包含离群值，其假设如下：<br />
+<span class="math inline">\(H_0\)</span>: 数据集中没有离群值<br />
+<span class="math inline">\(H_1\)</span>: 数据集中至少有一个离群值</p>
+<p>Grubbs检验统计量<span class="math inline">\(G=\frac{\max _{i=1,
+\ldots,
+N}\left|Y_{i}-\overline{Y}\right|}{s}\)</span>，该统计量实际上是指样本与均值的最大绝对离差相对于样本标准差的倍数。两侧检验时，当<span
+class="math inline">\(G&gt;\frac{N-1}{N} \sqrt{\frac{t_{\alpha /(2
+N)}^{2}(\mathrm{N}-2)}{N-2+t_{\alpha /(2
+N)}^{2}(\mathrm{N}-2)}}\)</span>时，拒绝<span
+class="math inline">\(H_0\)</span>，即认为数据中存在离群值。</p>
+<blockquote>
+<p>outliers::grubbs.test(x,type=10,opposite=FALSE,two.sided=FALSE)</p>
+</blockquote>
+<p>其中，x是待检验数据，type表示检验类型，10表示检验一个离群值（默认值）,11表示检验两个尾部上的两个离群值，20表示在一个尾部检验两个离群值。Opposite表示检验反方向上的离群值。two.sided表示是否进行双边检验。</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(outliers) <span class="co"># 载入outliers包</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">5</span>) <span class="co"># 设随机数种子</span></span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">10</span>) <span class="co"># 生产10个标准正态分布随机数</span></span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
+<pre><code>#&gt;  [1] -0.84085548  1.38435934 -1.25549186  0.07014277  1.71144087 -0.60290798
+#&gt;  [7] -0.47216639 -0.63537131 -0.28577363  0.13810822</code></pre>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grubbs.test</span>(x) <span class="co"># grubbs检验，右尾是否有离群值。p=0.2，不拒绝原假设，没有离群值。</span></span></code></pre></div>
+<pre><code>#&gt; 
+#&gt;  Grubbs test for one outlier
+#&gt; 
+#&gt; data:  x
+#&gt; G = 1.8799, U = 0.5637, p-value = 0.1881
+#&gt; alternative hypothesis: highest value 1.71144087270237 is an outlier</code></pre>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grubbs.test</span>(x, <span class="at">type =</span> <span class="dv">20</span>) <span class="co"># 右尾是否有两个离群值。p=0.02，拒绝原假设，然后呢？</span></span></code></pre></div>
+<pre><code>#&gt; 
+#&gt;  Grubbs test for two outliers
+#&gt; 
+#&gt; data:  x
+#&gt; U = 0.18292, p-value = 0.02345
+#&gt; alternative hypothesis: highest values 1.38435934347858 , 1.71144087270237 are outliers</code></pre>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grubbs.test</span>(x, <span class="at">type =</span> <span class="dv">11</span>) <span class="co"># 双边是否有离群值。p=0.7，不拒绝原假设。</span></span></code></pre></div>
+<pre><code>#&gt; 
+#&gt;  Grubbs test for two opposite outliers
+#&gt; 
+#&gt; data:  x
+#&gt; G = 3.11544, U = 0.43194, p-value = 0.7015
+#&gt; alternative hypothesis: -1.25549186262767 and 1.71144087270237 are outliers</code></pre>
+</div>
+<div id="dixons-q检验" class="section level3">
+<h3>Dixon’s Q检验</h3>
+<p>Q统计量<span
+class="math inline">\(Q=\frac{gap}{{range}}\)</span>，其中gap是假设的离群值离它最近值的绝对距离，range是极差（最大值与最小值之间的距离）。</p>
+<blockquote>
+<p>outliers::dixon.test(x,type=0,opposite=FALSE,two.sided=TRUE)</p>
+</blockquote>
+<p>其中，x是待检验数据。type表示检验类型,根据样本量大小选择不同的类型，具体包括10(样本量3-7），11（样本量8-10），21（样本量11-13），22（14及以上）。opposite表示检验反方向上的离群值。two.sided表示是否进行双边检验。</p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">8</span>)</span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">10</span>)</span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
+<pre><code>#&gt;  [1] -0.08458607  0.84040013 -0.46348277 -0.55083500  0.73604043 -0.10788140
+#&gt;  [7] -0.17028915 -1.08833171 -3.01105168 -0.59317433</code></pre>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dixon.test</span>(x) <span class="co"># Dixon’s Q检验</span></span></code></pre></div>
+<pre><code>#&gt; 
+#&gt;  Dixon test for outliers
+#&gt; 
+#&gt; data:  x
+#&gt; Q = 0.51312, p-value = 0.0652
+#&gt; alternative hypothesis: lowest value -3.01105167576798 is an outlier</code></pre>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dixon.test</span>(x, <span class="at">opposite =</span> <span class="cn">TRUE</span>) <span class="co"># 检验反方向上的离群值</span></span></code></pre></div>
+<pre><code>#&gt; 
+#&gt;  Dixon test for outliers
+#&gt; 
+#&gt; data:  x
+#&gt; Q = 0.054108, p-value = 0.3471
+#&gt; alternative hypothesis: highest value 0.840400125597476 is an outlier</code></pre>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 两个方向的检测P都大于0.05，因此不能拒绝原假设，即两个方向都没有离群值</span></span></code></pre></div>
+</div>
+</div>
+</div>
+<div id="双变量数据分析" class="section level1">
+<h1>双变量数据分析</h1>
+<div id="分类数据分类数据" class="section level2">
+<h2>分类数据~分类数据</h2>
+<div id="二维表" class="section level3">
+<h3>二维表</h3>
+<blockquote>
+<p>table(),生成二维表 prop.table(x,margin),计算二维表的边缘概率。</p>
+</blockquote>
+<p>margin=1表示各个数据占行汇总数的比例；margin=2表示各个数据占列
+汇总数的比例；省略时，表示占总和的比例。</p>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>smoke <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Y&quot;</span>, <span class="st">&quot;N&quot;</span>, <span class="st">&quot;N&quot;</span>, <span class="st">&quot;Y&quot;</span>, <span class="st">&quot;N&quot;</span>, <span class="st">&quot;Y&quot;</span>, <span class="st">&quot;Y&quot;</span>, <span class="st">&quot;Y&quot;</span>, <span class="st">&quot;N&quot;</span>, <span class="st">&quot;Y&quot;</span>)</span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>study <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;&lt;5h&quot;</span>, <span class="st">&quot;5-10h&quot;</span>, <span class="st">&quot;5-10h&quot;</span>, <span class="st">&quot;&gt;10h&quot;</span>, <span class="st">&quot;&gt;10h&quot;</span>, <span class="st">&quot;&lt;5h&quot;</span>, <span class="st">&quot;5-10h&quot;</span>, <span class="st">&quot;&lt;5h&quot;</span>, <span class="st">&quot;&gt;10h&quot;</span>, <span class="st">&quot;5-10h&quot;</span>)</span>
+<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(smoke, study)</span></code></pre></div>
+<pre><code>#&gt;      study
+#&gt; smoke &lt;5h &gt;10h 5-10h
+#&gt;     N   0    2     2
+#&gt;     Y   3    1     2</code></pre>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>tab <span class="ot">&lt;-</span> <span class="fu">table</span>(smoke, study)</span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a><span class="fu">prop.table</span>(tab, <span class="dv">1</span>) <span class="co"># 返回占行汇总数的比例</span></span></code></pre></div>
+<pre><code>#&gt;      study
+#&gt; smoke       &lt;5h      &gt;10h     5-10h
+#&gt;     N 0.0000000 0.5000000 0.5000000
+#&gt;     Y 0.5000000 0.1666667 0.3333333</code></pre>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="co"># prop.table()的功能也可以用自定义函数实现</span></span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>prop <span class="ot">&lt;-</span> <span class="cf">function</span>(x) x <span class="sc">/</span> <span class="fu">sum</span>(x)</span>
+<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(tab, <span class="dv">2</span>, prop) <span class="co"># 返回占列汇总数的比例</span></span></code></pre></div>
+<pre><code>#&gt;      study
+#&gt; smoke &lt;5h      &gt;10h 5-10h
+#&gt;     N   0 0.6666667   0.5
+#&gt;     Y   1 0.3333333   0.5</code></pre>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(tab, <span class="dv">1</span>, prop)</span></code></pre></div>
+<pre><code>#&gt;        smoke
+#&gt; study     N         Y
+#&gt;   &lt;5h   0.0 0.5000000
+#&gt;   &gt;10h  0.5 0.1666667
+#&gt;   5-10h 0.5 0.3333333</code></pre>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t</span>(<span class="fu">apply</span>(tab, <span class="dv">1</span>, prop)) <span class="co"># 返回占行汇总数的比例</span></span></code></pre></div>
+<pre><code>#&gt;      study
+#&gt; smoke &lt;5h      &gt;10h     5-10h
+#&gt;     N 0.0 0.5000000 0.5000000
+#&gt;     Y 0.5 0.1666667 0.3333333</code></pre>
+</div>
+<div id="复式条形图" class="section level3">
+<h3>复式条形图</h3>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>)) <span class="co"># 设置图形窗口以一行三列形式输出</span></span>
+<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">table</span>(smoke, study)) <span class="co"># 以study为分类变量作条形图</span></span>
+<span id="cb75-3"><a href="#cb75-3" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">table</span>(study, smoke)) <span class="co"># 以smoke为分类变量作条形图</span></span>
+<span id="cb75-4"><a href="#cb75-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-5"><a href="#cb75-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 设置图例。beside参数设置为False时，作出的图是堆积条形图，True时作出的是簇状条形图，R默认的是False。</span></span>
+<span id="cb75-6"><a href="#cb75-6" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">table</span>(study, smoke), <span class="at">beside =</span> T, <span class="at">legend.text =</span> <span class="fu">c</span>(<span class="st">&quot;&lt;5h&quot;</span>, <span class="st">&quot;5-10h&quot;</span>, <span class="st">&quot;&gt;10h&quot;</span>))</span></code></pre></div>
+<p><img src="../img/unnamed-chunk-14-1.png" width="90%" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="分类数据数值数据" class="section level2">
+<h2>分类数据~数值数据</h2>
+<p>分组、刻面箱线图为主</p>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">13</span>, <span class="dv">7</span>, <span class="dv">11</span>, <span class="dv">11</span>, <span class="dv">9</span>, <span class="dv">8</span>, <span class="dv">9</span>) <span class="co"># 实验组</span></span>
+<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">11</span>, <span class="dv">8</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">9</span>, <span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">5</span>, <span class="dv">4</span>, <span class="dv">10</span>) <span class="co"># 对照组</span></span>
+<span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(x, y)</span></code></pre></div>
+<p><img src="../img/unnamed-chunk-15-1.png" width="90%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 还可以将不同类数据合并起来，另标记分类向量，作出同样的图</span></span>
+<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">13</span>, <span class="dv">7</span>, <span class="dv">11</span>, <span class="dv">11</span>, <span class="dv">9</span>, <span class="dv">8</span>, <span class="dv">9</span>, <span class="dv">11</span>, <span class="dv">8</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">9</span>, <span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">5</span>, <span class="dv">4</span>, <span class="dv">10</span>)</span>
+<span id="cb77-3"><a href="#cb77-3" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>)</span>
+<span id="cb77-4"><a href="#cb77-4" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(d <span class="sc">~</span> g) <span class="co"># 分类向量放在~后边</span></span></code></pre></div>
+<p><img src="../img/unnamed-chunk-16-1.png" width="90%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="数值数据数值数据" class="section level2">
+<h2>数值数据~数值数据</h2>
+<div id="散点图" class="section level3">
+<h3>散点图</h3>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>rev <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">&quot;revenue.txt&quot;</span>, <span class="at">header =</span> T)</span>
+<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(rev<span class="sc">$</span>x, rev<span class="sc">$</span>y)</span>
+<span id="cb78-3"><a href="#cb78-3" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="fu">lm</span>(rev<span class="sc">$</span>y <span class="sc">~</span> rev<span class="sc">$</span>x))</span></code></pre></div>
+<p><img src="../img/unnamed-chunk-17-1.png" width="90%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="相关系数" class="section level3">
+<h3>相关系数</h3>
+<blockquote>
+<p>cor(x,y),pearson相关系数</p>
+</blockquote>
+<blockquote>
+<p>cor(x,y,method=“spearman”),spearman等级相关系数(秩相关系数)，等同于cor(rank(x),rank(y))</p>
+</blockquote>
+<p>注意：</p>
+<ol style="list-style-type: decimal">
+<li>不线性相关并不意味着不相关；</li>
+<li>有相关关系并不意味着一定有因果关系；</li>
+<li>相关分析研究一个变量对另一个（些）变量的统计依赖关系，但它们并不意味着一定有因果关系。</li>
+<li>相关分析对称地对待任何（两个）变量，两个变量都被看作是随机的。</li>
+</ol>
+</div>
+</div>
+</div>
+<div id="多变量数据分析" class="section level1">
+<h1>多变量数据分析</h1>
+<div id="多维列联表" class="section level2">
+<h2>多维列联表</h2>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS) <span class="co"># Car93数据在MASS包中</span></span>
+<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(Cars93)</span>
+<span id="cb79-3"><a href="#cb79-3" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(Cars93)</span></code></pre></div>
+<pre><code>#&gt;  [1] &quot;Manufacturer&quot;       &quot;Model&quot;              &quot;Type&quot;              
+#&gt;  [4] &quot;Min.Price&quot;          &quot;Price&quot;              &quot;Max.Price&quot;         
+#&gt;  [7] &quot;MPG.city&quot;           &quot;MPG.highway&quot;        &quot;AirBags&quot;           
+#&gt; [10] &quot;DriveTrain&quot;         &quot;Cylinders&quot;          &quot;EngineSize&quot;        
+#&gt; [13] &quot;Horsepower&quot;         &quot;RPM&quot;                &quot;Rev.per.mile&quot;      
+#&gt; [16] &quot;Man.trans.avail&quot;    &quot;Fuel.tank.capacity&quot; &quot;Passengers&quot;        
+#&gt; [19] &quot;Length&quot;             &quot;Wheelbase&quot;          &quot;Width&quot;             
+#&gt; [22] &quot;Turn.circle&quot;        &quot;Rear.seat.room&quot;     &quot;Luggage.room&quot;      
+#&gt; [25] &quot;Weight&quot;             &quot;Origin&quot;             &quot;Make&quot;</code></pre>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(Cars93)</span>
+<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb81-3"><a href="#cb81-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 把Price按区间分成三组，并对此因子命名</span></span>
+<span id="cb81-4"><a href="#cb81-4" aria-hidden="true" tabindex="-1"></a>price <span class="ot">&lt;-</span> <span class="fu">cut</span>(Price, <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">12</span>, <span class="dv">20</span>, <span class="fu">max</span>(Price)))</span>
+<span id="cb81-5"><a href="#cb81-5" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(price) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;cheap&quot;</span>, <span class="st">&quot;okay&quot;</span>, <span class="st">&quot;expensive&quot;</span>)</span>
+<span id="cb81-6"><a href="#cb81-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 把miles per gallon in highway按区间分成3组并命名</span></span>
+<span id="cb81-7"><a href="#cb81-7" aria-hidden="true" tabindex="-1"></a>mpg <span class="ot">&lt;-</span> <span class="fu">cut</span>(MPG.highway, <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="fu">max</span>(MPG.highway)))</span>
+<span id="cb81-8"><a href="#cb81-8" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(mpg) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;gasguzzler&quot;</span>, <span class="st">&quot;oky&quot;</span>, <span class="st">&quot;miser&quot;</span>) <span class="co"># 费油、普通、省油</span></span>
+<span id="cb81-9"><a href="#cb81-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb81-10"><a href="#cb81-10" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(Type)</span></code></pre></div>
+<pre><code>#&gt; Type
+#&gt; Compact   Large Midsize   Small  Sporty     Van 
+#&gt;      16      11      22      21      14       9</code></pre>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(price, Type)</span></code></pre></div>
+<pre><code>#&gt;            Type
+#&gt; price       Compact Large Midsize Small Sporty Van
+#&gt;   cheap           3     0       0    18      1   0
+#&gt;   okay            9     3       8     3      9   8
+#&gt;   expensive       4     8      14     0      4   1</code></pre>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(price, Type, mpg)</span></code></pre></div>
+<pre><code>#&gt; , , mpg = gasguzzler
+#&gt; 
+#&gt;            Type
+#&gt; price       Compact Large Midsize Small Sporty Van
+#&gt;   cheap           0     0       0     0      0   0
+#&gt;   okay            0     0       0     0      0   2
+#&gt;   expensive       0     0       0     0      0   0
+#&gt; 
+#&gt; , , mpg = oky
+#&gt; 
+#&gt;            Type
+#&gt; price       Compact Large Midsize Small Sporty Van
+#&gt;   cheap           1     0       0     4      0   0
+#&gt;   okay            5     3       6     0      6   6
+#&gt;   expensive       4     8      14     0      4   1
+#&gt; 
+#&gt; , , mpg = miser
+#&gt; 
+#&gt;            Type
+#&gt; price       Compact Large Midsize Small Sporty Van
+#&gt;   cheap           2     0       0    14      1   0
+#&gt;   okay            4     0       2     3      3   0
+#&gt;   expensive       0     0       0     0      0   0</code></pre>
+</div>
+<div id="复式条形图-1" class="section level2">
+<h2>复式条形图</h2>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">table</span>(price, Type))</span></code></pre></div>
+<p><img src="../img/unnamed-chunk-19-1.png" width="90%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">table</span>(price, Type), <span class="at">beside =</span> T)</span></code></pre></div>
+<p><img src="../img/unnamed-chunk-19-2.png" width="90%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">table</span>(Type, price))</span></code></pre></div>
+<p><img src="../img/unnamed-chunk-19-3.png" width="90%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">table</span>(Type, price), <span class="at">beside =</span> T)</span></code></pre></div>
+<p><img src="../img/unnamed-chunk-19-4.png" width="90%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="并列箱线图" class="section level2">
+<h2>并列箱线图</h2>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(Price <span class="sc">~</span> Type)</span></code></pre></div>
+<p><img src="../img/unnamed-chunk-20-1.png" width="90%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 模拟1000个标准正态分布随机数，分成10组，作10个并列箱线图。</span></span>
+<span id="cb92-2"><a href="#cb92-2" aria-hidden="true" tabindex="-1"></a>r1 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>)</span>
+<span id="cb92-3"><a href="#cb92-3" aria-hidden="true" tabindex="-1"></a>f1 <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="dv">100</span>))</span>
+<span id="cb92-4"><a href="#cb92-4" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(r1 <span class="sc">~</span> f1)</span></code></pre></div>
+<p><img src="../img/unnamed-chunk-20-2.png" width="90%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="点带图" class="section level2">
+<h2>点带图</h2>
+<p>点带图也可以用来比较各变量的分布情况，但主要用在样本观察值比较少时。当样本观察值比较多时，点带图就显得有点凌乱，没有箱线图清晰直观。所以当样本观察值很多时，就应该使用箱线图。</p>
+<blockquote>
+<p>stripchart(z～t)</p>
+</blockquote>
+<p>z变量在t变量上的分布情况，不同的是这里z变量刻度在x轴上，而t变量在y轴上。</p>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="fu">factor</span>(Type)</span>
+<span id="cb93-2"><a href="#cb93-2" aria-hidden="true" tabindex="-1"></a>f</span></code></pre></div>
+<pre><code>#&gt;  [1] Small   Midsize Compact Midsize Midsize Midsize Large   Large   Midsize
+#&gt; [10] Large   Midsize Compact Compact Sporty  Midsize Van     Van     Large  
+#&gt; [19] Sporty  Large   Compact Large   Small   Small   Compact Van     Midsize
+#&gt; [28] Sporty  Small   Large   Small   Small   Compact Sporty  Sporty  Van    
+#&gt; [37] Midsize Large   Small   Sporty  Sporty  Small   Compact Small   Small  
+#&gt; [46] Sporty  Midsize Midsize Midsize Midsize Midsize Large   Small   Small  
+#&gt; [55] Compact Van     Sporty  Compact Midsize Sporty  Midsize Small   Midsize
+#&gt; [64] Small   Compact Van     Midsize Compact Midsize Van     Large   Sporty 
+#&gt; [73] Small   Compact Sporty  Midsize Large   Compact Small   Small   Small  
+#&gt; [82] Compact Small   Small   Sporty  Midsize Van     Small   Van     Compact
+#&gt; [91] Sporty  Compact Midsize
+#&gt; Levels: Compact Large Midsize Small Sporty Van</code></pre>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a>f1 <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">ordered</span>(f))</span>
+<span id="cb95-2"><a href="#cb95-2" aria-hidden="true" tabindex="-1"></a>f1</span></code></pre></div>
+<pre><code>#&gt;  [1] 4 3 1 3 3 3 2 2 3 2 3 1 1 5 3 6 6 2 5 2 1 2 4 4 1 6 3 5 4 2 4 4 1 5 5 6 3 2
+#&gt; [39] 4 5 5 4 1 4 4 5 3 3 3 3 3 2 4 4 1 6 5 1 3 5 3 4 3 4 1 6 3 1 3 6 2 5 4 1 5 3
+#&gt; [77] 2 1 4 4 4 1 4 4 5 3 6 4 6 1 5 1 3</code></pre>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stripchart</span>(f1 <span class="sc">~</span> price)</span></code></pre></div>
+<p><img src="../img/unnamed-chunk-21-1.png" width="90%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 值得注意的是，x轴用1-6代表Type的Compact、Large等。</span></span>
+<span id="cb98-2"><a href="#cb98-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-3"><a href="#cb98-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 模拟100个标准正态分布的随机数，分成5组，作点带图。</span></span>
+<span id="cb98-4"><a href="#cb98-4" aria-hidden="true" tabindex="-1"></a>r2 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>)</span>
+<span id="cb98-5"><a href="#cb98-5" aria-hidden="true" tabindex="-1"></a>f2 <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">20</span>))</span>
+<span id="cb98-6"><a href="#cb98-6" aria-hidden="true" tabindex="-1"></a><span class="fu">stripchart</span>(r2 <span class="sc">~</span> f2)</span></code></pre></div>
+<p><img src="../img/unnamed-chunk-21-2.png" width="90%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="多变量散点图" class="section level2">
+<h2>多变量散点图</h2>
+<p>例：以datasets包里的数据集iris为例，这是Fisher关于150个植物分类的数据，是判别分析的经典案例。</p>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a>iris</span></code></pre></div>
+<pre><code>#&gt;     Sepal.Length Sepal.Width Petal.Length Petal.Width    Species
+#&gt; 1            5.1         3.5          1.4         0.2     setosa
+#&gt; 2            4.9         3.0          1.4         0.2     setosa
+#&gt; 3            4.7         3.2          1.3         0.2     setosa
+#&gt; 4            4.6         3.1          1.5         0.2     setosa
+#&gt; 5            5.0         3.6          1.4         0.2     setosa
+#&gt; 6            5.4         3.9          1.7         0.4     setosa
+#&gt; 7            4.6         3.4          1.4         0.3     setosa
+#&gt; 8            5.0         3.4          1.5         0.2     setosa
+#&gt; 9            4.4         2.9          1.4         0.2     setosa
+#&gt; 10           4.9         3.1          1.5         0.1     setosa
+#&gt; 11           5.4         3.7          1.5         0.2     setosa
+#&gt; 12           4.8         3.4          1.6         0.2     setosa
+#&gt; 13           4.8         3.0          1.4         0.1     setosa
+#&gt; 14           4.3         3.0          1.1         0.1     setosa
+#&gt; 15           5.8         4.0          1.2         0.2     setosa
+#&gt; 16           5.7         4.4          1.5         0.4     setosa
+#&gt; 17           5.4         3.9          1.3         0.4     setosa
+#&gt; 18           5.1         3.5          1.4         0.3     setosa
+#&gt; 19           5.7         3.8          1.7         0.3     setosa
+#&gt; 20           5.1         3.8          1.5         0.3     setosa
+#&gt; 21           5.4         3.4          1.7         0.2     setosa
+#&gt; 22           5.1         3.7          1.5         0.4     setosa
+#&gt; 23           4.6         3.6          1.0         0.2     setosa
+#&gt; 24           5.1         3.3          1.7         0.5     setosa
+#&gt; 25           4.8         3.4          1.9         0.2     setosa
+#&gt; 26           5.0         3.0          1.6         0.2     setosa
+#&gt; 27           5.0         3.4          1.6         0.4     setosa
+#&gt; 28           5.2         3.5          1.5         0.2     setosa
+#&gt; 29           5.2         3.4          1.4         0.2     setosa
+#&gt; 30           4.7         3.2          1.6         0.2     setosa
+#&gt; 31           4.8         3.1          1.6         0.2     setosa
+#&gt; 32           5.4         3.4          1.5         0.4     setosa
+#&gt; 33           5.2         4.1          1.5         0.1     setosa
+#&gt; 34           5.5         4.2          1.4         0.2     setosa
+#&gt; 35           4.9         3.1          1.5         0.2     setosa
+#&gt; 36           5.0         3.2          1.2         0.2     setosa
+#&gt; 37           5.5         3.5          1.3         0.2     setosa
+#&gt; 38           4.9         3.6          1.4         0.1     setosa
+#&gt; 39           4.4         3.0          1.3         0.2     setosa
+#&gt; 40           5.1         3.4          1.5         0.2     setosa
+#&gt; 41           5.0         3.5          1.3         0.3     setosa
+#&gt; 42           4.5         2.3          1.3         0.3     setosa
+#&gt; 43           4.4         3.2          1.3         0.2     setosa
+#&gt; 44           5.0         3.5          1.6         0.6     setosa
+#&gt; 45           5.1         3.8          1.9         0.4     setosa
+#&gt; 46           4.8         3.0          1.4         0.3     setosa
+#&gt; 47           5.1         3.8          1.6         0.2     setosa
+#&gt; 48           4.6         3.2          1.4         0.2     setosa
+#&gt; 49           5.3         3.7          1.5         0.2     setosa
+#&gt; 50           5.0         3.3          1.4         0.2     setosa
+#&gt; 51           7.0         3.2          4.7         1.4 versicolor
+#&gt; 52           6.4         3.2          4.5         1.5 versicolor
+#&gt; 53           6.9         3.1          4.9         1.5 versicolor
+#&gt; 54           5.5         2.3          4.0         1.3 versicolor
+#&gt; 55           6.5         2.8          4.6         1.5 versicolor
+#&gt; 56           5.7         2.8          4.5         1.3 versicolor
+#&gt; 57           6.3         3.3          4.7         1.6 versicolor
+#&gt; 58           4.9         2.4          3.3         1.0 versicolor
+#&gt; 59           6.6         2.9          4.6         1.3 versicolor
+#&gt; 60           5.2         2.7          3.9         1.4 versicolor
+#&gt; 61           5.0         2.0          3.5         1.0 versicolor
+#&gt; 62           5.9         3.0          4.2         1.5 versicolor
+#&gt; 63           6.0         2.2          4.0         1.0 versicolor
+#&gt; 64           6.1         2.9          4.7         1.4 versicolor
+#&gt; 65           5.6         2.9          3.6         1.3 versicolor
+#&gt; 66           6.7         3.1          4.4         1.4 versicolor
+#&gt; 67           5.6         3.0          4.5         1.5 versicolor
+#&gt; 68           5.8         2.7          4.1         1.0 versicolor
+#&gt; 69           6.2         2.2          4.5         1.5 versicolor
+#&gt; 70           5.6         2.5          3.9         1.1 versicolor
+#&gt; 71           5.9         3.2          4.8         1.8 versicolor
+#&gt; 72           6.1         2.8          4.0         1.3 versicolor
+#&gt; 73           6.3         2.5          4.9         1.5 versicolor
+#&gt; 74           6.1         2.8          4.7         1.2 versicolor
+#&gt; 75           6.4         2.9          4.3         1.3 versicolor
+#&gt; 76           6.6         3.0          4.4         1.4 versicolor
+#&gt; 77           6.8         2.8          4.8         1.4 versicolor
+#&gt; 78           6.7         3.0          5.0         1.7 versicolor
+#&gt; 79           6.0         2.9          4.5         1.5 versicolor
+#&gt; 80           5.7         2.6          3.5         1.0 versicolor
+#&gt; 81           5.5         2.4          3.8         1.1 versicolor
+#&gt; 82           5.5         2.4          3.7         1.0 versicolor
+#&gt; 83           5.8         2.7          3.9         1.2 versicolor
+#&gt; 84           6.0         2.7          5.1         1.6 versicolor
+#&gt; 85           5.4         3.0          4.5         1.5 versicolor
+#&gt; 86           6.0         3.4          4.5         1.6 versicolor
+#&gt; 87           6.7         3.1          4.7         1.5 versicolor
+#&gt; 88           6.3         2.3          4.4         1.3 versicolor
+#&gt; 89           5.6         3.0          4.1         1.3 versicolor
+#&gt; 90           5.5         2.5          4.0         1.3 versicolor
+#&gt; 91           5.5         2.6          4.4         1.2 versicolor
+#&gt; 92           6.1         3.0          4.6         1.4 versicolor
+#&gt; 93           5.8         2.6          4.0         1.2 versicolor
+#&gt; 94           5.0         2.3          3.3         1.0 versicolor
+#&gt; 95           5.6         2.7          4.2         1.3 versicolor
+#&gt; 96           5.7         3.0          4.2         1.2 versicolor
+#&gt; 97           5.7         2.9          4.2         1.3 versicolor
+#&gt; 98           6.2         2.9          4.3         1.3 versicolor
+#&gt; 99           5.1         2.5          3.0         1.1 versicolor
+#&gt; 100          5.7         2.8          4.1         1.3 versicolor
+#&gt; 101          6.3         3.3          6.0         2.5  virginica
+#&gt; 102          5.8         2.7          5.1         1.9  virginica
+#&gt; 103          7.1         3.0          5.9         2.1  virginica
+#&gt; 104          6.3         2.9          5.6         1.8  virginica
+#&gt; 105          6.5         3.0          5.8         2.2  virginica
+#&gt; 106          7.6         3.0          6.6         2.1  virginica
+#&gt; 107          4.9         2.5          4.5         1.7  virginica
+#&gt; 108          7.3         2.9          6.3         1.8  virginica
+#&gt; 109          6.7         2.5          5.8         1.8  virginica
+#&gt; 110          7.2         3.6          6.1         2.5  virginica
+#&gt; 111          6.5         3.2          5.1         2.0  virginica
+#&gt; 112          6.4         2.7          5.3         1.9  virginica
+#&gt; 113          6.8         3.0          5.5         2.1  virginica
+#&gt; 114          5.7         2.5          5.0         2.0  virginica
+#&gt; 115          5.8         2.8          5.1         2.4  virginica
+#&gt; 116          6.4         3.2          5.3         2.3  virginica
+#&gt; 117          6.5         3.0          5.5         1.8  virginica
+#&gt; 118          7.7         3.8          6.7         2.2  virginica
+#&gt; 119          7.7         2.6          6.9         2.3  virginica
+#&gt; 120          6.0         2.2          5.0         1.5  virginica
+#&gt; 121          6.9         3.2          5.7         2.3  virginica
+#&gt; 122          5.6         2.8          4.9         2.0  virginica
+#&gt; 123          7.7         2.8          6.7         2.0  virginica
+#&gt; 124          6.3         2.7          4.9         1.8  virginica
+#&gt; 125          6.7         3.3          5.7         2.1  virginica
+#&gt; 126          7.2         3.2          6.0         1.8  virginica
+#&gt; 127          6.2         2.8          4.8         1.8  virginica
+#&gt; 128          6.1         3.0          4.9         1.8  virginica
+#&gt; 129          6.4         2.8          5.6         2.1  virginica
+#&gt; 130          7.2         3.0          5.8         1.6  virginica
+#&gt; 131          7.4         2.8          6.1         1.9  virginica
+#&gt; 132          7.9         3.8          6.4         2.0  virginica
+#&gt; 133          6.4         2.8          5.6         2.2  virginica
+#&gt; 134          6.3         2.8          5.1         1.5  virginica
+#&gt; 135          6.1         2.6          5.6         1.4  virginica
+#&gt; 136          7.7         3.0          6.1         2.3  virginica
+#&gt; 137          6.3         3.4          5.6         2.4  virginica
+#&gt; 138          6.4         3.1          5.5         1.8  virginica
+#&gt; 139          6.0         3.0          4.8         1.8  virginica
+#&gt; 140          6.9         3.1          5.4         2.1  virginica
+#&gt; 141          6.7         3.1          5.6         2.4  virginica
+#&gt; 142          6.9         3.1          5.1         2.3  virginica
+#&gt; 143          5.8         2.7          5.1         1.9  virginica
+#&gt; 144          6.8         3.2          5.9         2.3  virginica
+#&gt; 145          6.7         3.3          5.7         2.5  virginica
+#&gt; 146          6.7         3.0          5.2         2.3  virginica
+#&gt; 147          6.3         2.5          5.0         1.9  virginica
+#&gt; 148          6.5         3.0          5.2         2.0  virginica
+#&gt; 149          6.2         3.4          5.4         2.3  virginica
+#&gt; 150          5.9         3.0          5.1         1.8  virginica</code></pre>
+<div class="sourceCode" id="cb101"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(iris<span class="sc">$</span>Species) <span class="co"># 种类Species的水平</span></span></code></pre></div>
+<pre><code>#&gt; [1] &quot;setosa&quot;     &quot;versicolor&quot; &quot;virginica&quot;</code></pre>
+<div class="sourceCode" id="cb103"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 共有三种植物，分别是setosa，versicolor和virginica。为了在图中方便显示，重新标示它们为1、2和3。</span></span>
+<span id="cb103-2"><a href="#cb103-2" aria-hidden="true" tabindex="-1"></a>iris.lab <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">&quot;1&quot;</span>, <span class="st">&quot;2&quot;</span>, <span class="st">&quot;3&quot;</span>), <span class="fu">rep</span>(<span class="dv">50</span>, <span class="dv">3</span>))</span></code></pre></div>
+<div id="重叠散点图" class="section level3">
+<h3>重叠散点图</h3>
+<p>将两个或多组两个变量的散点图绘制在同一个图中，这样可以更好比较它们之间的相关关系</p>
+<div class="sourceCode" id="cb104"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(iris[, <span class="dv">1</span>], iris[, <span class="dv">3</span>], <span class="at">type =</span> <span class="st">&quot;n&quot;</span>) <span class="co"># 绘制iris第1、3列的散点图，type=&#39;n&#39;即不显示点</span></span>
+<span id="cb104-2"><a href="#cb104-2" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(iris[, <span class="dv">1</span>], iris[, <span class="dv">3</span>], <span class="at">cex =</span> <span class="fl">0.6</span>) <span class="co"># 显示样本序号，缩小字体cex=0.6</span></span></code></pre></div>
+<p><img src="../img/unnamed-chunk-23-1.png" width="90%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb105"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(iris[, <span class="dv">1</span>], iris[, <span class="dv">3</span>], <span class="at">type =</span> <span class="st">&quot;n&quot;</span>)</span>
+<span id="cb105-2"><a href="#cb105-2" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(iris[, <span class="dv">1</span>], iris[, <span class="dv">3</span>], iris.lab, <span class="at">cex =</span> <span class="fl">0.7</span>) <span class="co"># 显示分类号，缩小字体cex=0.7</span></span></code></pre></div>
+<p><img src="../img/unnamed-chunk-23-2.png" width="90%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="矩阵式散点图" class="section level3">
+<h3>矩阵式散点图</h3>
+<p>欲同时考察三个或三个以上的数值变量间的相关关系时，利用矩阵式散点图比较合适，这样可以快速发现多个变量间主要相关性，这一点在多元线性回归显得尤为重要。</p>
+<blockquote>
+<p>pairs()</p>
+</blockquote>
+<div class="sourceCode" id="cb106"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(iris)</span></code></pre></div>
+<p><img src="../img/unnamed-chunk-24-1.png" width="90%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb107"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(iris[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>], <span class="at">pch =</span> <span class="dv">21</span>, <span class="at">bg =</span> iris.lab) <span class="co"># 按iris.lab分类</span></span></code></pre></div>
+<p><img src="../img/unnamed-chunk-24-2.png" width="90%" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+</div>
+
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIkV4cGxvcmF0b3J5IERhdGEgQW5hbHlzaXMiDQpzdWJ0aXRsZTogJ+inguWvn+aVsOaNrueJueW+ge+8jOWvu+aJvue7n+iuoeaOqOaWreeahOWQiOmAguaWueazlScNCmF1dGhvcjogIkh1bW9vbiINCmRhdGU6ICJgciBTeXMuRGF0ZSgpYCINCm91dHB1dDogaHRtbF9kb2N1bWVudA0KLS0tDQoNCmBgYHtyIHNldHVwLCBpbmNsdWRlPUZBTFNFfQ0Kc291cmNlKCIuLi9SbWFya2Rvd24tdGVtcGxhdGUvUm1hcmtkb3duX2NvbmZpZy5SIikNCg0KIyMgZ2xvYmFsIG9wdGlvbnMgPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0NCmtuaXRyOjpvcHRzX2NodW5rJHNldCgNCiAgd2lkdGggPSBjb25maWckd2lkdGgsDQogIGZpZy53aWR0aCA9IGNvbmZpZyRmaWcud2lkdGgsDQogIGZpZy5hc3AgPSBjb25maWckZmlnLmFzcCwNCiAgb3V0LndpZHRoID0gY29uZmlnJG91dC53aWR0aCwNCiAgZmlnLmFsaWduID0gY29uZmlnJGZpZy5hbGlnbiwNCiAgZmlnLnBhdGggPSBjb25maWckZmlnLnBhdGgsDQogIGZpZy5zaG93ID0gY29uZmlnJGZpZy5zaG93LA0KICB3YXJuID0gY29uZmlnJHdhcm4sDQogIHdhcm5pbmcgPSBjb25maWckd2FybmluZywNCiAgbWVzc2FnZSA9IGNvbmZpZyRtZXNzYWdlLA0KICBlY2hvID0gY29uZmlnJGVjaG8sDQogIGV2YWwgPSBjb25maWckZXZhbCwNCiAgdGlkeSA9IGNvbmZpZyR0aWR5LA0KICBjb21tZW50ID0gY29uZmlnJGNvbW1lbnQsDQogIGNvbGxhcHNlID0gY29uZmlnJGNvbGxhcHNlLA0KICBjYWNoZSA9IGNvbmZpZyRjYWNoZSwNCiAgY2FjaGUuY29tbWVudHMgPSBjb25maWckY2FjaGUuY29tbWVudHMsDQogIGF1dG9kZXAgPSBjb25maWckYXV0b2RlcA0KKQ0KYGBgDQoNCiMg5Li76KaB5YiG5p6Q5bel5YW3DQoNCiog5p2h5b2i5Zu+77yIYmFycGxvdO+8ie+8mueUqOS6juWIhuexu+aVsOaNrg0KKiDnm7Tmlrnlm77vvIhoaXN077yJ44CB54K55Zu+77yIZG90Y2hhcnTvvInjgIHojI7lj7blm77vvIhzdGVt77yJ77ya55So5LqO6KeC5a+f5pWw5YC85Z6L5YiG5biD55qE5b2i54q2DQoqIOeusee6v+Wbvu+8iGJveHBsb3TvvInvvJrnu5nlh7rmlbDlgLzlnovliIbluIPnmoTmsYfmgLvmlbDmja7vvIzpgILnlKjkuo7kuI3lkIzliIbluIPnmoTmr5TovoPlkozplb/lsL7jgIHnprvnvqTngrnnmoTor4bliKsNCiog5q2j5oCB5qaC546H5Zu+77yIcXFub3Jt77yJ77ya55So5LqO6KeC5a+f5pWw5o2u5piv5ZCm6L+R5Ly85Zyw5pyN5LuO5q2j5oCB5YiG5biDDQoNCmBgYHtyfQ0KIyDkvovvvJrogIPor5XmlbDmja4NCk1TIDwtIHRyaWJibGUoDQogIH5JRCwgfm1hdGgsIH5zdGF0LA0KICAjIOKAlOKAlOKAlOKAlOKAlOKAlOKAlOKAlOKAlOKAlOKAlOKAlOKAlOKAlOKAlOKAlA0KICAxLCA4MSwgNzIsDQogIDIsIDkwLCA5MCwNCiAgMywgOTEsIDk2LA0KICA0LCA3NCwgNjgsDQogIDUsIDcwLCA4MiwNCiAgNiwgNzMsIDc4LA0KICA3LCA4OCwgODksDQogIDgsIDc4LCA4MiwNCiAgOSwgOTUsIDk2LA0KICAxMCwgNjMsIDc1LA0KICAxMSwgODUsIDg2LA0KICAxMiwgNjAsIDcxLA0KICAxMywgODMsIDc4LA0KICAxNCwgODEsIDk0LA0KICAxNSwgNzcsIDczLA0KICAxNiwgNjAsIDY2LA0KICAxNywgNjYsIDU4LA0KICAxOCwgODQsIDg3LA0KICAxOSwgODAsIDg2LA0KICAyMCwgODUsIDg0LA0KICAyMSwgNzAsIDgyLA0KICAyMiwgNTQsIDU2LA0KICAyMywgOTMsIDk4LA0KICAyNCwgNjgsIDc2DQopDQoNCiMg55So6IyO5Y+25Zu+6KeC5a+f5pWw5a2m5ZKM57uf6K6h5a2m55qE5oiQ57up5YiG5biDDQpzdGVtKE1TJG1hdGgpDQpzdGVtKE1TJHN0YXQpDQpgYGANCg0K6IyO5Y+25Zu+55qE56ysMeS9jeaYr+WNgeWIhuS9jeaVsO+8jOavlOWmgu+8muaVsOaNruaIkOe7qeeahOiMjuWPtuWbvumHjO+8jDV8NOihqOekuuacieS4gOS9jeWtpueUn+eahOaVsOWtpuaIkOe7qeS4ujU077ybNnwwMDM2OOihqOekuuaciTXkvY3lrabnlJ/nmoTmiJDnu6nlnKhbNjAsNzBd5LmL6Ze077yM5YW25Lit5Lik5L2N5pivNjDliIbvvIzkuIDkvY02M+WIhu+8jOS4gOS9jTY25YiG77yM5LiA5L2NNjjliIbvvIzlhbbkvZnnmoTnsbvkvLzjgIINCg0KDQo+ICoq5Y+v5Lul5bCG5LiA5Lqb5bi455So55qE5o6i57Si5oCn5YiG5p6Q55qE5Zu+5b2i5Ye95pWw5pW05ZCI5oiQ5LiA5Liq5Ye95pWw77yM6L+b6KGM5LiA6ZSu5byP5YWo6Z2i5YiG5p6QKioNCg0KYGBge3J9DQpFREEgPC0gZnVuY3Rpb24oeCkgew0KICBwYXIobWZyb3cgPSBjKDIsIDIpKQ0KICBoaXN0KHgpICMg55u05pa55Zu+DQogIGRvdGNoYXJ0KHgpICMg54K55Zu+DQogIGJveHBsb3QoeCwgaG9yaXpvbnRhbCA9IFQpICMg566x5byP5Zu+DQogIHFxbm9ybSh4KQ0KICBxcWxpbmUoeCkgIyDmraPmgIHmpoLnjoflm74NCiAgcGFyKG1mcm93ID0gYygxLCAxKSkNCn0NCkVEQShNUyRtYXRoKSAjIOaOoue0ouWIhuaekOaVsOWtpuaIkOe7qQ0KRURBKE1TJHN0YXQpICMg5o6i57Si5YiG5p6Q57uf6K6h5oiQ57upDQpgYGANCg0KDQojIOWNleWPmOmHj+aVsOaNruWIhuaekA0KDQojIyBicnVjZVIg5YyF5Lit55qE5o+P6L+w57uf6K6hDQoNCg0KIyMjIGBEZXNjcmliZSgpYA0KDQrmj4/ov7Dnu5/orqHvvIjovpPlh7rmoLfmnKzph4/jgIHlubPlnYflgLzjgIHmoIflh4blt67jgIHkuK3kvY3mlbDjgIHlgY/luqbjgIHls7DluqbvvIkNCg0KLSDkuLvopoHlj4LmlbANCg0KLSAtIGBkYXRhYO+8muaVsOaNruahhu+8iOm7mOiupOS9v+eUqOaJgOacieWPmOmHj++8jOivt+aPkOWJjeetm+mAieWHuuaDs+imgeWIhuaekOeahOWPmOmHj+S7rO+8iQ0KICAtIGBkaWdpdHNg77ya5L+d55WZ55qE5bCP5pWw5L2N5pWw77yM6buY6K6k5pivIDIg5L2N5bCP5pWwDQogIC0gYGZpbGVg77ya5L+d5a2Y55qEIFdvcmQg5paH5qGj77yM6buY6K6k6L6T5Ye65YiwIFIg5o6n5Yi25Y+wDQogIC0gYHBsb3Rg77ya5piv5ZCm55S75q+P5Liq5Y+Y6YeP55qE5YiG5biD5Zu+44CB5Y+Y6YeP6Ze055qE55u45YWz5Zu+77yf6buY6K6k5pivIGBGQUxTRWANCiAgLSDigKbigKbvvIjop4Hljp/lp4vluK7liqnmlofmoaPvvIkNCg0KLSDkvb/nlKjnpLrkvosNCg0KYGBge3J9DQpzZXQuc2VlZCgxKQ0KRGVzY3JpYmUocm5vcm0oMTAwMDAwMCksIHBsb3QgPSBUUlVFKQ0KRGVzY3JpYmUoYWlycXVhbGl0eSkNCkRlc2NyaWJlKGFpcnF1YWxpdHksIHBsb3QgPSBUUlVFLCB1cHBlci50cmlhbmdsZSA9IFRSVUUsIHVwcGVyLnNtb290aCA9ICJsbSIpDQpgYGANCg0KIyMjIGBGcmVxKClgDQoNCumikeaVsOe7n+iuoe+8iOi+k+WHuumikeaVsOS4jumikeeOhyAl77yJDQoNCi0g5Li76KaB5Y+C5pWwDQoNCi0gLSBgdmFyYO+8muWPmOmHjw0KICAtIGBsYWJlbGDvvJrlpoLmnInpnIDopoHvvIzlj6/ku6XlrprkuYnmlbDlgLzmoIfnrb4NCiAgLSBgc29ydGDvvJrmjpLluo/mlrnms5XvvIzpu5jorqTmjInnhaflj5jph4/mlbDlgLwgLyDmoIfnrb7mjpLluo/vvIzlj6/pgInmi6kgYCItImDvvIjmjInpopHmlbDku47lpKfliLDlsI/mjpLliJfvvInmiJYgYCIrImDvvIjmjInpopHmlbDku47lsI/liLDlpKfmjpLliJfvvIkNCiAgLSBgZGlnaXRzYO+8muS/neeVmeeahOWwj+aVsOS9jeaVsO+8jOm7mOiupOaYryAxIOS9jeWwj+aVsA0KICAtIGBmaWxlYO+8muS/neWtmOWIsCAuZG9j77yM6buY6K6k6L6T5Ye65YiwIFIg5o6n5Yi25Y+wDQoNCi0g5L2/55So56S65L6LDQoNCmBgYHtyfQ0KZGF0YSA8LSBwc3ljaDo6YmZpDQpGcmVxKGRhdGEkZWR1Y2F0aW9uKQ0KRnJlcShkYXRhJGdlbmRlcikNCkZyZXEoZGF0YSRnZW5kZXIsIGxhYmVsID0gYygiTWFsZSIsICJGZW1hbGUiKSkNCmBgYA0KDQojIyDliIbnsbvlnovmlbDmja4NCg0KMS4g5YiG57G76aKR5pWw6KGo77ya5aaC5p6ceOaYr+WIhuexu+aVsOaNru+8jHRhYmxlKHgp5Y+v5Lul55Sf5oiQ5YiG57G76aKR5pWw6KGoDQpgYGB7cn0NCnggPC0gYygi5pivIiwgIuWQpiIsICLlkKYiLCAi5pivIiwgIuaYryIsICLlkKYiLCAi5ZCmIiwgIuaYryIsICLmmK8iKQ0KdGFibGUoeCkNCmBgYA0KDQoyLiDmnaHlvaLlm77lkozppbzlm74NCmBgYHtyfQ0KZHJpbmsgPC0gYygzLCA0LCAxLCAxLCAzLCA0LCAzLCAzLCAxLCAzLCAyLCAxLCAyLCAxLCAyLCAzLCAyLCAzLCAxLCAxLCAxLCAxLCA0LCAzLCAxKQ0KDQpiYXJwbG90KGRyaW5rKSAjIOacquWIhue7hOeahOadoeW9ouWbvu+8jOe6tei9tOS4jeaYr+mikeaVsOiAjOaYr+awtOW5sw0KYmFycGxvdCh0YWJsZShkcmluaykpICMg5YiG57uE55qE5p2h5b2i5Zu+77yM57q16L205piv6aKR5pWwDQpiYXJwbG90KHRhYmxlKGRyaW5rKSAvIGxlbmd0aChkcmluaykpICMg57q16L205piv6aKR546HDQpiYXJwbG90KHRhYmxlKGRyaW5rKSwgY29sID0gYygicmVkIiwgInllbGxvdyIsICJibHVlIiwgIndoaXRlIikpDQoNCmRyaW5rLmNvdW50IDwtIHRhYmxlKGRyaW5rKSAjIHnmlbDmja7liIbnu4TlkI7otYvlgLznu5lkcmluay5jb3VudOOAgg0KcGllKGRyaW5rLmNvdW50KQ0KbmFtZXMoZHJpbmsuY291bnQpIDwtIGMoIue6oumFkiIsICLnmb3phZIiLCAi6buE6YWSIiwgIuWVpOmFkiIpDQpwaWUoZHJpbmsuY291bnQpDQpwaWUoZHJpbmsuY291bnQsIGNvbCA9IGMoInB1cnBsZSIsICJncmVlbiIsICJjeWFuIiwgIndoaXRlIikpDQpgYGANCg0KIyMg5pWw5YC85Z6L5pWw5o2uDQoNCiMjIyDpm4bkuK3otovlir/lkoznprvmlaPnqIvluqYNCm1lYW4oKSxtZWRpYW4oKSx2YXIoKSxzZCgpLGZpdmVudW0oKSxzdW1tYXJ5KCkNCg0K5b2T5pWw5o2u5YiG5biD6Z2e5a+556ew44CB5pyJ6ZW/5bC+5pe277yM5Y+v5Lul5Yip55So5oiq5bC+5Z2H5YC85p2l5o+P6L+w5bmz5Z2H5rC05bmz77ya5ZyobWVhbuWHveaVsOmHjOWvuXRyaW3lj4LmlbDov5vooYzorr7nva4NCmBgYHtyfQ0Kc2FsYXJ5IDwtIGMoDQogIDIwMDAsIDIxMDAsIDIyMDAsIDIzMDAsIDIzNTAsIDI0NTAsIDI1MDAsIDI3MDAsIDI5MDAsDQogIDI4NTAsIDM1MDAsIDM4MDAsIDI2MDAsIDMwMDAsIDMzMDAsIDMyMDAsIDQwMDAsIDMxMDAsIDQyMDANCikNCiMg5a+56K+l6YOo6Zeo55qE5bel6LWE5oiq5Y675Lik5aS0MjDvvIXlkI7nmoTlnYflgLwsdHJpbT3lj6/ku6XnnIHnlaUNCm1lYW4oc2FsYXJ5LCB0cmltID0gMC4yKQ0KIyDlr7nor6Xpg6jpl6jnmoTlt6XotYTmiKrljrvkuKTlpLQ1MO+8heWQjueahOWdh+WAvO+8jOWunumZheS4iui/meWwseaYr+S4reS9jeaVsA0KbWVhbihzYWxhcnksIDAuNSkNCmBgYA0KDQrmlrnlt67jgIHmoIflh4blt67lr7nlvILluLjlgLzkuZ/lvojmlY/mhJ/vvIzlj6/ku6XnlKjnqLPlgaXnmoTlm5vliIbkvY3pl7Tot50oSVFSKeWSjOW5s+Wdh+W3rihtYWQp5p2l5o+P6L+w56a75pWj56iL5bqmDQpgYGB7cn0NCklRUihzYWxhcnkpDQptYWQoc2FsYXJ5KQ0KYGBgDQoNCiMjIyDlm77lvaLlsZXnjrANCmBgYHtyfQ0KIyDojI7lj7blm74o6YCC55So5LqO5bCP5qC35pysKQ0Kc3RlbShzYWxhcnkpDQpzYWxhcnltIDwtIGMoc2FsYXJ5LCAxNTAwMCkgIyDliqDlhaXnu4/nkIbnmoTlt6XotYQNCnN0ZW0oc2FsYXJ5bSkgIyDlj5HnjrDnu4/nkIbnmoTmlbDmja7mmK/kuIDkuKrnprvnvqTlgLwNCg0KIyDnlKhjdXQoKeWvueaVsOWAvOaVsOaNrui/m+ihjOWIhue7hA0Kc2FsYXJ5ZyA8LSBjdXQoc2FsYXJ5LCBicmVha3MgPSBjKDIwMDAsIDMwMDAsIDQwMDAsIG1heChzYWxhcnkpKSkNCnRhYmxlKHNhbGFyeWcpDQoNCiMg55u05pa55Zu+DQpoaXN0KHNhbGFyeSkgIyDpopHmlbANCmhpc3Qoc2FsYXJ5LCBwcm9iID0gVCkgIyDpopHnjocNCiMg6L+Y5Y+v5Lul55SocnVnKCnlkb3ku6TmiorlkITkuKrmlbDmja7nq5bnur/mj4/nu5jlnKhY6L205LiKDQpydWcoc2FsYXJ5KQ0KDQojIOeusee6v+Wbvg0KYm94cGxvdChzYWxhcnkpICMg6buY6K6k56uW55u0DQpib3hwbG90KHNhbGFyeSwgaG9yaXpvbnRhbCA9IFQpICMg5rC05bmz566x57q/5Zu+DQoNCiMg5a+G5bqm5Ye95pWw57q/ZGVuc2l0eSgpDQpoaXN0KGZhaXRoZnVsJGVydXB0aW9ucywgcHJvYiA9IFQsIGJyZWFrcyA9IDI1KSAjIOS9v+eUqOezu+e7n+iHquW4pueahGZhaXRoZnVs5pWw5o2uDQpsaW5lcyhkZW5zaXR5KGZhaXRoZnVsJGVydXB0aW9ucyksIGNvbCA9ICJyZWQiKQ0KYGBgIA0KDQojIyDnprvnvqTlgLzmjqLntKINCg0K56a7576k5YC877yIb3V0bGllcu+8ieWwseaYr+afkOS4quaIluWwkeaVsOWHoOS4quWAvOaYjuaYvui/nOemu+S6juWFtuS7luWkp+mDqOWIhuaVsOaNruOAgueQhuiuuuS4iuiusu+8jOemu+e+pOWAvOWPr+S7peWHuueOsOWcqOWQhOenjeWIhuW4g+S4re+8jOS9huW4uOingeeahOS4u+imgeWHuueOsOWcqOWFt+aciea1i+mHj+ivr+W3ru+8iG1lYXN1cmVtZW50IGVycm9y77yJ55qE5pWw5o2u5oiW6ICF5oC75L2T5piv5Y6a5bC+77yIaGVhdnktdGFpbGVk77yJ5YiG5biD55qE5pWw5o2u5Lit44CC56a7576k5YC855qE5qOA6aqM5Li76KaB5pyJ77ya77yIMe+8ieeusee6v+WbvuajgOmqjO+8m++8iDLvvIlHcnViYuajgOmqjO+8m++8iDPvvIlEaXhvbuKAmXNR5qOA6aqM44CCDQoNCiMjIyDnrrHnur/lm77mo4DpqowNCg0K5aaC5p6c6KeC5rWL5YC86Led5bqV57q/UTHvvIjnrKwyNeeZvuWIhuS9jeaVsO+8ieaIlumhtue6v1Ez77yI56ysNzXnmb7liIbkvY3mlbDvvInov4fov5zvvIzlpoLotoXlh7rnrrHkvZPpq5jluqbvvIjlm5vliIbkvY3mlbDpl7Tot53vvInnmoQxLjXlgI3ku6XkuIrvvIzliJnlj6/op4bor6Xop4LmtYvlgLzkuLrnprvnvqTlgLzjgIINCg0KYm94cGxvdC5zdGF0cygp5Y+v5Lul6L+U5Zue566x57q/5Zu+55qE5pyJ5YWz57uf6K6h6YeP44CC5YW255So5rOV5pivDQoNCj4gYm94cGxvdC5zdGF0cyh4LGNvZWY9MS41LGRvLmNvbmY9VFJVRSxkby5vdXQ9VFJVRSkNCg0K5YW25pi+56S65YaF5a655Li677yaICAgICAgIA0KDQoqIHN0YXRz55SxNeS4quWAvOe7hOaIkO+8jOWIhuWIq+aYr+S4i+mhu+e6v+OAgeS4i+Wbm+WIhuS9jeaVsOOAgeS4reS9jeaVsOOAgeS4iuWbm+WIhuS9jeaVsOOAgeS4iumhu+e6vw0KKiBu5Li65qC35pys6YePDQoqIGNvbmbkuLrnva7kv6HljLrpl7TvvIzpu5jorqTnva7kv6HmsLTlubPkuLo5NSUNCiogb3V05Li656a7576k5YC844CCDQoNCmBgYHtyfQ0KIyDlr7nliY3pnaLliqDkuobpg6jpl6jnu4/nkIblt6XotYTlkI7nmoTpg6jpl6jmnIjlt6XotYTmlbDmja7ov5vooYznprvnvqTlgLzmjqLntKINCmJveHBsb3Qoc2FsYXJ5bSkgIyDku47lm77lj6/ku6XnnIvlh7rmnInkuIDkuKrnprvnvqTlgLzvvIzlsLHmmK/pg6jpl6jnu4/nkIbnmoTlt6XotYTvvIzov5zov5zpq5jkuo7pg6jpl6jnmoTlhbbku5bkurrnmoTlt6XotYTvvIzlm6DmraTooqvorqTkuLrnprvnvqTlgLzjgIINCg0KYm94cGxvdC5zdGF0cyhzYWxhcnltKQ0KYGBgDQoNCiMjIyBHcnViYuajgOmqjA0KDQpHcnViYnPmo4Dpqozln7rkuo7mraPmgIHmgLvkvZPnmoTlgYforr7vvIzkuZ/lsLHor7TlnKjlgZrmo4DpqozliY3pnIDopoHlhYjmo4DpqozmlbDmja7nmoTmraPmgIHmgKfjgIINCkdydWJic+ajgOmqjOavj+asoeWPquiDveajgOmqjOaVsOaNrumbhuS4reaYr+WQpuWMheWQq+emu+e+pOWAvO+8jOWFtuWBh+iuvuWmguS4i++8miAgIA0KICAkSF8wJDog5pWw5o2u6ZuG5Lit5rKh5pyJ56a7576k5YC8ICAgIA0KICAkSF8xJDog5pWw5o2u6ZuG5Lit6Iez5bCR5pyJ5LiA5Liq56a7576k5YC8DQoNCkdydWJic+ajgOmqjOe7n+iuoemHjyRHPVxmcmFje1xtYXggX3tpPTEsIFxsZG90cywgTn1cbGVmdHxZX3tpfS1cb3ZlcmxpbmV7WX1ccmlnaHR8fXtzfSTvvIzor6Xnu5/orqHph4/lrp7pmYXkuIrmmK/mjIfmoLfmnKzkuI7lnYflgLznmoTmnIDlpKfnu53lr7nnprvlt67nm7jlr7nkuo7moLfmnKzmoIflh4blt67nmoTlgI3mlbDjgILkuKTkvqfmo4Dpqozml7bvvIzlvZMkRz5cZnJhY3tOLTF9e059IFxzcXJ0e1xmcmFje3Rfe1xhbHBoYSAvKDIgTil9XnsyfShcbWF0aHJte059LTIpfXtOLTIrdF97XGFscGhhIC8oMiBOKX1eezJ9KFxtYXRocm17Tn0tMil9fSTml7bvvIzmi5Lnu50kSF8wJO+8jOWNs+iupOS4uuaVsOaNruS4reWtmOWcqOemu+e+pOWAvOOAgg0KDQo+IG91dGxpZXJzOjpncnViYnMudGVzdCh4LHR5cGU9MTAsb3Bwb3NpdGU9RkFMU0UsdHdvLnNpZGVkPUZBTFNFKQ0KDQrlhbbkuK3vvIx45piv5b6F5qOA6aqM5pWw5o2u77yMdHlwZeihqOekuuajgOmqjOexu+Wei++8jDEw6KGo56S65qOA6aqM5LiA5Liq56a7576k5YC877yI6buY6K6k5YC877yJLDEx6KGo56S65qOA6aqM5Lik5Liq5bC+6YOo5LiK55qE5Lik5Liq56a7576k5YC877yMMjDooajnpLrlnKjkuIDkuKrlsL7pg6jmo4DpqozkuKTkuKrnprvnvqTlgLzjgIJPcHBvc2l0ZeihqOekuuajgOmqjOWPjeaWueWQkeS4iueahOemu+e+pOWAvOOAgnR3by5zaWRlZOihqOekuuaYr+WQpui/m+ihjOWPjOi+ueajgOmqjOOAgg0KYGBge3J9DQpsaWJyYXJ5KG91dGxpZXJzKSAjIOi9veWFpW91dGxpZXJz5YyFDQpzZXQuc2VlZCg1KSAjIOiuvumaj+acuuaVsOenjeWtkA0KeCA8LSBybm9ybSgxMCkgIyDnlJ/kuqcxMOS4quagh+WHhuato+aAgeWIhuW4g+maj+acuuaVsA0KeA0KZ3J1YmJzLnRlc3QoeCkgIyBncnViYnPmo4DpqozvvIzlj7PlsL7mmK/lkKbmnInnprvnvqTlgLzjgIJwPTAuMu+8jOS4jeaLkue7neWOn+WBh+iuvu+8jOayoeacieemu+e+pOWAvOOAgg0KZ3J1YmJzLnRlc3QoeCwgdHlwZSA9IDIwKSAjIOWPs+WwvuaYr+WQpuacieS4pOS4quemu+e+pOWAvOOAgnA9MC4wMu+8jOaLkue7neWOn+WBh+iuvu+8jOeEtuWQjuWRou+8nw0KZ3J1YmJzLnRlc3QoeCwgdHlwZSA9IDExKSAjIOWPjOi+ueaYr+WQpuacieemu+e+pOWAvOOAgnA9MC4377yM5LiN5ouS57ud5Y6f5YGH6K6+44CCDQpgYGANCg0KIyMjIERpeG9u4oCZcyBR5qOA6aqMDQoNClHnu5/orqHph48kUT1cZnJhY3tnYXB9e3tyYW5nZX19JO+8jOWFtuS4rWdhcOaYr+WBh+iuvueahOemu+e+pOWAvOemu+Wug+acgOi/keWAvOeahOe7neWvuei3neemu++8jHJhbmdl5piv5p6B5beu77yI5pyA5aSn5YC85LiO5pyA5bCP5YC85LmL6Ze055qE6Led56a777yJ44CCDQoNCj4gb3V0bGllcnM6OmRpeG9uLnRlc3QoeCx0eXBlPTAsb3Bwb3NpdGU9RkFMU0UsdHdvLnNpZGVkPVRSVUUpDQoNCuWFtuS4re+8jHjmmK/lvoXmo4DpqozmlbDmja7jgIJ0eXBl6KGo56S65qOA6aqM57G75Z6LLOagueaNruagt+acrOmHj+Wkp+Wwj+mAieaLqeS4jeWQjOeahOexu+Wei++8jOWFt+S9k+WMheaLrDEwKOagt+acrOmHjzMtN++8ie+8jDEx77yI5qC35pys6YePOC0xMO+8ie+8jDIx77yI5qC35pys6YePMTEtMTPvvInvvIwyMu+8iDE05Y+K5Lul5LiK77yJ44CCb3Bwb3NpdGXooajnpLrmo4Dpqozlj43mlrnlkJHkuIrnmoTnprvnvqTlgLzjgIJ0d28uc2lkZWTooajnpLrmmK/lkKbov5vooYzlj4zovrnmo4DpqozjgIINCmBgYHtyfQ0Kc2V0LnNlZWQoOCkNCnggPC0gcm5vcm0oMTApDQp4DQpkaXhvbi50ZXN0KHgpICMgRGl4b27igJlzIFHmo4DpqowNCmRpeG9uLnRlc3QoeCwgb3Bwb3NpdGUgPSBUUlVFKSAjIOajgOmqjOWPjeaWueWQkeS4iueahOemu+e+pOWAvA0KIyDkuKTkuKrmlrnlkJHnmoTmo4DmtYtQ6YO95aSn5LqOMC4wNe+8jOWboOatpOS4jeiDveaLkue7neWOn+WBh+iuvu+8jOWNs+S4pOS4quaWueWQkemDveayoeacieemu+e+pOWAvA0KYGBgDQoNCiMg5Y+M5Y+Y6YeP5pWw5o2u5YiG5p6QDQoNCiMjIOWIhuexu+aVsOaNrn7liIbnsbvmlbDmja4NCg0KIyMjIOS6jOe7tOihqA0KDQo+IHRhYmxlKCks55Sf5oiQ5LqM57u06KGoDQo+IHByb3AudGFibGUoeCxtYXJnaW4pLOiuoeeul+S6jOe7tOihqOeahOi+uee8mOamgueOh+OAgg0KDQptYXJnaW49MeihqOekuuWQhOS4quaVsOaNruWNoOihjOaxh+aAu+aVsOeahOavlOS+i++8m21hcmdpbj0y6KGo56S65ZCE5Liq5pWw5o2u5Y2g5YiXIOaxh+aAu+aVsOeahOavlOS+i++8m+ecgeeVpeaXtu+8jOihqOekuuWNoOaAu+WSjOeahOavlOS+i+OAgg0KDQpgYGB7cn0NCnNtb2tlIDwtIGMoIlkiLCAiTiIsICJOIiwgIlkiLCAiTiIsICJZIiwgIlkiLCAiWSIsICJOIiwgIlkiKQ0Kc3R1ZHkgPC0gYygiPDVoIiwgIjUtMTBoIiwgIjUtMTBoIiwgIj4xMGgiLCAiPjEwaCIsICI8NWgiLCAiNS0xMGgiLCAiPDVoIiwgIj4xMGgiLCAiNS0xMGgiKQ0KdGFibGUoc21va2UsIHN0dWR5KQ0KdGFiIDwtIHRhYmxlKHNtb2tlLCBzdHVkeSkNCnByb3AudGFibGUodGFiLCAxKSAjIOi/lOWbnuWNoOihjOaxh+aAu+aVsOeahOavlOS+iw0KDQojIHByb3AudGFibGUoKeeahOWKn+iDveS5n+WPr+S7peeUqOiHquWumuS5ieWHveaVsOWunueOsA0KcHJvcCA8LSBmdW5jdGlvbih4KSB4IC8gc3VtKHgpDQphcHBseSh0YWIsIDIsIHByb3ApICMg6L+U5Zue5Y2g5YiX5rGH5oC75pWw55qE5q+U5L6LDQphcHBseSh0YWIsIDEsIHByb3ApDQp0KGFwcGx5KHRhYiwgMSwgcHJvcCkpICMg6L+U5Zue5Y2g6KGM5rGH5oC75pWw55qE5q+U5L6LDQpgYGANCg0KIyMjIOWkjeW8j+adoeW9ouWbvg0KYGBge3J9DQpwYXIobWZyb3cgPSBjKDEsIDMpKSAjIOiuvue9ruWbvuW9oueql+WPo+S7peS4gOihjOS4ieWIl+W9ouW8j+i+k+WHug0KYmFycGxvdCh0YWJsZShzbW9rZSwgc3R1ZHkpKSAjIOS7pXN0dWR55Li65YiG57G75Y+Y6YeP5L2c5p2h5b2i5Zu+DQpiYXJwbG90KHRhYmxlKHN0dWR5LCBzbW9rZSkpICMg5Lulc21va2XkuLrliIbnsbvlj5jph4/kvZzmnaHlvaLlm74NCg0KIyDorr7nva7lm77kvovjgIJiZXNpZGXlj4LmlbDorr7nva7kuLpGYWxzZeaXtu+8jOS9nOWHuueahOWbvuaYr+Wghuenr+adoeW9ouWbvu+8jFRydWXml7bkvZzlh7rnmoTmmK/nsIfnirbmnaHlvaLlm77vvIxS6buY6K6k55qE5pivRmFsc2XjgIINCmJhcnBsb3QodGFibGUoc3R1ZHksIHNtb2tlKSwgYmVzaWRlID0gVCwgbGVnZW5kLnRleHQgPSBjKCI8NWgiLCAiNS0xMGgiLCAiPjEwaCIpKQ0KYGBgDQoNCiMjIOWIhuexu+aVsOaNrn7mlbDlgLzmlbDmja4NCg0K5YiG57uE44CB5Yi76Z2i566x57q/5Zu+5Li65Li7DQoNCmBgYHtyfQ0KeCA8LSBjKDUsIDUsIDUsIDEzLCA3LCAxMSwgMTEsIDksIDgsIDkpICMg5a6e6aqM57uEDQp5IDwtIGMoMTEsIDgsIDQsIDUsIDksIDUsIDEwLCA1LCA0LCAxMCkgIyDlr7nnhafnu4QNCmJveHBsb3QoeCwgeSkNCmBgYA0KDQpgYGB7cn0NCiMg6L+Y5Y+v5Lul5bCG5LiN5ZCM57G75pWw5o2u5ZCI5bm26LW35p2l77yM5Y+m5qCH6K6w5YiG57G75ZCR6YeP77yM5L2c5Ye65ZCM5qC355qE5Zu+DQpkIDwtIGMoNSwgNSwgNSwgMTMsIDcsIDExLCAxMSwgOSwgOCwgOSwgMTEsIDgsIDQsIDUsIDksIDUsIDEwLCA1LCA0LCAxMCkNCmcgPC0gYygxLCAxLCAxLCAxLCAxLCAxLCAxLCAxLCAxLCAxLCAyLCAyLCAyLCAyLCAyLCAyLCAyLCAyLCAyLCAyKQ0KYm94cGxvdChkIH4gZykgIyDliIbnsbvlkJHph4/mlL7lnKh+5ZCO6L65DQpgYGANCg0KDQojIyDmlbDlgLzmlbDmja5+5pWw5YC85pWw5o2uDQoNCiMjIyDmlaPngrnlm74NCg0KYGBge3J9DQpyZXYgPC0gcmVhZC50YWJsZSgicmV2ZW51ZS50eHQiLCBoZWFkZXIgPSBUKQ0KcGxvdChyZXYkeCwgcmV2JHkpDQphYmxpbmUobG0ocmV2JHkgfiByZXYkeCkpDQpgYGANCg0KIyMjIOebuOWFs+ezu+aVsA0KDQo+IGNvcih4LHkpLHBlYXJzb27nm7jlhbPns7vmlbANCg0KPiBjb3IoeCx5LG1ldGhvZD0ic3BlYXJtYW4iKSxzcGVhcm1hbuetiee6p+ebuOWFs+ezu+aVsCjnp6nnm7jlhbPns7vmlbAp77yM562J5ZCM5LqOY29yKHJhbmsoeCkscmFuayh5KSkNCg0K5rOo5oSP77yaDQoNCjEuIOS4jee6v+aAp+ebuOWFs+W5tuS4jeaEj+WRs+edgOS4jeebuOWFs++8mw0KMi4g5pyJ55u45YWz5YWz57O75bm25LiN5oSP5ZGz552A5LiA5a6a5pyJ5Zug5p6c5YWz57O777ybDQozLiDnm7jlhbPliIbmnpDnoJTnqbbkuIDkuKrlj5jph4/lr7nlj6bkuIDkuKrvvIjkupvvvInlj5jph4/nmoTnu5/orqHkvp3otZblhbPns7vvvIzkvYblroPku6zlubbkuI3mhI/lkbPnnYDkuIDlrprmnInlm6DmnpzlhbPns7vjgIINCjQuIOebuOWFs+WIhuaekOWvueensOWcsOWvueW+heS7u+S9le+8iOS4pOS4qu+8ieWPmOmHj++8jOS4pOS4quWPmOmHj+mDveiiq+eci+S9nOaYr+maj+acuueahOOAgg0KDQojIOWkmuWPmOmHj+aVsOaNruWIhuaekA0KDQojIyDlpJrnu7TliJfogZTooagNCmBgYHtyfQ0KbGlicmFyeShNQVNTKSAjIENhcjkz5pWw5o2u5ZyoTUFTU+WMheS4rQ0KZGF0YShDYXJzOTMpDQpuYW1lcyhDYXJzOTMpDQphdHRhY2goQ2FyczkzKQ0KDQojIOaKilByaWNl5oyJ5Yy66Ze05YiG5oiQ5LiJ57uE77yM5bm25a+55q2k5Zug5a2Q5ZG95ZCNDQpwcmljZSA8LSBjdXQoUHJpY2UsIGMoMCwgMTIsIDIwLCBtYXgoUHJpY2UpKSkNCmxldmVscyhwcmljZSkgPC0gYygiY2hlYXAiLCAib2theSIsICJleHBlbnNpdmUiKQ0KIyDmioptaWxlcyBwZXIgZ2FsbG9uIGluIGhpZ2h3YXnmjInljLrpl7TliIbmiJAz57uE5bm25ZG95ZCNDQptcGcgPC0gY3V0KE1QRy5oaWdod2F5LCBjKDAsIDIwLCAzMCwgbWF4KE1QRy5oaWdod2F5KSkpDQpsZXZlbHMobXBnKSA8LSBjKCJnYXNndXp6bGVyIiwgIm9reSIsICJtaXNlciIpICMg6LS55rK544CB5pmu6YCa44CB55yB5rK5DQoNCnRhYmxlKFR5cGUpDQp0YWJsZShwcmljZSwgVHlwZSkNCnRhYmxlKHByaWNlLCBUeXBlLCBtcGcpDQpgYGANCg0KIyMg5aSN5byP5p2h5b2i5Zu+DQpgYGB7cn0NCmJhcnBsb3QodGFibGUocHJpY2UsIFR5cGUpKQ0KYmFycGxvdCh0YWJsZShwcmljZSwgVHlwZSksIGJlc2lkZSA9IFQpDQpiYXJwbG90KHRhYmxlKFR5cGUsIHByaWNlKSkNCmJhcnBsb3QodGFibGUoVHlwZSwgcHJpY2UpLCBiZXNpZGUgPSBUKQ0KYGBgDQoNCiMjIOW5tuWIl+eusee6v+Wbvg0KDQpgYGB7cn0NCmJveHBsb3QoUHJpY2UgfiBUeXBlKQ0KDQojIOaooeaLnzEwMDDkuKrmoIflh4bmraPmgIHliIbluIPpmo/mnLrmlbDvvIzliIbmiJAxMOe7hO+8jOS9nDEw5Liq5bm25YiX566x57q/5Zu+44CCDQpyMSA8LSBybm9ybSgxMDAwKQ0KZjEgPC0gZmFjdG9yKHJlcCgxOjEwLCAxMDApKQ0KYm94cGxvdChyMSB+IGYxKQ0KYGBgDQoNCiMjIOeCueW4puWbvg0K54K55bim5Zu+5Lmf5Y+v5Lul55So5p2l5q+U6L6D5ZCE5Y+Y6YeP55qE5YiG5biD5oOF5Ya177yM5L2G5Li76KaB55So5Zyo5qC35pys6KeC5a+f5YC85q+U6L6D5bCR5pe244CC5b2T5qC35pys6KeC5a+f5YC85q+U6L6D5aSa5pe277yM54K55bim5Zu+5bCx5pi+5b6X5pyJ54K55YeM5Lmx77yM5rKh5pyJ566x57q/5Zu+5riF5pmw55u06KeC44CC5omA5Lul5b2T5qC35pys6KeC5a+f5YC85b6I5aSa5pe277yM5bCx5bqU6K+l5L2/55So566x57q/5Zu+44CCDQoNCj4gc3RyaXBjaGFydCh6772edCkNCg0KeuWPmOmHj+WcqHTlj5jph4/kuIrnmoTliIbluIPmg4XlhrXvvIzkuI3lkIznmoTmmK/ov5nph4x65Y+Y6YeP5Yi75bqm5ZyoeOi9tOS4iu+8jOiAjHTlj5jph4/lnKh56L205LiK44CCDQpgYGB7cn0NCmYgPC0gZmFjdG9yKFR5cGUpDQpmDQpmMSA8LSBhcy5udW1lcmljKG9yZGVyZWQoZikpDQpmMQ0Kc3RyaXBjaGFydChmMSB+IHByaWNlKQ0KIyDlgLzlvpfms6jmhI/nmoTmmK/vvIx46L2055SoMS025Luj6KGoVHlwZeeahENvbXBhY3TjgIFMYXJnZeetieOAgg0KDQojIOaooeaLnzEwMOS4quagh+WHhuato+aAgeWIhuW4g+eahOmaj+acuuaVsO+8jOWIhuaIkDXnu4TvvIzkvZzngrnluKblm77jgIINCnIyIDwtIHJub3JtKDEwMCkNCmYyIDwtIGZhY3RvcihyZXAoMTo1LCAyMCkpDQpzdHJpcGNoYXJ0KHIyIH4gZjIpDQpgYGANCg0KIyMg5aSa5Y+Y6YeP5pWj54K55Zu+DQoNCuS+i++8muS7pWRhdGFzZXRz5YyF6YeM55qE5pWw5o2u6ZuGaXJpc+S4uuS+i++8jOi/meaYr0Zpc2hlcuWFs+S6jjE1MOS4quakjeeJqeWIhuexu+eahOaVsOaNru+8jOaYr+WIpOWIq+WIhuaekOeahOe7j+WFuOahiOS+i+OAgg0KYGBge3J9DQppcmlzDQpsZXZlbHMoaXJpcyRTcGVjaWVzKSAjIOenjeexu1NwZWNpZXPnmoTmsLTlubMNCiMg5YWx5pyJ5LiJ56eN5qSN54mp77yM5YiG5Yir5pivc2V0b3Nh77yMdmVyc2ljb2xvcuWSjHZpcmdpbmljYeOAguS4uuS6huWcqOWbvuS4reaWueS+v+aYvuekuu+8jOmHjeaWsOagh+ekuuWug+S7rOS4ujHjgIEy5ZKMM+OAgg0KaXJpcy5sYWIgPC0gcmVwKGMoIjEiLCAiMiIsICIzIiksIHJlcCg1MCwgMykpDQpgYGANCg0KIyMjIOmHjeWPoOaVo+eCueWbvg0K5bCG5Lik5Liq5oiW5aSa57uE5Lik5Liq5Y+Y6YeP55qE5pWj54K55Zu+57uY5Yi25Zyo5ZCM5LiA5Liq5Zu+5Lit77yM6L+Z5qC35Y+v5Lul5pu05aW95q+U6L6D5a6D5Lus5LmL6Ze055qE55u45YWz5YWz57O7DQpgYGB7cn0NCnBsb3QoaXJpc1ssIDFdLCBpcmlzWywgM10sIHR5cGUgPSAibiIpICMg57uY5Yi2aXJpc+esrDHjgIEz5YiX55qE5pWj54K55Zu+77yMdHlwZT0nbifljbPkuI3mmL7npLrngrkNCnRleHQoaXJpc1ssIDFdLCBpcmlzWywgM10sIGNleCA9IDAuNikgIyDmmL7npLrmoLfmnKzluo/lj7fvvIznvKnlsI/lrZfkvZNjZXg9MC42DQpwbG90KGlyaXNbLCAxXSwgaXJpc1ssIDNdLCB0eXBlID0gIm4iKQ0KdGV4dChpcmlzWywgMV0sIGlyaXNbLCAzXSwgaXJpcy5sYWIsIGNleCA9IDAuNykgIyDmmL7npLrliIbnsbvlj7fvvIznvKnlsI/lrZfkvZNjZXg9MC43DQpgYGANCg0KIyMjIOefqemYteW8j+aVo+eCueWbvg0KDQrmrLLlkIzml7bogIPlr5/kuInkuKrmiJbkuInkuKrku6XkuIrnmoTmlbDlgLzlj5jph4/pl7TnmoTnm7jlhbPlhbPns7vml7bvvIzliKnnlKjnn6npmLXlvI/mlaPngrnlm77mr5TovoPlkIjpgILvvIzov5nmoLflj6/ku6Xlv6vpgJ/lj5HnjrDlpJrkuKrlj5jph4/pl7TkuLvopoHnm7jlhbPmgKfvvIzov5nkuIDngrnlnKjlpJrlhYPnur/mgKflm57lvZLmmL7lvpflsKTkuLrph43opoHjgIINCg0KPiBwYWlycygpDQoNCmBgYHtyfQ0KcGFpcnMoaXJpcykNCnBhaXJzKGlyaXNbMTo0XSwgcGNoID0gMjEsIGJnID0gaXJpcy5sYWIpICMg5oyJaXJpcy5sYWLliIbnsbsNCmBgYA0K</div>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeSourceEmbed("Exploratory_Data_Analysis.Rmd");
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3,h4",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

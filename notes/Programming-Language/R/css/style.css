@@ -43,23 +43,24 @@ h1.title {
 }
 
 h2 {
-  text-align: left;
-  font-size: 36px;
+  text-align: center;
+  font-size: 40px;
   counter-increment: chapter;
   counter-reset: section;
   font-weight: bold;
   font-family: "Italic", STKaiTi;
   color: purple;
-  margin-top: 1.5em;
+  margin-top: 2em;
+  margin-bottom: 0.5em;
 }
 
 h3 {
   /* background-color:lightgray; */
   font-weight: bold;
-  line-height: 150%;
+  /* line-height: 150%; */
   font-size: 30px;
-  margin-top: 1em;
-  margin-bottom: 1em;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
   /* counter-increment: section; */
   /* counter-reset: counter1; */
   text-align: center;
@@ -79,7 +80,7 @@ h3.subtitle {
 }
 
 h4 {
-  background-color: lightgray;
+  /* background-color: lightgray; */
   /* color: darkblue; */
   /* line-height: 150%; */
   font-size: 20px;
@@ -301,6 +302,13 @@ p {
 /* 表格 */
 table {
   font-family: 'Times New Roman', Times, serif;
+}
+
+table caption {
+  text-align: center;
+  font-weight: bold;
+  color: #272822;
+  font-family: 'Microsoft YaHei';
 }
 
 table thead tr th:first-child {

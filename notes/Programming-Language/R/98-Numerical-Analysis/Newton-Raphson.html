@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Humoon" />
+
+<meta name="date" content="2022-04-16" />
+
+<title>Newton-Raphson Method</title>
+
+<script src="libs/header-attrs-2.13/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="libs/bootstrap-3.3.5/css/united.min.css" rel="stylesheet" />
+<script src="libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="libs/navigation-1.1/tabsets.js"></script>
+<script src="libs/navigation-1.1/codefolding.js"></script>
+<script src="libs/navigation-1.1/sourceembed.js"></script>
+<link href="libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="libs/pagedtable-1.1/js/pagedtable.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; } /* Alert */
+code span.an { color: #008000; } /* Annotation */
+code span.at { } /* Attribute */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #0000ff; } /* ControlFlow */
+code span.ch { color: #008080; } /* Char */
+code span.cn { } /* Constant */
+code span.co { color: #008000; } /* Comment */
+code span.cv { color: #008000; } /* CommentVar */
+code span.do { color: #008000; } /* Documentation */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.im { } /* Import */
+code span.in { color: #008000; } /* Information */
+code span.kw { color: #0000ff; } /* Keyword */
+code span.op { } /* Operator */
+code span.ot { color: #ff4000; } /* Other */
+code span.pp { color: #ff4000; } /* Preprocessor */
+code span.sc { color: #008080; } /* SpecialChar */
+code span.ss { color: #008080; } /* SpecialString */
+code span.st { color: #008080; } /* String */
+code span.va { } /* Variable */
+code span.vs { color: #008080; } /* VerbatimString */
+code span.wa { color: #008000; font-weight: bold; } /* Warning */
+
+.sourceCode .row {
+  width: 100%;
+}
+.sourceCode {
+  overflow-x: auto;
+}
+.code-folding-btn {
+  margin-right: -30px;
+}
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+<style type="text/css">
+#rmd-source-code {
+  display: none;
+}
+</style>
+
+
+<link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+<li role="separator" class="divider"></li>
+<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Newton-Raphson Method</h1>
+<h3 class="subtitle">求解非线性方程/方程组</h3>
+<h4 class="author">Humoon</h4>
+<h4 class="date">2022-04-16</h4>
+
+</div>
+
+
+<p><br> <br></p>
+<p>非线性方程组可以看作一个非线性变换（<strong>一般不能写成矩阵乘法的形式</strong>），将
+<span class="math inline">\(\boldsymbol{X}\)</span> 向量变换为 <span
+class="math inline">\(f(\boldsymbol{X})\)</span>
+向量。求解方程组，即寻找能够使 <span
+class="math inline">\(f(\boldsymbol{X})=\boldsymbol{0}\)</span> 的 <span
+class="math inline">\(\boldsymbol{X}\)</span>.</p>
+<div id="手写-newton-raphson-算法" class="section level2">
+<h2>手写 Newton-Raphson 算法</h2>
+<div id="一元方程" class="section level3">
+<h3>一元方程</h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>Newton_root <span class="ot">&lt;-</span> <span class="cf">function</span>(f, start,</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">tolerance =</span> <span class="fl">1e-7</span>, <span class="at">max_iter =</span> <span class="dv">50</span>) {</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  root <span class="ot">&lt;-</span> start</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>max_iter) {</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    f_prime <span class="ot">&lt;-</span> numDeriv<span class="sc">::</span><span class="fu">genD</span>(f, root)<span class="sc">$</span>D[<span class="dv">1</span>, <span class="dv">1</span>]</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># $D 是一个矩阵，其中不仅包含一阶导数，还有二阶导数</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    dx <span class="ot">&lt;-</span> <span class="fu">f</span>(root) <span class="sc">/</span> f_prime</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    root <span class="ot">&lt;-</span> root <span class="sc">-</span> dx</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="fu">str_c</span>(<span class="st">&quot;root = &quot;</span>, root))</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">abs</span>(dx) <span class="sc">&lt;</span> tolerance) {</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>      <span class="fu">return</span>(<span class="fu">list</span>(</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">root =</span> root, <span class="at">f.root =</span> <span class="fu">f</span>(root),</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>        <span class="at">iterator =</span> i, <span class="at">estimate_precise =</span> <span class="fu">abs</span>(dx)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>      ))</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;Maximum number of iterations exceeded.&quot;</span>)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>transformation0 <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  x<span class="sc">^</span><span class="dv">3</span> <span class="sc">-</span> <span class="fu">sin</span>(x)<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="fu">Newton_root</span>(<span class="at">f =</span> transformation0, <span class="at">start =</span> <span class="dv">1</span>)</span></code></pre></div>
+<pre><code>#&gt; [1] &quot;root = 0.860369147925258&quot;
+#&gt; [1] &quot;root = 0.809891223391771&quot;
+#&gt; [1] &quot;root = 0.802931615098361&quot;
+#&gt; [1] &quot;root = 0.802803774492958&quot;
+#&gt; [1] &quot;root = 0.802803731737894&quot;</code></pre>
+<pre><code>#&gt; $root
+#&gt; [1] 0.8028037
+#&gt; 
+#&gt; $f.root
+#&gt; [1] 4.440892e-15
+#&gt; 
+#&gt; $iterator
+#&gt; [1] 5
+#&gt; 
+#&gt; $estimate_precise
+#&gt; [1] 4.275506e-08</code></pre>
+</div>
+<div id="多元方程组" class="section level3">
+<h3>多元方程组</h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>Newton_Raphson <span class="ot">&lt;-</span> <span class="cf">function</span>(transformation, start, <span class="at">tolerance =</span> <span class="fl">1e-7</span>, <span class="at">max_iter =</span> <span class="dv">50</span>) {</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  dimension <span class="ot">&lt;-</span> <span class="fu">length</span>(start)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  root <span class="ot">&lt;-</span> start</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>max_iter) {</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    f <span class="ot">&lt;-</span> <span class="fu">transformation</span>(root)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    Jacobi <span class="ot">&lt;-</span> numDeriv<span class="sc">::</span><span class="fu">genD</span>(transformation, root)<span class="sc">$</span>D[<span class="dv">1</span><span class="sc">:</span>dimension, <span class="dv">1</span><span class="sc">:</span>dimension]</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    dx <span class="ot">&lt;-</span> <span class="fu">solve</span>(Jacobi, f)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    root <span class="ot">&lt;-</span> root <span class="sc">-</span> dx</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">str_c</span>(root, <span class="at">collapse =</span> <span class="st">&quot;, &quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>      <span class="fu">str_c</span>(<span class="st">&quot;root = [&quot;</span>, ., <span class="st">&quot;]&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>      <span class="fu">print</span>()</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    precise <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">sum</span>(dx <span class="sc">*</span> dx))</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (precise <span class="sc">&lt;</span> tolerance) {</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>      <span class="fu">return</span>(<span class="fu">list</span>(</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>        <span class="at">root =</span> root, <span class="at">f.root =</span> <span class="fu">transformation</span>(root),</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>        <span class="at">iterator =</span> i, <span class="at">estimate_precise =</span> precise</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>      ))</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;Maximum number of iterations exceeded.&quot;</span>)</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>transformation1 <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">f1 =</span> x[<span class="dv">1</span>] <span class="sc">+</span> x[<span class="dv">2</span>] <span class="sc">-</span> <span class="fl">2.5</span>,</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">f2 =</span> x[<span class="dv">1</span>] <span class="sc">*</span> x[<span class="dv">2</span>] <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a><span class="fu">Newton_Raphson</span>(transformation1, <span class="at">start =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">3</span>))</span></code></pre></div>
+<pre><code>#&gt; [1] &quot;root = [0.33333333333384, 2.16666666666507]&quot;
+#&gt; [1] &quot;root = [0.484848484848594, 2.01515151514307]&quot;
+#&gt; [1] &quot;root = [0.499849984998516, 2.00015001500144]&quot;
+#&gt; [1] &quot;root = [0.499999984999999, 2.000000015]&quot;
+#&gt; [1] &quot;root = [0.5, 2]&quot;</code></pre>
+<pre><code>#&gt; $root
+#&gt; [1] 0.5 2.0
+#&gt; 
+#&gt; $f.root
+#&gt;            f1            f2 
+#&gt;  0.000000e+00 -2.220446e-16 
+#&gt; 
+#&gt; $iterator
+#&gt; [1] 5
+#&gt; 
+#&gt; $estimate_precise
+#&gt; [1] 2.121321e-08</code></pre>
+</div>
+</div>
+<div id="rootsolve-包" class="section level2">
+<h2>rootSolve 包</h2>
+<p>详细资料见 CRAN 上的 rootSolve.pdf</p>
+<div id="一元方程-1" class="section level3">
+<h3>一元方程</h3>
+<p>寻找 root，使传入的函数作用于 root 时返回的标量为0</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>fs <span class="ot">&lt;-</span> <span class="cf">function</span>(s) {</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  s<span class="sc">^</span><span class="dv">3</span> <span class="sc">-</span> <span class="dv">4</span> <span class="sc">*</span> s<span class="sc">^</span><span class="dv">2</span> <span class="sc">-</span> <span class="dv">10</span> <span class="sc">*</span> s <span class="sc">+</span> <span class="dv">4</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 一次性在4个初始位置开始迭代，求出了所有三个数值解</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>rootSolve<span class="sc">::</span><span class="fu">multiroot</span>(<span class="at">f =</span> fs, <span class="at">start =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="dv">0</span>, <span class="fl">2.5</span>, <span class="dv">8</span>))</span></code></pre></div>
+<pre><code>#&gt; $root
+#&gt; [1] -2.0000000  0.3542487  0.3542487  5.6457513
+#&gt; 
+#&gt; $f.root
+#&gt; [1] -6.375274e-10 -8.881784e-16  4.440892e-16  1.421085e-14
+#&gt; 
+#&gt; $iter
+#&gt; [1] 7
+#&gt; 
+#&gt; $estim.precis
+#&gt; [1] 1.593857e-10</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 求出参数区间内的所有解</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>rootSolve<span class="sc">::</span><span class="fu">uniroot.all</span>(<span class="at">f =</span> fs, <span class="at">interval =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">10</span>, <span class="dv">10</span>))</span></code></pre></div>
+<pre><code>#&gt; [1] -2.000000  0.354230  5.645754</code></pre>
+</div>
+<div id="二元方程组-without-jacobi" class="section level3">
+<h3>二元方程组 without Jacobi</h3>
+<p>一般来说，不需要显示给出偏导数的 Jacobi 矩阵</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>transformation2 <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">f1 =</span> <span class="dv">10</span> <span class="sc">*</span> x[<span class="dv">1</span>] <span class="sc">+</span> <span class="dv">3</span> <span class="sc">*</span> x[<span class="dv">2</span>]<span class="sc">^</span><span class="dv">2</span> <span class="sc">-</span> <span class="dv">3</span>,</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">f2 =</span> x[<span class="dv">1</span>]<span class="sc">^</span><span class="dv">2</span> <span class="sc">-</span> <span class="fu">exp</span>(x[<span class="dv">2</span>]) <span class="sc">-</span> <span class="dv">2</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>rootSolve<span class="sc">::</span><span class="fu">multiroot</span>(<span class="at">f =</span> transformation2, <span class="at">start =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span></code></pre></div>
+<pre><code>#&gt; $root
+#&gt; [1] -1.445552 -2.412158
+#&gt; 
+#&gt; $f.root
+#&gt;            f1            f2 
+#&gt;  5.117684e-12 -6.084022e-14 
+#&gt; 
+#&gt; $iter
+#&gt; [1] 10
+#&gt; 
+#&gt; $estim.precis
+#&gt; [1] 2.589262e-12</code></pre>
+</div>
+<div id="二元方程组-with-jacobi" class="section level3">
+<h3>二元方程组 with Jacobi</h3>
+<p>显示给出偏导数的 Jacobi 矩阵，在某些时候可以加快迭代速度</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>derivs <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="dv">10</span>, <span class="dv">6</span> <span class="sc">*</span> x[<span class="dv">2</span>], <span class="co"># f11, f12</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="dv">2</span> <span class="sc">*</span> x[<span class="dv">1</span>], <span class="sc">-</span><span class="fu">exp</span>(x[<span class="dv">2</span>]) <span class="co"># f21, f22</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">matrix</span>(<span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">byrow =</span> T)</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>rootSolve<span class="sc">::</span><span class="fu">multiroot</span>(<span class="at">f =</span> transformation2, <span class="at">start =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), <span class="at">jacfunc =</span> derivs)</span></code></pre></div>
+<pre><code>#&gt; $root
+#&gt; [1] -1.445552 -2.412158
+#&gt; 
+#&gt; $f.root
+#&gt;            f1            f2 
+#&gt;  1.166651e-09 -1.390243e-11 
+#&gt; 
+#&gt; $iter
+#&gt; [1] 29
+#&gt; 
+#&gt; $estim.precis
+#&gt; [1] 5.902766e-10</code></pre>
+</div>
+<div id="方程组中有若干参数" class="section level3">
+<h3>方程组中有若干参数</h3>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>transformation3 <span class="ot">&lt;-</span> <span class="cf">function</span>(x, parms) {</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">f1 =</span> x[<span class="dv">1</span>] <span class="sc">+</span> x[<span class="dv">2</span>] <span class="sc">+</span> x[<span class="dv">3</span>]<span class="sc">^</span><span class="dv">2</span> <span class="sc">-</span> parms[<span class="dv">1</span>],</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">f2 =</span> x[<span class="dv">1</span>]<span class="sc">^</span><span class="dv">2</span> <span class="sc">-</span> x[<span class="dv">2</span>] <span class="sc">+</span> x[<span class="dv">3</span>] <span class="sc">-</span> parms[<span class="dv">2</span>],</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">f3 =</span> <span class="dv">2</span> <span class="sc">*</span> x[<span class="dv">1</span>] <span class="sc">-</span> x[<span class="dv">2</span>]<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> x[<span class="dv">3</span>] <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>parms <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">12</span>, <span class="dv">2</span>)</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>rootSolve<span class="sc">::</span><span class="fu">multiroot</span>(transformation3, <span class="at">start =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>), <span class="at">parms =</span> parms)</span></code></pre></div>
+<pre><code>#&gt; $root
+#&gt; [1] 1 2 3
+#&gt; 
+#&gt; $f.root
+#&gt;            f1            f2            f3 
+#&gt;  3.087877e-10  4.794444e-09 -8.678146e-09 
+#&gt; 
+#&gt; $iter
+#&gt; [1] 6
+#&gt; 
+#&gt; $estim.precis
+#&gt; [1] 4.593792e-09</code></pre>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>rootSolve<span class="sc">::</span><span class="fu">multiroot</span>(transformation3, <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>), <span class="at">parms =</span> parms <span class="sc">*</span> <span class="dv">2</span>)</span></code></pre></div>
+<pre><code>#&gt; $root
+#&gt; [1] -0.8103629  1.4861978  4.8295098
+#&gt; 
+#&gt; $f.root
+#&gt;            f1            f2            f3 
+#&gt; -4.973799e-14  4.143352e-12 -5.280221e-13 
+#&gt; 
+#&gt; $iter
+#&gt; [1] 11
+#&gt; 
+#&gt; $estim.precis
+#&gt; [1] 1.573704e-12</code></pre>
+</div>
+<div id="矩阵形式的方程组" class="section level3">
+<h3>矩阵形式的方程组</h3>
+<p><code>rootSolve::multiroot()</code>的第一个参数（非线性变换）可以返回一个矩阵。计算出的解将保证这个矩阵为全零矩阵。</p>
+<p>例：求解 25 元非线性方程组</p>
+<p><span class="math display">\[
+\mathbf{X} \cdot \mathbf{X} \cdot \mathbf{X}=\left[\begin{array}{lllll}
+1 &amp; 2 &amp; 3 &amp; 4 &amp; 5 \\
+6 &amp; 7 &amp; 8 &amp; 9 &amp; 10 \\
+11 &amp; 12 &amp; 13 &amp; 14 &amp; 15 \\
+16 &amp; 17 &amp; 18 &amp; 19 &amp; 20 \\
+21 &amp; 22 &amp; 23 &amp; 24 &amp; 25
+\end{array}\right]
+\]</span></p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>transformation4 <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  X <span class="ot">&lt;-</span> <span class="fu">matrix</span>(x, <span class="at">nrow =</span> <span class="dv">5</span>)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  X <span class="sc">%*%</span> X <span class="sc">%*%</span> X <span class="sc">-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>, <span class="at">nrow =</span> <span class="dv">5</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> rootSolve<span class="sc">::</span><span class="fu">multiroot</span>(transformation4, <span class="at">start =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>)<span class="sc">$</span>root</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
+<pre><code>#&gt;  [1] -0.67506260 -0.03483809  0.60668343  1.24815964  1.88640623 -0.34547775
+#&gt;  [7]  0.16864884  0.68350802  1.19974369  1.71457060 -0.01800918  0.37530821
+#&gt; [13]  0.76025826  1.15042418  1.54265669  0.31230570  0.57358465  0.84421247
+#&gt; [19]  1.10046033  1.36971978  0.64043429  0.77971070  0.91597598  1.06007417
+#&gt; [25]  1.19373256</code></pre>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">nrow =</span> <span class="dv">5</span>, x)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>X <span class="sc">%*%</span> X <span class="sc">%*%</span> X</span></code></pre></div>
+<pre><code>#&gt;      [,1] [,2] [,3] [,4] [,5]
+#&gt; [1,]    1    2    3    4    5
+#&gt; [2,]    6    7    8    9   10
+#&gt; [3,]   11   12   13   14   15
+#&gt; [4,]   16   17   18   19   20
+#&gt; [5,]   21   22   23   24   25</code></pre>
+</div>
+</div>
+
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIk5ld3Rvbi1SYXBoc29uIE1ldGhvZCINCnN1YnRpdGxlOiAi5rGC6Kej6Z2e57q/5oCn5pa556iLL+aWueeoi+e7hCINCmF1dGhvcjogIkh1bW9vbiINCmRhdGU6ICJgciBTeXMuRGF0ZSgpYCINCm91dHB1dDogDQogIGh0bWxfZG9jdW1lbnQ6DQogICAgc2VsZl9jb250YWluZWQ6IGZhbHNlDQogICAgbGliX2RpcjogbGlicw0KICAgIGNvZGVfZG93bmxvYWQ6IHllcw0KICAgIGNvZGVfZm9sZGluZzogc2hvdw0KICAgIGNzczogLi4vY3NzL3N0eWxlLmNzcw0KICAgIGZpZ19jYXB0aW9uOiB5ZXMNCiAgICB0aGVtZTogdW5pdGVkDQogICAgaGlnaGxpZ2h0OiBoYWRkb2NrDQogICAgZGZfcHJpbnQ6IHBhZ2VkDQogICAgbnVtYmVyX3NlY3Rpb25zOiBubw0KICAgIHRvYzogeWVzDQogICAgdG9jX2RlcHRoOiA0DQogICAgdG9jX2Zsb2F0Og0KICAgICAgY29sbGFwc2VkOiB5ZXMNCiAgICAgIHNtb290aF9zY3JvbGw6IHllcw0KICBwZGZfZG9jdW1lbnQ6DQogICAgdG9jOiBubw0KICAgIHRvY19kZXB0aDogMw0KICAgIG51bWJlcl9zZWN0aW9uczogeWVzDQpkb2N1bWVudGNsYXNzOiBjdGV4YXJ0DQpjbGFzc29wdGlvbjogaHlwZXJyZWYsDQotLS0NCg0KYGBge3Igc2V0dXAsIGluY2x1ZGUgPSBGQUxTRX0NCnNvdXJjZSgiLi4vUm1hcmtkb3duLXRlbXBsYXRlL1JtYXJrZG93bl9jb25maWcuUiIpDQoNCiMjIGdsb2JhbCBvcHRpb25zID09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09DQprbml0cjo6b3B0c19jaHVuayRzZXQoDQogIHdpZHRoID0gY29uZmlnJHdpZHRoLA0KICBmaWcud2lkdGggPSBjb25maWckZmlnLndpZHRoLA0KICBmaWcuYXNwID0gY29uZmlnJGZpZy5hc3AsDQogIG91dC53aWR0aCA9IGNvbmZpZyRvdXQud2lkdGgsDQogIGZpZy5hbGlnbiA9IGNvbmZpZyRmaWcuYWxpZ24sDQogIGZpZy5wYXRoID0gY29uZmlnJGZpZy5wYXRoLA0KICBmaWcuc2hvdyA9IGNvbmZpZyRmaWcuc2hvdywNCiAgd2FybiA9IGNvbmZpZyR3YXJuLA0KICB3YXJuaW5nID0gY29uZmlnJHdhcm5pbmcsDQogIG1lc3NhZ2UgPSBjb25maWckbWVzc2FnZSwNCiAgZWNobyA9IGNvbmZpZyRlY2hvLA0KICBldmFsID0gY29uZmlnJGV2YWwsDQogIHRpZHkgPSBjb25maWckdGlkeSwNCiAgY29tbWVudCA9IGNvbmZpZyRjb21tZW50LA0KICBjb2xsYXBzZSA9IGNvbmZpZyRjb2xsYXBzZSwNCiAgY2FjaGUgPSBjb25maWckY2FjaGUsDQogIGNhY2hlLmNvbW1lbnRzID0gY29uZmlnJGNhY2hlLmNvbW1lbnRzLA0KICBhdXRvZGVwID0gY29uZmlnJGF1dG9kZXANCikNCmBgYA0KDQo8YnI+DQo8YnI+DQoNCumdnue6v+aAp+aWueeoi+e7hOWPr+S7peeci+S9nOS4gOS4qumdnue6v+aAp+WPmOaNou+8iCoq5LiA6Iis5LiN6IO95YaZ5oiQ55+p6Zi15LmY5rOV55qE5b2i5byPKirvvInvvIzlsIYgJFxib2xkc3ltYm9se1h9JCDlkJHph4/lj5jmjaLkuLogJGYoXGJvbGRzeW1ib2x7WH0pJCDlkJHph4/jgILmsYLop6PmlrnnqIvnu4TvvIzljbPlr7vmib7og73lpJ/kvb8gJGYoXGJvbGRzeW1ib2x7WH0pPVxib2xkc3ltYm9sezB9JCDnmoQgJFxib2xkc3ltYm9se1h9JC4gDQoNCiMjIOaJi+WGmSBOZXd0b24tUmFwaHNvbiDnrpfms5UNCg0KIyMjIOS4gOWFg+aWueeoiw0KDQpgYGB7cn0NCk5ld3Rvbl9yb290IDwtIGZ1bmN0aW9uKGYsIHN0YXJ0LA0KICAgICAgICAgICAgICAgICAgICAgICAgdG9sZXJhbmNlID0gMWUtNywgbWF4X2l0ZXIgPSA1MCkgew0KICByb290IDwtIHN0YXJ0DQogIGZvciAoaSBpbiAxOm1heF9pdGVyKSB7DQogICAgZl9wcmltZSA8LSBudW1EZXJpdjo6Z2VuRChmLCByb290KSREWzEsIDFdDQogICAgIyAkRCDmmK/kuIDkuKrnn6npmLXvvIzlhbbkuK3kuI3ku4XljIXlkKvkuIDpmLblr7zmlbDvvIzov5jmnInkuozpmLblr7zmlbANCiAgICBkeCA8LSBmKHJvb3QpIC8gZl9wcmltZQ0KICAgIHJvb3QgPC0gcm9vdCAtIGR4DQogICAgcHJpbnQoc3RyX2MoInJvb3QgPSAiLCByb290KSkNCiAgICBpZiAoYWJzKGR4KSA8IHRvbGVyYW5jZSkgew0KICAgICAgcmV0dXJuKGxpc3QoDQogICAgICAgIHJvb3QgPSByb290LCBmLnJvb3QgPSBmKHJvb3QpLA0KICAgICAgICBpdGVyYXRvciA9IGksIGVzdGltYXRlX3ByZWNpc2UgPSBhYnMoZHgpDQogICAgICApKQ0KICAgIH0NCiAgfQ0KICBwcmludCgiTWF4aW11bSBudW1iZXIgb2YgaXRlcmF0aW9ucyBleGNlZWRlZC4iKQ0KfQ0KDQp0cmFuc2Zvcm1hdGlvbjAgPC0gZnVuY3Rpb24oeCkgew0KICB4XjMgLSBzaW4oeCleMg0KfQ0KDQpOZXd0b25fcm9vdChmID0gdHJhbnNmb3JtYXRpb24wLCBzdGFydCA9IDEpDQpgYGANCg0KIyMjIOWkmuWFg+aWueeoi+e7hA0KDQpgYGB7cn0NCk5ld3Rvbl9SYXBoc29uIDwtIGZ1bmN0aW9uKHRyYW5zZm9ybWF0aW9uLCBzdGFydCwgdG9sZXJhbmNlID0gMWUtNywgbWF4X2l0ZXIgPSA1MCkgew0KICBkaW1lbnNpb24gPC0gbGVuZ3RoKHN0YXJ0KQ0KICByb290IDwtIHN0YXJ0DQogIGZvciAoaSBpbiAxOm1heF9pdGVyKSB7DQogICAgZiA8LSB0cmFuc2Zvcm1hdGlvbihyb290KQ0KICAgIEphY29iaSA8LSBudW1EZXJpdjo6Z2VuRCh0cmFuc2Zvcm1hdGlvbiwgcm9vdCkkRFsxOmRpbWVuc2lvbiwgMTpkaW1lbnNpb25dDQogICAgZHggPC0gc29sdmUoSmFjb2JpLCBmKQ0KICAgIHJvb3QgPC0gcm9vdCAtIGR4DQogICAgc3RyX2Mocm9vdCwgY29sbGFwc2UgPSAiLCAiKSAlPiUNCiAgICAgIHN0cl9jKCJyb290ID0gWyIsIC4sICJdIikgJT4lDQogICAgICBwcmludCgpDQoNCiAgICBwcmVjaXNlIDwtIHNxcnQoc3VtKGR4ICogZHgpKQ0KICAgIGlmIChwcmVjaXNlIDwgdG9sZXJhbmNlKSB7DQogICAgICByZXR1cm4obGlzdCgNCiAgICAgICAgcm9vdCA9IHJvb3QsIGYucm9vdCA9IHRyYW5zZm9ybWF0aW9uKHJvb3QpLA0KICAgICAgICBpdGVyYXRvciA9IGksIGVzdGltYXRlX3ByZWNpc2UgPSBwcmVjaXNlDQogICAgICApKQ0KICAgIH0NCiAgfQ0KICBwcmludCgiTWF4aW11bSBudW1iZXIgb2YgaXRlcmF0aW9ucyBleGNlZWRlZC4iKQ0KfQ0KDQp0cmFuc2Zvcm1hdGlvbjEgPC0gZnVuY3Rpb24oeCkgew0KICBjKA0KICAgIGYxID0geFsxXSArIHhbMl0gLSAyLjUsDQogICAgZjIgPSB4WzFdICogeFsyXSAtIDENCiAgKQ0KfQ0KDQpOZXd0b25fUmFwaHNvbih0cmFuc2Zvcm1hdGlvbjEsIHN0YXJ0ID0gYygwLCAzKSkNCmBgYA0KDQojIyByb290U29sdmUg5YyFDQoNCuivpue7hui1hOaWmeingSBDUkFOIOS4iueahCByb290U29sdmUucGRmDQoNCiMjIyDkuIDlhYPmlrnnqIsNCg0K5a+75om+IHJvb3TvvIzkvb/kvKDlhaXnmoTlh73mlbDkvZznlKjkuo4gcm9vdCDml7bov5Tlm57nmoTmoIfph4/kuLowDQoNCmBgYHtyfQ0KZnMgPC0gZnVuY3Rpb24ocykgew0KICBzXjMgLSA0ICogc14yIC0gMTAgKiBzICsgNA0KfQ0KDQojIOS4gOasoeaAp+WcqDTkuKrliJ3lp4vkvY3nva7lvIDlp4vov63ku6PvvIzmsYLlh7rkuobmiYDmnInkuInkuKrmlbDlgLzop6MNCnJvb3RTb2x2ZTo6bXVsdGlyb290KGYgPSBmcywgc3RhcnQgPSBjKC01LCAwLCAyLjUsIDgpKQ0KDQojIOaxguWHuuWPguaVsOWMuumXtOWGheeahOaJgOacieinow0Kcm9vdFNvbHZlOjp1bmlyb290LmFsbChmID0gZnMsIGludGVydmFsID0gYygtMTAsIDEwKSkNCmBgYA0KDQojIyMg5LqM5YWD5pa556iL57uEIHdpdGhvdXQgSmFjb2JpDQoNCuS4gOiIrOadpeivtO+8jOS4jemcgOimgeaYvuekuue7meWHuuWBj+WvvOaVsOeahCBKYWNvYmkg55+p6Zi1DQoNCmBgYHtyfQ0KdHJhbnNmb3JtYXRpb24yIDwtIGZ1bmN0aW9uKHgpIHsNCiAgYygNCiAgICBmMSA9IDEwICogeFsxXSArIDMgKiB4WzJdXjIgLSAzLA0KICAgIGYyID0geFsxXV4yIC0gZXhwKHhbMl0pIC0gMg0KICApDQp9DQpyb290U29sdmU6Om11bHRpcm9vdChmID0gdHJhbnNmb3JtYXRpb24yLCBzdGFydCA9IGMoMSwgMSkpDQpgYGANCg0KIyMjIOS6jOWFg+aWueeoi+e7hCB3aXRoIEphY29iaQ0KDQrmmL7npLrnu5nlh7rlgY/lr7zmlbDnmoQgSmFjb2JpIOefqemYte+8jOWcqOafkOS6m+aXtuWAmeWPr+S7peWKoOW/q+i/reS7o+mAn+W6pg0KDQpgYGB7cn0NCmRlcml2cyA8LSBmdW5jdGlvbih4KSB7DQogIGMoDQogICAgMTAsIDYgKiB4WzJdLCAjIGYxMSwgZjEyDQogICAgMiAqIHhbMV0sIC1leHAoeFsyXSkgIyBmMjEsIGYyMg0KICApICU+JQ0KICAgIG1hdHJpeChucm93ID0gMiwgYnlyb3cgPSBUKQ0KfQ0Kcm9vdFNvbHZlOjptdWx0aXJvb3QoZiA9IHRyYW5zZm9ybWF0aW9uMiwgc3RhcnQgPSBjKDAsIDApLCBqYWNmdW5jID0gZGVyaXZzKQ0KYGBgDQoNCiMjIyDmlrnnqIvnu4TkuK3mnInoi6XlubLlj4LmlbANCg0KYGBge3J9DQp0cmFuc2Zvcm1hdGlvbjMgPC0gZnVuY3Rpb24oeCwgcGFybXMpIHsNCiAgYygNCiAgICBmMSA9IHhbMV0gKyB4WzJdICsgeFszXV4yIC0gcGFybXNbMV0sDQogICAgZjIgPSB4WzFdXjIgLSB4WzJdICsgeFszXSAtIHBhcm1zWzJdLA0KICAgIGYzID0gMiAqIHhbMV0gLSB4WzJdXjIgKyB4WzNdIC0gMQ0KICApDQp9DQpwYXJtcyA8LSBjKDEyLCAyKQ0Kcm9vdFNvbHZlOjptdWx0aXJvb3QodHJhbnNmb3JtYXRpb24zLCBzdGFydCA9IGMoMSwgMSwgMSksIHBhcm1zID0gcGFybXMpDQpyb290U29sdmU6Om11bHRpcm9vdCh0cmFuc2Zvcm1hdGlvbjMsIGMoMCwgMCwgMCksIHBhcm1zID0gcGFybXMgKiAyKQ0KYGBgDQoNCiMjIyDnn6npmLXlvaLlvI/nmoTmlrnnqIvnu4QNCg0KYHJvb3RTb2x2ZTo6bXVsdGlyb290KClg55qE56ys5LiA5Liq5Y+C5pWw77yI6Z2e57q/5oCn5Y+Y5o2i77yJ5Y+v5Lul6L+U5Zue5LiA5Liq55+p6Zi144CC6K6h566X5Ye655qE6Kej5bCG5L+d6K+B6L+Z5Liq55+p6Zi15Li65YWo6Zu255+p6Zi144CCDQoNCuS+i++8muaxguinoyAyNSDlhYPpnZ7nur/mgKfmlrnnqIvnu4QNCg0KJCQNClxtYXRoYmZ7WH0gXGNkb3QgXG1hdGhiZntYfSBcY2RvdCBcbWF0aGJme1h9PVxsZWZ0W1xiZWdpbnthcnJheX17bGxsbGx9DQoxICYgMiAmIDMgJiA0ICYgNSBcXA0KNiAmIDcgJiA4ICYgOSAmIDEwIFxcDQoxMSAmIDEyICYgMTMgJiAxNCAmIDE1IFxcDQoxNiAmIDE3ICYgMTggJiAxOSAmIDIwIFxcDQoyMSAmIDIyICYgMjMgJiAyNCAmIDI1DQpcZW5ke2FycmF5fVxyaWdodF0NCiQkDQoNCg0KYGBge3J9DQp0cmFuc2Zvcm1hdGlvbjQgPC0gZnVuY3Rpb24oeCkgew0KICBYIDwtIG1hdHJpeCh4LCBucm93ID0gNSkNCiAgWCAlKiUgWCAlKiUgWCAtIG1hdHJpeCgxOjI1LCBucm93ID0gNSwgYnlyb3cgPSBUUlVFKQ0KfQ0KDQp4IDwtIHJvb3RTb2x2ZTo6bXVsdGlyb290KHRyYW5zZm9ybWF0aW9uNCwgc3RhcnQgPSAxOjI1KSRyb290DQp4DQpYIDwtIG1hdHJpeChucm93ID0gNSwgeCkNClggJSolIFggJSolIFgNCmBgYA==</div>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeSourceEmbed("Newton-Raphson.Rmd");
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3,h4",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

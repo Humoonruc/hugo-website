@@ -1,0 +1,150 @@
+---
+title: "ggplot2-3"
+subtitle: '图形输出'
+author: "Humoon"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    code_download: yes
+    css: ../css/style.css
+    fig_caption: yes
+    theme: united
+    highlight: haddock
+    number_sections: no
+    toc: yes
+    toc_depth: 4
+    toc_float:
+      collapsed: yes
+      smooth_scroll: yes
+documentclass: ctexart
+classoption: hyperref,
+---
+
+```{r setup, include = FALSE}
+source("../Rmarkdown-template/Rmarkdown_config.R")
+
+## global options ===================================
+knitr::opts_chunk$set(
+  width = config$width,
+  fig.width = config$fig.width,
+  fig.asp = config$fig.asp,
+  out.width = config$out.width,
+  fig.align = config$fig.align,
+  fig.path = config$fig.path,
+  fig.show = config$fig.show,
+  warn = config$warn,
+  warning = config$warning,
+  message = config$message,
+  echo = config$echo, 
+  eval = config$eval, 
+  tidy = config$tidy, 
+  comment = config$comment, 
+  collapse = config$collapse, 
+  cache = config$cache,
+  cache.comments = config$cache.comments,
+  autodep = config$autodep
+)
+
+## use necessary packages ==============================
+library(tidyverse)
+library(data.table)
+library(magrittr)
+library(plotly)
+library(htmlwidgets)
+
+pacman::p_load(
+  lubridate,
+  ggthemes,
+  gridExtra, # 拼接 ggplot2 图像的包
+  showtext,
+  car, 
+  readxl, 
+  reshape2, 
+  RColorBrewer
+)
+
+data(car::Salaries)
+
+## plotting =============================================
+
+# 包含图的代码块需要fig.showtext = TRUE选项
+showtext_auto(enable = TRUE)
+windowsFonts(H = windowsFont("Microsoft YaHei"))
+```
+
+
+
+## 图形尺寸
+
+* fig.width和fig.asp设置R生成的图形（并非向文档输出的图形）的宽度和宽高比（默认黄金比例）。如果需要修改，建议只改宽高比。
+* out.width和out.height设置图片在输出文档中的宽高。out.width将宽度设置为行宽的百分比，默认设置为out.width = "70%" 和fig.align = "center"。这样一来，图形既不会占用过多空间，也不会显得太拥挤。
+* 如果想在一行中放置多个图形，可以将out.width设置为50%以放置2个图形、设置为33%以放置3个图形，或者设置为25%以放置4个图形，同时还要设置fig.align ="default"
+* 如果想要为图形添加说明文字，可以使用fig.cap。在RMarkdown中，这样做会将图形从“内联”模式修改为“浮动”模式。
+
+
+
+## 保存图形 ggsave()
+
+可以保存为 png, pdf
+
+```{r}
+# 稍详细的设置，保存到当前目录
+myplot <- ggplot(mpg, aes(displ, hwy)) +
+  geom_point()
+ggsave(
+  file = "./figure/mygraph.png", plot = myplot,
+  width = 5, height = 4, dpi = 600
+)
+
+# 简略设置，自动保存最新创建的图
+ggplot(mpg, aes(displ, hwy)) +
+  geom_point()
+ggsave(file = "./figure/mygraph.pdf")
+```
+
+注：由于MS office对矢量图的支持很差，当生成用于word的图像时，可以将ggsave()的参数dpi（光栅图形的分辨率）设置为600（默认为300），用于向word的高品质图形输出。
+
+
+
+## 动画包 gganimate
+
+
+**可以保存为 gif 和 mp4 ！但不是很清楚。作为示意图可用，真要高清显示还得在页面上操作 JS. **
+
+```{r}
+library(gganimate)
+theme_set(theme_bw()) # 配合动画的默认主题
+library(gapminder)
+head(gapminder)
+
+p <- ggplot(mtcars, aes(factor(cyl), mpg)) +
+  geom_boxplot() +
+  # Here comes the gganimate code
+  transition_states(gear,
+    transition_length = 2, state_length = 1
+  )
+
+p <- ggplot(
+  gapminder,
+  aes(
+    x = gdpPercap,
+    y = lifeExp,
+    size = pop,
+    colour = country
+  )
+) +
+  geom_point(show.legend = FALSE, alpha = 0.7) +
+  scale_color_viridis_d() +
+  scale_size(range = c(2, 12)) +
+  scale_x_log10() +
+  labs(x = "GDP per capita", y = "Life expectancy")
+p
+# 动画
+p + transition_time(year) + labs(title = "Year: {frame_time}")
+anim_save(
+  filename = "./figure/test.gif",
+  animation = last_animation(),
+  dpi = 600
+)
+# anim_save(filename = "test.mp4", animation = last_animation())
+```

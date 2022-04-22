@@ -11,7 +11,7 @@
 
 <meta name="author" content="Humoon" />
 
-<meta name="date" content="2022-04-04" />
+<meta name="date" content="2022-04-16" />
 
 <title>R Basic Grammar</title>
 
@@ -356,13 +356,14 @@ div.tocify {
 <h1 class="title toc-ignore">R Basic Grammar</h1>
 <h3 class="subtitle">Variable, Condition, Loop and Debug</h3>
 <h4 class="author">Humoon</h4>
-<h4 class="date">2022-04-04</h4>
+<h4 class="date">2022-04-16</h4>
 
 </div>
 
 
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lobstr)</span></code></pre></div>
-<p><a href="../pdf/cheatsheet-base-r.pdf"><em>R base cheatsheet.pdf</em></a></p>
+<p><a href="../pdf/cheatsheet-base-r.pdf"><em>R base
+cheatsheet.pdf</em></a></p>
 <object data="../pdf/cheatsheet-base-r.pdf" type="application/pdf" width="100%" height="100%">
 </object>
 <div id="r-变量" class="section level2">
@@ -391,7 +392,8 @@ div.tocify {
 </tr>
 <tr class="odd">
 <td><code>is.*(x)</code></td>
-<td>判断数据类型。判断向量最好用 <code>is.atomic()</code> 而非 <code>is.vector()</code></td>
+<td>判断数据类型。判断向量最好用 <code>is.atomic()</code> 而非
+<code>is.vector()</code></td>
 </tr>
 <tr class="even">
 <td><code>as.*(x)</code></td>
@@ -399,7 +401,9 @@ div.tocify {
 </tr>
 <tr class="odd">
 <td><code>typeof(x)/mode(x)</code></td>
-<td>查看对象的数据类型。<br>若对象为homogeneous data types，则返回元素的数据类型，如 integer, double, character, logical；若为异质性的列表或数据框，则返回 list</td>
+<td>查看对象的数据类型。<br>若对象为homogeneous data
+types，则返回元素的数据类型，如 integer, double, character,
+logical；若为异质性的列表或数据框，则返回 list</td>
 </tr>
 <tr class="even">
 <td><code>class(x)</code></td>
@@ -433,141 +437,141 @@ div.tocify {
 </table>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> <span class="fu">data.table</span>(<span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">lower =</span> letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>])</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(df)</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;list&quot;</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(df)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;data.table&quot; &quot;data.frame&quot;</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df)</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Classes &#39;data.table&#39; and &#39;data.frame&#39;:   10 obs. of  2 variables:</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ id   : int  1 2 3 4 5 6 7 8 9 10</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ lower: chr  &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; ...</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  - attr(*, &quot;.internal.selfref&quot;)=&lt;externalptr&gt;</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(df)</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Rows: 10</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Columns: 2</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ id    &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ lower &lt;chr&gt; &quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;e&quot;, &quot;f&quot;, &quot;g&quot;, &quot;h&quot;, &quot;i&quot;, &quot;j&quot;</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">summary</span>()</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;        id           lower          </span></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Min.   : 1.00   Length:10         </span></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1st Qu.: 3.25   Class :character  </span></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Median : 5.50   Mode  :character  </span></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Mean   : 5.50                     </span></span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3rd Qu.: 7.75                     </span></span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Max.   :10.00</span></span></code></pre></div>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(df)</span></code></pre></div>
+<pre><code>#&gt; [1] &quot;list&quot;</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(df)</span></code></pre></div>
+<pre><code>#&gt; [1] &quot;data.table&quot; &quot;data.frame&quot;</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df)</span></code></pre></div>
+<pre><code>#&gt; Classes &#39;data.table&#39; and &#39;data.frame&#39;:   10 obs. of  2 variables:
+#&gt;  $ id   : int  1 2 3 4 5 6 7 8 9 10
+#&gt;  $ lower: chr  &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; ...
+#&gt;  - attr(*, &quot;.internal.selfref&quot;)=&lt;externalptr&gt;</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(df)</span></code></pre></div>
+<pre><code>#&gt; Rows: 10
+#&gt; Columns: 2
+#&gt; $ id    &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+#&gt; $ lower &lt;chr&gt; &quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;e&quot;, &quot;f&quot;, &quot;g&quot;, &quot;h&quot;, &quot;i&quot;, &quot;j&quot;</code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">summary</span>()</span></code></pre></div>
+<pre><code>#&gt;        id           lower          
+#&gt;  Min.   : 1.00   Length:10         
+#&gt;  1st Qu.: 3.25   Class :character  
+#&gt;  Median : 5.50   Mode  :character  
+#&gt;  Mean   : 5.50                     
+#&gt;  3rd Qu.: 7.75                     
+#&gt;  Max.   :10.00</code></pre>
 </div>
 <div id="变量名" class="section level3">
 <h3>变量名</h3>
 <div id="指针" class="section level4">
 <h4>指针</h4>
 <p>对象的变量名是一个常量指针，指向一个对象所在的地址。</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> x</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># x, y 为指向同一个向量的指针</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(x)</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;0x260206e8&quot;</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(y)</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;0x260206e8&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> x</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># x, y 为指向同一个向量的指针</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(x)</span></code></pre></div>
+<pre><code>#&gt; [1] &quot;0x24adfe78&quot;</code></pre>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(y)</span></code></pre></div>
+<pre><code>#&gt; [1] &quot;0x24adfe78&quot;</code></pre>
 </div>
 <div id="不规则变量名" class="section level4">
 <h4>不规则变量名</h4>
 <p>要用反引号括起来</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>c <span class="sc">%&gt;%</span> <span class="fu">class</span>() <span class="co"># c是一个内置函数，所以一般变量不能以&#39;c命名</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;function&quot;</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>c </span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; function (...)  .Primitive(&quot;c&quot;)</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="st">`</span><span class="at">x+1</span><span class="st">`</span> <span class="ot">&lt;-</span> <span class="cf">function</span>(n) n <span class="sc">+</span> <span class="dv">1</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="st">`</span><span class="at">x+1</span><span class="st">`</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; function(n) n + 1</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="st">`</span><span class="at">x+1</span><span class="st">`</span>(<span class="dv">3</span>)</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 4</span></span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>c <span class="sc">%&gt;%</span> <span class="fu">class</span>() <span class="co"># c是一个内置函数，所以一般变量不能以&#39;c命名</span></span></code></pre></div>
+<pre><code>#&gt; [1] &quot;function&quot;</code></pre>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>c </span></code></pre></div>
+<pre><code>#&gt; function (...)  .Primitive(&quot;c&quot;)</code></pre>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="st">`</span><span class="at">x+1</span><span class="st">`</span> <span class="ot">&lt;-</span> <span class="cf">function</span>(n) n <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="st">`</span><span class="at">x+1</span><span class="st">`</span></span></code></pre></div>
+<pre><code>#&gt; function(n) n + 1</code></pre>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="st">`</span><span class="at">x+1</span><span class="st">`</span>(<span class="dv">3</span>)</span></code></pre></div>
+<pre><code>#&gt; [1] 4</code></pre>
 </div>
 </div>
 <div id="修改时复制-copy-on-modify" class="section level3">
 <h3>修改时复制 copy-on-modify</h3>
-<p>R 中的对象一般不许被修改（就像 JS 中的<code>const</code>常量），这对数据安全有好处。</p>
-<p>赋值时 R 大量使用了拷贝机制，这是 R 速度慢的一个主要原因。如显示循环，每次迭代都会复制对象。</p>
+<p>R 中的对象一般不许被修改（就像 JS
+中的<code>const</code>常量），这对数据安全有好处。</p>
+<p>赋值时 R 大量使用了拷贝机制，这是 R
+速度慢的一个主要原因。如显示循环，每次迭代都会复制对象。</p>
 <div id="会复制对象的情形" class="section level4">
 <h4>会复制对象的情形</h4>
 <div id="数字向量" class="section level5">
 <h5>数字向量</h5>
 <ol style="list-style-type: decimal">
 <li><p>有多个指针指向同一个对象，且通过其中一个指针修改该对象时，会生成该对象的一个副本（一个新对象）。修改作用在这个副本上，然后使被修改的指针指向这个副本。</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># tracemen()跟踪x指针指向的对象，每当这个对象被复制，tracemem()都会打印一条说明</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">tracemem</span>(x), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;00000000267C1FC8&gt;</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> x</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>y[<span class="dv">3</span>] <span class="ot">&lt;-</span> 4L <span class="co"># 发生拷贝</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; tracemem[0x00000000267c1fc8 -&gt; 0x00000000239b4e30]: eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir eng_r block_exec call_block process_group.block process_group withCallingHandlers process_file &lt;Anonymous&gt; &lt;Anonymous&gt;</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(x)</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;0x267c1fc8&quot;</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(y)</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;0x239b4e30&quot;</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="fu">untracemem</span>(x) <span class="co"># 关闭跟踪</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="co"># tracemen()跟踪x指针指向的对象，每当这个对象被复制，tracemem()都会打印一条说明</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">tracemem</span>(x), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>#&gt; &lt;0000000027281F18&gt;</code></pre>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> x</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>y[<span class="dv">3</span>] <span class="ot">&lt;-</span> 4L <span class="co"># 发生拷贝</span></span></code></pre></div>
+<pre><code>#&gt; tracemem[0x0000000027281f18 -&gt; 0x00000000257249f8]: eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group.block process_group withCallingHandlers process_file &lt;Anonymous&gt; &lt;Anonymous&gt; do.call eval eval eval eval eval.parent local</code></pre>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(x)</span></code></pre></div>
+<pre><code>#&gt; [1] &quot;0x27281f18&quot;</code></pre>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(y)</span></code></pre></div>
+<pre><code>#&gt; [1] &quot;0x257249f8&quot;</code></pre>
+<div class="sourceCode" id="cb32"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">untracemem</span>(x) <span class="co"># 关闭跟踪</span></span></code></pre></div></li>
 <li><p>对象作为参数传递给函数，并在函数内部修改对象时，也会创建对象的副本</p>
 <ol style="list-style-type: decimal">
 <li>函数外部的变量名仍指向未被修改的原对象</li>
-<li>但<strong>如果使用运算符 <code>&lt;&lt;-</code>，就可以修改函数外部的变量（如一些随着迭代一轮轮更新的统计变量）</strong>。某些情况下，这个功能非常重要，可以<strong>通过函数修改外部变量</strong>。</li>
+<li>但<strong>如果使用运算符
+<code>&lt;&lt;-</code>，就可以修改函数外部的变量（如一些随着迭代一轮轮更新的统计变量）</strong>。某些情况下，这个功能非常重要，可以<strong>通过函数修改外部变量</strong>。</li>
 </ol>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>modify_first <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  x[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  x</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>v1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">tracemem</span>(v1), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;0000000023C1BC70&gt;</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="fu">modify_first</span>(v1)</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; tracemem[0x0000000023c1bc70 -&gt; 0x0000000022bfb7e0]: modify_first eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir eng_r block_exec call_block process_group.block process_group withCallingHandlers process_file &lt;Anonymous&gt; &lt;Anonymous&gt;</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 0 2 3</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>v1 <span class="co"># 外部的 v1 未被修改</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 1 2 3</span></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">tracemem</span>(x), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;0000000024612AC8&gt;</span></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>modify_x <span class="ot">&lt;-</span> <span class="cf">function</span>(value) {</span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;&lt;-</span> value</span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="fu">modify_x</span>(<span class="dv">3</span>)</span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>x <span class="co"># 外部的 x 被修改了</span></span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 3</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>modify_first <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  x[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  x</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>v1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">tracemem</span>(v1), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>#&gt; &lt;00000000274020B0&gt;</code></pre>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">modify_first</span>(v1)</span></code></pre></div>
+<pre><code>#&gt; tracemem[0x00000000274020b0 -&gt; 0x00000000274036c0]: modify_first eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group.block process_group withCallingHandlers process_file &lt;Anonymous&gt; &lt;Anonymous&gt; do.call eval eval eval eval eval.parent local</code></pre>
+<pre><code>#&gt; [1] 0 2 3</code></pre>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>v1 <span class="co"># 外部的 v1 未被修改</span></span></code></pre></div>
+<pre><code>#&gt; [1] 1 2 3</code></pre>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">tracemem</span>(x), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>#&gt; &lt;0000000027092658&gt;</code></pre>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>modify_x <span class="ot">&lt;-</span> <span class="cf">function</span>(value) {</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;&lt;-</span> value</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="fu">modify_x</span>(<span class="dv">3</span>)</span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>x <span class="co"># 外部的 x 被修改了</span></span></code></pre></div>
+<pre><code>#&gt; [1] 3</code></pre></li>
 </ol>
 </div>
 <div id="列表" class="section level5">
 <h5>列表</h5>
 <p>为了节省空间，列表储存的不是对象，而是指针。修改列表时，只有变化的元素会复制。</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">list</span>(a, a)</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>c <span class="ot">&lt;-</span> <span class="fu">list</span>(b, a, <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ref</span>(a, b, c)</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1:0x247db0a8] &lt;int&gt; </span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  </span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; o [2:0x2641d1d0] &lt;list&gt; </span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; +-[1:0x247db0a8] </span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; \-[1:0x247db0a8] </span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  </span></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; o [3:0x22ccf840] &lt;list&gt; </span></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; +-[2:0x2641d1d0] </span></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; +-[1:0x247db0a8] </span></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; \-[4:0x24870d10] &lt;int&gt;</span></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>l1 <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>l2 <span class="ot">&lt;-</span> l1</span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="co"># 拷贝机制启动，但拷贝的是指针，而不是 value，这是浅拷贝</span></span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>l2[[<span class="dv">3</span>]] <span class="ot">&lt;-</span> <span class="dv">4</span> </span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>lobstr<span class="sc">::</span><span class="fu">ref</span>(l1, l2)</span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; o [1:0x22c02450] &lt;list&gt; </span></span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; +-[2:0x255b0de0] &lt;dbl&gt; </span></span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; +-[3:0x255b0da8] &lt;dbl&gt; </span></span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; \-[4:0x255b0d70] &lt;dbl&gt; </span></span>
-<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  </span></span>
-<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; o [5:0x26009fd0] &lt;list&gt; </span></span>
-<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; +-[2:0x255b0de0] </span></span>
-<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; +-[3:0x255b0da8] </span></span>
-<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; \-[6:0x255b0c90] &lt;dbl&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">list</span>(a, a)</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>c <span class="ot">&lt;-</span> <span class="fu">list</span>(b, a, <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ref</span>(a, b, c)</span></code></pre></div>
+<pre><code>#&gt; [1:0x25147420] &lt;int&gt; 
+#&gt;  
+#&gt; o [2:0x27a7cb88] &lt;list&gt; 
+#&gt; +-[1:0x25147420] 
+#&gt; \-[1:0x25147420] 
+#&gt;  
+#&gt; o [3:0x27b8e5a0] &lt;list&gt; 
+#&gt; +-[2:0x27a7cb88] 
+#&gt; +-[1:0x25147420] 
+#&gt; \-[4:0x252557a8] &lt;int&gt;</code></pre>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>l1 <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>l2 <span class="ot">&lt;-</span> l1</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 拷贝机制启动，但拷贝的是指针，而不是 value，这是浅拷贝</span></span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>l2[[<span class="dv">3</span>]] <span class="ot">&lt;-</span> <span class="dv">4</span> </span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>lobstr<span class="sc">::</span><span class="fu">ref</span>(l1, l2)</span></code></pre></div>
+<pre><code>#&gt; o [1:0x27c27510] &lt;list&gt; 
+#&gt; +-[2:0x27a4cee0] &lt;dbl&gt; 
+#&gt; +-[3:0x27a4cea8] &lt;dbl&gt; 
+#&gt; \-[4:0x27a4ce70] &lt;dbl&gt; 
+#&gt;  
+#&gt; o [5:0x27c59930] &lt;list&gt; 
+#&gt; +-[2:0x27a4cee0] 
+#&gt; +-[3:0x27a4cea8] 
+#&gt; \-[6:0x27a4cd90] &lt;dbl&gt;</code></pre>
 <p><img src="http://humoon-image-hosting-service.oss-cn-beijing.aliyuncs.com/img/typora/JavaScript/l-modify-1.png" alt="img" style="zoom:50%;"/></p>
 <p><img src="http://humoon-image-hosting-service.oss-cn-beijing.aliyuncs.com/img/typora/JavaScript/l-modify-2.png" alt="img" style="zoom:50%;"/></p>
 </div>
@@ -575,67 +579,73 @@ div.tocify {
 <h5>数据框</h5>
 <p>数据框本质上是一个列表，储存的都是指向列向量的指针。</p>
 <div class="figure">
-<img src="http://humoon-image-hosting-service.oss-cn-beijing.aliyuncs.com/img/typora/JavaScript/v2-2011de6f14aeeb477c91516ef289b32c_720w.jpg" alt="" />
+<img
+src="http://humoon-image-hosting-service.oss-cn-beijing.aliyuncs.com/img/typora/JavaScript/v2-2011de6f14aeeb477c91516ef289b32c_720w.jpg"
+alt="" />
 <p class="caption">img</p>
 </div>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>d1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">6</span>), <span class="at">y =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">3</span>))</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>d2 <span class="ot">&lt;-</span> d1</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>d3 <span class="ot">&lt;-</span> d1</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ref</span>(d1, d2)</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; o [1:0x27a51218] &lt;df[,2]&gt; </span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; +-x = [2:0x27a55688] &lt;dbl&gt; </span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; \-y = [3:0x27a55638] &lt;dbl&gt; </span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  </span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1:0x27a51218]</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ref</span>(d1, d3)</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; o [1:0x27a51218] &lt;df[,2]&gt; </span></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; +-x = [2:0x27a55688] &lt;dbl&gt; </span></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; \-y = [3:0x27a55638] &lt;dbl&gt; </span></span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  </span></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1:0x27a51218]</span></span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="co"># 修改列，该列复制；其他列扔指向原对象</span></span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>d2[, <span class="dv">2</span>] <span class="ot">&lt;-</span> d2[, <span class="dv">2</span>] <span class="sc">*</span> <span class="dv">2</span></span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="fu">ref</span>(d1, d2)</span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; o [1:0x27a51218] &lt;df[,2]&gt; </span></span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; +-x = [2:0x27a55688] &lt;dbl&gt; </span></span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; \-y = [3:0x27a55638] &lt;dbl&gt; </span></span>
-<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  </span></span>
-<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; o [4:0x27aecb48] &lt;df[,2]&gt; </span></span>
-<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; +-x = [2:0x27a55688] </span></span>
-<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; \-y = [5:0x27aeecc8] &lt;dbl&gt;</span></span>
-<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a><span class="co"># 修改行，必须复制每一列</span></span>
-<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>d3[<span class="dv">1</span>, ] <span class="ot">&lt;-</span> d3[<span class="dv">1</span>, ] <span class="sc">*</span> <span class="dv">3</span></span>
-<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a><span class="fu">ref</span>(d1, d3)</span>
-<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; o [1:0x27a51218] &lt;df[,2]&gt; </span></span>
-<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; +-x = [2:0x27a55688] &lt;dbl&gt; </span></span>
-<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; \-y = [3:0x27a55638] &lt;dbl&gt; </span></span>
-<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  </span></span>
-<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; o [4:0x27b7db38] &lt;df[,2]&gt; </span></span>
-<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; +-x = [5:0x27b8b058] &lt;dbl&gt; </span></span>
-<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; \-y = [6:0x27b8b008] &lt;dbl&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>d1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">6</span>), <span class="at">y =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">3</span>))</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>d2 <span class="ot">&lt;-</span> d1</span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>d3 <span class="ot">&lt;-</span> d1</span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ref</span>(d1, d2)</span></code></pre></div>
+<pre><code>#&gt; o [1:0x245966c8] &lt;df[,2]&gt; 
+#&gt; +-x = [2:0x130fd420] &lt;dbl&gt; 
+#&gt; \-y = [3:0x130fd330] &lt;dbl&gt; 
+#&gt;  
+#&gt; [1:0x245966c8]</code></pre>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ref</span>(d1, d3)</span></code></pre></div>
+<pre><code>#&gt; o [1:0x245966c8] &lt;df[,2]&gt; 
+#&gt; +-x = [2:0x130fd420] &lt;dbl&gt; 
+#&gt; \-y = [3:0x130fd330] &lt;dbl&gt; 
+#&gt;  
+#&gt; [1:0x245966c8]</code></pre>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 修改列，该列复制；其他列扔指向原对象</span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>d2[, <span class="dv">2</span>] <span class="ot">&lt;-</span> d2[, <span class="dv">2</span>] <span class="sc">*</span> <span class="dv">2</span></span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ref</span>(d1, d2)</span></code></pre></div>
+<pre><code>#&gt; o [1:0x245966c8] &lt;df[,2]&gt; 
+#&gt; +-x = [2:0x130fd420] &lt;dbl&gt; 
+#&gt; \-y = [3:0x130fd330] &lt;dbl&gt; 
+#&gt;  
+#&gt; o [4:0x24dcac60] &lt;df[,2]&gt; 
+#&gt; +-x = [2:0x130fd420] 
+#&gt; \-y = [5:0x141240f8] &lt;dbl&gt;</code></pre>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 修改行，必须复制每一列</span></span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>d3[<span class="dv">1</span>, ] <span class="ot">&lt;-</span> d3[<span class="dv">1</span>, ] <span class="sc">*</span> <span class="dv">3</span></span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ref</span>(d1, d3)</span></code></pre></div>
+<pre><code>#&gt; o [1:0x245966c8] &lt;df[,2]&gt; 
+#&gt; +-x = [2:0x130fd420] &lt;dbl&gt; 
+#&gt; \-y = [3:0x130fd330] &lt;dbl&gt; 
+#&gt;  
+#&gt; o [4:0x12dc27a8] &lt;df[,2]&gt; 
+#&gt; +-x = [5:0x271a72e8] &lt;dbl&gt; 
+#&gt; \-y = [6:0x271a71a8] &lt;dbl&gt;</code></pre>
 <div class="figure">
-<img src="http://humoon-image-hosting-service.oss-cn-beijing.aliyuncs.com/img/typora/JavaScript/v2-215964869b3a1831e898cdf97795b94e_720w.jpg" alt="" />
+<img
+src="http://humoon-image-hosting-service.oss-cn-beijing.aliyuncs.com/img/typora/JavaScript/v2-215964869b3a1831e898cdf97795b94e_720w.jpg"
+alt="" />
 <p class="caption">img</p>
 </div>
 <div class="figure">
-<img src="http://humoon-image-hosting-service.oss-cn-beijing.aliyuncs.com/img/typora/JavaScript/v2-eea06589af18217eecda405f7ef0e781_r.jpg" alt="" />
+<img
+src="http://humoon-image-hosting-service.oss-cn-beijing.aliyuncs.com/img/typora/JavaScript/v2-eea06589af18217eecda405f7ef0e781_r.jpg"
+alt="" />
 <p class="caption">img</p>
 </div>
 </div>
 <div id="字符向量" class="section level5">
 <h5>字符向量</h5>
 <p>也是指针的向量。每个指针指向一个字符串，这个字符串位于全局字符串池中。</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;a&quot;</span>, <span class="st">&quot;abc&quot;</span>, <span class="st">&quot;d&quot;</span>)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ref</span>(x, <span class="at">character =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; o [1:0x23fd8e98] &lt;chr&gt; </span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; +-[2:0x140f9d70] &lt;string: &quot;a&quot;&gt; </span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; +-[2:0x140f9d70] </span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; +-[3:0x2164ca10] &lt;string: &quot;abc&quot;&gt; </span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; \-[4:0x142f3cd8] &lt;string: &quot;d&quot;&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;a&quot;</span>, <span class="st">&quot;abc&quot;</span>, <span class="st">&quot;d&quot;</span>)</span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ref</span>(x, <span class="at">character =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>#&gt; o [1:0x27889690] &lt;chr&gt; 
+#&gt; +-[2:0x146d9d70] &lt;string: &quot;a&quot;&gt; 
+#&gt; +-[2:0x146d9d70] 
+#&gt; +-[3:0x12aa7a80] &lt;string: &quot;abc&quot;&gt; 
+#&gt; \-[4:0x148d3cb8] &lt;string: &quot;d&quot;&gt;</code></pre>
 <div class="figure">
-<img src="http://humoon-image-hosting-service.oss-cn-beijing.aliyuncs.com/img/typora/JavaScript/v2-be504b8fb9460aecea72cd2cb21c811e_720w.jpg" alt="" />
+<img
+src="http://humoon-image-hosting-service.oss-cn-beijing.aliyuncs.com/img/typora/JavaScript/v2-be504b8fb9460aecea72cd2cb21c811e_720w.jpg"
+alt="" />
 <p class="caption">img</p>
 </div>
 </div>
@@ -646,36 +656,37 @@ div.tocify {
 <h5>唯一指针</h5>
 <p>只有一个指针指向对象时，修改对象不会发生复制。</p>
 <p>(Rstudio 中与 Console 中不同，Rstudio 中仍要复制)</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">tracemem</span>(z), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;0000000025951860&gt;</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>z[<span class="dv">3</span>] <span class="ot">&lt;-</span> 4L</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; tracemem[0x0000000025951860 -&gt; 0x0000000025aa0c10]: eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir eng_r block_exec call_block process_group.block process_group withCallingHandlers process_file &lt;Anonymous&gt; &lt;Anonymous&gt;</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>z</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 1 2 4 4 5</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(z)</span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;0x25aa0c10&quot;</span></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="fu">untracemem</span>(z) <span class="co"># 关闭跟踪</span></span></code></pre></div>
-<p>但是，R 对指针数量的判断不够智能。如两个指针指向一个对象，其中一个被删除后，R 却不知道，仍然以为有两个指针。因此会产生很多不必要的对象拷贝。</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">matrix</span>(<span class="fu">runif</span>(<span class="dv">5</span> <span class="sc">*</span> <span class="fl">1e4</span>), <span class="at">ncol =</span> <span class="dv">5</span>))</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">tracemem</span>(x), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;00000000260242A8&gt;</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>medians <span class="ot">&lt;-</span> <span class="fu">vapply</span>(x, median, <span class="fu">numeric</span>(<span class="dv">1</span>))</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; tracemem[0x00000000260242a8 -&gt; 0x0000000026042648]: as.list.data.frame as.list vapply eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir eng_r block_exec call_block process_group.block process_group withCallingHandlers process_file &lt;Anonymous&gt; &lt;Anonymous&gt;</span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>) {</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  x[[i]] <span class="ot">&lt;-</span> x[[i]] <span class="sc">-</span> medians[[i]]</span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; tracemem[0x00000000260242a8 -&gt; 0x0000000026433388]: eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir eng_r block_exec call_block process_group.block process_group withCallingHandlers process_file &lt;Anonymous&gt; &lt;Anonymous&gt; </span></span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; tracemem[0x0000000026433388 -&gt; 0x0000000026447c98]: [[&lt;-.data.frame [[&lt;- eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir eng_r block_exec call_block process_group.block process_group withCallingHandlers process_file &lt;Anonymous&gt; &lt;Anonymous&gt; </span></span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; tracemem[0x0000000026447c98 -&gt; 0x0000000026447bb8]: eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir eng_r block_exec call_block process_group.block process_group withCallingHandlers process_file &lt;Anonymous&gt; &lt;Anonymous&gt; </span></span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; tracemem[0x0000000026447bb8 -&gt; 0x0000000026447b48]: [[&lt;-.data.frame [[&lt;- eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir eng_r block_exec call_block process_group.block process_group withCallingHandlers process_file &lt;Anonymous&gt; &lt;Anonymous&gt; </span></span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; tracemem[0x0000000026447b48 -&gt; 0x0000000026447ad8]: eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir eng_r block_exec call_block process_group.block process_group withCallingHandlers process_file &lt;Anonymous&gt; &lt;Anonymous&gt; </span></span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; tracemem[0x0000000026447ad8 -&gt; 0x0000000026447838]: [[&lt;-.data.frame [[&lt;- eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir eng_r block_exec call_block process_group.block process_group withCallingHandlers process_file &lt;Anonymous&gt; &lt;Anonymous&gt; </span></span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; tracemem[0x0000000026447838 -&gt; 0x0000000026447758]: eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir eng_r block_exec call_block process_group.block process_group withCallingHandlers process_file &lt;Anonymous&gt; &lt;Anonymous&gt; </span></span>
-<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; tracemem[0x0000000026447758 -&gt; 0x0000000026447678]: [[&lt;-.data.frame [[&lt;- eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir eng_r block_exec call_block process_group.block process_group withCallingHandlers process_file &lt;Anonymous&gt; &lt;Anonymous&gt; </span></span>
-<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; tracemem[0x0000000026447678 -&gt; 0x0000000026447598]: eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir eng_r block_exec call_block process_group.block process_group withCallingHandlers process_file &lt;Anonymous&gt; &lt;Anonymous&gt; </span></span>
-<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; tracemem[0x0000000026447598 -&gt; 0x00000000264474b8]: [[&lt;-.data.frame [[&lt;- eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir eng_r block_exec call_block process_group.block process_group withCallingHandlers process_file &lt;Anonymous&gt; &lt;Anonymous&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)</span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">tracemem</span>(z), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>#&gt; &lt;0000000027730588&gt;</code></pre>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>z[<span class="dv">3</span>] <span class="ot">&lt;-</span> 4L</span></code></pre></div>
+<pre><code>#&gt; tracemem[0x0000000027730588 -&gt; 0x000000002774cef8]: eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group.block process_group withCallingHandlers process_file &lt;Anonymous&gt; &lt;Anonymous&gt; do.call eval eval eval eval eval.parent local</code></pre>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>z</span></code></pre></div>
+<pre><code>#&gt; [1] 1 2 4 4 5</code></pre>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(z)</span></code></pre></div>
+<pre><code>#&gt; [1] &quot;0x2774cef8&quot;</code></pre>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">untracemem</span>(z) <span class="co"># 关闭跟踪</span></span></code></pre></div>
+<p>但是，R
+对指针数量的判断不够智能。如两个指针指向一个对象，其中一个被删除后，R
+却不知道，仍然以为有两个指针。因此会产生很多不必要的对象拷贝。</p>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">matrix</span>(<span class="fu">runif</span>(<span class="dv">5</span> <span class="sc">*</span> <span class="fl">1e4</span>), <span class="at">ncol =</span> <span class="dv">5</span>))</span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">tracemem</span>(x), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>#&gt; &lt;00000000279ADDB8&gt;</code></pre>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>medians <span class="ot">&lt;-</span> <span class="fu">vapply</span>(x, median, <span class="fu">numeric</span>(<span class="dv">1</span>))</span></code></pre></div>
+<pre><code>#&gt; tracemem[0x00000000279addb8 -&gt; 0x00000000279df400]: as.list.data.frame as.list vapply eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group.block process_group withCallingHandlers process_file &lt;Anonymous&gt; &lt;Anonymous&gt; do.call eval eval eval eval eval.parent local</code></pre>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>) {</span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a>  x[[i]] <span class="ot">&lt;-</span> x[[i]] <span class="sc">-</span> medians[[i]]</span>
+<span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>#&gt; tracemem[0x00000000279addb8 -&gt; 0x0000000027a4eb60]: eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group.block process_group withCallingHandlers process_file &lt;Anonymous&gt; &lt;Anonymous&gt; do.call eval eval eval eval eval.parent local 
+#&gt; tracemem[0x0000000027a4eb60 -&gt; 0x0000000027a63e38]: [[&lt;-.data.frame [[&lt;- eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group.block process_group withCallingHandlers process_file &lt;Anonymous&gt; &lt;Anonymous&gt; do.call eval eval eval eval eval.parent local 
+#&gt; tracemem[0x0000000027a63e38 -&gt; 0x0000000027a63dc8]: eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group.block process_group withCallingHandlers process_file &lt;Anonymous&gt; &lt;Anonymous&gt; do.call eval eval eval eval eval.parent local 
+#&gt; tracemem[0x0000000027a63dc8 -&gt; 0x0000000027a63d58]: [[&lt;-.data.frame [[&lt;- eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group.block process_group withCallingHandlers process_file &lt;Anonymous&gt; &lt;Anonymous&gt; do.call eval eval eval eval eval.parent local 
+#&gt; tracemem[0x0000000027a63d58 -&gt; 0x0000000027a63ce8]: eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group.block process_group withCallingHandlers process_file &lt;Anonymous&gt; &lt;Anonymous&gt; do.call eval eval eval eval eval.parent local 
+#&gt; tracemem[0x0000000027a63ce8 -&gt; 0x0000000027a63c08]: [[&lt;-.data.frame [[&lt;- eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group.block process_group withCallingHandlers process_file &lt;Anonymous&gt; &lt;Anonymous&gt; do.call eval eval eval eval eval.parent local 
+#&gt; tracemem[0x0000000027a63c08 -&gt; 0x0000000027a63738]: eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group.block process_group withCallingHandlers process_file &lt;Anonymous&gt; &lt;Anonymous&gt; do.call eval eval eval eval eval.parent local 
+#&gt; tracemem[0x0000000027a63738 -&gt; 0x0000000027a81618]: [[&lt;-.data.frame [[&lt;- eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group.block process_group withCallingHandlers process_file &lt;Anonymous&gt; &lt;Anonymous&gt; do.call eval eval eval eval eval.parent local 
+#&gt; tracemem[0x0000000027a81618 -&gt; 0x0000000027a81538]: eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group.block process_group withCallingHandlers process_file &lt;Anonymous&gt; &lt;Anonymous&gt; do.call eval eval eval eval eval.parent local 
+#&gt; tracemem[0x0000000027a81538 -&gt; 0x0000000027a814c8]: [[&lt;-.data.frame [[&lt;- eval eval eval_with_user_handlers withVisible withCallingHandlers handle timing_fn evaluate_call &lt;Anonymous&gt; evaluate in_dir in_input_dir eng_r block_exec call_block process_group.block process_group withCallingHandlers process_file &lt;Anonymous&gt; &lt;Anonymous&gt; do.call eval eval eval eval eval.parent local</code></pre>
 </div>
 <div id="环境对象总是被就地修改" class="section level5">
 <h5>环境对象总是被就地修改</h5>
@@ -684,115 +695,118 @@ div.tocify {
 </div>
 <div id="解构赋值unpacking-assignment" class="section level3">
 <h3>解构赋值（Unpacking Assignment）</h3>
-<p><strong>zeallot 包提供的 <code>%&lt;-%</code> 和 <code>%&gt;-%</code> 函数</strong></p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(zeallot)</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># unpack vector</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(lat, lng) <span class="sc">%&lt;-%</span> <span class="fu">c</span>(<span class="fl">38.061944</span>, <span class="sc">-</span><span class="fl">122.643889</span>)</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>lat</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 38.06194</span></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>lng</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] -122.6439</span></span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="co"># unpack list</span></span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>coords_list <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list</span>(<span class="fl">38.061944</span>, <span class="sc">-</span><span class="fl">122.643889</span>)</span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(lat, lng) <span class="sc">%&lt;-%</span> <span class="fu">coords_list</span>()</span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>lat</span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 38.06194</span></span>
-<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>lng</span>
-<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] -122.6439</span></span>
-<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a><span class="co"># unpack regression result</span></span>
-<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(inter, slope) <span class="sc">%&lt;-%</span> <span class="fu">coef</span>(<span class="fu">lm</span>(mpg <span class="sc">~</span> cyl, <span class="at">data =</span> mtcars))</span>
-<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>inter</span>
-<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 37.88458</span></span>
-<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>slope</span>
-<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] -2.87579</span></span>
-<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a><span class="co"># unpack data.frame</span></span>
-<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(mpg, cyl, disp, hp) <span class="sc">%&lt;-%</span> mtcars[, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>]</span>
-<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mpg)</span>
-<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 21.0 21.0 22.8 21.4 18.7 18.1</span></span>
-<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a><span class="co"># unpack nested values</span></span>
-<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(a, <span class="fu">c</span>(b, d), e) <span class="sc">%&lt;-%</span> <span class="fu">list</span>(<span class="st">&quot;begin&quot;</span>, <span class="fu">list</span>(<span class="st">&quot;middle1&quot;</span>, <span class="st">&quot;middle2&quot;</span>), <span class="st">&quot;end&quot;</span>)</span>
-<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a>a</span>
-<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;begin&quot;</span></span>
-<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a>b</span>
-<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;middle1&quot;</span></span>
-<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a>d</span>
-<span id="cb12-39"><a href="#cb12-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;middle2&quot;</span></span>
-<span id="cb12-40"><a href="#cb12-40" aria-hidden="true" tabindex="-1"></a>e</span>
-<span id="cb12-41"><a href="#cb12-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;end&quot;</span></span>
-<span id="cb12-42"><a href="#cb12-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-43"><a href="#cb12-43" aria-hidden="true" tabindex="-1"></a><span class="co"># unpack character string</span></span>
-<span id="cb12-44"><a href="#cb12-44" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(ch1, ch2, ch3) <span class="sc">%&lt;-%</span> <span class="st">&quot;abc&quot;</span></span>
-<span id="cb12-45"><a href="#cb12-45" aria-hidden="true" tabindex="-1"></a>ch1</span>
-<span id="cb12-46"><a href="#cb12-46" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;a&quot;</span></span>
-<span id="cb12-47"><a href="#cb12-47" aria-hidden="true" tabindex="-1"></a>ch2</span>
-<span id="cb12-48"><a href="#cb12-48" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;b&quot;</span></span>
-<span id="cb12-49"><a href="#cb12-49" aria-hidden="true" tabindex="-1"></a>ch3</span>
-<span id="cb12-50"><a href="#cb12-50" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;c&quot;</span></span>
-<span id="cb12-51"><a href="#cb12-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-52"><a href="#cb12-52" aria-hidden="true" tabindex="-1"></a><span class="co"># unpack Date</span></span>
-<span id="cb12-53"><a href="#cb12-53" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(y, m, d) <span class="sc">%&lt;-%</span> <span class="fu">Sys.Date</span>()</span>
-<span id="cb12-54"><a href="#cb12-54" aria-hidden="true" tabindex="-1"></a>y</span>
-<span id="cb12-55"><a href="#cb12-55" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 2022</span></span>
-<span id="cb12-56"><a href="#cb12-56" aria-hidden="true" tabindex="-1"></a>m</span>
-<span id="cb12-57"><a href="#cb12-57" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 4</span></span>
-<span id="cb12-58"><a href="#cb12-58" aria-hidden="true" tabindex="-1"></a>d</span>
-<span id="cb12-59"><a href="#cb12-59" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 4</span></span>
-<span id="cb12-60"><a href="#cb12-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-61"><a href="#cb12-61" aria-hidden="true" tabindex="-1"></a><span class="co"># ... rest of</span></span>
-<span id="cb12-62"><a href="#cb12-62" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(begin, ...middle, end) <span class="sc">%&lt;-%</span> <span class="fu">list</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)</span>
-<span id="cb12-63"><a href="#cb12-63" aria-hidden="true" tabindex="-1"></a>begin</span>
-<span id="cb12-64"><a href="#cb12-64" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 1</span></span>
-<span id="cb12-65"><a href="#cb12-65" aria-hidden="true" tabindex="-1"></a>middle</span>
-<span id="cb12-66"><a href="#cb12-66" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [[1]]</span></span>
-<span id="cb12-67"><a href="#cb12-67" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 2</span></span>
-<span id="cb12-68"><a href="#cb12-68" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb12-69"><a href="#cb12-69" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [[2]]</span></span>
-<span id="cb12-70"><a href="#cb12-70" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 3</span></span>
-<span id="cb12-71"><a href="#cb12-71" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb12-72"><a href="#cb12-72" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [[3]]</span></span>
-<span id="cb12-73"><a href="#cb12-73" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 4</span></span>
-<span id="cb12-74"><a href="#cb12-74" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-75"><a href="#cb12-75" aria-hidden="true" tabindex="-1"></a><span class="co"># place holder</span></span>
-<span id="cb12-76"><a href="#cb12-76" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(min_wt, ., ., mean_wt, ., max_wt) <span class="sc">%&lt;-%</span> <span class="fu">summary</span>(mtcars<span class="sc">$</span>wt)</span>
-<span id="cb12-77"><a href="#cb12-77" aria-hidden="true" tabindex="-1"></a>min_wt</span>
-<span id="cb12-78"><a href="#cb12-78" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 1.513</span></span>
-<span id="cb12-79"><a href="#cb12-79" aria-hidden="true" tabindex="-1"></a>mean_wt</span>
-<span id="cb12-80"><a href="#cb12-80" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 3.21725</span></span>
-<span id="cb12-81"><a href="#cb12-81" aria-hidden="true" tabindex="-1"></a>max_wt</span>
-<span id="cb12-82"><a href="#cb12-82" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 5.424</span></span>
-<span id="cb12-83"><a href="#cb12-83" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-84"><a href="#cb12-84" aria-hidden="true" tabindex="-1"></a><span class="co"># 向右的解构赋值符号 %-&gt;%</span></span>
-<span id="cb12-85"><a href="#cb12-85" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span></span>
-<span id="cb12-86"><a href="#cb12-86" aria-hidden="true" tabindex="-1"></a>  <span class="fu">subset</span>(hp <span class="sc">&gt;</span> <span class="dv">100</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb12-87"><a href="#cb12-87" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aggregate</span>(. <span class="sc">~</span> cyl, <span class="at">data =</span> ., <span class="at">FUN =</span> . <span class="sc">%&gt;%</span> <span class="fu">mean</span>() <span class="sc">%&gt;%</span> <span class="fu">round</span>(<span class="dv">2</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb12-88"><a href="#cb12-88" aria-hidden="true" tabindex="-1"></a>  <span class="fu">transform</span>(<span class="at">kpl =</span> mpg <span class="sc">%&gt;%</span> <span class="fu">multiply_by</span>(<span class="fl">0.4251</span>)) <span class="sc">%-&gt;%</span> </span>
-<span id="cb12-89"><a href="#cb12-89" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(cyl, mpg, ...rest)</span>
-<span id="cb12-90"><a href="#cb12-90" aria-hidden="true" tabindex="-1"></a>cyl</span>
-<span id="cb12-91"><a href="#cb12-91" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 4 6 8</span></span></code></pre></div>
+<p><strong>zeallot 包提供的 <code>%&lt;-%</code> 和 <code>%&gt;-%</code>
+函数</strong></p>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(zeallot)</span>
+<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-3"><a href="#cb73-3" aria-hidden="true" tabindex="-1"></a><span class="co"># unpack vector</span></span>
+<span id="cb73-4"><a href="#cb73-4" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(lat, lng) <span class="sc">%&lt;-%</span> <span class="fu">c</span>(<span class="fl">38.061944</span>, <span class="sc">-</span><span class="fl">122.643889</span>)</span>
+<span id="cb73-5"><a href="#cb73-5" aria-hidden="true" tabindex="-1"></a>lat</span></code></pre></div>
+<pre><code>#&gt; [1] 38.06194</code></pre>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a>lng</span></code></pre></div>
+<pre><code>#&gt; [1] -122.6439</code></pre>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="co"># unpack list</span></span>
+<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a>coords_list <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb77-3"><a href="#cb77-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list</span>(<span class="fl">38.061944</span>, <span class="sc">-</span><span class="fl">122.643889</span>)</span>
+<span id="cb77-4"><a href="#cb77-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb77-5"><a href="#cb77-5" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(lat, lng) <span class="sc">%&lt;-%</span> <span class="fu">coords_list</span>()</span>
+<span id="cb77-6"><a href="#cb77-6" aria-hidden="true" tabindex="-1"></a>lat</span></code></pre></div>
+<pre><code>#&gt; [1] 38.06194</code></pre>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a>lng</span></code></pre></div>
+<pre><code>#&gt; [1] -122.6439</code></pre>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="co"># unpack regression result</span></span>
+<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(inter, slope) <span class="sc">%&lt;-%</span> <span class="fu">coef</span>(<span class="fu">lm</span>(mpg <span class="sc">~</span> cyl, <span class="at">data =</span> mtcars))</span>
+<span id="cb81-3"><a href="#cb81-3" aria-hidden="true" tabindex="-1"></a>inter</span></code></pre></div>
+<pre><code>#&gt; [1] 37.88458</code></pre>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a>slope</span></code></pre></div>
+<pre><code>#&gt; [1] -2.87579</code></pre>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="co"># unpack data.frame</span></span>
+<span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(mpg, cyl, disp, hp) <span class="sc">%&lt;-%</span> mtcars[, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>]</span>
+<span id="cb85-3"><a href="#cb85-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mpg)</span></code></pre></div>
+<pre><code>#&gt; [1] 21.0 21.0 22.8 21.4 18.7 18.1</code></pre>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="co"># unpack nested values</span></span>
+<span id="cb87-2"><a href="#cb87-2" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(a, <span class="fu">c</span>(b, d), e) <span class="sc">%&lt;-%</span> <span class="fu">list</span>(<span class="st">&quot;begin&quot;</span>, <span class="fu">list</span>(<span class="st">&quot;middle1&quot;</span>, <span class="st">&quot;middle2&quot;</span>), <span class="st">&quot;end&quot;</span>)</span>
+<span id="cb87-3"><a href="#cb87-3" aria-hidden="true" tabindex="-1"></a>a</span></code></pre></div>
+<pre><code>#&gt; [1] &quot;begin&quot;</code></pre>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a>b</span></code></pre></div>
+<pre><code>#&gt; [1] &quot;middle1&quot;</code></pre>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a>d</span></code></pre></div>
+<pre><code>#&gt; [1] &quot;middle2&quot;</code></pre>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a>e</span></code></pre></div>
+<pre><code>#&gt; [1] &quot;end&quot;</code></pre>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="co"># unpack character string</span></span>
+<span id="cb95-2"><a href="#cb95-2" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(ch1, ch2, ch3) <span class="sc">%&lt;-%</span> <span class="st">&quot;abc&quot;</span></span>
+<span id="cb95-3"><a href="#cb95-3" aria-hidden="true" tabindex="-1"></a>ch1</span></code></pre></div>
+<pre><code>#&gt; [1] &quot;a&quot;</code></pre>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a>ch2</span></code></pre></div>
+<pre><code>#&gt; [1] &quot;b&quot;</code></pre>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a>ch3</span></code></pre></div>
+<pre><code>#&gt; [1] &quot;c&quot;</code></pre>
+<div class="sourceCode" id="cb101"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="co"># unpack Date</span></span>
+<span id="cb101-2"><a href="#cb101-2" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(y, m, d) <span class="sc">%&lt;-%</span> <span class="fu">Sys.Date</span>()</span>
+<span id="cb101-3"><a href="#cb101-3" aria-hidden="true" tabindex="-1"></a>y</span></code></pre></div>
+<pre><code>#&gt; [1] 2022</code></pre>
+<div class="sourceCode" id="cb103"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1" aria-hidden="true" tabindex="-1"></a>m</span></code></pre></div>
+<pre><code>#&gt; [1] 4</code></pre>
+<div class="sourceCode" id="cb105"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="#cb105-1" aria-hidden="true" tabindex="-1"></a>d</span></code></pre></div>
+<pre><code>#&gt; [1] 16</code></pre>
+<div class="sourceCode" id="cb107"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ... rest of</span></span>
+<span id="cb107-2"><a href="#cb107-2" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(begin, ...middle, end) <span class="sc">%&lt;-%</span> <span class="fu">list</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)</span>
+<span id="cb107-3"><a href="#cb107-3" aria-hidden="true" tabindex="-1"></a>begin</span></code></pre></div>
+<pre><code>#&gt; [1] 1</code></pre>
+<div class="sourceCode" id="cb109"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="#cb109-1" aria-hidden="true" tabindex="-1"></a>middle</span></code></pre></div>
+<pre><code>#&gt; [[1]]
+#&gt; [1] 2
+#&gt; 
+#&gt; [[2]]
+#&gt; [1] 3
+#&gt; 
+#&gt; [[3]]
+#&gt; [1] 4</code></pre>
+<div class="sourceCode" id="cb111"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="#cb111-1" aria-hidden="true" tabindex="-1"></a><span class="co"># place holder</span></span>
+<span id="cb111-2"><a href="#cb111-2" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(min_wt, ., ., mean_wt, ., max_wt) <span class="sc">%&lt;-%</span> <span class="fu">summary</span>(mtcars<span class="sc">$</span>wt)</span>
+<span id="cb111-3"><a href="#cb111-3" aria-hidden="true" tabindex="-1"></a>min_wt</span></code></pre></div>
+<pre><code>#&gt; [1] 1.513</code></pre>
+<div class="sourceCode" id="cb113"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="#cb113-1" aria-hidden="true" tabindex="-1"></a>mean_wt</span></code></pre></div>
+<pre><code>#&gt; [1] 3.21725</code></pre>
+<div class="sourceCode" id="cb115"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="#cb115-1" aria-hidden="true" tabindex="-1"></a>max_wt</span></code></pre></div>
+<pre><code>#&gt; [1] 5.424</code></pre>
+<div class="sourceCode" id="cb117"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="#cb117-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 向右的解构赋值符号 %-&gt;%</span></span>
+<span id="cb117-2"><a href="#cb117-2" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span></span>
+<span id="cb117-3"><a href="#cb117-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">subset</span>(hp <span class="sc">&gt;</span> <span class="dv">100</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb117-4"><a href="#cb117-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aggregate</span>(. <span class="sc">~</span> cyl, <span class="at">data =</span> ., <span class="at">FUN =</span> . <span class="sc">%&gt;%</span> <span class="fu">mean</span>() <span class="sc">%&gt;%</span> <span class="fu">round</span>(<span class="dv">2</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb117-5"><a href="#cb117-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">transform</span>(<span class="at">kpl =</span> mpg <span class="sc">%&gt;%</span> <span class="fu">multiply_by</span>(<span class="fl">0.4251</span>)) <span class="sc">%-&gt;%</span> </span>
+<span id="cb117-6"><a href="#cb117-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(cyl, mpg, ...rest)</span>
+<span id="cb117-7"><a href="#cb117-7" aria-hidden="true" tabindex="-1"></a>cyl</span></code></pre></div>
+<pre><code>#&gt; [1] 4 6 8</code></pre>
 </div>
 </div>
 <div id="条件语句" class="section level2">
 <h2>条件语句</h2>
 <div id="if...else-if...else..." class="section level3">
 <h3><code>if...else if...else...</code></h3>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (condition1) {</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span> (condition2) { </span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># else if中间有空格，跟 JavaScript 一样</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb119"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="#cb119-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (condition1) {</span>
+<span id="cb119-2"><a href="#cb119-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb119-3"><a href="#cb119-3" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span> (condition2) { </span>
+<span id="cb119-4"><a href="#cb119-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># else if中间有空格，跟 JavaScript 一样</span></span>
+<span id="cb119-5"><a href="#cb119-5" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb119-6"><a href="#cb119-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb119-7"><a href="#cb119-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 </div>
 <div id="ifelse" class="section level3">
 <h3><code>ifelse()</code></h3>
-<p><code>if...else</code> 的 condition 不能是向量，将自动忽略条件向量中第一个以后的元素。有时，要用<code>any(bool vector)</code>和<code>all(bool vector)</code>将布尔向量转换为一个bool值，再配合<code>if</code>使用。</p>
+<p><code>if...else</code> 的 condition
+不能是向量，将自动忽略条件向量中第一个以后的元素。有时，要用<code>any(bool vector)</code>和<code>all(bool vector)</code>将布尔向量转换为一个bool值，再配合<code>if</code>使用。</p>
 <p>而三元选择符<code>ifelse(cond, statement1, statement2)</code>可以接收三个向量，按各自分量执行向量化操作</p>
 <blockquote>
 <p>对应 JS 中的 <code>condition? Statement1: statement2;</code></p>
@@ -800,29 +814,32 @@ div.tocify {
 </div>
 <div id="switchstatement-list" class="section level3">
 <h3><code>switch(statement, list)</code></h3>
-<p>list 是一组键值对，statement 是一个键，返回 list 中与该键对应的值。</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>result1 <span class="ot">=</span> <span class="cf">switch</span>(<span class="st">&#39;fruit&#39;</span>,</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">meat =</span> <span class="st">&quot;chicken&quot;</span>,</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fruit =</span> <span class="st">&quot;apple&quot;</span>,</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">vegetable =</span> <span class="st">&quot;cucumber&quot;</span>,</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>                 <span class="st">&#39;soup&#39;</span>)</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>result1</span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] &quot;apple&quot;</span></span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>result2 <span class="ot">=</span> <span class="cf">switch</span>(<span class="st">&#39;final&#39;</span>,</span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>                 <span class="at">meat =</span> <span class="st">&quot;chicken&quot;</span>,</span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fruit =</span> <span class="st">&quot;apple&quot;</span>,</span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>                 <span class="at">vegetable =</span> <span class="st">&quot;cucumber&quot;</span>,</span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>                 <span class="st">&#39;soup&#39;</span>)</span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>result2 <span class="co"># 都不匹配时，返回无key的值</span></span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] &quot;soup&quot;</span></span></code></pre></div>
+<p>list 是一组键值对，statement 是一个键，返回 list
+中与该键对应的值。</p>
+<div class="sourceCode" id="cb120"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="#cb120-1" aria-hidden="true" tabindex="-1"></a>result1 <span class="ot">=</span> <span class="cf">switch</span>(<span class="st">&#39;fruit&#39;</span>,</span>
+<span id="cb120-2"><a href="#cb120-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">meat =</span> <span class="st">&quot;chicken&quot;</span>,</span>
+<span id="cb120-3"><a href="#cb120-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fruit =</span> <span class="st">&quot;apple&quot;</span>,</span>
+<span id="cb120-4"><a href="#cb120-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">vegetable =</span> <span class="st">&quot;cucumber&quot;</span>,</span>
+<span id="cb120-5"><a href="#cb120-5" aria-hidden="true" tabindex="-1"></a>                 <span class="st">&#39;soup&#39;</span>)</span>
+<span id="cb120-6"><a href="#cb120-6" aria-hidden="true" tabindex="-1"></a>result1</span>
+<span id="cb120-7"><a href="#cb120-7" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] &quot;apple&quot;</span></span>
+<span id="cb120-8"><a href="#cb120-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-9"><a href="#cb120-9" aria-hidden="true" tabindex="-1"></a>result2 <span class="ot">=</span> <span class="cf">switch</span>(<span class="st">&#39;final&#39;</span>,</span>
+<span id="cb120-10"><a href="#cb120-10" aria-hidden="true" tabindex="-1"></a>                 <span class="at">meat =</span> <span class="st">&quot;chicken&quot;</span>,</span>
+<span id="cb120-11"><a href="#cb120-11" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fruit =</span> <span class="st">&quot;apple&quot;</span>,</span>
+<span id="cb120-12"><a href="#cb120-12" aria-hidden="true" tabindex="-1"></a>                 <span class="at">vegetable =</span> <span class="st">&quot;cucumber&quot;</span>,</span>
+<span id="cb120-13"><a href="#cb120-13" aria-hidden="true" tabindex="-1"></a>                 <span class="st">&#39;soup&#39;</span>)</span>
+<span id="cb120-14"><a href="#cb120-14" aria-hidden="true" tabindex="-1"></a>result2 <span class="co"># 都不匹配时，返回无key的值</span></span>
+<span id="cb120-15"><a href="#cb120-15" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] &quot;soup&quot;</span></span></code></pre></div>
 </div>
 </div>
 <div id="循环语句" class="section level2">
 <h2>循环语句</h2>
 <div id="repeat" class="section level3">
 <h3><code>repeat{}</code></h3>
-<p>必须手动指定 break 条件，否则无限循环。这在创建交互式 app 时很有用。</p>
+<p>必须手动指定 break 条件，否则无限循环。这在创建交互式 app
+时很有用。</p>
 </div>
 <div id="while-condition" class="section level3">
 <h3><code>while (condition) {}</code></h3>
@@ -831,14 +848,17 @@ div.tocify {
 <h3><code>for( iterator in sequence) {}</code></h3>
 <div id="预先分配空间提高传统-for-循环的效率" class="section level4">
 <h4>预先分配空间：提高传统 for 循环的效率</h4>
-<p>R 中如果对对象的 size 做了改动（如添加一个元素），要把整个数据结构都重新拷贝一份，这非常慢。如果在每次循环中都有这种语句，时间复杂度会是<span class="math inline">\(\mathrm{O}\left(\mathrm{n}^{2}\right)\)</span>级的。</p>
+<p>R 中如果对对象的 size
+做了改动（如添加一个元素），要把整个数据结构都重新拷贝一份，这非常慢。如果在每次循环中都有这种语句，时间复杂度会是<span
+class="math inline">\(\mathrm{O}\left(\mathrm{n}^{2}\right)\)</span>级的。</p>
 <p>所以最好在开始循环前，预先声明一个向量，为输出结果分配足够的空间，这对循环效率非常重要。预先分配的空间往往是一个list，在循环结束后需要打散并重组为我们需要的对象：对于向量用<code>unlist()</code>，数据框用<code>dplyr::bind_rows()</code></p>
 <p>这其实有点像 JS 里面的:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> arr <span class="op">=</span> []<span class="op">;</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (<span class="kw">let</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="dv">6</span><span class="op">;</span> i<span class="op">++</span>) {</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  arr<span class="op">.</span><span class="fu">push</span>(i <span class="op">^</span> <span class="dv">2</span> <span class="op">%</span> <span class="dv">11</span>)<span class="op">;</span></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(arr)<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb121"><pre
+class="sourceCode js"><code class="sourceCode javascript"><span id="cb121-1"><a href="#cb121-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> arr <span class="op">=</span> []<span class="op">;</span></span>
+<span id="cb121-2"><a href="#cb121-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (<span class="kw">let</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="dv">6</span><span class="op">;</span> i<span class="op">++</span>) {</span>
+<span id="cb121-3"><a href="#cb121-3" aria-hidden="true" tabindex="-1"></a>  arr<span class="op">.</span><span class="fu">push</span>(i <span class="op">^</span> <span class="dv">2</span> <span class="op">%</span> <span class="dv">11</span>)<span class="op">;</span></span>
+<span id="cb121-4"><a href="#cb121-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb121-5"><a href="#cb121-5" aria-hidden="true" tabindex="-1"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(arr)<span class="op">;</span></span></code></pre></div>
 <script type="text/javascript">
 const arr = [];
 for (let i = 0; i < 6; i++) {
@@ -847,20 +867,21 @@ for (let i = 0; i < 6; i++) {
 console.log(arr);
 </script>
 <p>例：</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">a =</span> <span class="fu">rnorm</span>(<span class="dv">10</span>),</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">b =</span> <span class="fu">rnorm</span>(<span class="dv">10</span>),</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">c =</span> <span class="fu">rnorm</span>(<span class="dv">10</span>),</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">d =</span> <span class="fu">rnorm</span>(<span class="dv">10</span>)</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 要求df各列的中位数，先为输出分配空间，长度为ncol(df)的向量</span></span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>output <span class="ot">&lt;-</span>  <span class="fu">double</span>(<span class="fu">ncol</span>(df))</span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(df)) { </span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>  output[[i]] <span class="ot">&lt;-</span> <span class="fu">median</span>(df[[i]])</span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>output</span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] -0.26629871  0.08006262 -0.16643811  0.29386703</span></span></code></pre></div>
+<div class="sourceCode" id="cb122"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="#cb122-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb122-2"><a href="#cb122-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">a =</span> <span class="fu">rnorm</span>(<span class="dv">10</span>),</span>
+<span id="cb122-3"><a href="#cb122-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">b =</span> <span class="fu">rnorm</span>(<span class="dv">10</span>),</span>
+<span id="cb122-4"><a href="#cb122-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">c =</span> <span class="fu">rnorm</span>(<span class="dv">10</span>),</span>
+<span id="cb122-5"><a href="#cb122-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">d =</span> <span class="fu">rnorm</span>(<span class="dv">10</span>)</span>
+<span id="cb122-6"><a href="#cb122-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb122-7"><a href="#cb122-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb122-8"><a href="#cb122-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 要求df各列的中位数，先为输出分配空间，长度为ncol(df)的向量</span></span>
+<span id="cb122-9"><a href="#cb122-9" aria-hidden="true" tabindex="-1"></a>output <span class="ot">&lt;-</span>  <span class="fu">double</span>(<span class="fu">ncol</span>(df))</span>
+<span id="cb122-10"><a href="#cb122-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(df)) { </span>
+<span id="cb122-11"><a href="#cb122-11" aria-hidden="true" tabindex="-1"></a>  output[[i]] <span class="ot">&lt;-</span> <span class="fu">median</span>(df[[i]])</span>
+<span id="cb122-12"><a href="#cb122-12" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb122-13"><a href="#cb122-13" aria-hidden="true" tabindex="-1"></a>output</span></code></pre></div>
+<pre><code>#&gt; [1]  0.1464552 -0.6036229  0.2464697  0.7352336</code></pre>
 </div>
 </div>
 <div id="break-关键字" class="section level3">
@@ -875,7 +896,7 @@ console.log(arr);
 <p><code>stop(string)</code> 终止程序并报错：“Error: string”</p>
 </div>
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIlIgQmFzaWMgR3JhbW1hciINCnN1YnRpdGxlOiBWYXJpYWJsZSwgQ29uZGl0aW9uLCBMb29wIGFuZCBEZWJ1Zw0KYXV0aG9yOiAiSHVtb29uIg0KZGF0ZTogImByIFN5cy5EYXRlKClgIg0Kb3V0cHV0Og0KICBodG1sX2RvY3VtZW50Og0KICAgIGNvZGVfZG93bmxvYWQ6IHllcw0KICAgIGNzczogLi4vY3NzL3N0eWxlLmNzcw0KICAgIGZpZ19jYXB0aW9uOiB5ZXMNCiAgICB0aGVtZTogdW5pdGVkDQogICAgaGlnaGxpZ2h0OiBoYWRkb2NrDQogICAgbnVtYmVyX3NlY3Rpb25zOiBubw0KICAgIHRvYzogeWVzDQogICAgdG9jX2RlcHRoOiA0DQogICAgdG9jX2Zsb2F0Og0KICAgICAgY29sbGFwc2VkOiB5ZXMNCiAgICAgIHNtb290aF9zY3JvbGw6IHllcw0KZG9jdW1lbnRjbGFzczogY3RleGFydA0KY2xhc3NvcHRpb246IGh5cGVycmVmLA0KLS0tDQoNCmBgYHtyIHNldHVwLCBpbmNsdWRlID0gRkFMU0V9DQpzb3VyY2UoIi4uL1JtYXJrZG93bi10ZW1wbGF0ZS9SbWFya2Rvd25fY29uZmlnLlIiKQ0KDQojIyBnbG9iYWwgb3B0aW9ucyA9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PQ0Ka25pdHI6Om9wdHNfY2h1bmskc2V0KA0KICB3aWR0aCA9IGNvbmZpZyR3aWR0aCwNCiAgZmlnLndpZHRoID0gY29uZmlnJGZpZy53aWR0aCwNCiAgZmlnLmFzcCA9IGNvbmZpZyRmaWcuYXNwLA0KICBvdXQud2lkdGggPSBjb25maWckb3V0LndpZHRoLA0KICBmaWcuYWxpZ24gPSBjb25maWckZmlnLmFsaWduLA0KICBmaWcucGF0aCA9IGNvbmZpZyRmaWcucGF0aCwNCiAgZmlnLnNob3cgPSBjb25maWckZmlnLnNob3csDQogIHdhcm4gPSBjb25maWckd2FybiwNCiAgd2FybmluZyA9IGNvbmZpZyR3YXJuaW5nLA0KICBtZXNzYWdlID0gY29uZmlnJG1lc3NhZ2UsDQogIGVjaG8gPSBjb25maWckZWNobywgDQogIGV2YWwgPSBjb25maWckZXZhbCwgDQogIHRpZHkgPSBjb25maWckdGlkeSwgDQogIGNvbW1lbnQgPSBjb25maWckY29tbWVudCwgDQogIGNvbGxhcHNlID0gY29uZmlnJGNvbGxhcHNlLCANCiAgY2FjaGUgPSBjb25maWckY2FjaGUsDQogIGNhY2hlLmNvbW1lbnRzID0gY29uZmlnJGNhY2hlLmNvbW1lbnRzLA0KICBhdXRvZGVwID0gY29uZmlnJGF1dG9kZXANCikNCg0KIyMgdXNlIG5lY2Vzc2FyeSBwYWNrYWdlcyA9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0NCmxpYnJhcnkodGlkeXZlcnNlKQ0KbGlicmFyeShkYXRhLnRhYmxlKQ0KbGlicmFyeShtYWdyaXR0cikNCmxpYnJhcnkocGxvdGx5KQ0KbGlicmFyeShodG1sd2lkZ2V0cykNCmBgYA0KDQpgYGB7ciwgZWNobz1UUlVFfQ0KbGlicmFyeShsb2JzdHIpDQpgYGANCg0KDQo8YSBocmVmPSIuLi9wZGYvY2hlYXRzaGVldC1iYXNlLXIucGRmIj4qUiBiYXNlIGNoZWF0c2hlZXQucGRmKjwvYT4NCg0KPG9iamVjdCBkYXRhPSIuLi9wZGYvY2hlYXRzaGVldC1iYXNlLXIucGRmIiB0eXBlPSJhcHBsaWNhdGlvbi9wZGYiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjwvb2JqZWN0Pg0KDQoNCiMjIFIg5Y+Y6YePDQoNCiMjIyDmn6XnnIvlj5jph4/lsZ7mgKcNCg0KfCDlh73mlbAgICAgICAgICAgICAgICAgfCDor7TmmI4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB8DQp8IC0tLS0tLS0tLS0tLS0tLS0tLS0gfCAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0gfA0KfCBgb2JqZWN0LnNpemUoeClgICAgIHwg5a+56LGh5omA5Y2g5YaF5a2Y56m66Ze055qE5aSn5bCPIChieXRlcykgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfA0KfCBgbGVuZ3RoKHgpYCAgICAgICAgIHwg5a+56LGh55qEIHNpemUgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHwNCnwgYGlzLiooeClgICAgICAgICAgICB8IOWIpOaWreaVsOaNruexu+Wei+OAguWIpOaWreWQkemHj+acgOWlveeUqCBgaXMuYXRvbWljKClgIOiAjOmdniBgaXMudmVjdG9yKClgIHwNCnwgYGFzLiooeClgICAgICAgICAgICB8IOW8uuWItui9rOaNouaVsOaNruexu+WeiyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHwNCnwgYHR5cGVvZih4KS9tb2RlKHgpYCB8IOafpeeci+WvueixoeeahOaVsOaNruexu+Wei+OAgjxicj7oi6Xlr7nosaHkuLpob21vZ2VuZW91cyBkYXRhIHR5cGVz77yM5YiZ6L+U5Zue5YWD57Sg55qE5pWw5o2u57G75Z6L77yM5aaCIGludGVnZXIsICBkb3VibGUsIGNoYXJhY3RlciwgbG9naWNhbO+8m+iLpeS4uuW8gui0qOaAp+eahOWIl+ihqOaIluaVsOaNruahhu+8jOWImei/lOWbniBsaXN0IHwNCnwgYGNsYXNzKHgpYCAgICAgICAgICB8IOafpeeci+WvueixoeaJgOWxnueahOexuyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHwNCnwgYHN0cih4KWAgICAgICAgICAgICB8IOWvueixoeeahGNsYXNz44CB57uT5p6E5ZKM5qaC6KaB5L+h5oGvICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHwNCnwgYHRpYmJsZTo6Z2xpbXBzZSgpYCB8IHRpYmJsZSDniYhgc3RyKClg77yM5LiN5pi+56S6Y2xhc3PvvIzlj6rmmL7npLrmlbDmja4gICAgICAgICAgICAgICAgICAgIHwNCnwgYGRpbSh4KWAgICAgICAgICAgICB8IOi/lOWbnuWvueixoeeahOe7tOW6pu+8jOWPqumAgueUqOS6juefqemYteWSjOaVsOaNruahhiAgICAgICAgICAgICAgICAgICAgICAgICB8DQp8IGBzdW1tYXJ5KHgpYCAgICAgICAgfCDmjInliJfmsYfmgLvlr7nosaHnmoTln7rmnKzkv6Hmga/jgILlr7nkuo7lm6DlrZDvvIzmsYfmgLvlj5bmr4/kuIDkuKrmsLTlubPnmoTooYzmlbDvvJvlr7nkuo7mlbDlgLzlkJHph4/vvIzov5Tlm57ph43opoHnmoTliIbkvY3mlbDvvJvlr7nkuo7lhbbku5bnsbvlnovnmoTliJfvvIzliJnmmL7npLrliJfnmoTplb/luqbjgIHnsbvlnovlkozmqKHlvI/jgIIgfA0KfCBgaGVhZCh4LCBuKWAgICAgICAgIHwg5YiX5Ye65a+56LGh55qE5YmNbuS4quWFg+e0oO+8jOm7mOiupG7kuLo2ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB8DQp8IGB0YWlsKHgsIG4pYCAgICAgICAgfCDliJflh7rlr7nosaHnmoTlkI5u5Liq5YWD57SgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfA0KDQoNCg0KYGBge3J9DQpkZiA9IGRhdGEudGFibGUoaWQgPSAxOjEwLCBsb3dlciA9IGxldHRlcnNbMToxMF0pDQoNCnR5cGVvZihkZikNCmNsYXNzKGRmKQ0Kc3RyKGRmKQ0KZ2xpbXBzZShkZikNCg0KZGYgJT4lIHN1bW1hcnkoKQ0KYGBgDQoNCiMjIyDlj5jph4/lkI0NCg0KIyMjIyDmjIfpkogNCg0K5a+56LGh55qE5Y+Y6YeP5ZCN5piv5LiA5Liq5bi46YeP5oyH6ZKI77yM5oyH5ZCR5LiA5Liq5a+56LGh5omA5Zyo55qE5Zyw5Z2A44CCDQoNCmBgYHtyfQ0KeCA8LSBjKDEsIDIsIDMpDQp5IDwtIHgNCiMgeCwgeSDkuLrmjIflkJHlkIzkuIDkuKrlkJHph4/nmoTmjIfpkogNCm9ial9hZGRyKHgpDQpvYmpfYWRkcih5KQ0KYGBgDQoNCiMjIyMg5LiN6KeE5YiZ5Y+Y6YeP5ZCNDQoNCuimgeeUqOWPjeW8leWPt+aLrOi1t+adpQ0KDQpgYGB7cn0NCmMgJT4lIGNsYXNzKCkgIyBj5piv5LiA5Liq5YaF572u5Ye95pWw77yM5omA5Lul5LiA6Iis5Y+Y6YeP5LiN6IO95LulJ2Plkb3lkI0NCmMgDQoNCmB4KzFgIDwtIGZ1bmN0aW9uKG4pIG4gKyAxDQpgeCsxYA0KYHgrMWAoMykNCmBgYA0KDQojIyMg5L+u5pS55pe25aSN5Yi2IGNvcHktb24tbW9kaWZ5DQoNClIg5Lit55qE5a+56LGh5LiA6Iis5LiN6K646KKr5L+u5pS577yI5bCx5YOPIEpTIOS4reeahGBjb25zdGDluLjph4/vvInvvIzov5nlr7nmlbDmja7lronlhajmnInlpb3lpITjgIINCg0K6LWL5YC85pe2IFIg5aSn6YeP5L2/55So5LqG5ou36LSd5py65Yi277yM6L+Z5pivIFIg6YCf5bqm5oWi55qE5LiA5Liq5Li76KaB5Y6f5Zug44CC5aaC5pi+56S65b6q546v77yM5q+P5qyh6L+t5Luj6YO95Lya5aSN5Yi25a+56LGh44CCDQoNCiMjIyMg5Lya5aSN5Yi25a+56LGh55qE5oOF5b2iDQoNCiMjIyMjIOaVsOWtl+WQkemHjw0KDQoxLiAg5pyJ5aSa5Liq5oyH6ZKI5oyH5ZCR5ZCM5LiA5Liq5a+56LGh77yM5LiU6YCa6L+H5YW25Lit5LiA5Liq5oyH6ZKI5L+u5pS56K+l5a+56LGh5pe277yM5Lya55Sf5oiQ6K+l5a+56LGh55qE5LiA5Liq5Ymv5pys77yI5LiA5Liq5paw5a+56LGh77yJ44CC5L+u5pS55L2c55So5Zyo6L+Z5Liq5Ymv5pys5LiK77yM54S25ZCO5L2/6KKr5L+u5pS555qE5oyH6ZKI5oyH5ZCR6L+Z5Liq5Ymv5pys44CCDQoNCiAgICBgYGB7cn0NCiAgICB4IDwtIGMoMSwgMiwgMykNCiAgICAjIHRyYWNlbWVuKCnot5/ouKp45oyH6ZKI5oyH5ZCR55qE5a+56LGh77yM5q+P5b2T6L+Z5Liq5a+56LGh6KKr5aSN5Yi277yMdHJhY2VtZW0oKemDveS8muaJk+WNsOS4gOadoeivtOaYjg0KICAgIGNhdCh0cmFjZW1lbSh4KSwgIlxuIikNCiAgICB5IDwtIHgNCiAgICB5WzNdIDwtIDRMICMg5Y+R55Sf5ou36LSdDQogICAgb2JqX2FkZHIoeCkNCiAgICBvYmpfYWRkcih5KQ0KICAgIHVudHJhY2VtZW0oeCkgIyDlhbPpl63ot5/ouKoNCiAgICBgYGANCg0KMi4gIOWvueixoeS9nOS4uuWPguaVsOS8oOmAkue7meWHveaVsO+8jOW5tuWcqOWHveaVsOWGhemDqOS/ruaUueWvueixoeaXtu+8jOS5n+S8muWIm+W7uuWvueixoeeahOWJr+acrA0KDQogICAgMS4gIOWHveaVsOWklumDqOeahOWPmOmHj+WQjeS7jeaMh+WQkeacquiiq+S/ruaUueeahOWOn+WvueixoQ0KICAgIDIuICDkvYYqKuWmguaenOS9v+eUqOi/kOeul+espiBgPDwtYO+8jOWwseWPr+S7peS/ruaUueWHveaVsOWklumDqOeahOWPmOmHj++8iOWmguS4gOS6m+maj+edgOi/reS7o+S4gOi9rui9ruabtOaWsOeahOe7n+iuoeWPmOmHj++8iSoq44CC5p+Q5Lqb5oOF5Ya15LiL77yM6L+Z5Liq5Yqf6IO96Z2e5bi46YeN6KaB77yM5Y+v5LulKirpgJrov4flh73mlbDkv67mlLnlpJbpg6jlj5jph48qKuOAgg0KDQogICAgYGBge3J9DQogICAgbW9kaWZ5X2ZpcnN0IDwtIGZ1bmN0aW9uKHgpIHsNCiAgICAgIHhbMV0gPC0gMA0KICAgICAgeA0KICAgIH0NCiAgICB2MSA8LSBjKDEsIDIsIDMpDQogICAgY2F0KHRyYWNlbWVtKHYxKSwgIlxuIikNCiAgICBtb2RpZnlfZmlyc3QodjEpDQogICAgdjEgIyDlpJbpg6jnmoQgdjEg5pyq6KKr5L+u5pS5DQogICAgDQogICAgeCA8LSAwDQogICAgY2F0KHRyYWNlbWVtKHgpLCAiXG4iKQ0KICAgIG1vZGlmeV94IDwtIGZ1bmN0aW9uKHZhbHVlKSB7DQogICAgICB4IDw8LSB2YWx1ZQ0KICAgIH0NCiAgICBtb2RpZnlfeCgzKQ0KICAgIHggIyDlpJbpg6jnmoQgeCDooqvkv67mlLnkuoYNCiAgICBgYGANCg0KIyMjIyMg5YiX6KGoDQoNCuS4uuS6huiKguecgeepuumXtO+8jOWIl+ihqOWCqOWtmOeahOS4jeaYr+Wvueixoe+8jOiAjOaYr+aMh+mSiOOAguS/ruaUueWIl+ihqOaXtu+8jOWPquacieWPmOWMlueahOWFg+e0oOS8muWkjeWItuOAgg0KDQpgYGB7cn0NCmEgPC0gMToxMA0KYiA8LSBsaXN0KGEsIGEpDQpjIDwtIGxpc3QoYiwgYSwgMToxMCkNCnJlZihhLCBiLCBjKQ0KDQpsMSA8LSBsaXN0KDEsIDIsIDMpDQpsMiA8LSBsMQ0KIyDmi7fotJ3mnLrliLblkK/liqjvvIzkvYbmi7fotJ3nmoTmmK/mjIfpkojvvIzogIzkuI3mmK8gdmFsdWXvvIzov5nmmK/mtYXmi7fotJ0NCmwyW1szXV0gPC0gNCANCmxvYnN0cjo6cmVmKGwxLCBsMikNCmBgYA0KDQo8aW1nIHNyYz0iaHR0cDovL2h1bW9vbi1pbWFnZS1ob3N0aW5nLXNlcnZpY2Uub3NzLWNuLWJlaWppbmcuYWxpeXVuY3MuY29tL2ltZy90eXBvcmEvSmF2YVNjcmlwdC9sLW1vZGlmeS0xLnBuZyIgYWx0PSJpbWciIHN0eWxlPSJ6b29tOjUwJTsiLz4NCg0KPGltZyBzcmM9Imh0dHA6Ly9odW1vb24taW1hZ2UtaG9zdGluZy1zZXJ2aWNlLm9zcy1jbi1iZWlqaW5nLmFsaXl1bmNzLmNvbS9pbWcvdHlwb3JhL0phdmFTY3JpcHQvbC1tb2RpZnktMi5wbmciIGFsdD0iaW1nIiBzdHlsZT0iem9vbTo1MCU7Ii8+DQoNCiMjIyMjIOaVsOaNruahhg0KDQrmlbDmja7moYbmnKzotKjkuIrmmK/kuIDkuKrliJfooajvvIzlgqjlrZjnmoTpg73mmK/mjIflkJHliJflkJHph4/nmoTmjIfpkojjgIINCg0KIVtpbWddKGh0dHA6Ly9odW1vb24taW1hZ2UtaG9zdGluZy1zZXJ2aWNlLm9zcy1jbi1iZWlqaW5nLmFsaXl1bmNzLmNvbS9pbWcvdHlwb3JhL0phdmFTY3JpcHQvdjItMjAxMWRlNmYxNGFlZWI0NzdjOTE1MTZlZjI4OWIzMmNfNzIwdy5qcGcpDQoNCmBgYHtyfQ0KZDEgPC0gZGF0YS5mcmFtZSh4ID0gYygxLCA1LCA2KSwgeSA9IGMoMiwgNCwgMykpDQpkMiA8LSBkMQ0KZDMgPC0gZDENCnJlZihkMSwgZDIpDQpyZWYoZDEsIGQzKQ0KDQojIOS/ruaUueWIl++8jOivpeWIl+WkjeWItu+8m+WFtuS7luWIl+aJlOaMh+WQkeWOn+WvueixoQ0KZDJbLCAyXSA8LSBkMlssIDJdICogMg0KcmVmKGQxLCBkMikNCg0KIyDkv67mlLnooYzvvIzlv4XpobvlpI3liLbmr4/kuIDliJcNCmQzWzEsIF0gPC0gZDNbMSwgXSAqIDMNCnJlZihkMSwgZDMpDQpgYGANCg0KIVtpbWddKGh0dHA6Ly9odW1vb24taW1hZ2UtaG9zdGluZy1zZXJ2aWNlLm9zcy1jbi1iZWlqaW5nLmFsaXl1bmNzLmNvbS9pbWcvdHlwb3JhL0phdmFTY3JpcHQvdjItMjE1OTY0ODY5YjNhMTgzMWU4OThjZGY5Nzc5NWI5NGVfNzIwdy5qcGcpDQoNCiFbaW1nXShodHRwOi8vaHVtb29uLWltYWdlLWhvc3Rpbmctc2VydmljZS5vc3MtY24tYmVpamluZy5hbGl5dW5jcy5jb20vaW1nL3R5cG9yYS9KYXZhU2NyaXB0L3YyLWVlYTA2NTg5YWYxODIxN2VlY2RhNDA1ZjdlZjBlNzgxX3IuanBnKQ0KDQojIyMjIyDlrZfnrKblkJHph48NCg0K5Lmf5piv5oyH6ZKI55qE5ZCR6YeP44CC5q+P5Liq5oyH6ZKI5oyH5ZCR5LiA5Liq5a2X56ym5Liy77yM6L+Z5Liq5a2X56ym5Liy5L2N5LqO5YWo5bGA5a2X56ym5Liy5rGg5Lit44CCDQoNCmBgYHtyfQ0KeCA8LSBjKCJhIiwgImEiLCAiYWJjIiwgImQiKQ0KcmVmKHgsIGNoYXJhY3RlciA9IFRSVUUpDQpgYGANCg0KIVtpbWddKGh0dHA6Ly9odW1vb24taW1hZ2UtaG9zdGluZy1zZXJ2aWNlLm9zcy1jbi1iZWlqaW5nLmFsaXl1bmNzLmNvbS9pbWcvdHlwb3JhL0phdmFTY3JpcHQvdjItYmU1MDRiOGZiOTQ2MGFlY2VhNzJjZDJjYjIxYzgxMWVfNzIwdy5qcGcpDQoNCiMjIyMg5LiN5Lya5aSN5Yi25a+56LGh55qE5oOF5b2iDQoNCiMjIyMjIOWUr+S4gOaMh+mSiA0KDQrlj6rmnInkuIDkuKrmjIfpkojmjIflkJHlr7nosaHml7bvvIzkv67mlLnlr7nosaHkuI3kvJrlj5HnlJ/lpI3liLbjgIINCg0KKFJzdHVkaW8g5Lit5LiOIENvbnNvbGUg5Lit5LiN5ZCM77yMUnN0dWRpbyDkuK3ku43opoHlpI3liLYpDQoNCmBgYHtyfQ0KeiA8LSBjKDEsIDIsIDMsIDQsIDUpDQpjYXQodHJhY2VtZW0oeiksICJcbiIpDQp6WzNdIDwtIDRMDQp6DQpvYmpfYWRkcih6KQ0KdW50cmFjZW1lbSh6KSAjIOWFs+mXrei3n+i4qg0KYGBgDQoNCuS9huaYr++8jFIg5a+55oyH6ZKI5pWw6YeP55qE5Yik5pat5LiN5aSf5pm66IO944CC5aaC5Lik5Liq5oyH6ZKI5oyH5ZCR5LiA5Liq5a+56LGh77yM5YW25Lit5LiA5Liq6KKr5Yig6Zmk5ZCO77yMUiDljbTkuI3nn6XpgZPvvIzku43nhLbku6XkuLrmnInkuKTkuKrmjIfpkojjgILlm6DmraTkvJrkuqfnlJ/lvojlpJrkuI3lv4XopoHnmoTlr7nosaHmi7fotJ3jgIINCg0KYGBge3J9DQp4IDwtIGRhdGEuZnJhbWUobWF0cml4KHJ1bmlmKDUgKiAxZTQpLCBuY29sID0gNSkpDQpjYXQodHJhY2VtZW0oeCksICJcbiIpDQptZWRpYW5zIDwtIHZhcHBseSh4LCBtZWRpYW4sIG51bWVyaWMoMSkpDQoNCmZvciAoaSBpbiAxOjUpIHsNCiAgeFtbaV1dIDwtIHhbW2ldXSAtIG1lZGlhbnNbW2ldXQ0KfQ0KYGBgDQoNCiMjIyMjIOeOr+Wig+WvueixoeaAu+aYr+iiq+WwseWcsOS/ruaUuQ0KDQoNCiMjIyDop6PmnoTotYvlgLzvvIhVbnBhY2tpbmcgQXNzaWdubWVudO+8iQ0KDQoqKnplYWxsb3Qg5YyF5o+Q5L6b55qEIGAlPC0lYCDlkowgYCU+LSVgIOWHveaVsCoqDQoNCmBgYHtyfQ0KbGlicmFyeSh6ZWFsbG90KQ0KDQojIHVucGFjayB2ZWN0b3INCmMobGF0LCBsbmcpICU8LSUgYygzOC4wNjE5NDQsIC0xMjIuNjQzODg5KQ0KbGF0DQpsbmcNCg0KIyB1bnBhY2sgbGlzdA0KY29vcmRzX2xpc3QgPC0gZnVuY3Rpb24oKSB7DQogIGxpc3QoMzguMDYxOTQ0LCAtMTIyLjY0Mzg4OSkNCn0NCmMobGF0LCBsbmcpICU8LSUgY29vcmRzX2xpc3QoKQ0KbGF0DQpsbmcNCg0KIyB1bnBhY2sgcmVncmVzc2lvbiByZXN1bHQNCmMoaW50ZXIsIHNsb3BlKSAlPC0lIGNvZWYobG0obXBnIH4gY3lsLCBkYXRhID0gbXRjYXJzKSkNCmludGVyDQpzbG9wZQ0KDQojIHVucGFjayBkYXRhLmZyYW1lDQpjKG1wZywgY3lsLCBkaXNwLCBocCkgJTwtJSBtdGNhcnNbLCAxOjRdDQpoZWFkKG1wZykNCg0KIyB1bnBhY2sgbmVzdGVkIHZhbHVlcw0KYyhhLCBjKGIsIGQpLCBlKSAlPC0lIGxpc3QoImJlZ2luIiwgbGlzdCgibWlkZGxlMSIsICJtaWRkbGUyIiksICJlbmQiKQ0KYQ0KYg0KZA0KZQ0KDQojIHVucGFjayBjaGFyYWN0ZXIgc3RyaW5nDQpjKGNoMSwgY2gyLCBjaDMpICU8LSUgImFiYyINCmNoMQ0KY2gyDQpjaDMNCg0KIyB1bnBhY2sgRGF0ZQ0KYyh5LCBtLCBkKSAlPC0lIFN5cy5EYXRlKCkNCnkNCm0NCmQNCg0KIyAuLi4gcmVzdCBvZg0KYyhiZWdpbiwgLi4ubWlkZGxlLCBlbmQpICU8LSUgbGlzdCgxLCAyLCAzLCA0LCA1KQ0KYmVnaW4NCm1pZGRsZQ0KDQojIHBsYWNlIGhvbGRlcg0KYyhtaW5fd3QsIC4sIC4sIG1lYW5fd3QsIC4sIG1heF93dCkgJTwtJSBzdW1tYXJ5KG10Y2FycyR3dCkNCm1pbl93dA0KbWVhbl93dA0KbWF4X3d0DQoNCiMg5ZCR5Y+z55qE6Kej5p6E6LWL5YC856ym5Y+3ICUtPiUNCm10Y2FycyAlPiUNCiAgc3Vic2V0KGhwID4gMTAwKSAlPiUNCiAgYWdncmVnYXRlKC4gfiBjeWwsIGRhdGEgPSAuLCBGVU4gPSAuICU+JSBtZWFuKCkgJT4lIHJvdW5kKDIpKSAlPiUNCiAgdHJhbnNmb3JtKGtwbCA9IG1wZyAlPiUgbXVsdGlwbHlfYnkoMC40MjUxKSkgJS0+JSANCiAgYyhjeWwsIG1wZywgLi4ucmVzdCkNCmN5bA0KYGBgDQoNCg0KIyMg5p2h5Lu26K+t5Y+lDQoNCiMjIyBgaWYuLi5lbHNlIGlmLi4uZWxzZS4uLmANCg0KYGBgIHINCmlmIChjb25kaXRpb24xKSB7DQogIA0KfSBlbHNlIGlmIChjb25kaXRpb24yKSB7IA0KICAjIGVsc2UgaWbkuK3pl7TmnInnqbrmoLzvvIzot58gSmF2YVNjcmlwdCDkuIDmoLcNCn0gZWxzZSB7DQogIA0KfQ0KYGBgDQoNCiMjIyBgaWZlbHNlKClgDQoNCmBpZi4uLmVsc2VgIOeahCBjb25kaXRpb24g5LiN6IO95piv5ZCR6YeP77yM5bCG6Ieq5Yqo5b+955Wl5p2h5Lu25ZCR6YeP5Lit56ys5LiA5Liq5Lul5ZCO55qE5YWD57Sg44CC5pyJ5pe277yM6KaB55SoYGFueShib29sIHZlY3Rvcilg5ZKMYGFsbChib29sIHZlY3Rvcilg5bCG5biD5bCU5ZCR6YeP6L2s5o2i5Li65LiA5LiqYm9vbOWAvO+8jOWGjemFjeWQiGBpZmDkvb/nlKjjgIINCg0K6ICM5LiJ5YWD6YCJ5oup56ymYGlmZWxzZShjb25kLCBzdGF0ZW1lbnQxLCBzdGF0ZW1lbnQyKWDlj6/ku6XmjqXmlLbkuInkuKrlkJHph4/vvIzmjInlkIToh6rliIbph4/miafooYzlkJHph4/ljJbmk43kvZwNCg0KPiDlr7nlupQgSlMg5Lit55qEIGBjb25kaXRpb24/IFN0YXRlbWVudDE6IHN0YXRlbWVudDI7YA0KDQojIyMgYHN3aXRjaChzdGF0ZW1lbnQsIGxpc3QpYA0KDQpsaXN0IOaYr+S4gOe7hOmUruWAvOWvue+8jHN0YXRlbWVudCDmmK/kuIDkuKrplK7vvIzov5Tlm54gbGlzdCDkuK3kuI7or6XplK7lr7nlupTnmoTlgLzjgIINCg0KYGBgIHINCnJlc3VsdDEgPSBzd2l0Y2goJ2ZydWl0JywNCiAgICAgICAgICAgICAgICAgbWVhdCA9ICJjaGlja2VuIiwNCiAgICAgICAgICAgICAgICAgZnJ1aXQgPSAiYXBwbGUiLA0KICAgICAgICAgICAgICAgICB2ZWdldGFibGUgPSAiY3VjdW1iZXIiLA0KICAgICAgICAgICAgICAgICAnc291cCcpDQpyZXN1bHQxDQojIFsxXSAiYXBwbGUiDQoNCnJlc3VsdDIgPSBzd2l0Y2goJ2ZpbmFsJywNCiAgICAgICAgICAgICAgICAgbWVhdCA9ICJjaGlja2VuIiwNCiAgICAgICAgICAgICAgICAgZnJ1aXQgPSAiYXBwbGUiLA0KICAgICAgICAgICAgICAgICB2ZWdldGFibGUgPSAiY3VjdW1iZXIiLA0KICAgICAgICAgICAgICAgICAnc291cCcpDQpyZXN1bHQyICMg6YO95LiN5Yy56YWN5pe277yM6L+U5Zue5pega2V555qE5YC8DQojIFsxXSAic291cCINCmBgYA0KDQojIyDlvqrnjq/or63lj6UNCg0KIyMjIGByZXBlYXR7fWANCg0K5b+F6aG75omL5Yqo5oyH5a6aIGJyZWFrIOadoeS7tu+8jOWQpuWImeaXoOmZkOW+queOr+OAgui/meWcqOWIm+W7uuS6pOS6kuW8jyBhcHAg5pe25b6I5pyJ55So44CCDQoNCiMjIyBgd2hpbGUgKGNvbmRpdGlvbikge31gDQoNCiMjIyBgZm9yKCBpdGVyYXRvciBpbiBzZXF1ZW5jZSkge31gDQoNCiMjIyMg6aKE5YWI5YiG6YWN56m66Ze077ya5o+Q6auY5Lyg57ufIGZvciDlvqrnjq/nmoTmlYjnjocNCg0KUiDkuK3lpoLmnpzlr7nlr7nosaHnmoQgc2l6ZSDlgZrkuobmlLnliqjvvIjlpoLmt7vliqDkuIDkuKrlhYPntKDvvInvvIzopoHmiormlbTkuKrmlbDmja7nu5PmnoTpg73ph43mlrDmi7fotJ3kuIDku73vvIzov5npnZ7luLjmhaLjgILlpoLmnpzlnKjmr4/mrKHlvqrnjq/kuK3pg73mnInov5nnp43or63lj6XvvIzml7bpl7TlpI3mnYLluqbkvJrmmK8kXG1hdGhybXtPfVxsZWZ0KFxtYXRocm17bn1eezJ9XHJpZ2h0KSTnuqfnmoTjgIINCg0K5omA5Lul5pyA5aW95Zyo5byA5aeL5b6q546v5YmN77yM6aKE5YWI5aOw5piO5LiA5Liq5ZCR6YeP77yM5Li66L6T5Ye657uT5p6c5YiG6YWN6Laz5aSf55qE56m66Ze077yM6L+Z5a+55b6q546v5pWI546H6Z2e5bi46YeN6KaB44CC6aKE5YWI5YiG6YWN55qE56m66Ze05b6A5b6A5piv5LiA5LiqbGlzdO+8jOWcqOW+queOr+e7k+adn+WQjumcgOimgeaJk+aVo+W5tumHjee7hOS4uuaIkeS7rOmcgOimgeeahOWvueixoe+8muWvueS6juWQkemHj+eUqGB1bmxpc3QoKWDvvIzmlbDmja7moYbnlKhgZHBseXI6OmJpbmRfcm93cygpYA0KDQrov5nlhbblrp7mnInngrnlg48gSlMg6YeM6Z2i55qEOg0KDQpgYGB7anN9DQpjb25zdCBhcnIgPSBbXTsNCmZvciAobGV0IGkgPSAwOyBpIDwgNjsgaSsrKSB7DQogIGFyci5wdXNoKGkgXiAyICUgMTEpOw0KfQ0KY29uc29sZS5sb2coYXJyKTsNCmBgYA0KDQrkvovvvJoNCg0KYGBge3J9DQpkZiA8LSB0aWJibGUoDQogIGEgPSBybm9ybSgxMCksDQogIGIgPSBybm9ybSgxMCksDQogIGMgPSBybm9ybSgxMCksDQogIGQgPSBybm9ybSgxMCkNCikNCg0KIyDopoHmsYJkZuWQhOWIl+eahOS4reS9jeaVsO+8jOWFiOS4uui+k+WHuuWIhumFjeepuumXtO+8jOmVv+W6puS4um5jb2woZGYp55qE5ZCR6YePDQpvdXRwdXQgPC0gIGRvdWJsZShuY29sKGRmKSkNCmZvciAoaSBpbiAxOm5jb2woZGYpKSB7IA0KICBvdXRwdXRbW2ldXSA8LSBtZWRpYW4oZGZbW2ldXSkNCn0NCm91dHB1dA0KYGBgDQoNCiMjIyBgYnJlYWtgIOWFs+mUruWtlw0KDQojIyMgYG5leHRgIOWFs+mUruWtlw0KDQojIyBEZWJ1Zw0KDQpgc3RvcChzdHJpbmcpYAnnu4jmraLnqIvluo/lubbmiqXplJnvvJoiRXJyb3I6IHN0cmluZyINCg==</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIlIgQmFzaWMgR3JhbW1hciINCnN1YnRpdGxlOiBWYXJpYWJsZSwgQ29uZGl0aW9uLCBMb29wIGFuZCBEZWJ1Zw0KYXV0aG9yOiAiSHVtb29uIg0KZGF0ZTogImByIFN5cy5EYXRlKClgIg0Kb3V0cHV0OiBodG1sX2RvY3VtZW50DQpkb2N1bWVudGNsYXNzOiBjdGV4YXJ0DQpjbGFzc29wdGlvbjogaHlwZXJyZWYsDQotLS0NCg0KYGBge3Igc2V0dXAsIGluY2x1ZGUgPSBGQUxTRX0NCnNvdXJjZSgiLi4vUm1hcmtkb3duLXRlbXBsYXRlL1JtYXJrZG93bl9jb25maWcuUiIpDQoNCiMjIGdsb2JhbCBvcHRpb25zID09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09DQprbml0cjo6b3B0c19jaHVuayRzZXQoDQogIHdpZHRoID0gY29uZmlnJHdpZHRoLA0KICBmaWcud2lkdGggPSBjb25maWckZmlnLndpZHRoLA0KICBmaWcuYXNwID0gY29uZmlnJGZpZy5hc3AsDQogIG91dC53aWR0aCA9IGNvbmZpZyRvdXQud2lkdGgsDQogIGZpZy5hbGlnbiA9IGNvbmZpZyRmaWcuYWxpZ24sDQogIGZpZy5wYXRoID0gY29uZmlnJGZpZy5wYXRoLA0KICBmaWcuc2hvdyA9IGNvbmZpZyRmaWcuc2hvdywNCiAgd2FybiA9IGNvbmZpZyR3YXJuLA0KICB3YXJuaW5nID0gY29uZmlnJHdhcm5pbmcsDQogIG1lc3NhZ2UgPSBjb25maWckbWVzc2FnZSwNCiAgZWNobyA9IGNvbmZpZyRlY2hvLCANCiAgZXZhbCA9IGNvbmZpZyRldmFsLCANCiAgdGlkeSA9IGNvbmZpZyR0aWR5LCANCiAgY29tbWVudCA9IGNvbmZpZyRjb21tZW50LCANCiAgY29sbGFwc2UgPSBjb25maWckY29sbGFwc2UsIA0KICBjYWNoZSA9IGNvbmZpZyRjYWNoZSwNCiAgY2FjaGUuY29tbWVudHMgPSBjb25maWckY2FjaGUuY29tbWVudHMsDQogIGF1dG9kZXAgPSBjb25maWckYXV0b2RlcA0KKQ0KDQojIyB1c2UgbmVjZXNzYXJ5IHBhY2thZ2VzID09PT09PT09PT09PT09PT09PT09PT09PT09PT09PQ0KbGlicmFyeSh0aWR5dmVyc2UpDQpsaWJyYXJ5KGRhdGEudGFibGUpDQpsaWJyYXJ5KG1hZ3JpdHRyKQ0KbGlicmFyeShwbG90bHkpDQpsaWJyYXJ5KGh0bWx3aWRnZXRzKQ0KYGBgDQoNCmBgYHtyLCBlY2hvPVRSVUV9DQpsaWJyYXJ5KGxvYnN0cikNCmBgYA0KDQoNCjxhIGhyZWY9Ii4uL3BkZi9jaGVhdHNoZWV0LWJhc2Utci5wZGYiPipSIGJhc2UgY2hlYXRzaGVldC5wZGYqPC9hPg0KDQo8b2JqZWN0IGRhdGE9Ii4uL3BkZi9jaGVhdHNoZWV0LWJhc2Utci5wZGYiIHR5cGU9ImFwcGxpY2F0aW9uL3BkZiIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSI+PC9vYmplY3Q+DQoNCg0KIyMgUiDlj5jph48NCg0KIyMjIOafpeeci+WPmOmHj+WxnuaApw0KDQp8IOWHveaVsCAgICAgICAgICAgICAgICB8IOivtOaYjiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHwNCnwgLS0tLS0tLS0tLS0tLS0tLS0tLSB8IC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLSB8DQp8IGBvYmplY3Quc2l6ZSh4KWAgICAgfCDlr7nosaHmiYDljaDlhoXlrZjnqbrpl7TnmoTlpKflsI8gKGJ5dGVzKSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB8DQp8IGBsZW5ndGgoeClgICAgICAgICAgfCDlr7nosaHnmoQgc2l6ZSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfA0KfCBgaXMuKih4KWAgICAgICAgICAgIHwg5Yik5pat5pWw5o2u57G75Z6L44CC5Yik5pat5ZCR6YeP5pyA5aW955SoIGBpcy5hdG9taWMoKWAg6ICM6Z2eIGBpcy52ZWN0b3IoKWAgfA0KfCBgYXMuKih4KWAgICAgICAgICAgIHwg5by65Yi26L2s5o2i5pWw5o2u57G75Z6LICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfA0KfCBgdHlwZW9mKHgpL21vZGUoeClgIHwg5p+l55yL5a+56LGh55qE5pWw5o2u57G75Z6L44CCPGJyPuiLpeWvueixoeS4umhvbW9nZW5lb3VzIGRhdGEgdHlwZXPvvIzliJnov5Tlm57lhYPntKDnmoTmlbDmja7nsbvlnovvvIzlpoIgaW50ZWdlciwgIGRvdWJsZSwgY2hhcmFjdGVyLCBsb2dpY2Fs77yb6Iul5Li65byC6LSo5oCn55qE5YiX6KGo5oiW5pWw5o2u5qGG77yM5YiZ6L+U5ZueIGxpc3QgfA0KfCBgY2xhc3MoeClgICAgICAgICAgIHwg5p+l55yL5a+56LGh5omA5bGe55qE57G7ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfA0KfCBgc3RyKHgpYCAgICAgICAgICAgIHwg5a+56LGh55qEY2xhc3PjgIHnu5PmnoTlkozmpoLopoHkv6Hmga8gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfA0KfCBgdGliYmxlOjpnbGltcHNlKClgIHwgdGliYmxlIOeJiGBzdHIoKWDvvIzkuI3mmL7npLpjbGFzc++8jOWPquaYvuekuuaVsOaNriAgICAgICAgICAgICAgICAgICAgfA0KfCBgZGltKHgpYCAgICAgICAgICAgIHwg6L+U5Zue5a+56LGh55qE57u05bqm77yM5Y+q6YCC55So5LqO55+p6Zi15ZKM5pWw5o2u5qGGICAgICAgICAgICAgICAgICAgICAgICAgIHwNCnwgYHN1bW1hcnkoeClgICAgICAgICB8IOaMieWIl+axh+aAu+WvueixoeeahOWfuuacrOS/oeaBr+OAguWvueS6juWboOWtkO+8jOaxh+aAu+WPluavj+S4gOS4quawtOW5s+eahOihjOaVsO+8m+WvueS6juaVsOWAvOWQkemHj++8jOi/lOWbnumHjeimgeeahOWIhuS9jeaVsO+8m+WvueS6juWFtuS7luexu+Wei+eahOWIl++8jOWImeaYvuekuuWIl+eahOmVv+W6puOAgeexu+Wei+WSjOaooeW8j+OAgiB8DQp8IGBoZWFkKHgsIG4pYCAgICAgICAgfCDliJflh7rlr7nosaHnmoTliY1u5Liq5YWD57Sg77yM6buY6K6kbuS4ujYgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHwNCnwgYHRhaWwoeCwgbilgICAgICAgICB8IOWIl+WHuuWvueixoeeahOWQjm7kuKrlhYPntKAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB8DQoNCg0KDQpgYGB7cn0NCmRmID0gZGF0YS50YWJsZShpZCA9IDE6MTAsIGxvd2VyID0gbGV0dGVyc1sxOjEwXSkNCg0KdHlwZW9mKGRmKQ0KY2xhc3MoZGYpDQpzdHIoZGYpDQpnbGltcHNlKGRmKQ0KDQpkZiAlPiUgc3VtbWFyeSgpDQpgYGANCg0KIyMjIOWPmOmHj+WQjQ0KDQojIyMjIOaMh+mSiA0KDQrlr7nosaHnmoTlj5jph4/lkI3mmK/kuIDkuKrluLjph4/mjIfpkojvvIzmjIflkJHkuIDkuKrlr7nosaHmiYDlnKjnmoTlnLDlnYDjgIINCg0KYGBge3J9DQp4IDwtIGMoMSwgMiwgMykNCnkgPC0geA0KIyB4LCB5IOS4uuaMh+WQkeWQjOS4gOS4quWQkemHj+eahOaMh+mSiA0Kb2JqX2FkZHIoeCkNCm9ial9hZGRyKHkpDQpgYGANCg0KIyMjIyDkuI3op4TliJnlj5jph4/lkI0NCg0K6KaB55So5Y+N5byV5Y+35ous6LW35p2lDQoNCmBgYHtyfQ0KYyAlPiUgY2xhc3MoKSAjIGPmmK/kuIDkuKrlhoXnva7lh73mlbDvvIzmiYDku6XkuIDoiKzlj5jph4/kuI3og73ku6UnY+WRveWQjQ0KYyANCg0KYHgrMWAgPC0gZnVuY3Rpb24obikgbiArIDENCmB4KzFgDQpgeCsxYCgzKQ0KYGBgDQoNCiMjIyDkv67mlLnml7blpI3liLYgY29weS1vbi1tb2RpZnkNCg0KUiDkuK3nmoTlr7nosaHkuIDoiKzkuI3orrjooqvkv67mlLnvvIjlsLHlg48gSlMg5Lit55qEYGNvbnN0YOW4uOmHj++8ie+8jOi/meWvueaVsOaNruWuieWFqOacieWlveWkhOOAgg0KDQrotYvlgLzml7YgUiDlpKfph4/kvb/nlKjkuobmi7fotJ3mnLrliLbvvIzov5nmmK8gUiDpgJ/luqbmhaLnmoTkuIDkuKrkuLvopoHljp/lm6DjgILlpoLmmL7npLrlvqrnjq/vvIzmr4/mrKHov63ku6Ppg73kvJrlpI3liLblr7nosaHjgIINCg0KIyMjIyDkvJrlpI3liLblr7nosaHnmoTmg4XlvaINCg0KIyMjIyMg5pWw5a2X5ZCR6YePDQoNCjEuICDmnInlpJrkuKrmjIfpkojmjIflkJHlkIzkuIDkuKrlr7nosaHvvIzkuJTpgJrov4flhbbkuK3kuIDkuKrmjIfpkojkv67mlLnor6Xlr7nosaHml7bvvIzkvJrnlJ/miJDor6Xlr7nosaHnmoTkuIDkuKrlia/mnKzvvIjkuIDkuKrmlrDlr7nosaHvvInjgILkv67mlLnkvZznlKjlnKjov5nkuKrlia/mnKzkuIrvvIznhLblkI7kvb/ooqvkv67mlLnnmoTmjIfpkojmjIflkJHov5nkuKrlia/mnKzjgIINCg0KICAgIGBgYHtyfQ0KICAgIHggPC0gYygxLCAyLCAzKQ0KICAgICMgdHJhY2VtZW4oKei3n+i4qnjmjIfpkojmjIflkJHnmoTlr7nosaHvvIzmr4/lvZPov5nkuKrlr7nosaHooqvlpI3liLbvvIx0cmFjZW1lbSgp6YO95Lya5omT5Y2w5LiA5p2h6K+05piODQogICAgY2F0KHRyYWNlbWVtKHgpLCAiXG4iKQ0KICAgIHkgPC0geA0KICAgIHlbM10gPC0gNEwgIyDlj5HnlJ/mi7fotJ0NCiAgICBvYmpfYWRkcih4KQ0KICAgIG9ial9hZGRyKHkpDQogICAgdW50cmFjZW1lbSh4KSAjIOWFs+mXrei3n+i4qg0KICAgIGBgYA0KDQoyLiAg5a+56LGh5L2c5Li65Y+C5pWw5Lyg6YCS57uZ5Ye95pWw77yM5bm25Zyo5Ye95pWw5YaF6YOo5L+u5pS55a+56LGh5pe277yM5Lmf5Lya5Yib5bu65a+56LGh55qE5Ymv5pysDQoNCiAgICAxLiAg5Ye95pWw5aSW6YOo55qE5Y+Y6YeP5ZCN5LuN5oyH5ZCR5pyq6KKr5L+u5pS555qE5Y6f5a+56LGhDQogICAgMi4gIOS9hioq5aaC5p6c5L2/55So6L+Q566X56ymIGA8PC1g77yM5bCx5Y+v5Lul5L+u5pS55Ye95pWw5aSW6YOo55qE5Y+Y6YeP77yI5aaC5LiA5Lqb6ZqP552A6L+t5Luj5LiA6L2u6L2u5pu05paw55qE57uf6K6h5Y+Y6YeP77yJKirjgILmn5Dkupvmg4XlhrXkuIvvvIzov5nkuKrlip/og73pnZ7luLjph43opoHvvIzlj6/ku6UqKumAmui/h+WHveaVsOS/ruaUueWklumDqOWPmOmHjyoq44CCDQoNCiAgICBgYGB7cn0NCiAgICBtb2RpZnlfZmlyc3QgPC0gZnVuY3Rpb24oeCkgew0KICAgICAgeFsxXSA8LSAwDQogICAgICB4DQogICAgfQ0KICAgIHYxIDwtIGMoMSwgMiwgMykNCiAgICBjYXQodHJhY2VtZW0odjEpLCAiXG4iKQ0KICAgIG1vZGlmeV9maXJzdCh2MSkNCiAgICB2MSAjIOWklumDqOeahCB2MSDmnKrooqvkv67mlLkNCiAgICANCiAgICB4IDwtIDANCiAgICBjYXQodHJhY2VtZW0oeCksICJcbiIpDQogICAgbW9kaWZ5X3ggPC0gZnVuY3Rpb24odmFsdWUpIHsNCiAgICAgIHggPDwtIHZhbHVlDQogICAgfQ0KICAgIG1vZGlmeV94KDMpDQogICAgeCAjIOWklumDqOeahCB4IOiiq+S/ruaUueS6hg0KICAgIGBgYA0KDQojIyMjIyDliJfooagNCg0K5Li65LqG6IqC55yB56m66Ze077yM5YiX6KGo5YKo5a2Y55qE5LiN5piv5a+56LGh77yM6ICM5piv5oyH6ZKI44CC5L+u5pS55YiX6KGo5pe277yM5Y+q5pyJ5Y+Y5YyW55qE5YWD57Sg5Lya5aSN5Yi244CCDQoNCmBgYHtyfQ0KYSA8LSAxOjEwDQpiIDwtIGxpc3QoYSwgYSkNCmMgPC0gbGlzdChiLCBhLCAxOjEwKQ0KcmVmKGEsIGIsIGMpDQoNCmwxIDwtIGxpc3QoMSwgMiwgMykNCmwyIDwtIGwxDQojIOaLt+i0neacuuWItuWQr+WKqO+8jOS9huaLt+i0neeahOaYr+aMh+mSiO+8jOiAjOS4jeaYryB2YWx1Ze+8jOi/meaYr+a1heaLt+i0nQ0KbDJbWzNdXSA8LSA0IA0KbG9ic3RyOjpyZWYobDEsIGwyKQ0KYGBgDQoNCjxpbWcgc3JjPSJodHRwOi8vaHVtb29uLWltYWdlLWhvc3Rpbmctc2VydmljZS5vc3MtY24tYmVpamluZy5hbGl5dW5jcy5jb20vaW1nL3R5cG9yYS9KYXZhU2NyaXB0L2wtbW9kaWZ5LTEucG5nIiBhbHQ9ImltZyIgc3R5bGU9Inpvb206NTAlOyIvPg0KDQo8aW1nIHNyYz0iaHR0cDovL2h1bW9vbi1pbWFnZS1ob3N0aW5nLXNlcnZpY2Uub3NzLWNuLWJlaWppbmcuYWxpeXVuY3MuY29tL2ltZy90eXBvcmEvSmF2YVNjcmlwdC9sLW1vZGlmeS0yLnBuZyIgYWx0PSJpbWciIHN0eWxlPSJ6b29tOjUwJTsiLz4NCg0KIyMjIyMg5pWw5o2u5qGGDQoNCuaVsOaNruahhuacrOi0qOS4iuaYr+S4gOS4quWIl+ihqO+8jOWCqOWtmOeahOmDveaYr+aMh+WQkeWIl+WQkemHj+eahOaMh+mSiOOAgg0KDQohW2ltZ10oaHR0cDovL2h1bW9vbi1pbWFnZS1ob3N0aW5nLXNlcnZpY2Uub3NzLWNuLWJlaWppbmcuYWxpeXVuY3MuY29tL2ltZy90eXBvcmEvSmF2YVNjcmlwdC92Mi0yMDExZGU2ZjE0YWVlYjQ3N2M5MTUxNmVmMjg5YjMyY183MjB3LmpwZykNCg0KYGBge3J9DQpkMSA8LSBkYXRhLmZyYW1lKHggPSBjKDEsIDUsIDYpLCB5ID0gYygyLCA0LCAzKSkNCmQyIDwtIGQxDQpkMyA8LSBkMQ0KcmVmKGQxLCBkMikNCnJlZihkMSwgZDMpDQoNCiMg5L+u5pS55YiX77yM6K+l5YiX5aSN5Yi277yb5YW25LuW5YiX5omU5oyH5ZCR5Y6f5a+56LGhDQpkMlssIDJdIDwtIGQyWywgMl0gKiAyDQpyZWYoZDEsIGQyKQ0KDQojIOS/ruaUueihjO+8jOW/hemhu+WkjeWItuavj+S4gOWIlw0KZDNbMSwgXSA8LSBkM1sxLCBdICogMw0KcmVmKGQxLCBkMykNCmBgYA0KDQohW2ltZ10oaHR0cDovL2h1bW9vbi1pbWFnZS1ob3N0aW5nLXNlcnZpY2Uub3NzLWNuLWJlaWppbmcuYWxpeXVuY3MuY29tL2ltZy90eXBvcmEvSmF2YVNjcmlwdC92Mi0yMTU5NjQ4NjliM2ExODMxZTg5OGNkZjk3Nzk1Yjk0ZV83MjB3LmpwZykNCg0KIVtpbWddKGh0dHA6Ly9odW1vb24taW1hZ2UtaG9zdGluZy1zZXJ2aWNlLm9zcy1jbi1iZWlqaW5nLmFsaXl1bmNzLmNvbS9pbWcvdHlwb3JhL0phdmFTY3JpcHQvdjItZWVhMDY1ODlhZjE4MjE3ZWVjZGE0MDVmN2VmMGU3ODFfci5qcGcpDQoNCiMjIyMjIOWtl+espuWQkemHjw0KDQrkuZ/mmK/mjIfpkojnmoTlkJHph4/jgILmr4/kuKrmjIfpkojmjIflkJHkuIDkuKrlrZfnrKbkuLLvvIzov5nkuKrlrZfnrKbkuLLkvY3kuo7lhajlsYDlrZfnrKbkuLLmsaDkuK3jgIINCg0KYGBge3J9DQp4IDwtIGMoImEiLCAiYSIsICJhYmMiLCAiZCIpDQpyZWYoeCwgY2hhcmFjdGVyID0gVFJVRSkNCmBgYA0KDQohW2ltZ10oaHR0cDovL2h1bW9vbi1pbWFnZS1ob3N0aW5nLXNlcnZpY2Uub3NzLWNuLWJlaWppbmcuYWxpeXVuY3MuY29tL2ltZy90eXBvcmEvSmF2YVNjcmlwdC92Mi1iZTUwNGI4ZmI5NDYwYWVjZWE3MmNkMmNiMjFjODExZV83MjB3LmpwZykNCg0KIyMjIyDkuI3kvJrlpI3liLblr7nosaHnmoTmg4XlvaINCg0KIyMjIyMg5ZSv5LiA5oyH6ZKIDQoNCuWPquacieS4gOS4quaMh+mSiOaMh+WQkeWvueixoeaXtu+8jOS/ruaUueWvueixoeS4jeS8muWPkeeUn+WkjeWItuOAgg0KDQooUnN0dWRpbyDkuK3kuI4gQ29uc29sZSDkuK3kuI3lkIzvvIxSc3R1ZGlvIOS4reS7jeimgeWkjeWItikNCg0KYGBge3J9DQp6IDwtIGMoMSwgMiwgMywgNCwgNSkNCmNhdCh0cmFjZW1lbSh6KSwgIlxuIikNCnpbM10gPC0gNEwNCnoNCm9ial9hZGRyKHopDQp1bnRyYWNlbWVtKHopICMg5YWz6Zet6Lef6LiqDQpgYGANCg0K5L2G5piv77yMUiDlr7nmjIfpkojmlbDph4/nmoTliKTmlq3kuI3lpJ/mmbrog73jgILlpoLkuKTkuKrmjIfpkojmjIflkJHkuIDkuKrlr7nosaHvvIzlhbbkuK3kuIDkuKrooqvliKDpmaTlkI7vvIxSIOWNtOS4jeefpemBk++8jOS7jeeEtuS7peS4uuacieS4pOS4quaMh+mSiOOAguWboOatpOS8muS6p+eUn+W+iOWkmuS4jeW/heimgeeahOWvueixoeaLt+i0neOAgg0KDQpgYGB7cn0NCnggPC0gZGF0YS5mcmFtZShtYXRyaXgocnVuaWYoNSAqIDFlNCksIG5jb2wgPSA1KSkNCmNhdCh0cmFjZW1lbSh4KSwgIlxuIikNCm1lZGlhbnMgPC0gdmFwcGx5KHgsIG1lZGlhbiwgbnVtZXJpYygxKSkNCg0KZm9yIChpIGluIDE6NSkgew0KICB4W1tpXV0gPC0geFtbaV1dIC0gbWVkaWFuc1tbaV1dDQp9DQpgYGANCg0KIyMjIyMg546v5aKD5a+56LGh5oC75piv6KKr5bCx5Zyw5L+u5pS5DQoNCg0KIyMjIOino+aehOi1i+WAvO+8iFVucGFja2luZyBBc3NpZ25tZW5077yJDQoNCioqemVhbGxvdCDljIXmj5DkvpvnmoQgYCU8LSVgIOWSjCBgJT4tJWAg5Ye95pWwKioNCg0KYGBge3J9DQpsaWJyYXJ5KHplYWxsb3QpDQoNCiMgdW5wYWNrIHZlY3Rvcg0KYyhsYXQsIGxuZykgJTwtJSBjKDM4LjA2MTk0NCwgLTEyMi42NDM4ODkpDQpsYXQNCmxuZw0KDQojIHVucGFjayBsaXN0DQpjb29yZHNfbGlzdCA8LSBmdW5jdGlvbigpIHsNCiAgbGlzdCgzOC4wNjE5NDQsIC0xMjIuNjQzODg5KQ0KfQ0KYyhsYXQsIGxuZykgJTwtJSBjb29yZHNfbGlzdCgpDQpsYXQNCmxuZw0KDQojIHVucGFjayByZWdyZXNzaW9uIHJlc3VsdA0KYyhpbnRlciwgc2xvcGUpICU8LSUgY29lZihsbShtcGcgfiBjeWwsIGRhdGEgPSBtdGNhcnMpKQ0KaW50ZXINCnNsb3BlDQoNCiMgdW5wYWNrIGRhdGEuZnJhbWUNCmMobXBnLCBjeWwsIGRpc3AsIGhwKSAlPC0lIG10Y2Fyc1ssIDE6NF0NCmhlYWQobXBnKQ0KDQojIHVucGFjayBuZXN0ZWQgdmFsdWVzDQpjKGEsIGMoYiwgZCksIGUpICU8LSUgbGlzdCgiYmVnaW4iLCBsaXN0KCJtaWRkbGUxIiwgIm1pZGRsZTIiKSwgImVuZCIpDQphDQpiDQpkDQplDQoNCiMgdW5wYWNrIGNoYXJhY3RlciBzdHJpbmcNCmMoY2gxLCBjaDIsIGNoMykgJTwtJSAiYWJjIg0KY2gxDQpjaDINCmNoMw0KDQojIHVucGFjayBEYXRlDQpjKHksIG0sIGQpICU8LSUgU3lzLkRhdGUoKQ0KeQ0KbQ0KZA0KDQojIC4uLiByZXN0IG9mDQpjKGJlZ2luLCAuLi5taWRkbGUsIGVuZCkgJTwtJSBsaXN0KDEsIDIsIDMsIDQsIDUpDQpiZWdpbg0KbWlkZGxlDQoNCiMgcGxhY2UgaG9sZGVyDQpjKG1pbl93dCwgLiwgLiwgbWVhbl93dCwgLiwgbWF4X3d0KSAlPC0lIHN1bW1hcnkobXRjYXJzJHd0KQ0KbWluX3d0DQptZWFuX3d0DQptYXhfd3QNCg0KIyDlkJHlj7PnmoTop6PmnoTotYvlgLznrKblj7cgJS0+JQ0KbXRjYXJzICU+JQ0KICBzdWJzZXQoaHAgPiAxMDApICU+JQ0KICBhZ2dyZWdhdGUoLiB+IGN5bCwgZGF0YSA9IC4sIEZVTiA9IC4gJT4lIG1lYW4oKSAlPiUgcm91bmQoMikpICU+JQ0KICB0cmFuc2Zvcm0oa3BsID0gbXBnICU+JSBtdWx0aXBseV9ieSgwLjQyNTEpKSAlLT4lIA0KICBjKGN5bCwgbXBnLCAuLi5yZXN0KQ0KY3lsDQpgYGANCg0KDQojIyDmnaHku7bor63lj6UNCg0KIyMjIGBpZi4uLmVsc2UgaWYuLi5lbHNlLi4uYA0KDQpgYGAgcg0KaWYgKGNvbmRpdGlvbjEpIHsNCiAgDQp9IGVsc2UgaWYgKGNvbmRpdGlvbjIpIHsgDQogICMgZWxzZSBpZuS4remXtOacieepuuagvO+8jOi3nyBKYXZhU2NyaXB0IOS4gOagtw0KfSBlbHNlIHsNCiAgDQp9DQpgYGANCg0KIyMjIGBpZmVsc2UoKWANCg0KYGlmLi4uZWxzZWAg55qEIGNvbmRpdGlvbiDkuI3og73mmK/lkJHph4/vvIzlsIboh6rliqjlv73nlaXmnaHku7blkJHph4/kuK3nrKzkuIDkuKrku6XlkI7nmoTlhYPntKDjgILmnInml7bvvIzopoHnlKhgYW55KGJvb2wgdmVjdG9yKWDlkoxgYWxsKGJvb2wgdmVjdG9yKWDlsIbluIPlsJTlkJHph4/ovazmjaLkuLrkuIDkuKpib29s5YC877yM5YaN6YWN5ZCIYGlmYOS9v+eUqOOAgg0KDQrogIzkuInlhYPpgInmi6nnrKZgaWZlbHNlKGNvbmQsIHN0YXRlbWVudDEsIHN0YXRlbWVudDIpYOWPr+S7peaOpeaUtuS4ieS4quWQkemHj++8jOaMieWQhOiHquWIhumHj+aJp+ihjOWQkemHj+WMluaTjeS9nA0KDQo+IOWvueW6lCBKUyDkuK3nmoQgYGNvbmRpdGlvbj8gU3RhdGVtZW50MTogc3RhdGVtZW50MjtgDQoNCiMjIyBgc3dpdGNoKHN0YXRlbWVudCwgbGlzdClgDQoNCmxpc3Qg5piv5LiA57uE6ZSu5YC85a+577yMc3RhdGVtZW50IOaYr+S4gOS4qumUru+8jOi/lOWbniBsaXN0IOS4reS4juivpemUruWvueW6lOeahOWAvOOAgg0KDQpgYGAgcg0KcmVzdWx0MSA9IHN3aXRjaCgnZnJ1aXQnLA0KICAgICAgICAgICAgICAgICBtZWF0ID0gImNoaWNrZW4iLA0KICAgICAgICAgICAgICAgICBmcnVpdCA9ICJhcHBsZSIsDQogICAgICAgICAgICAgICAgIHZlZ2V0YWJsZSA9ICJjdWN1bWJlciIsDQogICAgICAgICAgICAgICAgICdzb3VwJykNCnJlc3VsdDENCiMgWzFdICJhcHBsZSINCg0KcmVzdWx0MiA9IHN3aXRjaCgnZmluYWwnLA0KICAgICAgICAgICAgICAgICBtZWF0ID0gImNoaWNrZW4iLA0KICAgICAgICAgICAgICAgICBmcnVpdCA9ICJhcHBsZSIsDQogICAgICAgICAgICAgICAgIHZlZ2V0YWJsZSA9ICJjdWN1bWJlciIsDQogICAgICAgICAgICAgICAgICdzb3VwJykNCnJlc3VsdDIgIyDpg73kuI3ljLnphY3ml7bvvIzov5Tlm57ml6BrZXnnmoTlgLwNCiMgWzFdICJzb3VwIg0KYGBgDQoNCiMjIOW+queOr+ivreWPpQ0KDQojIyMgYHJlcGVhdHt9YA0KDQrlv4XpobvmiYvliqjmjIflrpogYnJlYWsg5p2h5Lu277yM5ZCm5YiZ5peg6ZmQ5b6q546v44CC6L+Z5Zyo5Yib5bu65Lqk5LqS5byPIGFwcCDml7blvojmnInnlKjjgIINCg0KIyMjIGB3aGlsZSAoY29uZGl0aW9uKSB7fWANCg0KIyMjIGBmb3IoIGl0ZXJhdG9yIGluIHNlcXVlbmNlKSB7fWANCg0KIyMjIyDpooTlhYjliIbphY3nqbrpl7TvvJrmj5Dpq5jkvKDnu58gZm9yIOW+queOr+eahOaViOeOhw0KDQpSIOS4reWmguaenOWvueWvueixoeeahCBzaXplIOWBmuS6huaUueWKqO+8iOWmgua3u+WKoOS4gOS4quWFg+e0oO+8ie+8jOimgeaKiuaVtOS4quaVsOaNrue7k+aehOmDvemHjeaWsOaLt+i0neS4gOS7ve+8jOi/memdnuW4uOaFouOAguWmguaenOWcqOavj+asoeW+queOr+S4remDveaciei/meenjeivreWPpe+8jOaXtumXtOWkjeadguW6puS8muaYryRcbWF0aHJte099XGxlZnQoXG1hdGhybXtufV57Mn1ccmlnaHQpJOe6p+eahOOAgg0KDQrmiYDku6XmnIDlpb3lnKjlvIDlp4vlvqrnjq/liY3vvIzpooTlhYjlo7DmmI7kuIDkuKrlkJHph4/vvIzkuLrovpPlh7rnu5PmnpzliIbphY3otrPlpJ/nmoTnqbrpl7TvvIzov5nlr7nlvqrnjq/mlYjnjofpnZ7luLjph43opoHjgILpooTlhYjliIbphY3nmoTnqbrpl7TlvoDlvoDmmK/kuIDkuKpsaXN077yM5Zyo5b6q546v57uT5p2f5ZCO6ZyA6KaB5omT5pWj5bm26YeN57uE5Li65oiR5Lus6ZyA6KaB55qE5a+56LGh77ya5a+55LqO5ZCR6YeP55SoYHVubGlzdCgpYO+8jOaVsOaNruahhueUqGBkcGx5cjo6YmluZF9yb3dzKClgDQoNCui/meWFtuWunuacieeCueWDjyBKUyDph4zpnaLnmoQ6DQoNCmBgYHtqc30NCmNvbnN0IGFyciA9IFtdOw0KZm9yIChsZXQgaSA9IDA7IGkgPCA2OyBpKyspIHsNCiAgYXJyLnB1c2goaSBeIDIgJSAxMSk7DQp9DQpjb25zb2xlLmxvZyhhcnIpOw0KYGBgDQoNCuS+i++8mg0KDQpgYGB7cn0NCmRmIDwtIHRpYmJsZSgNCiAgYSA9IHJub3JtKDEwKSwNCiAgYiA9IHJub3JtKDEwKSwNCiAgYyA9IHJub3JtKDEwKSwNCiAgZCA9IHJub3JtKDEwKQ0KKQ0KDQojIOimgeaxgmRm5ZCE5YiX55qE5Lit5L2N5pWw77yM5YWI5Li66L6T5Ye65YiG6YWN56m66Ze077yM6ZW/5bqm5Li6bmNvbChkZinnmoTlkJHph48NCm91dHB1dCA8LSAgZG91YmxlKG5jb2woZGYpKQ0KZm9yIChpIGluIDE6bmNvbChkZikpIHsgDQogIG91dHB1dFtbaV1dIDwtIG1lZGlhbihkZltbaV1dKQ0KfQ0Kb3V0cHV0DQpgYGANCg0KIyMjIGBicmVha2Ag5YWz6ZSu5a2XDQoNCiMjIyBgbmV4dGAg5YWz6ZSu5a2XDQoNCiMjIERlYnVnDQoNCmBzdG9wKHN0cmluZylgCee7iOatoueoi+W6j+W5tuaKpemUme+8miJFcnJvcjogc3RyaW5nIg0K</div>
 
 
 </div>

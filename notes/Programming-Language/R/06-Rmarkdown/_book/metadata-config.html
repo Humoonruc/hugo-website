@@ -23,7 +23,7 @@
 <meta name="author" content="黄蒙 ✉huangmeng@ucass.edu.cn" />
 
 
-<meta name="date" content="2022-04-11" />
+<meta name="date" content="2022-04-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -244,7 +244,11 @@ Rmarkdown 文本文件的语法
 <li class="chapter" data-level="3.1" data-path="Rmarkdown.html"><a href="Rmarkdown.html#基本语法"><i class="fa fa-check"></i><b>3.1</b> 基本语法<span></span></a></li>
 <li class="chapter" data-level="3.2" data-path="Rmarkdown.html"><a href="Rmarkdown.html#编译pdf"><i class="fa fa-check"></i><b>3.2</b> 编译PDF<span></span></a></li>
 <li class="chapter" data-level="3.3" data-path="Rmarkdown.html"><a href="Rmarkdown.html#r-代码可执行"><i class="fa fa-check"></i><b>3.3</b> R 代码（可执行）<span></span></a></li>
-<li class="chapter" data-level="3.4" data-path="Rmarkdown.html"><a href="Rmarkdown.html#r表格"><i class="fa fa-check"></i><b>3.4</b> R表格<span></span></a></li>
+<li class="chapter" data-level="3.4" data-path="Rmarkdown.html"><a href="Rmarkdown.html#r表格"><i class="fa fa-check"></i><b>3.4</b> R表格<span></span></a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="Rmarkdown.html"><a href="Rmarkdown.html#kableextra-package"><i class="fa fa-check"></i><b>3.4.1</b> kableExtra package<span></span></a></li>
+<li class="chapter" data-level="3.4.2" data-path="Rmarkdown.html"><a href="Rmarkdown.html#brucerprint_table"><i class="fa fa-check"></i><b>3.4.2</b> <code>bruceR::print_table()</code><span></span></a></li>
+</ul></li>
 <li class="chapter" data-level="3.5" data-path="Rmarkdown.html"><a href="Rmarkdown.html#r图"><i class="fa fa-check"></i><b>3.5</b> R图<span></span></a></li>
 <li class="chapter" data-level="3.6" data-path="Rmarkdown.html"><a href="Rmarkdown.html#制表式截面"><i class="fa fa-check"></i><b>3.6</b> 制表式截面<span></span></a>
 <ul>
@@ -329,29 +333,29 @@ Rmarkdown 文本文件的语法
 </a>
 <p><br>
 setup 代码块的设置形如 <code>{r setup, include = FALSE}</code>（在表示代码块起始的三个反引号后加入这个大括号），代码块内部只需要写</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="metadata-config.html#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;../Rmarkdown-template/Rmarkdown_config.R&quot;</span>)</span>
-<span id="cb45-2"><a href="metadata-config.html#cb45-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-3"><a href="metadata-config.html#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="do">## global options ===================================</span></span>
-<span id="cb45-4"><a href="metadata-config.html#cb45-4" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(</span>
-<span id="cb45-5"><a href="metadata-config.html#cb45-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">width =</span> config<span class="sc">$</span>width,</span>
-<span id="cb45-6"><a href="metadata-config.html#cb45-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">fig.width =</span> config<span class="sc">$</span>fig.width,</span>
-<span id="cb45-7"><a href="metadata-config.html#cb45-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">fig.asp =</span> config<span class="sc">$</span>fig.asp,</span>
-<span id="cb45-8"><a href="metadata-config.html#cb45-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">out.width =</span> config<span class="sc">$</span>out.width,</span>
-<span id="cb45-9"><a href="metadata-config.html#cb45-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">fig.align =</span> config<span class="sc">$</span>fig.align,</span>
-<span id="cb45-10"><a href="metadata-config.html#cb45-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">fig.path =</span> config<span class="sc">$</span>fig.path,</span>
-<span id="cb45-11"><a href="metadata-config.html#cb45-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">fig.show =</span> config<span class="sc">$</span>fig.show,</span>
-<span id="cb45-12"><a href="metadata-config.html#cb45-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">warn =</span> config<span class="sc">$</span>warn,</span>
-<span id="cb45-13"><a href="metadata-config.html#cb45-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">warning =</span> config<span class="sc">$</span>warning,</span>
-<span id="cb45-14"><a href="metadata-config.html#cb45-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">message =</span> config<span class="sc">$</span>message,</span>
-<span id="cb45-15"><a href="metadata-config.html#cb45-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">echo =</span> config<span class="sc">$</span>echo,</span>
-<span id="cb45-16"><a href="metadata-config.html#cb45-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">eval =</span> config<span class="sc">$</span>eval,</span>
-<span id="cb45-17"><a href="metadata-config.html#cb45-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">tidy =</span> config<span class="sc">$</span>tidy,</span>
-<span id="cb45-18"><a href="metadata-config.html#cb45-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">comment =</span> config<span class="sc">$</span>comment,</span>
-<span id="cb45-19"><a href="metadata-config.html#cb45-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">collapse =</span> config<span class="sc">$</span>collapse,</span>
-<span id="cb45-20"><a href="metadata-config.html#cb45-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">cache =</span> config<span class="sc">$</span>cache,</span>
-<span id="cb45-21"><a href="metadata-config.html#cb45-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">cache.comments =</span> config<span class="sc">$</span>cache.comments,</span>
-<span id="cb45-22"><a href="metadata-config.html#cb45-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">autodep =</span> config<span class="sc">$</span>autodep</span>
-<span id="cb45-23"><a href="metadata-config.html#cb45-23" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="metadata-config.html#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;../Rmarkdown-template/Rmarkdown_config.R&quot;</span>)</span>
+<span id="cb49-2"><a href="metadata-config.html#cb49-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-3"><a href="metadata-config.html#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="do">## global options ===================================</span></span>
+<span id="cb49-4"><a href="metadata-config.html#cb49-4" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(</span>
+<span id="cb49-5"><a href="metadata-config.html#cb49-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">width =</span> config<span class="sc">$</span>width,</span>
+<span id="cb49-6"><a href="metadata-config.html#cb49-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">fig.width =</span> config<span class="sc">$</span>fig.width,</span>
+<span id="cb49-7"><a href="metadata-config.html#cb49-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">fig.asp =</span> config<span class="sc">$</span>fig.asp,</span>
+<span id="cb49-8"><a href="metadata-config.html#cb49-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">out.width =</span> config<span class="sc">$</span>out.width,</span>
+<span id="cb49-9"><a href="metadata-config.html#cb49-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">fig.align =</span> config<span class="sc">$</span>fig.align,</span>
+<span id="cb49-10"><a href="metadata-config.html#cb49-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">fig.path =</span> config<span class="sc">$</span>fig.path,</span>
+<span id="cb49-11"><a href="metadata-config.html#cb49-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">fig.show =</span> config<span class="sc">$</span>fig.show,</span>
+<span id="cb49-12"><a href="metadata-config.html#cb49-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">warn =</span> config<span class="sc">$</span>warn,</span>
+<span id="cb49-13"><a href="metadata-config.html#cb49-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">warning =</span> config<span class="sc">$</span>warning,</span>
+<span id="cb49-14"><a href="metadata-config.html#cb49-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">message =</span> config<span class="sc">$</span>message,</span>
+<span id="cb49-15"><a href="metadata-config.html#cb49-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">echo =</span> config<span class="sc">$</span>echo,</span>
+<span id="cb49-16"><a href="metadata-config.html#cb49-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">eval =</span> config<span class="sc">$</span>eval,</span>
+<span id="cb49-17"><a href="metadata-config.html#cb49-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">tidy =</span> config<span class="sc">$</span>tidy,</span>
+<span id="cb49-18"><a href="metadata-config.html#cb49-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">comment =</span> config<span class="sc">$</span>comment,</span>
+<span id="cb49-19"><a href="metadata-config.html#cb49-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">collapse =</span> config<span class="sc">$</span>collapse,</span>
+<span id="cb49-20"><a href="metadata-config.html#cb49-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">cache =</span> config<span class="sc">$</span>cache,</span>
+<span id="cb49-21"><a href="metadata-config.html#cb49-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">cache.comments =</span> config<span class="sc">$</span>cache.comments,</span>
+<span id="cb49-22"><a href="metadata-config.html#cb49-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">autodep =</span> config<span class="sc">$</span>autodep</span>
+<span id="cb49-23"><a href="metadata-config.html#cb49-23" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 </div>
 </div>
             </section>

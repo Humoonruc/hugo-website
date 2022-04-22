@@ -1,0 +1,1187 @@
+---
+title: "SQL语言"
+subtitle: '——应用于sqldf包'
+author: "Humoon"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    df_print: paged
+    fig_caption: yes
+    theme: united
+    highlight: haddock
+    number_sections: yes
+    toc: yes
+    toc_depth: 3
+    toc_float:
+      collapsed: yes
+      smooth_scroll: FALSE
+  rticles::ctex:
+    df_print: default
+    fig_caption: yes
+    number_sections: yes
+  word_document:
+    fig_caption: yes
+    toc: yes
+    toc_depth: 3
+    reference_docx: 
+  pdf_document:
+    toc: yes
+    toc_depth: '2'
+documentclass: ctexart
+classoption: hyperref,
+---
+
+```{r setup, include = FALSE}
+
+## global options
+knitr::opts_chunk$set(
+  fig.width = 6, fig.asp = 0.618,
+  out.width = "80%", fig.align = "center",
+  fig.path = 'Figures/', fig.show = "hold",
+  warn = 1, warning = F, message = F, echo = T, 
+  comment = '', collapse = F, 
+  cache = T, cache.comments = F, autodep = T
+  )
+
+
+## use necessary packages
+library('pacman')
+p_load(tidyverse, lubridate, # 数据整理，最新版tidyverse已包含管道操作符
+       ggthemes, showtext, gridExtra, # 可视化
+       lmtest, plm, orcutt, stats, forecast, zoo, # 统计分析  
+       rvest, httr, xml2, # 爬虫
+       RMySQL, sqldf, DT, # I/O，其中sqldf包含了RSQLite包
+       jiebaR, wordcloud2, webshot, htmlwidgets # 文本分析
+       )
+options(sqldf.driver = "SQLite") 
+```
+
+# 准备工作
+
+```{r}
+con <- dbConnect(MySQL(), username = "root", 
+                 password = "1234", dbname = "tysql")
+dbSendQuery(con,'SET NAMES gbk')
+
+con_sqlite <- dbConnect(
+  SQLite(), 
+  dbname = 'C:/Users/humoo/OneDrive/ICT/DataBase/tysql.sqlite') 
+```
+
+1. 打开 MySQL Command Line Client
+在其中输入命令，每一句用`;`结束。SQL语言不区分大小写。
+
+2. 查看所有数据库
+```
+SHOW DATABASES;
+```
+
+3. 选择教学数据库
+```
+USE tysql;
+```
+
+# 对表的基本操作
+
+## 查看所有表
+```{r}
+dbListTables(con)
+```
+
+```{sql connection=con}
+SHOW TABLES;
+```
+## 创建一张表
+
+### 基本语法
+
+MySQL版：
+```
+CREATE TABLE Products
+(
+  prod_id    char(10)      NOT NULL ,
+  vend_id    char(10)      NOT NULL ,
+  prod_name  char(255)     NOT NULL ,
+  prod_price decimal(8,2)  NOT NULL ,
+  prod_desc  text          NULL 
+);
+```
+
+SQLite版：
+```
+CREATE TABLE Products
+(
+  prod_id    char(10)      NOT NULL ,
+  vend_id    char(10)      NOT NULL ,
+  prod_name  char(255)     NOT NULL ,
+  prod_price decimal(8,2)  NOT NULL ,
+  prod_desc  VARCHAR(1000) NULL 
+);
+```
+只有不允许 NULL 的列可以作为主键
+
+### 默认值
+
+```
+CREATE TABLE OrderItems
+(
+  order_num  int          NOT NULL ,
+  order_item int          NOT NULL ,
+  prod_id    char(10)     NOT NULL ,
+  quantity   int          NOT NULL  DEFAULT 1,
+  item_price decimal(8,2) NOT NULL 
+);
+```
+
+## 查看一张表
+```{sql connection=con}
+SELECT * FROM customers;
+```
+
+## 更新一张表
+
+`ALTER TABLE`，不同 DBMS 的规定差别很大。
+
+增加一个字符列：
+```
+ALTER TABLE Vendors
+ADD vend_phone CHAR(20);
+```
+
+## 删除一张表
+```{r}
+# 不必担心出错的删除表方法：
+if (dbExistsTable(con, 't_demo')) {
+  dbRemoveTable(con, "t_demo")
+}
+```
+
+```
+DROP TABLE IF EXISTS custcopy;
+```
+
+# 查询
+
+## 一般格式：
+
+- SELECT [ALL|DISTINCT|TOP n] *|column_1, column_2, ...    
+- FROM table_1 [INNER | LEFT | RIGHT] JOIN table_2 
+  - ON conditions
+- WHERE conditions
+- GROUP BY column_1 
+  - HAVING group_conditions
+- ORDER BY column_1 [ASC|DESC]
+- LIMIT offset, length;
+
+
+- SELECT
+  - 对查询结果行的限制
+    - ALL，查询满足条件的所有记录，默认
+    - DISTINCT，查询结果是不包含重复值的所有记录
+    - TOP n，查询结果是前n条记录
+  - 对查询列的限制
+    - *，查询所有列
+    - 列名用逗号分隔
+- FROM 指定要查询数据的表或视图（VIEW）
+  - JOIN 根据某些连接条件从其他表中获取数据
+  - ON 以一定的条件进行连接，可以不是相等，这就是非等值连接
+- WHERE按一定条件过滤查询结果
+- GROUP BY对查询结果进行分组
+  - HAVING，过滤器，限定分组必须满足的条件
+- ORDER BY对检索结果排序
+- LIMIT限制返回行的数量
+
+## `SELECT` 检索
+
+### `,` 检索若干列
+```{r}
+dbGetQuery(con, 
+"SELECT prod_id, prod_name, prod_price FROM Products")
+```
+
+### `*` 通配所有列 
+```{r}
+dbGetQuery(con, 
+"SELECT * FROM Products")
+```
+
+### `DISTINCT` 使检索结果没有重复行 
+
+比较有无 `DISTINCT` 的不同：
+```{r}
+dbGetQuery(con, 
+"SELECT vend_id, prod_price 
+FROM Products")
+
+dbGetQuery(con, 
+"SELECT DISTINCT vend_id, prod_price 
+FROM Products")
+```
+
+### `LIMIT` 筛选部分结果
+
+“注：各种数据库对于这一功能实现的语法不同！”
+```{r}
+# 前5行
+dbGetQuery(con, 
+"SELECT prod_name 
+FROM Products 
+LIMIT 5")
+
+# 从第3行开始，往后数5行（即第4-8行）
+dbGetQuery(con, 
+"SELECT prod_name 
+FROM Products 
+LIMIT 5 OFFSET 3")
+
+# 上式的等价简化写法
+dbGetQuery(con, 
+"SELECT prod_name 
+FROM Products 
+LIMIT 3,5")
+```
+
+## `ORDER BY` 排序子句 (clause)
+
+```{r}
+dbGetQuery(con, 
+"SELECT prod_name 
+FROM Products 
+ORDER BY prod_name")
+
+dbGetQuery(con, 
+"SELECT prod_name 
+FROM Products 
+ORDER BY prod_price")
+
+dbGetQuery(con, 
+"SELECT prod_id, prod_price, prod_name 
+FROM Products 
+ORDER BY prod_price, prod_name")
+```
+
+1. `ORDER BY` 字句必须在 SQL 语句的最末，在其他子句之后。在逻辑上，也是所有其他操作都完成后，最后排序。
+2. 用不在检索范围内的列排序也是完全可以的
+
+### 列的位置索引（用整数代替列名）
+```{r}
+dbGetQuery(con, 
+"SELECT prod_id, prod_price, prod_name 
+FROM Products 
+ORDER BY 2, 3")
+```
+
+1. 其中的数字是 `SELECT` 清单中的相对位置
+2. 可以混合使用列名和想对位置
+
+### `DESC` 逆序
+
+逆序加`DESC`关键字，只作用于直接在其前面的一个列名。想对多个列以降序排列，只能对每一列指定`DESC`
+```{r}
+dbGetQuery(con, 
+"SELECT prod_id, prod_price, prod_name 
+FROM Products 
+ORDER BY prod_price DESC, prod_name")
+```
+
+## `WHERE` 过滤 (filter) 子句
+
+- =, <>或!=, >, <, >=或!<, <=或!>
+- NOT, AND, OR
+- BETWEEN .. AND .., NOT ETWEEN .. AND ..
+- IN + 向量
+- LIKE + 通配符 
+- IS NULL
+
+### 数值比较
+
+```{r}
+dbGetQuery(con, 
+"SELECT prod_name, prod_price
+FROM Products 
+WHERE prod_price = 3.49")
+```
+
+```{r}
+dbGetQuery(con, 
+"SELECT prod_name, prod_price
+FROM Products 
+WHERE prod_price < 10")
+```
+
+```{r}
+dbGetQuery(con, 
+"SELECT vend_id, prod_name
+FROM Products 
+WHERE vend_id != 'DLL01'")
+```
+
+### `BETWEEN .. AND ..`
+
+```{r}
+dbGetQuery(con, 
+"SELECT prod_name, prod_price
+FROM Products 
+WHERE prod_price BETWEEN 5 AND 10")
+```
+
+### `IS NULL`
+
+```{r}
+dbGetQuery(con, 
+"SELECT cust_name
+FROM Customers 
+WHERE cust_email IS NULL")
+```
+
+### `AND`, `OR` 多条件过滤
+
+```{r}
+dbGetQuery(con, 
+"SELECT prod_id, prod_price, prod_name
+FROM Products 
+WHERE vend_id = 'DLL01' AND prod_price <=4")
+```
+
+SQL 优先处理 `AND`，所以要根据问题使用`()`（括号的优先级最高）
+
+```{r}
+dbGetQuery(con, 
+"SELECT prod_name, prod_price
+FROM Products 
+WHERE (vend_id = 'DLL01' OR vend_id = 'BRS01') AND prod_price >=10")
+```
+
+### `IN` 可取值向量，功能与 `OR` 类似
+```{r}
+dbGetQuery(con, 
+"SELECT prod_name, prod_price
+FROM Products 
+WHERE vend_id IN ('DLL01', 'BRS01')
+ORDER BY prod_name")
+```
+
+### `NOT`
+不单独使用，要配合其他操作符
+```{r}
+dbGetQuery(con, 
+"SELECT prod_name
+FROM Products 
+WHERE NOT vend_id = 'DLL01'
+ORDER BY prod_name")
+```
+
+### `LIKE + 通配符`
+
+#### `%` 代表任意长度（包括0个）字符, NULL除外
+
+```{r}
+dbGetQuery(con, 
+"SELECT prod_id, prod_name
+FROM Products 
+WHERE prod_name LIKE 'FISH%'")
+```
+```{r}
+dbGetQuery(con, 
+"SELECT prod_id, prod_name
+FROM Products 
+WHERE prod_name LIKE '%bean bag%'")
+```
+```{r}
+dbGetQuery(con, 
+"SELECT prod_id, prod_name
+FROM Products 
+WHERE prod_name LIKE 'F%y'")
+```
+
+
+#### `_` 代表一个字符
+```{r}
+dbGetQuery(con, 
+"SELECT prod_id, prod_name
+FROM Products 
+WHERE prod_name LIKE '__ inch teddy bear'")
+```
+
+## 计算字段
+
+### `||` 拼接字段，`AS`
+
+MySQL 中没有直接拼接的操作符，SQLite 中的拼接操作符为`||`
+
+下面这个查询的意思是，将`vend_name`，空格和左括号，`vend_country`和右括号拼接为一个字符串，作为新字段`position`
+
+```{r}
+dbGetQuery(con_sqlite, 
+"SELECT vend_name || ' (' || vend_country || ')' AS vend_title
+FROM Vendors 
+ORDER BY vend_name")
+```
+
+#### 去掉字符串中用来填充的空格
+
+有些DBMS中会用空格将一个单元格填充满，拼接字符串时便需要首先去掉这些空格，包括`LTRIM()`、`RTRIM()`和`TRIM()`，分别去掉字符串左边、右边和两边的空格。于是 SQL 语句可以写为`SELECT TRIM(vend_name) || ' (' || TRIM(vend_country) || ')' AS position FROM Vendors ORDER BY vend_name`
+
+#### `Concat()` 
+在MySQL()中拼接字符串要用 `Concat()` 函数
+```{r}
+dbGetQuery(con, 
+"SELECT Concat(vend_name, ' (', vend_country, ')') AS vend_title
+FROM Vendors 
+ORDER BY vend_name")
+```
+
+### 算数计算
+```{r}
+dbGetQuery(con, 
+"SELECT prod_id, 
+        quantity, 
+        item_price, 
+        quantity*item_price AS expanded_price
+FROM OrderItems 
+WHERE order_num = 20008")
+```
+
+## 使用函数
+
+与 SQL 语句不同，函数在不同 DBMS 间差异极大，难以移植 (portable)。还是把数据用 SQL 读出来在 R 中使用函数处理更好。在 SQL 中使用函数的主要优点是服务器处理的速度一般比 PC 上的客户端软件要快得多。
+
+### 文本处理函数
+
+```{r}
+# UPPER() 将文本转换为大写
+dbGetQuery(con, 
+"SELECT vend_name, 
+        UPPER(vend_name) AS vend_name_upcase
+FROM Vendors 
+ORDER BY vend_name")
+```
+
+函数|说明
+--|--
+LEFT()/RIGHT()|返回字符串左/右边的字符
+UPPER()/LOWER()|转换大/小写
+LTRIM()/RTRIM()/TRIM()|去掉字符串左/右/两边的空格
+
+### 日期和时间处理函数
+
+可移植性最差
+
+### 数值处理函数
+
+略
+
+## 用聚集函数汇总数据
+
+很多时候我们只需要汇总后的信息而不需要原始数据
+
+### `AVG()` 求均值
+```{r}
+dbGetQuery(con, 
+"SELECT AVG(prod_price) AS avg_price
+FROM Products")
+
+dbGetQuery(con, 
+"SELECT AVG(prod_price) AS avg_price
+FROM Products
+WHERE vend_id = 'DLL01'")
+```
+
+1. 要求多列的均值，必须使用多个 `AVG()`
+2. `AVG()` 忽略值为 `NULL` 的行
+
+### `COUNT()` 返回行数
+
+1. `COUNT(*)` 统计整张表的行数，不论某行是否包含 `NULL`
+2. `COUNT(column)` 只对特定列中具有值得行计数，忽略值为 `NULL` 的行
+
+```{r}
+dbGetQuery(con, 
+"SELECT COUNT(*) AS num_cust
+FROM Customers")
+
+dbGetQuery(con, 
+"SELECT COUNT(cust_email) AS num_cust
+FROM Customers")
+```
+
+### `MAX()/MIN()` 返回某列的最大/小值
+```{r}
+dbGetQuery(con, 
+"SELECT MAX(prod_price) AS max_price
+FROM Products")
+```
+
+### `SUM()` 返回某列值之和
+```{r}
+dbGetQuery(con, 
+"SELECT SUM(quantity) AS items_ordered
+FROM OrderItems
+WHERE order_num = 20005")
+
+dbGetQuery(con, 
+"SELECT SUM(item_price*quantity)
+FROM OrderItems
+WHERE order_num = 20005")
+```
+
+### 聚集函数与 `DISTINCT` 连用
+
+```{r}
+# 此例计算各个不同的价格的平均数，不再有加权含义
+dbGetQuery(con, 
+"SELECT AVG(DISTINCT prod_price) AS avg_price
+FROM Products
+WHERE vend_id = 'DLL01'")
+```
+
+### 同时使用多个聚集函数
+```{r}
+dbGetQuery(con, 
+"SELECT COUNT(*) AS num_items, 
+        MIN(prod_price) AS price_min, 
+        MAX(prod_price) AS price_max, 
+        AVG(prod_price) AS price_avg
+FROM Products")
+```
+
+### 开窗函数 `OVER (PARTITION BY)`
+
+`OVER (PARTITION BY)` 不能单独使用，要和分析函数：rank(), dense_rank(), row_number(), sum() 等一起使用。分析函数用于计算基于组的某种聚合值，它和聚集函数的不同之处是：对于每个组返回多行，而聚集函数对于每个组只返回一行。开窗函数对数据进行分组，指定了分析函数工作的数据窗口大小。
+
+其参数：OVER (PARTITION BY columnname1 ORDER BY columnname2)
+含义：按字段columnname1的值进行分组，再按columnname2的值进行排序并应用OVER前面的分析函数。
+
+例1：employees表中，有两个部门的记录：department_id ＝10和20
+```
+SELECT  department_id，
+        RANK() OVER (PARTITION BY department_id ORDER BY salary) AS rank
+FROM employees;
+```
+就是指分别在部门10和20中进行薪水的排名。
+
+例2：有一个月度出口额表为total，各列为 year, month, export
+```
+SELECT  *, 
+        SUM(export) OVER (PARTITION BY year ORDER BY month) AS acc_export
+FROM total
+```
+按年分组，每组内按照月份排序累加，形成累计出口这个新字段
+
+
+## `GROUP BY` 和 `HAVING`
+
+### `GROUP BY` 分组
+1. `GROUP BY` 子句可以包含任意数目的列，从而可以对分组进行嵌套，更细致地进行数据分组
+2. 嵌套分组时，数据将在最后指定的分组上进行汇总。
+3. 除聚集计算语句外，`SELECT` 语句中的每一列都必须在 `GROUP BY` 子句中给出
+4. `GROUP BY` 必须在 `WHERE` 之后，`ORDER BY` 之前
+
+```{r}
+dbGetQuery(con, 
+"SELECT vend_id, 
+        COUNT(*) AS num_prods
+FROM Products
+GROUP BY vend_id")
+```
+该例的逻辑：
+1. 首先按 vend_id 将观测分组
+2. 然后对每个组计算表格总行数（用`*`）
+3. 最后挑选 vend_id 和 num_prods 两列
+
+### `HAVING` 过滤分组
+
+不同于 `WHERE` 只能过滤行。或者说， `WHERE` 在分组前过滤（所以写在前面）， `HAVING` 在分组后过滤。
+
+```{r}
+dbGetQuery(con, 
+"SELECT cust_id, 
+        COUNT(*) AS orders
+FROM Orders
+GROUP BY cust_id
+  HAVING COUNT(*) >= 2")
+```
+
+该例的逻辑：
+1. 首先按 cust_id 将观测分组
+2. 只选择总行数大于等于2的分组
+2. 对这些组计算总行数（用`*`）并命名为 orders
+3. 最后挑选 cust_id 和 orders 两列
+
+```{r}
+dbGetQuery(con, 
+"SELECT vend_id, 
+        COUNT(*) AS num_prods
+FROM Products
+WHERE prod_price >= 4
+GROUP BY vend_id
+  HAVING COUNT(*) >= 2")
+```
+
+```{r}
+dbGetQuery(con, 
+"SELECT order_num, 
+        COUNT(*) AS items
+FROM OrderItems
+GROUP BY order_num
+  HAVING COUNT(*) >= 3
+ORDER BY items, order_num")
+```
+
+## 子查询
+
+事实上，连接 (join) 是比子查询更清晰简明的写法，子查询很少真正被使用。
+
+### 嵌套查询
+
+例：查询订购物品 RGAN01 的顾客信息
+
+1. 首先查询订购物品 RGAN01 的所有订单号
+```{r}
+dbGetQuery(con, 
+"SELECT order_num
+FROM OrderItems
+WHERE prod_id = 'RGAN01'")
+```
+2. 其次查询这两个订单的顾客
+```{r}
+dbGetQuery(con, 
+"SELECT cust_id
+FROM Orders
+WHERE order_num IN (20007, 20008)")
+```
+3. 若要一步得出结果，需要通过子查询合并两个查询
+```{r}
+dbGetQuery(con, 
+"SELECT cust_id
+FROM Orders
+WHERE order_num IN (SELECT order_num 
+                    FROM OrderItems
+                    WHERE prod_id = 'RGAN01')")
+```
+
+4. 检索这些顾客 ID 的顾客信息
+```{r}
+dbGetQuery(con, 
+"SELECT cust_name, cust_contact
+FROM Customers
+WHERE cust_id IN ('1000000004', '1000000005')")
+```
+
+5. 使用子查询
+
+```{sql connection=con}
+SELECT cust_name, cust_contact
+FROM Customers
+WHERE cust_id IN (SELECT cust_id
+                  FROM Orders
+                  WHERE order_num IN (SELECT order_num 
+                                      FROM OrderItems
+                                      WHERE prod_id = 'RGAN01'))
+```
+
+6. 更好地方法是使用连接
+
+```{sql connection=con}
+SELECT cust_name, cust_contact
+FROM Customers, Orders, OrderItems
+WHERE Customers.cust_id = Orders.cust_id 
+  AND OrderItems.order_num = Orders.order_num 
+  AND prod_id = 'RGAN01';
+```
+
+### `表名.列名` 完全限定字段
+
+限定字段语句放在 WHERE 子句中
+
+```{sql connection=con}
+SELECT cust_name, 
+        cust_state, 
+        ( SELECT COUNT(*) 
+          FROM Orders 
+          WHERE Orders.cust_id = Customers.cust_id) AS orders 
+FROM Customers 
+ORDER BY cust_name
+```
+
+该例的逻辑：
+1. 对每一位顾客，子查询统计了其订单数量
+2. 母查询输出姓名、状态和订单数量，最后排序
+
+**表名.列名，在有可能混淆列名时必须这样用。**
+
+## 连接表
+
+一个连接中可以包含多个表，用`表名.列名`表达连接条件。
+
+### 等值连接/INNER JOIN
+
+```{sql connection=con}
+SELECT vend_name, prod_name, prod_price
+FROM Vendors, Products
+WHERE Vendors.vend_id = Products.vend_id;
+```
+
+```{sql connection=con}
+SELECT vend_name, prod_name, prod_price
+FROM Vendors INNER JOIN Products 
+  ON Vendors.vend_id = Products.vend_id;
+```
+
+### 使用表别名
+
+可以缩短 SQL 语句
+```{sql connection=con}
+SELECT cust_name, cust_contact
+FROM Customers AS C, Orders AS O, OrderItems AS OI
+WHERE C.cust_id = O.cust_id 
+  AND OI.order_num = O.order_num 
+  AND prod_id = 'RGAN01';
+```
+
+### 自连接/Self Join
+
+使用表别名，在一条 SQL 语句中不止一次引用相同的表
+
+例：查询联系人为 Jim Jones 的企业客户的所有信息
+
+本题不能使用简单查询
+```{sql connection=con}
+SELECT cust_id, cust_name, cust_contact
+FROM Customers
+WHERE cust_contact = 'Jim Jones';
+```
+因为 Fun4All 这家企业客户拥有不止一个分支机构，它的两个分支机构在我们的客户名单上分别有账号。所以应该首先由一个分支机构的负责人 Jim Jones 查出这家企业的名称，然后找到这家企业所有的分支结构并返回信息。上述简单查询只能返回一个分支机构的信息。这道题不用 SQL 语言，是很难做的。
+
+```{sql connection=con}
+SELECT c1.cust_id, c1.cust_name, c1.cust_contact
+FROM Customers AS c1, Customers AS c2
+WHERE c1.cust_name = c2.cust_name 
+  AND c2.cust_contact = 'Jim Jones';
+```
+
+使用上述语句，c2 表中`cust_contact = 'Jim Jones'`的那行会匹配到 c1 表中 `cust_name` 为 Fun4All 的所有行，然后再返回 c1 表中相应的信息。
+
+### 自然连接
+
+每个列最多出现一次
+
+```{sql connection=con}
+SELECT c.*, o.order_num, o.order_date, oi.prod_id, oi.quantity, oi.item_price
+FROM customers AS c, orders AS o, orderitems AS oi
+WHERE c.cust_id = o.cust_id 
+  AND oi.order_num = o.order_num
+  AND prod_id = 'RGAN01';
+```
+
+### 外连接
+
+```{sql connection=con}
+SELECT c.cust_id, o.order_num
+FROM customers AS c LEFT OUTER JOIN orders AS o
+  ON c.cust_id = o.cust_id;
+```
+
+注意：
+- SQLite 仅支持左连接，不支持右连接
+- SQLite 和 MySQL 都不支持全连接，但事实上，全连接只要将左连接和右连接的语句 `UNION` 起来即可。
+
+### 使用带聚集函数的连接
+
+```{sql connection=con}
+SELECT c.cust_id, COUNT(o.order_num) AS num_ord
+FROM customers AS c INNER JOIN orders AS o
+  ON c.cust_id = o.cust_id
+GROUP BY c.cust_id;
+```
+运行顺序：
+1. 连接
+2. 分组
+3. 汇总
+
+```{sql connection=con}
+SELECT c.cust_id, COUNT(o.order_num) AS num_ord
+FROM customers AS c LEFT OUTER JOIN orders AS o
+  ON c.cust_id = o.cust_id
+GROUP BY c.cust_id;
+```
+
+## `UNION` 组合查询
+
+执行多个查询（多条 SELECT 语句）并将结果作为一个查询集返回
+
+### 实例
+
+需要公司为 Fun4All 的，或位于 Illinois、 Indiana 和 Michigan 三个州的所有顾客的报表
+
+```{sql connection=con}
+SELECT cust_name, cust_contact, cust_email
+FROM customers
+WHERE cust_state IN ('IL','IN','MI');
+```
+
+```{sql connection=con}
+SELECT cust_name, cust_contact, cust_email
+FROM customers
+WHERE cust_name = 'Fun4All';
+```
+```{sql connection=con}
+SELECT cust_name, cust_contact, cust_email
+FROM customers
+WHERE cust_state IN ('IL','IN','MI')
+UNION
+SELECT cust_name, cust_contact, cust_email
+FROM customers
+WHERE cust_name = 'Fun4All'
+ORDER BY cust_name, cust_contact;
+```
+
+对于较复杂的过滤情形，使用 `UNION` 可能比 `WHERE` 子句更简单，特别是从多个表中检索数据的时候
+
+### `UNION` 规则
+
+- 两条以上 `SELECT`，之间用 `UNION` 分割
+- 组合对象的结构应相同
+- `UNION` 自动去掉重复的行，若不像这样，需要使用 `UNION ALL`
+- 若要排序，只能有一条 `ORDER BY` 语句，且在最后一个查询之后
+
+# 增、删、改
+
+## `INSERT INTO` 插入
+
+### 插入完整的行
+
+```{r, eval=FALSE}
+# 不够安全的写法，表结构变了就不能用了
+dbGetQuery(con, 
+"INSERT INTO customers
+VALUES( '1000000006',
+        'Toy Land',
+        '123 Any Street',
+        'New York',
+        'NY',
+        '11111',
+        'USA',
+        NULL,
+        NULL)")
+
+# 安全写法，不怕列之间的顺序改变
+dbGetQuery(con, 
+"INSERT INTO customers( cust_id,
+                        cust_name,
+                        cust_address,
+                        cust_city,
+                        cust_state,
+                        cust_zip,
+                        cust_country,
+                        cust_contact,
+                        cust_email)
+VALUES( '1000000006',
+        'Toy Land',
+        '123 Any Street',
+        'New York',
+        'NY',
+        '11111',
+        'USA',
+        NULL,
+        NULL)")
+```
+
+### 插入部分行
+
+如果表的定义允许，可以在 `INSERT` 操作中省略某些列，该列定义必须允许 NULL 或在表定义中给出了默认值。
+```{r, eval=FALSE}
+dbGetQuery(con, 
+"INSERT INTO customers( cust_id,
+                        cust_name,
+                        cust_address,
+                        cust_city,
+                        cust_state,
+                        cust_zip,
+                        cust_country)
+VALUES( '1000000006',
+        'Toy Land',
+        '123 Any Street',
+        'New York',
+        'NY',
+        '11111',
+        'USA')")
+```
+
+### 插入检索出的数据
+可以一次插入多行
+
+```{r, eval=FALSE}
+dbGetQuery(con, 
+"INSERT INTO customers( cust_id,
+                        cust_contact,
+                        cust_email,
+                        cust_name,
+                        cust_address,
+                        cust_city,
+                        cust_state,
+                        cust_zip,
+                        cust_country)
+SELECT  cust_id,
+        cust_contact
+        cust_email,
+        cust_name,
+        cust_address
+        cust_city,
+        cust_state,
+        cust_zip,
+        cust_country
+FROM custnew")
+```
+
+在填充 CustNew 时，不应该使用已经在 Customers 中用过的 cust_id 值（如果主键值重复，后续的 INSERT 操作将会失败）。
+
+### 表的复制
+
+```{sql connection=con}
+CREATE TABLE custcopy AS
+SELECT * FROM customers;
+```
+
+```{sql connection=con}
+SELECT * FROM custcopy;
+```
+
+```{sql connection=con}
+DROP TABLE IF EXISTS custcopy;
+```
+
+## `UPDATE` 更新
+
+请千万注意 `WHERE` 子句，否则稍不留神就成了更新所有行。
+
+```{r, eval=FALSE}
+dbGetQuery(con, 
+"UPDATE customers
+SET cust_email = 'kim@thetoystore.com'
+WHERE cust_id = '1000000005'")
+```
+
+```{r, eval=FALSE}
+dbGetQuery(con, 
+"UPDATE customers
+SET cust_contact = 'Sam Roberts',
+    cust_email = 'sam@toyland.com'
+WHERE cust_id = '1000000006'")
+```
+
+```{r, eval=FALSE}
+dbGetQuery(con, 
+"UPDATE customers
+SET cust_email = NULL
+WHERE cust_id = '1000000005'")
+```
+
+## `DELETE` 删除行
+
+不删除列，也不删除表，只能删除行。
+
+请千万注意 `WHERE` 子句，否则稍不留神就成了删除所有行。
+
+```{r, eval=FALSE}
+dbGetQuery(con, 
+"DELETE FROM customers
+WHERE cust_id = '1000000006'")
+```
+
+# 视图
+
+视图是虚拟的表。SQLite 仅支持只读视图。视图可以将查询保存为视图，极大地简化了复杂 SQL 语句的使用；可以一次性编写基础的 SQL ，然后根据需要多次使用。
+
+其实，视图就是一个中间层的封装。
+
+## 创建视图
+
+```{sql connection=con}
+CREATE VIEW ProductCustomers AS 
+SELECT cust_name, cust_contact, prod_id
+FROM customers, orders, orderitems
+WHERE customers.cust_id = orders.cust_id
+  AND orderitems.order_num = orders.order_num;
+```
+
+```{sql connection=con}
+SELECT cust_name, cust_contact
+FROM ProductCustomers
+WHERE prod_id = 'RGAN01';
+```
+
+## 删除视图
+
+视图不能被更新，必须先删除它，再重新创建。
+
+```{sql connection=con}
+DROP VIEW IF EXISTS ProductCustomers;
+```
+
+# 约束 (constraint)
+
+大多数约束是在表定义中定义的。
+
+引用完整性 (referential integrity)
+
+
+## 主键 `PRIMARY KEY`
+
+建表时定义主键^[SQLite只允许此时创建。] ：
+```
+CREATE TABLE Vendors
+(
+  vend_id      char(10) NOT NULL PRIMARY KEY,
+  vend_name    char(50) NOT NULL ,
+  vend_address char(50) NULL ,
+  vend_city    char(50) NULL ,
+  vend_state   char(5)  NULL ,
+  vend_zip     char(10) NULL ,
+  vend_country char(50) NULL 
+);
+```
+
+在建好表后定义主键：
+```
+ALTER TABLE Vendors 
+ADD CONSTRAINT PRIMARY KEY (vend_id);
+```
+
+## 外键 `REFERENCES`
+
+例：orders表中的顾客ID列是customers表的主键，因此是orders表的外键。**该列只能接受customers表的主键值**。
+
+建立表时定义外键：该句表明 orders.cust_id 中的任何值都必须是 customers.cust_id 中的值。
+```
+CREATE TABLE Orders
+(
+  order_num  int      NOT NULL PRIMARY KEY,
+  order_date datetime NOT NULL ,
+  cust_id    char(10) NOT NULL REFERENCES Customers(cust_id)
+);
+```
+
+建立表后定义外键：
+```
+ALTER TABLE Orders
+ADD CONSTRAINT FOREIGN KEY (cust_id) REFERENCES Customers (cust_id)
+```
+
+外键有助于防止意外删除：定义外键后，DBMS不允许删除在另一个表中具有关联行的行，例如，customers表不能删除具有关联订单的顾客。删除该顾客的唯一方法是首先删除相关的订单。
+
+## 唯一约束
+
+## 检查约束
+
+使一列数据满足预先指定的值域才能输入。
+
+建立表时定义检查约束：
+```
+CREATE TABLE OrderItems
+(
+  order_num  int          NOT NULL ,
+  order_item int          NOT NULL ,
+  prod_id    char(10)     NOT NULL ,
+  quantity   int          NOT NULL  CHECK(quantity > 0),
+  item_price decimal(8,2) NOT NULL 
+);
+```
+
+建立表后定义外键：
+```
+ADD CONSTRAINT CHECK (gender = 'M' OR gender = 'F')
+```
+
+```{r}
+dbDisconnect(con)
+dbDisconnect(con_sqlite)
+```
+
+
+# sqldf 包
+
+sqldf 包^[内含RSQLite包。]能对任何 dataframe 进行 SQL 语句操作！有时候用 dplyr 函数族不方便，可以考虑 sqldf + SQL 
+
+## 从文件读入数据, write.csv.sql()
+
+```{r}
+write.csv(iris, "iris.csv", quote = FALSE, row.names = FALSE)
+iris2 <- read.csv.sql(
+  "iris.csv", 
+  sql = "SELECT * FROM file WHERE Species = 'setosa';")
+iris2
+```
+
+## 高级查询, sqldf()
+
+```{r}
+## LIMIT 子句类似head()
+a1r <- head(warpbreaks)
+a1s <- sqldf("SELECT * FROM warpbreaks LIMIT 6")
+identical(a1r, a1s)  #结果为TRUE，则结果一致
+
+## 分组汇总
+sqldf(
+'SELECT Species, 
+        AVG("Sepal.Length") AS `mean.Sepal.Length`,
+        AVG("Sepal.Width") AS `mean.Sepal.Width`,
+        AVG("Sepal.Length"/"Sepal.Width") AS `mean.Sepal.ratio` 
+FROM iris
+GROUP BY Species')
+
+
+df <- data.frame(g = rep(1:2, each = 5), t = rep(1:5, 2), v = 1:10)
+Gavg <- sqldf("SELECT g, AVG(v) AS avg_v FROM df GROUP BY g")
+Gavg
+sqldf( # v exceeds its group average where g is group
+"SELECT df.g, t, v 
+FROM df, Gavg 
+WHERE df.g = Gavg.g and v > avg_v")
+sqldf( # 使用子查询实现同样功能
+"SELECT g, t, v
+FROM df AS d1, (SELECT g AS g2, avg(v) AS avg_v FROM df GROUP BY g)
+WHERE d1.g = g2 and v > avg_v")
+sqldf( # 使用自然连接实现同样功能
+"SELECT g, t, v
+FROM df NATURAL JOIN (SELECT g, AVG(v) AS avg_v FROM df GROUP BY g)
+WHERE v > avg_v")
+
+
+sqldf( # 注意(t==1)是一个逻辑表达式，返回1或0
+"SELECT g,
+        SUM((t == 1) * v) AS t_1,
+        SUM((t == 2) * v) AS t_2,
+        SUM((t == 3) * v) AS t_3,
+        SUM((t == 4) * v) AS t_4,
+        SUM((t == 5) * v) AS t_5
+FROM df 
+GROUP BY g")
+
+
+## centered moving average of length 7
+set.seed(1)
+df <- data.frame(x = rnorm(15, 1:15))
+sqldf(
+"SELECT a.x AS x, AVG(b.x) AS movavgx 
+FROM df AS a, df AS b
+WHERE a.row_names - b.row_names BETWEEN -3 AND 3
+GROUP BY a.row_names 
+  HAVING count(*) = 7
+ORDER BY a.row_names+0",
+row.names = T) 
+# row.names = T 使得a和b两个数据源自动获得了row_names这个变量
+# 最后查询生成的数据框，x为均值从4到12的正态随机数
+# 没一行，movavgx对应x的数为前后7个数的移动平均值
+
+
+## 由单月值求累计值
+df1 <- tibble(year = 2017, month = 1:12, export = 100)
+df2 <- tibble(year = 2018, month = 1:12, export = 110)
+df <- rbind(df1, df2)
+sqldf(
+"SELECT *, 
+        SUM(export) OVER (PARTITION BY year ORDER BY month) AS acc_export
+FROM df")
+```
+

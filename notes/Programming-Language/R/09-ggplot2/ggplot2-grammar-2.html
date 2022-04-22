@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Humoon" />
+
+<meta name="date" content="2022-03-26" />
+
+<title>ggplot2-2</title>
+
+<script src="libs/header-attrs-2.13/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="libs/bootstrap-3.3.5/css/united.min.css" rel="stylesheet" />
+<script src="libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="libs/navigation-1.1/tabsets.js"></script>
+<script src="libs/navigation-1.1/codefolding.js"></script>
+<script src="libs/navigation-1.1/sourceembed.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; } /* Alert */
+code span.an { color: #008000; } /* Annotation */
+code span.at { } /* Attribute */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #0000ff; } /* ControlFlow */
+code span.ch { color: #008080; } /* Char */
+code span.cn { } /* Constant */
+code span.co { color: #008000; } /* Comment */
+code span.cv { color: #008000; } /* CommentVar */
+code span.do { color: #008000; } /* Documentation */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.im { } /* Import */
+code span.in { color: #008000; } /* Information */
+code span.kw { color: #0000ff; } /* Keyword */
+code span.op { } /* Operator */
+code span.ot { color: #ff4000; } /* Other */
+code span.pp { color: #ff4000; } /* Preprocessor */
+code span.sc { color: #008080; } /* SpecialChar */
+code span.ss { color: #008080; } /* SpecialString */
+code span.st { color: #008080; } /* String */
+code span.va { } /* Variable */
+code span.vs { color: #008080; } /* VerbatimString */
+code span.wa { color: #008000; font-weight: bold; } /* Warning */
+
+.sourceCode .row {
+  width: 100%;
+}
+.sourceCode {
+  overflow-x: auto;
+}
+.code-folding-btn {
+  margin-right: -30px;
+}
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+<style type="text/css">
+#rmd-source-code {
+  display: none;
+}
+</style>
+
+
+<link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+<li role="separator" class="divider"></li>
+<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">ggplot2-2</h1>
+<h3 class="subtitle">样式美化</h3>
+<h4 class="author">Humoon</h4>
+<h4 class="date">2022-03-26</h4>
+
+</div>
+
+
+<p><a href="../pdf/cheatsheet-ggplot.pdf"><em>ggplot2 cheatsheet.pdf</em></a></p>
+<object data="../pdf/cheatsheet-ggplot.pdf" type="application/pdf" width="100%" height="100%">
+</object>
+<div id="labs绘图区外部的各种元素的标题" class="section level2">
+<h2>Labs(绘图区外部的各种元素的标题)</h2>
+<p><code>labs(..., title = , subtitle = , caption = , tag = )</code></p>
+<div id="图形标题副标题和说明" class="section level3">
+<h3>图形标题、副标题和说明</h3>
+<p>title, 主标题。使用标题的目的是概括主要成果。尽量不要使用那些只对图形进行描述的标题，如”发动机排量与燃油效率散点图”。</p>
+<p>subtitle, 副标题。在标题下以更小的字体添加更多附加信息。</p>
+<p>caption, 说明，在图形下方添加文本，常用于描述数据来源。</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(displ, hwy)) <span class="sc">+</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> class)) <span class="sc">+</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="fu">paste</span>(<span class="st">&quot;Fuel efficiency generally decreases with&quot;</span>, <span class="st">&quot;engine size&quot;</span>),</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="fu">paste</span>(</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;Two seaters (sports cars) are an exception&quot;</span>,</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;because of their light weight&quot;</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">&quot;Data from fueleconomy.gov&quot;</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<p><img src="figure/unnamed-chunk-1-1.png" width="70%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="坐标轴和图例的标题" class="section level3">
+<h3>坐标轴和图例的标题</h3>
+<p>简短的变量名称加单位</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 气泡图</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mtcars, <span class="fu">aes</span>(<span class="at">x =</span> wt, <span class="at">y =</span> mpg, <span class="at">size =</span> disp)) <span class="sc">+</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 将disp变量映射为图形的size属性，本例中即为散点的大小。同时生成size图例</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">shape =</span> <span class="dv">21</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">fill =</span> <span class="st">&quot;cornsilk&quot;</span>) <span class="sc">+</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># shape=21表示有框圆形（不同于单一颜色的小圆点）</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Weight (1000 lbs)&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Miles/(US) gallon&quot;</span>,</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Bubble Chart&quot;</span>,</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="st">&quot;Engine</span><span class="sc">\n</span><span class="st">Displacement (cu.in.)&quot;</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># size意为对图例添加标签</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<p><img src="figure/unnamed-chunk-2-1.png" width="70%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="使用数学公式代替字符串文本" class="section level3">
+<h3>使用数学公式代替字符串文本</h3>
+<p><code>quote()</code></p>
+<p>使用?plotmath命令查看可用选项</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="fu">runif</span>(<span class="dv">10</span>),</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> <span class="fu">runif</span>(<span class="dv">10</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(x, y)) <span class="sc">+</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="fu">quote</span>(<span class="fu">sum</span>(x[i]<span class="sc">^</span><span class="dv">2</span>, i <span class="sc">==</span> <span class="dv">1</span>, n)),</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="fu">quote</span>(alpha <span class="sc">+</span> beta <span class="sc">+</span> <span class="fu">frac</span>(delta, theta))</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<p><img src="figure/unnamed-chunk-3-1.png" width="70%" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="绘图区内部的文本标签和说明" class="section level2">
+<h2>绘图区内部的文本标签和说明</h2>
+<p><code>geom_label()</code>和<code>ggrepel::geom_label_repel()</code>在数据旁添加文本标签</p>
+<p><code>geom_text()</code>和<code>ggrepel::geom_text_repel()</code>在图内添加文本说明</p>
+<div id="数据点旁的标签" class="section level3">
+<h3>数据点旁的标签</h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 先选取出每类汽车中效率最高的型号，然后在图形中标记出来</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>best_in_class <span class="ot">&lt;-</span> mpg <span class="sc">%&gt;%</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(class) <span class="sc">%&gt;%</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">row_number</span>(<span class="fu">desc</span>(hwy)) <span class="sc">==</span> <span class="dv">1</span>) <span class="co"># desc()排序</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(displ, hwy)) <span class="sc">+</span> <span class="co"># 全局映射和全局数据</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> class)) <span class="sc">+</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> model), <span class="at">data =</span> best_in_class) <span class="co"># 用局部数据，将model变量映射为文本标签</span></span></code></pre></div>
+<p><img src="figure/unnamed-chunk-4-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(displ, hwy)) <span class="sc">+</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> class)) <span class="sc">+</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_label</span>(<span class="fu">aes</span>(<span class="at">label =</span> model),</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> best_in_class,</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">nudge_y =</span> <span class="dv">2</span>, <span class="at">alpha =</span> <span class="fl">0.5</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="co"># nudge_y参数可以调整标签相对于数据点的位置</span></span></code></pre></div>
+<p><img src="figure/unnamed-chunk-4-2.png" width="70%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ggrepel包可以自动调整标签的位置，使它们免于重叠</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(displ, hwy)) <span class="sc">+</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> class)) <span class="sc">+</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>, <span class="at">shape =</span> <span class="dv">1</span>, <span class="at">data =</span> best_in_class) <span class="sc">+</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 添加了一个图层，用较大的空心圆来强调添加了标签的数据点</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  ggrepel<span class="sc">::</span><span class="fu">geom_label_repel</span>(<span class="fu">aes</span>(<span class="at">label =</span> model), <span class="at">data =</span> best_in_class)</span></code></pre></div>
+<p><img src="figure/unnamed-chunk-4-3.png" width="70%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 将标签直接放在图形上，以替代图例</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 分组，对每组取数据分布的中位数，在该处放置组名</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>class_avg <span class="ot">&lt;-</span> mpg <span class="sc">%&gt;%</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(class) <span class="sc">%&gt;%</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">displ =</span> <span class="fu">median</span>(displ), <span class="at">hwy =</span> <span class="fu">median</span>(hwy))</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(displ, hwy, <span class="at">color =</span> class)) <span class="sc">+</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  ggrepel<span class="sc">::</span><span class="fu">geom_label_repel</span>(</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">label =</span> class),</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> class_avg, <span class="at">size =</span> <span class="dv">6</span>,</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">label.size =</span> <span class="dv">0</span>, <span class="at">segment.color =</span> <span class="cn">NA</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="co"># 不显示图例</span></span></code></pre></div>
+<p><img src="figure/unnamed-chunk-4-4.png" width="70%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="图中空白处的说明" class="section level3">
+<h3>图中空白处的说明</h3>
+<p>创建一个数据点，位置在空白处，借这个数据添加标签</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 创建只有一个观测的数据框，用以保存标签的坐标</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>label <span class="ot">&lt;-</span> mpg <span class="sc">%&gt;%</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">displ =</span> <span class="fu">max</span>(displ), <span class="at">hwy =</span> <span class="fu">max</span>(hwy),</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> <span class="fu">paste</span>(</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;Increasing engine size is </span><span class="sc">\n</span><span class="st">related to&quot;</span>,</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;decreasing fuel economy.&quot;</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(displ, hwy)) <span class="sc">+</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">label =</span> label),</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> label,</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">vjust =</span> <span class="st">&quot;top&quot;</span>, <span class="at">hjust =</span> <span class="st">&quot;right&quot;</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<p><img src="figure/unnamed-chunk-5-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 如果想让标签紧贴着图形的边界，可以使用+Inf和-Inf值（因为坐标轴的实际范围要比数据范围大一些）</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>label <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">displ =</span> <span class="cn">Inf</span>, <span class="at">hwy =</span> <span class="cn">Inf</span>,</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="fu">paste</span>(</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Increasing engine size is </span><span class="sc">\n</span><span class="st">related to&quot;</span>,</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;decreasing fuel economy.&quot;</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(displ, hwy)) <span class="sc">+</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> label), <span class="at">data =</span> label, <span class="at">vjust =</span> <span class="st">&quot;top&quot;</span>, <span class="at">hjust =</span> <span class="st">&quot;right&quot;</span>)</span></code></pre></div>
+<p><img src="figure/unnamed-chunk-5-2.png" width="70%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 自动为标签断行的方法</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;Increasing engine size related to decreasing fuel economy.&quot;</span> <span class="sc">%&gt;%</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  stringr<span class="sc">::</span><span class="fu">str_wrap</span>(<span class="at">width =</span> <span class="dv">40</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">writeLines</span>()</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Increasing engine size related to</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; decreasing fuel economy.</span></span></code></pre></div>
+</div>
+<div id="vjust和hjust参数" class="section level3">
+<h3>vjust和hjust参数</h3>
+<p>设置标签相对于坐标的对齐方式</p>
+<div class="figure">
+<img src="http://humoon-image-hosting-service.oss-cn-beijing.aliyuncs.com/img/typora/2022/20220323-标签相对于坐标的对齐方式.png" alt="" />
+<p class="caption">20220323-标签相对于坐标的对齐方式</p>
+</div>
+</div>
+</div>
+<div id="参考线箭头和方框" class="section level2">
+<h2>参考线、箭头和方框</h2>
+<ul>
+<li><p>可以使<code>用geom_hline(yintercept = 0)</code>和<code>geom_vline(xintercept = 0)</code>添加参考线。我们经常使用加粗（size = 2）和白色（color = white）的直线作为参考线，并将它们绘制在基本数据层的下面。这样的参考线既清晰可见，又不至于喧宾夺主，影响我们查看数据。</p></li>
+<li><p>可以使用<code>geom_rect()</code>在我们感兴趣的数据点周围绘制一个矩形。矩形的边界由图形属性 xmin、 xmax、 ymin 和 ymax 确定。</p></li>
+<li><p>可以使用<code>geom_segment()</code>及<code>arrow</code>参数绘制箭头，指向需要关注的数据点。使用 x 和 y 属性来定义开始位置，使用 xend 和 yend 属性来定义结束位置。</p></li>
+</ul>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_segment</span>(</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="dv">6</span>, <span class="at">y =</span> <span class="dv">4</span>, <span class="at">xend =</span> <span class="dv">3</span>, <span class="at">yend =</span> <span class="dv">1</span>, <span class="at">colour =</span> <span class="st">&quot;blue&quot;</span>,</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">arrow =</span> <span class="fu">arrow</span>(<span class="at">angle =</span> <span class="dv">30</span>, <span class="at">length =</span> <span class="fu">unit</span>(<span class="fl">0.5</span>, <span class="st">&quot;cm&quot;</span>), <span class="at">type =</span> <span class="st">&quot;open&quot;</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co"># angle为箭头所张角度，type决定箭头是空心还是实心</span></span></code></pre></div>
+</div>
+<div id="图例-legends" class="section level2">
+<h2>图例 Legends</h2>
+<div id="guides" class="section level3">
+<h3>guides()</h3>
+<p>要想控制单个图例的显示，可以配合guide_legend()（负责离散型图例）或guide_colorbar()（负责连续型图例）来使用guides()</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(displ, hwy)) <span class="sc">+</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> class)) <span class="sc">+</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>) <span class="sc">+</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">color =</span> <span class="fu">guide_legend</span>(<span class="at">nrow =</span> <span class="dv">1</span>, <span class="at">override.aes =</span> <span class="fu">list</span>(<span class="at">size =</span> <span class="dv">4</span>)))</span></code></pre></div>
+<p><img src="figure/unnamed-chunk-7-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># nrow使图例排列为1行，size = 4使图例中的数据点更大一些</span></span></code></pre></div>
+</div>
+<div id="图例的位置" class="section level3">
+<h3>图例的位置</h3>
+<p>theme()中的legend.position参数可以控制图例的整体位置：</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>base <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(displ, hwy)) <span class="sc">+</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> class))</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>base <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;left&quot;</span>)</span></code></pre></div>
+<p><img src="figure/unnamed-chunk-8-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>base <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;top&quot;</span>)</span></code></pre></div>
+<p><img src="figure/unnamed-chunk-8-2.png" width="70%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>base <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>)</span></code></pre></div>
+<p><img src="figure/unnamed-chunk-8-3.png" width="70%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>base <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;right&quot;</span>) <span class="co"># 默认设置</span></span></code></pre></div>
+<p><img src="figure/unnamed-chunk-8-4.png" width="70%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>base <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>)</span></code></pre></div>
+<p><img src="figure/unnamed-chunk-8-5.png" width="70%" style="display: block; margin: auto;" /></p>
+<p>也可以指定一个二元素向量，表示图例的中心相对于整张图左下角的距离（都用比例表示）</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(Salaries, <span class="at">package =</span> <span class="st">&quot;car&quot;</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>Salaries <span class="sc">%&gt;%</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> rank, <span class="at">y =</span> salary, <span class="at">fill =</span> sex)) <span class="sc">+</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">c</span>(<span class="st">&quot;AsstProf&quot;</span>, <span class="st">&quot;AssocProf&quot;</span>, <span class="st">&quot;Prof&quot;</span>),</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;Assistant</span><span class="sc">\n</span><span class="st">Professor&quot;</span>,</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;Associate</span><span class="sc">\n</span><span class="st">Professor&quot;</span>,</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;Full</span><span class="sc">\n</span><span class="st">Professor&quot;</span></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">50000</span>, <span class="dv">100000</span>, <span class="dv">150000</span>, <span class="dv">200000</span>),</span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;$50K&quot;</span>, <span class="st">&quot;$100K&quot;</span>, <span class="st">&quot;$150K&quot;</span>, <span class="st">&quot;$200K&quot;</span>)</span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Faculty Salary by Rank and Gender&quot;</span>,</span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;&quot;</span>, <span class="at">y =</span> <span class="st">&quot;&quot;</span>, <span class="at">fill =</span> <span class="st">&quot;Gender&quot;</span></span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="fu">c</span>(<span class="fl">0.1</span>, <span class="fl">0.8</span>))</span></code></pre></div>
+<p><img src="figure/unnamed-chunk-9-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 图例中心相对于整张图左下角的距离，0.1和0.8都是相对于整个画面的比例</span></span></code></pre></div>
+</div>
+</div>
+<div id="主题" class="section level2">
+<h2>主题</h2>
+<p>theme()可以定制图形中的非数据元素，使图表有自己的风格，在做图表时不考虑格式，最后一次性应用主题。</p>
+<div id="ggplot2内置的八种主题" class="section level3">
+<h3>ggplot2内置的八种主题</h3>
+<div class="figure">
+<img src="http://humoon-image-hosting-service.oss-cn-beijing.aliyuncs.com/img/typora/2022/20220323-内置主题.png" alt="" />
+<p class="caption">20220323-内置主题</p>
+</div>
+<p>默认主题使用灰色背景，这样可以在网格线可见的情况下更加突出数据。白色网格线既是可见的（这非常重要，因为它们非常有助于位置判定)，又对视觉没有什么严重影响，我们完全可以对其视而不见。图表的灰色背景不像白色背景那么突兀，与文本印刷颜色非常相近，保证了图形与文档其他部分浑然一体。最后，灰色背景可以创建一片连续的颜色区域，使图形成为形象鲜明的一个独立视觉实体。</p>
+</div>
+<div id="自定义主题" class="section level3">
+<h3>自定义主题</h3>
+<p>所有可定义的参数可查询<code>ggplot2::theme()</code>的帮助文档</p>
+<table>
+<thead>
+<tr class="header">
+<th>参数</th>
+<th>设置的对象</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>plot.title</td>
+<td>图标题</td>
+</tr>
+<tr class="even">
+<td>plot.caption</td>
+<td>图标注（一般是资料来源）</td>
+</tr>
+<tr class="odd">
+<td>axis.title</td>
+<td>轴标题</td>
+</tr>
+<tr class="even">
+<td>axis.text</td>
+<td>轴须标签</td>
+</tr>
+<tr class="odd">
+<td>panel.background</td>
+<td>画图区域（fill填充，color边框）</td>
+</tr>
+<tr class="even">
+<td>panel.grid.major.y</td>
+<td>y轴（水平）主要网格线</td>
+</tr>
+<tr class="odd">
+<td>panel.grid.minor.y</td>
+<td>y轴（水平）次要网格线</td>
+</tr>
+<tr class="even">
+<td>panel.grid.major.x</td>
+<td>x轴（竖直）主要网格线</td>
+</tr>
+<tr class="odd">
+<td>panel.grid.minor.x</td>
+<td>x轴（竖直）次要网格线</td>
+</tr>
+<tr class="even">
+<td>legend.position</td>
+<td>图例的位置</td>
+</tr>
+<tr class="odd">
+<td>legend.title</td>
+<td>图例的标题</td>
+</tr>
+<tr class="even">
+<td>legend.text</td>
+<td>图例各项的文字</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(Salaries, <span class="at">package =</span> <span class="st">&quot;car&quot;</span>)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 定义自己的主题mytheme</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>mytheme <span class="ot">&lt;-</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">face =</span> <span class="st">&quot;bold.italic&quot;</span>,</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">size =</span> <span class="dv">14</span>, <span class="at">color =</span> <span class="st">&quot;brown&quot;</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">face =</span> <span class="st">&quot;bold.italic&quot;</span>, <span class="at">size =</span> <span class="dv">10</span>,</span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>      <span class="at">color =</span> <span class="st">&quot;brown&quot;</span></span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text =</span> <span class="fu">element_text</span>(</span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>      <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>, <span class="at">size =</span> <span class="dv">9</span>,</span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>      <span class="at">color =</span> <span class="st">&quot;darkblue&quot;</span></span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.background =</span> <span class="fu">element_rect</span>(</span>
+<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>      <span class="at">fill =</span> <span class="st">&quot;white&quot;</span>,</span>
+<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>      <span class="at">color =</span> <span class="st">&quot;darkblue&quot;</span></span>
+<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.major.y =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">&quot;grey&quot;</span>, <span class="at">linetype =</span> <span class="dv">1</span>),</span>
+<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor.y =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">&quot;grey&quot;</span>, <span class="at">linetype =</span> <span class="dv">2</span>),</span>
+<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.major.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb21-25"><a href="#cb21-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb21-26"><a href="#cb21-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">&quot;top&quot;</span></span>
+<span id="cb21-27"><a href="#cb21-27" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb21-28"><a href="#cb21-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-29"><a href="#cb21-29" aria-hidden="true" tabindex="-1"></a><span class="co"># 在画图时，应用自己的主题mytheme</span></span>
+<span id="cb21-30"><a href="#cb21-30" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(Salaries, <span class="fu">aes</span>(<span class="at">x =</span> rank, <span class="at">y =</span> salary, <span class="at">fill =</span> sex)) <span class="sc">+</span></span>
+<span id="cb21-31"><a href="#cb21-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb21-32"><a href="#cb21-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Salary by Rank and Sex&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Rank&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Salary&quot;</span>) <span class="sc">+</span></span>
+<span id="cb21-33"><a href="#cb21-33" aria-hidden="true" tabindex="-1"></a>  mytheme</span></code></pre></div>
+<p><img src="figure/unnamed-chunk-10-1.png" width="70%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="套用现成主题ggthemes包" class="section level3">
+<h3>套用现成主题：ggthemes包</h3>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(Salaries, <span class="fu">aes</span>(<span class="at">x =</span> rank, <span class="at">y =</span> salary, <span class="at">fill =</span> sex)) <span class="sc">+</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Salary by Rank and Sex&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Rank&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Salary&quot;</span>) <span class="sc">+</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_wsj</span>() <span class="sc">+</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_wsj</span>()</span></code></pre></div>
+<p><img src="figure/unnamed-chunk-11-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(Salaries, <span class="fu">aes</span>(<span class="at">x =</span> rank, <span class="at">y =</span> salary, <span class="at">fill =</span> sex)) <span class="sc">+</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Salary by Rank and Sex&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Rank&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Salary&quot;</span>) <span class="sc">+</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_wsj</span>() <span class="sc">+</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_wsj</span>(<span class="st">&quot;rgby&quot;</span>, <span class="st">&quot;&quot;</span>) <span class="sc">+</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.ticks.length =</span> <span class="fu">unit</span>(<span class="fl">0.5</span>, <span class="st">&quot;cm&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">fill =</span> <span class="fu">guide_legend</span>(<span class="at">title =</span> <span class="cn">NULL</span>))</span></code></pre></div>
+<p><img src="figure/unnamed-chunk-11-2.png" width="70%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(Salaries, <span class="fu">aes</span>(<span class="at">x =</span> rank, <span class="at">y =</span> salary, <span class="at">fill =</span> sex)) <span class="sc">+</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Salary by Rank and Sex&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Rank&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Salary&quot;</span>) <span class="sc">+</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_economist</span>(<span class="at">base_size =</span> <span class="dv">14</span>) <span class="sc">+</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_economist</span>() <span class="sc">+</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.ticks.length =</span> <span class="fu">unit</span>(<span class="fl">0.5</span>, <span class="st">&quot;cm&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">fill =</span> <span class="fu">guide_legend</span>(<span class="at">title =</span> <span class="cn">NULL</span>))</span></code></pre></div>
+<p><img src="figure/unnamed-chunk-11-3.png" width="70%" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="多图拼接" class="section level2">
+<h2>多图拼接</h2>
+<p>ggplot2包认为它提供的刻面功能已经足够了。为了组合ggplot图形，需要使用其他包。</p>
+<div id="patchwork-包" class="section level3">
+<h3>patchwork 包</h3>
+<p><code>(p1/p2)|p3</code> 表示p1和p2居左，分别上下；p3居右，合并成一幅图</p>
+</div>
+<div id="gridextra-包" class="section level3">
+<h3>gridExtra 包</h3>
+<p><code>gridExtra::grid.arrange()</code>可以组合多幅图</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(Salaries, <span class="at">package =</span> <span class="st">&quot;car&quot;</span>)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ggplot()画的图可以保存为一个对象！</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> Salaries, <span class="fu">aes</span>(<span class="at">x =</span> rank)) <span class="sc">+</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>()</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> Salaries, <span class="fu">aes</span>(<span class="at">x =</span> sex)) <span class="sc">+</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>()</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>p3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> Salaries, <span class="fu">aes</span>(<span class="at">x =</span> yrs.since.phd, <span class="at">y =</span> salary)) <span class="sc">+</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gridExtra)</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(p1, p2, p3, <span class="at">ncol =</span> <span class="dv">3</span>)</span></code></pre></div>
+<p><img src="figure/unnamed-chunk-12-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p><code>arrangeGrob()</code>则可以处理一个由图对象组成的列表（循环作图时很有用）</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">list</span>(p1, p2, p3)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>graph <span class="ot">&lt;-</span> <span class="fu">arrangeGrob</span>(<span class="at">grobs =</span> p, <span class="at">ncol =</span> <span class="dv">3</span>)</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(graph)</span></code></pre></div>
+<p><img src="figure/unnamed-chunk-13-1.png" width="70%" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+
+<div id="rmd-source-code">LS0tDQp0aXRsZTogImdncGxvdDItMiINCnN1YnRpdGxlOiAn5qC35byP576O5YyWJw0KYXV0aG9yOiAiSHVtb29uIg0KZGF0ZTogImByIFN5cy5EYXRlKClgIg0Kb3V0cHV0Og0KICBodG1sX2RvY3VtZW50Og0KICAgIGNvZGVfZG93bmxvYWQ6IHllcw0KICAgIGNzczogLi4vY3NzL3N0eWxlLmNzcw0KICAgIGZpZ19jYXB0aW9uOiB5ZXMNCiAgICB0aGVtZTogdW5pdGVkDQogICAgaGlnaGxpZ2h0OiBoYWRkb2NrDQogICAgbnVtYmVyX3NlY3Rpb25zOiBubw0KICAgIHRvYzogeWVzDQogICAgdG9jX2RlcHRoOiA0DQogICAgdG9jX2Zsb2F0Og0KICAgICAgY29sbGFwc2VkOiB5ZXMNCiAgICAgIHNtb290aF9zY3JvbGw6IHllcw0KZG9jdW1lbnRjbGFzczogY3RleGFydA0KY2xhc3NvcHRpb246IGh5cGVycmVmLA0KLS0tDQoNCmBgYHtyIHNldHVwLCBpbmNsdWRlID0gRkFMU0V9DQpzb3VyY2UoIi4uL1JtYXJrZG93bi10ZW1wbGF0ZS9SbWFya2Rvd25fY29uZmlnLlIiKQ0KDQojIyBnbG9iYWwgb3B0aW9ucyA9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PQ0Ka25pdHI6Om9wdHNfY2h1bmskc2V0KA0KICB3aWR0aCA9IGNvbmZpZyR3aWR0aCwNCiAgZmlnLndpZHRoID0gY29uZmlnJGZpZy53aWR0aCwNCiAgZmlnLmFzcCA9IGNvbmZpZyRmaWcuYXNwLA0KICBvdXQud2lkdGggPSBjb25maWckb3V0LndpZHRoLA0KICBmaWcuYWxpZ24gPSBjb25maWckZmlnLmFsaWduLA0KICBmaWcucGF0aCA9IGNvbmZpZyRmaWcucGF0aCwNCiAgZmlnLnNob3cgPSBjb25maWckZmlnLnNob3csDQogIHdhcm4gPSBjb25maWckd2FybiwNCiAgd2FybmluZyA9IGNvbmZpZyR3YXJuaW5nLA0KICBtZXNzYWdlID0gY29uZmlnJG1lc3NhZ2UsDQogIGVjaG8gPSBjb25maWckZWNobywgDQogIGV2YWwgPSBjb25maWckZXZhbCwgDQogIHRpZHkgPSBjb25maWckdGlkeSwgDQogIGNvbW1lbnQgPSBjb25maWckY29tbWVudCwgDQogIGNvbGxhcHNlID0gY29uZmlnJGNvbGxhcHNlLCANCiAgY2FjaGUgPSBjb25maWckY2FjaGUsDQogIGNhY2hlLmNvbW1lbnRzID0gY29uZmlnJGNhY2hlLmNvbW1lbnRzLA0KICBhdXRvZGVwID0gY29uZmlnJGF1dG9kZXANCikNCg0KIyMgdXNlIG5lY2Vzc2FyeSBwYWNrYWdlcyA9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0NCmxpYnJhcnkodGlkeXZlcnNlKQ0KbGlicmFyeShkYXRhLnRhYmxlKQ0KbGlicmFyeShtYWdyaXR0cikNCmxpYnJhcnkocGxvdGx5KQ0KbGlicmFyeShodG1sd2lkZ2V0cykNCg0KcGFjbWFuOjpwX2xvYWQoDQogIGx1YnJpZGF0ZSwNCiAgc2hvd3RleHQsDQogIERULA0KICBqc29ubGl0ZSwNCiAgcmV0aWN1bGF0ZSwNCiAgY2FyLCANCiAgcmVhZHhsLCANCiAgcmVzaGFwZTIsIA0KICBSQ29sb3JCcmV3ZXINCikNCg0KZGF0YShjYXI6OlNhbGFyaWVzKQ0KDQojIyBwbG90dGluZyA9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0NCg0KIyDljIXlkKvlm77nmoTku6PnoIHlnZfpnIDopoFmaWcuc2hvd3RleHQgPSBUUlVF6YCJ6aG5DQpzaG93dGV4dF9hdXRvKGVuYWJsZSA9IFRSVUUpDQp3aW5kb3dzRm9udHMoSCA9IHdpbmRvd3NGb250KCJNaWNyb3NvZnQgWWFIZWkiKSkNCmBgYA0KDQo8YSBocmVmPSIuLi9wZGYvY2hlYXRzaGVldC1nZ3Bsb3QucGRmIj4qZ2dwbG90MiBjaGVhdHNoZWV0LnBkZio8L2E+DQoNCjxvYmplY3QgZGF0YT0iLi4vcGRmL2NoZWF0c2hlZXQtZ2dwbG90LnBkZiIgdHlwZT0iYXBwbGljYXRpb24vcGRmIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIj48L29iamVjdD4NCg0KIyMgTGFicyjnu5jlm77ljLrlpJbpg6jnmoTlkITnp43lhYPntKDnmoTmoIfpopgpDQoNCmBsYWJzKC4uLiwgdGl0bGUgPSAsIHN1YnRpdGxlID0gLCBjYXB0aW9uID0gLCB0YWcgPSApYA0KDQojIyMg5Zu+5b2i5qCH6aKY44CB5Ymv5qCH6aKY5ZKM6K+05piODQoNCnRpdGxlLCDkuLvmoIfpopjjgILkvb/nlKjmoIfpopjnmoTnm67nmoTmmK/mpoLmi6zkuLvopoHmiJDmnpzjgILlsL3ph4/kuI3opoHkvb/nlKjpgqPkupvlj6rlr7nlm77lvaLov5vooYzmj4/ov7DnmoTmoIfpopjvvIzlpoIi5Y+R5Yqo5py65o6S6YeP5LiO54eD5rK55pWI546H5pWj54K55Zu+IuOAgg0KDQpzdWJ0aXRsZSwg5Ymv5qCH6aKY44CC5Zyo5qCH6aKY5LiL5Lul5pu05bCP55qE5a2X5L2T5re75Yqg5pu05aSa6ZmE5Yqg5L+h5oGv44CCDQoNCmNhcHRpb24sIOivtOaYju+8jOWcqOWbvuW9ouS4i+aWuea3u+WKoOaWh+acrO+8jOW4uOeUqOS6juaPj+i/sOaVsOaNruadpea6kOOAgg0KDQpgYGB7cn0NCmdncGxvdChtcGcsIGFlcyhkaXNwbCwgaHd5KSkgKw0KICBnZW9tX3BvaW50KGFlcyhjb2xvciA9IGNsYXNzKSkgKw0KICBnZW9tX3Ntb290aChzZSA9IEZBTFNFKSArDQogIGxhYnMoDQogICAgdGl0bGUgPSBwYXN0ZSgiRnVlbCBlZmZpY2llbmN5IGdlbmVyYWxseSBkZWNyZWFzZXMgd2l0aCIsICJlbmdpbmUgc2l6ZSIpLA0KICAgIHN1YnRpdGxlID0gcGFzdGUoDQogICAgICAiVHdvIHNlYXRlcnMgKHNwb3J0cyBjYXJzKSBhcmUgYW4gZXhjZXB0aW9uIiwNCiAgICAgICJiZWNhdXNlIG9mIHRoZWlyIGxpZ2h0IHdlaWdodCINCiAgICApLA0KICAgIGNhcHRpb24gPSAiRGF0YSBmcm9tIGZ1ZWxlY29ub215LmdvdiINCiAgKQ0KYGBgDQoNCiMjIyDlnZDmoIfovbTlkozlm77kvovnmoTmoIfpopgNCg0K566A55+t55qE5Y+Y6YeP5ZCN56ew5Yqg5Y2V5L2NDQoNCmBgYHtyLCBmaWcuc2hvdz0nYXNpcyd9DQojIOawlOazoeWbvg0KZ2dwbG90KG10Y2FycywgYWVzKHggPSB3dCwgeSA9IG1wZywgc2l6ZSA9IGRpc3ApKSArDQogICMg5bCGZGlzcOWPmOmHj+aYoOWwhOS4uuWbvuW9oueahHNpemXlsZ7mgKfvvIzmnKzkvovkuK3ljbPkuLrmlaPngrnnmoTlpKflsI/jgILlkIzml7bnlJ/miJBzaXpl5Zu+5L6LDQogIGdlb21fcG9pbnQoc2hhcGUgPSAyMSwgY29sb3IgPSAiYmxhY2siLCBmaWxsID0gImNvcm5zaWxrIikgKw0KICAjIHNoYXBlPTIx6KGo56S65pyJ5qGG5ZyG5b2i77yI5LiN5ZCM5LqO5Y2V5LiA6aKc6Imy55qE5bCP5ZyG54K577yJDQogIGxhYnMoDQogICAgeCA9ICJXZWlnaHQgKDEwMDAgbGJzKSIsIHkgPSAiTWlsZXMvKFVTKSBnYWxsb24iLA0KICAgIHRpdGxlID0gIkJ1YmJsZSBDaGFydCIsDQogICAgc2l6ZSA9ICJFbmdpbmVcbkRpc3BsYWNlbWVudCAoY3UuaW4uKSINCiAgICAjIHNpemXmhI/kuLrlr7nlm77kvovmt7vliqDmoIfnrb4NCiAgKQ0KYGBgDQoNCiMjIyDkvb/nlKjmlbDlrablhazlvI/ku6Pmm7/lrZfnrKbkuLLmlofmnKwNCg0KYHF1b3RlKClgDQoNCuS9v+eUqD9wbG90bWF0aOWRveS7pOafpeeci+WPr+eUqOmAiemhuQ0KDQpgYGB7cn0NCmRmIDwtIHRpYmJsZSgNCiAgeCA9IHJ1bmlmKDEwKSwNCiAgeSA9IHJ1bmlmKDEwKQ0KKQ0KDQpnZ3Bsb3QoZGYsIGFlcyh4LCB5KSkgKw0KICBnZW9tX3BvaW50KCkgKw0KICBsYWJzKA0KICAgIHggPSBxdW90ZShzdW0oeFtpXV4yLCBpID09IDEsIG4pKSwNCiAgICB5ID0gcXVvdGUoYWxwaGEgKyBiZXRhICsgZnJhYyhkZWx0YSwgdGhldGEpKQ0KICApDQpgYGANCg0KIyMg57uY5Zu+5Yy65YaF6YOo55qE5paH5pys5qCH562+5ZKM6K+05piODQoNCmBnZW9tX2xhYmVsKClg5ZKMYGdncmVwZWw6Omdlb21fbGFiZWxfcmVwZWwoKWDlnKjmlbDmja7ml4Hmt7vliqDmlofmnKzmoIfnrb4NCg0KYGdlb21fdGV4dCgpYOWSjGBnZ3JlcGVsOjpnZW9tX3RleHRfcmVwZWwoKWDlnKjlm77lhoXmt7vliqDmlofmnKzor7TmmI4NCg0KIyMjIOaVsOaNrueCueaXgeeahOagh+etvg0KDQpgYGB7ciwgZmlnLnNob3c9J2FzaXMnfQ0KIyDlhYjpgInlj5blh7rmr4/nsbvmsb3ovabkuK3mlYjnjofmnIDpq5jnmoTlnovlj7fvvIznhLblkI7lnKjlm77lvaLkuK3moIforrDlh7rmnaUNCmJlc3RfaW5fY2xhc3MgPC0gbXBnICU+JQ0KICBncm91cF9ieShjbGFzcykgJT4lDQogIGZpbHRlcihyb3dfbnVtYmVyKGRlc2MoaHd5KSkgPT0gMSkgIyBkZXNjKCnmjpLluo8NCg0KDQpnZ3Bsb3QobXBnLCBhZXMoZGlzcGwsIGh3eSkpICsgIyDlhajlsYDmmKDlsITlkozlhajlsYDmlbDmja4NCiAgZ2VvbV9wb2ludChhZXMoY29sb3IgPSBjbGFzcykpICsNCiAgZ2VvbV90ZXh0KGFlcyhsYWJlbCA9IG1vZGVsKSwgZGF0YSA9IGJlc3RfaW5fY2xhc3MpICMg55So5bGA6YOo5pWw5o2u77yM5bCGbW9kZWzlj5jph4/mmKDlsITkuLrmlofmnKzmoIfnrb4NCg0KZ2dwbG90KG1wZywgYWVzKGRpc3BsLCBod3kpKSArDQogIGdlb21fcG9pbnQoYWVzKGNvbG9yID0gY2xhc3MpKSArDQogIGdlb21fbGFiZWwoYWVzKGxhYmVsID0gbW9kZWwpLA0KICAgIGRhdGEgPSBiZXN0X2luX2NsYXNzLA0KICAgIG51ZGdlX3kgPSAyLCBhbHBoYSA9IDAuNQ0KICApICMgbnVkZ2VfeeWPguaVsOWPr+S7peiwg+aVtOagh+etvuebuOWvueS6juaVsOaNrueCueeahOS9jee9rg0KDQojIGdncmVwZWzljIXlj6/ku6Xoh6rliqjosIPmlbTmoIfnrb7nmoTkvY3nva7vvIzkvb/lroPku6zlhY3kuo7ph43lj6ANCmdncGxvdChtcGcsIGFlcyhkaXNwbCwgaHd5KSkgKw0KICBnZW9tX3BvaW50KGFlcyhjb2xvciA9IGNsYXNzKSkgKw0KICBnZW9tX3BvaW50KHNpemUgPSAzLCBzaGFwZSA9IDEsIGRhdGEgPSBiZXN0X2luX2NsYXNzKSArDQogICMg5re75Yqg5LqG5LiA5Liq5Zu+5bGC77yM55So6L6D5aSn55qE56m65b+D5ZyG5p2l5by66LCD5re75Yqg5LqG5qCH562+55qE5pWw5o2u54K5DQogIGdncmVwZWw6Omdlb21fbGFiZWxfcmVwZWwoYWVzKGxhYmVsID0gbW9kZWwpLCBkYXRhID0gYmVzdF9pbl9jbGFzcykNCg0KIyDlsIbmoIfnrb7nm7TmjqXmlL7lnKjlm77lvaLkuIrvvIzku6Xmm7/ku6Plm77kvosNCiMg5YiG57uE77yM5a+55q+P57uE5Y+W5pWw5o2u5YiG5biD55qE5Lit5L2N5pWw77yM5Zyo6K+l5aSE5pS+572u57uE5ZCNDQpjbGFzc19hdmcgPC0gbXBnICU+JQ0KICBncm91cF9ieShjbGFzcykgJT4lDQogIHN1bW1hcml6ZShkaXNwbCA9IG1lZGlhbihkaXNwbCksIGh3eSA9IG1lZGlhbihod3kpKQ0KDQpnZ3Bsb3QobXBnLCBhZXMoZGlzcGwsIGh3eSwgY29sb3IgPSBjbGFzcykpICsNCiAgZ2dyZXBlbDo6Z2VvbV9sYWJlbF9yZXBlbCgNCiAgICBhZXMobGFiZWwgPSBjbGFzcyksDQogICAgZGF0YSA9IGNsYXNzX2F2Zywgc2l6ZSA9IDYsDQogICAgbGFiZWwuc2l6ZSA9IDAsIHNlZ21lbnQuY29sb3IgPSBOQQ0KICApICsNCiAgZ2VvbV9wb2ludCgpICsNCiAgdGhlbWUobGVnZW5kLnBvc2l0aW9uID0gIm5vbmUiKSAjIOS4jeaYvuekuuWbvuS+iw0KYGBgDQoNCiMjIyDlm77kuK3nqbrnmb3lpITnmoTor7TmmI4NCg0K5Yib5bu65LiA5Liq5pWw5o2u54K577yM5L2N572u5Zyo56m655m95aSE77yM5YCf6L+Z5Liq5pWw5o2u5re75Yqg5qCH562+DQoNCmBgYHtyLCBmaWcuc2hvdz0nYXNpcyd9DQojIOWIm+W7uuWPquacieS4gOS4quingua1i+eahOaVsOaNruahhu+8jOeUqOS7peS/neWtmOagh+etvueahOWdkOaghw0KbGFiZWwgPC0gbXBnICU+JQ0KICBzdW1tYXJpemUoDQogICAgZGlzcGwgPSBtYXgoZGlzcGwpLCBod3kgPSBtYXgoaHd5KSwNCiAgICBsYWJlbCA9IHBhc3RlKA0KICAgICAgIkluY3JlYXNpbmcgZW5naW5lIHNpemUgaXMgXG5yZWxhdGVkIHRvIiwNCiAgICAgICJkZWNyZWFzaW5nIGZ1ZWwgZWNvbm9teS4iDQogICAgKQ0KICApDQoNCmdncGxvdChtcGcsIGFlcyhkaXNwbCwgaHd5KSkgKw0KICBnZW9tX3BvaW50KCkgKw0KICBnZW9tX3RleHQoDQogICAgYWVzKGxhYmVsID0gbGFiZWwpLA0KICAgIGRhdGEgPSBsYWJlbCwNCiAgICB2anVzdCA9ICJ0b3AiLCBoanVzdCA9ICJyaWdodCINCiAgKQ0KDQojIOWmguaenOaDs+iuqeagh+etvue0p+i0tOedgOWbvuW9oueahOi+ueeVjO+8jOWPr+S7peS9v+eUqCtJbmblkowtSW5m5YC877yI5Zug5Li65Z2Q5qCH6L2055qE5a6e6ZmF6IyD5Zu06KaB5q+U5pWw5o2u6IyD5Zu05aSn5LiA5Lqb77yJDQpsYWJlbCA8LSB0aWJibGUoDQogIGRpc3BsID0gSW5mLCBod3kgPSBJbmYsDQogIGxhYmVsID0gcGFzdGUoDQogICAgIkluY3JlYXNpbmcgZW5naW5lIHNpemUgaXMgXG5yZWxhdGVkIHRvIiwNCiAgICAiZGVjcmVhc2luZyBmdWVsIGVjb25vbXkuIg0KICApDQopDQoNCmdncGxvdChtcGcsIGFlcyhkaXNwbCwgaHd5KSkgKw0KICBnZW9tX3BvaW50KCkgKw0KICBnZW9tX3RleHQoYWVzKGxhYmVsID0gbGFiZWwpLCBkYXRhID0gbGFiZWwsIHZqdXN0ID0gInRvcCIsIGhqdXN0ID0gInJpZ2h0IikNCg0KIyDoh6rliqjkuLrmoIfnrb7mlq3ooYznmoTmlrnms5UNCiJJbmNyZWFzaW5nIGVuZ2luZSBzaXplIHJlbGF0ZWQgdG8gZGVjcmVhc2luZyBmdWVsIGVjb25vbXkuIiAlPiUNCiAgc3RyaW5ncjo6c3RyX3dyYXAod2lkdGggPSA0MCkgJT4lDQogIHdyaXRlTGluZXMoKQ0KYGBgDQoNCiMjIyB2anVzdOWSjGhqdXN05Y+C5pWwDQoNCuiuvue9ruagh+etvuebuOWvueS6juWdkOagh+eahOWvuem9kOaWueW8jw0KDQohWzIwMjIwMzIzLeagh+etvuebuOWvueS6juWdkOagh+eahOWvuem9kOaWueW8j10oaHR0cDovL2h1bW9vbi1pbWFnZS1ob3N0aW5nLXNlcnZpY2Uub3NzLWNuLWJlaWppbmcuYWxpeXVuY3MuY29tL2ltZy90eXBvcmEvMjAyMi8yMDIyMDMyMy3moIfnrb7nm7jlr7nkuo7lnZDmoIfnmoTlr7npvZDmlrnlvI8ucG5nKQ0KDQojIyDlj4LogIPnur/jgIHnrq3lpLTlkozmlrnmoYYNCg0KLSAgIOWPr+S7peS9v2DnlKhnZW9tX2hsaW5lKHlpbnRlcmNlcHQgPSAwKWDlkoxgZ2VvbV92bGluZSh4aW50ZXJjZXB0ID0gMClg5re75Yqg5Y+C6ICD57q/44CC5oiR5Lus57uP5bi45L2/55So5Yqg57KX77yIc2l6ZSA9IDLvvInlkoznmb3oibLvvIhjb2xvciA9IHdoaXRl77yJ55qE55u057q/5L2c5Li65Y+C6ICD57q/77yM5bm25bCG5a6D5Lus57uY5Yi25Zyo5Z+65pys5pWw5o2u5bGC55qE5LiL6Z2i44CC6L+Z5qC355qE5Y+C6ICD57q/5pei5riF5pmw5Y+v6KeB77yM5Y+I5LiN6Iez5LqO5Zan5a6+5aS65Li777yM5b2x5ZON5oiR5Lus5p+l55yL5pWw5o2u44CCDQoNCi0gICDlj6/ku6Xkvb/nlKhgZ2VvbV9yZWN0KClg5Zyo5oiR5Lus5oSf5YW06Laj55qE5pWw5o2u54K55ZGo5Zu057uY5Yi25LiA5Liq55+p5b2i44CC55+p5b2i55qE6L6555WM55Sx5Zu+5b2i5bGe5oCnIHhtaW7jgIEgeG1heOOAgSB5bWluIOWSjCB5bWF4IOehruWumuOAgg0KDQotICAg5Y+v5Lul5L2/55SoYGdlb21fc2VnbWVudCgpYOWPimBhcnJvd2Dlj4LmlbDnu5jliLbnrq3lpLTvvIzmjIflkJHpnIDopoHlhbPms6jnmoTmlbDmja7ngrnjgILkvb/nlKggeCDlkowgeSDlsZ7mgKfmnaXlrprkuYnlvIDlp4vkvY3nva7vvIzkvb/nlKggeGVuZCDlkowgeWVuZCDlsZ7mgKfmnaXlrprkuYnnu5PmnZ/kvY3nva7jgIINCg0KYGBge3IsIGV2YWw9RkFMU0V9DQpnZW9tX3NlZ21lbnQoDQogIHggPSA2LCB5ID0gNCwgeGVuZCA9IDMsIHllbmQgPSAxLCBjb2xvdXIgPSAiYmx1ZSIsDQogIGFycm93ID0gYXJyb3coYW5nbGUgPSAzMCwgbGVuZ3RoID0gdW5pdCgwLjUsICJjbSIpLCB0eXBlID0gIm9wZW4iKQ0KKQ0KIyBhbmdsZeS4uueureWktOaJgOW8oOinkuW6pu+8jHR5cGXlhrPlrprnrq3lpLTmmK/nqbrlv4Pov5jmmK/lrp7lv4MNCmBgYA0KDQojIyDlm77kvosgTGVnZW5kcw0KDQojIyMgZ3VpZGVzKCkNCg0K6KaB5oOz5o6n5Yi25Y2V5Liq5Zu+5L6L55qE5pi+56S677yM5Y+v5Lul6YWN5ZCIZ3VpZGVfbGVnZW5kKCnvvIjotJ/otKPnprvmlaPlnovlm77kvovvvInmiJZndWlkZV9jb2xvcmJhcigp77yI6LSf6LSj6L+e57ut5Z6L5Zu+5L6L77yJ5p2l5L2/55SoZ3VpZGVzKCkNCg0KYGBge3J9DQpnZ3Bsb3QobXBnLCBhZXMoZGlzcGwsIGh3eSkpICsNCiAgZ2VvbV9wb2ludChhZXMoY29sb3IgPSBjbGFzcykpICsNCiAgZ2VvbV9zbW9vdGgoc2UgPSBGQUxTRSkgKw0KICB0aGVtZShsZWdlbmQucG9zaXRpb24gPSAiYm90dG9tIikgKw0KICBndWlkZXMoY29sb3IgPSBndWlkZV9sZWdlbmQobnJvdyA9IDEsIG92ZXJyaWRlLmFlcyA9IGxpc3Qoc2l6ZSA9IDQpKSkNCiMgbnJvd+S9v+WbvuS+i+aOkuWIl+S4ujHooYzvvIxzaXplID0gNOS9v+WbvuS+i+S4reeahOaVsOaNrueCueabtOWkp+S4gOS6mw0KYGBgDQoNCiMjIyDlm77kvovnmoTkvY3nva4NCg0KdGhlbWUoKeS4reeahGxlZ2VuZC5wb3NpdGlvbuWPguaVsOWPr+S7peaOp+WItuWbvuS+i+eahOaVtOS9k+S9jee9ru+8mg0KDQpgYGB7ciwgZmlnLnNob3c9J2FzaXMnfQ0KYmFzZSA8LSBnZ3Bsb3QobXBnLCBhZXMoZGlzcGwsIGh3eSkpICsNCiAgZ2VvbV9wb2ludChhZXMoY29sb3IgPSBjbGFzcykpDQoNCmJhc2UgKyB0aGVtZShsZWdlbmQucG9zaXRpb24gPSAibGVmdCIpDQpiYXNlICsgdGhlbWUobGVnZW5kLnBvc2l0aW9uID0gInRvcCIpDQpiYXNlICsgdGhlbWUobGVnZW5kLnBvc2l0aW9uID0gImJvdHRvbSIpDQpiYXNlICsgdGhlbWUobGVnZW5kLnBvc2l0aW9uID0gInJpZ2h0IikgIyDpu5jorqTorr7nva4NCmJhc2UgKyB0aGVtZShsZWdlbmQucG9zaXRpb24gPSAibm9uZSIpDQpgYGANCg0K5Lmf5Y+v5Lul5oyH5a6a5LiA5Liq5LqM5YWD57Sg5ZCR6YeP77yM6KGo56S65Zu+5L6L55qE5Lit5b+D55u45a+55LqO5pW05byg5Zu+5bem5LiL6KeS55qE6Led56a777yI6YO955So5q+U5L6L6KGo56S677yJDQoNCmBgYHtyfQ0KZGF0YShTYWxhcmllcywgcGFja2FnZSA9ICJjYXIiKQ0KDQpTYWxhcmllcyAlPiUNCiAgZ2dwbG90KGFlcyh4ID0gcmFuaywgeSA9IHNhbGFyeSwgZmlsbCA9IHNleCkpICsNCiAgZ2VvbV9ib3hwbG90KCkgKw0KICBzY2FsZV94X2Rpc2NyZXRlKA0KICAgIGJyZWFrcyA9IGMoIkFzc3RQcm9mIiwgIkFzc29jUHJvZiIsICJQcm9mIiksDQogICAgbGFiZWxzID0gYygNCiAgICAgICJBc3Npc3RhbnRcblByb2Zlc3NvciIsDQogICAgICAiQXNzb2NpYXRlXG5Qcm9mZXNzb3IiLA0KICAgICAgIkZ1bGxcblByb2Zlc3NvciINCiAgICApDQogICkgKw0KICBzY2FsZV95X2NvbnRpbnVvdXMoDQogICAgYnJlYWtzID0gYyg1MDAwMCwgMTAwMDAwLCAxNTAwMDAsIDIwMDAwMCksDQogICAgbGFiZWxzID0gYygiJDUwSyIsICIkMTAwSyIsICIkMTUwSyIsICIkMjAwSyIpDQogICkgKw0KICBsYWJzKA0KICAgIHRpdGxlID0gIkZhY3VsdHkgU2FsYXJ5IGJ5IFJhbmsgYW5kIEdlbmRlciIsDQogICAgeCA9ICIiLCB5ID0gIiIsIGZpbGwgPSAiR2VuZGVyIg0KICApICsNCiAgdGhlbWUobGVnZW5kLnBvc2l0aW9uID0gYygwLjEsIDAuOCkpDQojIOWbvuS+i+S4reW/g+ebuOWvueS6juaVtOW8oOWbvuW3puS4i+inkueahOi3neemu++8jDAuMeWSjDAuOOmDveaYr+ebuOWvueS6juaVtOS4queUu+mdoueahOavlOS+iw0KYGBgDQoNCiMjIOS4u+mimA0KDQp0aGVtZSgp5Y+v5Lul5a6a5Yi25Zu+5b2i5Lit55qE6Z2e5pWw5o2u5YWD57Sg77yM5L2/5Zu+6KGo5pyJ6Ieq5bex55qE6aOO5qC877yM5Zyo5YGa5Zu+6KGo5pe25LiN6ICD6JmR5qC85byP77yM5pyA5ZCO5LiA5qyh5oCn5bqU55So5Li76aKY44CCDQoNCiMjIyBnZ3Bsb3Qy5YaF572u55qE5YWr56eN5Li76aKYDQoNCiFbMjAyMjAzMjMt5YaF572u5Li76aKYXShodHRwOi8vaHVtb29uLWltYWdlLWhvc3Rpbmctc2VydmljZS5vc3MtY24tYmVpamluZy5hbGl5dW5jcy5jb20vaW1nL3R5cG9yYS8yMDIyLzIwMjIwMzIzLeWGhee9ruS4u+mimC5wbmcpIA0KDQrpu5jorqTkuLvpopjkvb/nlKjngbDoibLog4zmma/vvIzov5nmoLflj6/ku6XlnKjnvZHmoLznur/lj6/op4HnmoTmg4XlhrXkuIvmm7TliqDnqoHlh7rmlbDmja7jgILnmb3oibLnvZHmoLznur/ml6LmmK/lj6/op4HnmoTvvIjov5npnZ7luLjph43opoHvvIzlm6DkuLrlroPku6zpnZ7luLjmnInliqnkuo7kvY3nva7liKTlrpop77yM5Y+I5a+56KeG6KeJ5rKh5pyJ5LuA5LmI5Lil6YeN5b2x5ZON77yM5oiR5Lus5a6M5YWo5Y+v5Lul5a+55YW26KeG6ICM5LiN6KeB44CC5Zu+6KGo55qE54Gw6Imy6IOM5pmv5LiN5YOP55m96Imy6IOM5pmv6YKj5LmI56qB5YWA77yM5LiO5paH5pys5Y2w5Yi36aKc6Imy6Z2e5bi455u46L+R77yM5L+d6K+B5LqG5Zu+5b2i5LiO5paH5qGj5YW25LuW6YOo5YiG5rWR54S25LiA5L2T44CC5pyA5ZCO77yM54Gw6Imy6IOM5pmv5Y+v5Lul5Yib5bu65LiA54mH6L+e57ut55qE6aKc6Imy5Yy65Z+f77yM5L2/5Zu+5b2i5oiQ5Li65b2i6LGh6bKc5piO55qE5LiA5Liq54us56uL6KeG6KeJ5a6e5L2T44CCDQoNCiMjIyDoh6rlrprkuYnkuLvpopgNCg0K5omA5pyJ5Y+v5a6a5LmJ55qE5Y+C5pWw5Y+v5p+l6K+iYGdncGxvdDI6OnRoZW1lKClg55qE5biu5Yqp5paH5qGjDQoNCnwg5Y+C5pWwICAgICAgICAgICAgICAgfCDorr7nva7nmoTlr7nosaEgICAgICAgICAgICAgICAgICAgICAgfA0KfC0tLS0tLS0tLS0tLS0tLS0tLS0tfC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLXwNCnwgcGxvdC50aXRsZSAgICAgICAgIHwg5Zu+5qCH6aKYICAgICAgICAgICAgICAgICAgICAgICAgICB8DQp8IHBsb3QuY2FwdGlvbiAgICAgICB8IOWbvuagh+azqO+8iOS4gOiIrOaYr+i1hOaWmeadpea6kO+8iSAgICAgICAgfA0KfCBheGlzLnRpdGxlICAgICAgICAgfCDovbTmoIfpopggICAgICAgICAgICAgICAgICAgICAgICAgIHwNCnwgYXhpcy50ZXh0ICAgICAgICAgIHwg6L206aG75qCH562+ICAgICAgICAgICAgICAgICAgICAgICAgICB8DQp8IHBhbmVsLmJhY2tncm91bmQgICB8IOeUu+WbvuWMuuWfn++8iGZpbGzloavlhYXvvIxjb2xvcui+ueahhu+8iSB8DQp8IHBhbmVsLmdyaWQubWFqb3IueSB8IHnovbTvvIjmsLTlubPvvInkuLvopoHnvZHmoLznur8gICAgICAgICAgIHwNCnwgcGFuZWwuZ3JpZC5taW5vci55IHwgeei9tO+8iOawtOW5s++8ieasoeimgee9keagvOe6vyAgICAgICAgICAgICAgIHwNCnwgcGFuZWwuZ3JpZC5tYWpvci54IHwgeOi9tO+8iOerluebtO+8ieS4u+imgee9keagvOe6vyAgICAgICAgICAgICAgIHwNCnwgcGFuZWwuZ3JpZC5taW5vci54IHwgeOi9tO+8iOerluebtO+8ieasoeimgee9keagvOe6vyAgICAgICAgICAgICAgIHwNCnwgbGVnZW5kLnBvc2l0aW9uICAgIHwg5Zu+5L6L55qE5L2N572uICAgICAgICAgICAgICAgICAgICAgIHwNCnwgbGVnZW5kLnRpdGxlICAgICAgIHwg5Zu+5L6L55qE5qCH6aKYICAgICAgICAgICAgICAgICAgICAgIHwNCnwgbGVnZW5kLnRleHQgICAgICAgIHwg5Zu+5L6L5ZCE6aG555qE5paH5a2XICAgICAgICAgICAgICAgICAgfA0KDQpgYGB7cn0NCmRhdGEoU2FsYXJpZXMsIHBhY2thZ2UgPSAiY2FyIikNCg0KIyDlrprkuYnoh6rlt7HnmoTkuLvpophteXRoZW1lDQpteXRoZW1lIDwtDQogIHRoZW1lKA0KICAgIHBsb3QudGl0bGUgPSBlbGVtZW50X3RleHQoDQogICAgICBmYWNlID0gImJvbGQuaXRhbGljIiwNCiAgICAgIHNpemUgPSAxNCwgY29sb3IgPSAiYnJvd24iDQogICAgKSwNCiAgICBheGlzLnRpdGxlID0gZWxlbWVudF90ZXh0KA0KICAgICAgZmFjZSA9ICJib2xkLml0YWxpYyIsIHNpemUgPSAxMCwNCiAgICAgIGNvbG9yID0gImJyb3duIg0KICAgICksDQogICAgYXhpcy50ZXh0ID0gZWxlbWVudF90ZXh0KA0KICAgICAgZmFjZSA9ICJib2xkIiwgc2l6ZSA9IDksDQogICAgICBjb2xvciA9ICJkYXJrYmx1ZSINCiAgICApLA0KICAgIHBhbmVsLmJhY2tncm91bmQgPSBlbGVtZW50X3JlY3QoDQogICAgICBmaWxsID0gIndoaXRlIiwNCiAgICAgIGNvbG9yID0gImRhcmtibHVlIg0KICAgICksDQogICAgcGFuZWwuZ3JpZC5tYWpvci55ID0gZWxlbWVudF9saW5lKGNvbG9yID0gImdyZXkiLCBsaW5ldHlwZSA9IDEpLA0KICAgIHBhbmVsLmdyaWQubWlub3IueSA9IGVsZW1lbnRfbGluZShjb2xvciA9ICJncmV5IiwgbGluZXR5cGUgPSAyKSwNCiAgICBwYW5lbC5ncmlkLm1ham9yLnggPSBlbGVtZW50X2JsYW5rKCksDQogICAgcGFuZWwuZ3JpZC5taW5vci54ID0gZWxlbWVudF9ibGFuaygpLA0KICAgIGxlZ2VuZC5wb3NpdGlvbiA9ICJ0b3AiDQogICkNCg0KIyDlnKjnlLvlm77ml7bvvIzlupTnlKjoh6rlt7HnmoTkuLvpophteXRoZW1lDQpnZ3Bsb3QoU2FsYXJpZXMsIGFlcyh4ID0gcmFuaywgeSA9IHNhbGFyeSwgZmlsbCA9IHNleCkpICsNCiAgZ2VvbV9ib3hwbG90KCkgKw0KICBsYWJzKHRpdGxlID0gIlNhbGFyeSBieSBSYW5rIGFuZCBTZXgiLCB4ID0gIlJhbmsiLCB5ID0gIlNhbGFyeSIpICsNCiAgbXl0aGVtZQ0KYGBgDQoNCiMjIyDlpZfnlKjnjrDmiJDkuLvpopjvvJpnZ3RoZW1lc+WMhQ0KDQpgYGB7ciwgZmlnLnNob3c9J2FzaXMnfQ0KZ2dwbG90KFNhbGFyaWVzLCBhZXMoeCA9IHJhbmssIHkgPSBzYWxhcnksIGZpbGwgPSBzZXgpKSArDQogIGdlb21fYm94cGxvdCgpICsNCiAgbGFicyh0aXRsZSA9ICJTYWxhcnkgYnkgUmFuayBhbmQgU2V4IiwgeCA9ICJSYW5rIiwgeSA9ICJTYWxhcnkiKSArDQogIHRoZW1lX3dzaigpICsNCiAgc2NhbGVfZmlsbF93c2ooKQ0KDQpnZ3Bsb3QoU2FsYXJpZXMsIGFlcyh4ID0gcmFuaywgeSA9IHNhbGFyeSwgZmlsbCA9IHNleCkpICsNCiAgZ2VvbV9ib3hwbG90KCkgKw0KICBsYWJzKHRpdGxlID0gIlNhbGFyeSBieSBSYW5rIGFuZCBTZXgiLCB4ID0gIlJhbmsiLCB5ID0gIlNhbGFyeSIpICsNCiAgdGhlbWVfd3NqKCkgKw0KICBzY2FsZV9maWxsX3dzaigicmdieSIsICIiKSArDQogIHRoZW1lKGF4aXMudGlja3MubGVuZ3RoID0gdW5pdCgwLjUsICJjbSIpKSArDQogIGd1aWRlcyhmaWxsID0gZ3VpZGVfbGVnZW5kKHRpdGxlID0gTlVMTCkpDQoNCmdncGxvdChTYWxhcmllcywgYWVzKHggPSByYW5rLCB5ID0gc2FsYXJ5LCBmaWxsID0gc2V4KSkgKw0KICBnZW9tX2JveHBsb3QoKSArDQogIGxhYnModGl0bGUgPSAiU2FsYXJ5IGJ5IFJhbmsgYW5kIFNleCIsIHggPSAiUmFuayIsIHkgPSAiU2FsYXJ5IikgKw0KICB0aGVtZV9lY29ub21pc3QoYmFzZV9zaXplID0gMTQpICsNCiAgc2NhbGVfZmlsbF9lY29ub21pc3QoKSArDQogIHRoZW1lKGF4aXMudGlja3MubGVuZ3RoID0gdW5pdCgwLjUsICJjbSIpKSArDQogIGd1aWRlcyhmaWxsID0gZ3VpZGVfbGVnZW5kKHRpdGxlID0gTlVMTCkpDQpgYGANCg0KIyMg5aSa5Zu+5ou85o6lDQoNCmdncGxvdDLljIXorqTkuLrlroPmj5DkvpvnmoTliLvpnaLlip/og73lt7Lnu4/otrPlpJ/kuobjgILkuLrkuobnu4TlkIhnZ3Bsb3Tlm77lvaLvvIzpnIDopoHkvb/nlKjlhbbku5bljIXjgIINCg0KIyMjIHBhdGNod29yayDljIUNCg0KYChwMS9wMil8cDNgIOihqOekunAx5ZKMcDLlsYXlt6bvvIzliIbliKvkuIrkuIvvvJtwM+WxheWPs++8jOWQiOW5tuaIkOS4gOW5heWbvg0KDQojIyMgZ3JpZEV4dHJhIOWMhQ0KDQpgZ3JpZEV4dHJhOjpncmlkLmFycmFuZ2UoKWDlj6/ku6Xnu4TlkIjlpJrluYXlm74NCg0KYGBge3J9DQpkYXRhKFNhbGFyaWVzLCBwYWNrYWdlID0gImNhciIpDQojIGdncGxvdCgp55S755qE5Zu+5Y+v5Lul5L+d5a2Y5Li65LiA5Liq5a+56LGh77yBDQpwMSA8LSBnZ3Bsb3QoZGF0YSA9IFNhbGFyaWVzLCBhZXMoeCA9IHJhbmspKSArDQogIGdlb21fYmFyKCkNCnAyIDwtIGdncGxvdChkYXRhID0gU2FsYXJpZXMsIGFlcyh4ID0gc2V4KSkgKw0KICBnZW9tX2JhcigpDQpwMyA8LSBnZ3Bsb3QoZGF0YSA9IFNhbGFyaWVzLCBhZXMoeCA9IHlycy5zaW5jZS5waGQsIHkgPSBzYWxhcnkpKSArDQogIGdlb21fcG9pbnQoKQ0KDQpsaWJyYXJ5KGdyaWRFeHRyYSkNCmdyaWQuYXJyYW5nZShwMSwgcDIsIHAzLCBuY29sID0gMykNCmBgYA0KDQpgYXJyYW5nZUdyb2IoKWDliJnlj6/ku6XlpITnkIbkuIDkuKrnlLHlm77lr7nosaHnu4TmiJDnmoTliJfooajvvIjlvqrnjq/kvZzlm77ml7blvojmnInnlKjvvIkNCg0KYGBge3J9DQpwIDwtIGxpc3QocDEsIHAyLCBwMykNCmdyYXBoIDwtIGFycmFuZ2VHcm9iKGdyb2JzID0gcCwgbmNvbCA9IDMpDQpncmlkLmFycmFuZ2UoZ3JhcGgpDQpgYGANCg==</div>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeSourceEmbed("ggplot2-grammar-2.Rmd");
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3,h4",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

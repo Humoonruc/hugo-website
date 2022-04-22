@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Humoon" />
+
+<meta name="date" content="2022-03-27" />
+
+<title>Color Scale</title>
+
+<script src="libs/header-attrs-2.13/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="libs/bootstrap-3.3.5/css/united.min.css" rel="stylesheet" />
+<script src="libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="libs/navigation-1.1/tabsets.js"></script>
+<script src="libs/navigation-1.1/codefolding.js"></script>
+<script src="libs/navigation-1.1/sourceembed.js"></script>
+<script src="libs/font-awesome-5.13.0/js/script.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; } /* Alert */
+code span.an { color: #008000; } /* Annotation */
+code span.at { } /* Attribute */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #0000ff; } /* ControlFlow */
+code span.ch { color: #008080; } /* Char */
+code span.cn { } /* Constant */
+code span.co { color: #008000; } /* Comment */
+code span.cv { color: #008000; } /* CommentVar */
+code span.do { color: #008000; } /* Documentation */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.im { } /* Import */
+code span.in { color: #008000; } /* Information */
+code span.kw { color: #0000ff; } /* Keyword */
+code span.op { } /* Operator */
+code span.ot { color: #ff4000; } /* Other */
+code span.pp { color: #ff4000; } /* Preprocessor */
+code span.sc { color: #008080; } /* SpecialChar */
+code span.ss { color: #008080; } /* SpecialString */
+code span.st { color: #008080; } /* String */
+code span.va { } /* Variable */
+code span.vs { color: #008080; } /* VerbatimString */
+code span.wa { color: #008000; font-weight: bold; } /* Warning */
+
+.sourceCode .row {
+  width: 100%;
+}
+.sourceCode {
+  overflow-x: auto;
+}
+.code-folding-btn {
+  margin-right: -30px;
+}
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+<style type="text/css">
+#rmd-source-code {
+  display: none;
+}
+</style>
+
+
+<link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+<li role="separator" class="divider"></li>
+<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Color Scale</h1>
+<h4 class="author">Humoon</h4>
+<h4 class="date">2022-03-27</h4>
+
+</div>
+
+
+<a onclick="fetch(&#39;data:application/zip;base64,UEsDBAAAAAgAAEB5dlQAAAAAAAAAAAAAAAATAAAAUm1hcmtkb3duLXRlbXBsYXRlL1BLAwQUAAgICABRa3pUAAAAAAAAAAAAAAAAJQAAAFJtYXJrZG93bi10ZW1wbGF0ZS9SbWFya2Rvd25fY29uZmlnLlKVVMtOFEEU3ZPwD5UmJjNxaGcmBFmoiQuMC90gLlyRorumu6S6q9NVwzCu0KiA4RVRmBBQUWKIiaAGkcc4/Ew/hpW/YFX3PBs0ITOLuueee+rcujfdB7DlUJcDi+pFglhvD8HjLnTLKY718iRyGUq3MR1yqHI4TjpBCxou5tztgBxCOSl3ACa3SAnrBuKsA50qFO1OdVqyCYU6N7FkyV8fUEcsHZy9WAh/7/pLz4K333p7NGoXsAFu9AOCGU/19gAgtLkJboKhbEaGIq02ocEWApkj4qw6mBuKMFrkLZZyPXtFaTMJNmyJasjmyG0nHBizxbnoomvtBDNpSSYgwyxGS9CVErlWgG1DxHdu33swHGEWYgwaqAtDmkkFMDrycDgD+kBQ2fOXPweVWrh97J18Cj88jUiTkJwj1U+X61vzMcnfXJM8OUGpLklxIlh8Hc7NypxGLUv0Ji333VIimb0lIVCvrfgzx+H6c39uIaxO/6nOe4fH3vHLYPXIq5362wv+7EH4o1Lf3w/WDrzDBa+6HnzfCt6vtO1plBDoMNnYaPtq73AxPFkJ3m109uRv7PjL4obpLt8a1MxEtcjEDcYaYXXF/1ppcdVGNywqkjAscqojOe5RoVGf+eK/2qkv/vJra8HOlhA7W9v3apv1n6uiwfi68M1Ob09r62TF7rp3NAcMQy5zHniHJ2cfK+1lNQxuIjFCUWKVx6Kz3MjoMIbEilJLLOdYycQcpdLgajQQmYz2VZzRlHx9RJB0PibDVAFamMiRKfex5lJGCxw8gncRVtKZuEp6UTnmBJ2v1SSmjFOii3ky/ESGucGuSlYcv7C4yR7oYmvQ4ZjaSXLMAMB8XGSyhWymiTRl8i3Egq6BpUJ8SOUzgt74Kw5X0jGx69pkjZADOcHP5dtlDT5BBrJ11aEMN5wqnDpKd1baxAWswSaFoAJPcJJ3DiR9dtMnUFltNFu0MU/lBItgG7Ek8b+vnU+SL1iJJlf4SHrMJj025eAUZpdaknx35eVsxFPJ/9OGNsFUgmwj+nBGr9U/0DH89F9QSwcIRsyXIhIDAACCBgAAUEsBAgAAAAAACAAAQHl2VAAAAAAAAAAAAAAAABMAAAAAAAAAAAAQAAAAAAAAAFJtYXJrZG93bi10ZW1wbGF0ZS9QSwECAAAUAAgICABRa3pURsyXIhIDAACCBgAAJQAAAAAAAAAAAAAAAAAxAAAAUm1hcmtkb3duLXRlbXBsYXRlL1JtYXJrZG93bl9jb25maWcuUlBLBQYAAAAAAgACAJQAAACWAwAAAAA=&#39;).then(res =&gt; res.blob()).then(blob =&gt; {&#10;      const downloadURL = window.URL.createObjectURL(blob);&#10;      const a = document.createElement(&#39;a&#39;);&#10;      document.body.appendChild(a);&#10;      a.href = downloadURL;&#10;      a.download = &#39;Rscript.zip&#39;; a.click();&#10;      window.URL.revokeObjectURL(downloadURL);&#10;      document.body.removeChild(a);&#10;    });">
+<button class="btn btn-danger"><i class="fa fa-save"></i> Download R scripts</button>
+</a>
+<a onclick="fetch(&#39;data:application/zip;base64,UEsDBAAAAAgAAARndlQAAAAAAAAAAAAAAAAEAAAAY3NzL1BLAwQUAAgICADrTnZUAAAAAAAAAAAAAAAADQAAAGNzcy9zdHlsZS5jc3OtWE9v2zYUvwfIdyASFG5ay5HtOMscoIcV2FYM26VZgR1piba40KJGUXG8oUB7GNYBw3YosA7bJdm/dsft1i3LPsza/Dn1K+zJoiRSlhwZa4xYlvje4+/9+P6Q2ryBXn7+7OXvD9CNzdWV1RVPjhn6bHUFwd+Q+9IK6aekj9rbweHu6sr9WGTA3Wm1SPzU4YyLPlrvzv52NdEhHlM27aPGXTLiBH14p9FEIfZDKySCDptoD3t8jJvoHeKTA7jeI8LFPvxYe586god8KNFH+F1C11I0QRMQMe7sfxJxSeAmYvDF4y83/pJ4wEgKd4zFiPp9ZLd2yBjZqY3VlU2g4efvz/98enb0xeWP36VktFNFSQ6lhRkdgbJDfEmE7tWE0JEn+2jAmWuOJNRs2Rk1uiFGhrKMnLU7EiSctSa6u/cepnu0ai6TbkHc1CGv3ZJU5n4vmlVB3MkgVk2TkGdJHsBik7F6GmDXpf4oeWxnj5XwgEvJx+lAgq1Tj9QEV1ePqiiWsajvCDIGedDycJCrpQKChAQGQ+JIyv0rvKrFvGI4iETASOZIN3UEomeAnf2RAACulQizeKaRwNPdWTAtgsCoTyxPPW/37GvzNHTy5SlfhgLf+QBgKyEu5SbDpokp+tRtO5epXC9QnvfNdLsmwy4W+yHDkgxYpBHdCqOBEdBXpMKAwXIsDKaKjNDJtf9HjG+lQOfiAuWBoTGfOT/zW1+V+eAwiVXxYZvpm9FdLJtNrfRekRnlkTMfFpWh00lkFCMtHEmPi+bstwtLXE3RxKOSLO1Os17h9LkYY/Y61rvV01a8V9YS86xNUyT1BMADvCtLw8I16NRYg66+Bttawao2a6h0+gMy5IIYmiClyV9XVbiJnI/3LeoSDtEdeNTZWPv3wcM13Vq3hjVVmjYaqGHETx0gKjbnkTQAiWGut8Bc49XJo0bBZqfE5quTLw2b2/UhdjcaLcO/2Rbk8vHp2de/qM0HNgLKjJs6ZTcrhRHRa55LHC5wzHCcCn5WZHHf4wdEGL1Zl4X0JCIuRsam6cVfP50fPVSIHe5mvmslLdmX1O7Bjds8EhSQfEAmkNPqronG3OdhgJ0MQDwdVJPW2LWGxHdIWJhbjAbXeztNtNWN/zfK5lLGF8BL9piwprpzs/pkzcDApkAQawIhkQq79KAVgl2H3I5VdD29NGwVd8tzPSsH6Yec4XBhMauaWr8HwH5rGBVoWn/7jZ5t28vYCJ2CDb1b1zIgCwZGghB/GQsOn7cwXcaAe1Aw8Bb4cI9yRuRSOPySiHemeClncJEOwaeY6aTOku38jycv/n6ski2Ugvuj0hrRKHTJhnnOefTk4vjZ5fFzZUidl+aOSPBpxx3O2Nd0b87EvS117anrtrp2b3I1ztU4V+PFGVRz1XtokBgJ6sgyemsmDNdyaep7cKSUFa3bfBxvAAv2I3aL0dQuoyHkrZwyYslpANnr0tDZnRsLeEiTYskjGUKryMGixfYcKpz8YMEXz00cmm9gak6/2GQUBLATwCzwsKZzpRrjE1CLU3ffiLDLX7+9OP7q/OS3i39+UEEWGH2FQi+Jm6IWWTNFiMuzoxOlEidOgEfENU7wegnt5O8kDBm1fcuXecKFaw0EwftxXABJeclMFGXW9wYgCk4lp6vgEEHlpS5ad4ekQ3q7hRTZLZnPsNr3pWc5HmXu9Y6/Eb+N8Ah2qze+60Mcf+bASe+qg0+Cuxqz8quYAAuPQSUewgEKtbtF3mOErslgNZLXN6XXH1IBMTkjuGmA0UdKa0mZNeix5cbygYItnU5tU3T69OL0+dnRN1okwwJbbGRlrwwm1IUZUad3LfP/0Moe2rm7sbLkDh1Oi6p2maptay8KDrOD45tlLxX0l3pqGkttWAuplFbIzHb6XCTm1Quu+/8BUEsHCB4HcweYBQAAThQAAFBLAQIAAAAAAAgAAARndlQAAAAAAAAAAAAAAAAEAAAAAAAAAAAAEAAAAAAAAABjc3MvUEsBAgAAFAAICAgA6052VB4HcweYBQAAThQAAA0AAAAAAAAAAAAAAAAAIgAAAGNzcy9zdHlsZS5jc3NQSwUGAAAAAAIAAgBtAAAA9QUAAAAA&#39;).then(res =&gt; res.blob()).then(blob =&gt; {&#10;      const downloadURL = window.URL.createObjectURL(blob);&#10;      const a = document.createElement(&#39;a&#39;);&#10;      document.body.appendChild(a);&#10;      a.href = downloadURL;&#10;      a.download = &#39;css.zip&#39;; a.click();&#10;      window.URL.revokeObjectURL(downloadURL);&#10;      document.body.removeChild(a);&#10;    });">
+<button class="btn btn-success"><i class="fa fa-save"></i> Download css</button>
+</a>
+<a onclick="fetch(&#39;data:text/yaml;base64,aHRtbF9kb2N1bWVudDoNCiAgc2VsZl9jb250YWluZWQ6IGZhbHNlDQogIGxpYl9kaXI6IGxpYnMNCiAgY29kZV9kb3dubG9hZDogeWVzDQogIGNvZGVfZm9sZGluZzogc2hvdw0KICBjc3M6IC4uL2Nzcy9zdHlsZS5jc3MNCiAgZmlnX2NhcHRpb246IHllcw0KICB0aGVtZTogdW5pdGVkDQogIGhpZ2hsaWdodDogaGFkZG9jaw0KICBudW1iZXJfc2VjdGlvbnM6IG5vDQogIHRvYzogeWVzDQogIHRvY19kZXB0aDogNA0KICB0b2NfZmxvYXQ6DQogICAgY29sbGFwc2VkOiB5ZXMNCiAgICBzbW9vdGhfc2Nyb2xsOiB5ZXM=&#39;).then(res =&gt; res.blob()).then(blob =&gt; {&#10;      const downloadURL = window.URL.createObjectURL(blob);&#10;      const a = document.createElement(&#39;a&#39;);&#10;      document.body.appendChild(a);&#10;      a.href = downloadURL;&#10;      a.download = &#39;_output.yml&#39;; a.click();&#10;      window.URL.revokeObjectURL(downloadURL);&#10;      document.body.removeChild(a);&#10;    });">
+<button class="btn btn-default"><i class="fa fa-save"></i> Download config</button>
+</a>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)</span></code></pre></div>
+<div id="与色彩相关的函数" class="section level2">
+<h2>与色彩相关的函数</h2>
+<table>
+<thead>
+<tr class="header">
+<th>函数</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>palette()</td>
+<td>调色板</td>
+</tr>
+<tr class="even">
+<td>colors()</td>
+<td>R中有字符串名称的颜色</td>
+</tr>
+<tr class="odd">
+<td>rgb()</td>
+<td>由红绿蓝分量生成颜色值（向量）</td>
+</tr>
+<tr class="even">
+<td>col2rgb()</td>
+<td>将字符串颜色转为rgb色值。</td>
+</tr>
+<tr class="odd">
+<td>rgb2hsv(col2rgb(“blue”))</td>
+<td>由rgb转换为hsv色值</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">palette</span>() <span class="sc">%&gt;%</span> <span class="fu">show_col</span>()</span></code></pre></div>
+<p><img src="figure/unnamed-chunk-3-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># colors()为R中所有有名字的颜色</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colors</span>() <span class="sc">%&gt;%</span> <span class="fu">length</span>()</span></code></pre></div>
+<pre><code>#&gt; [1] 657</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colors</span>()[<span class="dv">21</span><span class="sc">:</span><span class="dv">36</span>] <span class="sc">%&gt;%</span> <span class="fu">show_col</span>()</span></code></pre></div>
+<p><img src="figure/unnamed-chunk-3-2.png" width="70%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># rgb()前三个参数为红、绿、蓝经过maxColorValue标准化的分量</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>red <span class="ot">&lt;-</span> (<span class="dv">1</span><span class="sc">:</span><span class="dv">9</span> <span class="sc">%&gt;%</span> <span class="fu">rescale</span>()) <span class="sc">/</span> <span class="dv">2</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>green <span class="ot">&lt;-</span> (<span class="dv">1</span><span class="sc">:</span><span class="dv">9</span> <span class="sc">%&gt;%</span> <span class="fu">rescale</span>()) <span class="sc">/</span> <span class="dv">2</span> <span class="sc">+</span> <span class="fl">0.5</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>blue <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">9</span> <span class="sc">%&gt;%</span> <span class="fu">rescale</span>()</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">rgb</span>(red, green, blue, <span class="at">maxColorValue =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> <span class="fu">show_col</span>()</span></code></pre></div>
+<p><img src="figure/unnamed-chunk-3-3.png" width="70%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">col2rgb</span>(<span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+<pre><code>#&gt;       [,1]
+#&gt; red    255
+#&gt; green    0
+#&gt; blue     0</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rgb2hsv</span>(<span class="fu">col2rgb</span>(<span class="st">&quot;blue&quot;</span>))</span></code></pre></div>
+<pre><code>#&gt;        [,1]
+#&gt; h 0.6666667
+#&gt; s 1.0000000
+#&gt; v 1.0000000</code></pre>
+</div>
+<div id="创建调色板" class="section level2">
+<h2>创建调色板</h2>
+<p>调色板即颜色比例尺函数，接收整数，输出相应个数的、<strong>均匀变化的</strong>颜色列表</p>
+<div id="r自带的六个调色板" class="section level3">
+<h3>R自带的六个调色板</h3>
+<p><code>rainbow()</code>，七彩色</p>
+<p><code>heat.colors()</code>，红-黄-白</p>
+<p><code>terrain.colors()</code>，绿-黄-白</p>
+<p><code>topo.colors()</code>，蓝-绿-黄</p>
+<p><code>cm.colors()</code>，青-粉</p>
+<p><code>gray()</code>，黑-白，参数必须在[0,1]之间</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">show_col</span>(<span class="fu">rainbow</span>(<span class="dv">16</span>))</span></code></pre></div>
+<p><img src="figure/unnamed-chunk-4-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">show_col</span>(<span class="fu">heat.colors</span>(<span class="dv">16</span>))</span></code></pre></div>
+<p><img src="figure/unnamed-chunk-4-2.png" width="70%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">show_col</span>(<span class="fu">terrain.colors</span>(<span class="dv">16</span>))</span></code></pre></div>
+<p><img src="figure/unnamed-chunk-4-3.png" width="70%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">show_col</span>(<span class="fu">topo.colors</span>(<span class="dv">16</span>))</span></code></pre></div>
+<p><img src="figure/unnamed-chunk-4-4.png" width="70%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">show_col</span>(<span class="fu">cm.colors</span>(<span class="dv">16</span>))</span></code></pre></div>
+<p><img src="figure/unnamed-chunk-4-5.png" width="70%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">show_col</span>(<span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="at">length.out =</span> <span class="dv">16</span>) <span class="sc">%&gt;%</span> <span class="fu">gray</span>())</span></code></pre></div>
+<p><img src="figure/unnamed-chunk-4-6.png" width="70%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="rcolorbrewer包中的调色板" class="section level3">
+<h3>RColorBrewer包中的调色板</h3>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 通过下列代码观察预先设定的颜色集</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RColorBrewer)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">display.brewer.all</span>()</span></code></pre></div>
+<p><img src="figure/unnamed-chunk-5-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">display.brewer.all</span>(<span class="at">type =</span> <span class="st">&#39;seq&#39;</span>)</span></code></pre></div>
+<p><img src="figure/unnamed-chunk-5-2.png" width="70%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">display.brewer.all</span>(<span class="at">type =</span> <span class="st">&#39;div&#39;</span>)</span></code></pre></div>
+<p><img src="figure/unnamed-chunk-5-3.png" width="70%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>brewer.pal.info</span></code></pre></div>
+<pre><code>#&gt;          maxcolors category colorblind
+#&gt; BrBG            11      div       TRUE
+#&gt; PiYG            11      div       TRUE
+#&gt; PRGn            11      div       TRUE
+#&gt; PuOr            11      div       TRUE
+#&gt; RdBu            11      div       TRUE
+#&gt; RdGy            11      div      FALSE
+#&gt; RdYlBu          11      div       TRUE
+#&gt; RdYlGn          11      div      FALSE
+#&gt; Spectral        11      div      FALSE
+#&gt; Accent           8     qual      FALSE
+#&gt; Dark2            8     qual       TRUE
+#&gt; Paired          12     qual       TRUE
+#&gt; Pastel1          9     qual      FALSE
+#&gt; Pastel2          8     qual      FALSE
+#&gt; Set1             9     qual      FALSE
+#&gt; Set2             8     qual       TRUE
+#&gt; Set3            12     qual      FALSE
+#&gt; Blues            9      seq       TRUE
+#&gt; BuGn             9      seq       TRUE
+#&gt; BuPu             9      seq       TRUE
+#&gt; GnBu             9      seq       TRUE
+#&gt; Greens           9      seq       TRUE
+#&gt; Greys            9      seq       TRUE
+#&gt; Oranges          9      seq       TRUE
+#&gt; OrRd             9      seq       TRUE
+#&gt; PuBu             9      seq       TRUE
+#&gt; PuBuGn           9      seq       TRUE
+#&gt; PuRd             9      seq       TRUE
+#&gt; Purples          9      seq       TRUE
+#&gt; RdPu             9      seq       TRUE
+#&gt; Reds             9      seq       TRUE
+#&gt; YlGn             9      seq       TRUE
+#&gt; YlGnBu           9      seq       TRUE
+#&gt; YlOrBr           9      seq       TRUE
+#&gt; YlOrRd           9      seq       TRUE</code></pre>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">brewer.pal</span>(<span class="at">n =</span> <span class="dv">9</span>, <span class="at">name =</span> <span class="st">&quot;YlGn&quot;</span>) <span class="sc">%&gt;%</span> <span class="co"># 选择一个调色板，n不能超过maxcolors</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  scales<span class="sc">::</span><span class="fu">show_col</span>()</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 同样的功能还可用 scales::brewer_pal()</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>scales<span class="sc">::</span><span class="fu">brewer_pal</span>(<span class="at">palette =</span> <span class="st">&quot;YlGn&quot;</span>)(<span class="dv">9</span>) <span class="sc">%&gt;%</span> scales<span class="sc">::</span><span class="fu">show_col</span>()</span></code></pre></div>
+<p><img src="figure/unnamed-chunk-5-4.png" width="70%" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="创建颜色比例尺" class="section level2">
+<h2>创建颜色比例尺</h2>
+<p>上述调色板返回的颜色向量都是均匀变化的，但很多时候数据的变化是不均匀的，要求颜色也要不均匀的变化，这就需要一个真正的颜色比例尺。</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 定义颜色比例尺，接收任意数字向量，返回相应的颜色向量</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 如果数字向量是不均匀的，那么这个颜色向量也是不均匀的</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>num_to_color <span class="ot">&lt;-</span> <span class="cf">function</span>(num_domain, color_range) {</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># colour_ramp()是一个函数工厂，接收一个颜色向量</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 返回一个从[0,1]到这个颜色两端的比例尺函数</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>  color_scale <span class="ot">&lt;-</span> <span class="fu">colour_ramp</span>(color_range)</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># color_scale() 接收一个从0到1的向量，按照比例尺返回相应项数的颜色向量</span></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>  num_domain <span class="sc">%&gt;%</span></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rescale</span>() <span class="sc">%&gt;%</span> <span class="co"># rescale()将数字向量映射到[0,1]上</span></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">color_scale</span>()</span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>num_domain <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">13</span>, <span class="dv">14</span>, <span class="dv">45</span>, <span class="dv">46</span>, <span class="dv">57</span>, <span class="dv">99</span>, <span class="dv">100</span>) <span class="co"># 假设这是一个变量的所有数据</span></span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>color_range <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;green&quot;</span>, <span class="st">&quot;blue&quot;</span>) <span class="co"># 把0到1映射到红-绿-蓝上</span></span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>colors <span class="ot">&lt;-</span> <span class="fu">num_to_color</span>(num_domain, color_range)</span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a><span class="fu">show_col</span>(colors) <span class="co"># 由于数据是不均匀的，颜色向量也是不均匀的</span></span></code></pre></div>
+<p><img src="figure/unnamed-chunk-6-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p>虽然根据数据生成的颜色比例尺是数量有限的，但按照这个方法，可以通过插值获取新颜色，理论上可以表现的颜色是无穷多的。</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">80</span> <span class="co"># 一个新数，对应什么颜色呢？</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 一个典型的比例尺运算</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(num_domain, n) <span class="sc">%&gt;%</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">num_to_color</span>(color_range) <span class="sc">%&gt;%</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">[</span><span class="st">`</span>(<span class="fu">length</span>(num_domain) <span class="sc">+</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">show_col</span>()</span></code></pre></div>
+<p><img src="figure/unnamed-chunk-7-1.png" width="70%" style="display: block; margin: auto;" /></p>
+</div>
+
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIkNvbG9yIFNjYWxlIg0Kc3VidGl0bGU6ICIiDQphdXRob3I6ICJIdW1vb24iDQpkYXRlOiAiYHIgU3lzLkRhdGUoKWAiDQpvdXRwdXQ6IGh0bWxfZG9jdW1lbnQNCmRvY3VtZW50Y2xhc3M6IGN0ZXhhcnQNCmNsYXNzb3B0aW9uOiBoeXBlcnJlZiwNCi0tLQ0KDQpgYGB7ciBzZXR1cCwgaW5jbHVkZSA9IEZBTFNFfQ0Kc291cmNlKCIuLi9SbWFya2Rvd24tdGVtcGxhdGUvUm1hcmtkb3duX2NvbmZpZy5SIikNCg0KIyMgZ2xvYmFsIG9wdGlvbnMgPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0NCmtuaXRyOjpvcHRzX2NodW5rJHNldCgNCiAgd2lkdGggPSBjb25maWckd2lkdGgsDQogIGZpZy53aWR0aCA9IGNvbmZpZyRmaWcud2lkdGgsDQogIGZpZy5hc3AgPSBjb25maWckZmlnLmFzcCwNCiAgb3V0LndpZHRoID0gY29uZmlnJG91dC53aWR0aCwNCiAgZmlnLmFsaWduID0gY29uZmlnJGZpZy5hbGlnbiwNCiAgZmlnLnBhdGggPSBjb25maWckZmlnLnBhdGgsDQogIGZpZy5zaG93ID0gY29uZmlnJGZpZy5zaG93LA0KICB3YXJuID0gY29uZmlnJHdhcm4sDQogIHdhcm5pbmcgPSBjb25maWckd2FybmluZywNCiAgbWVzc2FnZSA9IGNvbmZpZyRtZXNzYWdlLA0KICBlY2hvID0gY29uZmlnJGVjaG8sDQogIGV2YWwgPSBjb25maWckZXZhbCwNCiAgdGlkeSA9IGNvbmZpZyR0aWR5LA0KICBjb21tZW50ID0gY29uZmlnJGNvbW1lbnQsDQogIGNvbGxhcHNlID0gRiwNCiAgY2FjaGUgPSBjb25maWckY2FjaGUsDQogIGNhY2hlLmNvbW1lbnRzID0gY29uZmlnJGNhY2hlLmNvbW1lbnRzLA0KICBhdXRvZGVwID0gY29uZmlnJGF1dG9kZXANCikNCmBgYA0KDQpgYGB7ciwgZWNobz1GQUxTRX0NCmRvd25sb2FkdGhpczo6ZG93bmxvYWRfZGlyKA0KICBwYXRoID0gIi4uL1JtYXJrZG93bi10ZW1wbGF0ZSIsDQogIG91dHB1dF9uYW1lID0gIlJzY3JpcHQiLA0KICBidXR0b25fbGFiZWwgPSAiRG93bmxvYWQgUiBzY3JpcHRzIiwNCiAgYnV0dG9uX3R5cGUgPSAiZGFuZ2VyIiwNCiAgc2VsZl9jb250YWluZWQgPSBGQUxTRQ0KKQ0KZG93bmxvYWR0aGlzOjpkb3dubG9hZF9kaXIoDQogIHBhdGggPSAiLi4vY3NzIiwNCiAgb3V0cHV0X25hbWUgPSAiY3NzIiwNCiAgYnV0dG9uX2xhYmVsID0gIkRvd25sb2FkIGNzcyIsDQogIGJ1dHRvbl90eXBlID0gInN1Y2Nlc3MiLA0KICBzZWxmX2NvbnRhaW5lZCA9IEZBTFNFDQopDQpkb3dubG9hZHRoaXM6OmRvd25sb2FkX2ZpbGUoDQogIHBhdGggPSAiX291dHB1dC55bWwiLA0KICBvdXRwdXRfbmFtZSA9ICJfb3V0cHV0IiwNCiAgYnV0dG9uX2xhYmVsID0gIkRvd25sb2FkIGNvbmZpZyIsDQogIGJ1dHRvbl90eXBlID0gImRlZmF1bHQiLA0KICBzZWxmX2NvbnRhaW5lZCA9IEZBTFNFDQopDQpgYGANCg0KDQpgYGB7cn0NCmxpYnJhcnkoc2NhbGVzKQ0KYGBgDQoNCiMjIOS4juiJsuW9qeebuOWFs+eahOWHveaVsA0KDQp8IOWHveaVsCAgICAgICAgICAgICAgICAgICAgIHwg5Yqf6IO9ICAgICAgICAgICAgICAgICAgICAgIHwNCnwtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLXwtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS18DQp8IHBhbGV0dGUoKSAgICAgICAgICAgICAgICB8IOiwg+iJsuadvyAgICAgICAgICAgICAgICAgICAgfA0KfCBjb2xvcnMoKSAgICAgICAgICAgICAgICAgfCBS5Lit5pyJ5a2X56ym5Liy5ZCN56ew55qE6aKc6ImyICAgICAgICAgICAgICAgfA0KfCByZ2IoKSAgICAgICAgICAgICAgICAgICAgfCDnlLHnuqLnu7/ok53liIbph4/nlJ/miJDpopzoibLlgLzvvIjlkJHph4/vvIkgICAgICAgICAgICAgIHwNCnwgY29sMnJnYigpICAgICAgICAgICAgICAgIHwg5bCG5a2X56ym5Liy6aKc6Imy6L2s5Li6cmdi6Imy5YC844CCIHwNCnwgcmdiMmhzdihjb2wycmdiKCJibHVlIikpIHwg55Sxcmdi6L2s5o2i5Li6aHN26Imy5YC8ICAgICAgICAgICAgIHwNCg0KDQpgYGB7cn0NCnBhbGV0dGUoKSAlPiUgc2hvd19jb2woKQ0KDQojIGNvbG9ycygp5Li6UuS4reaJgOacieacieWQjeWtl+eahOminOiJsg0KY29sb3JzKCkgJT4lIGxlbmd0aCgpDQpjb2xvcnMoKVsyMTozNl0gJT4lIHNob3dfY29sKCkNCg0KIyByZ2IoKeWJjeS4ieS4quWPguaVsOS4uue6ouOAgee7v+OAgeiTnee7j+i/h21heENvbG9yVmFsdWXmoIflh4bljJbnmoTliIbph48NCnJlZCA8LSAoMTo5ICU+JSByZXNjYWxlKCkpIC8gMg0KZ3JlZW4gPC0gKDE6OSAlPiUgcmVzY2FsZSgpKSAvIDIgKyAwLjUNCmJsdWUgPC0gMTo5ICU+JSByZXNjYWxlKCkNCnJnYihyZWQsIGdyZWVuLCBibHVlLCBtYXhDb2xvclZhbHVlID0gMSkgJT4lIHNob3dfY29sKCkNCg0KY29sMnJnYigicmVkIikNCg0KcmdiMmhzdihjb2wycmdiKCJibHVlIikpDQpgYGANCiMjIOWIm+W7uuiwg+iJsuadvw0KDQrosIPoibLmnb/ljbPpopzoibLmr5TkvovlsLrlh73mlbDvvIzmjqXmlLbmlbTmlbDvvIzovpPlh7rnm7jlupTkuKrmlbDnmoTjgIEqKuWdh+WMgOWPmOWMlueahCoq6aKc6Imy5YiX6KGoDQoNCiMjIyBS6Ieq5bim55qE5YWt5Liq6LCD6Imy5p2/DQoNCmByYWluYm93KClg77yM5LiD5b2p6ImyDQoNCmBoZWF0LmNvbG9ycygpYO+8jOe6oi3pu4Qt55m9DQoNCmB0ZXJyYWluLmNvbG9ycygpYO+8jOe7vy3pu4Qt55m9DQoNCmB0b3BvLmNvbG9ycygpYO+8jOiTnS3nu78t6buEDQoNCmBjbS5jb2xvcnMoKWDvvIzpnZIt57KJDQoNCmBncmF5KClg77yM6buRLeeZve+8jOWPguaVsOW/hemhu+WcqFswLDFd5LmL6Ze0DQoNCmBgYHtyfQ0Kc2hvd19jb2wocmFpbmJvdygxNikpDQpzaG93X2NvbChoZWF0LmNvbG9ycygxNikpDQpzaG93X2NvbCh0ZXJyYWluLmNvbG9ycygxNikpDQpzaG93X2NvbCh0b3BvLmNvbG9ycygxNikpDQpzaG93X2NvbChjbS5jb2xvcnMoMTYpKQ0Kc2hvd19jb2woc2VxKDAsIDEsIGxlbmd0aC5vdXQgPSAxNikgJT4lIGdyYXkoKSkNCmBgYA0KDQojIyMgUkNvbG9yQnJld2Vy5YyF5Lit55qE6LCD6Imy5p2/DQoNCmBgYHtyLCBmaWcud2lkdGg9MTAsIGZpZy5oZWlnaHQ9MTB9DQojIOmAmui/h+S4i+WIl+S7o+eggeinguWvn+mihOWFiOiuvuWumueahOminOiJsumbhg0KbGlicmFyeShSQ29sb3JCcmV3ZXIpDQpkaXNwbGF5LmJyZXdlci5hbGwoKQ0KZGlzcGxheS5icmV3ZXIuYWxsKHR5cGUgPSAnc2VxJykNCmRpc3BsYXkuYnJld2VyLmFsbCh0eXBlID0gJ2RpdicpDQpicmV3ZXIucGFsLmluZm8NCmJyZXdlci5wYWwobiA9IDksIG5hbWUgPSAiWWxHbiIpICU+JSAjIOmAieaLqeS4gOS4quiwg+iJsuadv++8jG7kuI3og73otoXov4dtYXhjb2xvcnMNCiAgc2NhbGVzOjpzaG93X2NvbCgpDQoNCg0KIyDlkIzmoLfnmoTlip/og73ov5jlj6/nlKggc2NhbGVzOjpicmV3ZXJfcGFsKCkNCnNjYWxlczo6YnJld2VyX3BhbChwYWxldHRlID0gIllsR24iKSg5KSAlPiUgc2NhbGVzOjpzaG93X2NvbCgpDQpgYGANCg0KIyMg5Yib5bu66aKc6Imy5q+U5L6L5bC6DQoNCuS4iui/sOiwg+iJsuadv+i/lOWbnueahOminOiJsuWQkemHj+mDveaYr+Wdh+WMgOWPmOWMlueahO+8jOS9huW+iOWkmuaXtuWAmeaVsOaNrueahOWPmOWMluaYr+S4jeWdh+WMgOeahO+8jOimgeaxguminOiJsuS5n+imgeS4jeWdh+WMgOeahOWPmOWMlu+8jOi/meWwsemcgOimgeS4gOS4quecn+ato+eahOminOiJsuavlOS+i+WwuuOAgg0KDQoNCg0KYGBge3J9DQpsaWJyYXJ5KHNjYWxlcykNCg0KIyDlrprkuYnpopzoibLmr5TkvovlsLrvvIzmjqXmlLbku7vmhI/mlbDlrZflkJHph4/vvIzov5Tlm57nm7jlupTnmoTpopzoibLlkJHph48NCiMg5aaC5p6c5pWw5a2X5ZCR6YeP5piv5LiN5Z2H5YyA55qE77yM6YKj5LmI6L+Z5Liq6aKc6Imy5ZCR6YeP5Lmf5piv5LiN5Z2H5YyA55qEDQpudW1fdG9fY29sb3IgPC0gZnVuY3Rpb24obnVtX2RvbWFpbiwgY29sb3JfcmFuZ2UpIHsNCiAgIyBjb2xvdXJfcmFtcCgp5piv5LiA5Liq5Ye95pWw5bel5Y6C77yM5o6l5pS25LiA5Liq6aKc6Imy5ZCR6YePDQogICMg6L+U5Zue5LiA5Liq5LuOWzAsMV3liLDov5nkuKrpopzoibLkuKTnq6/nmoTmr5TkvovlsLrlh73mlbANCiAgY29sb3Jfc2NhbGUgPC0gY29sb3VyX3JhbXAoY29sb3JfcmFuZ2UpDQogICMgY29sb3Jfc2NhbGUoKSDmjqXmlLbkuIDkuKrku44w5YiwMeeahOWQkemHj++8jOaMieeFp+avlOS+i+Wwuui/lOWbnuebuOW6lOmhueaVsOeahOminOiJsuWQkemHjw0KDQogIG51bV9kb21haW4gJT4lDQogICAgcmVzY2FsZSgpICU+JSAjIHJlc2NhbGUoKeWwhuaVsOWtl+WQkemHj+aYoOWwhOWIsFswLDFd5LiKDQogICAgY29sb3Jfc2NhbGUoKQ0KfQ0KDQpudW1fZG9tYWluIDwtIGMoMSwgMiwgMTMsIDE0LCA0NSwgNDYsIDU3LCA5OSwgMTAwKSAjIOWBh+iuvui/meaYr+S4gOS4quWPmOmHj+eahOaJgOacieaVsOaNrg0KY29sb3JfcmFuZ2UgPC0gYygicmVkIiwgImdyZWVuIiwgImJsdWUiKSAjIOaKijDliLAx5pig5bCE5Yiw57qiLee7vy3ok53kuIoNCg0KY29sb3JzIDwtIG51bV90b19jb2xvcihudW1fZG9tYWluLCBjb2xvcl9yYW5nZSkNCnNob3dfY29sKGNvbG9ycykgIyDnlLHkuo7mlbDmja7mmK/kuI3lnYfljIDnmoTvvIzpopzoibLlkJHph4/kuZ/mmK/kuI3lnYfljIDnmoQNCmBgYA0KDQromb3nhLbmoLnmja7mlbDmja7nlJ/miJDnmoTpopzoibLmr5TkvovlsLrmmK/mlbDph4/mnInpmZDnmoTvvIzkvYbmjInnhafov5nkuKrmlrnms5XvvIzlj6/ku6XpgJrov4fmj5LlgLzojrflj5bmlrDpopzoibLvvIznkIborrrkuIrlj6/ku6XooajnjrDnmoTpopzoibLmmK/ml6DnqbflpJrnmoTjgIINCmBgYHtyfQ0KbiA8LSA4MCAjIOS4gOS4quaWsOaVsO+8jOWvueW6lOS7gOS5iOminOiJsuWRou+8nw0KDQojIOS4gOS4quWFuOWei+eahOavlOS+i+Wwuui/kOeulw0KYyhudW1fZG9tYWluLCBuKSAlPiUNCiAgbnVtX3RvX2NvbG9yKGNvbG9yX3JhbmdlKSAlPiUNCiAgYFtgKGxlbmd0aChudW1fZG9tYWluKSArIDEpICU+JQ0KICBzaG93X2NvbCgpDQpgYGANCg==</div>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeSourceEmbed("color-scale.Rmd");
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3,h4",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

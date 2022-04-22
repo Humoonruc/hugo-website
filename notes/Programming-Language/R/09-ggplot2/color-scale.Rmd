@@ -1,0 +1,174 @@
+---
+title: "Color Scale"
+subtitle: ""
+author: "Humoon"
+date: "`r Sys.Date()`"
+output: html_document
+documentclass: ctexart
+classoption: hyperref,
+---
+
+```{r setup, include = FALSE}
+source("../Rmarkdown-template/Rmarkdown_config.R")
+
+## global options ===================================
+knitr::opts_chunk$set(
+  width = config$width,
+  fig.width = config$fig.width,
+  fig.asp = config$fig.asp,
+  out.width = config$out.width,
+  fig.align = config$fig.align,
+  fig.path = config$fig.path,
+  fig.show = config$fig.show,
+  warn = config$warn,
+  warning = config$warning,
+  message = config$message,
+  echo = config$echo,
+  eval = config$eval,
+  tidy = config$tidy,
+  comment = config$comment,
+  collapse = F,
+  cache = config$cache,
+  cache.comments = config$cache.comments,
+  autodep = config$autodep
+)
+```
+
+```{r, echo=FALSE}
+downloadthis::download_dir(
+  path = "../Rmarkdown-template",
+  output_name = "Rscript",
+  button_label = "Download R scripts",
+  button_type = "danger",
+  self_contained = FALSE
+)
+downloadthis::download_dir(
+  path = "../css",
+  output_name = "css",
+  button_label = "Download css",
+  button_type = "success",
+  self_contained = FALSE
+)
+downloadthis::download_file(
+  path = "_output.yml",
+  output_name = "_output",
+  button_label = "Download config",
+  button_type = "default",
+  self_contained = FALSE
+)
+```
+
+
+```{r}
+library(scales)
+```
+
+## 与色彩相关的函数
+
+| 函数                     | 功能                      |
+|--------------------------|---------------------------|
+| palette()                | 调色板                    |
+| colors()                 | R中有字符串名称的颜色               |
+| rgb()                    | 由红绿蓝分量生成颜色值（向量）              |
+| col2rgb()                | 将字符串颜色转为rgb色值。 |
+| rgb2hsv(col2rgb("blue")) | 由rgb转换为hsv色值             |
+
+
+```{r}
+palette() %>% show_col()
+
+# colors()为R中所有有名字的颜色
+colors() %>% length()
+colors()[21:36] %>% show_col()
+
+# rgb()前三个参数为红、绿、蓝经过maxColorValue标准化的分量
+red <- (1:9 %>% rescale()) / 2
+green <- (1:9 %>% rescale()) / 2 + 0.5
+blue <- 1:9 %>% rescale()
+rgb(red, green, blue, maxColorValue = 1) %>% show_col()
+
+col2rgb("red")
+
+rgb2hsv(col2rgb("blue"))
+```
+## 创建调色板
+
+调色板即颜色比例尺函数，接收整数，输出相应个数的、**均匀变化的**颜色列表
+
+### R自带的六个调色板
+
+`rainbow()`，七彩色
+
+`heat.colors()`，红-黄-白
+
+`terrain.colors()`，绿-黄-白
+
+`topo.colors()`，蓝-绿-黄
+
+`cm.colors()`，青-粉
+
+`gray()`，黑-白，参数必须在[0,1]之间
+
+```{r}
+show_col(rainbow(16))
+show_col(heat.colors(16))
+show_col(terrain.colors(16))
+show_col(topo.colors(16))
+show_col(cm.colors(16))
+show_col(seq(0, 1, length.out = 16) %>% gray())
+```
+
+### RColorBrewer包中的调色板
+
+```{r, fig.width=10, fig.height=10}
+# 通过下列代码观察预先设定的颜色集
+library(RColorBrewer)
+display.brewer.all()
+display.brewer.all(type = 'seq')
+display.brewer.all(type = 'div')
+brewer.pal.info
+brewer.pal(n = 9, name = "YlGn") %>% # 选择一个调色板，n不能超过maxcolors
+  scales::show_col()
+
+
+# 同样的功能还可用 scales::brewer_pal()
+scales::brewer_pal(palette = "YlGn")(9) %>% scales::show_col()
+```
+
+## 创建颜色比例尺
+
+上述调色板返回的颜色向量都是均匀变化的，但很多时候数据的变化是不均匀的，要求颜色也要不均匀的变化，这就需要一个真正的颜色比例尺。
+
+```{r}
+library(scales)
+
+# 定义颜色比例尺，接收任意数字向量，返回相应的颜色向量
+# 如果数字向量是不均匀的，那么这个颜色向量也是不均匀的
+num_to_color <- function(num_domain, color_range) {
+  # colour_ramp()是一个函数工厂，接收一个颜色向量
+  # 返回一个从[0,1]到这个颜色两端的比例尺函数
+  color_scale <- colour_ramp(color_range)
+  # color_scale() 接收一个从0到1的向量，按照比例尺返回相应项数的颜色向量
+
+  num_domain %>%
+    rescale() %>% # rescale()将数字向量映射到[0,1]上
+    color_scale()
+}
+
+num_domain <- c(1, 2, 13, 14, 45, 46, 57, 99, 100) # 假设这是一个变量的所有数据
+color_range <- c("red", "green", "blue") # 把0到1映射到红-绿-蓝上
+
+colors <- num_to_color(num_domain, color_range)
+show_col(colors) # 由于数据是不均匀的，颜色向量也是不均匀的
+```
+
+虽然根据数据生成的颜色比例尺是数量有限的，但按照这个方法，可以通过插值获取新颜色，理论上可以表现的颜色是无穷多的。
+```{r}
+n <- 80 # 一个新数，对应什么颜色呢？
+
+# 一个典型的比例尺运算
+c(num_domain, n) %>%
+  num_to_color(color_range) %>%
+  `[`(length(num_domain) + 1) %>%
+  show_col()
+```

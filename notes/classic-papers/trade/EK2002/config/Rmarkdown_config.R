@@ -2,11 +2,14 @@
 library(tidyverse)
 library(data.table)
 library(magrittr)
-library(plotly)
+library(kableExtra) # 表格美化
+library(plotly) # 绘图
 library(htmlwidgets)
 library(downloadthis) # 提供资源下载的html部件
 library(zeallot) # 解构赋值
 library(ivreg) # 做 2SLS regression 很方便
+library(numDeriv) # Package for computing f'(x)
+library(rootSolve) # 求解非线性方程（组）和最优化
 
 
 # .Rmd 配置参数
@@ -32,6 +35,23 @@ config <- list(
 )
 
 
+# 自定义表格样式
+prettify <- function(table, ...) {
+  align_vector <- c("l", rep("c", ncol(table) - 1))
+
+  kable(table, "html", align = align_vector, ...) %>%
+    kable_styling(
+      bootstrap_options = c(
+        "striped", # 明暗条纹
+        "hover", # 鼠标划过高亮
+        "condensed", # 紧凑行高
+        "responsive" # 响应屏幕宽度
+      ),
+      # font_size = 14,
+      full_width = F
+    )
+}
+
 # 自定义 plotly 主题
 canvas <- plot_ly(
   width = 800,
@@ -39,7 +59,7 @@ canvas <- plot_ly(
 ) %>% config(
   mathjax = "cdn",
   toImageButtonOptions = list(
-    format = "svg", # one of png, svg, jpeg, webp
+    format = "png", # one of png, svg, jpeg, webp
     filename = "download_figure",
     width = 800,
     height = 600,
@@ -61,8 +81,8 @@ academic_layout <- function(p) {
     margin = list(b = 110, t = 20, l = 90, r = 0),
     title = list(
       font = list(
-        family = "Times New Roman",
-        size = 24
+        # family = "Times New Roman",
+        size = 20
       ),
       pad = list(t = 80),
       y = 0,

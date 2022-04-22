@@ -3,19 +3,7 @@ title: "R Basic Grammar"
 subtitle: Variable, Condition, Loop and Debug
 author: "Humoon"
 date: "`r Sys.Date()`"
-output:
-  html_document:
-    code_download: yes
-    css: ../css/style.css
-    fig_caption: yes
-    theme: united
-    highlight: haddock
-    number_sections: no
-    toc: yes
-    toc_depth: 4
-    toc_float:
-      collapsed: yes
-      smooth_scroll: yes
+output: html_document
 documentclass: ctexart
 classoption: hyperref,
 ---
@@ -373,6 +361,8 @@ result2 # 都不匹配时，返回无key的值
 ```
 
 ## 循环语句
+
+在 R 中，最好用向量化操作替代显式循环。
 
 ### `repeat{}`
 

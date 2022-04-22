@@ -90,3 +90,4 @@ metadata-config
 output
 config
 kableextra-package
+brucerprint_table

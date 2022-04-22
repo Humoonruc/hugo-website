@@ -1,0 +1,446 @@
+---
+title: "Exploratory Data Analysis"
+subtitle: '观察数据特征，寻找统计推断的合适方法'
+author: "Humoon"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+source("../Rmarkdown-template/Rmarkdown_config.R")
+
+## global options ===================================
+knitr::opts_chunk$set(
+  width = config$width,
+  fig.width = config$fig.width,
+  fig.asp = config$fig.asp,
+  out.width = config$out.width,
+  fig.align = config$fig.align,
+  fig.path = config$fig.path,
+  fig.show = config$fig.show,
+  warn = config$warn,
+  warning = config$warning,
+  message = config$message,
+  echo = config$echo,
+  eval = config$eval,
+  tidy = config$tidy,
+  comment = config$comment,
+  collapse = config$collapse,
+  cache = config$cache,
+  cache.comments = config$cache.comments,
+  autodep = config$autodep
+)
+```
+
+# 主要分析工具
+
+* 条形图（barplot）：用于分类数据
+* 直方图（hist）、点图（dotchart）、茎叶图（stem）：用于观察数值型分布的形状
+* 箱线图（boxplot）：给出数值型分布的汇总数据，适用于不同分布的比较和长尾、离群点的识别
+* 正态概率图（qqnorm）：用于观察数据是否近似地服从正态分布
+
+```{r}
+# 例：考试数据
+MS <- tribble(
+  ~ID, ~math, ~stat,
+  # ————————————————
+  1, 81, 72,
+  2, 90, 90,
+  3, 91, 96,
+  4, 74, 68,
+  5, 70, 82,
+  6, 73, 78,
+  7, 88, 89,
+  8, 78, 82,
+  9, 95, 96,
+  10, 63, 75,
+  11, 85, 86,
+  12, 60, 71,
+  13, 83, 78,
+  14, 81, 94,
+  15, 77, 73,
+  16, 60, 66,
+  17, 66, 58,
+  18, 84, 87,
+  19, 80, 86,
+  20, 85, 84,
+  21, 70, 82,
+  22, 54, 56,
+  23, 93, 98,
+  24, 68, 76
+)
+
+# 用茎叶图观察数学和统计学的成绩分布
+stem(MS$math)
+stem(MS$stat)
+```
+
+茎叶图的第1位是十分位数，比如：数据成绩的茎叶图里，5|4表示有一位学生的数学成绩为54；6|00368表示有5位学生的成绩在[60,70]之间，其中两位是60分，一位63分，一位66分，一位68分，其余的类似。
+
+
+> **可以将一些常用的探索性分析的图形函数整合成一个函数，进行一键式全面分析**
+
+```{r}
+EDA <- function(x) {
+  par(mfrow = c(2, 2))
+  hist(x) # 直方图
+  dotchart(x) # 点图
+  boxplot(x, horizontal = T) # 箱式图
+  qqnorm(x)
+  qqline(x) # 正态概率图
+  par(mfrow = c(1, 1))
+}
+EDA(MS$math) # 探索分析数学成绩
+EDA(MS$stat) # 探索分析统计成绩
+```
+
+
+# 单变量数据分析
+
+## bruceR 包中的描述统计
+
+
+### `Describe()`
+
+描述统计（输出样本量、平均值、标准差、中位数、偏度、峰度）
+
+- 主要参数
+
+- - `data`：数据框（默认使用所有变量，请提前筛选出想要分析的变量们）
+  - `digits`：保留的小数位数，默认是 2 位小数
+  - `file`：保存的 Word 文档，默认输出到 R 控制台
+  - `plot`：是否画每个变量的分布图、变量间的相关图？默认是 `FALSE`
+  - ……（见原始帮助文档）
+
+- 使用示例
+
+```{r}
+set.seed(1)
+Describe(rnorm(1000000), plot = TRUE)
+Describe(airquality)
+Describe(airquality, plot = TRUE, upper.triangle = TRUE, upper.smooth = "lm")
+```
+
+### `Freq()`
+
+频数统计（输出频数与频率 %）
+
+- 主要参数
+
+- - `var`：变量
+  - `label`：如有需要，可以定义数值标签
+  - `sort`：排序方法，默认按照变量数值 / 标签排序，可选择 `"-"`（按频数从大到小排列）或 `"+"`（按频数从小到大排列）
+  - `digits`：保留的小数位数，默认是 1 位小数
+  - `file`：保存到 .doc，默认输出到 R 控制台
+
+- 使用示例
+
+```{r}
+data <- psych::bfi
+Freq(data$education)
+Freq(data$gender)
+Freq(data$gender, label = c("Male", "Female"))
+```
+
+## 分类型数据
+
+1. 分类频数表：如果x是分类数据，table(x)可以生成分类频数表
+```{r}
+x <- c("是", "否", "否", "是", "是", "否", "否", "是", "是")
+table(x)
+```
+
+2. 条形图和饼图
+```{r}
+drink <- c(3, 4, 1, 1, 3, 4, 3, 3, 1, 3, 2, 1, 2, 1, 2, 3, 2, 3, 1, 1, 1, 1, 4, 3, 1)
+
+barplot(drink) # 未分组的条形图，纵轴不是频数而是水平
+barplot(table(drink)) # 分组的条形图，纵轴是频数
+barplot(table(drink) / length(drink)) # 纵轴是频率
+barplot(table(drink), col = c("red", "yellow", "blue", "white"))
+
+drink.count <- table(drink) # y数据分组后赋值给drink.count。
+pie(drink.count)
+names(drink.count) <- c("红酒", "白酒", "黄酒", "啤酒")
+pie(drink.count)
+pie(drink.count, col = c("purple", "green", "cyan", "white"))
+```
+
+## 数值型数据
+
+### 集中趋势和离散程度
+mean(),median(),var(),sd(),fivenum(),summary()
+
+当数据分布非对称、有长尾时，可以利用截尾均值来描述平均水平：在mean函数里对trim参数进行设置
+```{r}
+salary <- c(
+  2000, 2100, 2200, 2300, 2350, 2450, 2500, 2700, 2900,
+  2850, 3500, 3800, 2600, 3000, 3300, 3200, 4000, 3100, 4200
+)
+# 对该部门的工资截去两头20％后的均值,trim=可以省略
+mean(salary, trim = 0.2)
+# 对该部门的工资截去两头50％后的均值，实际上这就是中位数
+mean(salary, 0.5)
+```
+
+方差、标准差对异常值也很敏感，可以用稳健的四分位间距(IQR)和平均差(mad)来描述离散程度
+```{r}
+IQR(salary)
+mad(salary)
+```
+
+### 图形展现
+```{r}
+# 茎叶图(适用于小样本)
+stem(salary)
+salarym <- c(salary, 15000) # 加入经理的工资
+stem(salarym) # 发现经理的数据是一个离群值
+
+# 用cut()对数值数据进行分组
+salaryg <- cut(salary, breaks = c(2000, 3000, 4000, max(salary)))
+table(salaryg)
+
+# 直方图
+hist(salary) # 频数
+hist(salary, prob = T) # 频率
+# 还可以用rug()命令把各个数据竖线描绘在X轴上
+rug(salary)
+
+# 箱线图
+boxplot(salary) # 默认竖直
+boxplot(salary, horizontal = T) # 水平箱线图
+
+# 密度函数线density()
+hist(faithful$eruptions, prob = T, breaks = 25) # 使用系统自带的faithful数据
+lines(density(faithful$eruptions), col = "red")
+``` 
+
+## 离群值探索
+
+离群值（outlier）就是某个或少数几个值明显远离于其他大部分数据。理论上讲，离群值可以出现在各种分布中，但常见的主要出现在具有测量误差（measurement error）的数据或者总体是厚尾（heavy-tailed）分布的数据中。离群值的检验主要有：（1）箱线图检验；（2）Grubb检验；（3）Dixon’sQ检验。
+
+### 箱线图检验
+
+如果观测值距底线Q1（第25百分位数）或顶线Q3（第75百分位数）过远，如超出箱体高度（四分位数间距）的1.5倍以上，则可视该观测值为离群值。
+
+boxplot.stats()可以返回箱线图的有关统计量。其用法是
+
+> boxplot.stats(x,coef=1.5,do.conf=TRUE,do.out=TRUE)
+
+其显示内容为：       
+
+* stats由5个值组成，分别是下须线、下四分位数、中位数、上四分位数、上须线
+* n为样本量
+* conf为置信区间，默认置信水平为95%
+* out为离群值。
+
+```{r}
+# 对前面加了部门经理工资后的部门月工资数据进行离群值探索
+boxplot(salarym) # 从图可以看出有一个离群值，就是部门经理的工资，远远高于部门的其他人的工资，因此被认为离群值。
+
+boxplot.stats(salarym)
+```
+
+### Grubb检验
+
+Grubbs检验基于正态总体的假设，也就说在做检验前需要先检验数据的正态性。
+Grubbs检验每次只能检验数据集中是否包含离群值，其假设如下：   
+  $H_0$: 数据集中没有离群值    
+  $H_1$: 数据集中至少有一个离群值
+
+Grubbs检验统计量$G=\frac{\max _{i=1, \ldots, N}\left|Y_{i}-\overline{Y}\right|}{s}$，该统计量实际上是指样本与均值的最大绝对离差相对于样本标准差的倍数。两侧检验时，当$G>\frac{N-1}{N} \sqrt{\frac{t_{\alpha /(2 N)}^{2}(\mathrm{N}-2)}{N-2+t_{\alpha /(2 N)}^{2}(\mathrm{N}-2)}}$时，拒绝$H_0$，即认为数据中存在离群值。
+
+> outliers::grubbs.test(x,type=10,opposite=FALSE,two.sided=FALSE)
+
+其中，x是待检验数据，type表示检验类型，10表示检验一个离群值（默认值）,11表示检验两个尾部上的两个离群值，20表示在一个尾部检验两个离群值。Opposite表示检验反方向上的离群值。two.sided表示是否进行双边检验。
+```{r}
+library(outliers) # 载入outliers包
+set.seed(5) # 设随机数种子
+x <- rnorm(10) # 生产10个标准正态分布随机数
+x
+grubbs.test(x) # grubbs检验，右尾是否有离群值。p=0.2，不拒绝原假设，没有离群值。
+grubbs.test(x, type = 20) # 右尾是否有两个离群值。p=0.02，拒绝原假设，然后呢？
+grubbs.test(x, type = 11) # 双边是否有离群值。p=0.7，不拒绝原假设。
+```
+
+### Dixon’s Q检验
+
+Q统计量$Q=\frac{gap}{{range}}$，其中gap是假设的离群值离它最近值的绝对距离，range是极差（最大值与最小值之间的距离）。
+
+> outliers::dixon.test(x,type=0,opposite=FALSE,two.sided=TRUE)
+
+其中，x是待检验数据。type表示检验类型,根据样本量大小选择不同的类型，具体包括10(样本量3-7），11（样本量8-10），21（样本量11-13），22（14及以上）。opposite表示检验反方向上的离群值。two.sided表示是否进行双边检验。
+```{r}
+set.seed(8)
+x <- rnorm(10)
+x
+dixon.test(x) # Dixon’s Q检验
+dixon.test(x, opposite = TRUE) # 检验反方向上的离群值
+# 两个方向的检测P都大于0.05，因此不能拒绝原假设，即两个方向都没有离群值
+```
+
+# 双变量数据分析
+
+## 分类数据~分类数据
+
+### 二维表
+
+> table(),生成二维表
+> prop.table(x,margin),计算二维表的边缘概率。
+
+margin=1表示各个数据占行汇总数的比例；margin=2表示各个数据占列 汇总数的比例；省略时，表示占总和的比例。
+
+```{r}
+smoke <- c("Y", "N", "N", "Y", "N", "Y", "Y", "Y", "N", "Y")
+study <- c("<5h", "5-10h", "5-10h", ">10h", ">10h", "<5h", "5-10h", "<5h", ">10h", "5-10h")
+table(smoke, study)
+tab <- table(smoke, study)
+prop.table(tab, 1) # 返回占行汇总数的比例
+
+# prop.table()的功能也可以用自定义函数实现
+prop <- function(x) x / sum(x)
+apply(tab, 2, prop) # 返回占列汇总数的比例
+apply(tab, 1, prop)
+t(apply(tab, 1, prop)) # 返回占行汇总数的比例
+```
+
+### 复式条形图
+```{r}
+par(mfrow = c(1, 3)) # 设置图形窗口以一行三列形式输出
+barplot(table(smoke, study)) # 以study为分类变量作条形图
+barplot(table(study, smoke)) # 以smoke为分类变量作条形图
+
+# 设置图例。beside参数设置为False时，作出的图是堆积条形图，True时作出的是簇状条形图，R默认的是False。
+barplot(table(study, smoke), beside = T, legend.text = c("<5h", "5-10h", ">10h"))
+```
+
+## 分类数据~数值数据
+
+分组、刻面箱线图为主
+
+```{r}
+x <- c(5, 5, 5, 13, 7, 11, 11, 9, 8, 9) # 实验组
+y <- c(11, 8, 4, 5, 9, 5, 10, 5, 4, 10) # 对照组
+boxplot(x, y)
+```
+
+```{r}
+# 还可以将不同类数据合并起来，另标记分类向量，作出同样的图
+d <- c(5, 5, 5, 13, 7, 11, 11, 9, 8, 9, 11, 8, 4, 5, 9, 5, 10, 5, 4, 10)
+g <- c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2)
+boxplot(d ~ g) # 分类向量放在~后边
+```
+
+
+## 数值数据~数值数据
+
+### 散点图
+
+```{r}
+rev <- read.table("revenue.txt", header = T)
+plot(rev$x, rev$y)
+abline(lm(rev$y ~ rev$x))
+```
+
+### 相关系数
+
+> cor(x,y),pearson相关系数
+
+> cor(x,y,method="spearman"),spearman等级相关系数(秩相关系数)，等同于cor(rank(x),rank(y))
+
+注意：
+
+1. 不线性相关并不意味着不相关；
+2. 有相关关系并不意味着一定有因果关系；
+3. 相关分析研究一个变量对另一个（些）变量的统计依赖关系，但它们并不意味着一定有因果关系。
+4. 相关分析对称地对待任何（两个）变量，两个变量都被看作是随机的。
+
+# 多变量数据分析
+
+## 多维列联表
+```{r}
+library(MASS) # Car93数据在MASS包中
+data(Cars93)
+names(Cars93)
+attach(Cars93)
+
+# 把Price按区间分成三组，并对此因子命名
+price <- cut(Price, c(0, 12, 20, max(Price)))
+levels(price) <- c("cheap", "okay", "expensive")
+# 把miles per gallon in highway按区间分成3组并命名
+mpg <- cut(MPG.highway, c(0, 20, 30, max(MPG.highway)))
+levels(mpg) <- c("gasguzzler", "oky", "miser") # 费油、普通、省油
+
+table(Type)
+table(price, Type)
+table(price, Type, mpg)
+```
+
+## 复式条形图
+```{r}
+barplot(table(price, Type))
+barplot(table(price, Type), beside = T)
+barplot(table(Type, price))
+barplot(table(Type, price), beside = T)
+```
+
+## 并列箱线图
+
+```{r}
+boxplot(Price ~ Type)
+
+# 模拟1000个标准正态分布随机数，分成10组，作10个并列箱线图。
+r1 <- rnorm(1000)
+f1 <- factor(rep(1:10, 100))
+boxplot(r1 ~ f1)
+```
+
+## 点带图
+点带图也可以用来比较各变量的分布情况，但主要用在样本观察值比较少时。当样本观察值比较多时，点带图就显得有点凌乱，没有箱线图清晰直观。所以当样本观察值很多时，就应该使用箱线图。
+
+> stripchart(z～t)
+
+z变量在t变量上的分布情况，不同的是这里z变量刻度在x轴上，而t变量在y轴上。
+```{r}
+f <- factor(Type)
+f
+f1 <- as.numeric(ordered(f))
+f1
+stripchart(f1 ~ price)
+# 值得注意的是，x轴用1-6代表Type的Compact、Large等。
+
+# 模拟100个标准正态分布的随机数，分成5组，作点带图。
+r2 <- rnorm(100)
+f2 <- factor(rep(1:5, 20))
+stripchart(r2 ~ f2)
+```
+
+## 多变量散点图
+
+例：以datasets包里的数据集iris为例，这是Fisher关于150个植物分类的数据，是判别分析的经典案例。
+```{r}
+iris
+levels(iris$Species) # 种类Species的水平
+# 共有三种植物，分别是setosa，versicolor和virginica。为了在图中方便显示，重新标示它们为1、2和3。
+iris.lab <- rep(c("1", "2", "3"), rep(50, 3))
+```
+
+### 重叠散点图
+将两个或多组两个变量的散点图绘制在同一个图中，这样可以更好比较它们之间的相关关系
+```{r}
+plot(iris[, 1], iris[, 3], type = "n") # 绘制iris第1、3列的散点图，type='n'即不显示点
+text(iris[, 1], iris[, 3], cex = 0.6) # 显示样本序号，缩小字体cex=0.6
+plot(iris[, 1], iris[, 3], type = "n")
+text(iris[, 1], iris[, 3], iris.lab, cex = 0.7) # 显示分类号，缩小字体cex=0.7
+```
+
+### 矩阵式散点图
+
+欲同时考察三个或三个以上的数值变量间的相关关系时，利用矩阵式散点图比较合适，这样可以快速发现多个变量间主要相关性，这一点在多元线性回归显得尤为重要。
+
+> pairs()
+
+```{r}
+pairs(iris)
+pairs(iris[1:4], pch = 21, bg = iris.lab) # 按iris.lab分类
+```

@@ -1,0 +1,348 @@
+/* 全局 */
+
+
+html {
+  font-size: 17px;
+}
+
+body {
+  font-size: 18px;
+  color: #333333;
+  font-family: 'Segoe UI', sans-serif, Tahoma, Geneva, Verdana, "Microsoft YaHei";
+}
+
+p,
+blockquote,
+ul,
+ol,
+dl,
+table {
+  margin: 0.8em 0;
+}
+
+
+/* 多级标题 */
+
+h1 {
+  text-align: center;
+  font-weight: bolder;
+  font-size: 40px;
+  text-align: left;
+  font-family: "Italic", STKaiTi;
+  font-weight: bold;
+  color: red;
+}
+
+h1.title {
+  text-align: left;
+  font-size: 48px;
+  font-weight: bold;
+  margin-top: 1em;
+  padding-top: 0em;
+  margin-bottom: 0em;
+}
+
+h2 {
+  text-align: left;
+  font-size: 36px;
+  counter-increment: chapter;
+  counter-reset: section;
+  font-weight: bold;
+  font-family: "Italic", STKaiTi;
+  color: purple;
+  margin-top: 1.5em;
+}
+
+h3 {
+  /* background-color:lightgray; */
+  font-weight: bold;
+  line-height: 150%;
+  font-size: 30px;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  /* counter-increment: section; */
+  /* counter-reset: counter1; */
+  text-align: center;
+  /* font-weight: bold; */
+  font-family: "Italic", STKaiTi;
+  color: darkslateblue;
+}
+
+h3.subtitle {
+  font-weight: bold;
+  color: black;
+  font-size: 36px;
+  text-align: left;
+  margin-top: 0em;
+  padding-top: 0em;
+  margin-bottom: 0em;
+}
+
+h4 {
+  /* background-color: lightgray; */
+  /* color: darkblue; */
+  /* line-height: 150%; */
+  font-size: 20px;
+  font-family: "Microsoft YaHei", 'Segoe UI';
+  font-weight: bold;
+  /* counter-increment: counter1; */
+  /* counter-reset: counter2; */
+  margin-top: 2em;
+}
+
+h4.author,
+h4.date {
+  background-color: white;
+  font-family: "Microsoft YaHei", 'Segoe UI', "Italic", STKaiTi;
+  font-weight: normal;
+  margin-top: 0em;
+  padding-top: 0em;
+  margin-bottom: 0.5em;
+}
+
+h5 {
+  font-size: 18px;
+  /* font-family: HeiTi; */
+  font-weight: bold;
+  /* counter-increment: counter2; */
+  /* counter-reset: counter3; */
+}
+
+h6 {
+  /* counter-increment: counter3; */
+}
+
+h2:before {
+  /* content: counter(chapter, cjk-ideographic)"、"; */
+}
+
+h3:before {
+  /* content: counter(section)' '; */
+}
+
+h4:before {
+  /* content: counter(counter1, cjk-ideographic)'、'; */
+}
+
+h5:before {
+  /* content: '（'counter(counter2, cjk-ideographic)'）'; */
+}
+
+h6:before {
+  /* content: counter(counter3)'. '; */
+}
+
+
+/* 链接 */
+
+a {
+  font-family: HeiTi;
+  /* font-weight: bold; */
+  color: blue;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+
+/* 代码 */
+
+code {
+  color: darkred;
+  font-weight: bold;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+code,
+.md-fences {
+  color: rgb(58, 43, 43);
+  font-family: Courier;
+  font-weight: bold;
+}
+
+pre code {
+  white-space: pre-wrap;
+}
+
+/* div.sourceCode div.r-code-collapse, */
+div.sourceCode div.r-code-collapse pre.r {
+  background: #272822;
+  /* color: #F8F8F2; */
+  /* color: #A9B7C6; */
+  color: #9CDCFE;
+}
+
+div.sourceCode code {
+  font-size: 16px;
+  /* color: black; */
+  font-family: Consolas;
+  font-weight: normal;
+}
+
+/* 关键字 */
+div.sourceCode code.sourceCode span.cf {
+  color: #F92772;
+}
+
+/* 函数名 */
+div.sourceCode code.sourceCode span.fu {
+  color: orangered;
+}
+
+/* 运算符 */
+div.sourceCode code.sourceCode span.sc {
+  color: #F8F8F2;
+}
+
+/* 赋值箭头 */
+div.sourceCode code.sourceCode span.ot {
+  /* color: royalblue; */
+  color: #F8F8F2;
+}
+
+/* 字符串 */
+div.sourceCode code.sourceCode span.st {
+  color: #E6DB74;
+}
+
+/* 注释 */
+div.sourceCode code.sourceCode span.co {
+  color: #6e961e;
+  /* font-style: italic; */
+  font-family: Courier, SimSun;
+}
+
+/* 数字 */
+div.sourceCode code.sourceCode span.dv {
+  color: #AE81FF;
+}
+
+/* 内置常量如 TRUE/FALSE */
+div.sourceCode code.sourceCode span.cn {
+  color: darkcyan;
+}
+
+/* 函数的参数 */
+div.sourceCode code.sourceCode span.at {
+  color: orange;
+  /* color: blue; */
+}
+
+
+/* 粗体 */
+
+strong {
+  font-family: 'Microsoft YaHei';
+}
+
+
+/* 列表项 */
+
+ul,
+ol {
+  margin: 0 0 1.5em 0em;
+}
+
+h3+ul,
+h4+ul,
+h5+ul,
+h6+ul,
+h3+ol,
+h4+ol,
+h5+ol,
+h6+ol {
+  margin-top: 0.5em;
+}
+
+p+ul,
+p+ol {
+  margin-top: 0.5em;
+}
+
+li>ul,
+li>ol {
+  margin-top: inherit;
+  margin-bottom: 0;
+  margin-left: 0.5em;
+}
+
+ul>li {
+  /* list-style-type: disc; */
+  list-style-position: outside;
+}
+
+li ul>li {
+  list-style-type: circle;
+}
+
+ol>li {
+  list-style-type: decimal;
+  list-style-position: outside;
+}
+
+li ol>li {
+  list-style-type: upper-alpha;
+}
+
+li li ol>li {
+  list-style-type: lower-greek;
+}
+
+
+/* 首行缩进 */
+
+p {
+  text-indent: 0em;
+}
+
+
+/* 表格 */
+table {
+  font-family: 'Times New Roman', Times, serif;
+}
+
+table caption {
+  text-align: center;
+  font-weight: bold;
+  color: #272822;
+  font-family: 'Microsoft YaHei';
+}
+
+table thead tr th:first-child {
+  text-align: left;
+}
+
+table tr td strong {
+  font-family: 'Times New Roman', Times, serif;
+}
+
+
+/* 侧边栏 */
+
+div.col-lg-3 {
+  width: 25%;
+  max-width: 250px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 200px;
+  max-height: 90%;
+  font-size: 16px;
+}
+
+div.toc-content {
+  padding-left: 0px;
+  padding-right: 40px;
+}
+
+
+/* 引用块 */
+blockquote {
+  border-left: 4px solid #42b983;
+  padding: 10px 15px;
+  color: #777;
+  background-color: rgba(66, 185, 131, .1);
+}

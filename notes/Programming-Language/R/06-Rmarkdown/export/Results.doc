@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset='utf-8'>
+<title></title>
+<style>
+body, pre {font-size: 10.5pt; font-family: Times New Roman;}
+p {margin: 0px;}
+table {border-collapse: collapse; border-spacing: 0px; color: #000000;
+       border-top: 2px solid #000000; border-bottom: 2px solid #000000;}
+table thead th {border-bottom: 1px solid #000000;}
+table th, table td {padding-left: 5px; padding-right: 5px; height: 19px;}
+</style>
+</head>
+
+<body>
+<p></p>
+<table>
+<thead>
+<tr> <th align='left'></th> <th align='right'>Estimate</th> <th align='right'>S.E.</th> <th align='right'>t</th> <th align='right'>p</th> <th align='right'> </th> </tr>
+</thead>
+<tbody>
+<tr> <td align='left'>(Intercept)</td> <td align='right'>68.770</td> <td align='right'>(4.391)</td> <td align='right'>15.662</td> <td align='right'>< .001</td> <td align='right'>***</td> </tr>
+<tr> <td align='left'>Month</td> <td align='right'>2.225</td> <td align='right'>(0.441)</td> <td align='right'>5.047</td> <td align='right'>< .001</td> <td align='right'>***</td> </tr>
+<tr> <td align='left'>Day</td> <td align='right'>–0.084</td> <td align='right'>(0.070)</td> <td align='right'>–1.194</td> <td align='right'>.234</td> <td align='right'></td> </tr>
+<tr> <td align='left'>Wind</td> <td align='right'>–1.003</td> <td align='right'>(0.176)</td> <td align='right'>–5.695</td> <td align='right'>< .001</td> <td align='right'>***</td> </tr>
+<tr> <td align='left'>Solar.R</td> <td align='right'>0.027</td> <td align='right'>(0.007)</td> <td align='right'>3.991</td> <td align='right'>< .001</td> <td align='right'>***</td> </tr>
+</tbody>
+</table>
+<p></p>
+</body>
+
+</html>

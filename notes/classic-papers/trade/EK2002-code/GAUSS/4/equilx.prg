@@ -53,12 +53,14 @@ lvec = 2080*lvec;                 @ measure labor in approx hours 以年工作小时计
 awvec = awvec/2080;               @ absolute wage (not relative) 单位劳动的工资@
 
 lmuvec = realdat[.,5]; /* S1-S19 */
+"S1-S19"
+lmuvec;
 
 distmat = realdat[.,6:24];        @ distance measure, ln(dni^(-theta)), as defined in section 2, page 5 @
 "      ";
 "      ";
 "distance measure";
-distmat; /* 行index是n，列index是i */
+distmat; /* -theta*ln(dni)矩阵，行index是n，列index是i */
 
 /* 25~43列，19*19矩阵*/
 xnimat = realdat[.,25:43]; /* Xni，贸易额绝对值, 行index是n，列index是i */
@@ -69,6 +71,9 @@ xrmat = xrate*ones(1,ncnty); /* 扩展为19*19 */
 xnimat = xnimat./xrmat; /* 都换算为 million 美元*/
 xnimat = 1000000*xnimat;
 xnn = diag(xnimat);
+"Xnn";
+xnn;
+"";
 imprt = sumc(xnimat') - xnn; /* 进口额 */
 exprt = sumc(xnimat) - xnn; /* 出口额 */
 
@@ -101,8 +106,8 @@ totprod = xnn + exprt; /* 制造业总产出 */
 
 @ print out some data @;
 
-distmat = exp(distmat); /* distmat 已经变了，现在是 d_{ni}^(-theta) */
-distmat;
+distmat = exp(distmat); 
+distmat; /* distmat 变了，现在是 d_{ni}^(-theta) */
 distmat = diagrv(distmat,ones(ncnty,1)); /* 似乎毫无变化 */
 distmat;
 
@@ -112,6 +117,8 @@ lwvec = lwvec - lwvec[ncnty]; /* 对数有效工资，相对美国*/
 lmuvec = lmuvec - lmuvec[ncnty]; /*Sn-S19*/
 lmuvec = mybeta*(lmuvec + mytheta*lwvec); /*27式，这是ln(T_n/T_19)*/
 muvec = exp(lmuvec); /* T_n/T_19， TABLE VI theta=8.28 的那一列 */
+"T_n/T_19";
+muvec;
 rwvec = exp(lwvec);  /* 有效工资之比 */
 scalew = awvec[ncnty]; /* 美国的有效工资 */
 
@@ -136,7 +143,8 @@ alphavec = wageshar + (imprt - exprt)./yvec;
 
 yweight = yvec/sumc(yvec);
 myalpha = sumc(yweight.*alphavec); /* 用各国GDP作为权重，计算一个加权的 alpha */
-
+"alpha";
+myalpha;
 
 transmat = distmat^(-1/mytheta)-ones(ncnty,ncnty); /* d_{ni}-1 */
 
@@ -179,15 +187,15 @@ ldistmat[.,17:19];
 
 proc getgam(aw);
     local muwvec, muwmat, gammat;
-    muwvec = muvec.*(aw^(-mybeta*mytheta));
+    muwvec = muvec.*(aw^(-mybeta*mytheta)); /* T w^(\beta*theta)*/
     muwmat = ones(ncnty,1)*muwvec';
-    gammat = (varian^(mytheta))*(distmat.*muwmat);
+    gammat = (varian^(mytheta))*(distmat.*muwmat); /* g * D %*% Tw^(-beta*theta) */
     retp(gammat);
 endp;
 
 @ gammat is a global that gets updated @
 
-gammat = getgam(awvec);
+gammat = getgam(awvec);  /*  D %*% gTw^(-beta*theta)  */
 
 proc(2) = phtbound(gammat);
     local gammax, phitlow, phithigh;
@@ -199,7 +207,7 @@ endp;
 
 @ phitmin and phitmax are globals that get updated @
 
-{phitmin,phitmax} = phtbound(gammat);
+{phitmin,phitmax} = phtbound(gammat); /* p初始迭代的最大值和最小值 */
 
 
 
@@ -253,13 +261,13 @@ endp;
 @ non linear system to evaluate a func given phitilde (== x) @
 proc(2) = phifunc(x);
   local xbeta1,xbeta2,gaminv,func,dfunc;
-  xbeta1 = x^(1-mybeta);
+  xbeta1 = x^(1-mybeta); 
   xbeta2 = x^(-mybeta);
-  gaminv = inv(gammat);
+  gaminv = inv(gammat); /*gammat是 D %*% gTw^(-beta*theta) */
   func = xbeta1 - gaminv*x;   @ negative of the function @
-  dfunc = gaminv - (1-mybeta)*diagrv(eye(ncnty),xbeta2);
- @ derivative of the function @
-  retp(dfunc,func);
+  dfunc = gaminv - (1-mybeta)*diagrv(eye(ncnty),xbeta2); /*Jacobi*/
+ @ derivative of the function @ 
+  retp(dfunc,func); /*返回F(x)及其Jacobi导数矩阵*/
 endp;
 
 
@@ -317,8 +325,8 @@ oldaw = awvec;
 do while maxexlab > labtol;
    wagebill = findwb(oldaw,myalpha);
    lpred = wagebill./oldaw;
-   exlab = (lpred - lvec)./lvec;
-   "wage and excess demand";
+   exlab = (lpred - lvec)./lvec; /* 超额劳动引致需求 (Y_L/w)/L-1*/
+   "wage and excess demand"; /* 迭代多少次，就输出多少次*/
    newaw = oldaw.*(ones(ncnty,1) + mypsi*exlab);
    oldaw~exlab;
    oldaw = newaw;
@@ -331,10 +339,10 @@ eqmrw = eqmaw/eqmaw[ncnty];
 
 
 wagebill = findwb(eqmaw,myalpha);
-myawage = wagebill./lvec;
+myawage = wagebill./lvec; /* 制造业收入/劳动 */
 @ actual and predicted wages @
 
-base1 = eqmaw~myawage~awvec;
+base1 = eqmaw~myawage~awvec; /*均衡工资  均衡时制造业收入/劳动  */
 
 "wages from: (1) doloop, (2) wagebill, and (3) data";
 base1;
@@ -343,7 +351,7 @@ mse = meanc((ln(eqmaw) - ln(awvec))^2);
 rmse = sqrt(mse);
 "root mean square error " rmse;
 
-phitvec = findphit(eqmaw);
+phitvec = findphit(eqmaw); /* P=p^(-theta)*/
 phivec = findphi(eqmaw,phitvec);
 mprice = phitvec^(-1/mytheta);
 realw = eqmaw./((mprice)^(myalpha));
@@ -357,12 +365,14 @@ welfare = yvec.*mprice^(-myalpha);
 base2 = realw~welfare;
 "real wages and welfare";
 base2;
+"Y and price"
+yvec~mprice;
 
 rrealw = realw/realw[ncnty];
 rmprice = mprice/mprice[ncnty];
 base3 = eqmrw~rrealw~mprice~rmprice;
 
-"relative supply wage, real wage, abs and rel man price";
+"relative supply wage, real wage, absolute and relative manufacture price";
 base3;
 
 
@@ -390,9 +400,6 @@ thetavec[1,1]=mytheta;
 
 base = base1~base2~base3~trademat~thetavec;
 
-save .\basefe = base;
+save C:\Users\humoo\OneDrive\ICT\Website\static\notes\classic-papers\trade\EK2002-code\GAUSS\4\basefe = base;
 
 end;
-
-
-

@@ -1,0 +1,297 @@
+---
+title: "Linear Regression"
+subtitle: ''
+author: "Humoon"
+date: "`r Sys.Date()`"
+output: html_document
+documentclass: ctexart
+classoption: hyperref,
+---
+
+```{r setup, include = FALSE}
+source("../Rmarkdown-template/Rmarkdown_config.R")
+
+## global options ===================================
+knitr::opts_chunk$set(
+  width = config$width,
+  fig.width = config$fig.width,
+  fig.asp = config$fig.asp,
+  out.width = config$out.width,
+  fig.align = config$fig.align,
+  fig.path = config$fig.path,
+  fig.show = config$fig.show,
+  warn = config$warn,
+  warning = config$warning,
+  message = config$message,
+  echo = config$echo,
+  eval = config$eval,
+  tidy = config$tidy,
+  comment = config$comment,
+  collapse = config$collapse,
+  cache = config$cache,
+  cache.comments = config$cache.comments,
+  autodep = config$autodep
+)
+```
+
+```{r echo=FALSE}
+# 允许用户从页面下载文件
+xfun::embed_file("./data/wages.csv", text = "Download the data used in this project.")
+```
+
+
+## Data Processing
+
+### read data
+
+```{r}
+wages <- read_csv("./data/wages.csv")
+wages %>% head()
+```
+
+### 缺失值检查
+
+```{r}
+## 法1：删除含缺失值的行后，观测是否变少
+wages %>% dim()
+wages %>%
+  drop_na() %>%
+  dim()
+
+## 法2：直接统计各列的缺失值
+
+# summarise_all 表示对各列应用同一个函数
+# ~表示匿名函数，该匿名函数返回 sum(is.na(函数的自变量))
+wages %>% summarise_all(~ sum(is.na(.)))
+
+# 或
+wages %>% map_df(~ sum(is.na(.)))
+```
+
+### EDA
+
+```{r}
+wages %>% count(sex)
+
+# 性别分组身高均值和收入均值
+wages %>%
+  group_by(sex) %>%
+  summarise(n = n(), mean_height = mean(height), mean_earn = mean(earn))
+
+# 性别分组收入分布
+wages %>%
+  ggplot(aes(x = earn, color = sex)) +
+  geom_density()
+```
+
+## 回归模型
+
+### `lm()`中的 formula
+
+```{r}
+# 收入与身高的关系
+wages %>%
+  ggplot(aes(x = height, y = earn)) +
+  geom_point(alpha = 0.25) +
+  geom_smooth(method = "lm", se = TRUE)
+
+# 以下两种写法等价，都是不含截距项的回归
+lm(earn ~ height - 1, data = wages)
+lm(earn ~ 0 + height, data = wages)
+
+# 含截距项的回归
+mod1 <- lm(formula = earn ~ height, data = wages)
+class(mod1) # lm类，一个list
+names(mod1) # list中各项的name
+print(mod1)
+summary(mod1) # 回归模型的详细信息
+
+fitted(mod1) %>% head(10) # 查看模型拟合的\hat{y}
+predict(mod1) %>% head(10) # predict() 不给出新的X值时，就不是预测，而是等价于 fitted()
+resid(mod1) %>% head(10) # 查看残差 \hat{\varepsilon}
+
+# 将拟合值和残差添加到原数据框中
+wages %>%
+  modelr::add_predictions(mod1) %>% # 添加模型的预测值
+  modelr::add_residuals(mod1) # 添加残差
+```
+
+### 尝试各种回归
+
+```{r}
+lm(earn ~ age, wages)
+lm(earn ~ height + age, wages)
+lm(earn ~ . - age, wages) # . 代表被解释变量以外的所有变量
+lm(earn ~ ., wages)
+```
+
+### 比较多个回归模型
+
+`bruceR::model_summary()`，输出符合学术规范的三线表
+
+主要参数
+  
+- `model.list`：回归模型（多个模型用 `list()` 连接起来），支持多种回归模型的组合（包括但不限于一般线性模型、广义线性模型、混合线性模型、广义混合线性模型等）
+- `std`：是否换成标准化回归系数（`std=TRUE`）？默认输出非标准化回归系数（`std=FALSE`）
+- `digits`：保留的小数位数，默认是 3 位小数
+- `file`：保存到 .doc，默认输出到 R 控制台
+
+```{r}
+#### 一般线性模型 ####
+lm1 <- lm(Temp ~ Month + Day, data = airquality)
+lm2 <- lm(Temp ~ Month + Day + Wind + Solar.R, data = airquality)
+GLM_summary(lm1)
+GLM_summary(lm2)
+model_summary(list(lm1, lm2))
+model_summary(list(lm1, lm2), std = TRUE, digits = 2)
+model_summary(list(lm1, lm2), file = "OLS Models.doc")
+
+#### 混合线性模型 ####
+library(lmerTest)
+hlm1 <- lmer(Reaction ~ (1 | Subject), data = sleepstudy)
+hlm2 <- lmer(Reaction ~ Days + (1 | Subject), data = sleepstudy)
+hlm3 <- lmer(Reaction ~ Days + (Days | Subject), data = sleepstudy)
+HLM_summary(hlm1)
+HLM_summary(hlm2)
+HLM_summary(hlm3)
+model_summary(list(hlm1, hlm2, hlm3))
+model_summary(list(hlm1, hlm2, hlm3), std = TRUE)
+model_summary(list(hlm1, hlm2, hlm3), file = "HLM Models.doc")
+```
+
+## 比较变量的相对重要性
+
+法1：变量标准化后再回归，比较系数的绝对大小. `mutate_at(vars(), scale)`
+
+```{r}
+fit <- wages %>%
+  mutate_at(vars(earn, height, ed, age), scale) %>% # 自变量标准化
+  lm(earn ~ height + ed + age, data = .)
+summary(fit)
+```
+
+法2：比较模型参数 t 统计量的绝对大小。
+```{r}
+caret::varImp(fit)
+```
+
+## 分类变量（本质是方差分析）
+
+分类变量的数据类型一般是字符串，也可能是 factor.
+
+### 字符串型分类变量
+
+```{r}
+#
+wages %>% distinct(race) # 四个种族分类
+wages %>%
+  ggplot(aes(x = race, y = earn, fill = race)) +
+  geom_boxplot(position = position_dodge()) +
+  scale_y_continuous(limits = c(0, 20000))
+mod3 <- lm(earn ~ race, data = wages)
+mod3
+broom::tidy(mod3)
+```
+输出结果，只有 race_hispanic、race_other 和 race_white 三个系数以及 Intercept 截距。race_black 是 baseline，则三个系数分别表示从 baseline 切换到该分类时，earn 的变化量。
+
+### factor 型分类变量
+
+人为规定因子的好处在于方便调整各类的顺序
+
+```{r}
+# 将字符串向量转变为因子向量
+factor_race <- factor(wages$race, levels = c("hispanic", "white", "black", "other"))
+wages_fct <- wages %>%
+  mutate(race = factor_race) %>%
+  select(earn, race)
+head(wages_fct)
+mod4 <- wages_fct %>% lm(earn ~ race, .)
+broom::tidy(mod4)
+```
+
+## 连续变量和分类变量混合
+
+```{r}
+mod5 <- lm(earn ~ height + sex, data = wages)
+coef(mod5)
+p1 <- wages %>%
+  ggplot(aes(x = height, y = earn, color = sex)) +
+  geom_point(alpha = 0.1) +
+  geom_line(aes(y = predict(mod5))) +
+  scale_y_continuous(limits = c(0, 100000))
+p1 # 不同组别，连续变量的斜率相同
+```
+
+### 交互项
+
+```{r}
+# lm(earn ~ height + sex + height:sex, data = wages)
+# lm(earn ~ height * sex, data = wages)
+# lm(earn ~ (height + sex)^2, data = wages)
+# lm(earn ~ height:sex, data = wages)
+# lm(earn ~ height:sex:race, data = wages)
+
+mod6 <- lm(earn ~ height + sex + height:sex, data = wages)
+coef(mod6)
+```
+
+模型形如 
+
+$$\text { earn }=\alpha+\beta_{1} \text { height }+\beta_{2} \text { sex }+\beta_{3}(\text { height } \times \text{sex})+\varepsilon$$
+
+系数的含义：对于女性，height 增长 1 个单位，引起 earn 增长 564.5102；对于男性，height 增长 1 个单位，引起 earn 的增长除了 height 的系数，还有交互项的系数，故增长 564.5102 + 701.4065 = 1265.92，如下图所示。
+
+
+```{r}
+p2 <- wages %>%
+  ggplot(aes(x = height, y = earn, color = sex)) +
+  geom_point(alpha = 0.1) +
+  geom_line(aes(y = predict(mod6))) +
+  scale_y_continuous(limits = c(0, 100000))
+p2
+
+# 有无交互项的区别：
+library(patchwork)
+combined <- p1 + p2 & theme(legend.position = "bottom")
+combined + plot_layout(guides = "collect")
+```
+
+可见，加入交互项后，不同性别组的斜率和截距都会不同。
+
+这等价于两组分别回归，分别计算截距和斜率。
+
+```{r}
+wages %>%
+  group_by(sex) %>%
+  group_modify(~ broom::tidy(lm(earn ~ height, data = .)))
+
+wages %>%
+  ggplot(aes(x = height, y = earn, color = sex)) +
+  geom_smooth(method = lm, se = F)
+
+# 或
+wages %>%
+  ggplot(aes(x = height, y = earn, color = sex)) +
+  geom_line(aes(y = predict(mod6)))
+```
+
+### 虚拟变量
+
+事实上，$R$ 中处理分类变量时，都会将其转换成虚拟变量。以上面的模型为例，sex 这个分类变量被转换成了 sexmale 这个虚拟变量，女性取0，男性取1，于是模型变为：
+
+$$\text { earn }=\alpha+\beta_{1} \text { height }+\beta_{2} \text { sexmale }+\beta_{3}(\text { height } \times \text{sexmale})+\varepsilon$$
+
+将 0 和 1 代入，则女性适用的模型为 
+
+$$\text { earn }=\alpha+\beta_{1} \text { height }+\varepsilon$$
+
+男性适用的模型为 
+
+$$\text { earn }=(\alpha+\beta_2)+(\beta_{1}+\beta_3) \text { height }+\varepsilon$$
+
+再看回归结果的四个系数 $\alpha,\beta_1, \beta_2, \beta_3$：
+```{r}
+mod6
+```
+
+将其带入分别适用于男女的模型，即可知其经济含义。

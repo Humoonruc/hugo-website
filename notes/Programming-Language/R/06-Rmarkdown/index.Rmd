@@ -12,6 +12,20 @@ biblio-style: apalike
 csl: china-journal-of-economic-research.csl
 link-citations: yes
 output: 
+  bookdown::gitbook:
+    includes:
+      in_header: _header.html
+    config:
+      edit: null
+      fontsettings:
+        family: sans
+        size: 2
+        theme: white
+      search: yes
+      toc:
+        after: '黄蒙'
+        before: 'Rmarkdown 文本文件的语法'
+    split_by: chapter
   bookdown::html_document2:
     self_contained: false
     lib_dir: libs
@@ -28,20 +42,6 @@ output:
     toc_float:
       collapsed: yes
       smooth_scroll: yes
-  bookdown::gitbook:
-    includes:
-      in_header: _header.html
-    config:
-      edit: null
-      fontsettings:
-        family: sans
-        size: 2
-        theme: white
-      search: yes
-      toc:
-        after: '黄蒙'
-        before: 'Rmarkdown 文本文件的语法'
-    split_by: chapter
   bookdown::word_document2:
     reference_docx: template.docx
     toc: yes
@@ -760,7 +760,7 @@ table <- tibble::tibble(ID = 1:5, name = letters[1:5])
 knitr::kable(table, caption = "order of letters") # 用三线表格显示数据
 ```
 
-#### kableExtra package
+### kableExtra package
 
 更强大、优美的表格。主要包括：
 
@@ -794,6 +794,22 @@ mtcars[1:5, 1:4] %>%
     full_width = F
   ) %>%
   add_header_above(c(" " = 1, "Group1" = 2, "Group2" = 2))
+```
+
+### `bruceR::print_table()`
+
+输出三线表至 console 或 .doc
+
+- 主要参数
+  - `x`：矩阵（`matrix`）、数据框（`data.frame`、`data.table` 等）或**能够提取出模型系数表的统计模型（`lm`、`glm`、`lmer`、`glmer` 等）**
+  - `digits`：保留的小数位数，默认是 3 位小数
+  - `file`：保存的 Word 文档（`.doc`），默认输出到 R 控制台
+  - ……（见原始帮助文档）
+
+```{r}
+model <- lm(Temp ~ Month + Day + Wind + Solar.R, data = airquality)
+print_table(model)
+print_table(model, file = "./export/Results.doc")
 ```
 
 ## R图

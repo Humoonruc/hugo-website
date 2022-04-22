@@ -1,0 +1,146 @@
+---
+title: "R与SQLite数据库的通信"
+subtitle: '——RSQLite包'
+author: 'Humoon'
+date: "`r Sys.Date()`"
+documentclass: ctexart
+output:
+  bookdown::html_document2:
+    code_folding: show
+    df_print: paged
+    fig_caption: yes
+    highlight: haddock
+    number_sections: yes
+    theme: united
+    toc: yes
+    toc_depth: 3
+    toc_float:
+      collapsed: yes
+      smooth_scroll: no
+  bookdown::epub_book: default
+  rticles::ctex:
+    fig_caption: yes
+    number_sections: yes
+    toc: yes
+classoption: "hyperref,"
+---
+
+```{r setup, include=FALSE}
+## global options
+knitr::opts_chunk$set(
+  fig.width = 6, fig.asp = 0.618,
+  out.width = "80%",fig.align = "center",
+  fig.path = 'Figs/',fig.show = "hold",
+  warning = FALSE, message = FALSE, echo = TRUE, 
+  comment = '', collapse = F, 
+  cache = F, cache.comments = F, autodep = TRUE,
+  options(digits = 7, scipen = 7, signif = 7)
+  )
+
+## use necessary packages
+library('pacman')
+p_load(tidyverse, lubridate, reshape2, magrittr)
+```
+
+# 准备工作
+```{r}
+library(DBI)
+library(RSQLite)
+```
+
+datasetsdb 为示例数据库
+
+```{r}
+db <- RSQLite::datasetsDb() # db的类型是SQLiteConnection
+dbListTables(db)
+dbReadTable(db, "CO2")
+dbReadTable(db, "mtcars", row.names = FALSE)
+dbGetQuery(db, 
+  "SELECT * 
+  FROM CO2 
+  WHERE conc < 100")
+dbDisconnect(db)
+```
+
+有时SQLite数据库访问失败，需要在cmd中运行这个命令：
+`cacls C:/Users/humoo/OneDrive/ICT/DataBase  /e /t /g  everyone:F`
+
+
+# 简单示例
+
+```{r}
+# 与.db数据库建立连接
+con <- dbConnect(
+  SQLite(), 
+  dbname = "C:/Users/humoo/OneDrive/ICT/DataBase/test.db") 
+dbDisconnect(con) # 断开连接
+
+# 与.sqlite数据库建立连接。该格式也可以被SQLite识别。
+con <- dbConnect(
+  SQLite(), 
+  dbname = 'C:/Users/humoo/OneDrive/ICT/DataBase/Test.sqlite') 
+
+# 删除表
+dbSendQuery(con,
+  "DROP TABLE IF EXISTS mobile_phone")
+
+# 创建表的框架
+dbSendQuery(con,
+  "CREATE TABLE mobile_phone
+    (product_id INTEGER,
+    product_name TEXT,
+    price REAL,
+    brand_name TEXT)")
+
+# 插入数据
+dbSendQuery(con,
+            "INSERT INTO mobile_phone
+            VALUES(1,'iPhone 6s',6000,'Apple')")
+dbSendQuery(con,
+            "INSERT INTO mobile_phone
+            VALUES(2,'华为P8',3000,'华为')")
+dbSendQuery(con,
+            "INSERT INTO mobile_phone
+            VALUES(3,'三星 Galaxy S6',5000,'三星')")
+
+# 列出数据库中所有表
+dbListTables(con)
+dbListFields(con,"mobile_phone") # 列出所有字段
+head(dbReadTable(con,"mobile_phone"))
+dbDisconnect(con)
+
+library(ISLR)
+str(Hitters)
+
+# 建立连接
+db.hitters <- dbConnect(
+  SQLite(),
+  dbname = "C:/Users/humoo/OneDrive/ICT/DataBase/Hitters.db")
+
+# 写入数据
+dbWriteTable(conn = db.hitters, name = "Hitters", 
+             value = Hitters, overwrite = T,row.names = FALSE)
+
+# 读取表格
+tmp = dbReadTable(db.hitters,"Hitters")
+head(tmp)
+
+# 使用SELECT语句建立查询。
+dbGetQuery(db.hitters, 
+           "SELECT * 
+           FROM Hitters 
+           WHERE Salary >= 1000")[1:5,]
+
+dbGetQuery(db.hitters,
+           "SELECT League, Hits, Salary 
+           FROM Hitters 
+           WHERE League = 'A'")[1:5,]
+
+dbDisconnect(db.hitters)
+```
+
+# 参考文献
+
+网络教程：[SQLite快速入门](https://www.yiibai.com/sqlite/quick-start.html)；[SQLite 教程](https://www.runoob.com/sqlite/sqlite-tutorial.html)
+
+

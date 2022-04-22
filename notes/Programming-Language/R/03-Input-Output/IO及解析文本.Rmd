@@ -3,19 +3,7 @@ title: "IO及解析文本"
 subtitle: ''
 author: "Humoon"
 date: "`r Sys.Date()`"
-output:
-  html_document: 
-    code_download: true
-    css: ["../css/style.css"]
-    fig_caption: yes
-    theme: united
-    highlight: haddock
-    number_sections: no
-    toc: yes
-    toc_depth: 4
-    toc_float:
-      collapsed: yes
-      smooth_scroll: yes
+output: html_document
 documentclass: ctexart
 classoption: hyperref,
 ---
@@ -35,11 +23,11 @@ knitr::opts_chunk$set(
   warn = config$warn,
   warning = config$warning,
   message = config$message,
-  echo = config$echo, 
-  eval = config$eval, 
-  tidy = config$tidy, 
-  comment = config$comment, 
-  collapse = config$collapse, 
+  echo = config$echo,
+  eval = config$eval,
+  tidy = config$tidy,
+  comment = config$comment,
+  collapse = config$collapse,
   cache = config$cache,
   cache.comments = config$cache.comments,
   autodep = config$autodep
@@ -59,6 +47,37 @@ library(htmlwidgets)
 - `View(data)`, 显示表格化的数据
 - `fix(data)`, 显示表格化的数据，且可以编辑数值
 
+## `bruceR::import()/export()`
+
+一站式导入 / 导出任意存储格式的数据表
+
+- 主要参数
+
+  - `file`：带后缀的文件名（包括但不限于 TXT、CSV、Excel、SPSS、Stata 等），如果不设定，则从剪贴板导入 / 导出至剪贴板
+  - `sheet`：如果是 Excel 文件，可以额外指定是哪个 Sheet 表单（默认是第一个 Sheet）
+  - `range`：如果是 Excel 文件，可以额外指定数据的单元格范围（默认是全部单元格）
+  - `encoding`：字符编码（`"UTF-8"`、`"GBK"`、`"CP936"` 中的一种），一般用于会出现乱码的使用 UTF-8 编码的带有中文字符的 CSV 文件（设为 `"UTF-8"` 即可）
+  - `header`：导入时是否把第一行作为变量名（导出时是否包含变量名）？默认是 `TRUE`，可设为 `FALSE`
+  - `as`：导入后使用哪种数据框类型？默认是 `"data.frame"`，**可设为 `"data.table"`** 或 `"tibble"`
+
+- 使用示例
+
+```{r, eval=FALSE}
+# import() 支持导入 txt、csv、xlsx、rda、rds等
+data <- import("MyData.csv")
+data <- import("MyData.xlsx")
+data <- import("MyData.sav")
+data <- import(file = "aaa.csv", as = "data.table")
+
+# 导出
+export(data, file = "NewData.csv")
+export(data, file = "NewData.xlsx")
+export(data, file = "NewData.sav")
+
+# 一次同时导出两个数据集到Excel
+export(list(airquality, npk), sheet = c("air", "npk"), file = "Two_Datasets.xlsx")
+```
+
 ## Input
 
 <a href="../pdf/cheatsheet-data-import.pdf"><strong>import data as  tidy-style cheatsheet.pdf</strong></a>，内含三个包: readr, readxl, googlesheets4
@@ -73,7 +92,8 @@ library(htmlwidgets)
 直接输入一个向量
 
 ```{r}
-y <- c("a","b","c"); y
+y <- c("a", "b", "c")
+y
 ```
 
 #### `scan()` 控制台输入一个向量
@@ -92,7 +112,7 @@ x <- scan()
 ```{r}
 library(SemiPar)
 data(package = "SemiPar")
-data(copper,package = "SemiPar")
+data(copper, package = "SemiPar")
 head(copper)
 ```
 
@@ -102,13 +122,25 @@ head(copper)
 
 `readr::read_table()` 读空格分割的文件
 
+### from JSON
+
+`jsonlite::fromJSON(path)`
+
+### from 二进制文件
+
+#### .rda
+
+`load('xxx.rda')`
+
+#### .RDS
+
+`readRDS()`
+
 ### from CSV
 
 #### `data.table::fread()`
 
-
 **<span style="color:red;">对 csv 文件优先使用，读为 data.table</span>**
-
 
 注意两点：
 
@@ -116,7 +148,7 @@ head(copper)
 2. 注意文件编码
 
 ```{r}
-ISO3166 <- fread("./data/ISO-3166.csv", colClasses = list(character = c(4,9,10,11)), encoding = "UTF-8")
+ISO3166 <- fread("./data/ISO-3166.csv", colClasses = list(character = c(4, 9, 10, 11)), encoding = "UTF-8")
 str(ISO3166)
 ```
 
@@ -138,15 +170,6 @@ str(ISO3166)
 - `na = `, 设定缺失值，默认各种 white space[^whiteSpace] 和`NA`都是缺失值
 
 [^whiteSpace]: 如`\n`、`\t`等特殊字符。
-
-### from JSON
-
-`jsonlite::fromJSON(path)`
-
-### from .Rdata
-
-`load('xxx.RData')`
-
 
 
 ### `parse_*()`
@@ -245,10 +268,6 @@ parse_time("20:10:01")
 parse_date("1 janvier 2015", "%d %B %Y", locale = locale("fr"))
 ```
 
-### from RDS
-
-`readRDS()`
-
 ## Output
 
 ### to Console
@@ -275,6 +294,7 @@ r$> print('Hello')
 [1] "Hello"
 ```
 
+
 ### to TXT
 
 `writeLines()`
@@ -285,6 +305,30 @@ r$> print('Hello')
 
 `sink()` 取消文本输出到文件
 
+
+### to JSON
+
+1. `jsonlite::toJSON()`保存为 JSON 字符串
+2. `readr::write_lines(data, path)` 保存为 json 文件
+
+```{r}
+dir.create("./data")
+
+iris %>%
+  head() %>%
+  jsonlite::toJSON() %>%
+  readr::write_lines("./data/iris.json")
+```
+
+### to .rda
+
+`save(obj, file = 'xxx.rda')` 保存一些变量。第一个参数省略时保存所有对象。
+
+`save.image('xxx.rda')` 保存整个工作空间中的所有变量。对于长期连续编程，这非常有用。
+
+### to .RDS
+
+`saveRDS()`	保存单个对象到一个RDS文件
 
 ### to CSV
 
@@ -298,28 +342,3 @@ r$> print('Hello')
 * 它们使用ISO 8601格式来保存日期和日期时间数据，以便这些数据不论在何种环境下都更容易解析
 
 注意，当保存为CSV文件时，列的数据类型信息就丢失了：这使得CSV文件在暂存临时结果时有些不可靠——每次加载时都要重建列类型。
-
-### to JSON
-
-1. `jsonlite::toJSON()`保存为 JSON 字符串
-2. `readr::write_lines(data, path)` 保存为 json 文件
-
-```{r}
-dir.create('./data')
-
-iris %>% head() %>% 
-  jsonlite::toJSON() %>% 
-  readr::write_lines('./data/iris.json')
-```
-
-### to .Rdata
-
-`save(obj, file = 'xxx.Rdata')` 保存一些变量。第一个参数省略时保存所有对象。
-
-`save.image('xxx.Rdata')` 保存整个工作空间中的所有变量。对于长期连续编程，这非常有用。
-
-### to .RDS
-
-`saveRDS()`	保存单个对象到一个RDS文件
-
-

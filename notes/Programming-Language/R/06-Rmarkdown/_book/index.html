@@ -23,7 +23,7 @@
 <meta name="author" content="黄蒙 ✉huangmeng@ucass.edu.cn" />
 
 
-<meta name="date" content="2022-04-11" />
+<meta name="date" content="2022-04-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -244,7 +244,11 @@ Rmarkdown 文本文件的语法
 <li class="chapter" data-level="3.1" data-path="Rmarkdown.html"><a href="Rmarkdown.html#基本语法"><i class="fa fa-check"></i><b>3.1</b> 基本语法<span></span></a></li>
 <li class="chapter" data-level="3.2" data-path="Rmarkdown.html"><a href="Rmarkdown.html#编译pdf"><i class="fa fa-check"></i><b>3.2</b> 编译PDF<span></span></a></li>
 <li class="chapter" data-level="3.3" data-path="Rmarkdown.html"><a href="Rmarkdown.html#r-代码可执行"><i class="fa fa-check"></i><b>3.3</b> R 代码（可执行）<span></span></a></li>
-<li class="chapter" data-level="3.4" data-path="Rmarkdown.html"><a href="Rmarkdown.html#r表格"><i class="fa fa-check"></i><b>3.4</b> R表格<span></span></a></li>
+<li class="chapter" data-level="3.4" data-path="Rmarkdown.html"><a href="Rmarkdown.html#r表格"><i class="fa fa-check"></i><b>3.4</b> R表格<span></span></a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="Rmarkdown.html"><a href="Rmarkdown.html#kableextra-package"><i class="fa fa-check"></i><b>3.4.1</b> kableExtra package<span></span></a></li>
+<li class="chapter" data-level="3.4.2" data-path="Rmarkdown.html"><a href="Rmarkdown.html#brucerprint_table"><i class="fa fa-check"></i><b>3.4.2</b> <code>bruceR::print_table()</code><span></span></a></li>
+</ul></li>
 <li class="chapter" data-level="3.5" data-path="Rmarkdown.html"><a href="Rmarkdown.html#r图"><i class="fa fa-check"></i><b>3.5</b> R图<span></span></a></li>
 <li class="chapter" data-level="3.6" data-path="Rmarkdown.html"><a href="Rmarkdown.html#制表式截面"><i class="fa fa-check"></i><b>3.6</b> 制表式截面<span></span></a>
 <ul>
@@ -311,7 +315,7 @@ Rmarkdown 文本文件的语法
 <div id="header">
 <h1 class="title">Rmarkdown 文本文件的语法</h1>
 <p class="author"><em>黄蒙 ✉<a href="mailto:huangmeng@ucass.edu.cn" class="email">huangmeng@ucass.edu.cn</a></em></p>
-<p class="date"><em>2022-04-11</em></p>
+<p class="date"><em>2022-04-20</em></p>
 <div class="abstract">
 <p class="abstract">Abstract</p>
 <p>随着近年来R语言相关环境的功能越来越丰富，编写包含R代码的文本文件，再通过统一的R环境运算、编译和导出，成为了一种管理文件的新方法。这种方法的好处有：（1）节省了硬盘资源，使多种多样的文件都能以文本的方式保存；（2）使针对原始数据所做的一切整理和分析工作变得可复制，实践了“可重复性研究”的理念；（3）能让作者专注于文件内容和参数调整本身，而把调节格式、修改结果的工作全部交给R并实现自动化。本文通过对markdown, Rmarkdown, bookdown, Xaringan 语法的整理，便利了R文本文件的编写。</p>

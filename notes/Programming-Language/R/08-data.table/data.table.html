@@ -1,0 +1,1263 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Humoon" />
+
+<meta name="date" content="2022-03-31" />
+
+<title>data.table</title>
+
+<script src="libs/header-attrs-2.13/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="libs/bootstrap-3.3.5/css/united.min.css" rel="stylesheet" />
+<script src="libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="libs/navigation-1.1/tabsets.js"></script>
+<script src="libs/navigation-1.1/codefolding.js"></script>
+<script src="libs/navigation-1.1/sourceembed.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; } /* Alert */
+code span.an { color: #008000; } /* Annotation */
+code span.at { } /* Attribute */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #0000ff; } /* ControlFlow */
+code span.ch { color: #008080; } /* Char */
+code span.cn { } /* Constant */
+code span.co { color: #008000; } /* Comment */
+code span.cv { color: #008000; } /* CommentVar */
+code span.do { color: #008000; } /* Documentation */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.im { } /* Import */
+code span.in { color: #008000; } /* Information */
+code span.kw { color: #0000ff; } /* Keyword */
+code span.op { } /* Operator */
+code span.ot { color: #ff4000; } /* Other */
+code span.pp { color: #ff4000; } /* Preprocessor */
+code span.sc { color: #008080; } /* SpecialChar */
+code span.ss { color: #008080; } /* SpecialString */
+code span.st { color: #008080; } /* String */
+code span.va { } /* Variable */
+code span.vs { color: #008080; } /* VerbatimString */
+code span.wa { color: #008000; font-weight: bold; } /* Warning */
+
+.sourceCode .row {
+  width: 100%;
+}
+.sourceCode {
+  overflow-x: auto;
+}
+.code-folding-btn {
+  margin-right: -30px;
+}
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+<style type="text/css">
+#rmd-source-code {
+  display: none;
+}
+</style>
+
+
+<link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+<li role="separator" class="divider"></li>
+<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">data.table</h1>
+<h4 class="author">Humoon</h4>
+<h4 class="date">2022-03-31</h4>
+
+</div>
+
+
+<p><a href="../pdf/cheatsheet-data.table.pdf"><em>data.table cheatsheet.pdf</em></a></p>
+<object data="../pdf/cheatsheet-data.table.pdf" type="application/pdf" width="100%" height="100%">
+</object>
+<p>data.table 是 data.frame 的扩展，兼容 dplyr 包中的函数，被其操作后，返回值仍为 data.table</p>
+<p>故今后凡是操作数据框都可以默认先转换为 data.table. 然后，当需要保留原始数据时，使用 dplyr 系列函数；不需要保留时，使用 data.table 的象牙操作符，追求速度和简洁。</p>
+<div id="创建" class="section level2">
+<h2>创建</h2>
+<div id="直接创建data.table" class="section level3">
+<h3>直接创建data.table</h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>dt <span class="ot">&lt;-</span> <span class="fu">data.table</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">a =</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;A&quot;</span>, <span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>),</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">b =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(dt)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;data.table&quot; &quot;data.frame&quot;</span></span></code></pre></div>
+</div>
+<div id="将-data.frame-转化为-data.table" class="section level3">
+<h3>将 data.frame 转化为 data.table</h3>
+<div id="as.data.table-setdt" class="section level4">
+<h4><code>as.data.table()</code>; <code>setDT()</code></h4>
+<p>前者创建一份拷贝并转换，后者原地转换。</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">a =</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;A&quot;</span>, <span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>),</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">b =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">setDT</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">class</span>()</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;data.table&quot; &quot;data.frame&quot;</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sqldf)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">sqldf.driver =</span> <span class="st">&quot;SQLite&quot;</span>)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>channel <span class="ot">&lt;-</span> <span class="fu">dbConnect</span>(</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">SQLite</span>(),</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">dbname =</span> <span class="st">&quot;C:/Users/Humoonruc/OneDrive/ICT/DataBase/SQLite/trade.db&quot;</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>total <span class="ot">&lt;-</span> <span class="fu">dbReadTable</span>(channel, <span class="st">&quot;total&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>time) <span class="sc">%&gt;%</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">setDT</span>()</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(total)</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;data.table&quot; &quot;data.frame&quot;</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="fu">dbDisconnect</span>(channel)</span></code></pre></div>
+</div>
+<div id="set函数族" class="section level4">
+<h4><code>set*()</code>函数族</h4>
+<p>不复制数据，节省时间</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">a =</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;A&quot;</span>, <span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>),</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">b =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>dt3 <span class="ot">&lt;-</span> <span class="fu">setDT</span>(df, <span class="at">key =</span> <span class="st">&quot;b&quot;</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>df3 <span class="ot">&lt;-</span> <span class="fu">setDF</span>(dt3)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="fu">setnames</span>(total, <span class="st">&quot;trade&quot;</span>, <span class="st">&quot;total&quot;</span>) <span class="co"># 将列名trade改为total</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(total)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    year month export import  total surplus</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1: 2018     1 1994.9 1810.7 3805.6   184.2</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2: 2018     2 1706.4 1383.4 3089.8   323.0</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3: 2018     3 1739.1 1796.6 3535.7   -57.5</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4: 2018     4 1989.5 1726.7 3716.2   262.8</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5: 2018     5 2116.1 1881.8 3997.9   234.3</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6: 2018     6 2156.2 1747.0 3903.2   409.2</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>total[, id <span class="sc">:</span><span class="er">=</span> .I] <span class="co"># .I意为1:.N，这句为total加了一个序号索引列</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="co"># setcolorder() 列的重排序</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="co"># 默认第二个参数是一个列名向量。如果只写出了一部分列，则其他列按照原来的顺序</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="fu">setcolorder</span>(total, <span class="at">neworder =</span> <span class="st">&quot;id&quot;</span>) </span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(total)</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    id year month export import  total surplus</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1:  1 2018     1 1994.9 1810.7 3805.6   184.2</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2:  2 2018     2 1706.4 1383.4 3089.8   323.0</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3:  3 2018     3 1739.1 1796.6 3535.7   -57.5</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4:  4 2018     4 1989.5 1726.7 3716.2   262.8</span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5:  5 2018     5 2116.1 1881.8 3997.9   234.3</span></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6:  6 2018     6 2156.2 1747.0 3903.2   409.2</span></span></code></pre></div>
+<table>
+<colgroup>
+<col width="54%" />
+<col width="45%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>set*()</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>setDT()</code>, <code>setDF()</code></td>
+<td></td>
+</tr>
+<tr class="even">
+<td><code>setattr()</code> <code>setnames()</code></td>
+<td>Set attributes of objects by reference</td>
+</tr>
+<tr class="odd">
+<td><code>setkey()</code> <code>setkeyv()</code> <code>setindex()</code> <code>setindexv()</code> <code>key()</code> <code>indices()</code> <code>haskey()</code></td>
+<td>Create key on a data.table</td>
+</tr>
+<tr class="even">
+<td><code>setcolorder()</code></td>
+<td>Fast column reordering of a data.table by reference</td>
+</tr>
+<tr class="odd">
+<td><code>setorder(dt, a, -b)</code> <code>setorderv()</code></td>
+<td>Fast row reordering of a data.table by reference</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="读取文件" class="section level3">
+<h3>读取文件</h3>
+<ul>
+<li><p><code>fread()</code>可以将能直接将.csv .txt 等格式的文件读为 data.table 格式</p></li>
+<li><p><code>fwrite()</code>可以写 data.table 数据。</p></li>
+</ul>
+<p>在处理大数据时，它们的速度非常快。<strong>建议读写文件统一使用这两个函数</strong></p>
+</div>
+</div>
+<div id="data.table-查询语法" class="section level2">
+<h2>data.table 查询语法</h2>
+<div id="语法" class="section level3">
+<h3>语法</h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>dt[i, j, by <span class="ot">=</span> <span class="fu">list</span>(), ...]</span></code></pre></div>
+<p>很像 SQL 语句</p>
+<ol style="list-style-type: decimal">
+<li><code>i</code>: Subset 行（就像 WHERE 子句）</li>
+<li><code>by</code>/<code>keyby</code><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> : 分组（就像 GROUP BY 子句）</li>
+<li><code>j</code>: Subset<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> 或 Manipulate 列 （就像 SELECT 子句），甚至可以是一个匿名函数</li>
+</ol>
+</div>
+<div id="特殊符号" class="section level3">
+<h3>特殊符号</h3>
+<table>
+<thead>
+<tr class="header">
+<th>特殊符号</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>.()</td>
+<td>代替list()</td>
+</tr>
+<tr class="even">
+<td>.N</td>
+<td>总行数</td>
+</tr>
+<tr class="odd">
+<td>.SD</td>
+<td>代表分组后每个组的数据框</td>
+</tr>
+<tr class="even">
+<td>.SDcols</td>
+<td>在 by 处，与.SD连用，用来选择哪些列包含在.SD中</td>
+</tr>
+<tr class="odd">
+<td>.BY</td>
+<td>包含所有by分组变量的list</td>
+</tr>
+<tr class="even">
+<td>.I</td>
+<td>整数向量 1:.N</td>
+</tr>
+<tr class="odd">
+<td>.GRP</td>
+<td>分组索引</td>
+</tr>
+<tr class="even">
+<td>.NGRP</td>
+<td>分组数</td>
+</tr>
+<tr class="odd">
+<td>.EACHI</td>
+<td>用于by/keyby = .EACHI，表示根据i表达式的每一行分组</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="链式操作" class="section level3">
+<h3>链式操作</h3>
+<p><code>DT[...][...][...]</code></p>
+<p>或写为：</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>DT[</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  ...</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>][</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  ...</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>][</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  ...</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>]</span></code></pre></div>
+</div>
+<div id="与管道配合的链式操作" class="section level3">
+<h3>与管道<code>%&gt;%</code>配合的链式操作</h3>
+<p>由于 R 中所有的操作符都是函数，因此可以将`[`作为一个函数，贯穿于<code>%&gt;%</code>中，获得代码风格的一致性。</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span> </span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as.data.table</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">[</span><span class="st">`</span>(, .(<span class="at">mpg =</span> <span class="fu">mean</span>(mpg)), <span class="at">by =</span> cyl) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">[</span><span class="st">`</span>(.N,) </span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    cyl  mpg</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1:   8 15.1</span></span></code></pre></div>
+</div>
+<div id="subset-rows-using-i" class="section level3">
+<h3>Subset rows using i</h3>
+<p>选择行可以接受的运算符除了常用的逻辑运算符，还包括 <code>%like%</code> (匹配模式，有点像正则表达式) 和 <code>%between%</code></p>
+<p>data.table[] 方括号中只有一个参数时，默认为 i 参数，表示对行操作。</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>dt3 <span class="ot">&lt;-</span> <span class="fu">data.table</span>(</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">a =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">b =</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;A&quot;</span>, <span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>dt3[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, ]</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    a b</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1: 1 A</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2: 2 B</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co"># 选出最后一行</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>dt3[.N]</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    a b</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1: 6 B</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="co"># 选出第一行和最后一行</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>dt3[<span class="fu">c</span>(<span class="dv">1</span>, .N)]</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    a b</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1: 1 A</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2: 6 B</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="co"># 选出满足特定条件的行</span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>dt3[b <span class="sc">==</span> <span class="st">&quot;A&quot;</span>, ]</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    a b</span></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1: 1 A</span></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2: 4 A</span></span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3: 5 A</span></span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a><span class="co"># 行排序，负号表示降序</span></span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>total[<span class="fu">order</span>(<span class="sc">-</span>month)] <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    id year month export import  total surplus</span></span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1: 12 2018    12 2212.5 1641.9 3854.4   570.6</span></span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2: 11 2018    11 2243.3 1824.7 4068.0   418.6</span></span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3: 23 2019    11 2217.4 1830.1 4047.5   387.3</span></span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4: 10 2018    10 2148.0 1816.7 3964.7   331.3</span></span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5: 22 2019    10 2129.3 1701.2 3830.5   428.1</span></span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6:  9 2018     9 2254.3 1949.9 4204.2   304.4</span></span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a>total <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span>
+<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    id year month export import  total surplus</span></span>
+<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1:  1 2018     1 1994.9 1810.7 3805.6   184.2</span></span>
+<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2:  2 2018     2 1706.4 1383.4 3089.8   323.0</span></span>
+<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3:  3 2018     3 1739.1 1796.6 3535.7   -57.5</span></span>
+<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4:  4 2018     4 1989.5 1726.7 3716.2   262.8</span></span>
+<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5:  5 2018     5 2116.1 1881.8 3997.9   234.3</span></span>
+<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6:  6 2018     6 2156.2 1747.0 3903.2   409.2</span></span></code></pre></div>
+</div>
+<div id="manipulate-columns-with-j" class="section level3">
+<h3>Manipulate columns with j</h3>
+<div id="subset" class="section level4">
+<h4>subset</h4>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>dt[, <span class="fu">c</span>(<span class="dv">2</span>)] <span class="co"># 提取第2列</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    b</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1: 1</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2: 2</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3: 3</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4: 4</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5: 5</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6: 6</span></span></code></pre></div>
+</div>
+<div id="象牙操作符-3" class="section level4">
+<h4>象牙操作符 <code>:=</code><a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a></h4>
+<p>这个操作符有点像 SQL 语句中的 <code>AS</code> 关键词，但左为列名，右为表达式。</p>
+<ul>
+<li>给data.table对象增加一列，<code>data.table[, colname := var1]</code></li>
+<li>给data.table对象删除一列，就是给这列赋值为空，<code>data.table[, colname := NULL]</code></li>
+<li>修改data.table对象的值，通过索引定位后进行值的替换，<code>data.table[condition, colname := value]</code></li>
+</ul>
+<p>单个列名不用加引号，多个列名组成的向量，必须加引号，如<code>c('d1', 'd2')</code></p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>dt <span class="ot">&lt;-</span> <span class="fu">data.table</span>(</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">a =</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;A&quot;</span>, <span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>),</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">b =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 1列，不必加引号</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>dt[, c <span class="sc">:</span><span class="er">=</span> b <span class="sc">+</span> <span class="dv">2</span>] <span class="co"># (b + 2) AS c</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>dt</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    a b c</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1: A 1 3</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2: B 2 4</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3: C 3 5</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4: A 4 6</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5: A 5 7</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6: B 6 8</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="co"># 增加2列，第1种写法</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>dt[, <span class="fu">c</span>(<span class="st">&#39;d1&#39;</span>, <span class="st">&#39;d2&#39;</span>) <span class="sc">:</span><span class="er">=</span> <span class="fu">list</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, <span class="dv">2</span><span class="sc">:</span><span class="dv">7</span>)] <span class="co"># := 左边是一个name向量，右边是一个value列表</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>dt</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    a b c d1 d2</span></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1: A 1 3  1  2</span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2: B 2 4  2  3</span></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3: C 3 5  3  4</span></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4: A 4 6  4  5</span></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5: A 5 7  5  6</span></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6: B 6 8  6  7</span></span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a><span class="co"># 增加2列，第2种写法</span></span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>dt[,<span class="st">`</span><span class="at">:=</span><span class="st">`</span>(<span class="at">c1 =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, <span class="at">c2 =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">7</span>)] <span class="co"># := 很像一个update函数</span></span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>dt</span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    a b c d1 d2 c1 c2</span></span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1: A 1 3  1  2  1  2</span></span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2: B 2 4  2  3  2  3</span></span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3: C 3 5  3  4  3  4</span></span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4: A 4 6  4  5  4  5</span></span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5: A 5 7  5  6  5  6</span></span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6: B 6 8  6  7  6  7</span></span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a><span class="co"># 删除c1列</span></span>
+<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a>dt[, c1 <span class="sc">:</span><span class="er">=</span> <span class="cn">NULL</span>]</span>
+<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a>dt</span>
+<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    a b c d1 d2 c2</span></span>
+<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1: A 1 3  1  2  2</span></span>
+<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2: B 2 4  2  3  3</span></span>
+<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3: C 3 5  3  4  4</span></span>
+<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4: A 4 6  4  5  5</span></span>
+<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5: A 5 7  5  6  6</span></span>
+<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6: B 6 8  6  7  7</span></span>
+<span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a><span class="co"># 同时删除d1,d2列</span></span>
+<span id="cb9-51"><a href="#cb9-51" aria-hidden="true" tabindex="-1"></a>dt[, <span class="fu">c</span>(<span class="st">&quot;d1&quot;</span>, <span class="st">&quot;d2&quot;</span>) <span class="sc">:</span><span class="er">=</span> <span class="cn">NULL</span>]</span>
+<span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a>dt</span>
+<span id="cb9-53"><a href="#cb9-53" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    a b c c2</span></span>
+<span id="cb9-54"><a href="#cb9-54" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1: A 1 3  2</span></span>
+<span id="cb9-55"><a href="#cb9-55" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2: B 2 4  3</span></span>
+<span id="cb9-56"><a href="#cb9-56" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3: C 3 5  4</span></span>
+<span id="cb9-57"><a href="#cb9-57" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4: A 4 6  5</span></span>
+<span id="cb9-58"><a href="#cb9-58" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5: A 5 7  6</span></span>
+<span id="cb9-59"><a href="#cb9-59" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6: B 6 8  7</span></span>
+<span id="cb9-60"><a href="#cb9-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-61"><a href="#cb9-61" aria-hidden="true" tabindex="-1"></a><span class="co"># 给b赋值为30</span></span>
+<span id="cb9-62"><a href="#cb9-62" aria-hidden="true" tabindex="-1"></a>dt[, b <span class="sc">:</span><span class="er">=</span> <span class="dv">30</span>]</span>
+<span id="cb9-63"><a href="#cb9-63" aria-hidden="true" tabindex="-1"></a>dt</span>
+<span id="cb9-64"><a href="#cb9-64" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    a  b c c2</span></span>
+<span id="cb9-65"><a href="#cb9-65" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1: A 30 3  2</span></span>
+<span id="cb9-66"><a href="#cb9-66" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2: B 30 4  3</span></span>
+<span id="cb9-67"><a href="#cb9-67" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3: C 30 5  4</span></span>
+<span id="cb9-68"><a href="#cb9-68" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4: A 30 6  5</span></span>
+<span id="cb9-69"><a href="#cb9-69" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5: A 30 7  6</span></span>
+<span id="cb9-70"><a href="#cb9-70" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6: B 30 8  7</span></span>
+<span id="cb9-71"><a href="#cb9-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-72"><a href="#cb9-72" aria-hidden="true" tabindex="-1"></a><span class="co"># 对a列值为B、c2列值大于3的行，其b列赋值为100</span></span>
+<span id="cb9-73"><a href="#cb9-73" aria-hidden="true" tabindex="-1"></a>dt[a <span class="sc">==</span> <span class="st">&quot;B&quot;</span> <span class="sc">&amp;</span> c2 <span class="sc">&gt;</span> <span class="dv">3</span>, b <span class="sc">:</span><span class="er">=</span> <span class="dv">100</span>]</span>
+<span id="cb9-74"><a href="#cb9-74" aria-hidden="true" tabindex="-1"></a>dt</span>
+<span id="cb9-75"><a href="#cb9-75" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    a   b c c2</span></span>
+<span id="cb9-76"><a href="#cb9-76" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1: A  30 3  2</span></span>
+<span id="cb9-77"><a href="#cb9-77" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2: B  30 4  3</span></span>
+<span id="cb9-78"><a href="#cb9-78" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3: C  30 5  4</span></span>
+<span id="cb9-79"><a href="#cb9-79" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4: A  30 6  5</span></span>
+<span id="cb9-80"><a href="#cb9-80" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5: A  30 7  6</span></span>
+<span id="cb9-81"><a href="#cb9-81" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6: B 100 8  7</span></span>
+<span id="cb9-82"><a href="#cb9-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-83"><a href="#cb9-83" aria-hidden="true" tabindex="-1"></a><span class="co"># 另一种写法</span></span>
+<span id="cb9-84"><a href="#cb9-84" aria-hidden="true" tabindex="-1"></a>dt[, b <span class="sc">:</span><span class="er">=</span> <span class="fu">ifelse</span>(a <span class="sc">==</span> <span class="st">&quot;B&quot;</span> <span class="sc">&amp;</span> c2 <span class="sc">&gt;</span> <span class="dv">3</span>, <span class="dv">50</span>, b)]</span>
+<span id="cb9-85"><a href="#cb9-85" aria-hidden="true" tabindex="-1"></a>dt</span>
+<span id="cb9-86"><a href="#cb9-86" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    a  b c c2</span></span>
+<span id="cb9-87"><a href="#cb9-87" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1: A 30 3  2</span></span>
+<span id="cb9-88"><a href="#cb9-88" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2: B 30 4  3</span></span>
+<span id="cb9-89"><a href="#cb9-89" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3: C 30 5  4</span></span>
+<span id="cb9-90"><a href="#cb9-90" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4: A 30 6  5</span></span>
+<span id="cb9-91"><a href="#cb9-91" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5: A 30 7  6</span></span>
+<span id="cb9-92"><a href="#cb9-92" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6: B 50 8  7</span></span>
+<span id="cb9-93"><a href="#cb9-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-94"><a href="#cb9-94" aria-hidden="true" tabindex="-1"></a><span class="co"># 更新列</span></span>
+<span id="cb9-95"><a href="#cb9-95" aria-hidden="true" tabindex="-1"></a>dt[, b <span class="sc">:</span><span class="er">=</span> <span class="fu">as.character</span>(b)]</span>
+<span id="cb9-96"><a href="#cb9-96" aria-hidden="true" tabindex="-1"></a>dt</span>
+<span id="cb9-97"><a href="#cb9-97" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    a  b c c2</span></span>
+<span id="cb9-98"><a href="#cb9-98" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1: A 30 3  2</span></span>
+<span id="cb9-99"><a href="#cb9-99" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2: B 30 4  3</span></span>
+<span id="cb9-100"><a href="#cb9-100" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3: C 30 5  4</span></span>
+<span id="cb9-101"><a href="#cb9-101" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4: A 30 6  5</span></span>
+<span id="cb9-102"><a href="#cb9-102" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5: A 30 7  6</span></span>
+<span id="cb9-103"><a href="#cb9-103" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6: B 50 8  7</span></span></code></pre></div>
+</div>
+<div id="用而非象牙操作符" class="section level4">
+<h4>用<code>=</code>而非象牙操作符</h4>
+<p>不是在原来的数据框基础上改动，而是新创建一个数据框。</p>
+<p>此时，j 中的列不能写成向量，而要写成列表，用<code>.(列名...)</code>或<code>list(列名...)</code></p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>total[, .(year, month, export, import, <span class="at">ratio =</span> export <span class="sc">/</span> import)]</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     year month export import     ratio</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1: 2018     1 1994.9 1810.7 1.1017286</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2: 2018     2 1706.4 1383.4 1.2334827</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3: 2018     3 1739.1 1796.6 0.9679951</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4: 2018     4 1989.5 1726.7 1.1521978</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5: 2018     5 2116.1 1881.8 1.1245084</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6: 2018     6 2156.2 1747.0 1.2342301</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7: 2018     7 2144.2 1869.8 1.1467537</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8: 2018     8 2169.6 1907.1 1.1376435</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9: 2018     9 2254.3 1949.9 1.1561106</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10: 2018    10 2148.0 1816.7 1.1823636</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 11: 2018    11 2243.3 1824.7 1.2294076</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 12: 2018    12 2212.5 1641.9 1.3475242</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 13: 2019     1 2179.7 1788.0 1.2190716</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 14: 2019     2 1351.2 1317.0 1.0259681</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 15: 2019     3 1979.0 1657.3 1.1941109</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 16: 2019     4 1934.8 1797.8 1.0762042</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 17: 2019     5 2138.5 1721.2 1.2424471</span></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 18: 2019     6 2128.4 1618.6 1.3149635</span></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 19: 2019     7 2215.3 1764.8 1.2552697</span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 20: 2019     8 2148.0 1799.7 1.1935323</span></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 21: 2019     9 2181.2 1784.7 1.2221662</span></span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 22: 2019    10 2129.3 1701.2 1.2516459</span></span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 23: 2019    11 2217.4 1830.1 1.2116278</span></span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     year month export import     ratio</span></span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>total</span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     id year month export import  total surplus</span></span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1:  1 2018     1 1994.9 1810.7 3805.6   184.2</span></span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2:  2 2018     2 1706.4 1383.4 3089.8   323.0</span></span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3:  3 2018     3 1739.1 1796.6 3535.7   -57.5</span></span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4:  4 2018     4 1989.5 1726.7 3716.2   262.8</span></span>
+<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5:  5 2018     5 2116.1 1881.8 3997.9   234.3</span></span>
+<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6:  6 2018     6 2156.2 1747.0 3903.2   409.2</span></span>
+<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7:  7 2018     7 2144.2 1869.8 4014.0   274.4</span></span>
+<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8:  8 2018     8 2169.6 1907.1 4076.7   262.5</span></span>
+<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9:  9 2018     9 2254.3 1949.9 4204.2   304.4</span></span>
+<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10: 10 2018    10 2148.0 1816.7 3964.7   331.3</span></span>
+<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 11: 11 2018    11 2243.3 1824.7 4068.0   418.6</span></span>
+<span id="cb10-41"><a href="#cb10-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 12: 12 2018    12 2212.5 1641.9 3854.4   570.6</span></span>
+<span id="cb10-42"><a href="#cb10-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 13: 13 2019     1 2179.7 1788.0 3967.7   391.7</span></span>
+<span id="cb10-43"><a href="#cb10-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 14: 14 2019     2 1351.2 1317.0 2668.2    34.2</span></span>
+<span id="cb10-44"><a href="#cb10-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 15: 15 2019     3 1979.0 1657.3 3636.3   321.7</span></span>
+<span id="cb10-45"><a href="#cb10-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 16: 16 2019     4 1934.8 1797.8 3732.6   137.0</span></span>
+<span id="cb10-46"><a href="#cb10-46" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 17: 17 2019     5 2138.5 1721.2 3859.7   417.3</span></span>
+<span id="cb10-47"><a href="#cb10-47" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 18: 18 2019     6 2128.4 1618.6 3747.0   509.8</span></span>
+<span id="cb10-48"><a href="#cb10-48" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 19: 19 2019     7 2215.3 1764.8 3980.1   450.5</span></span>
+<span id="cb10-49"><a href="#cb10-49" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 20: 20 2019     8 2148.0 1799.7 3947.7   348.3</span></span>
+<span id="cb10-50"><a href="#cb10-50" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 21: 21 2019     9 2181.2 1784.7 3965.9   396.5</span></span>
+<span id="cb10-51"><a href="#cb10-51" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 22: 22 2019    10 2129.3 1701.2 3830.5   428.1</span></span>
+<span id="cb10-52"><a href="#cb10-52" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 23: 23 2019    11 2217.4 1830.1 4047.5   387.3</span></span>
+<span id="cb10-53"><a href="#cb10-53" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     id year month export import  total surplus</span></span></code></pre></div>
+</div>
+<div id="匿名函数" class="section level4">
+<h4>匿名函数</h4>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;diamonds&quot;</span>, <span class="at">package =</span> <span class="st">&quot;ggplot2&quot;</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">setDT</span>(diamonds)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 按 cut 分组做回归</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>diamonds[,</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  {</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    m <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">log</span>(price) <span class="sc">~</span> carat <span class="sc">+</span> depth)</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as.list</span>(<span class="fu">coef</span>(m))</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  },</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  keyby <span class="ot">=</span> cut</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          cut (Intercept)    carat        depth</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1:      Fair    7.730010 1.264588 -0.014982439</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2:      Good    7.077469 1.973600 -0.014601101</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3: Very Good    6.293642 2.087957 -0.002890208</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4:   Premium    5.934310 1.852778  0.005939651</span></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5:     Ideal    8.495409 2.125605 -0.038080022</span></span></code></pre></div>
+</div>
+</div>
+<div id="group-according-to-by" class="section level3">
+<h3>Group according to by</h3>
+<p>by 分组 keyby 不仅分组且立刻定义键，并按照键对行排序</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>dt <span class="ot">&lt;-</span> <span class="fu">data.table</span>(</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">a =</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;A&quot;</span>, <span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>),</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">b =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 对整个b列数据求和</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>dt[, <span class="fu">sum</span>(b)]</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 21</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 按a列分组，对b列按分组求和，运算结果自动命名为 V1</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>dt[, <span class="fu">sum</span>(b), by <span class="ot">=</span> a]</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    a V1</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1: A 10</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2: B  8</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3: C  3</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="co"># 提取每一组的第一行，组成新数据框</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>dt[, .SD[<span class="dv">1</span>], by <span class="ot">=</span> a]</span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    a b</span></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1: A 1</span></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2: B 2</span></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3: C 3</span></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a><span class="co"># 提取每一组的最后一行，组成新数据框</span></span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>dt[, .SD[.N], by <span class="ot">=</span> a]</span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    a b</span></span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1: A 5</span></span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2: B 6</span></span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3: C 3</span></span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a><span class="co"># 先分组，再显示每组行数</span></span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a>total[, .N, by <span class="ot">=</span> year] </span>
+<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    year  N</span></span>
+<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1: 2018 12</span></span>
+<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2: 2019 11</span></span>
+<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a>total[, .N, by <span class="ot">=</span> .(year, month)] <span class="co"># year 和 month 是有先后顺序的</span></span>
+<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     year month N</span></span>
+<span id="cb12-39"><a href="#cb12-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1: 2018     1 1</span></span>
+<span id="cb12-40"><a href="#cb12-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2: 2018     2 1</span></span>
+<span id="cb12-41"><a href="#cb12-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3: 2018     3 1</span></span>
+<span id="cb12-42"><a href="#cb12-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4: 2018     4 1</span></span>
+<span id="cb12-43"><a href="#cb12-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5: 2018     5 1</span></span>
+<span id="cb12-44"><a href="#cb12-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6: 2018     6 1</span></span>
+<span id="cb12-45"><a href="#cb12-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7: 2018     7 1</span></span>
+<span id="cb12-46"><a href="#cb12-46" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8: 2018     8 1</span></span>
+<span id="cb12-47"><a href="#cb12-47" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9: 2018     9 1</span></span>
+<span id="cb12-48"><a href="#cb12-48" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10: 2018    10 1</span></span>
+<span id="cb12-49"><a href="#cb12-49" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 11: 2018    11 1</span></span>
+<span id="cb12-50"><a href="#cb12-50" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 12: 2018    12 1</span></span>
+<span id="cb12-51"><a href="#cb12-51" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 13: 2019     1 1</span></span>
+<span id="cb12-52"><a href="#cb12-52" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 14: 2019     2 1</span></span>
+<span id="cb12-53"><a href="#cb12-53" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 15: 2019     3 1</span></span>
+<span id="cb12-54"><a href="#cb12-54" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 16: 2019     4 1</span></span>
+<span id="cb12-55"><a href="#cb12-55" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 17: 2019     5 1</span></span>
+<span id="cb12-56"><a href="#cb12-56" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 18: 2019     6 1</span></span>
+<span id="cb12-57"><a href="#cb12-57" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 19: 2019     7 1</span></span>
+<span id="cb12-58"><a href="#cb12-58" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 20: 2019     8 1</span></span>
+<span id="cb12-59"><a href="#cb12-59" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 21: 2019     9 1</span></span>
+<span id="cb12-60"><a href="#cb12-60" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 22: 2019    10 1</span></span>
+<span id="cb12-61"><a href="#cb12-61" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 23: 2019    11 1</span></span>
+<span id="cb12-62"><a href="#cb12-62" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     year month N</span></span>
+<span id="cb12-63"><a href="#cb12-63" aria-hidden="true" tabindex="-1"></a>total[, .(<span class="at">avg_ex =</span> <span class="fu">mean</span>(export)), by <span class="ot">=</span> year] <span class="co"># 即使只有一列，也要用列表</span></span>
+<span id="cb12-64"><a href="#cb12-64" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    year   avg_ex</span></span>
+<span id="cb12-65"><a href="#cb12-65" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1: 2018 2072.842</span></span>
+<span id="cb12-66"><a href="#cb12-66" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2: 2019 2054.800</span></span></code></pre></div>
+</div>
+</div>
+<div id="独立辅助函数" class="section level2">
+<h2>独立辅助函数</h2>
+<div id="行排序" class="section level3">
+<h3>行排序</h3>
+<p><code>setorder(dt, a, -b)</code> 重新排列行，先a按升序，再b按降序</p>
+</div>
+<div id="行去重" class="section level3">
+<h3>行去重</h3>
+<p><code>unique(dt, by = c("a","b"))</code> 检查by的列，提取不重复的行</p>
+<p><code>uniqueN(dt, by = c("a","b"))</code> 检查by的列，计算每个不重复的行出现了多少次</p>
+</div>
+<div id="列重命名" class="section level3">
+<h3>列重命名</h3>
+<p><code>setnames(dt, c("a","b"), c("x","y")</code> 列重命名</p>
+</div>
+<div id="提前和滞后-lead-and-lag" class="section level3">
+<h3>提前和滞后 lead and lag</h3>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>dt[, c <span class="sc">:</span><span class="er">=</span> <span class="fu">shift</span>(a, <span class="dv">1</span>)] <span class="co"># 默认 lag</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>dt</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    a b    c</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1: A 1 &lt;NA&gt;</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2: B 2    A</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3: C 3    B</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4: A 4    C</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5: A 5    A</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6: B 6    A</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>dt[, c <span class="sc">:</span><span class="er">=</span> <span class="fu">shift</span>(a, <span class="dv">1</span>, <span class="at">type =</span> <span class="st">&quot;lead&quot;</span>)]</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>dt</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    a b    c</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1: A 1    B</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2: B 2    C</span></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3: C 3    A</span></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4: A 4    A</span></span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5: A 5    B</span></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6: B 6 &lt;NA&gt;</span></span></code></pre></div>
+<p>这样可以很容易地加入提前或滞后列，进行同比增长率等计算</p>
+</div>
+<div id="遍历操作各列" class="section level3">
+<h3>遍历操作各列</h3>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>dt <span class="ot">&lt;-</span> <span class="fu">data.table</span>(<span class="at">a =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>), <span class="at">b =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>))</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 遍历a和b两列，都求平均值</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>dt[, <span class="fu">map</span>(.SD, mean), .SDcols <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>)]</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    a b</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1: 2 5</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>cols <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>)</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 遍历 cols 各列，求平均值，且赋给新加入的a_m列</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>dt[, <span class="fu">str_c</span>(cols, <span class="st">&quot;_m&quot;</span>) <span class="sc">:</span><span class="er">=</span> <span class="fu">map</span>(.SD, mean), .SDcols <span class="ot">=</span> cols]</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>dt</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    a b a_m b_m</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1: 1 4   2   5</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2: 2 5   2   5</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3: 3 6   2   5</span></span></code></pre></div>
+</div>
+</div>
+<div id="连接操作" class="section level2">
+<h2>连接操作</h2>
+<div id="键" class="section level3">
+<h3>键</h3>
+<p><code>setkey(d1, v1, v3, ...)</code></p>
+<p>将某些列定义为 keys后，就可以通过键选择行，以及进行关系数据连接，比无键时快170倍。同时，可以用 mult 参数对查询结果增加过滤条件，使代码更高效。</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>dt <span class="ot">&lt;-</span> <span class="fu">data.table</span>(<span class="at">a =</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;A&quot;</span>, <span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>),</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">b =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 设置a列为主键</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="fu">setkey</span>(dt, a)</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="co"># setkeyv(dt, &#39;a&#39;) 函数仅接受字符串作为第二个参数</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="fu">key</span>(dt)</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;a&quot;</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 打印dt对象，发现数据已经按照a列字母对应ASCII码值进行了排序。</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>dt</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    a b</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1: A 1</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2: A 4</span></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3: A 5</span></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4: B 2</span></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5: B 6</span></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6: C 3</span></span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a><span class="co"># 取a列中值为B的行，设置主键后可省略`a==`</span></span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>dt[<span class="st">&quot;B&quot;</span>]</span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    a b</span></span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1: B 2</span></span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2: B 6</span></span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a><span class="co"># 取a列中值为B的行，并保留查询结果的第一行</span></span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a>dt[<span class="st">&quot;B&quot;</span>, mult <span class="ot">=</span> <span class="st">&quot;first&quot;</span>]</span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    a b</span></span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1: B 2</span></span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a><span class="co"># 取a列中值为B的行，并保留查询结果的最后一行</span></span>
+<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a>dt[<span class="st">&quot;B&quot;</span>, mult <span class="ot">=</span> <span class="st">&quot;last&quot;</span>]</span>
+<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    a b</span></span>
+<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1: B 6</span></span>
+<span id="cb15-35"><a href="#cb15-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-36"><a href="#cb15-36" aria-hidden="true" tabindex="-1"></a><span class="co"># 取a列中值为b的行，没有数据则为NA</span></span>
+<span id="cb15-37"><a href="#cb15-37" aria-hidden="true" tabindex="-1"></a>dt[<span class="st">&quot;b&quot;</span>]</span>
+<span id="cb15-38"><a href="#cb15-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    a  b</span></span>
+<span id="cb15-39"><a href="#cb15-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1: b NA</span></span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setkey</span>(total, year, month)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>total[.(<span class="dv">2019</span>, <span class="dv">3</span>)] <span class="co"># 省略了 year == 2019 &amp; month == 3</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    id year month export import  total surplus</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1: 15 2019     3   1979 1657.3 3636.3   321.7</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>total[.(<span class="dv">2019</span>)] <span class="co"># 省略了 year == 2019，可以只根据一列 subset</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     id year month export import  total surplus</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1: 13 2019     1 2179.7 1788.0 3967.7   391.7</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2: 14 2019     2 1351.2 1317.0 2668.2    34.2</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3: 15 2019     3 1979.0 1657.3 3636.3   321.7</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4: 16 2019     4 1934.8 1797.8 3732.6   137.0</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5: 17 2019     5 2138.5 1721.2 3859.7   417.3</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6: 18 2019     6 2128.4 1618.6 3747.0   509.8</span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7: 19 2019     7 2215.3 1764.8 3980.1   450.5</span></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8: 20 2019     8 2148.0 1799.7 3947.7   348.3</span></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9: 21 2019     9 2181.2 1784.7 3965.9   396.5</span></span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10: 22 2019    10 2129.3 1701.2 3830.5   428.1</span></span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 11: 23 2019    11 2217.4 1830.1 4047.5   387.3</span></span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a><span class="co"># 不能写total[list(3)]，得不出有意义的结果</span></span></code></pre></div>
+</div>
+<div id="join" class="section level3">
+<h3>Join</h3>
+<p>基本语法为<code>dt1[dt2, on = .(b = y)]</code>，其中b为dt1的列，y为dt2的列</p>
+<ul>
+<li><p>若连个表都定义了 key, 第二个参数不用填</p></li>
+<li><p>若没有定义key，…要写 on = “commonColumn” 或 by.dt1 = “c1”, by.dt2 = “c2”</p></li>
+</ul>
+<p>例：学生考试的场景。按照ER设计方法，我们通常会按照实体进行数据划分。这里存在2个实体，一个是学生，一个是成绩。学生实体包括学生姓名等基本资料，而成绩实体包括考试的科目和成绩。通过设置两个主键，对2个数据集进行连接。</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 6个学生</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>student <span class="ot">&lt;-</span> <span class="fu">data.table</span>(</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>,</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">name =</span> <span class="fu">c</span>(<span class="st">&quot;Dan&quot;</span>, <span class="st">&quot;Mike&quot;</span>, <span class="st">&quot;Ann&quot;</span>, <span class="st">&quot;Yang&quot;</span>, <span class="st">&quot;Li&quot;</span>, <span class="st">&quot;Kate&quot;</span>)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>student</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    id name</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1:  1  Dan</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2:  2 Mike</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3:  3  Ann</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4:  4 Yang</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5:  5   Li</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6:  6 Kate</span></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a><span class="co"># 分别参加A和B两门考试</span></span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>score <span class="ot">&lt;-</span> <span class="fu">data.table</span>(</span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>, <span class="at">stuId =</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, <span class="dv">2</span>),</span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">score =</span> <span class="fu">runif</span>(<span class="dv">12</span>, <span class="dv">60</span>, <span class="dv">99</span>),</span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">course =</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">&quot;A&quot;</span>, <span class="dv">6</span>), <span class="fu">rep</span>(<span class="st">&quot;B&quot;</span>, <span class="dv">6</span>))</span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>score</span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     id stuId    score course</span></span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1:  1     1 89.23417      A</span></span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2:  2     2 60.88096      A</span></span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3:  3     3 74.37149      A</span></span>
+<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4:  4     4 70.25552      A</span></span>
+<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5:  5     5 89.04047      A</span></span>
+<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6:  6     6 90.60390      A</span></span>
+<span id="cb17-29"><a href="#cb17-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7:  7     1 78.00718      B</span></span>
+<span id="cb17-30"><a href="#cb17-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8:  8     2 65.72199      B</span></span>
+<span id="cb17-31"><a href="#cb17-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9:  9     3 61.33184      B</span></span>
+<span id="cb17-32"><a href="#cb17-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10: 10     4 97.92023      B</span></span>
+<span id="cb17-33"><a href="#cb17-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 11: 11     5 81.57589      B</span></span>
+<span id="cb17-34"><a href="#cb17-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 12: 12     6 96.84834      B</span></span>
+<span id="cb17-35"><a href="#cb17-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-36"><a href="#cb17-36" aria-hidden="true" tabindex="-1"></a><span class="co"># 设置student数据集的key</span></span>
+<span id="cb17-37"><a href="#cb17-37" aria-hidden="true" tabindex="-1"></a><span class="fu">setkey</span>(student, <span class="st">&quot;id&quot;</span>)</span>
+<span id="cb17-38"><a href="#cb17-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-39"><a href="#cb17-39" aria-hidden="true" tabindex="-1"></a><span class="co"># 设置score数据集的key</span></span>
+<span id="cb17-40"><a href="#cb17-40" aria-hidden="true" tabindex="-1"></a><span class="fu">setkey</span>(score, <span class="st">&quot;stuId&quot;</span>)</span>
+<span id="cb17-41"><a href="#cb17-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-42"><a href="#cb17-42" aria-hidden="true" tabindex="-1"></a><span class="co"># 连接</span></span>
+<span id="cb17-43"><a href="#cb17-43" aria-hidden="true" tabindex="-1"></a>student[score, nomatch <span class="ot">=</span> <span class="cn">NA</span>, mult <span class="ot">=</span> <span class="st">&quot;all&quot;</span>]</span>
+<span id="cb17-44"><a href="#cb17-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     id name i.id    score course</span></span>
+<span id="cb17-45"><a href="#cb17-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1:  1  Dan    1 89.23417      A</span></span>
+<span id="cb17-46"><a href="#cb17-46" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2:  1  Dan    7 78.00718      B</span></span>
+<span id="cb17-47"><a href="#cb17-47" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3:  2 Mike    2 60.88096      A</span></span>
+<span id="cb17-48"><a href="#cb17-48" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4:  2 Mike    8 65.72199      B</span></span>
+<span id="cb17-49"><a href="#cb17-49" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5:  3  Ann    3 74.37149      A</span></span>
+<span id="cb17-50"><a href="#cb17-50" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6:  3  Ann    9 61.33184      B</span></span>
+<span id="cb17-51"><a href="#cb17-51" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7:  4 Yang    4 70.25552      A</span></span>
+<span id="cb17-52"><a href="#cb17-52" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8:  4 Yang   10 97.92023      B</span></span>
+<span id="cb17-53"><a href="#cb17-53" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9:  5   Li    5 89.04047      A</span></span>
+<span id="cb17-54"><a href="#cb17-54" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10:  5   Li   11 81.57589      B</span></span>
+<span id="cb17-55"><a href="#cb17-55" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 11:  6 Kate    6 90.60390      A</span></span>
+<span id="cb17-56"><a href="#cb17-56" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 12:  6 Kate   12 96.84834      B</span></span>
+<span id="cb17-57"><a href="#cb17-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-58"><a href="#cb17-58" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>())</span></code></pre></div>
+</div>
+<div id="集合运算" class="section level3">
+<h3>集合运算</h3>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fintersect</span>(dt1, dt2)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fsetdiff</span>(dt1, dt2)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">funion</span>(dt1, dt2)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fsetequal</span>(dt1, dt2)</span></code></pre></div>
+</div>
+</div>
+<div id="高级应用实例" class="section level2">
+<h2>高级应用实例</h2>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="do">## 月K线图数据的整理</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. 产生日期序列</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>market_data <span class="ot">&lt;-</span> <span class="fu">data.table</span>(<span class="at">date =</span> (<span class="fu">as.Date</span>(<span class="st">&quot;2015-05-01&quot;</span>) <span class="sc">+</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">299</span>))</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">125</span>)</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. 产生成交价格和数量序列</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 股市价格是一个随机游走过程，将300天的变化率累乘起来</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 成交量 volume 取随机数</span></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>market_data[, <span class="st">`</span><span class="at">:=</span><span class="st">`</span>(</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">price =</span> ((<span class="dv">1</span> <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">300</span>, <span class="fl">0.001</span>, <span class="fl">0.05</span>)) <span class="sc">%&gt;%</span> <span class="fu">cumprod</span>() <span class="sc">*</span> <span class="dv">30</span>) <span class="sc">%&gt;%</span> <span class="fu">round</span>(<span class="dv">2</span>),</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">volume =</span> <span class="fu">rbinom</span>(<span class="dv">300</span>, <span class="dv">5000</span>, <span class="fl">0.8</span>)</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>)]</span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(market_data)</span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          date price volume</span></span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1: 2015-05-01 31.43   4000</span></span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2: 2015-05-02 30.64   4022</span></span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3: 2015-05-03 33.45   4006</span></span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4: 2015-05-04 33.62   3976</span></span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5: 2015-05-05 34.32   4044</span></span>
+<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6: 2015-05-06 30.59   4010</span></span>
+<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. 股价走势图</span></span>
+<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(price <span class="sc">~</span> date,</span>
+<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> market_data,</span>
+<span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">&quot;l&quot;</span>,</span>
+<span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">&quot;Market data&quot;</span></span>
+<span id="cb19-29"><a href="#cb19-29" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p><img src="figure/unnamed-chunk-16-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. 获取横轴 domain</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>market_data[, <span class="fu">range</span>(date)] <span class="co"># 没有:=，所以这不是update，而是summarize</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;2015-05-01&quot; &quot;2016-02-24&quot;</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. 按月分组，每组统计最大、最小、最早、最晚价格，这就是月K线图！！！</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>monthly <span class="ot">&lt;-</span> market_data[,</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 这样写 list 就很像键值对了</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>  .(</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">open =</span> price[[<span class="dv">1</span>]],</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">high =</span> <span class="fu">max</span>(price),</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">low =</span> <span class="fu">min</span>(price),</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">close =</span> price[[.N]]</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>  keyby <span class="ot">=</span> .(</span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">year =</span> <span class="fu">year</span>(date),</span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">month =</span> <span class="fu">month</span>(date)</span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(monthly)</span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    year month  open  high   low close</span></span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1: 2015     5 31.43 39.36 30.03 38.13</span></span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2: 2015     6 42.74 50.54 39.08 39.47</span></span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3: 2015     7 37.21 46.96 31.70 43.42</span></span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4: 2015     8 46.98 57.06 42.24 42.24</span></span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5: 2015     9 45.79 47.19 34.02 37.09</span></span>
+<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6: 2015    10 34.75 58.65 34.75 56.38</span></span>
+<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a><span class="co"># 6. 自定义函数，针对不同的列可以分组计算平均值</span></span>
+<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a>average <span class="ot">&lt;-</span> <span class="cf">function</span>(column) {</span>
+<span id="cb20-32"><a href="#cb20-32" aria-hidden="true" tabindex="-1"></a>  market_data[,</span>
+<span id="cb20-33"><a href="#cb20-33" aria-hidden="true" tabindex="-1"></a>    .(</span>
+<span id="cb20-34"><a href="#cb20-34" aria-hidden="true" tabindex="-1"></a>      <span class="at">average =</span> <span class="fu">mean</span>(.SD[[column]])</span>
+<span id="cb20-35"><a href="#cb20-35" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb20-36"><a href="#cb20-36" aria-hidden="true" tabindex="-1"></a>    by <span class="ot">=</span> .(<span class="at">year =</span> <span class="fu">year</span>(date))</span>
+<span id="cb20-37"><a href="#cb20-37" aria-hidden="true" tabindex="-1"></a>  ]</span>
+<span id="cb20-38"><a href="#cb20-38" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb20-39"><a href="#cb20-39" aria-hidden="true" tabindex="-1"></a><span class="fu">average</span>(<span class="st">&quot;price&quot;</span>)</span>
+<span id="cb20-40"><a href="#cb20-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    year  average</span></span>
+<span id="cb20-41"><a href="#cb20-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1: 2015 42.13637</span></span>
+<span id="cb20-42"><a href="#cb20-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2: 2016 24.56982</span></span>
+<span id="cb20-43"><a href="#cb20-43" aria-hidden="true" tabindex="-1"></a><span class="fu">average</span>(<span class="st">&quot;volume&quot;</span>)</span>
+<span id="cb20-44"><a href="#cb20-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    year  average</span></span>
+<span id="cb20-45"><a href="#cb20-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1: 2015 4003.596</span></span>
+<span id="cb20-46"><a href="#cb20-46" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2: 2016 3996.564</span></span></code></pre></div>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>能自动将分组变量设为key.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p>要用list()或.()<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
+<li id="fn3"><p>象牙操作符不拷贝被修改的列。原地修改的性能更高，避免了对数据的复制。<a href="#fnref3" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+
+<div id="rmd-source-code">LS0tDQp0aXRsZTogImRhdGEudGFibGUiDQpzdWJ0aXRsZTogJycNCmF1dGhvcjogIkh1bW9vbiINCmRhdGU6ICJgciBTeXMuRGF0ZSgpYCINCm91dHB1dDogaHRtbF9kb2N1bWVudA0KZG9jdW1lbnRjbGFzczogY3RleGFydA0KY2xhc3NvcHRpb246IGh5cGVycmVmLA0KLS0tDQoNCmBgYHtyIHNldHVwLCBpbmNsdWRlID0gRkFMU0V9DQpzb3VyY2UoIi4uL1JtYXJrZG93bi10ZW1wbGF0ZS9SbWFya2Rvd25fY29uZmlnLlIiKQ0KDQojIyBnbG9iYWwgb3B0aW9ucyA9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PQ0Ka25pdHI6Om9wdHNfY2h1bmskc2V0KA0KICB3aWR0aCA9IGNvbmZpZyR3aWR0aCwNCiAgZmlnLndpZHRoID0gY29uZmlnJGZpZy53aWR0aCwNCiAgZmlnLmFzcCA9IGNvbmZpZyRmaWcuYXNwLA0KICBvdXQud2lkdGggPSBjb25maWckb3V0LndpZHRoLA0KICBmaWcuYWxpZ24gPSBjb25maWckZmlnLmFsaWduLA0KICBmaWcucGF0aCA9IGNvbmZpZyRmaWcucGF0aCwNCiAgZmlnLnNob3cgPSBjb25maWckZmlnLnNob3csDQogIHdhcm4gPSBjb25maWckd2FybiwNCiAgd2FybmluZyA9IGNvbmZpZyR3YXJuaW5nLA0KICBtZXNzYWdlID0gY29uZmlnJG1lc3NhZ2UsDQogIGVjaG8gPSBjb25maWckZWNobywgDQogIGV2YWwgPSBjb25maWckZXZhbCwgDQogIHRpZHkgPSBjb25maWckdGlkeSwgDQogIGNvbW1lbnQgPSBjb25maWckY29tbWVudCwgDQogIGNvbGxhcHNlID0gY29uZmlnJGNvbGxhcHNlLCANCiAgY2FjaGUgPSBjb25maWckY2FjaGUsDQogIGNhY2hlLmNvbW1lbnRzID0gY29uZmlnJGNhY2hlLmNvbW1lbnRzLA0KICBhdXRvZGVwID0gY29uZmlnJGF1dG9kZXANCikNCg0KIyMgdXNlIG5lY2Vzc2FyeSBwYWNrYWdlcyA9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0NCmxpYnJhcnkodGlkeXZlcnNlKQ0KbGlicmFyeShkYXRhLnRhYmxlKQ0KbGlicmFyeShtYWdyaXR0cikNCmxpYnJhcnkocGxvdGx5KQ0KbGlicmFyeShodG1sd2lkZ2V0cykNCmBgYA0KDQoNCjxhIGhyZWY9Ii4uL3BkZi9jaGVhdHNoZWV0LWRhdGEudGFibGUucGRmIj4qZGF0YS50YWJsZSBjaGVhdHNoZWV0LnBkZio8L2E+DQoNCjxvYmplY3QgZGF0YT0iLi4vcGRmL2NoZWF0c2hlZXQtZGF0YS50YWJsZS5wZGYiIHR5cGU9ImFwcGxpY2F0aW9uL3BkZiIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSI+PC9vYmplY3Q+DQoNCg0KZGF0YS50YWJsZSDmmK8gZGF0YS5mcmFtZSDnmoTmianlsZXvvIzlhbzlrrkgZHBseXIg5YyF5Lit55qE5Ye95pWw77yM6KKr5YW25pON5L2c5ZCO77yM6L+U5Zue5YC85LuN5Li6IGRhdGEudGFibGUNCg0K5pWF5LuK5ZCO5Yeh5piv5pON5L2c5pWw5o2u5qGG6YO95Y+v5Lul6buY6K6k5YWI6L2s5o2i5Li6IGRhdGEudGFibGUuIOeEtuWQju+8jOW9k+mcgOimgeS/neeVmeWOn+Wni+aVsOaNruaXtu+8jOS9v+eUqCBkcGx5ciDns7vliJflh73mlbDvvJvkuI3pnIDopoHkv53nlZnml7bvvIzkvb/nlKggZGF0YS50YWJsZSDnmoTosaHniZnmk43kvZznrKbvvIzov73msYLpgJ/luqblkoznroDmtIHjgIINCg0KIyMg5Yib5bu6DQoNCiMjIyDnm7TmjqXliJvlu7pkYXRhLnRhYmxlDQoNCmBgYHtyfQ0KZHQgPC0gZGF0YS50YWJsZSgNCiAgYSA9IGMoIkEiLCAiQiIsICJDIiwgIkEiLCAiQSIsICJCIiksDQogIGIgPSAxOjYNCikNCmNsYXNzKGR0KQ0KYGBgDQoNCiMjIyDlsIYgZGF0YS5mcmFtZSDovazljJbkuLogZGF0YS50YWJsZQ0KDQojIyMjIGBhcy5kYXRhLnRhYmxlKClgOyBgc2V0RFQoKWANCg0K5YmN6ICF5Yib5bu65LiA5Lu95ou36LSd5bm26L2s5o2i77yM5ZCO6ICF5Y6f5Zyw6L2s5o2i44CCDQoNCmBgYHtyfQ0KZGYgPC0gZGF0YS5mcmFtZSgNCiAgYSA9IGMoIkEiLCAiQiIsICJDIiwgIkEiLCAiQSIsICJCIiksDQogIGIgPSAxOjYNCikNCmRmICU+JQ0KICBzZXREVCgpICU+JQ0KICBjbGFzcygpDQoNCg0KbGlicmFyeShzcWxkZikNCm9wdGlvbnMoc3FsZGYuZHJpdmVyID0gIlNRTGl0ZSIpDQpjaGFubmVsIDwtIGRiQ29ubmVjdCgNCiAgU1FMaXRlKCksDQogIGRibmFtZSA9ICJDOi9Vc2Vycy9IdW1vb25ydWMvT25lRHJpdmUvSUNUL0RhdGFCYXNlL1NRTGl0ZS90cmFkZS5kYiINCikNCnRvdGFsIDwtIGRiUmVhZFRhYmxlKGNoYW5uZWwsICJ0b3RhbCIpICU+JQ0KICBzZWxlY3QoLXRpbWUpICU+JQ0KICBzZXREVCgpDQpjbGFzcyh0b3RhbCkNCmRiRGlzY29ubmVjdChjaGFubmVsKQ0KYGBgDQoNCiMjIyMgYHNldCooKWDlh73mlbDml48NCg0K5LiN5aSN5Yi25pWw5o2u77yM6IqC55yB5pe26Ze0DQoNCmBgYHtyfQ0KZGYgPC0gZGF0YS5mcmFtZSgNCiAgYSA9IGMoIkEiLCAiQiIsICJDIiwgIkEiLCAiQSIsICJCIiksDQogIGIgPSAxOjYNCikNCmR0MyA8LSBzZXREVChkZiwga2V5ID0gImIiKQ0KZGYzIDwtIHNldERGKGR0MykNCg0Kc2V0bmFtZXModG90YWwsICJ0cmFkZSIsICJ0b3RhbCIpICMg5bCG5YiX5ZCNdHJhZGXmlLnkuLp0b3RhbA0KaGVhZCh0b3RhbCkNCnRvdGFsWywgaWQgOj0gLkldICMgLknmhI/kuLoxOi5O77yM6L+Z5Y+l5Li6dG90YWzliqDkuobkuIDkuKrluo/lj7fntKLlvJXliJcNCg0KIyBzZXRjb2xvcmRlcigpIOWIl+eahOmHjeaOkuW6jw0KIyDpu5jorqTnrKzkuozkuKrlj4LmlbDmmK/kuIDkuKrliJflkI3lkJHph4/jgILlpoLmnpzlj6rlhpnlh7rkuobkuIDpg6jliIbliJfvvIzliJnlhbbku5bliJfmjInnhafljp/mnaXnmoTpobrluo8NCnNldGNvbG9yZGVyKHRvdGFsLCBuZXdvcmRlciA9ICJpZCIpIA0KaGVhZCh0b3RhbCkNCmBgYA0KDQoNCg0KfCBzZXQqKCkgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfA0KfCAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0gfCAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0gfA0KfCBgc2V0RFQoKWAsIGBzZXRERigpYCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfA0KfCBgc2V0YXR0cigpYCBgc2V0bmFtZXMoKWAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfCBTZXQgYXR0cmlidXRlcyBvZiBvYmplY3RzIGJ5IHJlZmVyZW5jZSAgICAgICAgICAgICAgfA0KfCBgc2V0a2V5KClgIGBzZXRrZXl2KClgIGBzZXRpbmRleCgpYCBgc2V0aW5kZXh2KClgIGBrZXkoKWAgYGluZGljZXMoKWAgYGhhc2tleSgpYCB8IENyZWF0ZSBrZXkgb24gYSBkYXRhLnRhYmxlICAgICAgICAgICAgICAgICAgICAgICAgICB8DQp8IGBzZXRjb2xvcmRlcigpYCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB8IEZhc3QgY29sdW1uIHJlb3JkZXJpbmcgb2YgYSBkYXRhLnRhYmxlIGJ5IHJlZmVyZW5jZSB8DQp8IGBzZXRvcmRlcihkdCwgYSwgLWIpYCBgc2V0b3JkZXJ2KClgICAgICAgICAgICAgICAgICAgICAgICAgICB8IEZhc3Qgcm93IHJlb3JkZXJpbmcgb2YgYSBkYXRhLnRhYmxlIGJ5IHJlZmVyZW5jZSAgICB8DQoNCg0KDQojIyMg6K+75Y+W5paH5Lu2DQoNCi0gYGZyZWFkKCkgYOWPr+S7peWwhuiDveebtOaOpeWwhi5jc3YgLnR4dCDnrYnmoLzlvI/nmoTmlofku7bor7vkuLogZGF0YS50YWJsZSDmoLzlvI8NCg0KLSBgZndyaXRlKCkgYOWPr+S7peWGmSBkYXRhLnRhYmxlIOaVsOaNruOAgg0KDQrlnKjlpITnkIblpKfmlbDmja7ml7bvvIzlroPku6znmoTpgJ/luqbpnZ7luLjlv6vjgIIqKuW7uuiuruivu+WGmeaWh+S7tue7n+S4gOS9v+eUqOi/meS4pOS4quWHveaVsCoqDQoNCiMjIGRhdGEudGFibGUg5p+l6K+i6K+t5rOVDQoNCiMjIyDor63ms5UNCg0KYGBgYFINCmR0W2ksIGosIGJ5ID0gbGlzdCgpLCAuLi5dDQpgYGBgDQoNCuW+iOWDjyBTUUwg6K+t5Y+lDQoNCjEuIGBpYDogU3Vic2V0IOihjO+8iOWwseWDjyBXSEVSRSDlrZDlj6XvvIkNCjIuIGBieWAvYGtleWJ5YFteMV0gOiDliIbnu4TvvIjlsLHlg48gR1JPVVAgQlkg5a2Q5Y+l77yJDQozLiBgamA6IFN1YnNldFteMl0g5oiWIE1hbmlwdWxhdGUg5YiXIO+8iOWwseWDjyBTRUxFQ1Qg5a2Q5Y+l77yJ77yM55Sa6Iez5Y+v5Lul5piv5LiA5Liq5Yy/5ZCN5Ye95pWwDQoNClteMV06IOiDveiHquWKqOWwhuWIhue7hOWPmOmHj+iuvuS4umtleS4NCg0KW14yXTog6KaB55SobGlzdCgp5oiWLigpDQoNCiMjIyDnibnmrornrKblj7cNCg0KfCDnibnmrornrKblj7cgfCDor7TmmI4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHwNCnwgLS0tLS0tLS0gfCAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLSB8DQp8IC4oKSAgICAgIHwg5Luj5pu/bGlzdCgpICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB8DQp8IC5OICAgICAgIHwg5oC76KGM5pWwICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfA0KfCAuU0QgICAgICB8IOS7o+ihqOWIhue7hOWQjuavj+S4que7hOeahOaVsOaNruahhiAgICAgICAgICAgICAgICAgICAgICAgICAgIHwNCnwgLlNEY29scyAgfCDlnKggYnkg5aSE77yM5LiOLlNE6L+e55So77yM55So5p2l6YCJ5oup5ZOq5Lqb5YiX5YyF5ZCr5ZyoLlNE5LitICAgICAgICAgICAgICAgfA0KfCAuQlkgICAgICB8IOWMheWQq+aJgOaciWJ55YiG57uE5Y+Y6YeP55qEbGlzdCAgICAgICAgICAgICAgICAgICAgICAgICAgIHwNCnwgLkkgICAgICAgfCDmlbTmlbDlkJHph48gMTouTiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfA0KfCAuR1JQICAgICB8IOWIhue7hOe0ouW8lSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB8DQp8IC5OR1JQICAgIHwg5YiG57uE5pWwICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfA0KfCAuRUFDSEkgICB8IOeUqOS6jmJ5L2tleWJ5ID0gLkVBQ0hJ77yM6KGo56S65qC55o2uaeihqOi+vuW8j+eahOavj+S4gOihjOWIhue7hCB8DQoNCiMjIyDpk77lvI/mk43kvZwNCg0KYERUWy4uLl1bLi4uXVsuLi5dYA0KDQrmiJblhpnkuLrvvJoNCg0KYGBgUg0KRFRbDQogIC4uLg0KXVsNCiAgLi4uDQpdWw0KICAuLi4NCl0NCmBgYA0KDQojIyMg5LiO566h6YGTYCU+JWDphY3lkIjnmoTpk77lvI/mk43kvZwNCg0K55Sx5LqOIFIg5Lit5omA5pyJ55qE5pON5L2c56ym6YO95piv5Ye95pWw77yM5Zug5q2k5Y+v5Lul5bCGXGBbXGDkvZzkuLrkuIDkuKrlh73mlbDvvIzotK/nqb/kuo5gJT4lYOS4re+8jOiOt+W+l+S7o+eggemjjuagvOeahOS4gOiHtOaAp+OAgg0KDQpgYGB7cn0NCm10Y2FycyAlPiUgDQoJYXMuZGF0YS50YWJsZSgpICU+JSANCglgW2AoLCAuKG1wZyA9IG1lYW4obXBnKSksIGJ5ID0gY3lsKSAlPiUgDQoJYFtgKC5OLCkgDQpgYGANCg0KIyMjIFN1YnNldCByb3dzIHVzaW5nIGkNCg0K6YCJ5oup6KGM5Y+v5Lul5o6l5Y+X55qE6L+Q566X56ym6Zmk5LqG5bi455So55qE6YC76L6R6L+Q566X56ym77yM6L+Y5YyF5ousIGAlbGlrZSVgICjljLnphY3mqKHlvI/vvIzmnInngrnlg4/mraPliJnooajovr7lvI8pIOWSjCBgJWJldHdlZW4lYA0KDQpkYXRhLnRhYmxlW10g5pa55ous5Y+35Lit5Y+q5pyJ5LiA5Liq5Y+C5pWw5pe277yM6buY6K6k5Li6IGkg5Y+C5pWw77yM6KGo56S65a+56KGM5pON5L2c44CCDQoNCmBgYHtyfQ0KZHQzIDwtIGRhdGEudGFibGUoDQogIGEgPSAxOjYsDQogIGIgPSBjKCJBIiwgIkIiLCAiQyIsICJBIiwgIkEiLCAiQiIpDQopDQoNCmR0M1sxOjIsIF0NCg0KIyDpgInlh7rmnIDlkI7kuIDooYwNCmR0M1suTl0NCg0KIyDpgInlh7rnrKzkuIDooYzlkozmnIDlkI7kuIDooYwNCmR0M1tjKDEsIC5OKV0NCg0KIyDpgInlh7rmu6HotrPnibnlrprmnaHku7bnmoTooYwNCmR0M1tiID09ICJBIiwgXQ0KDQoNCiMg6KGM5o6S5bqP77yM6LSf5Y+36KGo56S66ZmN5bqPDQp0b3RhbFtvcmRlcigtbW9udGgpXSAlPiUgaGVhZCgpDQoNCnRvdGFsICU+JSBoZWFkKCkNCmBgYA0KDQojIyMgTWFuaXB1bGF0ZSBjb2x1bW5zIHdpdGggag0KDQojIyMjIHN1YnNldA0KDQpgYGB7cn0NCmR0WywgYygyKV0gIyDmj5Dlj5bnrKwy5YiXDQpgYGANCg0KDQojIyMjIOixoeeJmeaTjeS9nOespiBgOj1gW14zXQ0KDQpbXjNdOiDosaHniZnmk43kvZznrKbkuI3mi7fotJ3ooqvkv67mlLnnmoTliJfjgILljp/lnLDkv67mlLnnmoTmgKfog73mm7Tpq5jvvIzpgb/lhY3kuoblr7nmlbDmja7nmoTlpI3liLbjgIINCg0K6L+Z5Liq5pON5L2c56ym5pyJ54K55YOPIFNRTCDor63lj6XkuK3nmoQgYEFTYCDlhbPplK7or43vvIzkvYblt6bkuLrliJflkI3vvIzlj7PkuLrooajovr7lvI/jgIINCg0KLSAgIOe7mWRhdGEudGFibGXlr7nosaHlop7liqDkuIDliJfvvIxgZGF0YS50YWJsZVssIGNvbG5hbWUgOj0gdmFyMV1gDQotICAg57uZZGF0YS50YWJsZeWvueixoeWIoOmZpOS4gOWIl++8jOWwseaYr+e7mei/meWIl+i1i+WAvOS4uuepuu+8jGBkYXRhLnRhYmxlWywgY29sbmFtZSA6PSBOVUxMXWANCi0gICDkv67mlLlkYXRhLnRhYmxl5a+56LGh55qE5YC877yM6YCa6L+H57Si5byV5a6a5L2N5ZCO6L+b6KGM5YC855qE5pu/5o2i77yMYGRhdGEudGFibGVbY29uZGl0aW9uLCBjb2xuYW1lIDo9IHZhbHVlXWANCg0K5Y2V5Liq5YiX5ZCN5LiN55So5Yqg5byV5Y+377yM5aSa5Liq5YiX5ZCN57uE5oiQ55qE5ZCR6YeP77yM5b+F6aG75Yqg5byV5Y+377yM5aaCYGMoJ2QxJywgJ2QyJylgDQoNCmBgYHtyfQ0KZHQgPC0gZGF0YS50YWJsZSgNCiAgYSA9IGMoIkEiLCAiQiIsICJDIiwgIkEiLCAiQSIsICJCIiksDQogIGIgPSAxOjYNCikNCg0KIyAx5YiX77yM5LiN5b+F5Yqg5byV5Y+3DQpkdFssIGMgOj0gYiArIDJdICMgKGIgKyAyKSBBUyBjDQpkdA0KDQojIOWinuWKoDLliJfvvIznrKwx56eN5YaZ5rOVDQpkdFssIGMoJ2QxJywgJ2QyJykgOj0gbGlzdCgxOjYsIDI6NyldICMgOj0g5bem6L655piv5LiA5LiqbmFtZeWQkemHj++8jOWPs+i+ueaYr+S4gOS4qnZhbHVl5YiX6KGoDQpkdA0KDQojIOWinuWKoDLliJfvvIznrKwy56eN5YaZ5rOVDQpkdFssYDo9YChjMSA9IDE6NiwgYzIgPSAyOjcpXSAjIDo9IOW+iOWDj+S4gOS4qnVwZGF0ZeWHveaVsA0KZHQNCg0KIyDliKDpmaRjMeWIlw0KZHRbLCBjMSA6PSBOVUxMXQ0KZHQNCg0KIyDlkIzml7bliKDpmaRkMSxkMuWIlw0KZHRbLCBjKCJkMSIsICJkMiIpIDo9IE5VTExdDQpkdA0KDQojIOe7mWLotYvlgLzkuLozMA0KZHRbLCBiIDo9IDMwXQ0KZHQNCg0KIyDlr7lh5YiX5YC85Li6QuOAgWMy5YiX5YC85aSn5LqOM+eahOihjO+8jOWFtmLliJfotYvlgLzkuLoxMDANCmR0W2EgPT0gIkIiICYgYzIgPiAzLCBiIDo9IDEwMF0NCmR0DQoNCiMg5Y+m5LiA56eN5YaZ5rOVDQpkdFssIGIgOj0gaWZlbHNlKGEgPT0gIkIiICYgYzIgPiAzLCA1MCwgYildDQpkdA0KDQojIOabtOaWsOWIlw0KZHRbLCBiIDo9IGFzLmNoYXJhY3RlcihiKV0NCmR0DQpgYGANCg0KIyMjIyDnlKhgPWDogIzpnZ7osaHniZnmk43kvZznrKYNCg0K5LiN5piv5Zyo5Y6f5p2l55qE5pWw5o2u5qGG5Z+656GA5LiK5pS55Yqo77yM6ICM5piv5paw5Yib5bu65LiA5Liq5pWw5o2u5qGG44CCDQoNCuatpOaXtu+8jGog5Lit55qE5YiX5LiN6IO95YaZ5oiQ5ZCR6YeP77yM6ICM6KaB5YaZ5oiQ5YiX6KGo77yM55SoYC4o5YiX5ZCNLi4uKWDmiJZgbGlzdCjliJflkI0uLi4pYA0KDQpgYGB7cn0NCnRvdGFsWywgLih5ZWFyLCBtb250aCwgZXhwb3J0LCBpbXBvcnQsIHJhdGlvID0gZXhwb3J0IC8gaW1wb3J0KV0NCg0KdG90YWwNCmBgYA0KDQojIyMjIOWMv+WQjeWHveaVsA0KDQpgYGB7cn0NCmRhdGEoImRpYW1vbmRzIiwgcGFja2FnZSA9ICJnZ3Bsb3QyIikNCnNldERUKGRpYW1vbmRzKQ0KDQojIOaMiSBjdXQg5YiG57uE5YGa5Zue5b2SDQpkaWFtb25kc1ssDQogIHsNCiAgICBtIDwtIGxtKGxvZyhwcmljZSkgfiBjYXJhdCArIGRlcHRoKQ0KICAgIGFzLmxpc3QoY29lZihtKSkNCiAgfSwNCiAga2V5YnkgPSBjdXQNCl0NCmBgYA0KDQoNCg0KIyMjIEdyb3VwIGFjY29yZGluZyB0byBieQ0KDQpieSDliIbnu4QNCmtleWJ5IOS4jeS7heWIhue7hOS4lOeri+WIu+WumuS5iemUru+8jOW5tuaMieeFp+mUruWvueihjOaOkuW6jw0KDQpgYGB7cn0NCmR0IDwtIGRhdGEudGFibGUoDQogIGEgPSBjKCJBIiwgIkIiLCAiQyIsICJBIiwgIkEiLCAiQiIpLA0KICBiID0gMTo2DQopDQoNCiMg5a+55pW05LiqYuWIl+aVsOaNruaxguWSjA0KZHRbLCBzdW0oYildDQoNCiMg5oyJYeWIl+WIhue7hO+8jOWvuWLliJfmjInliIbnu4TmsYLlkozvvIzov5Dnrpfnu5Pmnpzoh6rliqjlkb3lkI3kuLogVjENCmR0Wywgc3VtKGIpLCBieSA9IGFdDQoNCiMg5o+Q5Y+W5q+P5LiA57uE55qE56ys5LiA6KGM77yM57uE5oiQ5paw5pWw5o2u5qGGDQpkdFssIC5TRFsxXSwgYnkgPSBhXQ0KDQojIOaPkOWPluavj+S4gOe7hOeahOacgOWQjuS4gOihjO+8jOe7hOaIkOaWsOaVsOaNruahhg0KZHRbLCAuU0RbLk5dLCBieSA9IGFdDQoNCg0KIyDlhYjliIbnu4TvvIzlho3mmL7npLrmr4/nu4TooYzmlbANCnRvdGFsWywgLk4sIGJ5ID0geWVhcl0gDQp0b3RhbFssIC5OLCBieSA9IC4oeWVhciwgbW9udGgpXSAjIHllYXIg5ZKMIG1vbnRoIOaYr+acieWFiOWQjumhuuW6j+eahA0KdG90YWxbLCAuKGF2Z19leCA9IG1lYW4oZXhwb3J0KSksIGJ5ID0geWVhcl0gIyDljbPkvb/lj6rmnInkuIDliJfvvIzkuZ/opoHnlKjliJfooagNCmBgYA0KDQoNCg0KIyMg54us56uL6L6F5Yqp5Ye95pWwDQoNCiMjIyDooYzmjpLluo8NCg0KYHNldG9yZGVyKGR0LCBhLCAtYilgIOmHjeaWsOaOkuWIl+ihjO+8jOWFiGHmjInljYfluo/vvIzlho1i5oyJ6ZmN5bqPDQoNCg0KIyMjIOihjOWOu+mHjQ0KDQpgdW5pcXVlKGR0LCBieSA9IGMoImEiLCJiIikpYCDmo4Dmn6VieeeahOWIl++8jOaPkOWPluS4jemHjeWkjeeahOihjA0KDQpgdW5pcXVlTihkdCwgYnkgPSBjKCJhIiwiYiIpKWAg5qOA5p+lYnnnmoTliJfvvIzorqHnrpfmr4/kuKrkuI3ph43lpI3nmoTooYzlh7rnjrDkuoblpJrlsJHmrKENCg0KIyMjIOWIl+mHjeWRveWQjQ0KDQpgc2V0bmFtZXMoZHQsIGMoImEiLCJiIiksIGMoIngiLCJ5IilgIOWIl+mHjeWRveWQjQ0KDQojIyMg5o+Q5YmN5ZKM5rue5ZCOIGxlYWQgYW5kIGxhZw0KDQpgYGB7cn0NCmR0WywgYyA6PSBzaGlmdChhLCAxKV0gIyDpu5jorqQgbGFnDQpkdA0KDQpkdFssIGMgOj0gc2hpZnQoYSwgMSwgdHlwZSA9ICJsZWFkIildDQpkdA0KYGBgDQoNCui/meagt+WPr+S7peW+iOWuueaYk+WcsOWKoOWFpeaPkOWJjeaIlua7nuWQjuWIl++8jOi/m+ihjOWQjOavlOWinumVv+eOh+etieiuoeeulw0KDQojIyMg6YGN5Y6G5pON5L2c5ZCE5YiXDQoNCmBgYHtyfQ0KZHQgPC0gZGF0YS50YWJsZShhID0gYygxLCAyLCAzKSwgYiA9IGMoNCwgNSwgNikpDQojIOmBjeWOhmHlkoxi5Lik5YiX77yM6YO95rGC5bmz5Z2H5YC8DQpkdFssIG1hcCguU0QsIG1lYW4pLCAuU0Rjb2xzID0gYygiYSIsICJiIildDQoNCmNvbHMgPC0gYygiYSIsICJiIikNCiMg6YGN5Y6GIGNvbHMg5ZCE5YiX77yM5rGC5bmz5Z2H5YC877yM5LiU6LWL57uZ5paw5Yqg5YWl55qEYV9t5YiXDQpkdFssIHN0cl9jKGNvbHMsICJfbSIpIDo9IG1hcCguU0QsIG1lYW4pLCAuU0Rjb2xzID0gY29sc10NCmR0DQpgYGANCg0KIyMg6L+e5o6l5pON5L2cDQoNCiMjIyDplK4NCg0KYHNldGtleShkMSwgdjEsIHYzLCAuLi4pYA0KDQrlsIbmn5DkupvliJflrprkuYnkuLoga2V5c+WQju+8jOWwseWPr+S7pemAmui/h+mUrumAieaLqeihjO+8jOS7peWPiui/m+ihjOWFs+ezu+aVsOaNrui/nuaOpe+8jOavlOaXoOmUruaXtuW/qzE3MOWAjeOAguWQjOaXtu+8jOWPr+S7peeUqCBtdWx0IOWPguaVsOWvueafpeivoue7k+aenOWinuWKoOi/h+a7pOadoeS7tu+8jOS9v+S7o+eggeabtOmrmOaViOOAgg0KDQpgYGB7cn0NCmR0IDwtIGRhdGEudGFibGUoYSA9IGMoIkEiLCAiQiIsICJDIiwgIkEiLCAiQSIsICJCIiksDQogICAgICAgICAgICAgICAgIGIgPSAxOjYpDQoNCiMg6K6+572uYeWIl+S4uuS4u+mUrg0Kc2V0a2V5KGR0LCBhKQ0KIyBzZXRrZXl2KGR0LCAnYScpIOWHveaVsOS7heaOpeWPl+Wtl+espuS4suS9nOS4uuesrOS6jOS4quWPguaVsA0Ka2V5KGR0KQ0KDQojIOaJk+WNsGR05a+56LGh77yM5Y+R546w5pWw5o2u5bey57uP5oyJ54WnYeWIl+Wtl+avjeWvueW6lEFTQ0lJ56CB5YC86L+b6KGM5LqG5o6S5bqP44CCDQpkdA0KDQojIOWPlmHliJfkuK3lgLzkuLpC55qE6KGM77yM6K6+572u5Li76ZSu5ZCO5Y+v55yB55WlYGE9PWANCmR0WyJCIl0NCg0KIyDlj5Zh5YiX5Lit5YC85Li6QueahOihjO+8jOW5tuS/neeVmeafpeivoue7k+aenOeahOesrOS4gOihjA0KZHRbIkIiLCBtdWx0ID0gImZpcnN0Il0NCg0KIyDlj5Zh5YiX5Lit5YC85Li6QueahOihjO+8jOW5tuS/neeVmeafpeivoue7k+aenOeahOacgOWQjuS4gOihjA0KZHRbIkIiLCBtdWx0ID0gImxhc3QiXQ0KDQojIOWPlmHliJfkuK3lgLzkuLpi55qE6KGM77yM5rKh5pyJ5pWw5o2u5YiZ5Li6TkENCmR0WyJiIl0NCmBgYA0KDQoNCmBgYHtyfQ0Kc2V0a2V5KHRvdGFsLCB5ZWFyLCBtb250aCkNCnRvdGFsWy4oMjAxOSwgMyldICMg55yB55Wl5LqGIHllYXIgPT0gMjAxOSAmIG1vbnRoID09IDMNCg0KdG90YWxbLigyMDE5KV0gIyDnnIHnlaXkuoYgeWVhciA9PSAyMDE577yM5Y+v5Lul5Y+q5qC55o2u5LiA5YiXIHN1YnNldA0KIyDkuI3og73lhpl0b3RhbFtsaXN0KDMpXe+8jOW+l+S4jeWHuuacieaEj+S5ieeahOe7k+aenA0KYGBgDQoNCiMjIyBKb2luDQoNCuWfuuacrOivreazleS4umBkdDFbZHQyLCBvbiA9IC4oYiA9IHkpXWDvvIzlhbbkuK1i5Li6ZHQx55qE5YiX77yMeeS4umR0MueahOWIlw0KDQotICAg6Iul6L+e5Liq6KGo6YO95a6a5LmJ5LqGIGtleSwg56ys5LqM5Liq5Y+C5pWw5LiN55So5aGrDQoNCi0gICDoi6XmsqHmnInlrprkuYlrZXnvvIwuLi7opoHlhpkgb24gPSAiY29tbW9uQ29sdW1uIiDmiJYgYnkuZHQxID0gImMxIiwgYnkuZHQyID0gImMyIg0KDQrkvovvvJrlrabnlJ/ogIPor5XnmoTlnLrmma/jgILmjInnhadFUuiuvuiuoeaWueazle+8jOaIkeS7rOmAmuW4uOS8muaMieeFp+WunuS9k+i/m+ihjOaVsOaNruWIkuWIhuOAgui/memHjOWtmOWcqDLkuKrlrp7kvZPvvIzkuIDkuKrmmK/lrabnlJ/vvIzkuIDkuKrmmK/miJDnu6njgILlrabnlJ/lrp7kvZPljIXmi6zlrabnlJ/lp5PlkI3nrYnln7rmnKzotYTmlpnvvIzogIzmiJDnu6nlrp7kvZPljIXmi6zogIPor5XnmoTnp5Hnm67lkozmiJDnu6njgILpgJrov4forr7nva7kuKTkuKrkuLvplK7vvIzlr7ky5Liq5pWw5o2u6ZuG6L+b6KGM6L+e5o6l44CCDQoNCmBgYHtyfQ0KIyA25Liq5a2m55SfDQpzdHVkZW50IDwtIGRhdGEudGFibGUoDQogIGlkID0gMTo2LA0KICBuYW1lID0gYygiRGFuIiwgIk1pa2UiLCAiQW5uIiwgIllhbmciLCAiTGkiLCAiS2F0ZSIpDQopDQpzdHVkZW50DQoNCiMg5YiG5Yir5Y+C5YqgQeWSjELkuKTpl6jogIPor5UNCnNjb3JlIDwtIGRhdGEudGFibGUoDQogIGlkID0gMToxMiwgc3R1SWQgPSByZXAoMTo2LCAyKSwNCiAgc2NvcmUgPSBydW5pZigxMiwgNjAsIDk5KSwNCiAgY291cnNlID0gYyhyZXAoIkEiLCA2KSwgcmVwKCJCIiwgNikpDQopDQpzY29yZQ0KDQojIOiuvue9rnN0dWRlbnTmlbDmja7pm4bnmoRrZXkNCnNldGtleShzdHVkZW50LCAiaWQiKQ0KDQojIOiuvue9rnNjb3Jl5pWw5o2u6ZuG55qEa2V5DQpzZXRrZXkoc2NvcmUsICJzdHVJZCIpDQoNCiMg6L+e5o6lDQpzdHVkZW50W3Njb3JlLCBub21hdGNoID0gTkEsIG11bHQgPSAiYWxsIl0NCg0Kcm0obGlzdCA9IGxzKCkpDQpgYGANCg0KIyMjIOmbhuWQiOi/kOeulw0KDQpgYGBSDQogIGZpbnRlcnNlY3QoZHQxLCBkdDIpDQogIGZzZXRkaWZmKGR0MSwgZHQyKQ0KICBmdW5pb24oZHQxLCBkdDIpDQogIGZzZXRlcXVhbChkdDEsIGR0MikNCmBgYA0KDQojIyDpq5jnuqflupTnlKjlrp7kvosNCg0KYGBge3J9DQoNCiMjIOaciEvnur/lm77mlbDmja7nmoTmlbTnkIYNCg0KIyAxLiDkuqfnlJ/ml6XmnJ/luo/liJcNCm1hcmtldF9kYXRhIDwtIGRhdGEudGFibGUoZGF0ZSA9IChhcy5EYXRlKCIyMDE1LTA1LTAxIikgKyAwOjI5OSkpDQpzZXQuc2VlZCgxMjUpDQoNCiMgMi4g5Lqn55Sf5oiQ5Lqk5Lu35qC85ZKM5pWw6YeP5bqP5YiXDQojIOiCoeW4guS7t+agvOaYr+S4gOS4qumaj+acuua4uOi1sOi/h+eoi++8jOWwhjMwMOWkqeeahOWPmOWMlueOh+e0r+S5mOi1t+adpQ0KIyDmiJDkuqTph48gdm9sdW1lIOWPlumaj+acuuaVsA0KbWFya2V0X2RhdGFbLCBgOj1gKA0KICBwcmljZSA9ICgoMSArIHJub3JtKDMwMCwgMC4wMDEsIDAuMDUpKSAlPiUgY3VtcHJvZCgpICogMzApICU+JSByb3VuZCgyKSwNCiAgdm9sdW1lID0gcmJpbm9tKDMwMCwgNTAwMCwgMC44KQ0KKV0NCmhlYWQobWFya2V0X2RhdGEpDQoNCiMgMy4g6IKh5Lu36LWw5Yq/5Zu+DQpwbG90KHByaWNlIH4gZGF0ZSwNCiAgZGF0YSA9IG1hcmtldF9kYXRhLA0KICB0eXBlID0gImwiLA0KICBtYWluID0gIk1hcmtldCBkYXRhIg0KKQ0KDQojIDQuIOiOt+WPluaoqui9tCBkb21haW4NCm1hcmtldF9kYXRhWywgcmFuZ2UoZGF0ZSldICMg5rKh5pyJOj3vvIzmiYDku6Xov5nkuI3mmK91cGRhdGXvvIzogIzmmK9zdW1tYXJpemUNCg0KIyA1LiDmjInmnIjliIbnu4TvvIzmr4/nu4Tnu5/orqHmnIDlpKfjgIHmnIDlsI/jgIHmnIDml6njgIHmnIDmmZrku7fmoLzvvIzov5nlsLHmmK/mnIhL57q/5Zu+77yB77yB77yBDQptb250aGx5IDwtIG1hcmtldF9kYXRhWywNCiAgIyDov5nmoLflhpkgbGlzdCDlsLHlvojlg4/plK7lgLzlr7nkuoYNCiAgLigNCiAgICBvcGVuID0gcHJpY2VbWzFdXSwNCiAgICBoaWdoID0gbWF4KHByaWNlKSwNCiAgICBsb3cgPSBtaW4ocHJpY2UpLA0KICAgIGNsb3NlID0gcHJpY2VbWy5OXV0NCiAgKSwNCiAga2V5YnkgPSAuKA0KICAgIHllYXIgPSB5ZWFyKGRhdGUpLA0KICAgIG1vbnRoID0gbW9udGgoZGF0ZSkNCiAgKQ0KXQ0KaGVhZChtb250aGx5KQ0KDQoNCiMgNi4g6Ieq5a6a5LmJ5Ye95pWw77yM6ZKI5a+55LiN5ZCM55qE5YiX5Y+v5Lul5YiG57uE6K6h566X5bmz5Z2H5YC8DQphdmVyYWdlIDwtIGZ1bmN0aW9uKGNvbHVtbikgew0KICBtYXJrZXRfZGF0YVssDQogICAgLigNCiAgICAgIGF2ZXJhZ2UgPSBtZWFuKC5TRFtbY29sdW1uXV0pDQogICAgKSwNCiAgICBieSA9IC4oeWVhciA9IHllYXIoZGF0ZSkpDQogIF0NCn0NCmF2ZXJhZ2UoInByaWNlIikNCmF2ZXJhZ2UoInZvbHVtZSIpDQpgYGANCg==</div>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeSourceEmbed("data.table.Rmd");
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3,h4",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

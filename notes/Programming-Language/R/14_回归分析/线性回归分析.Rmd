@@ -1,0 +1,1205 @@
+---
+title: "Linear Regression Analysis"
+subtitle: ''
+author: "Humoon"
+date: "`r Sys.Date()`"
+output:
+  html_document: 
+    code_download: true
+    css: ["../css/drake.css", "../css/style.css"]
+    fig_caption: yes
+    theme: united
+    highlight: haddock
+    number_sections: no
+    toc: yes
+    toc_depth: 4
+    toc_float:
+      collapsed: yes
+      smooth_scroll: yes
+documentclass: ctexart
+classoption: hyperref,
+---
+
+
+```{css, echo=FALSE}
+/* 还可以在 yaml 头部加入 css:"style.css" 来使用外部css文件 */
+  
+  
+/* 全局 */
+
+body {
+    font-size: 16px;
+    color: #333333;
+    font-family: sans-serif, 'Segoe UI', Tahoma, Geneva, Verdana, SimSun;
+}
+
+p,
+blockquote,
+ul,
+ol,
+dl,
+table {
+    margin: 0.8em 0;
+}
+
+
+/* 多级标题 */
+
+h1 {
+    font-size: 32px;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    color: red;
+    font-weight: bold;
+}
+
+h2 {
+    font-size: 28px;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    color: purple;
+    font-weight: bold;
+}
+
+h3 {
+    color: darkslateblue;
+    font-size: 24px;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+h4 {
+    font-size: 20px;
+}
+
+h1.title,
+h3.subtitle,
+h4.author,
+h4.date {
+    margin-top: 0.5em;
+    margin-bottom: 0em;
+}
+
+h4.date {
+  margin-bottom: 2em;
+}
+
+/* 链接 */
+
+a {
+  color: blue;
+}
+
+/* 代码 */
+
+code,
+.md-fences {
+  color: darkred;
+  font-family: Courier;
+  font-weight: bold;
+}
+
+div.sourceCode code {
+  font-size: 14px;
+  color: black;
+  font-family: Consolas;
+  font-weight: normal;
+}
+
+div.sourceCode code.sourceCode span.fu {
+  color: #F75000;
+}
+
+div.sourceCode code.sourceCode span.sc {
+  color: blue;
+}
+
+div.sourceCode code.sourceCode span.st {
+  color: green;
+}
+
+div.sourceCode code.sourceCode span.co {
+  color: grey;
+}
+
+div.sourceCode code.sourceCode span.dv {
+  color: BlueViolet;
+}
+
+div.sourceCode code.sourceCode span.cn {
+  color: darkcyan;
+}
+
+div.sourceCode code.sourceCode span.at {
+  color: royalblue;
+}
+
+/* 粗体 */
+strong {
+  font-family: 'Microsoft YaHei';
+}
+
+/* 列表项 */
+
+ul,
+ol {
+    margin: 0 0 1.5em 0.5em;
+}
+
+h3+ul,
+h4+ul,
+h5+ul,
+h6+ul,
+h3+ol,
+h4+ol,
+h5+ol,
+h6+ol {
+    margin-top: 0.5em;
+}
+
+p+ul,
+p+ol {
+    margin-top: 0.5em;
+}
+
+li>ul,
+li>ol {
+    margin-top: inherit;
+    margin-bottom: 0;
+    margin-left: 0.5em;
+}
+
+ul>li {
+    list-style-type: disc;
+    list-style-position: outside;
+}
+
+li ul>li {
+    list-style-type: circle;
+}
+
+ol>li {
+    list-style-type: decimal;
+    list-style-position: outside;
+}
+
+li ol>li {
+    list-style-type: upper-alpha;
+}
+
+li li ol>li {
+    list-style-type: lower-greek;
+}
+
+
+/* 首行缩进 */
+
+p {
+    text-indent: 0em;
+}
+
+
+/* 表格 */
+  
+div.pagedtable{
+  font-size:12px;
+}
+
+table {
+    padding: 0;
+    word-break: initial;
+}
+
+table tr {
+    border-top: 1px solid #dfe2e5;
+    margin: 0;
+    padding: 0;
+}
+
+table tr:nth-child(2n),
+thead {
+    background-color: #fafafa;
+}
+
+table tr th {
+    font-weight: bold;
+    border: 1px solid #dfe2e5;
+    border-bottom: 0;
+    text-align: left;
+    margin: 0;
+    padding: 6px 13px;
+}
+
+table tr td {
+    border: 1px solid #dfe2e5;
+    text-align: left;
+    margin: 0;
+    padding: 6px 13px;
+}
+
+table tr th:first-child,
+table tr td:first-child {
+    margin-top: 0;
+}
+
+table tr th:last-child,
+table tr td:last-child {
+    margin-bottom: 0;
+}
+
+
+/* 侧边栏 */
+div.col-lg-3 {
+  width: 25%;
+  max-width: 250px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 200px;
+  max-height: 90%;
+  font-size: 16px;
+}
+
+div.toc-content {
+  padding-left: 0px;
+  padding-right: 40px;
+}
+```
+
+
+```{r setup, include = FALSE}
+source("./config/Rmarkdown_config.R")
+
+## global options ===================================
+knitr::opts_chunk$set(
+  width = config$width,
+  fig.width = config$fig.width,
+  fig.asp = config$fig.asp,
+  out.width = config$out.width,
+  fig.align = config$fig.align,
+  fig.path = config$fig.path,
+  fig.show = config$fig.show,
+  warn = config$warn,
+  warning = config$warning,
+  message = config$message,
+  echo = config$echo,
+  eval = config$eval,
+  tidy = config$tidy,
+  comment = config$comment,
+  collapse = config$collapse,
+  cache = config$cache,
+  cache.comments = config$cache.comments,
+  autodep = config$autodep
+)
+
+## use necessary packages
+library("pacman")
+p_load(
+  # statistics
+  BSDA, maxLik,
+  # data processing
+  tidyverse, lubridate, data.table, magrittr,
+  # visualization
+  ggthemes, showtext, gridExtra,
+  # 可交互表格 DT::datatable()
+  DT
+)
+
+## database engine
+options(sqldf.driver = "SQLite")
+
+## plotting
+# 包含图的代码块需要fig.showtext = TRUE选项
+showtext_auto(enable = TRUE)
+# ggplot2图形需要在主题中显式指定中文字体才能正常显示图中的中文
+windowsFonts(YaHei = windowsFont("Microsoft YaHei"))
+# pdf中图形内部的中文字体设置
+pdf.options(family = "GB1")
+
+## 自定义图形主题
+# common template
+mytheme <- theme_economist_white() +
+  theme(
+    text = element_text(family = "YaHei"),
+    plot.title = element_text(face = "bold", size = 14),
+    plot.subtitle = element_text(size = 12),
+    plot.caption = element_text(
+      hjust = 0,
+      size = 10,
+      margin = margin(2, 0, 0, 0, "pt")
+    ),
+    plot.margin = margin(12, 10, 12, 0, "pt"),
+    legend.position = "top",
+    legend.justification = "left",
+    legend.margin = margin(4, 0, 0, 0, "pt"),
+    legend.key.size = unit(1, "lines"),
+    legend.title = element_text(size = 12),
+    legend.text = element_text(size = 10, margin = margin(0, 0, 0, 0, "pt")),
+    axis.text = element_text(size = 10, margin = margin(2, 0, 2, 0, "pt")),
+    axis.ticks.length = unit(-4, "pt")
+  )
+# histogram template
+theme_bar <- theme_economist_white() +
+  theme(
+    text = element_text(family = "YaHei"),
+    plot.title = element_text(face = "bold", size = 14),
+    plot.subtitle = element_text(size = 12),
+    plot.caption = element_text(
+      hjust = 0,
+      size = 10,
+      margin = margin(0, 0, 0, 0, "pt")
+    ),
+    plot.margin = margin(12, 0, 12, 10, "pt"),
+    legend.position = "top",
+    legend.justification = "left",
+    legend.margin = margin(4, 0, 0, 0, "pt"),
+    legend.key.size = unit(0.7, "lines"),
+    legend.title = element_blank(),
+    legend.text = element_text(size = 10, margin = margin(0, 8, 0, 4, "pt")),
+    axis.text = element_text(size = 10),
+    axis.ticks.length = unit(0, "pt") # 不要坐标轴须
+  )
+```
+
+## 一元线性回归
+
+### 探索性数据分析
+
+```{r}
+# input data
+consumption <-
+  c(594, 638, 1122, 1155, 1408, 1595, 1969, 2078, 2585, 2530)
+income <-
+  c(800, 1100, 1400, 1700, 2000, 2300, 2600, 2900, 3200, 3500)
+
+# 先画图
+plot(income, consumption)
+abline(lm(consumption ~ income))
+
+# 看看相关系数
+cor(income, consumption)
+```
+
+### 线性回归模型的创建和查看
+
+语法：`lm(formula, data, ...)`
+
+formula
+为回归表达式，一般是`y~x`，默认包含截距项；不需要截距项时要写成`y~-1+x`或`y~0+x`
+
+| `formula`中常用的符号 | 含义                                 |
+|-----------------------|--------------------------------------|
+| \~                    | 分隔符，左为被解释变量，右为解释变量 |
+| -1                    | 删除截距项                           |
+| \+                    | 分割解释变量                         |
+| :                     | 分隔符，用于两个解释变量的交互项中间 |
+| \*                    | 表示所有可能的交互项                 |
+| \^                    | 交互项达到某个次数                   |
+| .                     | 除响应变量之外的所有变量             |
+| \-                    | 从等式中移除某个解释变量             |
+
+```{r}
+# 有截距项回归
+lm_single <- lm(consumption ~ income)
+lm_single # 显示最基本的两个系数
+class(lm_single) # lm 类对象
+str(lm_single) # lm()返回长度为12的列表，可以逐项展开观察
+
+# 返回系数向量的两种写法
+coef(lm_single)
+lm_single$coefficients
+
+# 概览回归结果: summary(lm())
+slm_single <- summary(lm_single)
+class(slm_single) # summary.lm 类的对象
+slm_single
+
+# 系数详情
+coef(slm_single)
+slm_single$coefficients # 注意，这是一个矩阵。可以使用行列索引选取其中数据
+slm_single$coef[, 2] # 第二列为系数的标准误
+
+# 对\sigma的估计，有了这个参数才能计算系数的标准误
+slm_single$sigma
+
+# 模型系数的置信区间
+confint(lm_single, level = 0.95) # 注意第一个参数是lm而非slm!
+
+
+## 截距项不显著，故使用无截距项回归
+lm(consumption ~ -1 + income) %>% summary()
+# R^2变大了，所以去掉截距项是正确的
+```
+
+### OLS和MLE两种参数估计方法
+
+```{r}
+## 首先定义一个回调函数，传入模型参数向量，返回要取极值的表达式
+
+
+## MLE，最大化对数似然函数 likelihood function
+mleFunction <- function(para) {
+  n <- length(consumption)
+  e <- consumption - para[1] - para[2] * income # 残差
+  return(-0.5 * n * log(2 * pi) - n * log(para[3]) - 0.5 * sum(e^2) / (para[3]^2))
+  # 注意以上两行都是向量化计算
+}
+
+# maxLik()令似然函数取极值，估计出模型参数，建立回归模型
+lm_mle <- maxLik(mleFunction, start = c(0.1, 1, 1)) %T>% class()
+coef(lm_mle) # 3个参数，分别为截距项、一次项系数和\sigma的估计量
+
+
+## OLS，最小化残差平方和
+olsFunction <- function(para) {
+  e <- consumption - para[1] - para[2] * income
+  return(sum(e^2))
+}
+optim(c(100, 1), olsFunction) # 这不是一个回归模型对象，但它能显示模型参数值
+```
+
+### 统计检验
+
+#### 拟合优度
+
+```{r}
+slm_single$r.squared
+slm_single$adj.r.squared
+```
+
+#### t 检验
+
+看`slm$coef`展示的系数矩阵的三四列即可，使用了t检验
+
+其实直接显示slm摘要更方面，直接给出是否显著的星号
+
+```{r}
+slm_single$coefficients
+slm_single$coef
+slm_single
+```
+
+### 模型预测
+
+#### 点预测
+
+```{r}
+# 以下三种写法等价
+slm_single$coef[, 1][1] + slm_single$coef[, 1][2] * 4000
+coef(lm_single)[1] + coef(lm_single)[2] * 4000
+predict(lm_single, newdata = data.frame(income = 4000)) # 注意，X0必须是数据框格式
+
+
+round(fitted(lm_single), 2) # 模型在样本内的拟合值
+round(resid(lm_single), 2) # 模型在样本内的残差
+plot(lm_single) # 自动生成四个图
+```
+
+#### 区间预测
+
+$E(Y|X_0)$ 的置信区间（较窄）
+`predict(..., interval = "confidence", level = 0.95)`
+
+$Y_0$ 的置信区间（较宽）
+`predict(..., interval = "prediction", level = 0.95)`
+
+```{r}
+predict(
+  lm_single,
+  newdata = data.frame(income = 4000),
+  interval = "confidence",
+  level = 0.95
+)
+predict(
+  lm_single,
+  newdata = data.frame(income = 4000),
+  interval = "prediction",
+  level = 0.95
+)
+```
+
+#### 图示
+
+```{r}
+opar <- par(no.readonly = TRUE)
+par(mfrow = c(1, 1))
+sx <- sort(income) # 自变量排序
+confidence <- predict(lm_single, data.frame(income = sx), interval = "confidence")
+prediction <- predict(lm_single, data.frame(income = sx), interval = "prediction")
+plot(income, consumption)
+abline(lm_single) # 添加回归线
+lines(sx, confidence[, 2])
+lines(sx, confidence[, 3])
+lines(sx, prediction[, 2], lty = 3)
+lines(sx, prediction[, 3], lty = 3)
+par(opar)
+```
+
+```{r}
+ggplot(mapping = aes(x = income, y = consumption)) +
+  geom_point() +
+  geom_smooth(method = lm)
+```
+
+### 综合案例
+
+```{r}
+rm(list = ls())
+
+# 探索性数据分析
+data <- read.table("./data/medicine.txt", head = T)
+attach(data)
+plot(x, y, xlab = "人口数", ylab = "医疗机构数")
+abline(lm(y ~ x))
+cor(x, y) 
+cor.test(x, y) # 更详细
+
+# 建模和统计检验
+# 先看F检验,再看系数的t检验,最后看R^2
+lm <- lm(y ~ x)
+lm.summary <- summary(lm)
+lm.summary # 截距项不显著，说明回归方程可能经过原点
+lm.summary$r.squared
+lm.summary$adj.r.squared
+
+# 去掉截距项，重新建模
+lm2 <- lm(y ~ -1 + x)
+lm2.summary <- summary(lm2)
+lm2.summary
+
+# 作图
+par(mfrow = c(1, 1))
+sx <- sort(x)
+pred <- predict(lm2, data.frame(x = sx), interval = "prediction")
+conf <- predict(lm2, data.frame(x = sx), interval = "confidence")
+plot(x, y)
+abline(lm2)
+lines(sx, conf[, 2])
+lines(sx, conf[, 3])
+lines(sx, pred[, 2], lty = 3)
+lines(sx, pred[, 3], lty = 3)
+detach()
+```
+
+## 多元线性回归
+
+### 模型建构
+
+```{r}
+rm(list = ls())
+
+data <- read.csv("./data/tax.csv")
+lm3 <- lm(tax ~ GDP + expand + CPI, data = data)
+coef(lm3)
+```
+
+### 最大似然估计
+
+对数似然函数
+
+$$
+l \equiv \ln(L)=-n\ln(\sqrt{2\pi}\sigma)-\frac{1}{2\sigma^2}(\boldsymbol{Y-X\hat\beta})'(\boldsymbol{Y-X\hat\beta})
+$$
+
+```{r}
+## MLE
+
+# 自己构造对数似然函数
+loglik <- function(para) {
+  N <- length(data$tax)
+  e <- data$tax - para[1] - para[2] * data$GDP - para[3] * data$expand - para[4] * data$CPI
+  ll <- -N * log(sqrt(2 * pi) * para[5]) - 0.5 * sum(e^2) / (para[5]^2)
+  return(ll)
+}
+
+# maxLik()能自动找出似然函数极值时对应的参数值
+mle3 <- maxLik(loglik,
+  start = c(6616, 0.04, 0.6, 58, 100), # 迭代逼近，结果取决于初始值，未必为全局最优。如果初始值选的不好，结果可能和OLS的结果差的非常多。
+  iterlim = 10000
+)
+mle3
+coef(mle3)
+summary(mle3)
+```
+
+### 统计检验
+
+#### 拟合优度
+
+多元回归应该用 adjusted $R^2$
+
+```{r}
+slm3 <- summary(lm3)
+slm3$r.squared # 注意是在slm对象中提取，而非lm对象
+slm3$adj.r.squared
+```
+
+#### F检验
+
+```{r}
+slm3
+```
+
+#### t 检验
+
+```{r}
+slm3$coef
+```
+
+### 模型预测
+
+#### 点预测
+
+```{r}
+coef(lm3)
+# 最笨的写法
+coef(lm3)[1] + coef(lm3)[2] * 520000 + coef(lm3)[3] * 130000 + coef(lm3)[4] *
+  103
+# predict()
+predict(lm3, newdata = data.frame(GDP = 520000, expand = 130000, CPI = 103))
+```
+
+#### 区间预测
+
+```{r}
+predict(lm3,
+  newdata = data.frame(GDP = 520000, expand = 130000, CPI = 103),
+  interval = "confidence"
+)
+predict(lm3,
+  newdata = data.frame(GDP = 520000, expand = 130000, CPI = 103),
+  interval = "prediction"
+)
+
+# 不指定第二个参数，就是样本内拟合
+predict(lm3, interval = "confidence")
+predict(lm3, interval = "prediction")
+```
+
+### 综合案例
+
+```{r}
+rm(list = ls())
+par(mfrow = c(2, 3))
+
+data <- read.table("./data/travel.txt", head = 1)
+attach(data)
+
+## 探索性数据分析
+plot(x1, y, xlab = "国内旅游人数", ylab = "国内旅游收入");abline(lm(y ~ x1))
+plot(x2, y, xlab = "城镇居民人均旅游支出", ylab = "国内旅游收入");abline(lm(y ~ x2))
+plot(x3, y, xlab = "农村居民人均旅游支出", ylab = "国内旅游收入");abline(lm(y ~ x3))
+plot(x4, y, xlab = "公路里程", ylab = "国内旅游收入");abline(lm(y ~ x4))
+plot(x5, y, xlab = "铁路里程", ylab = "国内旅游收入");abline(lm(y ~ x5))
+
+c(cor(x1, y), cor(x2, y), cor(x3, y), cor(x4, y), cor(x5, y))
+# 散点图矩阵，可以观察哪些自变量之间存在强相关，可能导致多重共线性
+pairs(data[, 3:7])
+
+
+## 建模
+lm <- lm(y ~ x1 + x2 + x3 + x4 + x5)
+lm.summary <- summary(lm)
+lm.summary # 有三个系数不显著，可能存在多重共线性，下一章讨论
+
+
+# 统计检验
+lm.summary$r.squared
+lm.summary$adj.r.squared
+
+
+# 计算相关系数，看看多重共线性可能来自哪里
+c(cor(x1, x2), cor(x1, x3), cor(x4, x5))
+
+
+# 排除两个变量重新建模
+lm2 <- lm(y ~ x2 + x3 + x4)
+lm2.summary <- summary(lm2)
+lm2.summary # 三项检验均通过
+
+## 预测
+conf <- predict(lm2, data.frame(x2, x3, x4), interval = "confidence")
+pred <- predict(lm2, data.frame(x2, x3, x4), interval = "prediction")
+```
+
+## 多重共线性 multicolinarity
+
+### 原因
+
+变量之间存在较强的相关性，$\text{det}(\boldsymbol{X}'\boldsymbol{X})\rightarrow 0$，$\left(\boldsymbol{X}^T \boldsymbol{X}\right)^{-1}$
+中的元素就会变得非常大，从而导致系数的标准误
+$\operatorname{se}(\hat{\beta}_{i})=\hat{\sigma} \sqrt{\left(\boldsymbol{X}^T \boldsymbol{X}\right)^{-1}_{ii}}$
+非常大。此时，对模型系数的估计会丧失有效性。
+
+例：在二元线性模型中，若两个自变量的相关系数为 0.95 ，则相比于相关系数为
+0，参数的标准误会变为 3 倍多。
+
+### 多重共线性的检验
+
+#### 判定系数法
+
+$R^2$ 较大，$F$ 值也很高，但每个单独系数的
+t值都很小，即可怀疑存在多重共线性。例如：
+
+```{r}
+dat <- read.csv("./data/11-1.csv")
+lm3 <- lm(revenue ~ industry + agriculture + construction + consumption + pop + disaster, data = dat)
+summary(lm3)
+```
+
+#### Klein 检验法
+
+若有两个解释变量间的相关系数大于 $R^2$,高度怀疑存在多重共线性。
+
+```{r}
+cor(dat[,-c(1,8)])
+```
+
+#### 回归检验法
+
+以某个解释变量 $x_k$ 对所有其他解释变量进行线性回归，若共有 p
+个解释变量，则依次进行 p 次回归。
+
+若其中存在显著的回归方程，则说明存在多重共线性；若 p
+个回归模型都不显著，说明不存在多重共线性。
+
+这种方法**不仅能检验多重共线性，还能确定究竟是哪些变量引起了多重共线性**。
+
+```{r}
+xNames <- colnames(dat)[2:7]
+lms <- list()
+
+for (i in 1:6) {
+  lms[[i]] <- lm(
+    dat %>% extract2(xNames[i]) ~
+    dat %>%
+      extract2(xNames[-i][1]) +
+      dat %>%
+      extract2(xNames[-i][2]) +
+      dat %>%
+      extract2(xNames[-i][3]) +
+      dat %>%
+      extract2(xNames[-i][4]) +
+      dat %>%
+      extract2(xNames[-i][5])
+  )
+}
+
+index <- map_dbl(lms, function(lm) {
+  return(summary(lm)$adj.r.squared)
+}) %>%
+  which.max()
+
+cat(index)
+cat("\n")
+```
+
+因此，第三个解释变量与其他解释变量之间的回归方程最好地反映了变量之间的多重共线性。
+
+#### 特征根法
+
+矩阵的行列式等于其特征根的连乘积。因此，若矩阵$\boldsymbol{X}' \boldsymbol{X}$至少有一个特征根近似为
+0，则其行列式趋于零，存在多重共线性。
+
+```{r}
+x <- cbind(rep(1, length(dat[, 1])), dat[, -c(1, 8)]) # X矩阵
+x <- as.matrix(x)
+eigen(t(x) %*% x) # 发现最后一个特征根（values）近似为0
+```
+
+#### 条件指数(Condition Index, CI)法
+
+矩阵$X'X$的最大特征根$\lambda_m$与特征根$\lambda_i$的商的平方根称为特征根$\lambda_i$的条件指数(Condition
+Index)，记为 $$
+k_i = \sqrt {\frac{\lambda_m}{\lambda_i}}
+$$
+
+-   $0<k<10$时，不存在多重共线性
+-   $10\leq k<100$时，存在较强的多重共线性
+-   $k\geq100$时，存在严重的多重共线性
+
+```{r}
+CI_7 <- (eigen(t(x) %*% x)$values[1] / eigen(t(x) %*% x)$values[7]) %>% sqrt()
+CI_7
+```
+
+第 7 个特征根的 Condition Index 远大于100，故存在严重的多重共线性。
+
+#### 方差膨胀因子(variance inflation factor, VIF)
+
+自变量 $X_j$ 的方差膨胀因子
+$VIF_j \geq 10$时，就说明$x_j$与其余自变量之间存在严重的多重共线性。
+
+```{r}
+# car包和DAAG包均有vif()检验函数
+car::vif(lm3)
+DAAG::vif(lm3, digits = 5)
+```
+
+发现
+construction与其余变量的多重共线性最强，这与回归检验法得出的结论一致。
+
+### 多重共线性的克服
+
+#### 逐步回归
+
+逐步回归是从众多的变量中选出最优模型的变量的一套方法。最优模型一般通过一些准则来确定，比如
+F 值，$R^2$，AIC 等。
+
+forward 逐步回归，逐个引入变量，`step(lm3, direction = "forward")`
+
+![](images/%E9%80%90%E6%AD%A5%E5%9B%9E%E5%BD%92.png)
+
+backward
+逐步回归是先引入所有变量，然后逐个剔除，`step(lm3, direction = "backward")`
+
+both 逐步回归先逐步剔除变量，但可以后面的步骤中重新引入原先被剔除的变
+量，是双向的（推荐这种方法）。用`step(lm, direction = "both")`命令即可进行，省的自己写循环，非常方便。
+
+```{r}
+# 通过若干步比较，得出最优回归模型
+lm_step <- step(lm3, direction = "both")
+# 所有系数都是显著的
+lm_step %>% summary()
+# 但仍存在多重共线性
+DAAG::vif(lm_step, digits = 5)
+```
+
+#### 岭回归
+
+![](images/%E5%B2%AD%E5%9B%9E%E5%BD%921.png)
+
+![](images/%E5%B2%AD%E5%9B%9E%E5%BD%922.png)
+
+![](images/%E5%B2%AD%E5%9B%9E%E5%BD%923.png)
+
+`MASS::lm.ridge()`函数可以用来做岭估计，其用法与`lm()`用法类似。不指定$\lambda$时，默认为0
+
+```{r}
+library(MASS)
+
+lm.r <-
+  lm.ridge(revenue ~ industry + agriculture + construction + consumption +
+    pop + disaster,
+  data = dat
+  ) # 默认lambda为0
+lm.r
+
+# 岭迹图
+plot(
+  lm.ridge(
+    revenue ~ industry + agriculture + construction + consumption + pop + disaster,
+    data = dat,
+    lambda = seq(0, 0.3, 0.001)
+  ),
+  lwd = 3
+)
+
+# 自动选出最佳的\lambda
+select(
+  lm.ridge(
+    revenue ~ industry + agriculture + construction + consumption + pop + disaster,
+    data = dat,
+    lambda = seq(0, 0.3, 0.001)
+  )
+)
+
+# 使用最佳的\lambda做岭回归
+lm.ridge(
+  revenue ~ industry + agriculture + construction + consumption + pop + disaster,
+  data = dat,
+  lambda = 0.004
+)
+```
+
+## 异方差 hetersdascity
+
+### 说明
+
+若
+
+$$\operatorname{Var}(\boldsymbol{\varepsilon})=\begin{bmatrix}
+\sigma_{11} & 0 & \ldots & 0 \\
+0 & \sigma_{22} & \ldots & 0 \\
+\vdots & \vdots & \vdots & \vdots \\
+0 & 0 & \ldots & \sigma_{n n}
+\end{bmatrix}\neq \sigma^{2} \mathbf{I}$$
+
+称该随机扰动项存在异方差。异方差的主要后果是估计量不再有效，因此回对模型的
+F 检验和 t 检验带来问题。
+
+### 异方差的诊断
+
+#### 图示法（定性、粗略）
+
+##### 散点图
+
+y对各解释变量作散点图。
+
+```{r}
+agricul <- read.csv("./data/11-2.csv")
+y <- agricul[, 2]
+x <- agricul[, 1]
+plot(x, y)
+```
+
+散点图的**喇叭分布**，表明数据存在异方差。
+
+##### 残差图
+
+各解释变量对残差平方或残差绝对值作散点图
+
+```{r}
+lm.a <- lm(y ~ x)
+summary(lm.a)
+plot(resid(lm.a) ~ x)
+```
+
+残差也呈喇叭状分布
+
+#### Goldfeld-Quandt检验
+
+该检验的原理请查阅相关教材。
+
+```{r}
+lmtest::gqtest(lm.a, order.by = ~x)
+```
+
+显著，拒绝原假设，认为存在异方差。
+
+#### Glejser检验
+
+令残差绝对值对自变量进行对数化的暴力穷举回归，探索它们之间的函数关系。如果有显著的函数关系，即存在异方差。
+
+Glejser
+检验的特点是不仅能对异方差的存在进行判断，而且还能对异方差随解释变量变化的函数形式进行诊断。但该方法是属于穷举法，也存在很多缺陷。
+
+```{r}
+# 尝试检验一下残差与sqrt(x)的关系，很显著，可见二者存在函数关系
+re <- resid(lm.a)
+abre <- abs(re)
+summary(lm(abre ~ I(sqrt(x))))
+summary(lm(abre ~ -1 + I(sqrt(x))))
+```
+
+#### White检验
+
+怀特检验的特点是，不仅能够检验异方差的存在，同时在多变量的情况下，还能够判断出是哪一个变量引起的异方差，通常适用于界面数据的情形。
+
+该方法不需要异方差的先验信息，但**要求观测值为大样本**。
+
+```{r}
+lmtest::bptest(lm.a, ~ x + I(x^2)) # white检验拒绝原假设，认为存在异方差
+```
+
+### 异方差的克服
+
+#### 广义最小二乘法
+
+在Glejser检验中，发现残差绝对值与解释变量的函数关系：$\hat \epsilon_i = 0.2576\sqrt X_i$。因此把每个变量都除以$0.2576\sqrt X_i$（变换），消除异方差后再回归。
+
+由此得到的映射关系，需要还原，才能应用于预测。
+
+```{r}
+ys <- y / (0.2576 * sqrt(x))
+xs <- x / (0.2576 * sqrt(x))
+plot(xs, ys)
+lm.sa <- lm(ys ~ xs)
+summary(lm.sa)
+plot(xs, resid(lm.sa))
+
+# white检验通过了，无法拒绝H0
+lmtest::bptest(lm.sa, ~ xs + I(xs^2))
+```
+
+#### 取对数
+
+在实际中，很多情况，通过对模型的变量取对数降低异方差性的影响。
+
+这是因为经过对数变换后的线性模型，残差表示相对误差，而相对误差往往比绝对误差有较小的差异。
+
+```{r}
+lny <- log(y)
+lnx <- log(x)
+plot(lnx, lny) # 散点图不再是喇叭状
+lm.lna <- lm(lny ~ lnx)
+summary(lm.lna)
+plot(lnx, resid(lm.lna)) # 残差图也不再是喇叭状
+
+lmtest::bptest(lm.lna, ~ lnx + I(lnx^2)) # White 检验通过
+```
+
+## 自相关
+
+### 说明
+
+#### 定义
+
+保持 $\boldsymbol{X}$ 不变，抽取多个容量为 $n$ 的样本，则
+$\boldsymbol{\varepsilon_{i}}$ 和 $\boldsymbol{\varepsilon_{j}}$
+都是序列。若
+$\operatorname{Cov}\left(\boldsymbol{\varepsilon_{i}}, \boldsymbol{\varepsilon_{j}}\right) \neq 0, \quad(i \neq j)$，则称误差项
+$\varepsilon$ 存在自相关，常见于时间序列数据。
+
+如下例：
+
+```{r}
+rm(list = ls())
+
+dat <- read.csv("./data/11-3.csv")
+y <- dat$expend
+x <- dat$income
+p <- dat$cpi
+yp <- y / p * 100
+xp <- x / p * 100
+lm.in <- lm(yp ~ xp)
+summary(lm.in)
+
+e <- resid(lm.in)
+plot(e, type = "l");abline(h = 0, col = "red") # 残差序列图
+plot(e[-1], e[-length(e)]) # 残差散点图
+```
+
+（1）从残差序列图可以看出残差的变动有系统模式，连续为正和连续为负。（2）从残差序列与残差lag(1)序列之间的散点图可以看出，它们之间存在正相关。
+
+这些表明残差项存在一阶正自相关。
+
+#### 原因
+
+##### 模型中未包含一些自相关的重要解释变量
+
+该变量的影响必然归并到误差项中，从而使误差项呈现自相关。
+
+如消费是收入的函数叠加一个随机误差，但现实中，这个误差项中其实包含了一些难以量化的因素，而这些因素可能并不是随机分布的。如繁荣期，人们预期乐观，误差项就会为正；萧条期，人们悲观，误差项为负。
+
+##### 变量惯性
+
+如蛛网模型导致农产品产量和价格呈现跨期负相关。
+
+#### 危害
+
+OLS 估计量仍具有无偏性，但丧失有效性。
+
+### 自相关的诊断
+
+#### 图示法
+
+残差序列图或者残差散点图。
+
+![](images/%E6%AD%A3%E5%BA%8F%E5%88%97%E7%9B%B8%E5%85%B3.png)
+
+![](images/%E8%B4%9F%E5%BA%8F%E5%88%97%E7%9B%B8%E5%85%B3.png)
+
+#### Durbin-Watson(DW)检验
+
+适用情形：检验随机误差项之间是否存在**一阶**自相关，且样本容量充分大（$n>15$）。
+
+```{r}
+dw <- lmtest::dwtest(lm.in)
+dw 
+```
+p值太小，未通过 DW 检验，说明存在一阶自相关
+
+
+### 自相关的克服
+
+如果序列相关是由于错误地设定模型的数学形式所致，那么就应当修改模型的数学形式。
+
+如果序列相关是由于模型中省略了重要解释变量造成的，那么解决办法就是找出略去的解释变量，把它做为重要解释变量列入模型。
+
+只有当以上两种引起序列相关的原因都消除后，才能认为误差项
+"真正"存在序列相关。然后使用**广义差分法**得到新的系数。
+
+```{r}
+# 结果不仅给出了新的系数，还给出了D-W检验的前后比较，从显著到不显著。可以认为自相关性基本消除。
+orcutt::cochrane.orcutt(lm.in)
+```
+
+广义差分后回归，截距项为119.8985，自变量系数为0.5834
+
+
+## 虚拟变量（Dummy Variable）
+
+可参考庞皓《计量经济学》第八章
+
+
+### 说明
+
+将不能定量处理的变量量化，构造只取 0/1 的人工变量，通常称为 dummy variables，记为 D.
+
+例：假“职业”的取值分别为：工人、农民、学生、企业职员、其他，则可以增加 4 个虚拟变量来代替“职业”这个变量，分别为D1（1=工人/0=非工人）、D2(1=农民/0=非农民)、D3（1=学生/0=非学生）、D4(1=企业职员/0=非企业职员)，最后一个选项“其他”的信息已经包含在这4个变量中了，所以不需要再增加一个D5（1=其他/0=非其他）了。
+
+引入虚拟变量，相当于将不同属性的样本合并，扩大了样本容量，能够提高模型的精度。
+
+### 处理方法
+
+`caret::dummyVars()`
+
+```{r}
+rm(list = ls())
+library(caret) # 必须显式声明，覆盖purrr包中的一个同名函数
+
+customers <- data.frame(
+  id = c(10, 20, 30, 40, 50),
+  gender = c("male", "female", "female", "male", "female"),
+  mood = c("happy", "sad", "happy", "sad", "happy"),
+  outcome = c(1, 1, 0, 0, 0)
+)
+str(customers)
+
+# outcome用0,1标记，但其实是分类变量，因此转换为factor
+customers$outcome <- as.factor(customers$outcome) 
+customers
+
+
+# 对所有分类变量进行虚拟变量处理
+dmy <- caret::dummyVars(~., data = customers)
+trsf <- data.frame(predict(dmy, newdata = customers))
+trsf
+
+
+# 只对gender一个分类变量进行虚拟变量处理
+dmy <- caret::dummyVars(~gender, data = customers)
+trfs <- data.frame(predict(dmy, newdata = customers))
+trfs
+
+# 事实上，有了gendermale列，就不再需要genderfemale列
+# 此时可以使用fullRank=TRUE参数只保留一列
+dmy <- caret::dummyVars(~., data = customers, fullRank = T)
+trfs <- data.frame(predict(dmy, newdata = customers))
+trfs
+```
+
+### 虚拟变量回归
+
+哪本书里的数据？
+
+## 非线性回归模型
+
+以下均为《R数据分析：方法与案例详解》的各章
+
+### 可线性化的非线性回归
+
+#### Cobb-Douglas 生产函数
+
+#### 多项式方程模型
+
+#### 指数函数模型
+
+### 不可线性化的非线性回归
+
+
+## 二元选择模型
+
+因变量不是连续变量，而是离散型数据，需要广义线性模型（generaled linear model, GLM）
+
+### 线性概率模型
+
+### Probit模型
+
+### Logit模型
+
+## 多元选择模型
+
+

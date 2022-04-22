@@ -1,0 +1,332 @@
+---
+title: "Excel Plotting"
+subtitle: ''
+author: "Humoon"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    code_folding: show
+    df_print: paged
+    fig_caption: yes
+    theme: united
+    highlight: haddock
+    number_sections: yes
+    toc: yes
+    toc_depth: 3
+    toc_float:
+      collapsed: true
+      smooth_scroll: FALSE
+  word_document:
+    reference_docx: 
+    fig_caption: yes
+    toc: yes
+    toc_depth: 3
+---
+
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(fig.width=10, fig.height=6, 
+                      fig.path='Figs/', warning=FALSE, 
+                      message=FALSE, cache = T, 
+                      cache.comments = F, comment = '',
+                      options(digits = 3))
+# include=FALSE意为仅运行代码，但隐藏所有代码和结果的输出。
+# out.width和out.height设置图片在输出文档中的宽高。
+# echo为是否显示代码，eval为是否执行代码。
+# results='hide'可以隐藏文本输出，fig.show='hide'可以隐藏图形输出
+```
+
+```{r setup}
+# load necessary packages
+library('tidyverse')
+library('readxl')
+library('lubridate')
+library('reshape2')
+library('ggthemes')
+library('RColorBrewer')
+
+# 自定义偏好字体
+windowsFonts(H=windowsFont("微软雅黑"))  
+
+# 数据准备工作
+set.seed(123) #设定随机种子，保证结果的可重复性
+df <- data.frame(
+  var=LETTERS[1:10], #字母A-J
+  id=1:10, #数字1-10
+  a=runif(10), #10个随机数
+  b=runif(10), #10个随机数
+  c=runif(10), #10个随机数
+  stringsAsFactors = F #不转换为因子
+)
+df 
+# 这是我们在excel中常见的数据集形式，但是在R中，由于作图需要，通常会转换为长数据的形式。
+df1 <- df %>% gather("item",value,-1:-2) %>% 
+  bind_cols(data.frame(item_id=rep(1:3,each=10)))
+df1 
+```
+
+# 数据准备工作
+
+gather()类似于Excel中数据透视的功能，能把一个含有许多变量的宽数据转换成一个长数据，语法为：
+
+> gather(data, key, value, ..., na.rm = FALSE, convert = FALSE,factor_key = FALSE)
+
+核心语法为键值对(key,value)。其中key为新创建的变量；value为创建变量下的数值；...为key所包含的列。上例中-1:-2表示第1个变量var、第2个变量id不需要包含在key中，从而key仅包含后三个变量。
+
+
+# 柱形图
+
+一般来说，ggplot的柱形图默认统计方法（stat）是计数（count）的，但是大多时候，我们更习惯于使用统计完成的数据，因此，在相关的图形参数中必须要增加stat=“identity”这一项。
+
+## 簇状柱形图
+簇状柱形图的特点是在不同类别中，不同变量的数据是横向排列的，因此需要图形参数中设置position="dodge"
+
+```{r}
+ggplot(df1,aes(var,value)) + 
+  geom_bar(aes(fill=item), stat = "identity", 
+# 将item映射为填充，即按item分类观测，每一类用不同的颜色填充
+           position="dodge", width=0.8) + 
+  labs(title="aaa")
+```
+
+## 堆积柱形图
+
+堆积柱形图的特点是在不同类别中，不同变量的数据是纵向堆积的，因此需要图形参数中设置position='stack'
+
+```{r}
+ggplot(df1,aes(var,value))+
+  geom_bar(aes(fill=item), stat = "identity", 
+           position="stack", width=0.8)+
+  labs(title="aaa")
+```
+
+## 百分比堆积柱形图
+
+百分比堆积柱形图的特点是在不同类别中，不同变量的数据转换为百分比后再纵向堆积，因此需要图形参数中设置position='fill'
+```{r}
+ggplot(df1,aes(var,value))+
+  geom_bar(aes(fill=item),stat = "identity",
+           position="fill",width=0.8)+
+  labs(title="aaa")
+```
+
+## 三维柱形图——用分面替代
+
+三维柱形图的特定是利用x轴和y轴分别表示两个分类变量，z轴表示具体数值，但是由于3D的遮挡性，所以通常可视化效果欠佳。在ggplot2中，可以用分面（facet_grid）解决这一问题。
+```{r}
+ggplot(df1,aes(var,value))+
+  geom_bar(aes(fill=item),stat = "identity",width=0.8)+
+  facet_grid(item~.)+ # 分面语句
+  labs(title="aaa")
+```
+
+# 折线图
+
+在ggplot2中，自变量为分类变量的时候是不能使用折线图的（其实也可以，要在geom_line()的aes()中设置group=分类变量），因此，需要将分类变量先转换/标记为数字（一开始df中设置id就是这个用处），然后在标签上使用scale_x_continuous()进行设置后就可以完美解决这一问题。
+
+## 折线图
+
+折线图特点是每个变量先用散点标记，然后相连。因此全部使用默认参数即可。
+
+```{r}
+# 用离散变量画折线图
+ggplot(df1, aes(var,value,color=item)) + 
+  geom_line(aes(group=item))
+
+# 用连续变量画折线图
+ggplot(df1,aes(id,value,colour=item))+
+  geom_line()+
+  scale_x_continuous(breaks = 1:10,labels = LETTERS[1:10]) 
+```
+
+## 堆积折线图
+
+要设置位置参数position="stack"，且不同于折线图，堆积折线图的分组是有顺序的，这一点一定要注意。
+
+```{r}
+ggplot(df1,aes(var,value,color=item))+
+  geom_line(aes(group=item),position="stack")
+
+ggplot(df1,aes(id,value,colour=item))+
+  geom_line(position="stack")+
+  scale_x_continuous(breaks = 1:10,labels = LETTERS[1:10])
+```
+
+## 百分比堆积折线图
+
+百分比堆积折线图特点是所有变量上的不同属性转换成百分比后再进行纵向堆积（所以最高那条线必定是直线…），所以只要设置位置参数position="fill"即可。
+
+```{r}
+ggplot(df1,aes(var,value,colour=item))+
+  geom_line(aes(group=item),position="fill")
+
+ggplot(df1,aes(id,value,colour=item))+
+  geom_line(position="fill")+
+  scale_x_continuous(breaks = 1:10,labels = LETTERS[1:10])
+```
+
+## 带标记的折线图
+
+带标记的折线图特点是在折线图基础上用了点标记，只要增加散点图就可以实现。
+
+```{r}
+ggplot(df1,aes(id,value,colour=item))+
+  geom_line(aes(group=item))+
+  geom_point()
+
+ggplot(df1,aes(id,value,colour=item))+
+  geom_line()+
+  geom_point()+
+  scale_x_continuous(breaks = 1:10,labels = LETTERS[1:10])
+```
+
+## 三维折线图——用分面替代
+
+```{r}
+ggplot(df1,aes(var,value,colour=item))+
+  facet_grid(item~.)+
+  geom_line(aes(group=item))
+
+ggplot(df1,aes(id,value,colour=item))+
+  facet_grid(item~.)+
+  geom_line()+
+  scale_x_continuous(breaks = 1:10,labels = LETTERS[1:10])
+```
+
+# 饼图
+
+在ggplot2中，饼图其实就是柱形图进行直角坐标系到极坐标系的转换。如coord_polar(theta='y')，意为把y变量映射为角度theta，另一个坐标x则为半径r.
+
+语法
+
+> coord_polar(theta = "x", start = 0, direction = 1, clip = "on")      
+
+Parameter| Explanation
+---------|-------------------------------
+theta	   |variable to map angle to (x or y)
+start	   |offset of starting point from 12 o'clock in radians，注意这是弧度值
+direction|1, clockwise; -1, anticlockwise
+clip	   |Should drawing be clipped to the extent of the plot panel? A setting of "on" (the default) means yes, and a setting of "off" means no. For details, please see coord_cartesian().
+
+## 饼图
+
+```{r}
+# 百分比堆积柱状图，保证合计为1，将整个饼占满
+ggplot(df,aes(x = 1, y = a, fill=var))+
+  geom_bar(stat="identity",position="fill")+ 
+  coord_polar(theta='y')
+
+# 堆积柱状图，合计超过1
+ggplot(df,aes(x = 1, y = a, fill=var))+
+  geom_bar(stat="identity",position = 'stack')+ 
+  coord_polar(theta='y')
+
+# 簇状柱状图，不同半径代表不同的x值
+ggplot(df,aes(x = 1, y = a, fill=var))+
+  geom_bar(stat="identity",position = 'dodge')+ 
+  coord_polar(theta='y')
+
+# 设置零点的位置
+ggplot(df,aes(x = 1, y = a, fill=var))+
+  geom_bar(stat="identity",position="fill")+ 
+  coord_polar(theta='y',start=pi/2)
+
+# 设置逆时针，先左后右
+ggplot(df,aes(x = 1, y = a, fill=var))+
+  geom_bar(stat="identity",position="fill")+ 
+  coord_polar(theta='y',direction=-1)
+```
+
+## 复合饼图
+
+## 复合条饼图
+
+## 圆环图
+
+圆环图的特点是每一个圆环表示一个变量。
+
+```{r}
+ggplot(df1, aes(x = item, value, fill=var))+
+  geom_bar(stat="identity",position="fill",width=0.8,color='white')+
+  coord_polar(theta="y")
+```
+
+## 旭日图
+
+### 数据准备
+
+```{r}
+n <- length(df1$value)
+S <- df1 %>% summarise(sum_value=sum(value)) %>% 
+  as.matrix() %>% as.vector()
+df2 <- df1 %>% 
+  mutate(percent=100*value/S, id=paste0('No.',1:n)) %>% 
+  select(id, item, percent)
+df3 <- df2 %>% select(id,percent) %>% mutate(cate=2)
+
+df4 <- df2 %>% 
+  group_by(item) %>% 
+  summarise(sum_cat=sum(percent)) %>% 
+  rename(id = item, percent = sum_cat) %>% 
+  mutate(cate=1) %>% 
+  rbind(df3) %>% 
+  mutate(labels = paste0(id,'\n',round(percent,2),'%')) %>% 
+  mutate(id = factor(id, levels = unique(id)))
+df4
+```
+
+### 带数据标记的旭日图
+
+```{r}
+ggplot(df4,aes(x = cate, y = percent,fill=id))+
+  geom_bar(stat="identity",position="fill",
+           width = 0.95, color='white')+ 
+  coord_polar(theta='y')+
+  labs(x='',y='')+
+  geom_text(stat="identity",
+            aes(label=labels),family = 'H',
+            size=3,fontface="bold",
+            position=position_fill(vjust = 0.5))
+```
+
+### 去掉图例、轴的旭日图
+
+```{r}
+ggplot(df4,aes(x = cate, y = percent,fill=id))+
+  geom_bar(stat="identity",position="fill",
+           width = 0.95, color='white')+ 
+  coord_polar(theta='y')+
+  labs(x=NULL,y=NULL)+
+  theme(legend.position = 'none', 
+        panel.border = element_blank(), 
+        panel.grid=element_blank(), 
+        axis.ticks = element_blank(),
+        axis.text = element_blank()) + 
+  geom_text(stat="identity", aes(label=labels),
+            family = 'H',size=3,fontface="bold",
+            position=position_fill(vjust = 0.5))
+```
+
+
+
+## 其他圆形图（以x为角度）
+```{r}
+ggplot(df1,aes(x = id,value,fill=item))+
+  geom_bar(stat="identity",position="fill",width=0.8)+
+  coord_polar(theta="x")
+
+ggplot(df,aes(x = var,a,fill=var))+
+  geom_bar(stat="identity")+
+  coord_polar(theta="x")
+```
+
+# 条形图
+
+# 面积图
+
+# 散点图
+
+# 股价图
+
+# 曲面图
+
+# 雷达图

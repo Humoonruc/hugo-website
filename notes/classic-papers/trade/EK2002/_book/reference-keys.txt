@@ -104,3 +104,9 @@ estimate-general-equilibrium
 不完备模型6
 完备模型14
 反事实模拟17
+英文文献全文
+ek-code-r-version
+pdf-全文
+code-r-version
+theta-的经济含义
+估计虚拟变量

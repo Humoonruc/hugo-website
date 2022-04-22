@@ -9,8 +9,11 @@ stringr
 forcats
 data.table
 magrittr
+kableExtra
 plotly
 htmlwidgets
 downloadthis
 zeallot
 ivreg
+numDeriv
+rootSolve

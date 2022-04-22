@@ -1,0 +1,438 @@
+---
+title: "ggplot2-2"
+subtitle: '样式美化'
+author: "Humoon"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    code_download: yes
+    css: ../css/style.css
+    fig_caption: yes
+    theme: united
+    highlight: haddock
+    number_sections: no
+    toc: yes
+    toc_depth: 4
+    toc_float:
+      collapsed: yes
+      smooth_scroll: yes
+documentclass: ctexart
+classoption: hyperref,
+---
+
+```{r setup, include = FALSE}
+source("../Rmarkdown-template/Rmarkdown_config.R")
+
+## global options ===================================
+knitr::opts_chunk$set(
+  width = config$width,
+  fig.width = config$fig.width,
+  fig.asp = config$fig.asp,
+  out.width = config$out.width,
+  fig.align = config$fig.align,
+  fig.path = config$fig.path,
+  fig.show = config$fig.show,
+  warn = config$warn,
+  warning = config$warning,
+  message = config$message,
+  echo = config$echo, 
+  eval = config$eval, 
+  tidy = config$tidy, 
+  comment = config$comment, 
+  collapse = config$collapse, 
+  cache = config$cache,
+  cache.comments = config$cache.comments,
+  autodep = config$autodep
+)
+
+## use necessary packages ==============================
+library(tidyverse)
+library(data.table)
+library(magrittr)
+library(plotly)
+library(htmlwidgets)
+
+pacman::p_load(
+  lubridate,
+  showtext,
+  DT,
+  jsonlite,
+  reticulate,
+  car, 
+  readxl, 
+  reshape2, 
+  RColorBrewer
+)
+
+data(car::Salaries)
+
+## plotting =============================================
+
+# 包含图的代码块需要fig.showtext = TRUE选项
+showtext_auto(enable = TRUE)
+windowsFonts(H = windowsFont("Microsoft YaHei"))
+```
+
+<a href="../pdf/cheatsheet-ggplot.pdf">*ggplot2 cheatsheet.pdf*</a>
+
+<object data="../pdf/cheatsheet-ggplot.pdf" type="application/pdf" width="100%" height="100%"></object>
+
+## Labs(绘图区外部的各种元素的标题)
+
+`labs(..., title = , subtitle = , caption = , tag = )`
+
+### 图形标题、副标题和说明
+
+title, 主标题。使用标题的目的是概括主要成果。尽量不要使用那些只对图形进行描述的标题，如"发动机排量与燃油效率散点图"。
+
+subtitle, 副标题。在标题下以更小的字体添加更多附加信息。
+
+caption, 说明，在图形下方添加文本，常用于描述数据来源。
+
+```{r}
+ggplot(mpg, aes(displ, hwy)) +
+  geom_point(aes(color = class)) +
+  geom_smooth(se = FALSE) +
+  labs(
+    title = paste("Fuel efficiency generally decreases with", "engine size"),
+    subtitle = paste(
+      "Two seaters (sports cars) are an exception",
+      "because of their light weight"
+    ),
+    caption = "Data from fueleconomy.gov"
+  )
+```
+
+### 坐标轴和图例的标题
+
+简短的变量名称加单位
+
+```{r, fig.show='asis'}
+# 气泡图
+ggplot(mtcars, aes(x = wt, y = mpg, size = disp)) +
+  # 将disp变量映射为图形的size属性，本例中即为散点的大小。同时生成size图例
+  geom_point(shape = 21, color = "black", fill = "cornsilk") +
+  # shape=21表示有框圆形（不同于单一颜色的小圆点）
+  labs(
+    x = "Weight (1000 lbs)", y = "Miles/(US) gallon",
+    title = "Bubble Chart",
+    size = "Engine\nDisplacement (cu.in.)"
+    # size意为对图例添加标签
+  )
+```
+
+### 使用数学公式代替字符串文本
+
+`quote()`
+
+使用?plotmath命令查看可用选项
+
+```{r}
+df <- tibble(
+  x = runif(10),
+  y = runif(10)
+)
+
+ggplot(df, aes(x, y)) +
+  geom_point() +
+  labs(
+    x = quote(sum(x[i]^2, i == 1, n)),
+    y = quote(alpha + beta + frac(delta, theta))
+  )
+```
+
+## 绘图区内部的文本标签和说明
+
+`geom_label()`和`ggrepel::geom_label_repel()`在数据旁添加文本标签
+
+`geom_text()`和`ggrepel::geom_text_repel()`在图内添加文本说明
+
+### 数据点旁的标签
+
+```{r, fig.show='asis'}
+# 先选取出每类汽车中效率最高的型号，然后在图形中标记出来
+best_in_class <- mpg %>%
+  group_by(class) %>%
+  filter(row_number(desc(hwy)) == 1) # desc()排序
+
+
+ggplot(mpg, aes(displ, hwy)) + # 全局映射和全局数据
+  geom_point(aes(color = class)) +
+  geom_text(aes(label = model), data = best_in_class) # 用局部数据，将model变量映射为文本标签
+
+ggplot(mpg, aes(displ, hwy)) +
+  geom_point(aes(color = class)) +
+  geom_label(aes(label = model),
+    data = best_in_class,
+    nudge_y = 2, alpha = 0.5
+  ) # nudge_y参数可以调整标签相对于数据点的位置
+
+# ggrepel包可以自动调整标签的位置，使它们免于重叠
+ggplot(mpg, aes(displ, hwy)) +
+  geom_point(aes(color = class)) +
+  geom_point(size = 3, shape = 1, data = best_in_class) +
+  # 添加了一个图层，用较大的空心圆来强调添加了标签的数据点
+  ggrepel::geom_label_repel(aes(label = model), data = best_in_class)
+
+# 将标签直接放在图形上，以替代图例
+# 分组，对每组取数据分布的中位数，在该处放置组名
+class_avg <- mpg %>%
+  group_by(class) %>%
+  summarize(displ = median(displ), hwy = median(hwy))
+
+ggplot(mpg, aes(displ, hwy, color = class)) +
+  ggrepel::geom_label_repel(
+    aes(label = class),
+    data = class_avg, size = 6,
+    label.size = 0, segment.color = NA
+  ) +
+  geom_point() +
+  theme(legend.position = "none") # 不显示图例
+```
+
+### 图中空白处的说明
+
+创建一个数据点，位置在空白处，借这个数据添加标签
+
+```{r, fig.show='asis'}
+# 创建只有一个观测的数据框，用以保存标签的坐标
+label <- mpg %>%
+  summarize(
+    displ = max(displ), hwy = max(hwy),
+    label = paste(
+      "Increasing engine size is \nrelated to",
+      "decreasing fuel economy."
+    )
+  )
+
+ggplot(mpg, aes(displ, hwy)) +
+  geom_point() +
+  geom_text(
+    aes(label = label),
+    data = label,
+    vjust = "top", hjust = "right"
+  )
+
+# 如果想让标签紧贴着图形的边界，可以使用+Inf和-Inf值（因为坐标轴的实际范围要比数据范围大一些）
+label <- tibble(
+  displ = Inf, hwy = Inf,
+  label = paste(
+    "Increasing engine size is \nrelated to",
+    "decreasing fuel economy."
+  )
+)
+
+ggplot(mpg, aes(displ, hwy)) +
+  geom_point() +
+  geom_text(aes(label = label), data = label, vjust = "top", hjust = "right")
+
+# 自动为标签断行的方法
+"Increasing engine size related to decreasing fuel economy." %>%
+  stringr::str_wrap(width = 40) %>%
+  writeLines()
+```
+
+### vjust和hjust参数
+
+设置标签相对于坐标的对齐方式
+
+![20220323-标签相对于坐标的对齐方式](http://humoon-image-hosting-service.oss-cn-beijing.aliyuncs.com/img/typora/2022/20220323-标签相对于坐标的对齐方式.png)
+
+## 参考线、箭头和方框
+
+-   可以使`用geom_hline(yintercept = 0)`和`geom_vline(xintercept = 0)`添加参考线。我们经常使用加粗（size = 2）和白色（color = white）的直线作为参考线，并将它们绘制在基本数据层的下面。这样的参考线既清晰可见，又不至于喧宾夺主，影响我们查看数据。
+
+-   可以使用`geom_rect()`在我们感兴趣的数据点周围绘制一个矩形。矩形的边界由图形属性 xmin、 xmax、 ymin 和 ymax 确定。
+
+-   可以使用`geom_segment()`及`arrow`参数绘制箭头，指向需要关注的数据点。使用 x 和 y 属性来定义开始位置，使用 xend 和 yend 属性来定义结束位置。
+
+```{r, eval=FALSE}
+geom_segment(
+  x = 6, y = 4, xend = 3, yend = 1, colour = "blue",
+  arrow = arrow(angle = 30, length = unit(0.5, "cm"), type = "open")
+)
+# angle为箭头所张角度，type决定箭头是空心还是实心
+```
+
+## 图例 Legends
+
+### guides()
+
+要想控制单个图例的显示，可以配合guide_legend()（负责离散型图例）或guide_colorbar()（负责连续型图例）来使用guides()
+
+```{r}
+ggplot(mpg, aes(displ, hwy)) +
+  geom_point(aes(color = class)) +
+  geom_smooth(se = FALSE) +
+  theme(legend.position = "bottom") +
+  guides(color = guide_legend(nrow = 1, override.aes = list(size = 4)))
+# nrow使图例排列为1行，size = 4使图例中的数据点更大一些
+```
+
+### 图例的位置
+
+theme()中的legend.position参数可以控制图例的整体位置：
+
+```{r, fig.show='asis'}
+base <- ggplot(mpg, aes(displ, hwy)) +
+  geom_point(aes(color = class))
+
+base + theme(legend.position = "left")
+base + theme(legend.position = "top")
+base + theme(legend.position = "bottom")
+base + theme(legend.position = "right") # 默认设置
+base + theme(legend.position = "none")
+```
+
+也可以指定一个二元素向量，表示图例的中心相对于整张图左下角的距离（都用比例表示）
+
+```{r}
+data(Salaries, package = "car")
+
+Salaries %>%
+  ggplot(aes(x = rank, y = salary, fill = sex)) +
+  geom_boxplot() +
+  scale_x_discrete(
+    breaks = c("AsstProf", "AssocProf", "Prof"),
+    labels = c(
+      "Assistant\nProfessor",
+      "Associate\nProfessor",
+      "Full\nProfessor"
+    )
+  ) +
+  scale_y_continuous(
+    breaks = c(50000, 100000, 150000, 200000),
+    labels = c("$50K", "$100K", "$150K", "$200K")
+  ) +
+  labs(
+    title = "Faculty Salary by Rank and Gender",
+    x = "", y = "", fill = "Gender"
+  ) +
+  theme(legend.position = c(0.1, 0.8))
+# 图例中心相对于整张图左下角的距离，0.1和0.8都是相对于整个画面的比例
+```
+
+## 主题
+
+theme()可以定制图形中的非数据元素，使图表有自己的风格，在做图表时不考虑格式，最后一次性应用主题。
+
+### ggplot2内置的八种主题
+
+![20220323-内置主题](http://humoon-image-hosting-service.oss-cn-beijing.aliyuncs.com/img/typora/2022/20220323-内置主题.png) 
+
+默认主题使用灰色背景，这样可以在网格线可见的情况下更加突出数据。白色网格线既是可见的（这非常重要，因为它们非常有助于位置判定)，又对视觉没有什么严重影响，我们完全可以对其视而不见。图表的灰色背景不像白色背景那么突兀，与文本印刷颜色非常相近，保证了图形与文档其他部分浑然一体。最后，灰色背景可以创建一片连续的颜色区域，使图形成为形象鲜明的一个独立视觉实体。
+
+### 自定义主题
+
+所有可定义的参数可查询`ggplot2::theme()`的帮助文档
+
+| 参数               | 设置的对象                      |
+|--------------------|---------------------------------|
+| plot.title         | 图标题                          |
+| plot.caption       | 图标注（一般是资料来源）        |
+| axis.title         | 轴标题                          |
+| axis.text          | 轴须标签                          |
+| panel.background   | 画图区域（fill填充，color边框） |
+| panel.grid.major.y | y轴（水平）主要网格线           |
+| panel.grid.minor.y | y轴（水平）次要网格线               |
+| panel.grid.major.x | x轴（竖直）主要网格线               |
+| panel.grid.minor.x | x轴（竖直）次要网格线               |
+| legend.position    | 图例的位置                      |
+| legend.title       | 图例的标题                      |
+| legend.text        | 图例各项的文字                  |
+
+```{r}
+data(Salaries, package = "car")
+
+# 定义自己的主题mytheme
+mytheme <-
+  theme(
+    plot.title = element_text(
+      face = "bold.italic",
+      size = 14, color = "brown"
+    ),
+    axis.title = element_text(
+      face = "bold.italic", size = 10,
+      color = "brown"
+    ),
+    axis.text = element_text(
+      face = "bold", size = 9,
+      color = "darkblue"
+    ),
+    panel.background = element_rect(
+      fill = "white",
+      color = "darkblue"
+    ),
+    panel.grid.major.y = element_line(color = "grey", linetype = 1),
+    panel.grid.minor.y = element_line(color = "grey", linetype = 2),
+    panel.grid.major.x = element_blank(),
+    panel.grid.minor.x = element_blank(),
+    legend.position = "top"
+  )
+
+# 在画图时，应用自己的主题mytheme
+ggplot(Salaries, aes(x = rank, y = salary, fill = sex)) +
+  geom_boxplot() +
+  labs(title = "Salary by Rank and Sex", x = "Rank", y = "Salary") +
+  mytheme
+```
+
+### 套用现成主题：ggthemes包
+
+```{r, fig.show='asis'}
+ggplot(Salaries, aes(x = rank, y = salary, fill = sex)) +
+  geom_boxplot() +
+  labs(title = "Salary by Rank and Sex", x = "Rank", y = "Salary") +
+  theme_wsj() +
+  scale_fill_wsj()
+
+ggplot(Salaries, aes(x = rank, y = salary, fill = sex)) +
+  geom_boxplot() +
+  labs(title = "Salary by Rank and Sex", x = "Rank", y = "Salary") +
+  theme_wsj() +
+  scale_fill_wsj("rgby", "") +
+  theme(axis.ticks.length = unit(0.5, "cm")) +
+  guides(fill = guide_legend(title = NULL))
+
+ggplot(Salaries, aes(x = rank, y = salary, fill = sex)) +
+  geom_boxplot() +
+  labs(title = "Salary by Rank and Sex", x = "Rank", y = "Salary") +
+  theme_economist(base_size = 14) +
+  scale_fill_economist() +
+  theme(axis.ticks.length = unit(0.5, "cm")) +
+  guides(fill = guide_legend(title = NULL))
+```
+
+## 多图拼接
+
+ggplot2包认为它提供的刻面功能已经足够了。为了组合ggplot图形，需要使用其他包。
+
+### patchwork 包
+
+`(p1/p2)|p3` 表示p1和p2居左，分别上下；p3居右，合并成一幅图
+
+### gridExtra 包
+
+`gridExtra::grid.arrange()`可以组合多幅图
+
+```{r}
+data(Salaries, package = "car")
+# ggplot()画的图可以保存为一个对象！
+p1 <- ggplot(data = Salaries, aes(x = rank)) +
+  geom_bar()
+p2 <- ggplot(data = Salaries, aes(x = sex)) +
+  geom_bar()
+p3 <- ggplot(data = Salaries, aes(x = yrs.since.phd, y = salary)) +
+  geom_point()
+
+library(gridExtra)
+grid.arrange(p1, p2, p3, ncol = 3)
+```
+
+`arrangeGrob()`则可以处理一个由图对象组成的列表（循环作图时很有用）
+
+```{r}
+p <- list(p1, p2, p3)
+graph <- arrangeGrob(grobs = p, ncol = 3)
+grid.arrange(graph)
+```

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title></title>
+<style>
+body {font-size: 10.5pt; font-family: Times New Roman;}
+p {margin: 0px;}
+th, td {height: 19px;}
+table.texreg {margin: 1px auto;border-collapse: collapse;border-spacing: 0px;color: #000000;border-top: 2px solid #000000;}
+table.texreg thead .rule {border-bottom: 1px solid #000000;}
+table.texreg tbody tr.rule td {border-top: 1px solid #000000;}
+table.texreg tbody tr.bottomrule td {border-bottom: 2px solid #000000;}
+table.texreg tfoot td {font-size: 0.8em;}
+table.texreg th, table.texreg td {padding-left: 5px;padding-right: 5px;}
+</style>
+</head>
+<body>
+<p><b>Table X. Regression Models.</b></p>
+<table class="texreg">
+<thead>
+<tr>
+<th></th>
+<th>(1) Reaction</th>
+<th>(2) Reaction</th>
+<th>(3) Reaction</th>
+</tr>
+</thead>
+<tbody>
+<tr class="rule">
+<td>(Intercept)</td>
+<td>298.508<sup>&#42;&#42;&#42;</sup></td>
+<td>251.405<sup>&#42;&#42;&#42;</sup></td>
+<td>251.405<sup>&#42;&#42;&#42;</sup></td>
+</tr>
+<tr>
+<td></td>
+<td>(9.050)</td>
+<td>(9.747)</td>
+<td>(6.825)</td>
+</tr>
+<tr>
+<td>Days</td>
+<td></td>
+<td>10.467<sup>&#42;&#42;&#42;</sup></td>
+<td>10.467<sup>&#42;&#42;&#42;</sup></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>(0.804)</td>
+<td>(1.546)</td>
+</tr>
+<tr class="rule">
+<td>Marginal <i>R</i><sup>2</sup></td>
+<td>&ensp;0.000</td>
+<td>&ensp;0.280</td>
+<td>&ensp;0.279</td>
+</tr>
+<tr>
+<td>Conditional <i>R</i><sup>2</sup></td>
+<td>&ensp;0.395</td>
+<td>&ensp;0.704</td>
+<td>&ensp;0.799</td>
+</tr>
+<tr>
+<td>AIC</td>
+<td>1910.327</td>
+<td>1794.465</td>
+<td>1755.628</td>
+</tr>
+<tr>
+<td>BIC</td>
+<td>1919.905</td>
+<td>1807.237</td>
+<td>1774.786</td>
+</tr>
+<tr>
+<td>Num. obs.</td>
+<td>180</td>
+<td>180</td>
+<td>180</td>
+</tr>
+<tr>
+<td>Num. groups: Subject</td>
+<td>18</td>
+<td>18</td>
+<td>18</td>
+</tr>
+<tr>
+<td>Var: Subject (Intercept)</td>
+<td>1278.338</td>
+<td>1378.179</td>
+<td>612.100</td>
+</tr>
+<tr>
+<td>Var: Residual</td>
+<td>1958.865</td>
+<td>960.457</td>
+<td>654.940</td>
+</tr>
+<tr>
+<td>Var: Subject Days</td>
+<td></td>
+<td></td>
+<td>35.072</td>
+</tr>
+<tr class="bottomrule">
+<td>Cov: Subject (Intercept) Days</td>
+<td></td>
+<td></td>
+<td>&ensp;9.604</td>
+</tr>
+</tbody>
+</table>
+<p><i>Note</i>. Unstandardized regression coefficients are displayed, with standard errors in parentheses.</p><p>* <i>p</i> < .05. ** <i>p</i> < .01. *** <i>p</i> < .001.</p></body>
+</html>

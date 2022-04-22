@@ -1,0 +1,160 @@
+---
+title: "Statistics"
+subtitle: ''
+author: "Humoon"
+date: "`r Sys.Date()`"
+output:
+  html_document: 
+    code_download: true
+    css: ["../css/style.css"]
+    fig_caption: yes
+    theme: united
+    highlight: haddock
+    number_sections: no
+    toc: yes
+    toc_depth: 4
+    toc_float:
+      collapsed: yes
+      smooth_scroll: yes
+documentclass: ctexart
+classoption: hyperref,
+---
+
+```{r setup, include = FALSE}
+options(width = 80)
+
+## global options ===================================
+knitr::opts_chunk$set(
+  fig.width = 6,
+  fig.asp = 0.75,
+  out.width = "90%",
+  fig.align = "center",
+  fig.path = "figure/",
+  fig.show = "asis",
+  warn = 1,
+  warning = FALSE,
+  message = FALSE,
+  echo = TRUE, # 是否显示代码
+  eval = TRUE, # 是否运行代码块
+  tidy = F, # 代码排版
+  comment = "#", # 每行输出的前缀，为了方便复制粘贴时不会污染代码
+  collapse = T, # 代码与结果是否显示在同一代码块
+  cache = T,
+  cache.comments = T,
+  autodep = T # 自动获得模块间依赖，cache 用
+)
+
+
+## use necessary packages ==============================
+pacman::p_load(
+  # data processing
+  tidyverse, lubridate, data.table, magrittr,
+  # visualization
+  showtext,
+  # I/O
+  jsonlite
+)
+```
+
+
+
+## 常用分布
+
+```{r}
+scale <- 100000
+```
+
+
+### Normal Distribution
+
+```{r}
+# 频率与概率
+value <- rnorm(scale)
+Prob <- 1:3 %>%
+  map_dbl(~ 100 * length(value[value > -. & value < .]) / scale)
+```
+
+Range|Frequency|Probability
+--|--|--
+$\mu \pm 1 \sigma$|`r Prob[1]`%|`r 100*(pnorm(1) - pnorm(-1))`%
+$\mu \pm 2 \sigma$|`r Prob[2]`%|`r 100*(pnorm(2) - pnorm(-2))`%
+$\mu \pm 3 \sigma$|`r Prob[3]`%|`r 100*(pnorm(3) - pnorm(-3))`%
+
+
+```{r}
+# use built-in functions
+qnorm(0.025)
+qnorm(0.975)
+```
+
+
+```{r, fig.showtext = TRUE}
+x <- seq(from = -3, to = 3, length.out = scale)
+y <- dnorm(x)
+
+data.table(x = x, y = y) %>%
+  ggplot(aes(x, y)) +
+  geom_point(size = 0.3, alpha = 0.5)
+```
+
+
+### Student's t Distribution
+
+```{r, fig.showtext = TRUE}
+x <- seq(from = -4, to = 4, length.out = scale)
+y1 <- dnorm(x)
+y2 <- dt(x, df = 50) # df=50的t分布概率密度
+y3 <- dt(x, df = 30)
+y4 <- dt(x, df = 5)
+y5 <- dt(x, df = 1)
+
+data.table(x = x, y1 = y1, y2 = y2, y3 = y3, y4 = y4, y5 = y5) %>%
+  ggplot() +
+  geom_point(aes(x, y2), color = "red", size = 0.2, alpha = 0.5) +
+  geom_point(aes(x, y3), color = "yellow", size = 0.2, alpha = 0.5) +
+  geom_point(aes(x, y4), color = "green", size = 0.2, alpha = 0.5) +
+  geom_point(aes(x, y5), color = "blue", size = 0.2, alpha = 0.5) +
+  geom_point(aes(x, y1), color = "black", size = 0.1, alpha = 0.1) +
+  labs(x = "Random Variable", y = "Density")
+```
+
+### $\chi^2$ Distribution
+
+$k$ 个标准正态随机变量的平方和即为自由度为 $k$ 的卡方分布，其期望为 $k$。当 $k \rightarrow +\infty$ 时，卡方分布趋于正态分布。
+
+```{r}
+x <- seq(from = 6, to = 200, length.out = scale) / 5
+y1 <- dchisq(x, df = 1)
+y2 <- dchisq(x, df = 2)
+y3 <- dchisq(x, df = 5)
+y4 <- dchisq(x, df = 10)
+y5 <- dchisq(x, df = 20)
+
+data.table(x = x, y1 = y1, y2 = y2, y3 = y3, y4 = y4, y5 = y5) %>%
+  ggplot() +
+  geom_point(aes(x, y1), color = "black", size = 0.2, alpha = 0.5) +
+  geom_point(aes(x, y2), color = "red", size = 0.2, alpha = 0.5) +
+  geom_point(aes(x, y3), color = "yellow", size = 0.2, alpha = 0.5) +
+  geom_point(aes(x, y4), color = "green", size = 0.2, alpha = 0.5) +
+  geom_point(aes(x, y5), color = "blue", size = 0.2, alpha = 0.5) +
+  labs(x = "Random Variable", y = "Density")
+```
+
+### F Distribution
+
+```{r}
+x <- (scale %/% 100):scale / (scale / 4)
+x <- seq(from = 1, to = 100, length.out = scale) / 25
+y1 <- df(x, df1 = 1, df2 = 5)
+y2 <- df(x, df1 = 3, df2 = 5)
+y3 <- df(x, df1 = 3, df2 = 30)
+y4 <- df(x, df1 = 30, df2 = 30)
+
+data.table(x = x, y1 = y1, y2 = y2, y3 = y3, y4 = y4) %>%
+  ggplot() +
+  geom_point(aes(x, y1), color = "black", size = 0.2, alpha = 0.5) +
+  geom_point(aes(x, y2), color = "red", size = 0.2, alpha = 0.5) +
+  geom_point(aes(x, y3), color = "yellow", size = 0.2, alpha = 0.5) +
+  geom_point(aes(x, y4), color = "green", size = 0.2, alpha = 0.5) +
+  labs(x = "Random Variable", y = "Density")
+```

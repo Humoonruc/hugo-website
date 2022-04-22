@@ -1,6 +1,6 @@
 ---
 title: "R Engineering"
-subtitle: 'System, Modularization, Code Style and IDE'
+subtitle: ''
 author: "Humoon"
 date: "`r Sys.Date()`"
 output: html_document
@@ -35,6 +35,14 @@ knitr::opts_chunk$set(
 )
 ```
 
+## 版本
+
+建议安装 Microsoft R Open，对 R 中向量和矩阵的向量化操作进行了大幅优化，无需引入任何包，就能自动调用多核进行并行计算，可提高运算速度数十倍。
+
+这也意味着，向量化运算是 R 最基本、最主要的代码风格。
+
+但是，Microsoft R Open 的某些包更新不够及时（如 rmarkdown）。为了 Knit 的方便，可以 Rstudio 选择 R 的最新版，在 VSCode 中用 Microsoft R Open 日常加速计算。
+
 ## System interaction
 
 ### Environment
@@ -61,7 +69,7 @@ R 中词法作用域的机理通过环境实现。
 | `dir.create()`      | 创建一个目录          |
 | `getwd()`/`setwd()` | 查看/设定当前工作目录 |
 
-
+由此扩展，R 也可以完成文件管理工作。
 
 ### Memory
 
@@ -71,15 +79,28 @@ R 中词法作用域的机理通过环境实现。
 
 `Sys.sleep()` 使程序暂停若干秒，一般用于某些循环（爬虫、动画等），故意降低运行频率
 
-`sys.time()` 读取系统时间
+`sys.time()` 读取系统时间；
+
+`system.time()` 参数为大括号括起来的代码段，计算代码段运行时间
 
 ```{r, eval=FALSE}
 t1 <- Sys.time()
 ...
 t2 <- Sys.time()
 print(t2 - t1) # 中间代码的运行时间
+
+system.time({
+  ...
+}) # 代码段运行时间
 ```
 
+```{r}
+A <- matrix(1:1000000, 1000)
+
+system.time({
+  A %*% A
+})
+```
 
 ### Help
 
@@ -131,14 +152,12 @@ installed.packages() %>% View()
 
 ```{r}
 # 重装 R 前把已安装包的名称（第一列）存为一个 .rds 文件
-installed.packages()[, 1] %>% 
-	saveRDS("./download-packages.rds") 
+saveRDS(installed.packages()[, 1], "./download-packages.rds")
 ```
 
 ```R
 # 重装 R 后读取该文件，并安装这些 packages
-readRDS("./download-packages.rds") %>% 
-	install.packages()
+install.packages(readRDS("./download-packages.rds"))
 ```
 
 #### 查看包的流行程度
@@ -156,7 +175,7 @@ fashion <- function(package_name) {
   sum(d$count)
 }
 
-fashion('ggplot2')
+fashion("ggplot2")
 fashion("tidyverse")
 fashion("data.table")
 fashion("plotly")
@@ -172,7 +191,14 @@ fashion("plotly")
 
 由于 R 的懒加载特性，模块中的代码不会运行，故 .R 脚本文件作为模块时，不必加载配置常量和包，纯写函数即可，所有的包和配置由主文件加载。
 
+### 二进制数据文件
 
+数据处理的中间结果一般保存为 .rda 或 .rds 即可；有其他用途的数据转换结果，才有必要保存为 .csv 或 .json
+
+二者区别：
+
+1. saveRDS/readRDS 仅处理单个 R 对象。但是，它们比多对象存储方法更灵活，因为还原对象的对象名称不必与存储对象时的对象名称相同
+2. .rda 不对数据进行压缩，读写速度较快；.rds 会先对文件进行压缩再保存，速度相对稍慢。
 
 ## Code Style
 
@@ -227,7 +253,45 @@ install.packages("styler")
 
 单元测试应在另一个独立的的文件中进行
 
+## R 程序效率
 
+### Vectorization
+
+向量化运算，即对应元素执行同样的运算，适用于向量和矩阵。
+
+如果运算符两边的变量 size 不相同，size 较小的变量会自动循环扩展，与 size 较大的变量保持一致。返回值的 size 将和较大的变量保持一致。
+
+在计算矩阵的哈达马积、或对向量/矩阵的所有元素执行同样的变换时，向量化运算非常方便。
+
+R 中的运算符和函数默认支持向量化运算，这是 R 的一大特色，Microsoft R Open 还对向量和矩阵的向量化运算进行了并行优化。因此，用好向量化运算、矩阵代数，才是符合 R 风格的代码。
+
+如计算 $\begin{aligned}w=\frac{1}{n} \sum_{i=1}^n|x_i-\hat{m}|\end{aligned}$，其中 $\hat{m}$ 为中位数
+
+```{r, eval=FALSE}
+# 为了表明这里是向量化的并行操作，将自变量写为大写的X
+mean(abs(X - median(X)))
+
+# 由于 R 的向量化特性，这个自定义函数天然接受向量输入
+f3 <- function(X) ifelse(X >= 0, 1, 0)
+```
+
+### 多用内置函数
+
+R base 的很多内置函数是用 C 实现的，效率很高，尽量使用。
+
+- sum() 向量、矩阵所有元素的和，比用循环累加快得多
+- prod() 所有元素的积
+- cumsum()，返回累计和的序列
+- cumprod()，返回累计积的序列
+
+```{r}
+cumsum(1:10)
+cumprod(1:10)
+```
+
+### 避免制作副本
+
+多用 data.table 数据框在数据上就地修改
 
 ## IDE
 

@@ -1,5 +1,6 @@
 # import modules
 library(tidyverse)
+library(bruceR)
 library(data.table)
 library(magrittr)
 library(kableExtra) # 表格美化
@@ -81,8 +82,8 @@ academic_layout <- function(p) {
     margin = list(b = 110, t = 20, l = 90, r = 0),
     title = list(
       font = list(
-        family = "Times New Roman",
-        size = 24
+        # family = "Times New Roman",
+        size = 20
       ),
       pad = list(t = 80),
       y = 0,
@@ -109,27 +110,3 @@ academic_layout <- function(p) {
     legend = list(xanchor = "right")
   )
 }
-
-# 自定义 ggplot2 主题
-library(ggthemes)
-my_theme <- theme_economist_white() +
-  theme(
-    text = element_text(family = "Microsoft YaHei"),
-    plot.title = element_text(face = "bold", size = 16),
-    plot.subtitle = element_text(size = 14),
-    plot.caption = element_text(
-      hjust = 0,
-      size = 12,
-      margin = margin(2, 0, 0, 0, "pt")
-    ),
-    plot.margin = margin(12, 10, 12, 0, "pt"),
-    legend.position = "top",
-    legend.justification = "left",
-    legend.margin = margin(4, 0, 0, 0, "pt"),
-    legend.key.size = unit(1, "lines"),
-    legend.title = element_text(size = 12),
-    legend.text = element_text(size = 10, margin = margin(0, 0, 0, 0, "pt")),
-    axis.title = element_text(face = "bold", size = 12),
-    axis.text = element_text(size = 10, margin = margin(2, 0, 2, 0, "pt")),
-    axis.ticks.length = unit(-4, "pt")
-  )

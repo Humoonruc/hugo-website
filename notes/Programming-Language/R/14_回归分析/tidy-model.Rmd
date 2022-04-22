@@ -1,0 +1,211 @@
+---
+title: "Tidy Regression Model: `broom`"
+subtitle: ''
+author: "Humoon"
+date: "`r Sys.Date()`"
+output:
+  html_document: 
+    code_download: true
+    css: ["../css/style.css"]
+    fig_caption: yes
+    theme: united
+    highlight: haddock
+    number_sections: no
+    toc: yes
+    toc_depth: 4
+    toc_float:
+      collapsed: yes
+      smooth_scroll: yes
+documentclass: ctexart
+classoption: hyperref,
+---
+
+```{r setup, include = FALSE}
+source("./config/Rmarkdown_config.R")
+
+## global options ===================================
+knitr::opts_chunk$set(
+  width = config$width,
+  fig.width = config$fig.width,
+  fig.asp = config$fig.asp,
+  out.width = config$out.width,
+  fig.align = config$fig.align,
+  fig.path = config$fig.path,
+  fig.show = config$fig.show,
+  warn = config$warn,
+  warning = config$warning,
+  message = config$message,
+  echo = config$echo,
+  eval = config$eval,
+  tidy = config$tidy,
+  comment = config$comment,
+  collapse = config$collapse,
+  cache = config$cache,
+  cache.comments = config$cache.comments,
+  autodep = config$autodep
+)
+
+
+## use necessary packages ==============================
+library(tidyverse)
+library(data.table)
+library(magrittr)
+library(plotly)
+library(htmlwidgets)
+
+pacman::p_load(
+  jsonlite, ggthemes, showtext
+)
+
+## plotting =============================================
+
+# 包含图的代码块需要fig.showtext = TRUE选项
+showtext_auto(enable = TRUE)
+```
+
+## Data
+
+```{r}
+library(gapminder)
+gapminder
+```
+
+## EDA
+
+```{r}
+gapminder %>%
+  ggplot(aes(x = log(gdpPercap), y = lifeExp)) +
+  geom_point(alpha = 0.2)
+```
+
+
+将三个模型放在一张图中，直观地比较
+
+```{r}
+library(colorspace)
+
+model_colors <- colorspace::qualitative_hcl(4, palette = "dark 2")
+# model_colors <- c("darkorange", "purple", "cyan4")
+
+gapminder %>%
+  ggplot(aes(x = log(gdpPercap), y = lifeExp)) +
+  geom_point(alpha = 0.2) +
+  geom_smooth(
+    method = "lm",
+    aes(color = "OLS", fill = "OLS") # model 1
+  ) +
+  geom_smooth(
+    method = "lm", formula = y ~ splines::bs(x, df = 3),
+    aes(color = "Cubic Spline", fill = "Cubic Spline") # model 2
+  ) +
+  geom_smooth(
+    method = "loess",
+    aes(color = "LOESS", fill = "LOESS") # model 3
+  ) +
+  scale_color_manual(name = "Models", values = model_colors) +
+  scale_fill_manual(name = "Models", values = model_colors) +
+  theme(legend.position = "top")
+```
+
+## Modeling
+
+```{r}
+out <- lm(lifeExp ~ gdpPercap + pop + continent, gapminder)
+out
+class(out)
+```
+
+lm 对象的结构：
+![](./images/lm-object-structure.png)
+
+```{r}
+str(out)
+out$coefficients
+summary(out) # 打印lm对象的一小部分信息
+```
+
+## broom
+
+broom 包可以规整常见模型的输出结果为 tibble
+
+### `tidy()`
+
+`broom::tidy()` 提取模型输出结果的主要信息为一个 tibble，参数保持默认时，各列包括 coefficients 的点估计量、估计量的标准误、t-statistics 和 p 值
+
+```{r}
+library(broom)
+
+tidy(out)
+# 参数conf.int设置为TRUE，可以将系数的置信区间作为最后两列
+tidy(out, conf.int = TRUE)
+
+out %>%
+  tidy(conf.int = TRUE) %>%
+  filter(!term %in% c("(Intercept)")) %>%
+  ggplot(aes(
+    x = reorder(term, estimate), y = estimate,
+    ymin = conf.low, ymax = conf.high
+  )) +
+  geom_pointrange() +
+  coord_flip() +
+  labs(x = "", y = "OLS Estimate")
+```
+
+### `argument()`
+
+`broom::augment()` 返回一个数据框，这个数据框是在**原始数据框**的基础上，增加了模型的 fitted values（`.fitted`）、残差（`.resid`）、拟合值的标准误（`.se.fit`）等列。
+
+```{r}
+augment(out)
+out %>% augment() %>%
+  ggplot(mapping = aes(x = lifeExp, y = .fitted)) +
+  geom_point()
+```
+
+### `glance()`
+
+`broom::glance()` 也会返回 tibble，但只有一行，内容实际上是summary()输出结果的最底下一行，包括 F-statistic、model deviance、r-squared 等信息。
+
+```{r}
+glance(out)
+```
+
+### 应用
+
+```{r}
+penguins <-
+  palmerpenguins::penguins %>%
+  drop_na()
+
+penguins %>%
+  group_nest(species) %>%
+  mutate(model = purrr::map(data, ~ lm(bill_depth_mm ~ bill_length_mm, data = .))) %>%
+  mutate(glance = purrr::map(model, ~ broom::glance(.))) %>%
+  tidyr::unnest(glance)
+
+fit_ols <- function(df) {
+  lm(body_mass_g ~ bill_depth_mm + bill_length_mm, data = df)
+}
+
+
+out_tidy <- penguins %>%
+  group_nest(species) %>%
+  mutate(model = purrr::map(data, fit_ols)) %>%
+  mutate(tidy = purrr::map(model, ~ broom::tidy(.))) %>%
+  tidyr::unnest(tidy) %>%
+  dplyr::filter(!term %in% "(Intercept)")
+
+out_tidy
+
+out_tidy %>%
+  ggplot(aes(
+    x = species, y = estimate,
+    ymin = estimate - 2 * std.error,
+    ymax = estimate + 2 * std.error,
+    color = term
+  )) +
+  geom_pointrange(position = position_dodge(width = 0.25)) +
+  theme(legend.position = "top") +
+  labs(x = NULL, y = "Estimate", color = "coef")
+```
+

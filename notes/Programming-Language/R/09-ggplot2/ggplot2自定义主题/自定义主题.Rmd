@@ -1,0 +1,173 @@
+---
+title: "自定义主题：绘图模板"
+author: "Humoon"
+date: "2019/6/8"
+output: 
+  bookdown::html_document2:
+    code_folding: show
+    df_print: paged
+    fig_caption: yes
+    highlight: haddock
+    number_sections: yes
+    theme: united
+    toc: yes
+    toc_depth: 3
+    toc_float:
+      collapsed: yes
+      smooth_scroll: no
+---
+
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(
+  fig.width = 6, fig.asp = 0.618,
+  out.width = "70%", fig.align = "center",
+  fig.path = 'Figs/',fig.show = "asis",
+  warning = FALSE, message = FALSE, 
+  cache = F, cache.comments = F, comment = '', 
+  options(digits = 4))
+```
+
+```{r setup, include=FALSE}
+# use necessary packages
+library('pacman')
+p_load(tidyverse, lubridate, reshape2, magrittr, # 数据整理
+       ggthemes, showtext, gridExtra, RColorBrewer, # 可视化
+       lmtest, plm, orcutt, stats, forecast, # 统计分析  
+       rvest, rlist, # 爬虫
+       readxl, RMySQL, DT # I/O
+       )
+
+pdf.options(family = "GB1") 
+# 自定义偏好字体
+windowsFonts(H = windowsFont("微软雅黑"))
+# 代码块需要fig.showtext=TRUE选项，ggplot2图形再加一行 + theme(text = element_text(family = 'H'))来定义字体，才能正常显示图中的中文。
+```
+
+
+```{r, mytheme}
+# 柱状图主题
+theme_bar <- theme_economist_white() +
+  theme(text = element_text(family = 'H'), # 所有的文本字体
+        plot.title = element_text(face = 'bold', size = 12), 
+        plot.subtitle = element_text(size = 10),
+        plot.caption = element_text(hjust = 0, size = 8,
+                                    margin = margin(0,0,0,0,'pt')),
+        plot.margin = margin(12,0,12,10,'pt'),
+        legend.position = 'top',
+        legend.justification = 'left',
+        legend.margin = margin(4,0,0,0,'pt'),
+        legend.key.size = unit(0.7,'lines'),
+        legend.title = element_blank(),
+        legend.text = element_text(size = 8, margin = margin(0,8,0,4,'pt')),
+        axis.text = element_text(size = 8),
+        axis.ticks.length = unit(0,'pt') # 不要坐标轴须
+        )
+
+# 折线图主题
+theme_line <- theme_economist_white() +
+  theme(text = element_text(family = 'H'), # 所有的文本字体
+        plot.title = element_text(face = 'bold', size = 12), 
+        plot.subtitle = element_text(size = 10),
+        plot.caption = element_text(hjust = 0, size = 8,
+                                    margin = margin(0,0,0,0,'pt')),
+        plot.margin = margin(12,0,12,10,'pt'),
+        legend.position = 'top',
+        legend.justification = 'left',
+        legend.margin = margin(4,0,0,0,'pt'),
+        legend.key.size = unit(0.7,'lines'),
+        legend.title = element_blank(),
+        legend.text = element_text(size = 8, margin = margin(0,8,0,4,'pt')),
+        axis.text = element_text(size = 8),
+        axis.ticks.length = unit(0,'pt') # 不要坐标轴须
+        )
+```
+
+
+
+# 柱状图
+
+```{r, fig.showtext=TRUE}
+gdp <- read_excel('EU_GDP.xlsx', col_names = T) %>% 
+  melt(id = 'year') %>% 
+  rename(country = variable) 
+
+p_bar <- gdp %>% 
+  ggplot(aes(x = country, y = value, fill = year)) + 
+  geom_bar(stat = 'identity', position = 'dodge', width = 0.7) +
+  scale_y_continuous(position = "right", 
+                     breaks = c(0, 0.5, 1.0, 1.5, 2.0, 2.5),
+                     labels = c("0.0", "0.5", "1.0", "1.5", '2.0', '2.5%')) + 
+  labs(title = 'Slower Momentum', 
+       subtitle = 'The EU cuts its predictions for economic growth in the euro area', 
+       x = '', y = '', 
+       caption = 'Source: European Commission spring forecast, May 2019') +
+  scale_fill_manual(values = c("#016392", "#595959", "#fb832d")) +
+  theme_bar
+
+ggsave('EU_gdp.png', p_bar, width = 7, height = 4, dpi = 600)
+knitr::include_graphics("EU_gdp.png")
+```
+
+配色：2018-2020，欧洲经济从不错到谷底（灰黑色系），再到谨慎乐观（橙色而非大红）。颜色同时反映着情绪。
+
+柱状图可用于展示回归结果中各变量的系数，用不同颜色区分是否显著，以柱的高度显示系数大小（最好经过除以标准差这个标准化过程）
+
+
+# 饼图
+
+
+# 折线图
+
+```{r, fig.showtext=TRUE}
+# 参数设定
+kappa <- 4
+theta <- 0.36
+gamma <- 0.9
+
+# 辅助变量
+au <- kappa^(1/(1 - theta))
+
+# 变量数据结构
+# lambda的第一期是有用的，因为第二期会受第一期影响
+# k的第一期（末）也是有用的，会决定第二期的产出
+# 但y的第一期数据对之后没有任何影响
+k <- tribble(~k1,~k2,~k3,
+             0.8*au,au,1.2*au)
+lambda <- tribble(~A1,~A2,~A3,
+             1,1,1)
+y <- tribble(~y1,~y2,~y3,
+             0,0,0)
+y[1,] <- lambda[1,]*k[1,]^theta*65^(1 - theta)
+
+# 模拟
+for (i in 2:100) {
+  lambda[i,] <- 1 - gamma + gamma*lambda[i - 1,] + 
+    0.02*(runif(3) - 0.5)
+  y[i,] <- lambda[i,]*k[i - 1,]^theta*65^(1 - theta)
+  k[i,] <- kappa*lambda[i,]*k[i - 1,]^theta
+}
+data <- cbind(lambda,k,y) 
+data$t <- 1:length(data$A1)
+
+# 作图观察
+p_line <- data %>% select(t,y1,y2,y3) %>% 
+  rename('poor' = y1, 'mediem' = y2, 'rich' = y3) %>% 
+  melt(id = 't') %>% 
+  ggplot(aes(t,value)) + 
+  geom_line(aes(color = variable)) + 
+  labs(x = 'period', y = 'income per capita',
+       color = 'countries', title = 'Convergence',
+       subtitle = 'A Simulation of OLG Model') +   
+  labs(caption = 'Data Source: The ABCs of RBCs') +
+  theme_linedraw()
+
+ggsave(file = "olg_simulation.png", plot = p_line, 
+       width = 7, height = 4, dpi = 600)
+knitr::include_graphics("olg_simulation.png")
+```
+
+# 直方图
+
+# 箱线图
+
+# 散点图

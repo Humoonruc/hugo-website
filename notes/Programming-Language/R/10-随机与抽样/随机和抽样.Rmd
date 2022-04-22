@@ -1,0 +1,482 @@
+---
+title: "随机与抽样"
+subtitle: ''
+author: "Humoon"
+date: "`r Sys.Date()`"
+output:
+  html_document: 
+    code_download: true
+    css: ["../css/style.css"]
+    fig_caption: yes
+    theme: united
+    highlight: haddock
+    number_sections: no
+    toc: yes
+    toc_depth: 4
+    toc_float:
+      collapsed: yes
+      smooth_scroll: yes
+documentclass: ctexart
+classoption: hyperref,
+---
+
+```{r setup, include = FALSE}
+options(width = 80)
+
+## global options ===================================
+knitr::opts_chunk$set(
+  fig.width = 6,
+  fig.asp = 0.75,
+  out.width = "90%",
+  fig.align = "center",
+  fig.path = "figure/",
+  fig.show = "asis",
+  warn = 1,
+  warning = FALSE,
+  message = FALSE,
+  echo = TRUE, # 是否显示代码
+  eval = TRUE, # 是否运行代码块
+  tidy = F, # 代码排版
+  comment = "#", # 每行输出的前缀，为了方便复制粘贴时不会污染代码
+  collapse = T, # 代码与结果是否显示在同一代码块
+  cache = T,
+  cache.comments = T,
+  autodep = T # 自动获得模块间依赖，cache 用
+)
+
+
+## use necessary packages ==============================
+pacman::p_load(
+  # data processing
+  tidyverse, lubridate, data.table, magrittr,
+  # visualization
+  showtext,
+  # I/O
+  jsonlite
+)
+
+library(readxl)
+library(reshape2)
+library(ggthemes)
+library(RColorBrewer)
+library(gridExtra)
+```
+
+
+[TOC]
+
+## 设定随机数种子
+
+有时我们在做模拟的时候，为了比较不同方法的好坏，需要生成的随机数都要一样，即重复生成同样的随机数。这个时候我们可以使用`set.seed()`设定随机数种子，其参数为整数。
+
+```{r}
+set.seed(123) # 种子取一样，生成的随机数相同
+runif(5)
+
+runif(5) # 注意，运行语句本身就改变了种子！
+
+set.seed(123) # 重新设定种子，才能得到一样的结果2
+runif(5)
+```
+
+## 一元随机数的生成
+
+### 常见分布函数表
+
+![](常见分布函数表.png)
+
+除了在分布函数前面加 r(random) 表示产生随机数外，还可以加 p(cumulative probability), q(quantile), d(density), 分别表示：
+![](分布相关函数的代号及作用.png)
+例如：`dnorm()` 表示正态分布密度函数，`pnorm()` 表示正态分布累积概率密度函数，`qnorm()` 表示正态分布分位数函数（即正态累积概率密度函数的逆函数)
+
+```{r}
+# 求标准正态分布P(x ≤ 2)的累积概率。
+pnorm(2)
+
+# 已知标准正态分布累积概率为P(x≤a)=0.95，求对应的分位数a。
+qnorm(0.95)
+```
+
+
+
+### 均匀分布
+
+`runif(n, min = 0, max = 1)` 按照该参数的均匀分布，生成n个随机数
+
+```{r}
+# 通过直方图和散点图以及自相关系数图来检验独立同分布：
+Nsim <- 10^3
+x <- runif(Nsim)
+x1 <- x[-Nsim] # 因为要计算自相关系数，去掉最后一个数
+x2 <- x[-1] # 去掉第一个数
+par(mfrow = c(1, 3))
+# 图1 直方图
+hist(x, prob = T, col = gray(0.3), main = "uniformon[0,1]")
+curve(dunif(x, 0, 1), add = T, col = "red") # 添加均匀分布密度曲线
+# 图2 散点图
+plot(x1, x2, col = "red")
+# 图3 自相关系数（时间序列分析）图
+acf(x)
+```
+从上图可以看出，基本上满足独立同分布性质。
+
+
+### 正态分布
+
+`rnorm(n, mean=0, sd=1)` 按照该参数的正态分布，生成n个随机数
+
+```{r}
+# base plot
+x <- rnorm(100)
+hist(x, prob = T, main = "normal distribution: mu=0, sigma=1") # 作直方图
+curve(dnorm(x), add = T) # 在直方图上添加标准正态分布密度曲线
+
+
+# ggplot2
+data.table(
+  x = rnorm(10000)
+) %>%
+  ggplot(aes(x = x)) +
+  geom_density() + # 实际分布
+  # 理论正态分布
+  stat_function(
+    fun = dnorm,
+    args = list(mean = 0, sd = 1),
+    color = "red"
+  )
+
+
+# 线性关系模拟
+a <- runif(1000, 0, 5)
+b <- 4 + rnorm(1000, mean = 3.2 * a, sd = 1)
+data.table(x = a, y = b) %>%
+  ggplot(aes(x, y)) +
+  geom_point()
+```
+
+### 指数分布
+
+x 服从指数分布：$x \sim exp(\lambda)$，其中 $\lambda$ 等于均值的倒数。
+
+`rexp(n, lamda=1)`
+
+```{r}
+x <- rexp(100, 1 / 10) # 生成100个均值为10的指数分布随机数
+hist(x, prob = T, col = gray(0.9), main = "均值为10的指数分布随机数")
+curve(dexp(x, 1 / 10), add = T) # 添加指数分布密度线
+```
+
+
+```{r}
+# 比较两种方法生成的指数分布 X ~ Exp(1) 的随机数
+Nsim <- 10^4
+U <- runif(Nsim)
+X <- -log(U)
+Y <- rexp(Nsim)
+par(mfrow = c(1, 2))
+hist(X, freq = F, main = "Exp from runif")
+curve(dexp(x, 1), add = T, col = "red")
+hist(Y, freq = F, main = "Exp from rexp")
+curve(dexp(x, 1), add = T, col = "red")
+```
+
+### 二项分布
+
+x服从二项分布：$x \sim B(n, p)$
+
+`rbinom(n,size,prob)`
+
+n表示生成的随机数数量，size表示进行贝努力试验的次数，prob表示一次贝努力试验成功的概率。
+
+```{r}
+size <- 1
+p <- 0.5
+rbinom(10, size, p) # 一次伯努利实验，p=0.5即抛硬币实验
+
+size <- 10
+p <- 0.5
+rbinom(5, size, p) # 生成5个服从B(10,0.5)的二项分布随机数
+
+# 二项分布是离散分布，但随着试验次数size的增加，二项分布越来越接近于正态分布：
+par(mfrow = c(1, 3))
+p <- 0.25
+for (k in c(10, 20, 50)) {
+  x <- rbinom(100, size = k, p)
+  hist(x, prob = T, main = paste("n=", k, " p=", p))
+  xvals <- 0:k
+  points(xvals, dbinom(xvals, k, p), type = "h", lwd = 3)
+}
+par(mfrow = c(1, 1))
+```
+
+
+
+## 多元随机数的生成
+
+
+### 多元正态分布随机数
+
+#### MASS包
+
+`MASS::mvrnorm(n=1,mu,Sigma,tol=1e-6,empirical=FALSE,EISPACK=FALSE)`
+
+其中，n是生成的随机数个数，mu是均值向量，Sigma是协方差阵，tol是容忍度，empirical是逻辑参数，取TRUE时，mu和sigma取经验均值和协方差阵。
+
+每组随机变量高度相关。 比如人的身高服从正态分布，人的体重也服从正态分布，同时身高和体重又存在强烈的关联。
+
+例：生成均值都为0，协方差阵为$\left( \begin{matrix} 10 & 3\\ 3 & 2 \end{matrix} \right)$的两元正态分布随机数。
+```{r}
+library(MASS)
+sigma <- matrix(c(10, 3, 3, 2), 2, 2)
+mean <- c(1, 2)
+x <- mvrnorm(n = 1000, mean, sigma)
+head(x)
+var(x)
+plot(x)
+```
+
+上图是两元正态分布随机数的散点图，从散点图可以看出，两个正态分布随机数是正相关关系。可以从协方差阵里算出相关系数是$\frac{3}{\sqrt{10\times 2}}$
+
+$(x,y)$的协方差矩阵为为$\left( \begin{array}{cc}{\sigma_{1}^{2}} & {\rho \sigma_{1} \sigma_{2}} \\ {\rho \sigma_{1} \sigma_{2}} & {\sigma_{2}^{2}}\end{array}\right)$
+
+#### mvtnorm包
+
+`mvtnorm::rmvnorm(n, mean = rep(0, nrow(sigma)), sigma = diag(length(mean)), method=c("eigen", "svd", "chol"), pre0.9_9994 = FALSE)`
+
+其中，n是生成随机数的个数，mean是均值向量，sigma是协方差阵。method提供了三种对sigma矩阵进行分解的方法：特征根分解“eign” （默认），奇异值分解“sv” ， cholesky分解“chol” 。
+
+```{r}
+library(mvtnorm)
+x <- rmvnorm(n = 500, mean = mean, sigma = sigma)
+head(x)
+colMeans(x)
+var(x)
+plot(x)
+```
+
+
+### 多元正态分布密度函数、分位数与累积概率
+
+与生成一元随机数类似，mvtnorm::pmvnorm()可以计算累积概率，其用法是：  
+
+`pmvnorm(lower=-Inf, upper=Inf, mean=rep(0, length(lower)), corr=NULL,
+sigma=NULL, algorithm = GenzBretz(), ...)   `   
+
+其中lower是求累积概率的下限，默认为$-\infty$。upper是求累积概率的上限，默认为$+\infty$。mean是多元正态分布的均值向量，corr是多元正态分布的相关系数矩阵，sigma是协方差矩阵。其中，相关系数矩阵和协方差矩阵两者只要知道一个即可。 algortithm是计算累积概率的算法，R提供了 GenzBretz、 Miwa 和 TVPACK，默认为 GenzBretz算法。
+
+例：五元正态分布随机数，均值为0，相关系数矩阵为：
+$$\left( \begin{array}{ccccc}{1} & {0.5} & {0.5} & {0.5} & {0.5} \\ {0.5} & {1} & {0.5} & {0.5} & {0.5} \\ {0.5} & {0.5} & {1} & {0.5} & {0.5} \\ {0.5} & {0.5} & {0.5} & {1} & {0.5} \\ {0.5} & {0.5} & {0.5} & {0.5} & {1}\end{array}\right)$$     
+求其下限为 (-1,-1,-1,-1,-1)，上限为 (3,3,3,3,3) 的累积概率。
+
+```{r}
+library(mvtnorm)
+mean <- rep(0, 5) # 均值向量
+lower <- rep(-1, 5) # 下
+upper <- rep(3, 5) # 上限
+corr <- diag(5) # 相关系数矩阵
+corr[lower.tri(corr)] <- 0.5 # 相关系数矩阵下三角用0.5赋值
+corr[upper.tri(corr)] <- 0.5 # 相关系数矩阵上三角用0.5赋值
+corr
+(prob <- pmvnorm(lower, upper, mean, corr))
+```
+
+同理，求多元正态分布的密度函数可以用dmvnorm()函数，求多元正态分布的分位数可以用qmvnorm()函数。
+
+### 多元t分布随机数
+
+多元t分布随机数：
+
+`mvtnorm::rmvt(n, sigma = diag(2), df = 1, delta = rep(0, nrow(sigma)), type = c("shifted", "Kshirsagar"), ...)`
+
+同理，求多元t分布的密度函数可以dmvt()函数，求多元t分布的分位数可以用qmvt()函数，求多元t分布的累积概率用pmvt()函数。
+
+```{r}
+# 生成1000个服从自由度为5，相关系数为0.5的两元t分布
+library(mvtnorm)
+sigma <- diag(2) + 1
+sigma
+x2 <- rmvt(n = 1000, df = 5, sigma = sigma)
+head(x2)
+plot(x2)
+```
+
+
+
+## 随机抽样
+
+### 放回与无放回抽样
+
+R可以进行有放回、无放回抽样。用R语言进行抽样很简单，只要用sample()函数就可以。其语法为：
+
+`sample(x,n,replace=F,prob=NULL)`
+
+其中，X表示总体向量。n表示样本容量，replace=F 表示无放回抽样，replace=T 表示有放回抽样。prob 可以设置各个抽样单元不同的入样概率，进行不等概率抽样。
+
+```{r}
+# 用R来模拟抛一枚硬币，H表示正面，T表示反面，重复抛10次的情况。
+sample(c("H", "T"), 10, rep = T)
+# 掷一颗六面的骰子，重复掷10次。
+sample(1:6, 10, rep = T)
+# 从100个产品中无放回随机抽取10个
+sample(100, 10)
+
+# 掷两颗六面的骰子，重复5次（的抽样）
+dice <- as.vector(outer(1:6, 1:6, paste))
+sample(dice, 5, replace = T)
+# 掷两颗六面的骰子所有可能的结果
+dice <- as.vector(outer(1:6, 1:6, paste))
+dice
+```
+
+注：这里outer（a,b,function），当function为空时，表示a，b两个向量的外积，也就等价于a %o% b。function是paste表示X向量的第一个元素与Y向量的**每个**元素分别组合，组成第一行，接着，X向量的第二个元素与Y向量的**每个**元素分别组合，组成第二行，直到X向量最后一个元素组合完毕。由于这时为矩阵形式，用as.vector()把X强制转换成向量形式。
+```{r}
+outer(letters[1:6], 1:6, paste)
+```
+
+### bootstrap重抽样
+
+bootstrap重抽样法是Efron于1982所创立的方法，属于重复抽样(Resampling)方法。它是以原始数据为基础的模拟抽样统计推断法，其基本思想是：在原始数据的范围内做有放回的再抽样，样本量仍为n，原始数据中每个观察单位每次被抽到的概率相等，为1/n，所得样本称为bootstrap样本。下面演示一下一个简单的bootstrap抽样。
+```{r}
+# R内置数据faithful有个“eruptions”变量，用于记录火山爆发时间，它属于不常见的分布。对它进行bootstrap重抽样，程序如下：
+faithful # 读入内置数据
+sum(!is.na(faithful$eruptions))
+attach(faithful)
+sample(eruptions, 10, replace = T) # 从数据中抽一个样本量为10的子样本
+Sample <- sample(eruptions, 1000, rep = T) # 抽取一个样本容量为1000的bootstrap样本
+par(mfrow = c(1, 2)) # 设置作图窗口为一行两列
+hist(eruptions, breaks = 25)
+hist(Sample, breaks = 25)
+par(mfrow = c(1, 1)) # 设置作图窗口为一行一列
+detach(faithful)
+```
+结果见图，左边第一个图是eruptions的直方图，右边是bootstrap抽样的分布，从图中可以看出这两者的直方图很接近。
+
+## 统计模拟
+
+### 几种常见的模拟方法
+
+例：用模拟的方法检验中心极限定理
+
+设$\left\{x_{n}\right\}$是独立同部分随机变量序列，满足$\mathrm{E}\left(X_{1}\right)=\mu,\quad\operatorname{Var}\left(X_{1}\right)=\sigma^{2},\quad 0<\sigma^{2}<\infty$。则前$n$个变量之和的标准化变量$Y_{n}^{*}=\frac{X_{1}+X_{2}+\ldots+X_{n}-n \mu}{\sqrt{n} \sigma}$的分布函数将随着$n \rightarrow \infty$而依概率收敛于标准正态分布，或$\frac{\overline{X}-\mu}{\sigma / \sqrt{n}}$的分布随着$n \rightarrow \infty$而依概率收敛于标准正态分布。
+
+#### 二项分布模拟中心极限定理
+
+假如$\mathrm{z} \sim \mathrm{b}(\mathrm{n}, \mathrm{p})$，则其标准化变量$x=\frac{(\mathrm{Z}-\mathrm{np})}{\sqrt{\mathrm{np}(1-\mathrm{p})}}$。随着$n \rightarrow \infty$，x的分布而依概率收敛于标准正态分布。该定理也称为德莫弗－拉普拉斯定理。至于这个定理是否正确，除了数学上的严格证明外，也可用统计模拟方法检验它。
+
+
+```{r}
+# 首先介绍如何用R生成二项分布随机数的标准化变量
+n <- 10
+p <- 0.25
+z <- rbinom(1, n, p)
+x <- (z - n * p) / sqrt(n * p * (1 - p))
+
+# 这是一个随机数标准化后的结果，我们需要产生很多随机数并观察它们的分布情况，比如需要产生100个这样的随机数
+m <- 100 # m为模拟次数
+z <- rbinom(m, n, p) # 产生100个二项随机数
+x <- (z - n * p) / sqrt(n * p * (1 - p)) # 对100个二项随机数标准化
+hist(x, prob = T, main = paste("n=", n))
+curve(dnorm(x), add = T) # 添加正态曲线
+```
+
+在上面的模拟例子中，我们指定模拟次数m=10000，样本量n=10，概率=0.25，如果要改变这些参数来重新进行模拟将会很麻烦，下面将展示如何将上面的程序形成一个模拟函数再进行模拟。
+```{r}
+sim.clt <- function(m = 100, n = 10, p = 0.25) {
+  z <- rbinom(m, n, p)
+  x <- (z - n * p) / sqrt(n * p * (1 - p))
+  hist(x, prob = T, breaks = 20, main = paste("n=", n, "p=", p))
+  curve(dnorm(x), add = T)
+}
+sim.clt() # 默认m=100，n=10，p=0.25
+sim.clt(1000) # 取m=1000，n=10，p=0.25
+sim.clt(1000, 30) # 取m=1000，n=30，p=0.25
+sim.clt(1000, 30, 0.5) # 取m=1000，n=30，p=0.5
+```
+
+#### 正态概率模拟
+
+能比直方图更好地判定随机数是否近似服从正态分布的是正态概率图。其基本思想是作样本分位数与理论分位数的散点图，看图像是否近似在一条直线上。分位数比中位数、下四分位数Q1和上四分位数Q3等更具一般性。q分位数就是累积概率小于q％所对应的值，所以25％分位数就是Q1，50%分位数就是中位数，75％分位数就是Q3。
+
+用R来画正态概率图很简单，只要使用函数qqnorm()和qqline()，其中qqline是用来添加参考线（并不是回归线）。
+
+```{r}
+# 例:分别产生100个均值为0、标准差为1的正态分布随机数，均值为10、标准差为5的正态分布随机数，均值为10的指数分布，[0,1]上的均匀分布。再分别作它们的正态概率图。
+
+par(mfrow = c(2, 2)) # 设置2行2列的作图窗口
+x <- rnorm(100, 0, 1)
+qqnorm(x, main = "N(0,1)")
+qqline(x) # 画QQ图并添加qq线
+x <- rnorm(100, 10, 25)
+qqnorm(x, main = "N(10,25)")
+qqline(x)
+x <- rexp(100, 1 / 10)
+qqnorm(x, main = "exp(0.1)")
+qqline(x)
+x <- runif(100, 0, 1)
+qqnorm(x, main = "U(0,1)")
+qqline(x)
+par(mfrow = c(1, 1))
+```
+
+第一、第二（上面）两个图的散点近似分布在参考线上，所以服从正态分布，而第三（下面左边）个图的散点严重偏离参考线，第四个图两头翘尾，可认为这两个图不服从正态分布。
+
+### 编写模拟函数
+
+sim.fun()函数是专门用来解决这个问题的，只要编写一个用来生成随机数的函数，然后剩下的工作就交给sim.fun来做。下面编写泛式sim.fun函数（泛式是指函数是虚构的）
+
+```{r}
+sim.fun <- function(m, f, ...) # m为模拟样本次数，f为需模拟的函数
+{
+  sample <- 1:m
+  for (i in 1:m) {
+    sample[i] <- f(...)
+  }
+  sample
+}
+
+
+# 二项分布样本均值的标准化值
+f <- function(n = 10, p = 0.5) {
+  s <- rbinom(1, n, p)
+  (s - n * p) / sqrt(n * p * (1 - p))
+}
+x <- sim.fun(1000, f) # 1000个样本，每个样本的样本量为10
+hist(x, prob = T)
+
+
+# 均匀分布样本均值的标准化值
+f <- function(n = 10) {
+  mean(runif(n) - 1 / 2) / (1 / sqrt(12 * n))
+}
+x <- sim.fun(1000, f)
+hist(x, prob = T)
+
+
+# 正态分布样本均值的标准化值
+f <- function(n = 10, mu = 0, sigma = 1) {
+  r <- rnorm(n, mu, sigma)
+  (mean(r) - mu) / (sigma / sqrt(n))
+}
+x <- sim.fun(1000, f) # 模拟1000个样本量为10的N(0,1)随机数
+hist(x, breaks = 10, prob = T)
+x <- sim.fun(1000, f, 30, 5, 2) # 模拟1000个样本量为30的N(5,4)随机数
+hist(x, breaks = 10, prob = T)
+
+
+# 指数分布样本均值的标准化值，该分布的均值和标准差都是10
+f <- function(n, mu = 10) {
+  (mean(rexp(n, 1 / mu) - mu)) / (mu / sqrt(n))
+}
+x <- seq(-3, 3, 0.01)
+par(mfrow = c(2, 2))
+hist(sim.fun(100, f, 1, 10), prob = T, main = "n=1")
+points(x, dnorm(x, 0, 1), type = "l")
+hist(sim.fun(100, f, 5, 10), prob = T, main = "n=5")
+points(x, dnorm(x, 0, 1), type = "l")
+hist(sim.fun(100, f, 30, 10), prob = T, main = "n=30")
+points(x, dnorm(x, 0, 1), type = "l")
+hist(sim.fun(100, f, 1000, 10), prob = T, main = "n=1000")
+points(x, dnorm(x, 0, 1), type = "l")
+par(mfrow = c(1, 1))
+# 可见随着样本量n的增大，样本均值所服从的分布越来越接近于正态分布
+```

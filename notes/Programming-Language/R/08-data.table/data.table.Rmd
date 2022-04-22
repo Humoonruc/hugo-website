@@ -1,0 +1,540 @@
+---
+title: "data.table"
+subtitle: ''
+author: "Humoon"
+date: "`r Sys.Date()`"
+output: html_document
+documentclass: ctexart
+classoption: hyperref,
+---
+
+```{r setup, include = FALSE}
+source("../Rmarkdown-template/Rmarkdown_config.R")
+
+## global options ===================================
+knitr::opts_chunk$set(
+  width = config$width,
+  fig.width = config$fig.width,
+  fig.asp = config$fig.asp,
+  out.width = config$out.width,
+  fig.align = config$fig.align,
+  fig.path = config$fig.path,
+  fig.show = config$fig.show,
+  warn = config$warn,
+  warning = config$warning,
+  message = config$message,
+  echo = config$echo, 
+  eval = config$eval, 
+  tidy = config$tidy, 
+  comment = config$comment, 
+  collapse = config$collapse, 
+  cache = config$cache,
+  cache.comments = config$cache.comments,
+  autodep = config$autodep
+)
+
+## use necessary packages ==============================
+library(tidyverse)
+library(data.table)
+library(magrittr)
+library(plotly)
+library(htmlwidgets)
+```
+
+
+<a href="../pdf/cheatsheet-data.table.pdf">*data.table cheatsheet.pdf*</a>
+
+<object data="../pdf/cheatsheet-data.table.pdf" type="application/pdf" width="100%" height="100%"></object>
+
+
+data.table 是 data.frame 的扩展，兼容 dplyr 包中的函数，被其操作后，返回值仍为 data.table
+
+故今后凡是操作数据框都可以默认先转换为 data.table. 然后，当需要保留原始数据时，使用 dplyr 系列函数；不需要保留时，使用 data.table 的象牙操作符，追求速度和简洁。
+
+## 创建
+
+### 直接创建data.table
+
+```{r}
+dt <- data.table(
+  a = c("A", "B", "C", "A", "A", "B"),
+  b = 1:6
+)
+class(dt)
+```
+
+### 将 data.frame 转化为 data.table
+
+#### `as.data.table()`; `setDT()`
+
+前者创建一份拷贝并转换，后者原地转换。
+
+```{r}
+df <- data.frame(
+  a = c("A", "B", "C", "A", "A", "B"),
+  b = 1:6
+)
+df %>%
+  setDT() %>%
+  class()
+
+
+library(sqldf)
+options(sqldf.driver = "SQLite")
+channel <- dbConnect(
+  SQLite(),
+  dbname = "C:/Users/Humoonruc/OneDrive/ICT/DataBase/SQLite/trade.db"
+)
+total <- dbReadTable(channel, "total") %>%
+  select(-time) %>%
+  setDT()
+class(total)
+dbDisconnect(channel)
+```
+
+#### `set*()`函数族
+
+不复制数据，节省时间
+
+```{r}
+df <- data.frame(
+  a = c("A", "B", "C", "A", "A", "B"),
+  b = 1:6
+)
+dt3 <- setDT(df, key = "b")
+df3 <- setDF(dt3)
+
+setnames(total, "trade", "total") # 将列名trade改为total
+head(total)
+total[, id := .I] # .I意为1:.N，这句为total加了一个序号索引列
+
+# setcolorder() 列的重排序
+# 默认第二个参数是一个列名向量。如果只写出了一部分列，则其他列按照原来的顺序
+setcolorder(total, neworder = "id") 
+head(total)
+```
+
+
+
+| set*()                                                       |                                                     |
+| ------------------------------------------------------------ | --------------------------------------------------- |
+| `setDT()`, `setDF()`                                         |                                                     |
+| `setattr()` `setnames()`                                     | Set attributes of objects by reference              |
+| `setkey()` `setkeyv()` `setindex()` `setindexv()` `key()` `indices()` `haskey()` | Create key on a data.table                          |
+| `setcolorder()`                                              | Fast column reordering of a data.table by reference |
+| `setorder(dt, a, -b)` `setorderv()`                          | Fast row reordering of a data.table by reference    |
+
+
+
+### 读取文件
+
+- `fread() `可以将能直接将.csv .txt 等格式的文件读为 data.table 格式
+
+- `fwrite() `可以写 data.table 数据。
+
+在处理大数据时，它们的速度非常快。**建议读写文件统一使用这两个函数**
+
+## data.table 查询语法
+
+### 语法
+
+````R
+dt[i, j, by = list(), ...]
+````
+
+很像 SQL 语句
+
+1. `i`: Subset 行（就像 WHERE 子句）
+2. `by`/`keyby`[^1] : 分组（就像 GROUP BY 子句）
+3. `j`: Subset[^2] 或 Manipulate 列 （就像 SELECT 子句），甚至可以是一个匿名函数
+
+[^1]: 能自动将分组变量设为key.
+
+[^2]: 要用list()或.()
+
+### 特殊符号
+
+| 特殊符号 | 说明                                               |
+| -------- | -------------------------------------------------- |
+| .()      | 代替list()                                         |
+| .N       | 总行数                                             |
+| .SD      | 代表分组后每个组的数据框                           |
+| .SDcols  | 在 by 处，与.SD连用，用来选择哪些列包含在.SD中               |
+| .BY      | 包含所有by分组变量的list                           |
+| .I       | 整数向量 1:.N                                      |
+| .GRP     | 分组索引                                           |
+| .NGRP    | 分组数                                             |
+| .EACHI   | 用于by/keyby = .EACHI，表示根据i表达式的每一行分组 |
+
+### 链式操作
+
+`DT[...][...][...]`
+
+或写为：
+
+```R
+DT[
+  ...
+][
+  ...
+][
+  ...
+]
+```
+
+### 与管道`%>%`配合的链式操作
+
+由于 R 中所有的操作符都是函数，因此可以将\`[\`作为一个函数，贯穿于`%>%`中，获得代码风格的一致性。
+
+```{r}
+mtcars %>% 
+	as.data.table() %>% 
+	`[`(, .(mpg = mean(mpg)), by = cyl) %>% 
+	`[`(.N,) 
+```
+
+### Subset rows using i
+
+选择行可以接受的运算符除了常用的逻辑运算符，还包括 `%like%` (匹配模式，有点像正则表达式) 和 `%between%`
+
+data.table[] 方括号中只有一个参数时，默认为 i 参数，表示对行操作。
+
+```{r}
+dt3 <- data.table(
+  a = 1:6,
+  b = c("A", "B", "C", "A", "A", "B")
+)
+
+dt3[1:2, ]
+
+# 选出最后一行
+dt3[.N]
+
+# 选出第一行和最后一行
+dt3[c(1, .N)]
+
+# 选出满足特定条件的行
+dt3[b == "A", ]
+
+
+# 行排序，负号表示降序
+total[order(-month)] %>% head()
+
+total %>% head()
+```
+
+### Manipulate columns with j
+
+#### subset
+
+```{r}
+dt[, c(2)] # 提取第2列
+```
+
+
+#### 象牙操作符 `:=`[^3]
+
+[^3]: 象牙操作符不拷贝被修改的列。原地修改的性能更高，避免了对数据的复制。
+
+这个操作符有点像 SQL 语句中的 `AS` 关键词，但左为列名，右为表达式。
+
+-   给data.table对象增加一列，`data.table[, colname := var1]`
+-   给data.table对象删除一列，就是给这列赋值为空，`data.table[, colname := NULL]`
+-   修改data.table对象的值，通过索引定位后进行值的替换，`data.table[condition, colname := value]`
+
+单个列名不用加引号，多个列名组成的向量，必须加引号，如`c('d1', 'd2')`
+
+```{r}
+dt <- data.table(
+  a = c("A", "B", "C", "A", "A", "B"),
+  b = 1:6
+)
+
+# 1列，不必加引号
+dt[, c := b + 2] # (b + 2) AS c
+dt
+
+# 增加2列，第1种写法
+dt[, c('d1', 'd2') := list(1:6, 2:7)] # := 左边是一个name向量，右边是一个value列表
+dt
+
+# 增加2列，第2种写法
+dt[,`:=`(c1 = 1:6, c2 = 2:7)] # := 很像一个update函数
+dt
+
+# 删除c1列
+dt[, c1 := NULL]
+dt
+
+# 同时删除d1,d2列
+dt[, c("d1", "d2") := NULL]
+dt
+
+# 给b赋值为30
+dt[, b := 30]
+dt
+
+# 对a列值为B、c2列值大于3的行，其b列赋值为100
+dt[a == "B" & c2 > 3, b := 100]
+dt
+
+# 另一种写法
+dt[, b := ifelse(a == "B" & c2 > 3, 50, b)]
+dt
+
+# 更新列
+dt[, b := as.character(b)]
+dt
+```
+
+#### 用`=`而非象牙操作符
+
+不是在原来的数据框基础上改动，而是新创建一个数据框。
+
+此时，j 中的列不能写成向量，而要写成列表，用`.(列名...)`或`list(列名...)`
+
+```{r}
+total[, .(year, month, export, import, ratio = export / import)]
+
+total
+```
+
+#### 匿名函数
+
+```{r}
+data("diamonds", package = "ggplot2")
+setDT(diamonds)
+
+# 按 cut 分组做回归
+diamonds[,
+  {
+    m <- lm(log(price) ~ carat + depth)
+    as.list(coef(m))
+  },
+  keyby = cut
+]
+```
+
+
+
+### Group according to by
+
+by 分组
+keyby 不仅分组且立刻定义键，并按照键对行排序
+
+```{r}
+dt <- data.table(
+  a = c("A", "B", "C", "A", "A", "B"),
+  b = 1:6
+)
+
+# 对整个b列数据求和
+dt[, sum(b)]
+
+# 按a列分组，对b列按分组求和，运算结果自动命名为 V1
+dt[, sum(b), by = a]
+
+# 提取每一组的第一行，组成新数据框
+dt[, .SD[1], by = a]
+
+# 提取每一组的最后一行，组成新数据框
+dt[, .SD[.N], by = a]
+
+
+# 先分组，再显示每组行数
+total[, .N, by = year] 
+total[, .N, by = .(year, month)] # year 和 month 是有先后顺序的
+total[, .(avg_ex = mean(export)), by = year] # 即使只有一列，也要用列表
+```
+
+
+
+## 独立辅助函数
+
+### 行排序
+
+`setorder(dt, a, -b)` 重新排列行，先a按升序，再b按降序
+
+
+### 行去重
+
+`unique(dt, by = c("a","b"))` 检查by的列，提取不重复的行
+
+`uniqueN(dt, by = c("a","b"))` 检查by的列，计算每个不重复的行出现了多少次
+
+### 列重命名
+
+`setnames(dt, c("a","b"), c("x","y")` 列重命名
+
+### 提前和滞后 lead and lag
+
+```{r}
+dt[, c := shift(a, 1)] # 默认 lag
+dt
+
+dt[, c := shift(a, 1, type = "lead")]
+dt
+```
+
+这样可以很容易地加入提前或滞后列，进行同比增长率等计算
+
+### 遍历操作各列
+
+```{r}
+dt <- data.table(a = c(1, 2, 3), b = c(4, 5, 6))
+# 遍历a和b两列，都求平均值
+dt[, map(.SD, mean), .SDcols = c("a", "b")]
+
+cols <- c("a", "b")
+# 遍历 cols 各列，求平均值，且赋给新加入的a_m列
+dt[, str_c(cols, "_m") := map(.SD, mean), .SDcols = cols]
+dt
+```
+
+## 连接操作
+
+### 键
+
+`setkey(d1, v1, v3, ...)`
+
+将某些列定义为 keys后，就可以通过键选择行，以及进行关系数据连接，比无键时快170倍。同时，可以用 mult 参数对查询结果增加过滤条件，使代码更高效。
+
+```{r}
+dt <- data.table(a = c("A", "B", "C", "A", "A", "B"),
+                 b = 1:6)
+
+# 设置a列为主键
+setkey(dt, a)
+# setkeyv(dt, 'a') 函数仅接受字符串作为第二个参数
+key(dt)
+
+# 打印dt对象，发现数据已经按照a列字母对应ASCII码值进行了排序。
+dt
+
+# 取a列中值为B的行，设置主键后可省略`a==`
+dt["B"]
+
+# 取a列中值为B的行，并保留查询结果的第一行
+dt["B", mult = "first"]
+
+# 取a列中值为B的行，并保留查询结果的最后一行
+dt["B", mult = "last"]
+
+# 取a列中值为b的行，没有数据则为NA
+dt["b"]
+```
+
+
+```{r}
+setkey(total, year, month)
+total[.(2019, 3)] # 省略了 year == 2019 & month == 3
+
+total[.(2019)] # 省略了 year == 2019，可以只根据一列 subset
+# 不能写total[list(3)]，得不出有意义的结果
+```
+
+### Join
+
+基本语法为`dt1[dt2, on = .(b = y)]`，其中b为dt1的列，y为dt2的列
+
+-   若连个表都定义了 key, 第二个参数不用填
+
+-   若没有定义key，...要写 on = "commonColumn" 或 by.dt1 = "c1", by.dt2 = "c2"
+
+例：学生考试的场景。按照ER设计方法，我们通常会按照实体进行数据划分。这里存在2个实体，一个是学生，一个是成绩。学生实体包括学生姓名等基本资料，而成绩实体包括考试的科目和成绩。通过设置两个主键，对2个数据集进行连接。
+
+```{r}
+# 6个学生
+student <- data.table(
+  id = 1:6,
+  name = c("Dan", "Mike", "Ann", "Yang", "Li", "Kate")
+)
+student
+
+# 分别参加A和B两门考试
+score <- data.table(
+  id = 1:12, stuId = rep(1:6, 2),
+  score = runif(12, 60, 99),
+  course = c(rep("A", 6), rep("B", 6))
+)
+score
+
+# 设置student数据集的key
+setkey(student, "id")
+
+# 设置score数据集的key
+setkey(score, "stuId")
+
+# 连接
+student[score, nomatch = NA, mult = "all"]
+
+rm(list = ls())
+```
+
+### 集合运算
+
+```R
+  fintersect(dt1, dt2)
+  fsetdiff(dt1, dt2)
+  funion(dt1, dt2)
+  fsetequal(dt1, dt2)
+```
+
+## 高级应用实例
+
+```{r}
+
+## 月K线图数据的整理
+
+# 1. 产生日期序列
+market_data <- data.table(date = (as.Date("2015-05-01") + 0:299))
+set.seed(125)
+
+# 2. 产生成交价格和数量序列
+# 股市价格是一个随机游走过程，将300天的变化率累乘起来
+# 成交量 volume 取随机数
+market_data[, `:=`(
+  price = ((1 + rnorm(300, 0.001, 0.05)) %>% cumprod() * 30) %>% round(2),
+  volume = rbinom(300, 5000, 0.8)
+)]
+head(market_data)
+
+# 3. 股价走势图
+plot(price ~ date,
+  data = market_data,
+  type = "l",
+  main = "Market data"
+)
+
+# 4. 获取横轴 domain
+market_data[, range(date)] # 没有:=，所以这不是update，而是summarize
+
+# 5. 按月分组，每组统计最大、最小、最早、最晚价格，这就是月K线图！！！
+monthly <- market_data[,
+  # 这样写 list 就很像键值对了
+  .(
+    open = price[[1]],
+    high = max(price),
+    low = min(price),
+    close = price[[.N]]
+  ),
+  keyby = .(
+    year = year(date),
+    month = month(date)
+  )
+]
+head(monthly)
+
+
+# 6. 自定义函数，针对不同的列可以分组计算平均值
+average <- function(column) {
+  market_data[,
+    .(
+      average = mean(.SD[[column]])
+    ),
+    by = .(year = year(date))
+  ]
+}
+average("price")
+average("volume")
+```
